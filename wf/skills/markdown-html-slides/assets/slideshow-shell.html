@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Presentation</title>
+  <style id="deck-theme">
+    :root {
+      --ink: #111318;
+      --muted: #667085;
+      --line: #d9dde5;
+      --panel: #f2f4f7;
+      --accent: #2574f5;
+      --accent-soft: #65c9f3;
+      --paper: #fff;
+    }
+  </style>
+  <style id="slides-core">
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #15171b; color: var(--ink); }
+    body { font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", Arial, sans-serif; overflow: hidden; }
+    code { font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace; }
+    .deck { width: 100vw; height: 100vh; display: grid; place-items: center; }
+    .slide {
+      display: none;
+      position: relative;
+      width: min(100vw, calc(100vh * 16 / 9));
+      height: min(100vh, calc(100vw * 9 / 16));
+      aspect-ratio: 16 / 9;
+      padding: 4.8% 5.4% 4.3%;
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .slide.active { display: block; }
+    .eyebrow { margin: 0 0 2.2%; color: var(--accent); font-size: clamp(13px, 1.2vw, 22px); font-weight: 800; letter-spacing: .08em; }
+    h1 { margin: 0; max-width: 92%; font-size: clamp(48px, 5.2vw, 86px); line-height: 1.08; letter-spacing: -.04em; }
+    h2 { margin: 0; font-size: clamp(34px, 3.15vw, 54px); line-height: 1.12; letter-spacing: -.035em; }
+    h3 { margin: 0 0 10px; font-size: clamp(21px, 1.65vw, 29px); line-height: 1.25; }
+    p { margin: 0; }
+    .lead { margin-top: 3%; max-width: 76%; color: var(--muted); font-size: clamp(21px, 1.9vw, 33px); line-height: 1.55; }
+    .footer { position: absolute; left: 5.4%; right: 5.4%; bottom: 2.4%; display: flex; justify-content: space-between; color: #7f8795; font-size: clamp(11px, .85vw, 15px); }
+    .accent-line { width: 12%; height: 7px; margin-top: 4.5%; background: var(--accent); }
+    .columns-2, .columns-3, .columns-4 { display: grid; gap: 3%; margin-top: 4%; align-items: stretch; }
+    .columns-2 { grid-template-columns: repeat(2, 1fr); }
+    .columns-3 { grid-template-columns: repeat(3, 1fr); }
+    .columns-4 { grid-template-columns: repeat(4, 1fr); }
+    .panel { padding: 26px; background: var(--panel); border-top: 6px solid var(--line); }
+    .panel.accent { border-top-color: var(--accent); }
+    .panel.soft { border-top-color: var(--accent-soft); }
+    .panel p, .body { color: #414753; font-size: clamp(17px, 1.35vw, 23px); line-height: 1.55; }
+    .big-number { display: block; margin-bottom: 22px; color: var(--accent); font-size: clamp(42px, 4.5vw, 76px); font-weight: 900; line-height: 1; }
+    .rule-list { margin-top: 3.5%; border-top: 1px solid var(--line); }
+    .rule-row { display: grid; grid-template-columns: 30% 70%; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .rule-row b { font-size: clamp(18px, 1.45vw, 25px); }
+    .rule-row span { color: #414753; font-size: clamp(17px, 1.25vw, 22px); line-height: 1.5; }
+    table { width: 100%; margin-top: 3%; border-collapse: collapse; table-layout: fixed; font-size: clamp(14px, 1.08vw, 19px); }
+    th { padding: 12px 13px; color: var(--muted); text-align: left; border-bottom: 2px solid var(--ink); }
+    td { padding: 13px; vertical-align: top; border-bottom: 1px solid var(--line); line-height: 1.4; }
+    .keys { position: fixed; right: 14px; bottom: 12px; z-index: 20; color: #a9adb6; font: 12px/1.4 Arial, sans-serif; opacity: .45; }
+    .progress { position: fixed; left: 0; bottom: 0; z-index: 30; height: 4px; background: var(--accent); transition: width .2s ease; }
+    .notes { display: none; position: fixed; z-index: 40; left: 3vw; right: 3vw; bottom: 3vh; padding: 18px 22px; color: #f7f8fa; background: rgba(17,19,24,.94); border-left: 5px solid var(--accent-soft); font-size: 16px; line-height: 1.55; box-shadow: 0 8px 40px #0008; }
+    .notes.show { display: block; }
+    .overview .deck { align-content: start; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 18px; overflow: auto; }
+    .overview .slide { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; padding: 4%; cursor: pointer; box-shadow: 0 3px 12px #0006; }
+    .overview .slide * { pointer-events: none; }
+    .overview .slide .footer { display: none; }
+    @media (max-width: 900px) { .overview .deck { grid-template-columns: 1fr 1fr; } }
+    @media print {
+      body { overflow: visible; background: #fff; }
+      .deck { display: block; width: auto; height: auto; }
+      .slide { display: block !important; width: 100vw; height: 56.25vw; page-break-after: always; }
+      .keys, .progress, .notes { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide active" data-notes="Source: input Markdown files.">
+      <p class="eyebrow">PRESENTATION</p>
+      <h1>Presentation title</h1>
+      <p class="lead">A concise subtitle that frames why this presentation matters.</p>
+      <div class="accent-line"></div>
+      <div class="footer"><span>Presentation</span><span>01</span></div>
+    </section>
+
+    <section class="slide" data-notes="Source: input Markdown files.">
+      <p class="eyebrow">KEY TAKEAWAY</p>
+      <h2>One clear claim belongs on each slide</h2>
+      <div class="columns-3">
+        <article class="panel accent"><span class="big-number">01</span><h3>First point</h3><p>Short audience-facing explanation.</p></article>
+        <article class="panel soft"><span class="big-number">02</span><h3>Second point</h3><p>Short audience-facing explanation.</p></article>
+        <article class="panel"><span class="big-number">03</span><h3>Third point</h3><p>Short audience-facing explanation.</p></article>
+      </div>
+      <div class="footer"><span>Presentation</span><span>02</span></div>
+    </section>
+  </main>
+
+  <div class="keys">← → / Space · O Overview · N Notes · F Fullscreen</div>
+  <div class="progress"></div>
+  <aside class="notes"></aside>
+  <script id="slides-runtime">
+    const slides = [...document.querySelectorAll('.slide')];
+    const progress = document.querySelector('.progress');
+    const notes = document.querySelector('.notes');
+    let index = 0;
+    let notesOpen = false;
+    function show(next) {
+      index = Math.max(0, Math.min(slides.length - 1, next));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      notes.textContent = slides[index].dataset.notes || '';
+      location.hash = `slide-${index + 1}`;
+    }
+    function toggleOverview() {
+      document.body.classList.toggle('overview');
+      if (!document.body.classList.contains('overview')) show(index);
+    }
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(index + 1); }
+      if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) { event.preventDefault(); show(index - 1); }
+      if (event.key === 'Home') show(0);
+      if (event.key === 'End') show(slides.length - 1);
+      if (event.key.toLowerCase() === 'o') toggleOverview();
+      if (event.key.toLowerCase() === 'n') { notesOpen = !notesOpen; notes.classList.toggle('show', notesOpen); }
+      if (event.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+    });
+    slides.forEach((slide, i) => slide.addEventListener('click', () => {
+      if (document.body.classList.contains('overview')) { document.body.classList.remove('overview'); show(i); }
+    }));
+    const hashIndex = Number((location.hash.match(/slide-(\d+)/) || [])[1]) - 1;
+    show(Number.isInteger(hashIndex) && hashIndex >= 0 ? hashIndex : 0);
+  </script>
+</body>
+</html>

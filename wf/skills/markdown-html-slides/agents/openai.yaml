@@ -1,0 +1,6 @@
+interface:
+  display_name: "Markdown HTML Slides"
+  short_description: "把一或多份 Markdown 變成可直接播放的 HTML 簡報"
+  brand_color: "#2574F5"
+  default_prompt: "Use $markdown-html-slides to turn these Markdown files into a polished, browser-playable HTML presentation."
+
