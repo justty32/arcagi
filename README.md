@@ -2,6 +2,8 @@
 
 用自己的方法挑戰 ARC-AGI-1：官方公開題庫、可重現的衍生題目、求解器介面、精確比對評測與離線題目瀏覽器。不需要 GPU、模型或機器學習套件；`training` 只是官方題庫的目錄名稱。
 
+第一次操作請看 [逐步教學：跑完第一個實驗](docs/experiments/quickstart.md)，或依目的瀏覽 [使用教學總覽](docs/README.md)。
+
 ## 開始使用
 
 需要 Git、[uv](https://docs.astral.sh/uv/) 與 Python 3.12 以上。從專案根目錄執行：

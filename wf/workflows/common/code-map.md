@@ -13,6 +13,8 @@
 - [external](../../../src/arcagi/solvers/external.py)：跨語言 JSON request／response、程序逾時與逐次 artifacts；[測試](../../../tests/solvers/test_external.py)。
 - [experiments](../../../src/arcagi/experiments/__init__.py)：設定驗證、task／method／seed／repeat 矩陣、JSON／CSV／HTML 報告；[測試](../../../tests/experiments/)。
 - [eval](../../../src/arcagi/eval/__init__.py)：top-1 exact match、逐題報告、外部 JSON 預測評分；[測試](../../../tests/eval/)。
+- [CLI 參數](../../../src/arcagi/cli_args.py)與 [CLI I/O](../../../src/arcagi/cli_io.py)：argparse、題庫選取與 JSON 檔案邊界。
+- [實驗報告](../../../src/arcagi/experiments/report.py)、[統計](../../../src/arcagi/experiments/statistics.py)、[HTML](../../../src/arcagi/experiments/report_html.py)：檔案輸出、分組分母、圖表呈現各自維護。
 - [CLI](../../../src/arcagi/cli.py)、[進入點](../../../src/arcagi/__main__.py)：驗證、求解、評測、評分、生成與瀏覽；[測試](../../../tests/test_cli.py)。
 - [generation](../../../src/arcagi/generation/__init__.py)：固定 seed 的 RE-ARC adapter、生成驗證與 provenance；[測試](../../../tests/generation/)。
 - [visualization](../../../src/arcagi/visualization.py)：純 stdlib 離線 HTML 題目瀏覽器；[測試](../../../tests/test_visualization.py)。
