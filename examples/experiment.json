@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "path": "../data/ARC-AGI/data/training/007bbfb7.json",
+      "tags": ["smoke", "scale"]
+    },
+    {
+      "path": "../data/ARC-AGI/data/training/00d62c1b.json",
+      "tags": ["smoke", "fill"]
+    }
+  ],
+  "solvers": [
+    {
+      "name": "identity",
+      "command": ["python", "file_identity.py", "--input", "{input}", "--output", "{output}"],
+      "params": {"mode": "identity"},
+      "cwd": "."
+    },
+    {
+      "name": "zero",
+      "command": ["python", "file_identity.py", "--input", "{input}", "--output", "{output}"],
+      "params": {"mode": "zero"},
+      "cwd": "."
+    }
+  ],
+  "seeds": [0, 42],
+  "repeats": 2,
+  "timeout_seconds": 10
+}

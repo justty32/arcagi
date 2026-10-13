@@ -27,6 +27,8 @@ uv run arcagi eval --split evaluation --solver my_solver:solve --output artifact
 
 ## 非 Python 解法與手工答案
 
+要自動反覆執行其他語言、多方法或參數組比較，使用 [experiment 檔案介面](experiments.md)；框架負責寫 request、啟動命令、讀 response、逾時和保存圖表／JSON／CSV。下列 `score` 則適合已有預測檔案的情況。
+
 任何程式只要寫出 JSON 就能評分。JSON 最外層以 task ID 為鍵，值是依 test 順序排列的預測網格清單，例如某題有兩個 test：
 
 ```json

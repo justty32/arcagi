@@ -23,6 +23,10 @@ pytest 檢查資料格式、求解器介面、正確／錯誤答案計分、CLI�
 
 不要拿 evaluation 答案反覆調參後仍把結果當作未看過題目的泛化表現。合成題、training、公開 evaluation 各自產生報告；若需要自己的保留集，先決定規則族或任務的分割，再開始改解法。
 
+## 多方法、題型與重複試驗
+
+以 [experiment](experiments.md) 設定明確的 task 清單、自訂 tags、方法參數、seeds 和 repeats，所有方法跑同一矩陣；可用 `--task` 或 `--tag` 做單題／題型測試。HTML 和 CSV 的成功率以逐次執行為分母，失敗和逾時不移除；不要把重複試驗中任一次成功當成整題 100%。每次實驗使用新的輸出目錄，保留 config、request／response、log 和結果。
+
 ## 讀懂分數與退出碼
 
 本環境使用 exact-match top-1：尺寸和每格顏色完全一致才算 test 答對；一題有多個 test 時必須全部答對才算解出。報告的 `tasks_correct / tasks_total` 是整題準確率，`tests_correct / tests_total` 是測試範例準確率，`errors` 是求解器執行或預測格式失敗的題數。JSON 中的 accuracy 是 0–1 比例。

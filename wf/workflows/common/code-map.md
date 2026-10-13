@@ -10,6 +10,8 @@
 - [tasks](../../../src/arcagi/tasks/__init__.py)：`Task`／`SolverTask`／`Grid`、官方 JSON schema 驗證與載入；[測試](../../../tests/tasks/)。
 - [solvers](../../../src/arcagi/solvers/__init__.py)：`module:function` plugin、隱藏 test 答案、預測驗證；[identity](../../../src/arcagi/solvers/identity.py) 是流程基線；[測試](../../../tests/solvers/)。
 - [runtime](../../../src/arcagi/solvers/runtime.py)：每題獨立程序執行與可選逾時；[測試](../../../tests/solvers/test_runtime.py)。
+- [external](../../../src/arcagi/solvers/external.py)：跨語言 JSON request／response、程序逾時與逐次 artifacts；[測試](../../../tests/solvers/test_external.py)。
+- [experiments](../../../src/arcagi/experiments/__init__.py)：設定驗證、task／method／seed／repeat 矩陣、JSON／CSV／HTML 報告；[測試](../../../tests/experiments/)。
 - [eval](../../../src/arcagi/eval/__init__.py)：top-1 exact match、逐題報告、外部 JSON 預測評分；[測試](../../../tests/eval/)。
 - [CLI](../../../src/arcagi/cli.py)、[進入點](../../../src/arcagi/__main__.py)：驗證、求解、評測、評分、生成與瀏覽；[測試](../../../tests/test_cli.py)。
 - [generation](../../../src/arcagi/generation/__init__.py)：固定 seed 的 RE-ARC adapter、生成驗證與 provenance；[測試](../../../tests/generation/)。

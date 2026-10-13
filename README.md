@@ -27,6 +27,14 @@ uv run arcagi generate --task 007bbfb7 --seed 0 --count 5 --output data/generate
 uv run arcagi visualize data/generated/demo/tasks --output artifacts/generated.html
 ```
 
+跨語言、多方法與重複試驗使用同一套檔案介面：
+
+```sh
+uv run arcagi experiment examples/experiment.json --output artifacts/experiment-demo
+```
+
+開啟 `artifacts/experiment-demo/report.html` 查看成功率圖表、單題與題型比較；同目錄保留逐次 JSON、CSV 與彙總 CSV。[設定與介面說明](docs/experiments.md)。
+
 評測採 **top-1**：每個 test 輸入只交一個預測，網格尺寸與每格顏色全部相同才算答對；一題所有 test 都答對才算解出該題。這是本地測試指標，不代表官方競賽提交分數。
 
 - [題庫來源與產生器](docs/data.md)：公開資料、固定版本、授權與再現方式。

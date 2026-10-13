@@ -127,6 +127,13 @@ def build_parser() -> argparse.ArgumentParser:
     _add_dataset_args(visualize, positional=True)
     visualize.add_argument("--output", type=Path, required=True)
     visualize.add_argument("--title", default="ARC-AGI-1")
+    experiment = commands.add_parser(
+        "experiment", help="Run a file-based experiment matrix"
+    )
+    experiment.add_argument("config", type=Path)
+    experiment.add_argument("--output", type=Path, required=True)
+    experiment.add_argument("--task", action="append", dest="task_ids")
+    experiment.add_argument("--tag", action="append", dest="tags")
     return parser
 
 
@@ -190,6 +197,10 @@ def _protect_output(args: argparse.Namespace) -> None:
 
 def _run(args: argparse.Namespace) -> int:
     _protect_output(args)
+    if args.command == "experiment":
+        from arcagi.cli_experiment import run_experiment_command
+
+        return run_experiment_command(args)
     if args.command == "validate":
         tasks = _load_selected(args, require_outputs=args.require_test_outputs)
         _emit(

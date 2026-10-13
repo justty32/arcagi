@@ -32,6 +32,10 @@ uv run arcagi eval --split evaluation --solver identity --output artifacts/ident
 
 CI 在 [tests.yml](../../.github/workflows/tests.yml) 執行固定依賴安裝、lint、pytest 與官方兩份 split 的題數驗證。本機不需要 GPU、模型、外部服務帳號或訓練流程。
 
+## 實驗介面改動
+
+跨語言介面或報告修改時，執行 `uv run pytest tests/experiments tests/solvers/test_external.py -q`，確認逾時與失敗留在分母、重複試驗顯示逐次成功率、tag 可重疊，以及 JSON／CSV／HTML escaping。可用 `uv run arcagi experiment examples/experiment.json --output artifacts/experiment-check` 跑完整煙霧測試，輸出目錄須尚不存在；細節見 [experiments](../../docs/experiments.md)。
+
 ## 檢查必須能變紅
 
 新增或修改檢查時，要有應通過和應拒絕的例子。合法網格應通過；空網格、長短列、非法顏色應被拒絕。計分測試至少包含正確答案、錯誤尺寸、多 test 題只答對一部分與求解器失敗，確保錯誤不會被略過。
