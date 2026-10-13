@@ -1,47 +1,41 @@
-# dev-env — 開發環境、指令、外部工具
+# dev-env — 開發環境與指令
 
-[WORKFLOWS](../WORKFLOWS.md)｜[INDEX](../INDEX.md)
+[WORKFLOWS](../WORKFLOWS.md)｜[INDEX](../INDEX.md)｜[README](../../README.md)
 
-這台機器上要能開發需要什麼、怎麼裝、跑什麼指令；外部工具設定與 env var 也收在這裡。
-
-**何時用**：fresh clone、換機器、裝不起來、忘了指令、要加一個外部工具或環境變數。
-**何時不用**：驗證 / 測試怎麼跑 → [testing](testing.md)；程式碼慣例 → [common/conventions](common/conventions.md)。
+**何時用**：fresh clone、換機器、安裝問題或查指令。驗證流程見 [testing](testing.md)，資料來源見 [題庫文件](../../docs/data.md)。專案不需要 GPU、機器學習環境或 API key。
 
 ## Done when
 
-- 照「流程（fresh clone 後）」走完，`uv run pytest -q` 回傳 0。
-- 下面三張表沒有空欄；要使用者親自做的（帳號、授權、金鑰）在 [WAIT_USER](../WAIT_USER.md) 各佔一行。
+從乾淨 checkout 完成下列步驟，題庫來源檢查與 `uv run pytest -q` 都回傳 0。
 
-## 流程（fresh clone 後）
+## Fresh clone
 
-1. `git submodule update --init`（拉 `data/ARC-AGI/` 資料集）
-2. `uv sync`（建 `.venv` 並照 `uv.lock` 裝依賴）
-3. 目前沒有 env var 要設；有的話填下方「外部工具與 env var」表
-4. `uv run pytest -q` 確認裝好了
+需要 Git 與 [uv](https://docs.astral.sh/uv/getting-started/installation/)。Python 最低版本以 `pyproject.toml` 為準，目前為 3.12；套件版本固定在 `uv.lock`。在 repo 根目錄執行：
 
-## 指令表
+```sh
+uv sync --locked
+uv run python scripts/setup_data.py
+uv run python scripts/setup_data.py --check
+uv run pytest -q
+```
 
-| 做什麼 | 指令 | 備註 |
-|--------|------|------|
-| 安裝依賴 | `uv sync` | `pyproject.toml` / `uv.lock` 變動後重跑 |
-| build | 無 | 純 Python 套件，不需 build |
-| 解一題 | `uv run python -m arcagi solve <task.json>` | 進入點 `src/arcagi/__main__.py`（規劃中）|
-| 評測集跑分 | `uv run python -m arcagi eval --split training\|evaluation` | 分數數字是求解器改動的 Done when |
-| lint / format | `uv run ruff check . && uv run ruff format .` | |
+首次安裝依賴與題庫需網路。之後的測試、評分、產生題目、瀏覽均可離線；目前沒有必填環境變數。若從其他位置安裝套件，生成器可用 `ARCAGI_ROOT` 指向此 repo 的完整 checkout；正常使用不必設定。執行 plugin 時 Python 模組須可匯入，放專案根目錄的 `my_solver.py` 可直接以 `my_solver:solve` 載入。
 
-驗證與測試指令不列這裡——連同「誰跑」一起在 [testing](testing.md)。
+## 常用操作
 
-## 外部工具與 env var
+```sh
+uv run arcagi --help
+uv run arcagi validate --split evaluation --require-test-outputs
+uv run arcagi solve data/ARC-AGI/data/training/007bbfb7.json --solver identity
+uv run arcagi eval --split evaluation --solver identity --output artifacts/identity.json
+uv run arcagi generate --task 007bbfb7 --seed 0 --output data/generated/demo
+uv run arcagi visualize --split training --output artifacts/training.html
+```
 
-| 名稱 | 用途 | 怎麼取得 / 設定 |
-|------|------|----------------|
-| `uv` | Python 版本、虛擬環境與依賴管理 | `curl -LsSf https://astral.sh/uv/install.sh \| sh`；Python 版本由 `pyproject.toml` 的 `requires-python` 決定（規劃 ≥ 3.12），`uv sync` 會自動抓 |
-| `git`（submodule）| 拉 ARC-AGI-1 資料集 | 系統套件即可 |
-| env var | 目前沒有 | 出現時在此加列；金鑰不進 repo |
+`uv run python -m arcagi` 等同 `uv run arcagi`。自訂資料目錄在 `eval`／`score` 用 `--tasks-dir`，在 `validate`／`visualize` 直接給路徑。`generate` 的輸出目錄必須尚不存在；題目在其 `tasks/` 子目錄。
 
-需要帳號、付費、授權才能取得的：守鐵律 2（授權來源），並在 [WAIT_USER](../WAIT_USER.md) 記一行。
+求解器契約與外部預測格式見 [solvers](../../docs/solvers.md)。新增／升級相依需依 [user](common/user.md) 的授權邊界處理並更新 lock；不額外加入 ML 或繪圖套件。
 
 ## 交接
 
-- 環境就緒要開工 → [feature-dev](feature-dev/README.md)；先確認驗證跑得動 → [testing](testing.md)。
-- 同一個裝機坑第二次撞到 → [common/gotchas](common/gotchas.md)。
+環境就緒後進 [feature-dev](feature-dev/README.md)；安裝問題反覆發生時記到 [gotchas](common/gotchas.md)。

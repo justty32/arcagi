@@ -1,0 +1,13 @@
+{
+  "repository": "https://github.com/michaelhodel/re-arc",
+  "revision": "e5b7f1d06362a76f9d3b8c25154ff1fafca897ce",
+  "license": "MIT",
+  "files": {
+    "LICENSE": "60ea7c0edc4c765357257e31ad7c5f7d3ba7007329703d1fcfc3abbcbbd36efd",
+    "README.md": "161af204c8a56aead5e440e77a2ce67fa0e0258f7901e6facc3012d873f19ea7",
+    "dsl.py": "c60faf5730a966fc1689c08bc96794cd97fd0311b8036e0f9b0c80e2d12f0f11",
+    "generators.py": "1f598cb13c9c7b223181ab35485ca77d9079b600ee3baef1bce750db71248726",
+    "utils.py": "48e11e45f804a37fcb0e62005c879ece7d5f0e1593d3fd53f5f978d31666540a",
+    "verifiers.py": "e11c1ceed68ddb87fa544e3504f06d677c59698669a680e8124717f7703d80a1"
+  }
+}

@@ -1,0 +1,6 @@
+[submodule "data/ARC-AGI"]
+	path = data/ARC-AGI
+	url = https://github.com/fchollet/ARC-AGI.git
+[submodule "vendor/re-arc"]
+	path = vendor/re-arc
+	url = https://github.com/michaelhodel/re-arc.git

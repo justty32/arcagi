@@ -1,43 +1,45 @@
-# testing — 跑測試 / 驗證
+# testing — 跑測試與驗證
 
-[WORKFLOWS](../WORKFLOWS.md)｜[INDEX](../INDEX.md)
+[WORKFLOWS](../WORKFLOWS.md)｜[INDEX](../INDEX.md)｜[實驗流程](../../docs/testing.md)
 
-改完怎麼確認沒壞：有哪些驗證、各自的指令、哪些 agent 自己跑得了、哪些得交給使用者。
-
-**何時用**：改完程式要驗、使用者說「跑測試」、重構前要記基準。
-**何時不用**：環境還沒裝好、不知道指令哪來 → [dev-env](dev-env.md)；驗證紅了要查成因 → [investigation](investigation.md)。
+**何時用**：改完程式、跑測試、重構前記基準。環境未建立先看 [dev-env](dev-env.md)。
 
 ## Done when
 
-- 下表標「改完必跑」的列指令回傳 0。
-- 「誰跑」是使用者的列，已在 [WAIT_USER](../WAIT_USER.md) 各留一行（寫明跑什麼、什麼算過）。
+相關測試與 lint 通過；commit 前完整 pytest 通過。求解器改動另附同份 evaluation 的改前／改後解出題數；合成題分數另列。需要使用者處理的驗證才登記 [WAIT_USER](../WAIT_USER.md)。
 
-## 驗證表
+## 必跑指令
 
-| 驗證 | 指令 | 誰跑 |
-|------|------|------|
-| 快速驗證（改完必跑）| `uv run pytest -x -q` | agent |
-| 完整驗證（commit 前）| `uv run pytest` | agent |
-| lint / 型別 | `uv run ruff check . && uv run ruff format --check .` | agent |
-| 評測集跑分（求解器改動後）| `uv run python -m arcagi eval --split evaluation`（進入點規劃中）| agent |
+```sh
+# 迭代中：快速定位第一個失敗
+uv run pytest -x -q
 
-「誰跑」只有兩種值：**agent**（本機跑得動）、**使用者 → WAIT_USER**（要實機、外部服務、帳號、付費、目視）。判不準就當後者。
+# commit 前：完整驗證
+uv run ruff check .
+uv run ruff format --check .
+uv run pytest
 
-## 測試分類
+# 題庫或載入器變動時
+uv run python scripts/setup_data.py --check
+uv run arcagi validate --split training --require-test-outputs
+uv run arcagi validate --split evaluation --require-test-outputs
 
-- `fast`：unit 測試（`pytest -x -q`）；每次小改都跑。
-- `full`：完整 pytest＋評測集跑分；commit 前或求解器改動後跑。**求解器改動要附分數變化**（改前／改後各幾題），不能只說「測試綠燈」。
-- 本專案全部離線、單一環境，沒有需要使用者實機跑的驗證；出現時再補列並記 [WAIT_USER](../WAIT_USER.md)。
+# 求解器改動前後：替換為相同的 plugin 與不同輸出檔名
+uv run arcagi eval --split evaluation --solver identity --output artifacts/identity.json
+```
 
-## 綠燈不等於有檢查
+以上由 agent 執行。命令成功不等於答對題目；評測採 top-1 整題 exact match，讀 `tasks_correct`、`tasks_total`、`errors`，不要只看退出碼。未提供 test 答案不能評分，求解器異常不可自總數移除。細節見 [solvers](../../docs/solvers.md)。
 
-**一道檢查通過，可能是因為它根本沒在檢查。** 這不是假設：曾在一天內抓到四個恆真檢查——結構稽核、「鎖已釋放」的檢查指向已刪目錄、連結檢查器走到子 repo 指標就停、自製字元偵測。
+CI 在 [tests.yml](../../.github/workflows/tests.yml) 執行固定依賴安裝、lint、pytest 與官方兩份 split 的題數驗證。本機不需要 GPU、模型、外部服務帳號或訓練流程。
 
-**規則：新增或修改一道檢查時，要證明它能變紅。** 先餵一個**應該被擋**的輸入，確認 exit ≠ 0；再餵正確的輸入，確認 exit = 0。**沒做過這個雙向驗證的綠燈不算證據。**
+## 檢查必須能變紅
 
-兩個推論：檢查器的**涵蓋範圍要跟著結構走**——拆出子 repo、搬走目錄之後，回頭確認檢查器還看得到那些地方（見 [refactor/moving-things.md](refactor/moving-things.md)）；**靜態全過不等於畫面上是對的**，方框、亂碼、截斷、手感只有人眼看得出來，這類記到 [WAIT_USER](../WAIT_USER.md)，不要自己宣稱通過。
+新增或修改檢查時，要有應通過和應拒絕的例子。合法網格應通過；空網格、長短列、非法顏色應被拒絕。計分測試至少包含正確答案、錯誤尺寸、多 test 題只答對一部分與求解器失敗，確保錯誤不會被略過。
+
+靜態與結構測試不能證明畫面體驗正確。HTML 可先確認沒有外部資源、字串已 escaping、答案折疊，再開啟產出的 HTML 檢視。只有實際看過才能宣稱目視驗證；必要且無法自行完成的目視驗證，另記 WAIT_USER。
+
+生成器測試應使用臨時目錄和固定 seed，避免修改官方題庫或污染 evaluation。新增大型生成 sweep 先估執行時間，保存 manifest 和失敗資訊。
 
 ## 交接
 
-- 綠燈後回 [feature-dev](feature-dev/README.md) 接完剩下的步驟（code map → 文檔 → commit）。
-- 同一個紅燈第二次撞到 → [common/gotchas](common/gotchas.md)。
+驗證完成後回 [feature-dev](feature-dev/README.md)，同步 code map、文件並依授權 commit／push。

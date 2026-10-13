@@ -1,0 +1,66 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: false
+          persist-credentials: false
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990 # v8.3.2
+        with:
+          version: "0.12.2"
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install locked dependencies
+        run: uv sync --locked
+
+      - name: Initialize pinned data and sparse generator sources
+        run: uv run --no-sync python scripts/setup_data.py
+
+      - name: Verify local data and source revisions
+        run: uv run --no-sync python scripts/setup_data.py --check
+
+      - name: Lint
+        run: uv run --no-sync ruff check .
+
+      - name: Check formatting
+        run: uv run --no-sync ruff format --check .
+
+      - name: Run tests
+        run: uv run --no-sync pytest
+
+      - name: Validate all 800 official tasks
+        shell: bash
+        run: |
+          for split in training evaluation; do
+            uv run --no-sync arcagi validate --split "$split" |
+              uv run --no-sync python -c '
+          import json
+          import sys
+
+          summary = json.load(sys.stdin)
+          print(json.dumps(summary, sort_keys=True))
+          count = summary["tasks_total"]
+          if count != 400:
+              raise SystemExit(f"Expected 400 official tasks, found {count}")
+          '
+          done
