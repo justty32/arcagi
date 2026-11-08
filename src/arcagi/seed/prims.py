@@ -1,8 +1,10 @@
 """The whitelist of seed primitives: generic integer, boolean, sequence and
 higher-order functions. Nothing here knows about any task domain.
 
-Values: ``int``, ``bool`` and ``tuple`` (lists). Integer literals 0..9 and -1 are
-program leaves, not primitives. Generic resource caps keep enumeration bounded:
+Values: ``int``, ``bool`` and ``tuple`` (lists). Integer literals are program
+leaves, not primitives: {0, 1, -1} plus every integer occurring in the task's
+train inputs and outputs (``task_consts``). Generic resource caps keep
+enumeration bounded:
 lists longer than ``MAX_LEN`` or integers beyond ``MAX_INT`` raise
 ``OverflowLimitError``.
 Partial functions (head of an empty list, nth out of range, mod by zero) raise
@@ -11,7 +13,8 @@ ordinary Python errors that the interpreter maps to ``EvalError``.
 
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Any
 
@@ -19,7 +22,9 @@ from .types import BOOL, INT, FnT, parse
 
 MAX_LEN = 1024
 MAX_INT = 10**9
-CONSTS: tuple[int, ...] = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1)
+# Base integer literals; each task adds the integers seen in its train data
+# (see ``task_consts``).
+CONSTS: tuple[int, ...] = (0, 1, -1)
 
 
 class OverflowLimitError(ArithmeticError):
@@ -162,9 +167,48 @@ _TABLE: list[Prim] = [
 PRIMS: dict[str, Prim] = {p.name: p for p in _TABLE}
 assert len(PRIMS) <= 40
 
+
+@contextmanager
+def without(*names: str) -> Iterator[None]:
+    """Temporarily remove primitives (ablation), e.g.::
+
+        with seed.prims.without("transpose"):
+            seed.enumerate(lib, tasks, budget, workers=4)
+
+    Removal is global for the process (forked workers inherit it); programs
+    using a removed primitive fail with ``EvalError`` meanwhile. Restored on exit.
+    """
+    unknown = [n for n in names if n not in PRIMS]
+    if unknown:
+        raise KeyError(f"unknown primitives: {unknown}")
+    saved = dict(PRIMS)
+    for n in names:
+        del PRIMS[n]
+    try:
+        yield
+    finally:
+        PRIMS.clear()
+        PRIMS.update(saved)
+
+
+def task_consts(values: Iterable) -> tuple[int, ...]:
+    """Sorted distinct integers of ``CONSTS`` and all ints nested in ``values``."""
+    seen = set(CONSTS)
+    stack = list(values)
+    while stack:
+        v = stack.pop()
+        if isinstance(v, (tuple, list)):
+            stack.extend(v)
+        elif isinstance(v, int) and not isinstance(v, bool):
+            seen.add(v)
+    return tuple(sorted(seen))
+
+
 __all__ = [
     "BOOL",
     "CONSTS",
+    "task_consts",
+    "without",
     "INT",
     "MAX_INT",
     "MAX_LEN",

@@ -22,6 +22,7 @@ from typing import Any
 from .interp import MAX_STEPS, Program, compile_prog, expand, to_value
 from .lam import BodyPool, Op, build_ops, leaf_entries
 from .library import Library
+from .prims import CONSTS, task_consts
 from .types import BOOL, INPUT, INT, FnT, ListT, Type, is_ground, resolve, unify
 
 MAX_SIZE = 24
@@ -71,6 +72,7 @@ class Enumerator:
     ) -> None:
         self.xs = tuple(to_value(i) for i, _ in train)
         self.outs = tuple(to_value(o) for _, o in train)
+        self.consts = task_consts((self.xs, self.outs))
         self.lib = lib
         self.budget = budget_nodes
         self.nodes = 0
@@ -115,7 +117,9 @@ class Enumerator:
     # -- search ------------------------------------------------------------
     def run(self) -> None:
         self.bank.append({})
-        for prog, typ, vals in leaf_entries(self.lib, self.xs, self._run_expanded):
+        for prog, typ, vals in leaf_entries(
+            self.lib, self.xs, self.consts, self._run_expanded
+        ):
             self._offer(1, prog, typ, vals)
         for size in range(2, MAX_SIZE + 1):
             self.bank.append({})
@@ -196,7 +200,7 @@ class Enumerator:
             return None
         pool = self.pools.get(arg_types)
         if pool is None:
-            pool = BodyPool(arg_types, self.lib, self._probes(arg_types))
+            pool = BodyPool(arg_types, self.lib, self._probes(arg_types), self.consts)
             self.pools[arg_types] = pool
         return pool
 
@@ -232,9 +236,7 @@ class Enumerator:
                 for vs, x in zip(e.vals, self.xs, strict=True):
                     for v in vs[:6]:
                         add(v, x)
-        extra: tuple = (
-            (0, 1, 2, -1) if t == INT else ((True, False) if t == BOOL else ())
-        )
+        extra: tuple = CONSTS if t == INT else ((True, False) if t == BOOL else ())
         for v in extra:
             add(v, self.xs[0])
         return out
