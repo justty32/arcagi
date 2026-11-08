@@ -1,0 +1,18 @@
+{
+  "name": "extract_618ba9ad",
+  "kind": "extract",
+  "doc": "Generated extraction [\"count\", [\"all\", \"8same\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 2,
+  "support_tasks": [
+    "4be741c5",
+    "746b3537",
+    "c8cbb738",
+    "d0f5fe59"
+  ]
+}

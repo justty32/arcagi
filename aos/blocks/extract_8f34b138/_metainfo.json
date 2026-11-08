@@ -1,0 +1,18 @@
+{
+  "name": "extract_8f34b138",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"pred\", \"8same\", \"pred_b497c086\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 4,
+  "support_tasks": [
+    "2dc579da",
+    "39a8645d",
+    "5ad4f10b",
+    "fcb5c309"
+  ]
+}

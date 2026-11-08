@@ -1,0 +1,16 @@
+{
+  "name": "extract_9b1cab1a",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"pred\", \"8same\", \"pred_f0aa9bb1\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 2,
+  "length": 4,
+  "support_tasks": [
+    "1f0c79e5",
+    "a87f7484"
+  ]
+}

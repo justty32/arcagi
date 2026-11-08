@@ -1,0 +1,24 @@
+{
+  "name": "formula_14d79b41",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"max_obj_h\", 1, 2]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 6,
+  "length": 2,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "3f7978a0",
+    "846bdb03",
+    "85c4e7cd",
+    "9aec4887",
+    "bda2d7a6",
+    "d687bc17"
+  ]
+}

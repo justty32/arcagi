@@ -1,0 +1,16 @@
+{
+  "name": "extract_c2529930",
+  "kind": "extract",
+  "doc": "Generated extraction [\"count\", [\"pred\", \"4same\", \"pred_708b6c5e\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 2,
+  "length": 4,
+  "support_tasks": [
+    "a3325580",
+    "f9012d9b"
+  ]
+}

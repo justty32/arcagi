@@ -1,0 +1,11 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "mul",
+    "h",
+    "min_obj_w"
+  ],
+  "score": 81
+}

@@ -11,6 +11,8 @@ blocks/<name>/_gradients.jsonl # 梯度信（近失敗），每積木上限 50 �
 blocks/<macro>/program.json    # 巨集＝參數已定的 JSON 程式
 blocks/pred_<hash>/{_metainfo.json,_rule.json,_entry}   # 產生的謂詞積木（kind=pred）
 blocks/_gen/pred_combiner/_metainfo.json             # 產生器節點（kind=generator）
+blocks/formula_<hash>/、blocks/extract_<hash>/       # r03 公式型、抽取型積木（_rule.json＝{"kind":"formula"|"extract",...,"body":..}）
+blocks/_gen/formula/、blocks/_gen/extract/           # r03 產生器節點（_entry 跑產生器，metainfo 記 gen_seconds）
 solver/_entry                  # 一題的 --external 檔案協定 → in-process search
 pool/{config.json,wallets.json,ledger.jsonl,epochs/<n>.json}   # 帳
 ```
@@ -23,6 +25,9 @@ pool/{config.json,wallets.json,ledger.jsonl,epochs/<n>.json}   # 帳
 - 記帳一個 epoch：`uv run python -m arcagi.blocks.pool --report R.json --epoch N --split S`（同 epoch 同報告重跑＝不動；不同報告或跳號＝拒絕）
 - 抽巨集：`uv run python -m arcagi.blocks.library --traces T1.jsonl T2.jsonl [--min-tasks 3] [--dry-run]`
 - 產生謂詞積木：`uv run python -m arcagi.blocks.gen_predicates --split training --max-literals 2 [--live-cap 60] [--dry-run]`
+- 產生公式／抽取積木：`uv run python -m arcagi.blocks.gen_formula --split training [--dry-run]`、`... gen_extract ...`；或 `aos-exec --ws aos aos/blocks/_gen/formula --dry-run`
+- 單一公式／抽取積木：`echo '[[1,0,0],[0,2,2]]' | aos-exec --ws aos aos/blocks/formula_2367bc71` → `2`
+- 帳（r03）：`config.json` 的 `essential` 永不建議退休；巨集分紅 50% 按成分下傳；產生器花費＝`gen_seconds`×`generator_rate`；有 `generator` 且連續 0 收入又 covered 的積木會真的改 `retired`；epoch 檔有 `generator_budget`（只記不用）
 - 單一謂詞：`echo '{"object":{"is_largest":0,"shape_count":2},"group":[{"shape_count":2},{"shape_count":1}]}' | aos-exec --ws aos aos/blocks/pred_988c1402`（或直接給屬性 dict）→ `true`／`false`
 - 搜尋讀的目錄：環境變數 `ARCAGI_BLOCKS`，否則本目錄的 `blocks/`；不存在時行為同 r01。
 

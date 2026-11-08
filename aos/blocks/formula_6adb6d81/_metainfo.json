@@ -1,0 +1,18 @@
+{
+  "name": "formula_6adb6d81",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"n_bg\", 1, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 1,
+  "targets": [
+    "h_out"
+  ],
+  "support_tasks": [
+    "9af7a82c"
+  ]
+}

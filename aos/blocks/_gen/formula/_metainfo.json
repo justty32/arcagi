@@ -1,0 +1,24 @@
+{
+  "name": "_gen/formula",
+  "kind": "generator",
+  "doc": "Enumerates <=1-op, <=2-feature integer formulas for output size / repeat counts; scored on training.",
+  "params": [
+    "live_cap"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "produces": "formula",
+  "gen_seconds": 0.62,
+  "last_run": {
+    "split": "training",
+    "tasks": 400,
+    "problems": 366,
+    "scored": 1620,
+    "live": 24,
+    "covered": 60,
+    "over_cap": 0,
+    "dropped": 975,
+    "gen_seconds": 0.62
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "lin",
+    "max_obj_h",
+    1,
+    -2
+  ],
+  "score": 1
+}

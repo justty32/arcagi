@@ -1,0 +1,13 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": [
+    "count",
+    [
+      "pred",
+      "4same",
+      "pred_58662886"
+    ]
+  ]
+}

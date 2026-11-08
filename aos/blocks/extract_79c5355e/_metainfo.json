@@ -1,0 +1,17 @@
+{
+  "name": "extract_79c5355e",
+  "kind": "extract",
+  "doc": "Generated extraction [\"size\", [\"smallest\", \"8same\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 3,
+  "length": 2,
+  "support_tasks": [
+    "681b3aeb",
+    "b94a9452",
+    "d631b094"
+  ]
+}

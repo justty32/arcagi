@@ -1,0 +1,13 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": [
+    "size",
+    [
+      "pred",
+      "8same",
+      "pred_58662886"
+    ]
+  ]
+}

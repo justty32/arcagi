@@ -1,0 +1,12 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "lin",
+    "min_obj_w",
+    1,
+    0
+  ],
+  "score": 8
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "max",
+    "w",
+    "cnt_9"
+  ],
+  "score": 117
+}

@@ -1,0 +1,16 @@
+{
+  "name": "extract_f484d052",
+  "kind": "extract",
+  "doc": "Generated extraction [\"count\", [\"all\", \"4multi\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 2,
+  "length": 2,
+  "support_tasks": [
+    "5117e062",
+    "d0f5fe59"
+  ]
+}

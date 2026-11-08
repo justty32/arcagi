@@ -5,5 +5,24 @@
   "calls_per_unit": 1000,
   "retire_after": 3,
   "gradient_cap": 50,
-  "near_misses_per_task": 1
+  "near_misses_per_task": 1,
+  "generator_cut": 0.2,
+  "essential": [
+    "flip_lr",
+    "flip_ud",
+    "rot90",
+    "rot180",
+    "rot270",
+    "transpose",
+    "anti_transpose",
+    "crop_bbox",
+    "recolor_sel",
+    "delete_sel",
+    "keep_sel",
+    "move_sel",
+    "extend_sel"
+  ],
+  "macro_passdown": 0.5,
+  "generator_rate": 1.0,
+  "generator_floor": 0.2
 }

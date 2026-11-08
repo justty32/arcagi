@@ -1,0 +1,16 @@
+{
+  "name": "extract_96a7b0fb",
+  "kind": "extract",
+  "doc": "Generated extraction [\"size\", [\"pred\", \"4same\", \"pred_926eaf0d\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 2,
+  "length": 4,
+  "support_tasks": [
+    "a416b8f3",
+    "d631b094"
+  ]
+}

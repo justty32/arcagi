@@ -10,6 +10,7 @@ from collections.abc import Sequence
 
 from arcagi.tasks import Grid
 
+from . import background as bgc
 from . import grid as g
 from .objects_learner import apply_object_colormap, fit_object_colormap
 from .objects_props import (
@@ -51,13 +52,13 @@ def _recolor_sel(grid: Grid, conn: str, attr: str, value: object, color: int) ->
 
 
 def _delete_sel(grid: Grid, conn: str, attr: str, value: object) -> Grid:
-    bg = g.background(grid)
+    bg = bgc.of(grid)
     objs = selected(grid, conn, attr, value)
     return _paint(grid, {cell: bg for o in objs for cell in o.cells})
 
 
 def _keep_sel(grid: Grid, conn: str, attr: str, value: object) -> Grid:
-    bg = g.background(grid)
+    bg = bgc.of(grid)
     keep = {o.cells for o in selected(grid, conn, attr, value)}
     drop = [o for o in extract(grid, conn) if o.cells not in keep]
     return _paint(grid, {cell: bg for o in drop for cell in o.cells})
@@ -65,7 +66,7 @@ def _keep_sel(grid: Grid, conn: str, attr: str, value: object) -> Grid:
 
 def _fill_holes(grid: Grid, color: int) -> Grid:
     """Paint background cells enclosed by a single (8-connected) object."""
-    bg = g.background(grid)
+    bg = bgc.of(grid)
     paint = {}
     for o in extract(grid, "8multi"):
         for y, x in hole_cells(grid, o.cells):
@@ -77,7 +78,7 @@ def _fill_holes(grid: Grid, color: int) -> Grid:
 def _move_sel(grid: Grid, conn: str, attr: str, value: object, direction: str) -> Grid:
     """Slide each selected object in ``direction`` until the border or a cell."""
     dy, dx = DIRS[direction]
-    bg = g.background(grid)
+    bg = bgc.of(grid)
     height, width = g.shape(grid)
     objs = selected(grid, conn, attr, value)
     rows = [list(row) for row in grid]
@@ -106,7 +107,7 @@ def _extend_sel(
 ) -> Grid:
     """Draw a ray from each selected object's cells to the border over background."""
     dy, dx = DIRS[direction]
-    bg = g.background(grid)
+    bg = bgc.of(grid)
     height, width = g.shape(grid)
     paint = {}
     for o in selected(grid, conn, attr, value):
@@ -173,7 +174,7 @@ def _delete_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
     def label(o: Obj, s: Grid, i: int) -> bool | None:
         if not changed(o, targets[i]):
             return False
-        return True if _uniform(o, targets[i]) == g.background(s) else None
+        return True if _uniform(o, targets[i]) == bgc.of(s) else None
 
     return _selectors(states, label)
 
@@ -185,7 +186,7 @@ def _keep_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
     def label(o: Obj, s: Grid, i: int) -> bool | None:
         if not changed(o, targets[i]):
             return True
-        return False if _uniform(o, targets[i]) == g.background(s) else None
+        return False if _uniform(o, targets[i]) == bgc.of(s) else None
 
     return [p for p in _selectors(states, label) if p[1] != "all"]
 
@@ -195,7 +196,7 @@ def _fill_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
         return []
     colors = set()
     for state, target in zip(states, targets, strict=True):
-        bg = g.background(state)
+        bg = bgc.of(state)
         for rs, rt in zip(state, target, strict=True):
             for a, b in zip(rs, rt, strict=True):
                 if a != b:
@@ -240,7 +241,7 @@ def _move_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
 def _grow_dirs(o: Obj, target: Grid, state: Grid) -> set[str]:
     """Directions where the background cell just past ``o`` took its color."""
     height, width = g.shape(target)
-    bg = g.background(state)
+    bg = bgc.of(state)
     own = set(o.cells)
     found = set()
     for name, (dy, dx) in DIRS.items():

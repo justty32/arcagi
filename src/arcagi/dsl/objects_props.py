@@ -1,7 +1,8 @@
 """Object extraction, per-object attributes and single-attribute selectors.
 
 Objects come from ``grid.objects`` under four connectivity modes; the background
-is the grid's most frequent color. Every attribute value is an int or a str so
+is the task background when the search set one (``arcagi.dsl.background``), else
+the grid's most frequent color. Every attribute value is an int or a str so
 selectors ``(conn, attr, value)`` stay JSON-serializable program parameters.
 ``attr == "pred"`` makes ``value`` a predicate (a live block name or an inline
 AST, see ``arcagi.dsl.predicates``); ``(attr, value)`` is its ``eq`` special case.
@@ -14,6 +15,7 @@ from functools import lru_cache
 
 from arcagi.tasks import Grid
 
+from . import background as bgc
 from . import grid as g
 from . import predicates as pr
 
@@ -77,10 +79,13 @@ def hole_cells(grid: Grid, cells: Sequence[Cell]) -> list[Cell]:
     ]
 
 
-@lru_cache(maxsize=8192)
 def extract(grid: Grid, conn: str) -> tuple[Obj, ...]:
     """Objects of ``grid`` under ``conn`` with all attributes filled in."""
-    bg = g.background(grid)
+    return _extract(grid, conn, bgc.of(grid))
+
+
+@lru_cache(maxsize=8192)
+def _extract(grid: Grid, conn: str, bg: int) -> tuple[Obj, ...]:
     raw = g.objects(grid, bg, diagonal=conn[0] == "8", by_color=conn.endswith("same"))
     if not raw:
         return ()
@@ -122,13 +127,18 @@ def selected(grid: Grid, conn: str, attr: str, value: object) -> list[Obj]:
     if attr == "all":
         return list(objs)
     if attr == "pred":
-        mask = pred_mask(grid, conn, value if isinstance(value, str) else None, value)
+        name = value if isinstance(value, str) else None
+        mask = pred_mask(grid, conn, name, value)
         return [o for o, keep in zip(objs, mask, strict=True) if keep]
     return [o for o in objs if o.props[attr] == value]
 
 
-@lru_cache(maxsize=32768)
 def _named_mask(grid: Grid, conn: str, name: str) -> tuple[bool, ...]:
+    return _named_mask_bg(grid, conn, name, bgc.of(grid))
+
+
+@lru_cache(maxsize=32768)
+def _named_mask_bg(grid: Grid, conn: str, name: str, _bg: int) -> tuple[bool, ...]:
     return tuple(
         pr.evaluate_group(pr.resolve(name), [o.props for o in extract(grid, conn)])
     )

@@ -1,0 +1,24 @@
+{
+  "name": "formula_759b1983",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"w\", 2, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 6,
+  "length": 2,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "10fcaaa3",
+    "46442a0e",
+    "963e52fc",
+    "a416b8f3",
+    "c59eb873",
+    "f5b8619d"
+  ]
+}

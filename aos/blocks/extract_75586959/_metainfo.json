@@ -1,0 +1,17 @@
+{
+  "name": "extract_75586959",
+  "kind": "extract",
+  "doc": "Generated extraction [\"subgrid\", [\"unique_color\", \"4same\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 3,
+  "length": 2,
+  "support_tasks": [
+    "1cf80156",
+    "1f85a75f",
+    "c909285e"
+  ]
+}

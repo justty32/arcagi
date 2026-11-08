@@ -1,0 +1,19 @@
+{
+  "name": "extract_6db413d1",
+  "kind": "extract",
+  "doc": "Generated extraction [\"subgrid\", [\"pred\", \"4same\", \"pred_1731e9f2\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 5,
+  "length": 4,
+  "support_tasks": [
+    "0b148d64",
+    "1cf80156",
+    "1f85a75f",
+    "88a62173",
+    "c909285e"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "div",
+    "max_obj_w",
+    4
+  ],
+  "score": 1
+}

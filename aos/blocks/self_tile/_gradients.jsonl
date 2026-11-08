@@ -9,3 +9,4 @@
 {"epoch": 2, "from": "pool", "task": "27f8ce4f", "program": "[[\"self_tile\",\"neg\"],[\"mirror_tile\",\"ud\"],[\"split_overlay\",\"h\",\"left\"]]", "score": 0.6111, "train_correct": 0, "train_total": 4, "says": "near miss on an unsolved task"}
 {"epoch": 2, "from": "pool", "task": "ad7e01d0", "program": "[[\"self_tile\",\"pos\"]]", "score": 0.6142, "train_correct": 0, "train_total": 4, "says": "near miss on an unsolved task"}
 {"epoch": 2, "from": "pool", "task": "ccd554ac", "program": "[[\"self_tile\",\"neg\"]]", "score": 0.7762, "train_correct": 0, "train_total": 6, "says": "near miss on an unsolved task"}
+{"epoch": 3, "from": "pool", "task": "27f8ce4f", "program": "[[\"self_tile\",\"neg\"],[\"mirror_tile\",\"ud\"],[\"split_overlay\",\"h\",\"left\"]]", "train_correct": 0, "train_total": 4, "score": 0.6111, "says": "near miss on an unsolved task"}

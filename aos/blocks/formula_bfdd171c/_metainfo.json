@@ -1,0 +1,18 @@
+{
+  "name": "formula_bfdd171c",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"div\", \"max_obj_w\", 4]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 2,
+  "targets": [
+    "h_out"
+  ],
+  "support_tasks": [
+    "90c28cc7"
+  ]
+}

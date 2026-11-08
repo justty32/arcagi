@@ -15,6 +15,7 @@ from collections.abc import Sequence
 
 from arcagi.tasks import Grid
 
+from . import background as bgc
 from . import grid as g
 from .objects_props import ATTRS, CONNS, extract
 
@@ -42,7 +43,7 @@ def _bg_untouched(states: Sequence[Grid], targets: Sequence[Grid]) -> bool:
     for state, target in zip(states, targets, strict=True):
         if g.shape(state) != g.shape(target):
             return False
-        bg = g.background(state)
+        bg = bgc.of(state)
         for rs, rt in zip(state, target, strict=True):
             for a, b in zip(rs, rt, strict=True):
                 if a != b:

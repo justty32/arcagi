@@ -1,0 +1,23 @@
+{
+  "name": "_gen/extract",
+  "kind": "generator",
+  "doc": "Enumerates selector x property extractions; scored on training.",
+  "params": [
+    "live_cap"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "produces": "extract",
+  "gen_seconds": 7.98,
+  "last_run": {
+    "split": "training",
+    "tasks": 400,
+    "scored": 1500,
+    "live": 44,
+    "covered": 40,
+    "over_cap": 0,
+    "dropped": 556,
+    "gen_seconds": 7.98
+  }
+}

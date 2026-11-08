@@ -49,6 +49,17 @@
    "baseline": "dsl-search-r01 evaluation 21/400、training 57/400；退步 0",
    "verdict": "否：evaluation +7 未達 30（同大小 3→7）；training 達 75；一題由自動產生的謂詞解出",
    "record_path": "../../../reports/dsl-search-r02/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r03",
+   "date": "2026-11-08",
+   "hypothesis": "自動產生的公式型與抽取型積木（＋題目背景、投票、帳修正）讓 evaluation 解 ≥36 題",
+   "solver": "arcagi.solvers.search:solve (r03 收輪 commit)",
+   "split": "evaluation＋training",
+   "result": "evaluation 32/400、training 86/400, errors=0；top-2 同 top-1",
+   "baseline": "dsl-search-r02 evaluation 28/400、training 79/400；退步 0",
+   "verdict": "否：evaluation +4 未達 36，但 4 題全由公式型積木解出；尺寸隨輸入 54 題 2→6",
+   "record_path": "../../../reports/dsl-search-r03/README.md"
   }
  ]
 }

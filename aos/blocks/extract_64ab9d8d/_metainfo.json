@@ -1,0 +1,17 @@
+{
+  "name": "extract_64ab9d8d",
+  "kind": "extract",
+  "doc": "Generated extraction [\"count\", [\"pred\", \"4multi\", \"pred_9fa2fc1d\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 3,
+  "length": 4,
+  "support_tasks": [
+    "8e1813be",
+    "d0f5fe59",
+    "f9012d9b"
+  ]
+}

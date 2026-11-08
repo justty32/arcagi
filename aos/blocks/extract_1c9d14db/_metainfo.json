@@ -1,0 +1,19 @@
+{
+  "name": "extract_1c9d14db",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"pred\", \"4multi\", \"pred_1731e9f2\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 5,
+  "length": 4,
+  "support_tasks": [
+    "0b148d64",
+    "1f85a75f",
+    "3345333e",
+    "48d8fb45",
+    "7e0986d6"
+  ]
+}

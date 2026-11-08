@@ -5,7 +5,7 @@
   "params": [],
   "cost": 1,
   "status": "live",
-  "counter_uses": 1,
+  "counter_uses": 2,
   "generator": "_gen/pred_combiner",
   "score": 12.5,
   "literals": 1,

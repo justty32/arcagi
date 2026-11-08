@@ -1,0 +1,37 @@
+{
+  "name": "formula_0db6aabe",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"max_obj_h\", 1, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 19,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "06df4c85",
+    "0b148d64",
+    "1cf80156",
+    "1f85a75f",
+    "272f95fa",
+    "39e1d7f9",
+    "3bd67248",
+    "3eda0437",
+    "54d9e175",
+    "6455b5f5",
+    "6b9890af",
+    "7468f01a",
+    "77fdfe62",
+    "83302e8f",
+    "b94a9452",
+    "be94b721",
+    "e6721834",
+    "e73095fd",
+    "fcb5c309"
+  ]
+}

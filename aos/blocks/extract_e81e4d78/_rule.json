@@ -1,0 +1,13 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": [
+    "color",
+    [
+      "pred",
+      "4multi",
+      "pred_ffbb3253"
+    ]
+  ]
+}

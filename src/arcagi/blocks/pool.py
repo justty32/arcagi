@@ -2,16 +2,17 @@
 
 Run: ``uv run python -m arcagi.blocks.pool --report R.json --epoch N --split S``.
 
-Per solved task the top level earns ``price``; it keeps ``retain`` and pays the
-rest to blocks in proportion to their static references in the selected
-program. Spend = ``trace.metadata.block_calls[name] / calls_per_unit * cost``
-(0 when absent). Every wallet pays ``rent`` per epoch. A block with zero
-dividend for ``retire_after`` epochs in a row is only *suggested* for retirement.
-A generated block (``generator`` in its metainfo, e.g. a ``pred_*``
-referenced as a selector parameter) passes ``generator_cut`` of its dividend to
-its generator node. Near misses of unsolved tasks become ``_gradients.jsonl``
-letters to the blocks they reference. Files: ``config.json``, ``wallets.json``,
-``ledger.jsonl`` (append-only), ``epochs/<n>.json``.
+A solved task pays ``price``: the top keeps ``retain``, blocks share the rest by
+static references in the selected program; a macro passes ``macro_passdown`` on
+to its ``program.json`` steps, a generated block (``generator`` in metainfo, e.g.
+a ``pred_*`` parameter) ``generator_cut`` to its generator. Spend = block_calls /
+``calls_per_unit`` x cost, plus ``gen_seconds`` x ``generator_rate`` for
+generator nodes; ``rent`` per epoch. ``retire_after`` zero-dividend epochs in a
+row: suggested retirement unless ``essential``; really retired (status, ledger)
+if generated and ``covered``. ``generator_budget`` (net shares, floor
+``generator_floor``) is only recorded. Near misses become ``_gradients.jsonl``
+letters. Files: ``config.json``, ``wallets.json``, ``ledger.jsonl``
+(append-only), ``epochs/<n>.json``.
 """
 
 import argparse
@@ -23,7 +24,7 @@ from pathlib import Path
 from typing import Any
 
 from . import REPO_ROOT, read_json, write_json
-from .catalog import Catalog, load_catalog
+from .catalog import Catalog, load_catalog, load_macro_program
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "price_per_task": 1000,
@@ -34,7 +35,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "gradient_cap": 50,
     "near_misses_per_task": 1,
     "generator_cut": 0.2,
+    "essential": [],
+    "macro_passdown": 0.5,
+    "generator_rate": 1.0,
+    "generator_floor": 0.2,
 }
+LETTER_KEYS = ("program", "train_correct", "train_total")
 
 
 class EpochError(RuntimeError):
@@ -48,49 +54,84 @@ def selected_steps(trace: dict | None) -> list[str]:
     for attempt in trace.get("attempts", []):
         if attempt.get("id") == trace["selected"] and "program" in attempt:
             try:
-                steps = json.loads(attempt["program"])
-                return [step[0] for step in steps] + [
-                    p for step in steps for p in step[1:] if _is_pred(p)
-                ]
+                return _refs(json.loads(attempt["program"]))
             except (ValueError, TypeError, IndexError):
                 return []
     return []
 
 
+def _refs(steps) -> list[str]:
+    """Static block references of a program: step names plus pred_* params."""
+    preds = [p for step in steps for p in step[1:] if _is_pred(p)]
+    return [step[0] for step in steps] + preds
+
+
 def _is_pred(param: object) -> bool:
-    return isinstance(param, str) and param.startswith("pred_")
+    # Generated-block references: pred_*, formula_* and extract_* names.
+    return isinstance(param, str) and param.startswith(
+        ("pred_", "formula_", "extract_")
+    )
 
 
-def _generator_share(
-    dividends: dict[str, Fraction], catalog: Catalog, cut: Fraction
-) -> None:
-    """Move ``cut`` of each generated block's dividend to its generator node."""
+def _move(dividends: dict[str, Fraction], cut: object, targets: dict) -> None:
+    """Move ``cut`` of each dividend to ``targets[name]`` (a Counter) by weight."""
     for name in sorted(dividends):
-        block = catalog.blocks.get(name)
-        gen = block.meta.get("generator") if block else None
-        if isinstance(gen, str) and gen and dividends[name] > 0:
-            moved = dividends[name] * cut
+        parts = targets.get(name) if dividends[name] > 0 else None
+        if parts:
+            moved = dividends[name] * Fraction(str(cut))
             dividends[name] -= moved
-            dividends[gen] = dividends.get(gen, Fraction(0)) + moved
+            for part, n in parts.items():
+                share = moved * n / sum(parts.values())
+                dividends[part] = dividends.get(part, Fraction(0)) + share
 
 
-def _near_misses(trace: dict | None, limit: int) -> list[dict]:
-    if not trace:
-        return []
+def _targets(catalog: Catalog) -> tuple[dict[str, Counter], dict[str, Counter]]:
+    """Macro name -> its program's refs; generated block -> its generator."""
+    blocks = catalog.blocks.items()
+    macros = [(n, load_macro_program(b.path)) for n, b in blocks if b.kind == "macro"]
+    gens = [(n, b.meta.get("generator")) for n, b in blocks]
+    parts = {n: Counter(_refs(p or ())) for n, p in macros}
+    return parts, {n: Counter([g]) for n, g in gens if isinstance(g, str) and g}
+
+
+def _generator_meta(catalog: Catalog) -> dict[str, dict]:
+    """Generator nodes: ``<root>/_gen/*`` folders plus names cited as generator."""
+    names = {b.meta.get("generator") for b in catalog.blocks.values()}
+    found = {n: {} for n in names if isinstance(n, str) and n}
+    if catalog.root is not None:
+        found |= {
+            f"_gen/{p.parent.name}": {} for p in catalog.root.glob("_gen/*/_*.json")
+        }
+        for name in found:
+            meta = read_json(catalog.root / name / "_metainfo.json", {})
+            found[name] = meta if isinstance(meta, dict) else {}
+    return found
+
+
+def _budget(rows: dict[str, dict], gens: list[str], floor: float) -> dict:
+    """Next-round budget shares by positive net income, each at least ``floor``."""
+    floor = min(floor, 1 / len(gens)) if gens else 0
+    net = {n: rows[n]["dividend"] - rows[n]["spend"] for n in gens}
+    pos = sum(max(v, 0.0) for v in net.values())
+    part = {n: max(v, 0.0) / pos if pos else 1 / len(gens) for n, v in net.items()}
+    rest = 1 - floor * len(gens)
+    return {
+        n: {"net": round(net[n], 6), "share": round(floor + rest * part[n], 6)}
+        for n in gens
+    }
+
+
+def _near_misses(trace: dict, limit: int) -> list[dict]:
     near = [a for a in trace.get("attempts", []) if a.get("kind") == "near_miss"]
-    near.sort(key=lambda a: -a.get("data", {}).get("pixel_acc", 0))
-    return near[:limit]
+    return sorted(near, key=lambda a: -a.get("data", {}).get("pixel_acc", 0))[:limit]
 
 
 def _ledger_epochs(path: Path) -> dict[int, str]:
-    found: dict[int, str] = {}
-    if path.exists():
-        for line in path.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                row = json.loads(line)
-                if row.get("type") == "epoch":
-                    found[row["epoch"]] = row.get("report_sha256", "")
-    return found
+    text = path.read_text(encoding="utf-8") if path.exists() else ""
+    rows = [json.loads(line) for line in text.splitlines() if line.strip()]
+    return {
+        r["epoch"]: r.get("report_sha256", "") for r in rows if r["type"] == "epoch"
+    }
 
 
 def settle(
@@ -122,64 +163,50 @@ def settle(
                 names = {step[0] for step in json.loads(attempt["program"])}
             except (KeyError, ValueError, TypeError, IndexError):
                 continue
-            letter = {
-                "from": "pool",
-                "task": task.get("task_id"),
-                "program": attempt["program"],
-                "score": attempt.get("data", {}).get("pixel_acc"),
-                "train_correct": attempt.get("train_correct"),
-                "train_total": attempt.get("train_total"),
-                "says": "near miss on an unsolved task",
-            }
+            letter = {"from": "pool", "task": task.get("task_id")}
+            letter |= {k: attempt.get(k) for k in LETTER_KEYS}
+            letter["score"] = attempt.get("data", {}).get("pixel_acc")
+            letter["says"] = "near miss on an unsolved task"
             letters.extend((name, letter) for name in sorted(names))
-    _generator_share(
-        dividends, catalog, Fraction(str(config.get("generator_cut", 0.2)))
-    )
+    macro_parts, gen_parts = _targets(catalog)
+    _move(dividends, config["macro_passdown"], macro_parts)
+    _move(dividends, config["generator_cut"], gen_parts)
+    gens = _generator_meta(catalog)
     income = solved * price
     exact_retained = income - sum(dividends.values(), Fraction(0))
     paid = {name: round(float(value), 6) for name, value in dividends.items()}
     retained = round(float(exact_retained), 6)
     names = set(wallets.get("blocks", {})) | set(catalog.blocks) | set(paid)
-    names |= set(calls)
+    names |= set(calls) | set(gens)
     blocks_out: dict[str, dict] = {}
     for name in sorted(names):
         old = wallets.get("blocks", {}).get(name, {})
-        spend = round(
-            calls.get(name, 0) / config["calls_per_unit"] * catalog.cost(name), 6
-        )
+        sec = gens.get(name, {}).get("gen_seconds", 0)
+        spend = calls.get(name, 0) / config["calls_per_unit"] * catalog.cost(name)
+        spend = round(spend + float(sec or 0) * config["generator_rate"], 6)
         dividend = paid.get(name, 0.0)
         streak = 0 if dividend > 0 else old.get("zero_streak", 0) + 1
-        blocks_out[name] = {
-            "balance": round(
-                old.get("balance", 0.0) + dividend - spend - config["rent"], 6
-            ),
-            "dividend": dividend,
-            "spend": spend,
-            "rent": config["rent"],
-            "refs": refs.get(name, 0),
-            "zero_streak": streak,
-            "income_total": round(old.get("income_total", 0.0) + dividend, 6),
-        }
-    top = wallets.get("top", {})
-    new_wallets = {
-        "top": {"balance": round(top.get("balance", 0.0) + retained, 6)},
-        "blocks": blocks_out,
-    }
-    summary = {
-        "income": income,
-        "tasks_solved": solved,
-        "tasks_total": len(report.get("tasks", [])),
-        "retained": retained,
-        "dividends_total": round(float(income - exact_retained), 6),
-        "conservation_ok": exact_retained + sum(dividends.values()) == income
-        and abs(income - retained - sum(paid.values())) < 1e-3,
-        "suggest_retire": sorted(
-            n
-            for n, b in blocks_out.items()
-            if b["zero_streak"] >= config["retire_after"]
-        ),
-        "blocks": blocks_out,
-    }
+        balance = old.get("balance", 0.0) + dividend - spend - config["rent"]
+        blocks_out[name] = {"balance": round(balance, 6), "dividend": dividend}
+        blocks_out[name] |= {"spend": spend, "rent": config["rent"]}
+        blocks_out[name] |= {"refs": refs.get(name, 0), "zero_streak": streak}
+        total = old.get("income_total", 0) + dividend
+        blocks_out[name]["income_total"] = round(total, 6)
+    top = round(wallets.get("top", {}).get("balance", 0.0) + retained, 6)
+    new_wallets = {"top": {"balance": top}, "blocks": blocks_out}
+    ess, after = sorted(config["essential"]), config["retire_after"]
+    idle = [n for n, b in blocks_out.items() if b["zero_streak"] >= after]
+    idle = sorted(n for n in idle if n not in ess)
+    gone = [b for n in idle if (b := catalog.blocks.get(n)) and b.meta.get("generator")]
+    summary = {"income": income, "tasks_solved": solved, "retained": retained}
+    summary["tasks_total"] = len(report.get("tasks", []))
+    summary["dividends_total"] = round(float(income - exact_retained), 6)
+    summary["conservation_ok"] = exact_retained + sum(dividends.values()) == income
+    summary["conservation_ok"] &= abs(income - retained - sum(paid.values())) < 1e-3
+    summary |= {"essential": ess, "suggest_retire": idle}
+    summary["retire"] = [b.name for b in gone if b.status == "covered"]
+    budget = _budget(blocks_out, sorted(gens), config["generator_floor"])
+    summary |= {"generator_budget": budget, "blocks": blocks_out}
     return summary, new_wallets, letters
 
 
@@ -187,26 +214,21 @@ def _append_letters(catalog: Catalog, letters: list, epoch: int, cap: int) -> in
     written = 0
     for name, letter in letters:
         block = catalog.blocks.get(name)
-        if block is None:
-            continue
-        path = block.path / "_gradients.jsonl"
-        lines = path.read_text(encoding="utf-8").count("\n") if path.exists() else 0
-        if lines >= cap:
-            continue
-        with path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps({"epoch": epoch, **letter}) + "\n")
-        written += 1
+        path = block.path / "_gradients.jsonl" if block else None
+        if path and (path.read_text().count("\n") if path.exists() else 0) < cap:
+            with path.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps({"epoch": epoch, **letter}) + "\n")
+            written += 1
     return written
 
 
 def _bump_uses(catalog: Catalog, blocks: dict) -> None:
     for name, row in blocks.items():
-        block = catalog.blocks.get(name)
-        if block is None or not row["refs"]:
-            continue
-        meta = dict(block.meta)
-        meta["counter_uses"] = meta.get("counter_uses", 0) + row["refs"]
-        write_json(block.path / "_metainfo.json", meta)
+        if (block := catalog.blocks.get(name)) and row["refs"]:
+            uses = block.meta.get("counter_uses", 0) + row["refs"]
+            write_json(
+                block.path / "_metainfo.json", {**block.meta, "counter_uses": uses}
+            )
 
 
 def run_epoch(
@@ -232,38 +254,28 @@ def run_epoch(
     catalog = load_catalog(blocks_root)
     wallets = read_json(pool / "wallets.json", {}) or {}
     summary, new_wallets, letters = settle(json.loads(raw), wallets, config, catalog)  # type: ignore[arg-type]
-    summary = {
-        "epoch": epoch,
-        "split": split,
-        "report": str(report_path),
-        "report_sha256": sha,
-        **summary,
-    }
+    head = {"epoch": epoch, "split": split, "report": str(report_path)}
+    summary = {**head, "report_sha256": sha, **summary}
     summary["gradients_written"] = _append_letters(
         catalog, letters, epoch, config["gradient_cap"]
     )
     write_json(pool / "epochs" / f"{epoch}.json", summary)
     write_json(pool / "wallets.json", {"epoch": epoch, **new_wallets})
-    rows = [
-        {
-            "type": "epoch",
-            "epoch": epoch,
-            "split": split,
-            "report_sha256": sha,
-            "income": summary["income"],
-            "retained": summary["retained"],
-            "conservation_ok": summary["conservation_ok"],
-        }
-    ]
+    keys = ("epoch", "split", "report_sha256", "income", "retained", "conservation_ok")
+    rows = [{"type": "epoch", **{k: summary[k] for k in keys}}]
     rows += [
         {"type": "block", "epoch": epoch, "block": name, **row}
         for name, row in summary["blocks"].items()
     ]
+    rows += [{"type": "retire", "epoch": epoch, "block": n} for n in summary["retire"]]
     pool.mkdir(parents=True, exist_ok=True)
     with ledger.open("a", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
     _bump_uses(catalog, summary["blocks"])
+    for name in summary["retire"]:  # after _bump_uses, which rewrites metainfo
+        path = catalog.blocks[name].path / "_metainfo.json"
+        write_json(path, {**(read_json(path, {}) or {}), "status": "retired"})
     return summary
 
 
@@ -280,15 +292,8 @@ def main(argv: list[str] | None = None) -> int:
     except EpochError as exc:
         print(f"arcagi.blocks.pool: {exc}")
         return 2
-    keys = (
-        "epoch",
-        "income",
-        "retained",
-        "dividends_total",
-        "conservation_ok",
-        "suggest_retire",
-        "gradients_written",
-    )
+    keys = ("epoch", "income", "retained", "dividends_total", "conservation_ok")
+    keys += ("suggest_retire", "retire", "generator_budget", "gradients_written")
     print(json.dumps({k: summary.get(k) for k in keys}, ensure_ascii=False))
     return 0
 

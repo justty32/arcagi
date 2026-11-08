@@ -1,0 +1,11 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "max",
+    "h",
+    "max_obj_size"
+  ],
+  "score": 65
+}

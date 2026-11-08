@@ -1,0 +1,20 @@
+{
+  "name": "extract_d71ce6f2",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"pred\", \"4same\", \"pred_2b11d3f1\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 6,
+  "length": 4,
+  "support_tasks": [
+    "0b148d64",
+    "1f85a75f",
+    "445eab21",
+    "47c1f68c",
+    "7e0986d6",
+    "e48d4e1a"
+  ]
+}

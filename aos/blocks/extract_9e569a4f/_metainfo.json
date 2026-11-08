@@ -1,0 +1,23 @@
+{
+  "name": "extract_9e569a4f",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"pred\", \"4multi\", \"pred_dfb3435e\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 8,
+  "length": 4,
+  "support_tasks": [
+    "2dc579da",
+    "3345333e",
+    "48d8fb45",
+    "5ad4f10b",
+    "8731374e",
+    "aabf363d",
+    "f9012d9b",
+    "fcb5c309"
+  ],
+  "covered_by": "extract_185fa22c"
+}

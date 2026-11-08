@@ -1,0 +1,15 @@
+{
+  "name": "extract_4071bc78",
+  "kind": "extract",
+  "doc": "Generated extraction [\"size\", [\"color\", \"4same\", 3]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 1,
+  "length": 3,
+  "support_tasks": [
+    "7c008303"
+  ]
+}

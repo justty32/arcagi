@@ -1,0 +1,18 @@
+{
+  "name": "extract_f9faae9e",
+  "kind": "extract",
+  "doc": "Generated extraction [\"size\", [\"pred\", \"8same\", \"pred_1774abeb\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 4,
+  "support_tasks": [
+    "681b3aeb",
+    "7468f01a",
+    "b94a9452",
+    "e98196ab"
+  ]
+}

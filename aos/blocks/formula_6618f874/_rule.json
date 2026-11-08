@@ -1,0 +1,11 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "mul",
+    "w",
+    "n_obj8"
+  ],
+  "score": 39
+}

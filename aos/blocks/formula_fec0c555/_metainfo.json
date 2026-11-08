@@ -1,0 +1,19 @@
+{
+  "name": "formula_fec0c555",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"sq\", \"h\"]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 2,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "b190f7f5"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "formula_2367bc71",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"n_obj\", 1, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 7,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "rep_x",
+    "rep_y",
+    "w_out"
+  ],
+  "support_tasks": [
+    "7447852a",
+    "ac0a08a4",
+    "ba26e723",
+    "beb8660c",
+    "d0f5fe59",
+    "d406998b",
+    "feca6190"
+  ]
+}

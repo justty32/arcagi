@@ -1,0 +1,24 @@
+{
+  "name": "formula_fb26a2f6",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"n_color\", 1, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 5,
+  "length": 1,
+  "targets": [
+    "rep_x",
+    "rep_y",
+    "w_out"
+  ],
+  "support_tasks": [
+    "469497ad",
+    "ac0a08a4",
+    "b91ae062",
+    "beb8660c",
+    "feca6190"
+  ]
+}

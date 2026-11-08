@@ -1,0 +1,18 @@
+{
+  "name": "extract_d3461963",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"smallest\", \"8multi\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 2,
+  "support_tasks": [
+    "2dc579da",
+    "3345333e",
+    "a87f7484",
+    "aabf363d"
+  ]
+}

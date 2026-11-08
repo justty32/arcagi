@@ -49,9 +49,6 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
-| r03-A 公式 | opus | dsl/features.py、dsl/formula*.py、blocks/gen_formula.py、aos/blocks/formula_*、_gen/formula、對應測試 | 其餘；不 commit、不跑 evaluation | 2026-11-08 12:40 |
-| r03-B 抽取 | opus | dsl/extract*.py、blocks/gen_extract.py、aos/blocks/extract_*、_gen/extract、對應測試 | 其餘；不 commit、不跑 evaluation | 2026-11-08 12:40 |
-| r03-C 背景投票帳 | opus | dsl/background.py、dsl/objects*.py、solvers/search.py、solvers/vote.py、blocks/pool.py、aos/pool/config.json、對應測試 | 其餘；不 commit、不跑 evaluation | 2026-11-08 12:40 |
 
 ### 保留給主 agent，任何線都不得寫
 
@@ -65,6 +62,9 @@
 
 | 線 | 完成證據 | 收線時間 |
 |----|---------|---------|
+| r03-A 公式 | pytest 312 綠；training 輸出尺寸不同 100 題子集 32→35；24 live／60 covered 公式積木；`aos-exec … _gen/formula --dry-run` 可叫 | 2026-11-08 12:50 |
+| r03-B 抽取 | pytest 312 綠；training 子集 65→67（B 貢獻 1）；44 live／40 covered 抽取積木 | 2026-11-08 12:48 |
+| r03-C 背景投票帳 | pytest 313 綠；training 子集 46→48、退步 0；essential／巨集下傳／產生器成本／真退休／generator_budget 測試在 | 2026-11-08 12:50 |
 
 > 三張表是活狀態；膨脹到難讀就照 [STRUCTURE](../../STRUCTURE.md) 拆成 `CLAIMS.md`，本檔只留流程。
 

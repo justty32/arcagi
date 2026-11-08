@@ -7,7 +7,8 @@ Run: nice -n 19 uv run arcagi eval --split evaluation \\
 Enumerates programs from ``arcagi.dsl.primitives`` up to ``MAX_DEPTH`` steps,
 deduplicates by observational equivalence (identical intermediate train grids),
 tries terminal learners (color table, neighborhood rule) on every node, and
-submits the cheapest program that reproduces every train pair.
+finishes the first depth that has a solution, and submits the cheapest
+train-consistent program (votes break ties; see ``arcagi.solvers.vote``).
 """
 
 import heapq
@@ -15,7 +16,9 @@ import time
 from collections import Counter
 from dataclasses import dataclass, field
 
+from arcagi.dsl import background as bgc
 from arcagi.dsl import grid as g
+from arcagi.dsl.formula import predict_shapes
 from arcagi.dsl.learners import (
     apply_colormap,
     apply_local_rule,
@@ -28,14 +31,16 @@ from arcagi.dsl.registry import FIRST_STEP_ONLY, PRIMITIVES
 from arcagi.tasks import Grid, SolverTask
 
 from .trace import SolverResult, TraceRecorder
+from .vote import choose
 
 MAX_DEPTH = 3
 TIME_BUDGET = 5.0
 MAX_NODES = 20000
-MAX_SOLUTIONS = 30
+MAX_SOLUTIONS = 200  # whole first solved depth, capped
+MAX_RECORDED = 30  # program attempts written to the trace
 MAX_NEAR = 20
 PENALIZED = frozenset({"local_rule"})
-SOLVER_NAME = "dsl-search-r02"
+SOLVER_NAME = "dsl-search-r03"
 
 
 @dataclass
@@ -171,8 +176,14 @@ def search(
     budget: float = TIME_BUDGET,
     max_nodes: int = MAX_NODES,
 ) -> SearchResult:
-    """Enumerate programs; solutions are (cost, order, program, test outputs)."""
-    return _Search(task, budget, max_nodes).run(task, max_depth)
+    """Enumerate programs; solutions are (cost, order, program, test outputs).
+
+    Object primitives see the task background (all train inputs and outputs)
+    for the duration of the search; the previous context is restored after.
+    """
+    grids = [e.input for e in task.train] + [e.output for e in task.train]
+    with bgc.task_context(bgc.task_background(grids)):
+        return _Search(task, budget, max_nodes).run(task, max_depth)
 
 
 def _features(task: SolverTask) -> dict[str, object]:
@@ -188,34 +199,39 @@ def _features(task: SolverTask) -> dict[str, object]:
     }
 
 
-def _rank(item: tuple[float, int, Program, list[Grid]]) -> tuple[bool, float, int]:
-    """Neighbourhood-rule programs overfit most, so they rank after the others."""
-    cost_value, order, program, _tests = item
-    return (any(step[0] in PENALIZED for step in program), cost_value, order)
+def _shape_hint(task: SolverTask) -> list[tuple[int, int]] | None:
+    """Test output shapes predicted by the formula blocks (None when unknown)."""
+    pairs = [(e.input, e.output) for e in task.train]
+    try:
+        return predict_shapes(pairs, list(task.test))
+    except (ValueError, KeyError, ZeroDivisionError):
+        return None
 
 
-def _second(solutions: list[tuple[float, int, Program, list[Grid]]]):
-    """Test outputs of the best solution that predicts differently from the top."""
-    for _cost, _order, _program, tests in solutions[1:]:
-        if tests != solutions[0][3]:
-            return [[list(row) for row in grid] for grid in tests]
-    return None
+def solve(
+    task: SolverTask, shape_hint: list[tuple[int, int]] | None = None
+) -> SolverResult:
+    """Return the voted top-1 program's outputs plus a trace (top-2 in metadata).
 
-
-def solve(task: SolverTask) -> SolverResult:
-    """Return the best-ranked train-consistent program's outputs plus a trace."""
+    ``shape_hint`` (one ``(h, w)`` per test input) demotes a top-1 whose test
+    outputs have other shapes when some solution fits the hint.
+    """
     recorder = TraceRecorder(solver=SOLVER_NAME)
     result = search(task)
-    solutions = sorted(result.solutions, key=_rank)
+    if shape_hint is None and result.solutions:
+        shape_hint = _shape_hint(task)
+    vote = choose(result.solutions, penalized=PENALIZED, shape_hint=shape_hint)
+    solutions = vote.ranked
     ids = []
-    for cost_value, _order, program, _tests in solutions:
+    for solution in solutions[:MAX_RECORDED]:
+        cost_value, _order, program, _tests = solution
         ids.append(
             recorder.attempt(
                 f"program of cost {cost_value:.1f}",
                 kind="program",
                 program=to_json(program),
                 train_results=[True] * len(task.train),
-                data={"cost": cost_value},
+                data={"cost": cost_value, "votes": vote.votes_of(solution)},
             )
         )
     for acc, _order, program, results in sorted(result.near, reverse=True):
@@ -231,13 +247,15 @@ def solve(task: SolverTask) -> SolverResult:
         "nodes_per_depth": result.nodes_per_depth,
         "out_of_budget": result.out_of_budget,
         "solutions": len(solutions),
+        "outputs": len(vote.votes),
+        "shape_hint_applied": vote.hint_applied,
         "block_calls": dict(result.block_calls),
-        "second": _second(solutions) if solutions else None,
+        "second": vote.second,
     }
     if not solutions:
         recorder.reasoning = "No program reproduces every train pair; echo inputs."
         recorder.select(None)
         return recorder.result(list(task.test))
-    recorder.reasoning = "Cheapest train-consistent program (MDL), local_rule last."
+    recorder.reasoning = "Cheapest train-consistent program, votes break ties."
     recorder.select(ids[0])
     return recorder.result(solutions[0][3])

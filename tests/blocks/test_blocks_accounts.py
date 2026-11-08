@@ -116,3 +116,57 @@ def test_library_threshold_and_covered() -> None:
         [_record(t, f'[{frag},["flip_lr"]]', '[["transpose"]]') for t in "abc"]
     )
     assert find_macros(covered, min_tasks=3)[0].status == "covered"
+
+
+def _block(blocks: Path, name: str, **meta) -> None:
+    (blocks / name).mkdir(parents=True)
+    meta = {"name": name, "kind": "primitive", "cost": 1, **meta}
+    (blocks / name / "_metainfo.json").write_text(json.dumps(meta))
+
+
+def test_essential_passdown_generator_cost_retire_and_budget(tmp_path: Path) -> None:
+    blocks, pool = tmp_path / "blocks", tmp_path / "pool"
+    for name in ("rot90", "flip_lr", "recolor_sel", "colormap", "gravity"):
+        _block(blocks, name)
+    _block(blocks, "m_macro", kind="macro")
+    (blocks / "m_macro" / "program.json").write_text('[["rot90"],["flip_lr"]]')
+    _block(blocks, "pred_a", kind="pred", generator="_gen/g1", status="covered")
+    _block(blocks, "pred_b", kind="pred", generator="_gen/g1", status="live")
+    _block(blocks, "_gen/g1", kind="generator", gen_seconds=30)
+    _block(blocks, "_gen/g2", kind="generator", gen_seconds=10)
+    pool.mkdir()
+    config = {"retire_after": 2, "essential": ["gravity"], "generator_rate": 2.0}
+    (pool / "config.json").write_text(json.dumps(config))
+    sel = '[["recolor_sel","4same","pred","pred_b",2]]'
+    report = _report(
+        tmp_path / "r.json",
+        {"task_id": "t1", "correct": True, "trace": _trace(['[["m_macro"]]'], 0)},
+        {"task_id": "t2", "correct": True, "trace": _trace([sel], 0)},
+    )
+    summary = run_epoch(report, 0, "training", pool, blocks)
+    rows = summary["blocks"]
+    assert summary["conservation_ok"] and summary["retained"] == 400
+    # The macro keeps half of its 800; rot90 / flip_lr get 200 each.
+    assert rows["m_macro"]["dividend"] == 400
+    assert rows["rot90"]["dividend"] == rows["flip_lr"]["dividend"] == 200
+    # pred_b passes 20% of its 400 to its generator; generators pay seconds x rate.
+    assert rows["pred_b"]["dividend"] == 320 and rows["_gen/g1"]["dividend"] == 80
+    assert rows["_gen/g1"]["spend"] == 60 and rows["_gen/g2"]["spend"] == 20
+    assert summary["generator_budget"] == {
+        "_gen/g1": {"net": 20.0, "share": 0.8},
+        "_gen/g2": {"net": -20.0, "share": 0.2},
+    }
+    assert summary["essential"] == ["gravity"] and summary["retire"] == []
+    before = (pool / "ledger.jsonl").read_text()
+    summary = run_epoch(_report(tmp_path / "e.json"), 1, "training", pool, blocks)
+    assert "gravity" not in summary["suggest_retire"]  # essential, streak 2
+    assert {"colormap", "pred_a"} <= set(summary["suggest_retire"])
+    assert summary["retire"] == ["pred_a"]  # generated and covered only
+    assert load_catalog(blocks).blocks["pred_a"].status == "retired"
+    assert load_catalog(blocks).blocks["colormap"].status == "live"
+    ledger = (pool / "ledger.jsonl").read_text()
+    assert ledger.startswith(before)  # append-only
+    last = json.loads(ledger.splitlines()[-1])
+    assert last == {"type": "retire", "epoch": 1, "block": "pred_a"}
+    epoch0 = json.loads((pool / "epochs" / "0.json").read_text())
+    assert epoch0["retire"] == [] and "generator_budget" in epoch0

@@ -128,3 +128,33 @@ def test_object_colormap_split_form_handles_unseen_keys() -> None:
     assert table is not None and len(table) == 4
     json.dumps(table)
     assert apply_object_colormap(test, table) == grid("2220 0000 1111 1000")
+
+
+# Sizes 3 and 4 picked by ``2 < size < 5``; no single attribute separates them.
+P_STATE = grid("00000000 01110000 00000110 00000110 01000000 00001110 00001110")
+P_BODY = ["and", ["gt", "size", 2], ["lt", "size", 5]]
+
+
+def test_live_predicate_selectors_feed_every_action() -> None:
+    from arcagi.dsl import predicates as pr
+
+    saved = dict(pr.LIVE)
+    pr.install({"pred_testmid": P_BODY})
+    try:
+        recolored = grid(
+            "00000000 02220000 00000220 00000220 01000000 00001110 00001110"
+        )
+        deleted = grid("00000000 00000000 00000000 00000000 01000000 00001110 00001110")
+        kept = grid("00000000 01110000 00000110 00000110 00000000 00000000 00000000")
+        moved = grid("01110110 00000110 00000000 00000000 01000000 00001110 00001110")
+        sel = ("4same", "pred", "pred_testmid")
+        cases = [
+            ("recolor_sel", recolored, (*sel, 2)),
+            ("delete_sel", deleted, sel),
+            ("keep_sel", kept, sel),
+            ("move_sel", moved, (*sel, "up")),
+        ]
+        for name, target, params in cases:
+            assert params in solves(name, [P_STATE], [target]), name
+    finally:
+        pr.install(saved)

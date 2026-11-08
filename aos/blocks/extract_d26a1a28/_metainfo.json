@@ -1,0 +1,23 @@
+{
+  "name": "extract_d26a1a28",
+  "kind": "extract",
+  "doc": "Generated extraction [\"color\", [\"pred\", \"8same\", \"pred_328616eb\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 8,
+  "length": 4,
+  "support_tasks": [
+    "1f85a75f",
+    "3345333e",
+    "445eab21",
+    "47c1f68c",
+    "48d8fb45",
+    "7e0986d6",
+    "a78176bb",
+    "e48d4e1a"
+  ],
+  "covered_by": "extract_64a4c506"
+}

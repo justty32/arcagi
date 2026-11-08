@@ -1,0 +1,28 @@
+{
+  "name": "formula_fd3d919e",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"mul\", \"n_obj\", \"max_obj_size\"]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 8,
+  "length": 3,
+  "targets": [
+    "h_out",
+    "rep_x",
+    "rep_y",
+    "w_out"
+  ],
+  "support_tasks": [
+    "3bd67248",
+    "7447852a",
+    "ac0a08a4",
+    "ba26e723",
+    "d406998b",
+    "d631b094",
+    "f25fbde4",
+    "feca6190"
+  ]
+}

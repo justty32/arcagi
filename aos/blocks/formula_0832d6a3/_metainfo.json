@@ -1,0 +1,22 @@
+{
+  "name": "formula_0832d6a3",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"n_shape\", 1, 1]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 1,
+  "generator": "_gen/formula",
+  "score": 4,
+  "length": 2,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "2dee498d",
+    "7b7f7511",
+    "9af7a82c",
+    "a740d043"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "formula_62228070",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"max_obj_size\", 1, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 5,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "3bd67248",
+    "67a423a3",
+    "a3325580",
+    "bd4472b8",
+    "beb8660c"
+  ]
+}

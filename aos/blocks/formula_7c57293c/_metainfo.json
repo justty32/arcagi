@@ -1,0 +1,26 @@
+{
+  "name": "formula_7c57293c",
+  "kind": "formula",
+  "doc": "Generated integer formula [\"lin\", \"min_obj_w\", 1, 0]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 8,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "1cf80156",
+    "23b5c85d",
+    "272f95fa",
+    "496994bd",
+    "6455b5f5",
+    "8eb1be9a",
+    "9f236235",
+    "e73095fd"
+  ]
+}
