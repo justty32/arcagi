@@ -2,6 +2,9 @@
  "contract": "wf-table/1",
  "source": "README.md",
  "extracted": "2026-11-08",
+ "link_columns": [
+  "record_path"
+ ],
  "columns": [
   "id",
   "date",
@@ -11,9 +14,6 @@
   "result",
   "baseline",
   "verdict",
-  "record_path"
- ],
- "link_columns": [
   "record_path"
  ],
  "rows": [
@@ -38,6 +38,17 @@
    "baseline": "identity 0/400、0/400；template 0/400、6/400",
    "verdict": "是：超過驗收 8／30 與目標 12／45；瓶頸是原語覆蓋不是算力",
    "record_path": "../../../reports/dsl-search-r01/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r02",
+   "date": "2026-11-08",
+   "hypothesis": "物件層＋格線切塊＋自動產生謂詞積木在 evaluation 解 ≥30 題（同大小 ≥10）",
+   "solver": "arcagi.solvers.search:solve (75b90ed)",
+   "split": "evaluation＋training",
+   "result": "evaluation 28/400、training 79/400, errors=0；top-2 同 top-1",
+   "baseline": "dsl-search-r01 evaluation 21/400、training 57/400；退步 0",
+   "verdict": "否：evaluation +7 未達 30（同大小 3→7）；training 達 75；一題由自動產生的謂詞解出",
+   "record_path": "../../../reports/dsl-search-r02/README.md"
   }
  ]
 }
