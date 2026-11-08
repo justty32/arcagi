@@ -7,12 +7,16 @@ anchor object ``this``: ``this`` (objects covering the anchor's cells),
 closest other object, by bounding-box gap), ``nearest_aligned`` (the unique
 closest other object sharing rows or columns with the anchor; ``_same_color``
 / ``_other_color`` suffixes filter it further), ``touching`` (other objects
-8-adjacent to the anchor) and ``largest`` (the grid's unique largest object).
+8-adjacent to the anchor), ``largest`` (the grid's unique largest object) and
+``same_shape_other_color`` (other-colored objects with the anchor's normalized
+mask: an in-grid legend; ``color`` then needs them to agree).
 
 Properties: ``color`` (shared color), ``size`` / ``size_rank`` (unique among the
 selection), ``dir_to`` / ``dist_to`` (direction and background gap from the
-anchor to the single selected object; they must share rows or columns) and
-``wall_dir`` (direction of the anchor's nearest border, ``this`` only).
+anchor to the single selected object; they must share rows or columns),
+``dir8_to`` (like ``dir_to`` but a diagonal such as ``down_right`` when the two
+boxes share neither rows nor columns) and ``wall_dir`` (direction of the
+anchor's nearest border, ``this`` only).
 Ambiguity raises ValueError.
 """
 
@@ -32,9 +36,13 @@ OSELS = (
     "nearest_aligned_other_color",
     "touching",
     "largest",
+    "same_shape_other_color",
 )
-OPROPS = ("color", "dir_to", "dist_to", "size", "size_rank", "wall_dir")
+OPROPS = ("color", "dir_to", "dir8_to", "dist_to", "size", "size_rank", "wall_dir")
 DIRS = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
+DIAGONALS = {"up_left": (-1, -1), "up_right": (-1, 1)}
+DIAGONALS.update(down_left=(1, -1), down_right=(1, 1))
+DIRS8 = DIRS | DIAGONALS
 
 
 def validate(body: object) -> bool:
@@ -45,7 +53,7 @@ def validate(body: object) -> bool:
         return False
     if sel[0] not in OSELS or sel[1] not in CONNS:
         return False
-    if prop in ("dir_to", "dist_to") and sel[0] == "this":
+    if prop in ("dir_to", "dir8_to", "dist_to") and sel[0] == "this":
         return False
     return prop != "wall_dir" or sel[0] == "this"
 
@@ -92,6 +100,11 @@ def select(grid: Grid, sel: Sequence[object], anchor: Obj) -> list[Obj]:
         others = [o for o in others if o.props["color"] == color]
     elif op.endswith("_other_color"):
         others = [o for o in others if o.props["color"] != color]
+    if op == "same_shape_other_color":  # in-grid legend / template objects
+        found = [o for o in others if o.props["shape"] == anchor.props["shape"]]
+        if not found:
+            raise ValueError("no same-shape object")
+        return found
     if op == "touching":
         ring = {(y + a, x + b) for y, x in own for a in (-1, 0, 1) for b in (-1, 0, 1)}
         found = [o for o in others if ring & set(o.cells)]
@@ -128,6 +141,21 @@ def direction(a: Sequence[tuple[int, int]], b: Sequence[tuple[int, int]]):
     raise ValueError("objects are not aligned")
 
 
+def direction8(a: Sequence[tuple[int, int]], b: Sequence[tuple[int, int]]) -> str:
+    """``direction`` name, or the diagonal from ``a`` to a box-disjoint ``b``."""
+    try:
+        return direction(a, b)[0]
+    except ValueError:
+        pass
+    at, al, ab, ar = _box(a)
+    bt, bl, bb, br = _box(b)
+    vert = "down" if bt > ab else "up" if bb < at else None
+    horiz = "right" if bl > ar else "left" if br < al else None
+    if vert is None or horiz is None:
+        raise ValueError("objects overlap")
+    return f"{vert}_{horiz}"
+
+
 def prop(grid: Grid, name: str, objs: Sequence[Obj], anchor: Obj) -> object:
     if name == "color":
         colors = {o.props["color"] for o in objs}
@@ -143,6 +171,9 @@ def prop(grid: Grid, name: str, objs: Sequence[Obj], anchor: Obj) -> object:
         (target,) = _single(objs, name)
         d, k = direction(anchor.cells, target.cells)
         return d if name == "dir_to" else k
+    if name == "dir8_to":
+        (target,) = _single(objs, name)
+        return direction8(anchor.cells, target.cells)
     if name == "wall_dir":
         height, width = g.shape(grid)
         top, left, bottom, right = _box(anchor.cells)

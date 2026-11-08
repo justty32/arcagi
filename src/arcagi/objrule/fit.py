@@ -33,6 +33,13 @@ ERRORS = (ValueError, KeyError, IndexError, TypeError)
 type Targets = list[list[tuple[Obj, set | None]]]  # per pair: (obj, values|None)
 KIND_PROPS = {"recolor": ("color",), "move": ("dir_to", "wall_dir")}
 KIND_PROPS["extend"] = KIND_PROPS["move"]
+# 8-direction kinds: tried only when the 4-direction kind finds nothing; kept
+# out of ``KIND_PROPS`` so the object-extract generator (``gen``) is unchanged.
+EXTRA_PROPS = {"move8": ("dir8_to",), "extend8": ("dir8_to",)}
+
+
+def props_of(kind: str) -> tuple[str, ...]:
+    return KIND_PROPS.get(kind) or EXTRA_PROPS[kind]
 
 
 def uniform(obj: Obj, target: Grid) -> int | None:
@@ -40,11 +47,11 @@ def uniform(obj: Obj, target: Grid) -> int | None:
     return values.pop() if len(values) == 1 else None
 
 
-def shift_dirs(o: Obj, target: Grid) -> set[str]:
+def shift_dirs(o: Obj, target: Grid, dirs=ov.DIRS) -> set[str]:
     """Directions in which a shifted copy of ``o`` appears intact in ``target``."""
     height, width = g.shape(target)
     found = set()
-    for name, (dy, dx) in ov.DIRS.items():
+    for name, (dy, dx) in dirs.items():
         for k in range(1, max(height, width)):
             moved = [(y + dy * k, x + dx * k) for y, x in o.cells]
             if not all(0 <= y < height and 0 <= x < width for y, x in moved):
@@ -57,13 +64,13 @@ def shift_dirs(o: Obj, target: Grid) -> set[str]:
     return found
 
 
-def grow_dirs(o: Obj, target: Grid, state: Grid) -> set[str]:
+def grow_dirs(o: Obj, target: Grid, state: Grid, dirs=ov.DIRS) -> set[str]:
     """Directions where the background cell just past ``o`` took its color."""
     height, width = g.shape(target)
     bg = bgc.of(state)
     own = set(o.cells)
     found = set()
-    for name, (dy, dx) in ov.DIRS.items():
+    for name, (dy, dx) in dirs.items():
         for (y, x), c in zip(o.cells, o.colors, strict=True):
             ny, nx = y + dy, x + dx
             if (ny, nx) in own or not (0 <= ny < height and 0 <= nx < width):
@@ -81,22 +88,24 @@ def _recolor_value(o: Obj, state: Grid, target: Grid) -> set | None:
     return {c} if c is not None and c != bgc.of(state) else set()
 
 
-def _move_value(o: Obj, state: Grid, target: Grid) -> set | None:
+def _move_value(o: Obj, state: Grid, target: Grid, dirs=ov.DIRS) -> set | None:
     """Slide directions; an erased object is don't-care (a later step)."""
     if not changed(o, target):
         return None
-    dirs = shift_dirs(o, target)
-    return dirs or (None if uniform(o, target) == bgc.of(state) else dirs)
+    found = shift_dirs(o, target, dirs)
+    return found or (None if uniform(o, target) == bgc.of(state) else found)
 
 
-def _extend_value(o: Obj, state: Grid, target: Grid) -> set | None:
-    return grow_dirs(o, target, state) or None
+def _extend_value(o: Obj, state: Grid, target: Grid, dirs=ov.DIRS) -> set | None:
+    return grow_dirs(o, target, state, dirs) or None
 
 
 VALUE_OF: dict[str, Callable[[Obj, Grid, Grid], set | None]] = {
     "recolor": _recolor_value,
     "move": _move_value,
     "extend": _extend_value,
+    "move8": lambda o, s, t: _move_value(o, s, t, ov.DIRS8),
+    "extend8": lambda o, s, t: _extend_value(o, s, t, ov.DIRS8),
 }
 
 
@@ -137,7 +146,7 @@ def explains(body: object, states: Sequence[Grid], rows: Targets) -> bool:
 
 def sources(kind: str, states: Sequence[Grid], rows: Targets) -> list[object]:
     """Live object-extract names that explain ``rows``, else inline bodies."""
-    props = KIND_PROPS[kind]
+    props = props_of(kind)
     hits: list[object] = []
     for name, body in ex.LIVE_OBJ.items():
         if body["prop"] in props and explains(body, states, rows):
@@ -158,9 +167,9 @@ def noop(kind: str, o: Obj, value: object, state: Grid) -> bool:
     """True when applying ``value`` to ``o`` would change nothing."""
     if kind == "recolor":
         return {value} == set(o.colors)
-    if value not in ov.DIRS:
+    if value not in ov.DIRS8:
         return False
-    dy, dx = ov.DIRS[value]  # type: ignore[index]
+    dy, dx = ov.DIRS8[value]  # type: ignore[index]
     height, width = g.shape(state)
     bg, own = bgc.of(state), set(o.cells)
     for y, x in o.cells:
