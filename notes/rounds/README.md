@@ -12,6 +12,8 @@
 - **第四輪進行中**（2026-11-08）：[01 簡報](r04/01-簡報.md)、[02 fable 規劃](r04/02-規劃-fable.md)、[03 設計](r04/03-設計.md) 完成 → 三線施工中（A 每物件規則、B 公式＋預算＋拆 pool、C 搜尋預算＋並行評測）。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
+- **支線**（aos 人力加入後可並行的工作，路徑劃清）→ [支線.md](支線.md)。
+
 ## 使用者經 aos 轉達的前提（原文在 wf/inbox 的信，處理完在 wf/inbox/done/）
 
 - 用 aos 體系（符號邏輯）解 ARC-AGI-1；LLM 只用來找規則、寫程式、蒸餾，最終解題靠確定的程式；**神經網路盡量不用**。可暴力吃 CPU、可寫 CUDA（RTX 5060 Ti 16GB，nvcc 在 /opt/cuda/bin）。
