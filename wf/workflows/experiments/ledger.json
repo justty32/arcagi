@@ -148,6 +148,28 @@
    "baseline": "dsl-search-r06 138",
    "verdict": "是：+10 多來自 S3 families；退步 1（6cdd2623，native 期限雜訊）",
    "record_path": "../../../reports/gate-r07/README.md"
+  },
+  {
+   "id": "2026-11-08-gated-r07-s1c",
+   "date": "2026-11-08",
+   "hypothesis": "S1 ee869e5（native 支持度門）接在主線 gated 入口後 evaluation 是否退步",
+   "solver": "python -m arcagi.solvers.gated（head b645809、native ee869e5）",
+   "split": "evaluation",
+   "result": "evaluation 57/400，errors 0；每題最長 19.1 秒；過 train 答錯 10",
+   "baseline": "gated-r07 57；dsl-search-r06 56",
+   "verdict": "是：退步 0、S1 驗收達到；過 train 答錯不再下降（S1 門與主線 table 門重疊）",
+   "record_path": "../../../reports/gate-r07/README.md"
+  },
+  {
+   "id": "2026-11-08-curve-r07",
+   "date": "2026-11-08",
+   "hypothesis": "r07：空樹（32 通用原語）＋演繹分解＋G1 壓縮＋G4 演化在 L16 小題組上學習曲線能否上升",
+   "solver": "scripts/r07_curve.py（seed efdee5d、grow e181649、tag r07-seed0）",
+   "split": "training L16＋H8",
+   "result": "AUC_L：empty 16、empty-g1 24（Δ+1）、dec／dec-g1／dec-g1g4 32（Δ0；dec-g1 解出題節點 120160→7053）、old 72；H8 全 0；llm_calls 0",
+   "baseline": "old（r06 手寫樹）72",
+   "verdict": "部分：壓縮能讓曲線動（+1 題、省 17 倍節點），但冷啟動死鎖，meta 3 回合 Δ0",
+   "record_path": "../../../reports/curve-r07/README.md"
   }
  ]
 }
