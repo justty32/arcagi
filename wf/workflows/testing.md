@@ -34,7 +34,7 @@ CI 在 [tests.yml](../../.github/workflows/tests.yml) 執行固定依賴安裝�
 
 ## 實驗介面改動
 
-跨語言介面或報告修改時，執行 `uv run pytest tests/experiments tests/solvers/test_external.py -q`，確認逾時與失敗留在分母、重複試驗顯示逐次成功率、tag 可重疊，以及 JSON／CSV／HTML escaping。可用 `uv run arcagi experiment examples/experiment.json --output artifacts/experiment-check` 跑完整煙霧測試，輸出目錄須尚不存在；細節見 [experiments](../../docs/experiments.md)。
+跨語言介面或報告修改時，執行 `uv run pytest tests/experiments tests/solvers/test_external.py tests/solvers/test_trace.py -q`，確認逾時與失敗留在分母、重複試驗顯示逐次成功率、tag 可重疊，以及 JSON／CSV／HTML escaping。可用 `uv run arcagi experiment examples/experiment.json --output artifacts/experiment-check` 跑完整煙霧測試，輸出目錄須尚不存在；細節見 [experiments](../../docs/experiments.md)。
 
 ## 檢查必須能變紅
 

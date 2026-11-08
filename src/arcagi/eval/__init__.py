@@ -1,9 +1,11 @@
 """Exact-match top-1 evaluation with explicit failures and label validation."""
 
 from collections.abc import Iterable, Mapping
+from time import perf_counter
 from typing import Any
 
-from arcagi.solvers import Solver, predict
+from arcagi.solvers import Solver, validate_predictions
+from arcagi.solvers.trace import split_solver_output
 from arcagi.tasks import SolverTask, Task, TaskValidationError
 
 
@@ -15,6 +17,8 @@ def evaluate_tasks(
     All labels are checked before calling the solver. Solver exceptions and invalid
     predictions mark the entire task incorrect and are retained in the report.
     This passes no test answers through the plugin interface; it is not a sandbox.
+    Each task also records ``elapsed_seconds`` and an optional solver ``trace``
+    (``arcagi-trace/1``) or ``trace_error``; traces never affect scoring.
     """
     tasks = list(tasks)
     if not tasks:
@@ -35,10 +39,16 @@ def evaluate_tasks(
     for task in tasks:
         error = None
         predictions = ()
+        trace = trace_error = None
+        started = perf_counter()
         try:
-            predictions = predict(solver, task)
+            raw, trace, trace_error = split_solver_output(solver(task.to_solver_task()))
+            predictions = validate_predictions(task, raw)
         except Exception as exc:
             error = f"{type(exc).__name__}: {exc}"
+            trace = trace or getattr(exc, "arcagi_trace", None)
+            trace_error = trace_error or getattr(exc, "arcagi_trace_error", None)
+        elapsed = perf_counter() - started
         tests = []
         for index, example in enumerate(task.test):
             prediction = predictions[index] if error is None else None
@@ -57,7 +67,10 @@ def evaluate_tasks(
                 "task_id": task.task_id,
                 "correct": all(test["correct"] for test in tests),
                 "error": error,
+                "elapsed_seconds": elapsed,
                 "tests": tests,
+                "trace": trace,
+                "trace_error": trace_error,
             }
         )
     tasks_correct = sum(result["correct"] for result in results)
@@ -77,6 +90,7 @@ def evaluate_tasks(
         "tests_correct": tests_correct,
         "test_accuracy": tests_correct / tests_total,
         "errors": sum(result["error"] is not None for result in results),
+        "traces": sum(result["trace"] is not None for result in results),
         "tasks": results,
     }
 

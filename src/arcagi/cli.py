@@ -14,8 +14,43 @@ if TYPE_CHECKING:
     from arcagi.solvers import Solver
 
 
+def _solver_name(args: argparse.Namespace) -> str:
+    if args.name:
+        return args.name
+    return "external" if args.external else args.solver
+
+
+def _external_solver(args: argparse.Namespace) -> "Solver":
+    import shlex
+    import tempfile
+
+    from arcagi.solvers.external import make_external_solver
+
+    params = json.loads(args.params, object_pairs_hook=_unique_object)
+    if not isinstance(params, dict):
+        raise ValueError("--params must be a JSON object")
+    run_dir = args.artifacts
+    if run_dir is None:
+        if args.output is not None:
+            run_dir = args.output.with_name(args.output.stem + "-runs")
+        else:
+            run_dir = Path(tempfile.mkdtemp(prefix="arcagi-external-"))
+    args.artifacts = run_dir
+    return make_external_solver(
+        shlex.split(args.external),
+        run_dir=run_dir,
+        timeout=args.timeout if args.timeout is not None else 60.0,
+        seed=args.seed,
+        params=params,
+        cwd=args.cwd,
+    )
+
+
 def _solver(args: argparse.Namespace) -> "Solver":
     from arcagi.solvers import load_solver
+
+    if args.external:
+        return _external_solver(args)
 
     # Console entry points omit cwd, unlike python -m; local plugins need it.
     cwd = str(Path.cwd())
@@ -35,6 +70,10 @@ def _run(args: argparse.Namespace) -> int:
         from arcagi.cli_experiment import run_experiment_command
 
         return run_experiment_command(args)
+    if args.command == "compare":
+        from arcagi.cli_experiment import run_compare_command
+
+        return run_compare_command(args)
     if args.command == "validate":
         tasks = _load_selected(args, require_outputs=args.require_test_outputs)
         _emit(
@@ -68,11 +107,17 @@ def _run(args: argparse.Namespace) -> int:
             report = score_predictions(tasks, predictions)
         else:
             with redirect_stdout(sys.stderr):
-                report = evaluate_tasks(tasks, _solver(args), solver_name=args.solver)
+                report = evaluate_tasks(
+                    tasks, _solver(args), solver_name=_solver_name(args)
+                )
+            if args.traces:
+                _write_traces(report, args.traces)
         _emit(report, args.output)
         if args.output:
             summary = {key: value for key, value in report.items() if key != "tasks"}
             summary["output"] = str(args.output)
+            if getattr(args, "external", None):
+                summary["artifacts"] = str(args.artifacts)
             _emit(summary)
         return 1 if report["errors"] else 0
     elif args.command == "generate":
@@ -103,6 +148,25 @@ def _run(args: argparse.Namespace) -> int:
         output = write_html(tasks, args.output, title=args.title)
         _emit({"output": str(output), "tasks_total": len(tasks)})
     return 0
+
+
+def _write_traces(report: dict, path: Path) -> None:
+    """Write one stable JSONL record per task, joining trace and correctness."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as stream:
+        for task in report["tasks"]:
+            record = {
+                "schema_version": "arcagi-trace-record/1",
+                "solver": report["solver"],
+                "task_id": task["task_id"],
+                "correct": task["correct"],
+                "tests_correct": [test["correct"] for test in task["tests"]],
+                "error": task["error"],
+                "elapsed_seconds": task["elapsed_seconds"],
+                "trace": task["trace"],
+                "trace_error": task["trace_error"],
+            }
+            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
 def main(argv: list[str] | None = None) -> int:

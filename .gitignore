@@ -10,3 +10,4 @@ artifacts/
 data/generated/
 .coverage
 htmlcov/
+examples/c_identity/solver

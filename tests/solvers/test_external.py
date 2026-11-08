@@ -1,13 +1,15 @@
 """Validate the language-independent file protocol and retained artifacts."""
 
 import json
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 import pytest
 
-from arcagi.solvers import predict
+from arcagi.eval import evaluate_tasks
+from arcagi.solvers import predict, predict_with_trace
 from arcagi.solvers.external import (
     ExternalSolverError,
     ExternalSolverTimeoutError,
@@ -44,7 +46,9 @@ def test_example_protocol_and_artifacts(tmp_path: Path, task: Task) -> None:
         },
         "seed": 42,
         "params": {"mode": "identity"},
+        "trace_path": record["trace_path"],
     }
+    assert Path(record["trace_path"]).parent == Path(record["artifact_dir"])
     assert record["error"] is None
     assert record["returncode"] == 0
     assert record["elapsed_seconds"] > 0
@@ -236,3 +240,94 @@ def test_invalid_grid_is_recorded_as_error(tmp_path: Path, task: Task) -> None:
 def test_timeout_validation(tmp_path: Path, timeout: float) -> None:
     with pytest.raises(ValueError, match="finite and positive"):
         make_external_solver([sys.executable], run_dir=tmp_path, timeout=timeout)
+
+
+EXAMPLES = EXAMPLE.parent
+TWO_TESTS = Task(
+    "two",
+    (Example(((1,),), ((1,),)),),
+    (Example(((3, 4), (5, 6)), ((3, 4), (5, 6))), Example(((7,),), ((0,),))),
+)
+
+
+def _write_files(response: str, trace: str | None) -> str:
+    lines = [
+        "from pathlib import Path; import sys",
+        f"Path(sys.argv[1]).write_text({response!r})",
+    ]
+    if trace is not None:
+        lines.append(f"Path(sys.argv[2]).write_text({trace!r})")
+    return "\n".join(lines)
+
+
+def test_trace_file_is_returned_and_scored_separately(tmp_path: Path, task: Task):
+    trace = json.dumps({"attempts": [{"id": "x", "train_results": [True]}]})
+    solver = make_external_solver(
+        [sys.executable, "-c", _write_files('{"abc": [[[9]]]}', trace)]
+        + ["{output}", "{trace}"],
+        run_dir=tmp_path,
+        timeout=5,
+    )
+    grids, parsed, error = predict_with_trace(solver, task)
+    assert grids == (((9,),),)
+    assert parsed["attempts"][0]["id"] == "x" and error is None
+    report = evaluate_tasks([task], solver)
+    assert report["tasks_correct"] == 1
+    assert report["tasks"][0]["trace"]["schema_version"] == "arcagi-trace/1"
+
+
+@pytest.mark.parametrize("trace", ["not json", '{"attempts": 3}', "[]"])
+def test_invalid_trace_file_is_a_note_not_a_failure(tmp_path, task, trace):
+    solver = make_external_solver(
+        [sys.executable, "-c", _write_files('{"abc": [[[9]]]}', trace)]
+        + ["{output}", "{trace}"],
+        run_dir=tmp_path,
+        timeout=5,
+    )
+    report = evaluate_tasks([task], solver)
+    assert report["tasks_correct"] == 1 and report["errors"] == 0
+    assert report["tasks"][0]["trace"] is None
+    assert "Invalid trace file" in report["tasks"][0]["trace_error"]
+    assert solver.last_run["trace_error"] == report["tasks"][0]["trace_error"]
+
+
+def test_trace_survives_failed_run(tmp_path: Path, task: Task) -> None:
+    solver = make_external_solver(
+        [sys.executable, "-c", _write_files("{}", '{"reasoning": "stuck"}')]
+        + ["{output}", "{trace}"],
+        run_dir=tmp_path,
+        timeout=5,
+    )
+    report = evaluate_tasks([task], solver)
+    assert report["errors"] == 1
+    assert report["tasks"][0]["trace"]["reasoning"] == "stuck"
+
+
+def test_sh_example_works_through_protocol(tmp_path: Path) -> None:
+    solver = make_external_solver(
+        ["sh", str(EXAMPLES / "sh_identity.sh"), "{input}", "{output}", "{trace}"],
+        run_dir=tmp_path,
+        timeout=10,
+        params={"note": '}, "seed": [1]'},
+    )
+    report = evaluate_tasks([TWO_TESTS], solver)
+    assert report["errors"] == 0 and report["tests_correct"] == 1
+    assert report["tasks"][0]["trace"]["selected"] == "copy"
+
+
+@pytest.mark.skipif(shutil.which("cc") is None, reason="no C compiler")
+def test_c_example_compiles_and_works(tmp_path: Path) -> None:
+    binary = tmp_path / "solver"
+    subprocess.run(
+        ["cc", "-std=c99", "-O2", "-o", str(binary)]
+        + [str(EXAMPLES / "c_identity" / "solver.c")],
+        check=True,
+    )
+    solver = make_external_solver(
+        [str(binary), "{input}", "{output}", "{trace}"],
+        run_dir=tmp_path / "runs",
+        timeout=10,
+    )
+    report = evaluate_tasks([TWO_TESTS], solver)
+    assert report["errors"] == 0 and report["tests_correct"] == 1
+    assert report["tasks"][0]["trace"]["solver"] == "c_identity"

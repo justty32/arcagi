@@ -70,6 +70,8 @@ def run_experiment(
                         "predictions": [
                             test["prediction"] for test in task_result["tests"]
                         ],
+                        "trace": task_result["trace"],
+                        "trace_error": task_result["trace_error"],
                     }
                     runs.append(row)
                     with (output_dir / "runs.jsonl").open(

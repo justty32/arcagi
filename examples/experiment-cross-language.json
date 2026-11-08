@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "path": "../data/ARC-AGI/data/training/007bbfb7.json",
+      "tags": ["smoke", "scale"]
+    },
+    {
+      "path": "../data/ARC-AGI/data/training/00d62c1b.json",
+      "tags": ["smoke", "fill"]
+    }
+  ],
+  "solvers": [
+    {
+      "name": "python-identity",
+      "command": ["python", "file_identity.py", "--input", "{input}", "--output", "{output}"],
+      "params": {"mode": "identity"},
+      "cwd": "."
+    },
+    {
+      "name": "sh-identity",
+      "command": ["sh", "sh_identity.sh", "{input}", "{output}", "{trace}"],
+      "cwd": "."
+    }
+  ],
+  "seeds": [0],
+  "repeats": 1,
+  "timeout_seconds": 10
+}

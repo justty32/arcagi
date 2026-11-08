@@ -5,7 +5,7 @@
 輸出目錄必須尚不存在，以免覆蓋或混合實驗。完成後會有：
 
 - `report.html`：自含 SVG 圖表、方法比較、task × solver 成功率矩陣、tag 分組；不需網路或 CDN。
-- `results.json`、`results.csv`：逐次保留方法、題目、seed、repeat、params、正確與否、test 分數、耗時、錯誤及 artifact 位置。
+- `results.json`、`results.csv`：逐次保留方法、題目、seed、repeat、params、正確與否、test 分數、耗時、錯誤及 artifact 位置；JSON 另有求解器回報的 `trace`（[嘗試軌跡](../traces.md)），CSV 只放 `trace_error`。
 - `summary.csv`：各方法、各題／方法、各 tag／方法的次數、成功率、錯誤數及平均／中位耗時。
 - `config.json`、`runs.jsonl`、`artifacts/`：設定快照、逐次追加紀錄、每次 request／response／stdout／stderr／run metadata。中途停止時可查已寫出的紀錄；完整報告於跑完後產生。
 
@@ -14,3 +14,5 @@
 同一題可同時出現在多個 tag，tag 統計是重疊視角，不能相加當成整份資料集。CSV 中疑似試算表公式的文字會加單引號防止誤執行；原始文字完整保留在 JSON。需要重新處理資料時以 JSON 為準。
 
 重現時保存程式 commit、編譯器／runtime 版本、設定檔與生成題 manifest。報告也保留經 schema 驗證後的 canonical JSON 題目內容 checksum（不是原檔 bytes checksum）；固定 seed 只在解法遵循 seed 且執行環境一致時有助重現。所有成績請標明公開 training、evaluation 或自訂／合成資料，不宣稱官方私有測試分數。
+
+要比較兩次實驗或兩個方法誰對誰錯、哪些題新增解出或退步、按題型分組的正確率，用 `arcagi compare`，見 [比較方法與逐題對錯](../solvers.md#比較方法與逐題對錯)。

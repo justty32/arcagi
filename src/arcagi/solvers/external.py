@@ -12,6 +12,8 @@ from typing import Any
 
 from arcagi.tasks import Grid, SolverTask, validate_grid
 
+from .trace import MAX_TRACE_BYTES, SolverResult, TraceValidationError, validate_trace
+
 
 class ExternalSolverError(RuntimeError):
     """An external command failed or produced an invalid prediction file."""
@@ -37,8 +39,10 @@ def _reject_constant(value: str) -> None:
 class ExternalSolver:
     """A callable adapter retaining each run's files and timing records.
 
-    Commands are argv arrays and are never interpreted by a shell. This is not a
-    sandbox. Timeouts kill and reap the direct process; commands are responsible
+    Commands are argv arrays and are never interpreted by a shell. A command may
+    also write an optional ``arcagi-trace/1`` JSON file to ``{trace}`` (also given
+    as ``trace_path`` in the request); invalid traces never fail the run. This is
+    not a sandbox. Timeouts kill and reap the direct process; commands are responsible
     for any descendant processes they create.
     """
 
@@ -78,7 +82,7 @@ class ExternalSolver:
         """Return the most recent execution record, or None before the first call."""
         return self.records[-1] if self.records else None
 
-    def __call__(self, task: SolverTask) -> tuple[Grid, ...]:
+    def __call__(self, task: SolverTask) -> tuple[Grid, ...] | SolverResult:
         if not isinstance(task, SolverTask):
             raise TypeError("External solvers accept only a label-free SolverTask")
         self.run_dir.mkdir(parents=True, exist_ok=True)
@@ -88,15 +92,17 @@ class ExternalSolver:
         output_path = directory / "response.json"
         stdout_path = directory / "stdout.log"
         stderr_path = directory / "stderr.log"
+        trace_path = directory / "trace.json"
         replacements = {
             "{input}": str(input_path),
             "{output}": str(output_path),
+            "{trace}": str(trace_path),
             "{task_id}": task.task_id,
             "{seed}": str(self.seed),
         }
         command = [
             re.sub(
-                r"\{(?:input|output|task_id|seed)\}",
+                r"\{(?:input|output|trace|task_id|seed)\}",
                 lambda match: replacements[match.group()],
                 argument,
             )
@@ -110,10 +116,12 @@ class ExternalSolver:
             "output_path": str(output_path),
             "stdout_path": str(stdout_path),
             "stderr_path": str(stderr_path),
+            "trace_path": str(trace_path),
             "command": command,
             "elapsed_seconds": 0.0,
             "returncode": None,
             "error": None,
+            "trace_error": None,
             "status": "running",
         }
         self.records.append(record)
@@ -131,6 +139,7 @@ class ExternalSolver:
                 },
                 "seed": self.seed,
                 "params": self.params,
+                "trace_path": str(trace_path),
             }
             input_path.write_text(
                 json.dumps(request, ensure_ascii=False, allow_nan=False) + "\n",
@@ -181,10 +190,20 @@ class ExternalSolver:
                 for index, grid in enumerate(predictions)
             )
             record["status"] = "ok"
-            return result
+            if not trace_path.exists():
+                return result
+            trace, trace_error = self._read_trace(trace_path)
+            record["trace_error"] = trace_error
+            return SolverResult(result, trace, trace_error)
         except Exception as exc:
             record["status"] = "error"
             record["error"] = f"{type(exc).__name__}: {exc}"
+            if trace_path.exists():
+                # Keep traces of failed runs too; evaluators read these attributes.
+                trace, trace_error = self._read_trace(trace_path)
+                record["trace_error"] = trace_error
+                exc.arcagi_trace = trace  # type: ignore[attr-defined]
+                exc.arcagi_trace_error = trace_error  # type: ignore[attr-defined]
             raise
         finally:
             record["elapsed_seconds"] = time.perf_counter() - started
@@ -192,6 +211,21 @@ class ExternalSolver:
                 json.dumps(record, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8",
             )
+
+    @staticmethod
+    def _read_trace(path: Path) -> tuple[dict[str, Any] | None, str | None]:
+        """Read an optional trace file; problems become a message, not a failure."""
+        try:
+            if path.stat().st_size > MAX_TRACE_BYTES:
+                raise TraceValidationError(f"larger than {MAX_TRACE_BYTES} bytes")
+            value = json.loads(
+                path.read_text(encoding="utf-8"),
+                object_pairs_hook=_unique_keys,
+                parse_constant=_reject_constant,
+            )
+            return validate_trace(value), None
+        except (OSError, ValueError) as exc:
+            return None, f"Invalid trace file: {exc}"
 
 
 def make_external_solver(

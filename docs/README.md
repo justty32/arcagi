@@ -7,7 +7,8 @@
 - [題庫與產生器](data.md)：取得官方 800 題、檢查來源、生成額外練習題。
 - [訓練集題庫盤點](inventory/training.html)：400 題的大小、顏色、題型粗分與符號難易估計（逐題特徵在 [CSV](inventory/training-features.csv)）。
 - [實驗教學](experiments/README.md)：跨語言、多方法、參數組、題型及重複試驗。
-- [求解器介面](solvers.md)：Python plugin 或已有 JSON 預測的離線評分。
+- [求解器介面](solvers.md)：Python plugin、外部程式整份評測、已有 JSON 預測的離線評分、方法間逐題比較與題型分組。
+- [嘗試軌跡](traces.md)：求解器可選回報的逐題嘗試紀錄格式（為蒸餾規則保存）。
 - [驗證與實驗原則](testing.md)：怎麼確認環境沒壞、怎麼正確解讀分數。
 
 程式開發流程另見 [工作流入口](../wf/WORKFLOWS.md)。

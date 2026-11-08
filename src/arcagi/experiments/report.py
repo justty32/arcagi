@@ -39,6 +39,7 @@ RUN_FIELDS = (
     "artifact_dir",
     "returncode",
     "predictions",
+    "trace_error",
 )
 
 

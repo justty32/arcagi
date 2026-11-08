@@ -31,6 +31,32 @@ def _add_dataset_args(parser: argparse.ArgumentParser, *, positional: bool) -> N
     parser.add_argument("--limit", type=_positive_int, help="Use first N sorted tasks")
 
 
+def _add_solver_args(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--timeout", type=_positive_seconds, help="Per-task timeout in seconds"
+    )
+    parser.add_argument(
+        "--solver", default="identity", help="identity or module:function"
+    )
+    parser.add_argument(
+        "--external",
+        metavar="ARGV",
+        help="External solver command (split like a shell, never run by one), "
+        "e.g. 'sh solver.sh {input} {output} {trace}'; overrides --solver",
+    )
+    parser.add_argument("--name", help="Solver name recorded in the report")
+    parser.add_argument(
+        "--params", default="{}", help="JSON object passed to --external solvers"
+    )
+    parser.add_argument("--seed", type=int, default=0, help="Seed for --external")
+    parser.add_argument("--cwd", type=Path, help="Working directory for --external")
+    parser.add_argument(
+        "--artifacts",
+        type=Path,
+        help="Directory for --external request/response/log files",
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Build the argument parser without importing optional command modules."""
     parser = argparse.ArgumentParser(
@@ -50,24 +76,17 @@ def build_parser() -> argparse.ArgumentParser:
         "solve", help="Run a solver on one task (labels hidden)"
     )
     solve.add_argument("task", type=Path)
-    solve.add_argument(
-        "--timeout", type=_positive_seconds, help="Per-task timeout in seconds"
-    )
-    solve.add_argument(
-        "--solver", default="identity", help="identity or module:function"
-    )
+    _add_solver_args(solve)
     solve.add_argument(
         "--output", type=Path, help="Write predictions JSON to this file"
     )
     evaluate = commands.add_parser("eval", help="Measure exact-match top-1 accuracy")
     _add_dataset_args(evaluate, positional=False)
-    evaluate.add_argument(
-        "--timeout", type=_positive_seconds, help="Per-task timeout in seconds"
-    )
-    evaluate.add_argument(
-        "--solver", default="identity", help="identity or module:function"
-    )
+    _add_solver_args(evaluate)
     evaluate.add_argument("--output", type=Path, help="Write the complete JSON report")
+    evaluate.add_argument(
+        "--traces", type=Path, help="Write one JSONL line per task with its trace"
+    )
     score = commands.add_parser(
         "score", help="Score externally produced predictions JSON"
     )
@@ -111,4 +130,25 @@ def build_parser() -> argparse.ArgumentParser:
     experiment.add_argument("--output", type=Path, required=True)
     experiment.add_argument("--task", action="append", dest="task_ids")
     experiment.add_argument("--tag", action="append", dest="tags")
+    compare = commands.add_parser(
+        "compare", help="Compare eval/experiment reports task by task"
+    )
+    compare.add_argument(
+        "reports",
+        nargs="+",
+        metavar="[NAME=]REPORT",
+        help="eval JSON or experiment results.json; the first is the baseline",
+    )
+    compare.add_argument(
+        "--labels", type=Path, help="CSV/JSON mapping task_id to category"
+    )
+    compare.add_argument("--label-column", help="CSV category column name")
+    compare.add_argument(
+        "--label-sep", help="Split one CSV cell into several categories"
+    )
+    compare.add_argument("--output", type=Path, help="Write the full JSON comparison")
+    compare.add_argument("--matrix-csv", type=Path, help="Write task x method CSV")
+    compare.add_argument(
+        "--format", choices=("json", "markdown"), default="json", help="Stdout format"
+    )
     return parser

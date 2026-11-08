@@ -235,3 +235,61 @@ def test_console_entrypoint_loads_cwd_plugin(task_path: Path, tmp_path: Path) ->
     assert json.loads(result.stdout) == {"sample": [[[3]], [[4, 5]]]}
     assert "import log" in result.stderr
     assert "prediction log" in result.stderr
+
+
+SH_EXAMPLE = Path(__file__).resolve().parents[1] / "examples" / "sh_identity.sh"
+
+
+def test_eval_external_command_with_traces(
+    task_path: Path, tmp_path: Path, capsys
+) -> None:
+    output = tmp_path / "report.json"
+    traces = tmp_path / "traces.jsonl"
+    command = f"sh '{SH_EXAMPLE}' {{input}} {{output}} {{trace}}"
+    assert (
+        main(
+            [
+                "eval",
+                "--tasks-dir",
+                str(task_path.parent),
+                "--external",
+                command,
+                "--name",
+                "sh-demo",
+                "--timeout",
+                "10",
+                "--output",
+                str(output),
+                "--traces",
+                str(traces),
+            ]
+        )
+        == 0
+    )
+    summary = json.loads(capsys.readouterr().out)
+    assert summary["solver"] == "sh-demo"
+    assert summary["tasks_correct"] == 1 and summary["traces"] == 1
+    assert Path(summary["artifacts"]) == tmp_path / "report-runs"
+    records = [json.loads(line) for line in traces.read_text().splitlines()]
+    assert len(records) == 1
+    assert records[0]["schema_version"] == "arcagi-trace-record/1"
+    assert records[0]["solver"] == "sh-demo"
+    assert records[0]["correct"] is True
+    assert records[0]["tests_correct"] == [True, True]
+    assert records[0]["trace"]["selected"] == "copy"
+
+
+def test_eval_traces_without_trace_support_are_null(
+    task_path: Path, tmp_path: Path, capsys
+) -> None:
+    traces = tmp_path / "traces.jsonl"
+    args = ["eval", "--tasks-dir", str(task_path.parent), "--traces", str(traces)]
+    assert main(args) == 0
+    capsys.readouterr()
+    assert json.loads(traces.read_text())["trace"] is None
+
+
+def test_eval_external_rejects_bad_params(task_path: Path, capsys) -> None:
+    args = ["eval", "--tasks-dir", str(task_path.parent), "--external", "true"]
+    assert main([*args, "--params", "[1]"]) == 2
+    assert "JSON object" in capsys.readouterr().err

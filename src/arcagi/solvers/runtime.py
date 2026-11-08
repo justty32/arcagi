@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from arcagi.solvers import Solver, load_solver
+from arcagi.solvers.trace import SolverResult, split_solver_output
 from arcagi.tasks import Example, SolverTask
 
 
@@ -42,7 +43,7 @@ def load_timed_solver(spec: str, timeout: float) -> Solver:
         if not separator or not module or not function or ":" in function:
             raise ValueError("Solver must be 'identity' or 'module:function'")
 
-    def solve(task: SolverTask) -> Sequence[object]:
+    def solve(task: SolverTask) -> Sequence[object] | SolverResult:
         if not isinstance(task, SolverTask):
             raise TypeError("Timed solvers accept only a label-free SolverTask")
         payload = {
@@ -111,6 +112,10 @@ def load_timed_solver(spec: str, timeout: float) -> Solver:
             raise SolverExecutionError(
                 "Solver must return a sequence of prediction grids"
             )
+        if result.get("trace") is not None or result.get("trace_error") is not None:
+            return SolverResult(
+                predictions, result.get("trace"), result.get("trace_error")
+            )
         return predictions
 
     return solve
@@ -136,12 +141,18 @@ def _worker(result_path: Path) -> None:
             tuple(tuple(tuple(row) for row in grid) for grid in raw["test"]),
         )
         with contextlib.redirect_stdout(sys.stderr):
-            predictions = load_solver(request["solver"])(task)
+            output = load_solver(request["solver"])(task)
+        predictions, trace, trace_error = split_solver_output(output)
         if not isinstance(predictions, Sequence) or isinstance(
             predictions, (str, bytes)
         ):
             raise ValueError("Solver must return a sequence of prediction grids")
-        result = {"status": "ok", "predictions": list(predictions)}
+        result = {
+            "status": "ok",
+            "predictions": list(predictions),
+            "trace": trace,
+            "trace_error": trace_error,
+        }
         # Check serializability here so failures become ordinary per-task errors.
         encoded = json.dumps(result, allow_nan=False)
     except Exception as exc:
