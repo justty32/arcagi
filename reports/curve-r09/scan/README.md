@@ -20,6 +20,17 @@
 
 ## route：路由表鄰域
 
-（掃描進行中，結果補在下一個 commit。）
+| 項 | 結果 |
+|---|---|
+| 鄰域 | 6 條 live route 列 × （priority ±1、換成另外 3 個 arm）＝30 個變體 |
+| 被掃的樹 4 epoch 內出現的停滯狀態 | 只有 `ok`（base 取 `rt_sleep`） |
+| 離線分群（按每個已出現狀態取到的 arm） | 4 群；與 base 不同的 3 群各跑一個代表（3 seed × 4 epoch，牆鐘 3 分 13 秒，`rt_vsplit` 那群走 Python 慢道） |
+| 接受 | **1**：`route_ok_rt_sleep` 的 arm 改 `rt_vsplit`（ok 狀態改走縱拆）。A 折 0 掉題、Σnodes_to_first 降 14.4%；B 折折外 0 掉題、**多解 6 題**（三 seed 合計）、降 32.8% |
+| 未接受 | ok→`rt_pool`：A 多解 1 但 B 節點 +98%、無多解；ok→`rt_gatescan`：兩折完全不變 |
+| ledger | 30 筆 `layer:2 by:gate-scan`（接受者 1 筆帶新列 `route_ok_rt_sleep_scan3` live、舊列 dormant 並記 `tried_env_hashes`） |
+
+- **要分開標**：接受的這條，B 折多解的題來自 `rt_vsplit` 慢道跑的 `decomp_halves`／`decomp_nest`（`by:agent-r08`，r08 手寫拆法）被樹判升 live（變體樹 seed 1：`decomp_halves` 新解 3c9b0459、496994bd、ce4f8723，`decomp_nest` 新解 3c9b0459）。照 03 §1 隊長改動 2，這算「手寫拆法經樹判升」，不是樹自己長出的拆法；它可以算 M2(b)（route 列被 layer-2 接受、B 折折外 0 掉題並多解），但不能算 M2(a)。
+- 這次只在 scratch 根上做（`--write` 寫的是 scratch 根的 ops／ledger）。要讓活樹吃到，由隊長對 `ws/hammer/` 跑 `scan --kind route --write`，或把這條變體當 `add-op` 交樹判。
+- 逐變體明細在 [route.json](route.json)。
 
 重跑：`uv run python -m arcagi.hammer.scan <root> --kind gate|route --work DIR [--write] [--probe N] [--dry]`。

@@ -1,0 +1,536 @@
+{
+ "fired": [
+  "ok"
+ ],
+ "base_arms": {
+  "ok": "rt_sleep"
+ },
+ "groups": 4,
+ "variants": 30,
+ "ran": 3,
+ "accepted": 1,
+ "tried": [
+  {
+   "op": "route_ok_rt_sleep",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 1,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_sleep",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 3,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_vsplit",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 0,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_vsplit",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 2,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_vsplit",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 1,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_vsplit",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 1,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_vsplit",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 1,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_pool",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 1,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_pool",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 3,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_pool",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 2,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_pool",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 2,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_pool",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 2,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_sleep",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 0,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_sleep",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 2,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_sleep",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 1,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_sleep",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 1,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_starve_rt_sleep",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 1,
+    "when_stall": "starve"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_vsplit",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 1,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_vsplit",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 3,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_vsplit",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 2,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_vsplit",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 2,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_vsplit",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 2,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_gatescan",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 0,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_gatescan",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 2,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_gatescan",
+   "payload": {
+    "arm": "rt_sleep",
+    "priority": 1,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_gatescan",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 1,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_saturate_rt_gatescan",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 1,
+    "when_stall": "saturate"
+   },
+   "arms": {
+    "ok": "rt_sleep"
+   },
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "op": "route_ok_rt_sleep",
+   "payload": {
+    "arm": "rt_vsplit",
+    "priority": 2,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_vsplit"
+   },
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 399227,
+     "ntf": 341649,
+     "drop": 0.1442
+    },
+    "B": {
+     "lost": 0,
+     "gained": 6,
+     "ntf_base": 68576,
+     "ntf": 46091,
+     "drop": 0.3279
+    },
+    "selected": true,
+    "accepted": true
+   }
+  },
+  {
+   "op": "route_ok_rt_sleep",
+   "payload": {
+    "arm": "rt_pool",
+    "priority": 2,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_pool"
+   },
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 1,
+     "ntf_base": 399227,
+     "ntf": 463140,
+     "drop": -0.1601
+    },
+    "B": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 68576,
+     "ntf": 135877,
+     "drop": -0.9814
+    },
+    "selected": true,
+    "accepted": false
+   }
+  },
+  {
+   "op": "route_ok_rt_sleep",
+   "payload": {
+    "arm": "rt_gatescan",
+    "priority": 2,
+    "when_stall": "ok"
+   },
+   "arms": {
+    "ok": "rt_gatescan"
+   },
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 399227,
+     "ntf": 399227,
+     "drop": 0.0
+    },
+    "B": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 68576,
+     "ntf": 68576,
+     "drop": 0.0
+    },
+    "selected": false,
+    "accepted": false
+   }
+  }
+ ]
+}
