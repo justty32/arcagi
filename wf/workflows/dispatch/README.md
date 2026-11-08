@@ -49,9 +49,6 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
-| r04-A 每物件規則 | opus | `src/arcagi/objrule/`、`dsl/extract*.py`、`blocks/gen_extract.py`、`aos/blocks/extract_*`、`_gen/extract/`、對應 tests | 其餘；不跑 evaluation | 2026-11-08 13:00 |
-| r04-B 公式＋預算＋拆 pool | opus | `blocks/pool*`、`dsl/features.py`、`dsl/formula*.py`、`blocks/gen_formula.py`、`gen_predicates.py`、`aos/blocks/formula_*`、`pred_*`、`_gen/formula|pred_combiner/`、`aos/pool/config.json`、對應 tests | 其餘；不跑 evaluation | 2026-11-08 13:00 |
-| r04-C 搜尋預算＋並行 | opus | `solvers/search.py`、`vote.py`、`runtime.py`、`eval/`、`cli*.py`、對應 tests、`docs/solvers.md` | 其餘；evaluation baseline 一次 | 2026-11-08 13:00 |
 
 ### 保留給主 agent，任何線都不得寫
 
@@ -65,6 +62,9 @@
 
 | 線 | 完成證據 | 收線時間 |
 |----|---------|---------|
+| r04-A 每物件規則 | pytest 333 綠；training 同大小未解 73 題子集 0→5、已解 39 題退步 0；物件視角抽取 6 live／14 covered | 2026-11-08 13:10 |
+| r04-B 公式＋預算＋拆 pool＋_gen/_meta | pytest 337 綠；`blocks/pool/` 每檔 ≤300 行；預算 extract 5000／formula 11993／pred 8007；公式 35 live；meta 試 6 設定、最佳去 sq/div | 2026-11-08 13:25 |
+| r04-C 搜尋預算＋並行 | pytest 320 綠；`--workers`；evaluation baseline 32/400＝r03、退步 0、牆鐘 30 秒；out_of_budget 0/400（預算從未是瓶頸） | 2026-11-08 12:58 |
 | r03-A 公式 | pytest 312 綠；training 輸出尺寸不同 100 題子集 32→35；24 live／60 covered 公式積木；`aos-exec … _gen/formula --dry-run` 可叫 | 2026-11-08 12:50 |
 | r03-B 抽取 | pytest 312 綠；training 子集 65→67（B 貢獻 1）；44 live／40 covered 抽取積木 | 2026-11-08 12:48 |
 | r03-C 背景投票帳 | pytest 313 綠；training 子集 46→48、退步 0；essential／巨集下傳／產生器成本／真退休／generator_budget 測試在 | 2026-11-08 12:50 |

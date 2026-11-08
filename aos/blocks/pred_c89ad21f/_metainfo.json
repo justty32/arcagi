@@ -4,7 +4,7 @@
   "doc": "Generated object predicate [\"and\", [\"eq\", \"is_largest\", 0], [\"lt\", \"w\", 8]]",
   "params": [],
   "cost": 1,
-  "status": "covered",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/pred_combiner",
   "score": 17.0,

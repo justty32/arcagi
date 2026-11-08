@@ -60,6 +60,17 @@
    "baseline": "dsl-search-r02 evaluation 28/400、training 79/400；退步 0",
    "verdict": "否：evaluation +4 未達 36，但 4 題全由公式型積木解出；尺寸隨輸入 54 題 2→6",
    "record_path": "../../../reports/dsl-search-r03/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r04",
+   "date": "2026-11-08",
+   "hypothesis": "每物件各自規則（物件視角抽取積木當動作參數）＋產生器預算執行＋公式 2 層讓 evaluation 解 ≥38、同大小 ≥13",
+   "solver": "arcagi.solvers.search:solve (9dcf110)",
+   "split": "evaluation＋training",
+   "result": "evaluation 37/400、training 92/400, errors=0；同大小 evaluation 13/270",
+   "baseline": "dsl-search-r03 evaluation 32/400、training 86/400；退步 0",
+   "verdict": "部分：同大小 8→13 達標、evaluation 差 1 題；新解 5 題全由每物件規則；加大搜尋預算單獨 0 增量",
+   "record_path": "../../../reports/dsl-search-r04/README.md"
   }
  ]
 }

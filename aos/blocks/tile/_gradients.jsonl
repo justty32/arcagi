@@ -43,3 +43,8 @@
 {"epoch": 3, "from": "pool", "task": "c48954c1", "program": "[[\"rot180\"],[\"tile\",3,3]]", "train_correct": 0, "train_total": 3, "score": 0.7037, "says": "near miss on an unsolved task"}
 {"epoch": 3, "from": "pool", "task": "c92b942c", "program": "[[\"tile\",3,3],[\"symmetrize\",\"lr\",0]]", "train_correct": 0, "train_total": 4, "score": 0.5909, "says": "near miss on an unsolved task"}
 {"epoch": 3, "from": "pool", "task": "ed98d772", "program": "[[\"anti_transpose\"],[\"mirror_tile\",\"lr\"],[\"tile\",2,1]]", "train_correct": 0, "train_total": 5, "score": 0.7222, "says": "near miss on an unsolved task"}
+{"epoch": 4, "from": "pool", "task": "00576224", "program": "[[\"tile\",3,3],[\"fill_enclosed\"],[\"symmetrize\",\"lr\",10]]", "train_correct": 0, "train_total": 2, "score": 0.6667, "says": "near miss on an unsolved task"}
+{"epoch": 4, "from": "pool", "task": "2072aba6", "program": "[[\"tile\",2,2],[\"gravity\",\"left\"],[\"m_mirror_tile__split_overlay_fbb38a\"]]", "train_correct": 0, "train_total": 3, "score": 0.5185, "says": "near miss on an unsolved task"}
+{"epoch": 4, "from": "pool", "task": "310f3251", "program": "[[\"tile\",3,3]]", "train_correct": 0, "train_total": 5, "score": 0.9, "says": "near miss on an unsolved task"}
+{"epoch": 4, "from": "pool", "task": "3979b1a8", "program": "[[\"tile\",2,2],[\"gravity\",\"left\"],[\"gravity\",\"down\"]]", "train_correct": 0, "train_total": 2, "score": 0.4, "says": "near miss on an unsolved task"}
+{"epoch": 4, "from": "pool", "task": "5b6cbef5", "program": "[[\"tile\",4,4]]", "train_correct": 0, "train_total": 5, "score": 0.7695, "says": "near miss on an unsolved task"}

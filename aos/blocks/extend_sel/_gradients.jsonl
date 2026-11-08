@@ -47,3 +47,4 @@
 {"epoch": 3, "from": "pool", "task": "e5c44e8f", "program": "[[\"extend_sel\",\"4same\",\"color\",3,\"up\"]]", "train_correct": 0, "train_total": 3, "score": 0.6694, "says": "near miss on an unsolved task"}
 {"epoch": 3, "from": "pool", "task": "e69241bd", "program": "[[\"extend_sel\",\"8same\",\"shape_count\",3,\"down\"]]", "train_correct": 0, "train_total": 3, "score": 0.7536, "says": "near miss on an unsolved task"}
 {"epoch": 3, "from": "pool", "task": "e760a62e", "program": "[[\"extend_sel\",\"4same\",\"is_largest\",0,\"right\"]]", "train_correct": 0, "train_total": 3, "score": 0.8318, "says": "near miss on an unsolved task"}
+{"epoch": 4, "from": "pool", "task": "140c817e", "program": "[[\"extend_sel\",\"4same\",\"all\",1,\"down\"],[\"flip_ud\"],[\"fill_cells\",\"uniform\"]]", "train_correct": 0, "train_total": 3, "score": 0.6469, "says": "near miss on an unsolved task"}
