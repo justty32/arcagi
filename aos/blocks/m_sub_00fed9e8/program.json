@@ -1,0 +1,17 @@
+[
+  [
+    "mirror_tile",
+    {
+      "$slot": 1
+    }
+  ],
+  [
+    "split_overlay",
+    {
+      "$slot": 2
+    },
+    {
+      "$slot": 3
+    }
+  ]
+]

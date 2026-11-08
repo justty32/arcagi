@@ -82,9 +82,87 @@ class Catalog:
         return found
 
 
-def load_macro_program(folder: Path) -> Program | None:
+class RefError(ValueError):
+    """A ``$ref`` that cannot be resolved: unreadable, bad pointer or a cycle."""
+
+
+def _ref_specs(value: object) -> list[str] | None:
+    """The ``$ref`` strings of a directive object, or None if not a usable one.
+
+    Per aos N-45 a malformed directive (non-string, empty, ``#`` not followed by
+    ``/``, pointer without a file) is left untouched, so it yields None here.
+    """
+    if not isinstance(value, dict) or "$ref" not in value:
+        return None
+    raw = value["$ref"]
+    specs = [raw] if isinstance(raw, str) else raw
+    if not isinstance(specs, list) or not specs:
+        return None
+    for spec in specs:
+        if not isinstance(spec, str) or not spec:
+            return None
+        file, sep, pointer = spec.partition("#")
+        if not file or (sep and not pointer.startswith("/")):
+            return None
+    return specs
+
+
+def _pointer(doc: object, pointer: str) -> object:
+    for raw in pointer.split("/")[1:] if pointer else []:
+        token = raw.replace("~1", "/").replace("~0", "~")
+        if isinstance(doc, dict) and token in doc:
+            doc = doc[token]
+        elif isinstance(doc, list) and token.isdigit() and int(token) < len(doc):
+            doc = doc[int(token)]
+        else:
+            raise RefError(f"pointer #{pointer} not found")
+    return doc
+
+
+def load_ref(spec: str, base: Path, chain: tuple = ()) -> tuple[object, Path, tuple]:
+    """Raw value of one ``file#/pointer`` relative to ``base``; new dir and chain."""
+    file, _, pointer = spec.partition("#")
+    path = (base / file).resolve()
+    key = (str(path), pointer)
+    if key in chain:
+        raise RefError(f"$ref cycle at {spec}")
     try:
-        steps = json.loads((folder / "program.json").read_text(encoding="utf-8"))
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise RefError(f"cannot read $ref {spec}: {exc}") from exc
+    return _pointer(doc, pointer), path.parent, (*chain, key)
+
+
+def expand_steps(steps: object, base: Path, chain: tuple = ()) -> object:
+    """Splice ``{"$ref": ...}`` steps of a program list (aos N-45 ``$ref``).
+
+    Each directive step is replaced by the referenced program's steps, resolved
+    recursively from the referenced file's folder; a ``$ref`` list concatenates
+    its parts in order. Non-directive steps and non-list values pass unchanged.
+    """
+    if not isinstance(steps, list):
+        return steps
+    out: list = []
+    for step in steps:
+        specs = _ref_specs(step)
+        if specs is None:
+            out.append(step)
+            continue
+        for spec in specs:
+            value, where, deeper = load_ref(spec, base, chain)
+            value = expand_steps(value, where, deeper)
+            if not isinstance(value, list):
+                raise RefError(f"$ref {spec} is not a program list")
+            out.extend(value)
+    return out
+
+
+def load_macro_program(folder: Path) -> Program | None:
+    path = folder / "program.json"
+    try:
+        steps = json.loads(path.read_text(encoding="utf-8"))
+        here = path.resolve()
+        steps = expand_steps(steps, here.parent, ((str(here), ""),))
     except (OSError, ValueError):
         return None
     if not isinstance(steps, list) or not all(
@@ -127,4 +205,12 @@ def load_catalog(root: Path | None = None) -> Catalog:
     return Catalog(root=root, blocks=blocks)
 
 
-__all__ = ["Block", "Catalog", "load_catalog", "load_macro_program"]
+__all__ = [
+    "Block",
+    "Catalog",
+    "RefError",
+    "expand_steps",
+    "load_catalog",
+    "load_macro_program",
+    "load_ref",
+]

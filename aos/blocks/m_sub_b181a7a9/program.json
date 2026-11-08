@@ -1,0 +1,16 @@
+[
+  [
+    "crop_object",
+    "4same",
+    "smallest"
+  ],
+  [
+    "upscale",
+    {
+      "$slot": 1
+    },
+    {
+      "$slot": 2
+    }
+  ]
+]

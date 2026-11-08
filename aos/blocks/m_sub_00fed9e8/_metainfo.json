@@ -1,0 +1,74 @@
+{
+  "name": "m_sub_00fed9e8",
+  "kind": "slot_macro",
+  "doc": "Subtree with slots: [[\"mirror_tile\",{\"$slot\":1}],[\"split_overlay\",{\"$slot\":2},{\"$slot\":3}]]",
+  "params": [
+    "$1",
+    "$2",
+    "$3"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "slots": [
+    [
+      "ud",
+      "lr"
+    ],
+    [
+      "h",
+      "v"
+    ],
+    [
+      "xor",
+      "nor",
+      "or",
+      "and"
+    ]
+  ],
+  "slot_combos": [
+    [
+      "ud",
+      "h",
+      "xor"
+    ],
+    [
+      "ud",
+      "h",
+      "nor"
+    ],
+    [
+      "ud",
+      "h",
+      "or"
+    ],
+    [
+      "lr",
+      "v",
+      "nor"
+    ],
+    [
+      "lr",
+      "v",
+      "or"
+    ],
+    [
+      "ud",
+      "h",
+      "and"
+    ]
+  ],
+  "source_tasks": [
+    "25d8a9c8",
+    "25ff71a9",
+    "44f52bb0",
+    "5117e062",
+    "5582e5ca",
+    "6e02f1e3",
+    "d0f5fe59"
+  ],
+  "source_traces": [
+    "artifacts/r04/dsl-training-traces.jsonl"
+  ],
+  "origin": "srcspace.slots"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "m_sub_133be74a",
+  "kind": "slot_macro",
+  "doc": "Subtree with slots: [[\"flip_lr\"],[\"crop_object\",{\"$slot\":1},{\"$slot\":2}]]",
+  "params": [
+    "$1",
+    "$2"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "slots": [
+    [
+      "8multi",
+      "4same"
+    ],
+    [
+      "smallest",
+      "most_colors",
+      "largest"
+    ]
+  ],
+  "slot_combos": [
+    [
+      "8multi",
+      "most_colors"
+    ],
+    [
+      "8multi",
+      "smallest"
+    ],
+    [
+      "4same",
+      "largest"
+    ],
+    [
+      "4same",
+      "smallest"
+    ]
+  ],
+  "source_tasks": [
+    "137eaa0f",
+    "5117e062",
+    "a61ba2ce",
+    "d10ecb37"
+  ],
+  "source_traces": [
+    "artifacts/r04/dsl-training-traces.jsonl"
+  ],
+  "origin": "srcspace.slots"
+}
