@@ -33,9 +33,12 @@ CONTROL = ROOT / "reports" / "curve-r09" / "dec-g1" / "curve.csv"
 B_MAX = 100_000
 
 
-def fold(task_id: str) -> str:
-    return "A" if int(hashlib.sha1((task_id + "r09AB").encode()).hexdigest(),
-                      16) % 2 == 0 else "B"
+def folds(ids: list[str]) -> dict[str, str]:
+    """A/B halves: sort by sha1(task_id + "r09AB"), first half A (= the
+    ``fold`` field of data/r09/taskset.json, scripts/r09_taskset.py)."""
+    order = sorted(ids, key=lambda t: hashlib.sha1((t + "r09AB").encode())
+                   .hexdigest())
+    return {t: "A" if i < len(order) // 2 else "B" for i, t in enumerate(order)}
 
 
 def _steps(xs, ys):

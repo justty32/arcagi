@@ -17,7 +17,8 @@ import time
 from pathlib import Path
 
 from arcagi.grow import curve as gc
-from arcagi.hammer import epoch
+from arcagi.hammer import epoch, metrics
+from arcagi.hammer import formats as fm
 
 ROOT = Path(__file__).resolve().parent.parent
 REPORTS = ROOT / "reports" / "curve-r09"
@@ -34,6 +35,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--threads", type=int, default=6)
     ap.add_argument("--taskset", type=Path, default=None)
     ap.add_argument("--out", type=Path, default=None)
+    ap.add_argument("--lto", action="store_true",
+                    help="LTO-SCF∪: grow on P48 fold A (no H8/H24), score fold B")
     a = ap.parse_args(argv)
     if a.threads > 8:
         sys.exit("threads <= 8")
@@ -48,6 +51,24 @@ def main(argv: list[str] | None = None) -> None:
                           "wall_s": round(time.perf_counter() - t0, 1)}))
         return
     root = a.root or SCRATCH / a.tree
+    if a.lto:
+        ts = a.taskset or ROOT / "data" / "r09" / "taskset.json"
+        if not (root / "ops.jsonl").exists():
+            fm.init_root(root, ts, tree=a.tree)
+            tr = fm.read_json(root / "truth" / "train" / "taskset.json")
+            p_all = tr["P"]
+            f = metrics.folds(p_all)
+            tr["P"] = [t for t in p_all if f[t] == "A"]
+            tr["P_B"] = [t for t in p_all if f[t] == "B"]
+            fm.write_json(root / "truth" / "train" / "taskset.json", tr)
+        epoch.run_tree(root, a.tree, a.epochs, backend=a.backend,
+                       threads=a.threads, holdout=False)
+        tr = fm.read_json(root / "truth" / "train" / "taskset.json")
+        res = metrics.lto_scf(root, tr["P_B"], threads=a.threads)
+        fm.write_json(root / "lto_scf.json", res)
+        print(json.dumps({"tree": a.tree, "lto_scf": res,
+                          "wall_s": round(time.perf_counter() - t0, 1)}))
+        return
     rows = epoch.run_tree(root, a.tree, a.epochs, taskset=a.taskset,
                           backend=a.backend, threads=a.threads)
     out = a.out or REPORTS / a.tree

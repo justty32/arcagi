@@ -1,0 +1,10 @@
+epoch,solved_L,solved_H8,solved_H24,solved_P,logcost_L,lib_size,lib_bits,n_incubating,n_live,n_dormant,gate_in,promoted,rolled_back,stall,arm,evals_body,evals_shadow,evals_meta,evals_foundry,llm_calls,false_pos,env_hash,near_best_L,wall_s
+0,4,0,1,12,247.512,0,0.000,0,7,0,13,0,False,ok,rt_sleep,5183977,0,0,0,0,0,5fae961319ff,0.974,0.430
+1,4,0,1,13,246.030,0,0.000,0,7,0,14,0,False,ok,rt_sleep,6069061,0,0,0,0,0,5fae961319ff,0.974,0.900
+2,4,0,1,13,246.030,0,0.000,0,7,0,16,0,False,ok,rt_sleep,7801619,0,0,0,0,0,5fae961319ff,0.974,1.150
+3,4,0,1,13,246.030,0,0.000,0,7,0,16,0,False,stop,rt_vsplit,11342067,0,0,0,0,0,5fae961319ff,0.974,1.740
+4,4,0,1,13,246.041,0,0.000,0,7,0,16,0,False,stop,rt_vsplit,18216953,0,0,0,0,0,5fae961319ff,0.974,2.840
+5,4,0,1,13,246.041,0,0.000,0,7,0,16,0,False,stop,rt_vsplit,18216953,0,0,0,0,0,5fae961319ff,0.974,2.870
+6,4,0,1,13,246.041,0,0.000,0,7,0,16,0,False,stop,rt_vsplit,18216953,0,0,0,0,0,5fae961319ff,0.974,2.820
+7,4,0,1,13,246.041,0,0.000,0,7,0,16,0,False,stop,rt_vsplit,18216953,0,0,0,0,0,5fae961319ff,0.974,2.130
+8,4,0,1,13,246.041,0,0.000,0,7,0,16,0,False,stop,rt_vsplit,18216953,0,0,0,0,0,5fae961319ff,0.974,2.090
