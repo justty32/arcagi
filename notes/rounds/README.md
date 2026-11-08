@@ -10,7 +10,8 @@
 - **第二輪已收輪**（2026-11-08）：evaluation **28/400**、training **79/400**（r01 21／57，退步 0）。產物 [r02/](r02/04-總結簡報.md)：01 簡報（含 §9 使用者 12:05 新想法「優化產生積木」）→ 02 fable 規劃＋02b 增補 → 03 設計 → 04 總結＋[代定清單](r02/代定清單.md)；aos 接入在 repo 根 `aos/`（積木資料夾、求解器資料夾程式、node-pool 帳 epoch 0～2、謂詞產生器）；跑分 `reports/dsl-search-r02/`。
 - **第三輪已收輪**（2026-11-08）：evaluation **32/400**、training **86/400**（r02 28／79，退步 0）。產物 [r03/](r03/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r03/代定清單.md)；公式型／抽取型積木產生器（`blocks/gen_formula.py`、`gen_extract.py`，落地 `aos/blocks/formula_*`、`extract_*`）、題目背景、投票、帳 epoch 3；跑分 `reports/dsl-search-r03/`。
 - **第四輪已收輪**（2026-11-08）：evaluation **37/400**、training **92/400**（r03 32／86，退步 0；同大小 8→13）。產物 [r04/](r04/04-總結簡報.md)：01 簡報（含 §8 使用者 12:56 遞迴元優化想法）→ 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r04/代定清單.md)；每物件規則 `src/arcagi/objrule/`、產生器預算執行 `blocks/pool/budget.py`、產生器的產生器 `aos/blocks/_gen/_meta/`；跑分 `reports/dsl-search-r04/`。
-- **下一輪（r05）建議**：主軸＝使用者 12:56「整棵樹當搜尋對象、遞迴嵌套」＋13:09「呼叫鏈當原始碼、$ref、janet」合併（積木 JSON ⇄ janet 改寫搜尋，先看 `~/repo/langs/janet-lab` 的寫法與慣例、_meta 擴三台用帳本分紅當分數）、每物件規則 2 步、擴寬參數候選、aos-llm 與 C++ 走支線（見 r04/04 §6、[支線.md](支線.md)）。
+- **第五輪進行中**（2026-11-08 13:15 起）：[r05/01 簡報](r05/01-簡報.md) 已寫（含使用者 13:13「子樹也是一種積木」）、開輪帖 p-20261108-131350-e59a；fable 規劃中。
+- **r05 原建議**：主軸＝使用者 12:56「整棵樹當搜尋對象、遞迴嵌套」＋13:09「呼叫鏈當原始碼、$ref、janet」合併（積木 JSON ⇄ janet 改寫搜尋，先看 `~/repo/langs/janet-lab` 的寫法與慣例、_meta 擴三台用帳本分紅當分數）、每物件規則 2 步、擴寬參數候選、aos-llm 與 C++ 走支線（見 r04/04 §6、[支線.md](支線.md)）。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
 - **支線**（aos 人力加入後可並行的工作，路徑劃清）→ [支線.md](支線.md)。
