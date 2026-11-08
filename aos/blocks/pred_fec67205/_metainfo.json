@@ -1,0 +1,28 @@
+{
+  "name": "pred_fec67205",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"and\", [\"eq\", \"is_largest\", 1], [\"rank\", \"h\", \"max\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 13.0,
+  "literals": 2,
+  "tasks": [
+    "05f2a901",
+    "0dfd9992",
+    "1f642eb9",
+    "5168d44c",
+    "56dc2b01",
+    "6c434453",
+    "74dd1130",
+    "a1570a43",
+    "a78176bb",
+    "c1d99e64",
+    "d511f180",
+    "e5062a87",
+    "e76a88a6",
+    "ecdecbb3"
+  ]
+}

@@ -7,9 +7,11 @@ rest to blocks in proportion to their static references in the selected
 program. Spend = ``trace.metadata.block_calls[name] / calls_per_unit * cost``
 (0 when absent). Every wallet pays ``rent`` per epoch. A block with zero
 dividend for ``retire_after`` epochs in a row is only *suggested* for retirement.
-Near misses of unsolved tasks become ``_gradients.jsonl`` letters to the blocks
-they reference. Files: ``config.json``, ``wallets.json``, ``ledger.jsonl``
-(append-only), ``epochs/<n>.json``.
+A generated block (``generator`` in its metainfo, e.g. a ``pred_*``
+referenced as a selector parameter) passes ``generator_cut`` of its dividend to
+its generator node. Near misses of unsolved tasks become ``_gradients.jsonl``
+letters to the blocks they reference. Files: ``config.json``, ``wallets.json``,
+``ledger.jsonl`` (append-only), ``epochs/<n>.json``.
 """
 
 import argparse
@@ -31,6 +33,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "retire_after": 3,
     "gradient_cap": 50,
     "near_misses_per_task": 1,
+    "generator_cut": 0.2,
 }
 
 
@@ -39,16 +42,36 @@ class EpochError(RuntimeError):
 
 
 def selected_steps(trace: dict | None) -> list[str]:
-    """Step names of the attempt that ``trace.selected`` points to."""
+    """Block references of the selected attempt: step names plus pred params."""
     if not trace or trace.get("selected") is None:
         return []
     for attempt in trace.get("attempts", []):
         if attempt.get("id") == trace["selected"] and "program" in attempt:
             try:
-                return [step[0] for step in json.loads(attempt["program"])]
+                steps = json.loads(attempt["program"])
+                return [step[0] for step in steps] + [
+                    p for step in steps for p in step[1:] if _is_pred(p)
+                ]
             except (ValueError, TypeError, IndexError):
                 return []
     return []
+
+
+def _is_pred(param: object) -> bool:
+    return isinstance(param, str) and param.startswith("pred_")
+
+
+def _generator_share(
+    dividends: dict[str, Fraction], catalog: Catalog, cut: Fraction
+) -> None:
+    """Move ``cut`` of each generated block's dividend to its generator node."""
+    for name in sorted(dividends):
+        block = catalog.blocks.get(name)
+        gen = block.meta.get("generator") if block else None
+        if isinstance(gen, str) and gen and dividends[name] > 0:
+            moved = dividends[name] * cut
+            dividends[name] -= moved
+            dividends[gen] = dividends.get(gen, Fraction(0)) + moved
 
 
 def _near_misses(trace: dict | None, limit: int) -> list[dict]:
@@ -109,6 +132,9 @@ def settle(
                 "says": "near miss on an unsolved task",
             }
             letters.extend((name, letter) for name in sorted(names))
+    _generator_share(
+        dividends, catalog, Fraction(str(config.get("generator_cut", 0.2)))
+    )
     income = solved * price
     exact_retained = income - sum(dividends.values(), Fraction(0))
     paid = {name: round(float(value), 6) for name, value in dividends.items()}

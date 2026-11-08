@@ -1,0 +1,27 @@
+{
+  "name": "pred_68c2296f",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"gt\", \"size\", 1]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 12.5,
+  "literals": 1,
+  "tasks": [
+    "0dfd9992",
+    "0e206a2e",
+    "1f642eb9",
+    "29ec7d0e",
+    "5168d44c",
+    "74dd1130",
+    "9dfd6313",
+    "a1570a43",
+    "a78176bb",
+    "c3f564a4",
+    "d511f180",
+    "ddf7fa4f",
+    "ecdecbb3"
+  ]
+}

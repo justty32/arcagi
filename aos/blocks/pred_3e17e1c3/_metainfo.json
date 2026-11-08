@@ -1,0 +1,27 @@
+{
+  "name": "pred_3e17e1c3",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"and\", [\"ne\", \"color\", 0], [\"rank\", \"w\", \"min\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 12.0,
+  "literals": 2,
+  "tasks": [
+    "2bcee788",
+    "363442ee",
+    "4093f84a",
+    "6d0160f0",
+    "7e0986d6",
+    "88a10436",
+    "952a094c",
+    "a48eeaf7",
+    "a78176bb",
+    "aedd82e4",
+    "b6afb2da",
+    "d687bc17",
+    "f1cefba8"
+  ]
+}

@@ -2,3 +2,7 @@
 {"epoch": 1, "from": "pool", "task": "351d6448", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "score": 0.8974, "train_correct": 0, "train_total": 2, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "d47aa2ff", "program": "[[\"overlay_cells\",\"stack\"]]", "score": 0.9667, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "e99362f0", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "score": 0.6917, "train_correct": 0, "train_total": 6, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "281123b4", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "score": 0.7188, "train_correct": 0, "train_total": 6, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "351d6448", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "score": 0.8974, "train_correct": 0, "train_total": 2, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "d47aa2ff", "program": "[[\"overlay_cells\",\"stack\"]]", "score": 0.9667, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "e99362f0", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "score": 0.6917, "train_correct": 0, "train_total": 6, "says": "near miss on an unsolved task"}

@@ -1,10 +1,9 @@
-"""Object-level primitives: a single-attribute selector plus an action.
+"""Object-level primitives: a selector plus an action (same-size tasks only).
 
-Parameters are ``(conn, attr, value, ...)``; the selector is re-evaluated on
-every grid the program runs on, so ``("is_largest", 1)`` picks the largest
-object of the test input. Candidates are inferred by labeling each train object
-as changed / unchanged and keeping only selectors that separate the two sets.
-All primitives apply only to same-size tasks.
+Parameters are ``(conn, attr, value, ...)`` re-evaluated on every grid, so
+``("is_largest", 1)`` picks the largest test object; ``attr == "pred"`` names a
+live predicate block. Candidates come from labeling train objects changed /
+unchanged and keeping selectors that separate the two sets.
 """
 
 from collections.abc import Sequence
@@ -20,6 +19,7 @@ from .objects_props import (
     changed,
     extract,
     hole_cells,
+    pred_selectors,
     same_shapes,
     selected,
     separate,
@@ -28,6 +28,12 @@ from .primitives import Params, Primitive
 
 DIRS = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
 MAX_CANDIDATES = 8
+MAX_PRED = 2  # live generated predicates add at most this many per primitive
+
+
+def _cap(out: list[Params]) -> list[Params]:
+    plain = [p for p in out if p[1] != "pred"][:MAX_CANDIDATES]
+    return plain + [p for p in out if p[1] == "pred"][:MAX_PRED]
 
 
 def _paint(grid: Grid, cells: dict[tuple[int, int], int]) -> Grid:
@@ -115,21 +121,21 @@ def _extend_sel(
     return _paint(grid, paint)
 
 
-# --- candidate inference -------------------------------------------------------
-
-
 def _selectors(
     states: Sequence[Grid], label, extra: Sequence[object] = (), conns=CONNS
 ) -> list[Params]:
     """Run ``label(obj, state, target_index) -> bool|None`` per conn and separate."""
     out: list[Params] = []
     for conn in conns:
-        examples: list[Labeled] = []
-        for i, state in enumerate(states):
-            examples.append([(o, label(o, state, i)) for o in extract(state, conn)])
+        examples: list[Labeled] = [
+            [(o, label(o, state, i)) for o in extract(state, conn)]
+            for i, state in enumerate(states)
+        ]
         for attr, value in separate(examples):
             out.append((conn, attr, value, *extra))
-    return out[:MAX_CANDIDATES]
+        labels = [[lab for _, lab in ex] for ex in examples]
+        out += [(conn, "pred", n, *extra) for n in pred_selectors(states, conn, labels)]
+    return _cap(out)
 
 
 def _uniform(obj: Obj, target: Grid) -> int | None:
@@ -157,7 +163,7 @@ def _recolor_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list
             return True if _uniform(o, targets[i]) == color else None
 
         out.extend(_selectors(states, label, (color,), (conn,)))
-    return out[:MAX_CANDIDATES]
+    return _cap(out)
 
 
 def _delete_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
@@ -228,7 +234,7 @@ def _move_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
             return True if d in _shift_dirs(o, targets[i]) else None
 
         out.extend(_selectors(states, label, (direction,)))
-    return out[:MAX_CANDIDATES]
+    return _cap(out)
 
 
 def _grow_dirs(o: Obj, target: Grid, state: Grid) -> set[str]:
@@ -274,7 +280,7 @@ def _extend_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list:
             return d in _grow_dirs(o, targets[i], s)
 
         out.extend(_selectors(states, label, (direction,)))
-    return out[:MAX_CANDIDATES]
+    return _cap(out)
 
 
 OBJECTS: dict[str, Primitive] = {

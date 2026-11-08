@@ -9,6 +9,8 @@ blocks/<name>/_metainfo.json   # name, kind(primitive|learner|macro), doc, param
 blocks/<name>/_entry           # sh：stdin {"grid":..,"params":[..]} → stdout 網格
 blocks/<name>/_gradients.jsonl # 梯度信（近失敗），每積木上限 50 行
 blocks/<macro>/program.json    # 巨集＝參數已定的 JSON 程式
+blocks/pred_<hash>/{_metainfo.json,_rule.json,_entry}   # 產生的謂詞積木（kind=pred）
+blocks/_gen/pred_combiner/_metainfo.json             # 產生器節點（kind=generator）
 solver/_entry                  # 一題的 --external 檔案協定 → in-process search
 pool/{config.json,wallets.json,ledger.jsonl,epochs/<n>.json}   # 帳
 ```
@@ -20,9 +22,15 @@ pool/{config.json,wallets.json,ledger.jsonl,epochs/<n>.json}   # 帳
 - 求解器：`uv run arcagi eval --split training --limit 20 --external "aos-exec --ws aos aos/solver {input} {output} {trace}"`
 - 記帳一個 epoch：`uv run python -m arcagi.blocks.pool --report R.json --epoch N --split S`（同 epoch 同報告重跑＝不動；不同報告或跳號＝拒絕）
 - 抽巨集：`uv run python -m arcagi.blocks.library --traces T1.jsonl T2.jsonl [--min-tasks 3] [--dry-run]`
+- 產生謂詞積木：`uv run python -m arcagi.blocks.gen_predicates --split training --max-literals 2 [--live-cap 60] [--dry-run]`
+- 單一謂詞：`echo '{"object":{"is_largest":0,"shape_count":2},"group":[{"shape_count":2},{"shape_count":1}]}' | aos-exec --ws aos aos/blocks/pred_988c1402`（或直接給屬性 dict）→ `true`／`false`
 - 搜尋讀的目錄：環境變數 `ARCAGI_BLOCKS`，否則本目錄的 `blocks/`；不存在時行為同 r01。
 
 `--ws aos` 讓 aos-exec 的 stack 落在 `aos/.stack/`（已 gitignore）；不加則落在當前目錄的 `.stack/`。
+
+## 謂詞積木（判斷型，r02 增補）
+
+`_rule.json`＝`{"kind":"pred","in":"object","out":"bool","body":<AST>}`，AST 是 `["eq"|"ne"|"gt"|"lt",屬性,值]`、`["rank",屬性,"max"|"min"]`、`and`／`or`／`not`（求值器 [predicates.py](../src/arcagi/dsl/predicates.py)）。產生器只在 training 評分：分數＝能讓某連通方式下所有 train pair「物件變／不變」與謂詞真假完全一致的題數 − 字面數×0.5；≤0 不落地；同題集留最短、被不更長者題集包含者標 `covered`（純 `eq` 單字面被內建單屬性選擇器蓋住）；live 上限 60，舊的 pred_* 重跑後沒留下的標 `retired`。registry 把 live 謂詞載成物件選擇器 `(conn,"pred",名字)`，每原語最多多 2 個候選。pool：程式參數引用的 `pred_*` 也算靜態引用，其分紅 20%（`generator_cut`）轉給 metainfo 的 `generator` 節點。
 
 ## aos 概念對應
 

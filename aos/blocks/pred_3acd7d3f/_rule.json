@@ -1,0 +1,18 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "and",
+    [
+      "gt",
+      "size_rank",
+      1
+    ],
+    [
+      "lt",
+      "size_rank",
+      8
+    ]
+  ]
+}

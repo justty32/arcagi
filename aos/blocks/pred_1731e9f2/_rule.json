@@ -1,0 +1,18 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "and",
+    [
+      "lt",
+      "shape_count",
+      3
+    ],
+    [
+      "rank",
+      "color_count",
+      "min"
+    ]
+  ]
+}

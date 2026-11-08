@@ -1,0 +1,10 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "eq",
+    "is_largest",
+    0
+  ]
+}

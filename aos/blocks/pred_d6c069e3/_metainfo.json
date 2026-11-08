@@ -1,0 +1,29 @@
+{
+  "name": "pred_d6c069e3",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"and\", [\"gt\", \"size\", 3], [\"rank\", \"color_count\", \"min\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 14.0,
+  "literals": 2,
+  "tasks": [
+    "0dfd9992",
+    "0e206a2e",
+    "1f642eb9",
+    "29ec7d0e",
+    "3345333e",
+    "484b58aa",
+    "5168d44c",
+    "73251a56",
+    "74dd1130",
+    "a1570a43",
+    "a78176bb",
+    "b8825c91",
+    "ba97ae07",
+    "c3f564a4",
+    "d511f180"
+  ]
+}

@@ -21,3 +21,14 @@
 {"epoch": 1, "from": "pool", "task": "c48954c1", "program": "[[\"rot180\"],[\"tile\",3,3]]", "score": 0.7037, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "c92b942c", "program": "[[\"tile\",3,3],[\"symmetrize\",\"lr\",0]]", "score": 0.5909, "train_correct": 0, "train_total": 4, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "ed98d772", "program": "[[\"anti_transpose\"],[\"mirror_tile\",\"lr\"],[\"tile\",2,1]]", "score": 0.7222, "train_correct": 0, "train_total": 5, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "00576224", "program": "[[\"tile\",3,3],[\"fill_enclosed\"],[\"symmetrize\",\"lr\",10]]", "score": 0.6667, "train_correct": 0, "train_total": 2, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "2072aba6", "program": "[[\"tile\",2,2],[\"gravity\",\"left\"],[\"m_mirror_tile__split_overlay_fbb38a\"]]", "score": 0.5185, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "310f3251", "program": "[[\"tile\",3,3]]", "score": 0.9, "train_correct": 0, "train_total": 5, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "3979b1a8", "program": "[[\"tile\",2,2],[\"gravity\",\"left\"],[\"gravity\",\"down\"]]", "score": 0.4, "train_correct": 0, "train_total": 2, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "5b6cbef5", "program": "[[\"tile\",4,4]]", "score": 0.7695, "train_correct": 0, "train_total": 5, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "6f473927", "program": "[[\"tile\",1,2]]", "score": 0.6034, "train_correct": 0, "train_total": 4, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "7953d61e", "program": "[[\"anti_transpose\"],[\"mirror_tile\",\"lr\"],[\"tile\",2,1]]", "score": 0.4813, "train_correct": 0, "train_total": 5, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "bc4146bd", "program": "[[\"tile\",1,5]]", "score": 0.7875, "train_correct": 0, "train_total": 4, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "c48954c1", "program": "[[\"rot180\"],[\"tile\",3,3]]", "score": 0.7037, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "c92b942c", "program": "[[\"tile\",3,3],[\"symmetrize\",\"lr\",0]]", "score": 0.5909, "train_correct": 0, "train_total": 4, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "ed98d772", "program": "[[\"anti_transpose\"],[\"mirror_tile\",\"lr\"],[\"tile\",2,1]]", "score": 0.7222, "train_correct": 0, "train_total": 5, "says": "near miss on an unsolved task"}

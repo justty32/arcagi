@@ -1,13 +1,14 @@
 """The full primitive registry used by programs and search.
 
 Python implementations come from the primitive modules; the aos block folders
-(``aos/blocks/``, see ``arcagi.blocks.catalog``) decide which of them are live
-and add macro primitives (fixed JSON sub-programs). Without that folder the
-registry is exactly the union of the Python tables.
+(``aos/blocks/``, see ``arcagi.blocks.catalog``) decide which of them are live and
+add macro primitives (fixed JSON sub-programs) and live predicates (object
+selectors). Without that folder the registry is exactly the Python tables.
 """
 
 from arcagi.blocks.catalog import load_catalog
 
+from . import predicates
 from .cells import CELLS
 from .objects import OBJECTS
 from .primitives import BASE, MARK, Primitive, _no_params
@@ -15,6 +16,7 @@ from .primitives_more import MORE
 
 ALL: dict[str, Primitive] = {**BASE, **MORE, **CELLS, **OBJECTS}
 CATALOG = load_catalog()
+predicates.install(CATALOG.predicates())  # live pred blocks become selectors
 # Object selectors widen the tree a lot; they are only tried as the first step.
 FIRST_STEP_ONLY = frozenset(OBJECTS)
 

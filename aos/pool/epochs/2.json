@@ -1,0 +1,1250 @@
+{
+  "epoch": 2,
+  "split": "evaluation",
+  "report": "artifacts/r02/dsl-evaluation-b.json",
+  "report_sha256": "dec3551dff980da2f3a8ad54df2f2cfb46794569e0d310c8806d4223d3fa2212",
+  "income": 28000,
+  "tasks_solved": 28,
+  "tasks_total": 400,
+  "retained": 5600.0,
+  "dividends_total": 22400.0,
+  "conservation_ok": true,
+  "suggest_retire": [
+    "anti_transpose",
+    "crop_bbox",
+    "flip_ud",
+    "gravity",
+    "local_rule",
+    "rot270",
+    "rot90",
+    "self_tile",
+    "transpose"
+  ],
+  "blocks": {
+    "_gen/pred_combiner": {
+      "balance": -20.0,
+      "dividend": 80.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 0,
+      "income_total": 80.0
+    },
+    "anti_transpose": {
+      "balance": -438.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "cells_to_pixels": {
+      "balance": -200.008,
+      "dividend": 0.0,
+      "spend": 0.004,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "colormap": {
+      "balance": 13696.735,
+      "dividend": 4800.0,
+      "spend": 206.371,
+      "rent": 100,
+      "refs": 12,
+      "zero_streak": 0,
+      "income_total": 14400.0
+    },
+    "crop_bbox": {
+      "balance": -438.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "crop_object": {
+      "balance": 5055.1,
+      "dividend": 2000.0,
+      "spend": 323.67,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 6000.0
+    },
+    "delete_sel": {
+      "balance": -200.443,
+      "dividend": 0.0,
+      "spend": 0.263,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "downscale": {
+      "balance": 2086.875,
+      "dividend": 800.0,
+      "spend": 6.595,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 2400.0
+    },
+    "extend_sel": {
+      "balance": -200.592,
+      "dividend": 0.0,
+      "spend": 0.331,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "fill_cells": {
+      "balance": -219.152,
+      "dividend": 0.0,
+      "spend": 9.7,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "fill_enclosed": {
+      "balance": 433.919,
+      "dividend": 400.0,
+      "spend": 33.746,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 800.0
+    },
+    "fill_holes": {
+      "balance": -200.086,
+      "dividend": 0.0,
+      "spend": 0.043,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "flip_lr": {
+      "balance": 361.676001,
+      "dividend": 266.666667,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 800.000001
+    },
+    "flip_ud": {
+      "balance": -438.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "gravity": {
+      "balance": -564.324,
+      "dividend": 0.0,
+      "spend": 134.984,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "keep_sel": {
+      "balance": -200.599,
+      "dividend": 0.0,
+      "spend": 0.492,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "local_rule": {
+      "balance": -703.265,
+      "dividend": 0.0,
+      "spend": 206.371,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "m_crop_object__upscale_d1e901": {
+      "balance": -338.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "m_flip_ud__crop_object_862544": {
+      "balance": -338.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "m_flip_ud__crop_object__upscale_e8abd8": {
+      "balance": -338.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "m_mirror_tile__split_overlay_fbb38a": {
+      "balance": -338.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 2,
+      "income_total": 0.0
+    },
+    "mirror_tile": {
+      "balance": 2485.028001,
+      "dividend": 1066.666667,
+      "spend": 210.03,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 3200.000001
+    },
+    "move_sel": {
+      "balance": 1399.946,
+      "dividend": 800.0,
+      "spend": 0.031,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 1600.0
+    },
+    "object_colormap": {
+      "balance": 4196.735,
+      "dividend": 2400.0,
+      "spend": 206.371,
+      "rent": 100,
+      "refs": 4,
+      "zero_streak": 0,
+      "income_total": 4800.0
+    },
+    "overlay_cells": {
+      "balance": 2199.568,
+      "dividend": 1200.0,
+      "spend": 0.216,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 2400.0
+    },
+    "pick_cell": {
+      "balance": 1399.422,
+      "dividend": 800.0,
+      "spend": 0.289,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 1600.0
+    },
+    "pred_01b2a01d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_02860a2b": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_02f734d6": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_04e75e15": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_06f2dc53": {
+      "balance": 220.0,
+      "dividend": 320.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 320.0
+    },
+    "pred_09b1a3d6": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_0c9c5060": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_0fec3b8b": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_155f4f37": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_1731e9f2": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_1774abeb": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_22c7ec94": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_2a3b5bea": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_2b11d3f1": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_2cdacac1": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_2fa5c8e7": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_328616eb": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_3295827d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_334571b0": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_36bf0975": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_3acd7d3f": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_3ce8e37e": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_3e17e1c3": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_3ead1281": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_41510f60": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_43aa889c": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_44746037": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_4aeafa84": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_4c9f6c03": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_4cf3a709": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_56a46c4a": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_56bd4cad": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_57c85a5e": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_58662886": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_5b986a94": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_63957277": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_6577db90": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_68c2296f": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_70164a9d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_708b6c5e": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_70a63249": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_7bbd0f17": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_7f10560c": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_80e09b20": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_81e0c55c": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_8366c1af": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_8439dd0b": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_851e9e9b": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_891ee027": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_8a651d8f": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_8c1cbd7e": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_900f7743": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_9081183c": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_90b2a475": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_90e90408": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_926eaf0d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_9869979a": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_988c1402": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_9cdf81f8": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_9fa2fc1d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a03c9d31": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a1b40bc2": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a1c018c0": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a5396171": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a6651c8d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a6d52848": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_a90dc2f5": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_b4328121": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_b497c086": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_b73200d3": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_bc3bc915": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_bd5d8514": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_bf6ab07c": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_c4ee1519": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_c501af92": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_c70746ba": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_c89ad21f": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_d08a544c": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_d14ea983": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_d6c069e3": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_dd17e008": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_dfb3435e": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e136a1e8": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e204f7f6": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e31075e8": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e440d7ce": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e448a93d": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e62470f3": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_e9e76873": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_f0aa9bb1": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_f46ba153": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_f4b919ab": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_f4d19463": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_f6464d25": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_f6cb96f6": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_fb51a759": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_fd672293": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_fec67205": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_ffbb3253": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "pred_ffea57a7": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "recolor_sel": {
+      "balance": 199.553,
+      "dividend": 400.0,
+      "spend": 0.266,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 400.0
+    },
+    "rot180": {
+      "balance": 1961.676,
+      "dividend": 800.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 2,
+      "zero_streak": 0,
+      "income_total": 2400.0
+    },
+    "rot270": {
+      "balance": -438.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "rot90": {
+      "balance": -438.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "self_tile": {
+      "balance": -300.7,
+      "dividend": 0.0,
+      "spend": 0.35,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "split_overlay": {
+      "balance": 10057.405,
+      "dividend": 3200.0,
+      "spend": 21.415,
+      "rent": 100,
+      "refs": 8,
+      "zero_streak": 0,
+      "income_total": 10400.0
+    },
+    "symmetrize": {
+      "balance": 5435.695,
+      "dividend": 2000.0,
+      "spend": 134.735,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 6000.0
+    },
+    "tile": {
+      "balance": 497.359001,
+      "dividend": 266.666667,
+      "spend": 1.323,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 800.000001
+    },
+    "transpose": {
+      "balance": -438.324,
+      "dividend": 0.0,
+      "spend": 70.01,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 3,
+      "income_total": 0.0
+    },
+    "upscale": {
+      "balance": 2097.359,
+      "dividend": 800.0,
+      "spend": 1.323,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 2400.0
+    }
+  },
+  "gradients_written": 185
+}

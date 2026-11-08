@@ -8,3 +8,6 @@
 {"epoch": 1, "from": "pool", "task": "73ccf9c2", "program": "[[\"rot180\"],[\"crop_object\",\"8multi\",\"most_colors\"],[\"flip_ud\"]]", "score": 0.7746, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "90347967", "program": "[[\"rot180\"]]", "score": 0.9216, "train_correct": 2, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "c48954c1", "program": "[[\"rot180\"],[\"tile\",3,3]]", "score": 0.7037, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "73ccf9c2", "program": "[[\"rot180\"],[\"crop_object\",\"8multi\",\"most_colors\"],[\"flip_ud\"]]", "score": 0.7746, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "90347967", "program": "[[\"rot180\"]]", "score": 0.9216, "train_correct": 2, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "c48954c1", "program": "[[\"rot180\"],[\"tile\",3,3]]", "score": 0.7037, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}

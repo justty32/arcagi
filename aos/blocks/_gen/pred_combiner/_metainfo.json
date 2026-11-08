@@ -1,0 +1,23 @@
+{
+  "name": "_gen/pred_combiner",
+  "kind": "generator",
+  "doc": "Enumerates literals and 2-literal ANDs; scored on training.",
+  "params": [
+    "max_literals",
+    "live_cap"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "produces": "pred",
+  "last_run": {
+    "split": "training",
+    "max_literals": 2,
+    "segments": 323,
+    "scored": 21321,
+    "live": 60,
+    "covered": 40,
+    "over_cap": 335,
+    "dropped": 13187
+  }
+}

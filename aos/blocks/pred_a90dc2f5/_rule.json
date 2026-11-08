@@ -1,0 +1,18 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "and",
+    [
+      "ne",
+      "color",
+      2
+    ],
+    [
+      "gt",
+      "size",
+      3
+    ]
+  ]
+}

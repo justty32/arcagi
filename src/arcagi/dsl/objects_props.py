@@ -3,6 +3,8 @@
 Objects come from ``grid.objects`` under four connectivity modes; the background
 is the grid's most frequent color. Every attribute value is an int or a str so
 selectors ``(conn, attr, value)`` stay JSON-serializable program parameters.
+``attr == "pred"`` makes ``value`` a predicate (a live block name or an inline
+AST, see ``arcagi.dsl.predicates``); ``(attr, value)`` is its ``eq`` special case.
 """
 
 from collections import Counter
@@ -13,6 +15,7 @@ from functools import lru_cache
 from arcagi.tasks import Grid
 
 from . import grid as g
+from . import predicates as pr
 
 type Cell = tuple[int, int]
 CONNS = ("4same", "8same", "4multi", "8multi")
@@ -32,6 +35,7 @@ ATTRS = (
     "shape",
 )
 MAX_SELECTORS = 2
+MAX_PRED_SELECTORS = 2
 
 
 @dataclass(frozen=True)
@@ -112,12 +116,34 @@ def extract(grid: Grid, conn: str) -> tuple[Obj, ...]:
 
 
 def selected(grid: Grid, conn: str, attr: str, value: object) -> list[Obj]:
-    if conn not in CONNS or (attr not in ATTRS and attr != "all"):
+    if conn not in CONNS or (attr not in ATTRS and attr not in ("all", "pred")):
         raise ValueError(f"bad selector {conn}/{attr}")
     objs = extract(grid, conn)
     if attr == "all":
         return list(objs)
+    if attr == "pred":
+        mask = pred_mask(grid, conn, value if isinstance(value, str) else None, value)
+        return [o for o, keep in zip(objs, mask, strict=True) if keep]
     return [o for o in objs if o.props[attr] == value]
+
+
+@lru_cache(maxsize=32768)
+def _named_mask(grid: Grid, conn: str, name: str) -> tuple[bool, ...]:
+    return tuple(
+        pr.evaluate_group(pr.resolve(name), [o.props for o in extract(grid, conn)])
+    )
+
+
+def pred_mask(
+    grid: Grid, conn: str, name: str | None, body: object
+) -> tuple[bool, ...]:
+    """Per-object truth of a named (cached) or inline predicate."""
+    if name is not None:
+        return _named_mask(grid, conn, name)
+    if not pr.validate(body):
+        raise ValueError(f"bad predicate {body!r}")
+    group = [o.props for o in extract(grid, conn)]
+    return tuple(pr.evaluate_group(body, group))  # type: ignore[arg-type]
 
 
 type Labeled = list[tuple[Obj, bool | None]]
@@ -144,6 +170,29 @@ def separate(examples: Sequence[Labeled]) -> list[tuple[str, int | str]]:
         if all(o.props[attr] != value for o in neg):
             found.append((attr, value))
             if len(found) >= MAX_SELECTORS:
+                break
+    return found
+
+
+def pred_selectors(
+    grids: Sequence[Grid], conn: str, labels: Sequence[Sequence[bool | None]]
+) -> list[str]:
+    """Live predicate names consistent with per-object labels on every grid."""
+    if not any(lab for labs in labels for lab in labs):
+        return []
+    found = []
+    for name in pr.LIVE:
+        ok = True
+        for grid, labs in zip(grids, labels, strict=True):
+            mask = _named_mask(grid, conn, name)
+            if any(
+                lab is not None and lab != m for lab, m in zip(labs, mask, strict=True)
+            ):
+                ok = False
+                break
+        if ok:
+            found.append(name)
+            if len(found) >= MAX_PRED_SELECTORS:
                 break
     return found
 

@@ -57,6 +57,18 @@ class Catalog:
                 found[name] = program
         return found
 
+    def predicates(self) -> dict[str, list]:
+        """Live ``kind=pred`` blocks: name -> predicate AST from ``_rule.json``."""
+        from arcagi.dsl.predicates import read_rule
+
+        found: dict[str, list] = {}
+        for name, block in sorted(self.blocks.items()):
+            if block.kind == "pred" and block.status == "live":
+                body = read_rule(block.path)
+                if body is not None:
+                    found[name] = body
+        return found
+
 
 def load_macro_program(folder: Path) -> Program | None:
     try:

@@ -1,0 +1,31 @@
+{
+  "name": "pred_e62470f3",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"and\", [\"rank\", \"h\", \"min\"], [\"rank\", \"w\", \"min\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 16.0,
+  "literals": 2,
+  "tasks": [
+    "1a07d186",
+    "2204b7a8",
+    "2bcee788",
+    "363442ee",
+    "4093f84a",
+    "42a50994",
+    "54d9e175",
+    "673ef223",
+    "6d0160f0",
+    "7e0986d6",
+    "88a10436",
+    "952a094c",
+    "a48eeaf7",
+    "a78176bb",
+    "d687bc17",
+    "ef135b50",
+    "f1cefba8"
+  ]
+}

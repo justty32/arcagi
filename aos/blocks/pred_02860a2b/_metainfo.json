@@ -1,0 +1,27 @@
+{
+  "name": "pred_02860a2b",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"and\", [\"ne\", \"color\", 0], [\"gt\", \"size\", 1]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 12.0,
+  "literals": 2,
+  "tasks": [
+    "0dfd9992",
+    "0e206a2e",
+    "1f642eb9",
+    "5168d44c",
+    "67385a82",
+    "74dd1130",
+    "9dfd6313",
+    "a1570a43",
+    "a78176bb",
+    "b6afb2da",
+    "d511f180",
+    "ddf7fa4f",
+    "ecdecbb3"
+  ]
+}

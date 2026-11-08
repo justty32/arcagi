@@ -1,0 +1,28 @@
+{
+  "name": "pred_4aeafa84",
+  "kind": "pred",
+  "doc": "Generated object predicate [\"and\", [\"lt\", \"size\", 3], [\"rank\", \"shape_count\", \"max\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 13.0,
+  "literals": 2,
+  "tasks": [
+    "1a07d186",
+    "2204b7a8",
+    "363442ee",
+    "4093f84a",
+    "42a50994",
+    "54d9e175",
+    "6d0160f0",
+    "7e0986d6",
+    "88a10436",
+    "952a094c",
+    "9dfd6313",
+    "a48eeaf7",
+    "aedd82e4",
+    "d687bc17"
+  ]
+}

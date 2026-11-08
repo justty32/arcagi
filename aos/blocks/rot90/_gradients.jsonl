@@ -2,3 +2,6 @@
 {"epoch": 1, "from": "pool", "task": "5783df64", "program": "[[\"rot90\"],[\"m_crop_object__upscale_d1e901\"]]", "score": 0.1111, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "8ee62060", "program": "[[\"symmetrize\",\"transpose\",0],[\"rot90\"],[\"symmetrize\",\"transpose\",0]]", "score": 0.8866, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 1, "from": "pool", "task": "e633a9e5", "program": "[[\"rot90\"],[\"m_flip_ud__crop_object_862544\"],[\"upscale\",5,5]]", "score": 0.2133, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "5783df64", "program": "[[\"rot90\"],[\"m_crop_object__upscale_d1e901\"]]", "score": 0.1111, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "8ee62060", "program": "[[\"symmetrize\",\"transpose\",0],[\"rot90\"],[\"symmetrize\",\"transpose\",0]]", "score": 0.8866, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 2, "from": "pool", "task": "e633a9e5", "program": "[[\"rot90\"],[\"m_flip_ud__crop_object_862544\"],[\"upscale\",5,5]]", "score": 0.2133, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}

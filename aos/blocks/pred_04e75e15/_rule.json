@@ -1,0 +1,18 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "and",
+    [
+      "ne",
+      "color",
+      7
+    ],
+    [
+      "eq",
+      "is_largest",
+      0
+    ]
+  ]
+}
