@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+29ec7d0e,pattern,pattern.periodic_repair,high,fill the black holes in the multiplication-table style periodic pattern from its period
+2bcee788,pattern,pattern.make_symmetric,medium,mirror the object across the side marked by color 2 recoloring the 2 part to the object color; background becomes 3
+31aa019c,objects,objects.delete_filter,high,keep only the pixel whose color occurs once; delete all others and surround it with a 2 ring
+321b1fc6,objects,objects.copy_stamp,high,stamp the multicolor template onto every 8 shape of the same shape and delete the original template
+32597951,fill,fill.bbox_or_gap,medium,recolor the 1 cells inside the bounding box of the 8 region to 3
+3345333e,pattern,pattern.symmetry_repair,high,remove the solid occluding block and restore the hidden half of the shape by its mirror symmetry
+3618c87e,move,move.gravity,medium,each 1 sitting on a 5 pillar drops to the bottom row swapping with the 5 there
+3631a71a,pattern,pattern.symmetry_repair,high,replace the 9 occluder cells using the grid's mirror symmetry
+363442ee,objects,objects.copy_stamp,high,copy the 3x3 template to the 3x3 cell around each 1 marker
+36fdfd69,fill,fill.bbox_or_gap,high,within the bounding box of each 2 cluster recolor the non-2 cells to 4
+3906de3d,move,move.gravity,high,push the 2 segments upward into the gaps of the 1 block until they hit it
+3befdf3e,multi,multi.compositional,medium,swap the frame and core colors of the square and extend frame-colored arms outward by the core width
+3eda0437,fill,fill.bbox_or_gap,medium,fill the largest all-black rectangle (at least 2 tall) with 6
+4093f84a,move,move.toward_object,high,move every stray pixel perpendicular to the 5 band until it touches it and recolor it 5
+484b58aa,pattern,pattern.periodic_repair,high,fill the black holes from the periodic tiling
+50846271,objects,objects.shape_complete,high,complete each partial 2 plus cross of arm length 2 by drawing the missing cells in 8
+5168d44c,move,move.by_rule,high,move the 2 box two steps along the dotted 3 line in its direction
+54d9e175,recolor,recolor.global_map,medium,fill each separator-delimited cell with the color of its center pixel plus 5
+5521c0d9,move,move.by_rule,high,move each object upward by its own height
+56dc2b01,move,move.toward_object,high,move the 3 shape until it touches the 2 line and draw an 8 line on its far side
+67385a82,recolor,recolor.by_size,high,recolor 3 objects of size at least 2 to 8 leaving single pixels
+673ef223,draw,draw.ray_to_border,medium,shoot 8 rays from the 2 wall to each 8 dot ending in 4 and copy the ray rows to the opposite wall as full rays
+67a423a3,draw,draw.ring_around,high,draw a 4 square ring around the crossing point of the two lines
+6855a6e4,objects,objects.transform_each,medium,mirror each 5 object across its nearby 2 bracket so it lands inside the bracket pair
+6a1e5592,move,move.align,low,fit each 5 piece into the matching hole of the 2 wall and recolor it 1 (jigsaw fit)
+6c434453,recolor,recolor.by_shape,medium,replace each 3x3 hollow 1 square with a 2 plus sign
+6cdd2623,draw,draw.connect_points,high,connect the pair of same-colored border pixels with a full line and erase all other pixels
+6d0160f0,move,move.by_rule,medium,copy the grid cell containing 4 to the cell position given by the 4's position inside it and clear the rest
+6e02f1e3,summary,summary.classify,high,output a fixed line pattern chosen by the number of distinct colors (1 top row; 2 diagonal; 3 antidiagonal)
+73251a56,pattern,pattern.symmetry_repair,high,fill the black holes using the diagonal mirror symmetry of the pattern
+794b24be,summary,summary.count,high,count the 1 pixels and fill that many 2 cells in a fixed order in the top row then center
+7e0986d6,objects,objects.delete_filter,high,remove the noise color pixels; noise inside objects becomes the object color
+834ec97d,draw,draw.grid_lines,medium,move the pixel down one and draw 4 columns of same parity above its row up to the top
+855e0971,draw,draw.ray_to_border,medium,extend each black hole into a line across its color band perpendicular to the band orientation
+88a10436,objects,objects.copy_stamp,high,copy the multicolor template centered onto the 5 marker
+890034e9,objects,objects.copy_stamp,medium,copy the hollow rectangle frame around the other black region of the same interior size
+941d9a10,recolor,recolor.by_position,high,color the top-left grid cell 1 the center cell 2 and the bottom-right cell 3
+952a094c,move,move.by_rule,high,move the four inner corner pixels outside the frame to the diagonally opposite outer corners
+98cf29f8,move,move.toward_object,high,remove the connecting stick and pull the attached shape until it touches the other block
+a1570a43,move,move.align,high,shift the 2 shape so it sits inside the box defined by the four 3 corners
+a48eeaf7,move,move.toward_object,high,move each 5 pixel straight or diagonally toward the 2 square until adjacent
+a61f2674,recolor,recolor.by_size,high,recolor the tallest bar 1 and the shortest bar 2 and delete the others
+a78176bb,draw,draw.ray_to_border,medium,draw a parallel diagonal line offset beyond each 5 triangle attached to the diagonal and delete the triangle
+a79310a0,move,move.by_rule,medium,shift the 8 object down one row and recolor it 2
+a9f96cdd,draw,draw.ring_around,high,replace the 2 pixel by four diagonal neighbors with fixed colors 3 6 8 7
+aabf363d,recolor,recolor.by_legend,high,recolor the shape with the color of the corner marker pixel and delete the marker
+ae3edfdc,move,move.toward_object,high,pull the satellite pixels toward the center pixel of their pair color until adjacent
+aedd82e4,recolor,recolor.by_size,high,recolor isolated single 2 pixels to 1
+b1948b0a,recolor,recolor.global_map,high,recolor 6 to 2
+b548a754,objects,objects.transform_each,medium,stretch the framed box toward the 8 marker until it reaches it and delete the marker

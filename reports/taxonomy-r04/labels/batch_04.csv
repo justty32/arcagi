@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+aa18de87,fill,fill.bbox_or_gap,high,fill with 2 the cells between the two arms of each V/zigzag line in every row
+ac605cbb,draw,draw.path_bounce,low,each colored pixel emits a fixed-length 5 line in a color-specific direction then turns; crossings marked 4 and continue diagonally
+b15fca0b,draw,draw.connect_points,medium,draw a 4 path connecting the two 2 endpoints routing around the 1 walls
+b7fb29bc,draw,draw.ring_around,medium,inside the 3 frame draw concentric square rings around the interior seed pixel alternating 4 and 2 by chebyshev distance
+bf89d739,draw,draw.connect_points,high,connect all 2 points with axis-aligned 3 lines forming a tree through shared rows and columns
+c97c0139,draw,draw.ring_around,high,draw an 8 diamond around each 2 line segment with radius growing to half the segment length
+cb227835,draw,draw.connect_points,medium,connect the two 8 points with a 3 parallelogram outline made of a diagonal and a straight run
+d304284e,pattern,pattern.continue_sequence,medium,repeat the 7 shape rightward with one-cell gaps coloring every third copy 6; 6 copies also repeat downward to the edge
+d931c21c,objects,objects.outline_hollow,medium,for each closed 1 loop add a 2 border outside and a 3 border inside; open loops unchanged
+da2b0fe3,draw,draw.grid_lines,medium,draw a full 3 line across the grid through the empty gap row or column splitting the symmetric shape
+dc2e9a9d,objects,objects.copy_stamp,medium,copy each 3 shape with a protrusion adjacent in the protrusion direction coloring copy 1 if horizontal and 8 if vertical
+e4075551,draw,draw.grid_lines,low,the four outer markers define a rectangle whose sides take their colors; draw a 5 cross from the 2 center to the sides
+e7639916,draw,draw.ring_around,medium,draw the 1 bounding rectangle outline through all 8 points
+e9c9d9a1,recolor,recolor.by_position,high,in the 3 grid fill the four corner cells with 2/4/1/8 and all interior cells with 7
+f3b10344,fill,fill.bbox_or_gap,medium,fill the gap between facing same-color rectangles with an 8 bridge narrower by one cell on each side
+fd4b2b02,pattern,pattern.continue_sequence,medium,from the seed bar unfold alternating 6/3 bars rotated 90 degrees at each end spiraling outward to the border
+fe9372f3,draw,draw.ray_to_border,high,from the 2 plus emit diagonal 1 rays and orthogonal rays colored periodically 8 8 4 to the border
+ff72ca3e,draw,draw.ring_around,high,draw a 2 square around each 4 with radius just short of the nearest 5 pixel
+00d62c1b,fill,fill.enclosed,high,fill regions fully enclosed by 3 with 4
+0ca9ddb6,draw,draw.ring_around,high,draw 4 diagonal corners around 2 and 7 orthogonal neighbors around 1; other colors untouched
+1b60fb0c,pattern,pattern.make_symmetric,high,complete the 1 shape to 4-fold rotational symmetry with the missing left part drawn in 2
+22233c11,draw,draw.ring_around,medium,for each diagonal 3 pair place 8 blocks at the perpendicular diagonal positions outside it
+2281f1f4,draw,draw.grid_lines,medium,place 2 at every intersection of columns marked in the top row and rows marked in the right column
+23581191,draw,draw.grid_lines,high,draw full row and column lines from each point in its color with 2 at the crossings
+253bf280,draw,draw.connect_points,high,connect 8 points sharing a row or column with 3 lines
+272f95fa,recolor,recolor.by_position,high,color the 3x3 grid cells by position: top 2 left 4 center 6 right 3 bottom 1
+28e73c20,draw,draw.path_bounce,medium,draw a 3 inward square spiral starting from the top-left on the empty canvas
+29c11459,draw,draw.connect_points,high,extend the two endpoint colors toward each other meeting at a 5 in the middle
+2bee17df,draw,draw.grid_lines,high,fill with 3 every row and column that is completely open between the two border walls
+3aa6fb7a,objects,objects.shape_complete,high,complete each 3-cell 8 L into a 2x2 square by adding a 1 at the missing corner
+3bd67248,draw,draw.ray_to_border,medium,draw a 2 anti-diagonal from the top-right to the left column and a 4 line along the bottom row
+41e4d17e,draw,draw.grid_lines,high,draw 6 full row and column lines through the center of each 1 square on the background
+4258a5f9,draw,draw.ring_around,high,surround each 5 with a 3x3 ring of 1
+44d8ac46,fill,fill.enclosed,medium,fill with 2 the holes inside 5 shapes only when the hole is a square
+4612dd53,objects,objects.shape_complete,medium,complete the dashed 1 rectangle and its partial inner line by filling gaps with 2
+508bd3b6,draw,draw.path_bounce,high,continue the 8 diagonal as a 3 line that bounces off the 2 wall
+543a7ed5,objects,objects.outline_hollow,medium,draw a 3 outline around each 6 object and fill its holes with 4
+54d82841,draw,draw.ray_to_border,low,project each cup's open center down to the bottom row and mark it 4
+60b61512,fill,fill.bbox_or_gap,high,fill empty cells in each object's 3x3 bounding box with 7
+6455b5f5,recolor,recolor.by_size,high,color the largest background region 1 and the smallest region(s) 8
+6d75e8bb,fill,fill.bbox_or_gap,high,fill empty cells inside the 8 object's bounding box with 2
+6f8cd79b,objects,objects.outline_hollow,high,draw an 8 border around the edge of the grid
+7447852a,fill,fill.bbox_or_gap,low,fill with 4 every third region between the 2 zigzag strokes continuing the period along the strip
+7b6016b9,fill,fill.enclosed,high,fill regions enclosed by the lines with 2 and the remaining background with 3
+83302e8f,fill,fill.enclosed,medium,grid cells fully closed by walls become 3; cells joined through wall gaps become 4 including the gaps
+8403a5d5,pattern,pattern.continue_sequence,high,from the seed column draw lines every other column to the right with 5 caps alternating top and bottom
+868de0fa,fill,fill.enclosed,medium,fill each square frame interior with 2 if interior side is even and 7 if odd
+90f3ed37,objects,objects.shape_complete,medium,extend each 8 line pattern to the full length of the top template filling the missing part with 1
+913fb3ed,draw,draw.ring_around,high,surround each pixel with a 3x3 ring colored by map 3->6 8->4 2->1
+95990924,draw,draw.ring_around,high,place 1 2 3 4 at the four diagonal corners around each 2x2 5 square

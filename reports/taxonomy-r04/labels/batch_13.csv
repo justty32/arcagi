@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+b60334d2,draw,draw.ring_around,high,replace each gray pixel with a 3x3 ring of alternating 5 corners and 1 edges with empty center
+b6afb2da,objects,objects.outline_hollow,medium,recolor each gray rectangle so corners become 1; edges become 4; interior becomes 2
+b782dc8a,fill,fill.flood_from_seed,high,flood the maze corridors from the seed pixels alternating the two seed colors by path distance
+beb8660c,move,move.align,medium,sort the horizontal bars by length and stack them right-aligned above the base bar shortest on top
+c3f564a4,pattern,pattern.periodic_repair,high,fill the black holes by continuing the diagonal periodic color sequence
+c8f0f002,recolor,recolor.global_map,high,recolor every 7 to 5
+c9f8e694,recolor,recolor.by_position,high,recolor each gray cell by the color in column 0 of its row
+caa06a1f,pattern,pattern.continue_sequence,medium,extend the checkerboard tiling over the whole grid replacing the filler border; shifted by one phase
+ce22a75a,draw,draw.ring_around,high,replace each gray pixel with a 3x3 block of 1 centered on it
+d07ae81c,draw,draw.path_bounce,medium,shoot diagonal rays from each marker pixel; ray color depends on which background region it crosses
+d511f180,recolor,recolor.global_map,high,swap colors 5 and 8
+d5d6de2d,fill,fill.enclosed,medium,fill the interior of each hollow red rectangle with 3 and delete all red; solid shapes vanish
+d687bc17,move,move.toward_object,medium,move each stray pixel to the border line of its own color adjacent to it; delete pixels with no matching border
+d89b689b,move,move.toward_object,high,move the four scattered pixels into the 2x2 block cell closest to each; replacing the block
+d90796e8,recolor,recolor.by_contact,high,where a 3 is orthogonally adjacent to a 2 the 3 becomes 8 and the 2 is erased
+dc433765,move,move.toward_object,high,move the 3 pixel one step toward the 4 pixel
+e48d4e1a,move,move.by_rule,high,shift the cross left and down by the number of gray pixels in the corner and delete the gray
+e5062a87,objects,objects.copy_stamp,medium,stamp the red template shape into every empty region where it fits exactly
+e9afcf9a,recolor,recolor.by_position,high,alternate the two row colors column by column into a checkerboard
+ecdecbb3,draw,draw.ray_to_border,medium,shoot a ray from each red pixel to the nearest azure lines and draw a 3x3 azure box with red center at each hit
+ef135b50,fill,fill.bbox_or_gap,high,fill horizontal gaps between pairs of red blocks in the same rows with 9
+f1cefba8,draw,draw.grid_lines,medium,the defect pixels in the frame mark rows and columns; draw those lines through the inner box and extend them outside the shape
+f76d97a5,recolor,recolor.global_map,high,recolor 5 to the other color and the other color to 0
+f8a8fe49,move,move.by_rule,medium,mirror the gray shape inside the red brackets to the outside across the bracket line
+00576224,scale_tile,scale_tile.mirror_tile,high,tile 3x3 with the middle row of tiles flipped horizontally
+0692e18c,scale_tile,scale_tile.self_kron,high,place the color-inverted input at each colored cell of the input
+0c786b71,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input rotated 180 and its mirrors
+15696249,scale_tile,scale_tile.other,medium,tile the input three times along the uniform row or column and place it at that row or column band
+2072aba6,scale_tile,scale_tile.upscale,high,upscale 2x with each gray cell becoming the 2x2 pattern 12/21
+27f8ce4f,scale_tile,scale_tile.self_kron,high,place the input at each cell holding the most frequent color of the input
+310f3251,scale_tile,scale_tile.tile,medium,tile the input 3x3 and add a red pixel up-left diagonal of each colored pixel
+3979b1a8,reshape,reshape.extend_canvas,medium,double the canvas and extend the concentric color rings outward in the new space
+48131b3c,scale_tile,scale_tile.tile,high,tile the color-inverted input 2x2
+48f8583b,scale_tile,scale_tile.self_kron,high,place the input at each cell holding the least frequent color of the input
+59341089,scale_tile,scale_tile.mirror_tile,high,tile four copies horizontally alternating horizontal flip and original
+5b6cbef5,scale_tile,scale_tile.self_kron,high,place the input at each colored cell of the input
+60c09cac,scale_tile,scale_tile.upscale,high,upscale each cell 2x2
+6f473927,scale_tile,scale_tile.mirror_tile,medium,concatenate the input with its horizontal mirror whose colors are inverted to 8 and 0
+7953d61e,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input and its 90 180 270 rotations
+833dafe3,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirrors of the input
+8719f442,scale_tile,scale_tile.other,medium,upscale the input 3x in the center of a 5x canvas and place original copies outside at mask positions
+8b28cd80,reshape,reshape.render_from_spec,medium,draw a fixed 9x9 spiral in the pixel color whose center is set by the pixel position
+8e2edd66,scale_tile,scale_tile.self_kron,high,place the color-inverted input at each empty cell of the input
+a59b95c0,scale_tile,scale_tile.tile,high,tile the input n x n where n is the number of distinct colors
+ad7e01d0,scale_tile,scale_tile.self_kron,high,place the input at each gray cell of the input
+bc4146bd,scale_tile,scale_tile.mirror_tile,high,tile five copies horizontally alternating original and horizontal flip
+c1990cce,reshape,reshape.extend_canvas,medium,extend the 1xN row into an NxN canvas drawing a red triangle from the apex and parallel blue diagonals inside
+c48954c1,scale_tile,scale_tile.mirror_tile,high,tile 3x3 with flipped copies so neighbors mirror each other around the center input
+c92b942c,scale_tile,scale_tile.other,medium,tile the input 3x3 then draw a blue row through each pixel and green diagonal pixels around it
+cad67732,reshape,reshape.extend_canvas,high,double the canvas and continue the diagonal pattern to the new corner

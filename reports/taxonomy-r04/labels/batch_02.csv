@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+f0df5ff0,draw,draw.ring_around,high,paint the empty cells of the 3x3 neighbourhood of every blue pixel blue
+f8be4b64,draw,draw.grid_lines,medium,for each green plus with a colored center draw a full row and column through the center in that center color
+f9a67cb5,draw,draw.path_bounce,medium,red flow runs across open space and through wall gaps; spreading along each wall it hits and dropping through gaps
+fd096ab6,objects,objects.shape_complete,medium,complete each partial colored fragment into the full shape given by the one complete template
+045e512c,objects,objects.copy_stamp,medium,repeat the template shape stepwise in the direction of each colored fragment beside it using that fragment's color
+05269061,pattern,pattern.periodic_repair,high,fill the grid with the diagonal 3-color period implied by the visible diagonals
+0962bcdd,draw,draw.ring_around,high,expand each small plus seed into a larger fixed cross pattern with diagonal arms in the corner color
+0a938d79,pattern,pattern.continue_sequence,high,turn the two seed pixels into full stripes and repeat them alternately at their spacing to the far edge
+11852cab,pattern,pattern.make_symmetric,high,complete each pixel arrangement to full 4-fold symmetry about its center
+178fcbfb,draw,draw.grid_lines,high,draw full columns for red pixels and full rows for green and blue pixels; rows over columns
+1bfc4729,draw,draw.grid_lines,low,render a fixed frame-and-row pattern in the top half and bottom half using each seed's color
+1e32b0e9,objects,objects.copy_stamp,medium,copy the top-left cell's shape into every other grid cell filling missing parts with the divider color
+1f876c06,draw,draw.connect_points,high,connect each pair of same-colored pixels with a diagonal line
+22168020,fill,fill.bbox_or_gap,high,fill horizontally between the two arms of each V shape with its color
+22eb0ac0,draw,draw.connect_points,high,connect the left and right edge pixels of a row with a line when they share a color
+25d487eb,draw,draw.ray_to_border,high,shoot a ray in the tip color from the triangle's odd pixel out through the apex to the border
+2c608aff,draw,draw.ray_to_border,high,extend each lone pixel toward the big rectangle with a line when it is aligned with it
+2dd70a9a,draw,draw.path_bounce,medium,draw a green path from the green segment turning at walls until it reaches the red segment
+36d67576,objects,objects.shape_complete,medium,add the colored attachments of the reference shape onto each other rotated copy of the shape
+39e1d7f9,objects,objects.copy_stamp,high,copy the full multi-cell motif around every cell having the motif's center color
+3ac3eb23,pattern,pattern.continue_sequence,high,extend each top pixel downward as a repeating zigzag pattern
+3e980e27,objects,objects.copy_stamp,high,stamp the template containing a given color onto each lone pixel of that color; mirrored for green
+40853293,draw,draw.connect_points,high,connect same-colored pixel pairs with lines; vertical lines drawn over horizontal
+444801d8,fill,fill.enclosed,high,fill the cup interior and the row above its opening with the color of the pixel inside
+447fd412,objects,objects.copy_stamp,medium,stamp the template at each red marker block scaled to the marker size
+4938f0c2,pattern,pattern.make_symmetric,high,mirror the shape across both axes of the green 2x2 center
+496994bd,pattern,pattern.make_symmetric,high,mirror the top colored rows onto the bottom of the grid
+4c5c2cf0,pattern,pattern.make_symmetric,high,mirror the shape into all four quadrants around the small center object
+56ff96f3,fill,fill.bbox_or_gap,high,fill the rectangle spanned by each pair of same-colored pixels
+57aa92db,objects,objects.copy_stamp,medium,stamp the template onto each other block sharing its anchor color scaled to that block's size
+5c0a986e,draw,draw.ray_to_border,high,shoot a diagonal ray from the blue square up-left and from the red square down-right
+5c2c9af4,pattern,pattern.continue_sequence,high,draw concentric squares around the middle point with spacing set by the three diagonal points out to the border
+623ea044,draw,draw.ray_to_border,high,draw the four diagonal rays from the single pixel to the border
+6aa20dc0,objects,objects.copy_stamp,medium,stamp the template (rotated and scaled) onto each block group matching its corner colors
+6d58a25d,draw,draw.ray_to_border,medium,draw vertical lines down from the hat shape in the columns of dots below it to the border
+6e19193c,draw,draw.ray_to_border,high,shoot a diagonal ray from each L shape's missing corner outward to the border
+72322fa7,objects,objects.shape_complete,high,complete each partial fragment into the full template motif that contains it
+760b3cac,pattern,pattern.make_symmetric,high,mirror the azure shape left or right depending on which way the yellow shape points
+7ddcd7ec,draw,draw.ray_to_border,high,extend diagonal rays from each corner pixel attached to the block out to the border
+7df24a62,objects,objects.copy_stamp,medium,find yellow dot groups matching the template pattern under rotation and stamp the blue frame around them
+82819916,pattern,pattern.continue_sequence,high,continue each partial row with the full row's pattern using the partial row's color mapping
+8d510a79,draw,draw.ray_to_border,high,extend red pixels vertically to the gray line and blue pixels vertically to the border
+8e5a5113,objects,objects.transform_each,low,fill the two empty panels with the first panel rotated 90 and 180 degrees
+8eb1be9a,pattern,pattern.continue_sequence,high,repeat the patterned band vertically across the whole grid
+8f2ea7aa,scale_tile,scale_tile.self_kron,medium,place the 3x3 shape in each 3x3 block where the shape itself has a cell (same-size grid)
+928ad970,draw,draw.ring_around,high,draw a rectangle in the shape color just inside the four gray marker pixels
+93b581b8,draw,draw.ring_around,high,place a 2x2 block at each diagonal corner of the 2x2 square in the color of the opposite cell
+99fa7670,draw,draw.path_bounce,high,draw a line right from each pixel to the border then down the border to the next pixel's row
+9d9215db,pattern,pattern.make_symmetric,medium,make the corner pattern 4-fold symmetric and join the blue ends with dotted lines
+9edfc990,fill,fill.flood_from_seed,high,flood fill each black region that contains a blue pixel with blue

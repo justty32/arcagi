@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+4ff4c9da,objects,copy_stamp,low,copy the 8 overlay to every other location in the periodic line grid whose underlying local pattern matches the one under the 8
+50f325b5,recolor,by_shape,high,recolor every 3-colored group whose shape matches the 8 template shape to 8
+516b51b7,recolor,by_position,medium,recolor each rectangle's cells by depth from its border as concentric rings 1;2;3;2
+575b1a71,recolor,by_position,high,recolor background cells by the rank of their column among columns containing them (left to right 1;2;3;4)
+58743b76,recolor,by_legend,high,recolor each dot by the 2x2 corner legend color of the quadrant of the field it lies in
+626c0bcc,recolor,by_shape,medium,split the 8 shape into small pieces and color each piece by its piece shape/orientation
+639f5a19,recolor,by_position,high,color each rectangle by region: four corner quadrants 6;1;2;3 and a 2-cell-inset interior 4
+7d1f7ee8,recolor,by_contact,high,recolor everything nested inside each outer frame with that outer frame's color
+817e6c09,recolor,by_position,medium,recolor alternate 2x2 blocks to 8 counting from the rightmost block in column order
+845d6e51,recolor,by_legend,high,recolor each 3-colored shape with the color of the legend shape (top-left box) it matches
+8dae5dfc,recolor,by_position,medium,reverse the color sequence of concentric layers in each nested-square object
+9f27f097,objects,copy_stamp,high,copy the pattern into the empty hole of the same size mirrored horizontally
+a096bf4d,draw,connect_points,medium,an anomalous pixel found in two cells of a row/column of the cell grid is copied to all cells between them
+a57f2f04,pattern,continue_sequence,medium,tile the seed pattern in the corner of each enclosed region across the whole region
+aa300dc3,draw,path_bounce,medium,draw the longest diagonal line of 8 that fits through the empty interior
+ae58858e,recolor,by_size,high,recolor objects with 4 or more cells to 6
+b20f7c8b,recolor,by_legend,medium,swap each box between pattern and solid fill using the legend that pairs patterns with colors
+b457fec5,recolor,by_position,medium,color the diagonal band stripe by stripe by distance from its edge using the color sequence given at the top
+bd14c3bf,recolor,by_shape,high,recolor every 1 shape congruent to the 2-colored reference shape to 2
+c7d4e6ad,recolor,by_legend,high,recolor each 5 cell with the legend color in the left column of the same row
+ce039d91,recolor,by_position,medium,recolor 5 cells that have a left-right mirror partner about the vertical center line to 1
+d94c3b52,recolor,by_shape,medium,glyphs identical to the 8 glyph become 8 and glyphs lying between two such in a row or column become 7
+e0fb7511,recolor,by_size,high,recolor background components of size 2 or more to 8
+e681b708,recolor,by_contact,medium,recolor each 1 dot with the color of the line-junction marker at the corner of its compartment
+e7dd8335,recolor,by_position,high,recolor the bottom half of the shape to 2
+e88171ec,fill,bbox_or_gap,medium,find the largest empty square region and fill its 1-cell-inset interior with 8
+ef26cbf6,recolor,by_contact,high,recolor 1 shapes with the marker color in the paired cell across the divider
+fafd9572,recolor,by_legend,medium,recolor the 1 shapes by the legend arranged in the same relative layout as the shapes
+fea12743,recolor,by_shape,low,recolor shapes in the 3x2 grid to 8 or 3 based on comparing their shapes with other cells
+06df4c85,draw,connect_points,high,connect same-colored cells lying in the same row or column of the grid by filling the cells between
+08ed6ac7,recolor,by_size,high,recolor bars by height rank tallest 1 to shortest 4
+09629e4f,overlay,select_cell,medium,select the cell with the fewest colored pixels and enlarge each of its pixels to fill the corresponding cell of the grid
+150deff5,recolor,by_shape,high,decompose the shape into 2x2 squares colored 8 and 1x3 bars colored 2
+1f642eb9,recolor,by_contact,medium,each edge marker recolors the cell of the 8 block nearest to it in its row or column
+2204b7a8,recolor,by_position,high,recolor each 3 dot with the color of the nearer border line
+50cb2852,objects,outline_hollow,high,recolor the interior of each rectangle to 8 keeping a 1-cell border
+63613498,recolor,by_shape,high,recolor the shape matching the one in the corner box to 5
+694f12f3,recolor,by_size,high,fill the interior of the larger rectangle with 2 and the smaller with 1
+6cf79266,fill,bbox_or_gap,medium,fill every empty 3x3 square region with 1
+6e82a1ae,recolor,by_size,high,recolor objects by size 4 cells to 1 3 cells to 2 2 cells to 3
+776ffc46,recolor,by_shape,high,recolor shapes matching the shape inside a 5 box to that shape's color
+810b9b61,recolor,by_shape,high,recolor closed loops (shapes with a hole) to 3
+9565186b,recolor,by_count,medium,keep the majority color and recolor all other cells to 5
+a5f85a15,recolor,by_position,high,recolor every second cell along each diagonal line to 4
+a8d7556c,fill,bbox_or_gap,medium,fill every empty 2x2 square region with 2
+b230c067,recolor,by_shape,high,recolor the odd-one-out shape to 2 and the repeated shapes to 1
+b2862040,recolor,by_shape,high,recolor closed loops to 8 leaving open shapes 1
+ba97ae07,multi,other,medium,swap which bar is on top at the crossing; no layer-order subcategory
+bb43febb,objects,outline_hollow,high,recolor the interior of each rectangle to 2 keeping a 1-cell border
+c1d99e64,draw,grid_lines,high,color every fully empty row and column with 2

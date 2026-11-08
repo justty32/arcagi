@@ -1,0 +1,1168 @@
+{
+ "run": "r04",
+ "split": "training",
+ "seed": 4,
+ "quota": {
+  "scale_tile": 2,
+  "reshape": 4,
+  "objects": 6,
+  "pattern": 6,
+  "draw": 11,
+  "overlay": 1,
+  "summary": 3,
+  "recolor": 4,
+  "move": 4,
+  "crop": 4,
+  "fill": 4,
+  "multi": 1
+ },
+ "tasks": [
+  {
+   "task_id": "5daaa586",
+   "category": "crop",
+   "subcategory": "crop.then_transform",
+   "rule": "crop the rectangle bounded by four colored lines; then extend each dot as a bar toward the line of its own color",
+   "train_pass_wrong": false,
+   "near_misses": []
+  },
+  {
+   "task_id": "6ecd11f4",
+   "category": "crop",
+   "subcategory": "crop.then_transform",
+   "rule": "crop the small multicolor patch and zero the cells where the downscaled large shape is empty",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"smallest\"]]",
+     "pixel_acc": 0.6176,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"smallest\"],[\"gravity\",\"down\"]]",
+     "pixel_acc": 0.5,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"smallest\"],[\"gravity\",\"down\"],[\"gravity\",\"left\"]]",
+     "pixel_acc": 0.4118,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "3f7978a0",
+   "category": "crop",
+   "subcategory": "crop.by_frame",
+   "rule": "crop the rectangle bounded by the two 5 columns capped with 8s",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"crop_bbox\"],[\"resize_crop\",\"formula_14d79b41\",[\"lin\",\"max_obj_w\",1,3]]]",
+     "pixel_acc": 0.6222,
+     "train_correct": "1/3"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"resize_crop\",\"formula_14d79b41\",[\"lin\",\"max_obj_w\",1,3]],[\"gravity\",\"right\"]]",
+     "pixel_acc": 0.5889,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"4same\",\"largest\"],[\"resize_crop\",[\"lin\",\"n_bg\",1,2],[\"lin\",\"w\",2,3]],[\"m_mirror_tile__split_overlay_fbb38a\"]]",
+     "pixel_acc": 0.5778,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "7b7f7511",
+   "category": "crop",
+   "subcategory": "crop.fixed",
+   "rule": "input is the pattern repeated twice; output one half",
+   "train_pass_wrong": true,
+   "near_misses": []
+  },
+  {
+   "task_id": "dc1df850",
+   "category": "draw",
+   "subcategory": "draw.ring_around",
+   "rule": "draw a ring of 1 around every 2 pixel; other colors untouched",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.7248,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.6789,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.6697,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "40853293",
+   "category": "draw",
+   "subcategory": "draw.connect_points",
+   "rule": "connect same-colored pixel pairs with lines; vertical lines drawn over horizontal",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9375,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.9225,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.9175,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "25d487eb",
+   "category": "draw",
+   "subcategory": "draw.ray_to_border",
+   "rule": "shoot a ray in the tip color from the triangle's odd pixel out through the apex to the border",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9494,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.9156,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"flip_lr\"],[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.9114,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "2281f1f4",
+   "category": "draw",
+   "subcategory": "draw.grid_lines",
+   "rule": "place 2 at every intersection of columns marked in the top row and rows marked in the right column",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.8733,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"ud\"],[\"downscale\",2,1]]",
+     "pixel_acc": 0.8333,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"gravity\",\"up\"]]",
+     "pixel_acc": 0.8333,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "0ca9ddb6",
+   "category": "draw",
+   "subcategory": "draw.ring_around",
+   "rule": "draw 4 diagonal corners around 2 and 7 orthogonal neighbors around 1; other colors untouched",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.8683,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"transpose\",0]]",
+     "pixel_acc": 0.8519,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"flip_lr\"],[\"symmetrize\",\"transpose\",0],[\"flip_lr\"]]",
+     "pixel_acc": 0.8477,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "bdad9b1f",
+   "category": "draw",
+   "subcategory": "draw.ray_to_border",
+   "rule": "extend the 8 line and the 2 line across the grid; mark their intersection with 4",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.8056,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[]",
+     "pixel_acc": 0.8056,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.7778,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "93b581b8",
+   "category": "draw",
+   "subcategory": "draw.ring_around",
+   "rule": "place a 2x2 block at each diagonal corner of the 2x2 square in the color of the opposite cell",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"flip_lr\"],[\"symmetrize\",\"transpose\",0],[\"flip_lr\"]]",
+     "pixel_acc": 0.6296,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[]",
+     "pixel_acc": 0.6204,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"flip_lr\"],[\"symmetrize\",\"transpose\",0],[\"rot90\"]]",
+     "pixel_acc": 0.5926,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "22233c11",
+   "category": "draw",
+   "subcategory": "draw.ring_around",
+   "rule": "for each diagonal 3 pair place 8 blocks at the perpendicular diagonal positions outside it",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.96,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"transpose\",0]]",
+     "pixel_acc": 0.94,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"transpose\",0],[\"fill_enclosed\"]]",
+     "pixel_acc": 0.9367,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "29c11459",
+   "category": "draw",
+   "subcategory": "draw.connect_points",
+   "rule": "extend the two endpoint colors toward each other meeting at a 5 in the middle",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"extend_from\",\"4same\",\"all\",1,\"extract_51692a07\"]]",
+     "pixel_acc": 0.9091,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"gravity\",\"left\"],[\"symmetrize\",\"lr\",0],[\"recolor_from\",\"4multi\",\"all\",1,\"extract_c5dd0c7b\"]]",
+     "pixel_acc": 0.8727,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"extend_from\",\"4same\",\"all\",1,\"extract_51692a07\"],[\"flip_lr\"]]",
+     "pixel_acc": 0.8727,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "855e0971",
+   "category": "draw",
+   "subcategory": "draw.ray_to_border",
+   "rule": "extend each black hole into a line across its color band perpendicular to the band orientation",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"extend_from\",\"4same\",\"color\",0,\"extract_713b1328\"]]",
+     "pixel_acc": 0.9553,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[]",
+     "pixel_acc": 0.9358,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"gravity\",\"right\"]]",
+     "pixel_acc": 0.9289,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "8d510a79",
+   "category": "draw",
+   "subcategory": "draw.ray_to_border",
+   "rule": "extend red pixels vertically to the gray line and blue pixels vertically to the border",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.88,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.805,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"flip_lr\"],[\"gravity\",\"right\"]]",
+     "pixel_acc": 0.765,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "7447852a",
+   "category": "fill",
+   "subcategory": "fill.bbox_or_gap",
+   "rule": "fill with 4 every third region between the 2 zigzag strokes continuing the period along the strip",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.7674,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.6589,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.5814,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "6455b5f5",
+   "category": "fill",
+   "subcategory": "fill.color_by_region",
+   "rule": "color the largest background region 1 and the smallest region(s) 8",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.5813,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"fill_enclosed\"]]",
+     "pixel_acc": 0.5536,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.5221,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "44d8ac46",
+   "category": "fill",
+   "subcategory": "fill.enclosed",
+   "rule": "fill with 2 the holes inside 5 shapes only when the hole is a square",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9479,
+     "train_correct": "1/4"
+    },
+    {
+     "program": "[[\"fill_holes\",2]]",
+     "pixel_acc": 0.9444,
+     "train_correct": "1/4"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"rot\",10]]",
+     "pixel_acc": 0.9271,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "3eda0437",
+   "category": "fill",
+   "subcategory": "fill.bbox_or_gap",
+   "rule": "fill the largest all-black rectangle (at least 2 tall) with 6",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.8862,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"fill_enclosed\"]]",
+     "pixel_acc": 0.8793,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"fill_holes\",6]]",
+     "pixel_acc": 0.8724,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "6d0160f0",
+   "category": "move",
+   "subcategory": "move.by_rule",
+   "rule": "copy the grid cell containing 4 to the cell position given by the 4's position inside it and clear the rest",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"fill_cells\",\"uniform\"]]",
+     "pixel_acc": 0.9711,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0],[\"fill_cells\",\"max_pixels\"],[\"symmetrize\",\"rot\",10]]",
+     "pixel_acc": 0.9525,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"fill_cells\",\"max_pixels\"],[\"symmetrize\",\"both\",10],[\"fill_cells\",\"any\"]]",
+     "pixel_acc": 0.9339,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "56dc2b01",
+   "category": "move",
+   "subcategory": "move.toward_object",
+   "rule": "move the 3 shape until it touches the 2 line and draw an 8 line on its far side",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"move_from\",\"4same\",\"color\",3,\"extract_51692a07\"]]",
+     "pixel_acc": 0.9402,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"move_from\",\"4same\",\"color\",3,\"extract_51692a07\"],[\"fill_enclosed\"]]",
+     "pixel_acc": 0.9316,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"move_from\",\"4same\",\"color\",3,\"extract_51692a07\"],[\"fill_enclosed\"],[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.8889,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "1a07d186",
+   "category": "move",
+   "subcategory": "move.toward_object",
+   "rule": "move each pixel matching a line color next to that line; delete pixels matching no line",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"move_from\",\"4same\",\"is_largest\",0,\"extract_04a698eb\"]]",
+     "pixel_acc": 0.9874,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"recolor_sel\",\"4same\",\"is_largest\",0,0]]",
+     "pixel_acc": 0.9848,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[]",
+     "pixel_acc": 0.9646,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "e48d4e1a",
+   "category": "move",
+   "subcategory": "move.by_rule",
+   "rule": "shift the cross left and down by the number of gray pixels in the corner and delete the gray",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"recolor_sel\",\"4same\",\"all\",1,0]]",
+     "pixel_acc": 0.81,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"ud\"],[\"split_overlay\",\"h\",\"left\"],[\"symmetrize\",\"transpose\",10]]",
+     "pixel_acc": 0.8025,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"split_overlay\",\"v\",\"left\"],[\"symmetrize\",\"transpose\",10]]",
+     "pixel_acc": 0.8025,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "ba97ae07",
+   "category": "multi",
+   "subcategory": "multi.other",
+   "rule": "swap which bar is on top at the crossing; no layer-order subcategory",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9702,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"keep_sel\",\"4same\",\"pred\",\"pred_2cdacac1\"]]",
+     "pixel_acc": 0.9494,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"keep_sel\",\"4same\",\"pred\",\"pred_04e75e15\"],[\"extend_from\",\"4same\",\"all\",1,\"extract_04a698eb\"]]",
+     "pixel_acc": 0.881,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "543a7ed5",
+   "category": "objects",
+   "subcategory": "objects.outline_hollow",
+   "rule": "draw a 3 outline around each 6 object and fill its holes with 4",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"rot\",10],[\"fill_enclosed\"]]",
+     "pixel_acc": 0.6844,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"transpose\",10],[\"fill_enclosed\"]]",
+     "pixel_acc": 0.6844,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"ud\",10],[\"fill_enclosed\"]]",
+     "pixel_acc": 0.6844,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "4347f46a",
+   "category": "objects",
+   "subcategory": "objects.outline_hollow",
+   "rule": "hollow out each solid rectangle leaving its border",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.8824,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0],[\"m_mirror_tile__split_overlay_fbb38a\"]]",
+     "pixel_acc": 0.7689,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.7605,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "3bdb4ada",
+   "category": "objects",
+   "subcategory": "objects.outline_hollow",
+   "rule": "punch alternating holes along the middle row of each 3-row bar",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9275,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.7625,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0],[\"gravity\",\"left\"]]",
+     "pixel_acc": 0.7475,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "6855a6e4",
+   "category": "objects",
+   "subcategory": "objects.transform_each",
+   "rule": "mirror each 5 object across its nearby 2 bracket so it lands inside the bracket pair",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"recolor_sel\",\"4same\",\"color\",5,0]]",
+     "pixel_acc": 0.9659,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"recolor_sel\",\"4same\",\"color\",5,0],[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.9452,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"recolor_sel\",\"4same\",\"color\",5,0],[\"fill_cells\",\"uniform\"]]",
+     "pixel_acc": 0.9363,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "57aa92db",
+   "category": "objects",
+   "subcategory": "objects.stamp_transformed",
+   "rule": "stamp the template onto each other block sharing its anchor color scaled to that block's size",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9157,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.8883,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.8674,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "7e0986d6",
+   "category": "objects",
+   "subcategory": "objects.delete_filter",
+   "rule": "remove the noise color pixels; noise inside objects becomes the object color",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"delete_sel\",\"4same\",\"is_smallest\",1],[\"fill_enclosed\"],[\"recolor_from\",\"4same\",\"all\",1,\"extract_87186985\"]]",
+     "pixel_acc": 0.9744,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"delete_sel\",\"4same\",\"is_smallest\",1],[\"fill_enclosed\"],[\"symmetrize\",\"lr\",10]]",
+     "pixel_acc": 0.9692,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"delete_sel\",\"4same\",\"is_smallest\",1],[\"fill_enclosed\"],[\"symmetrize\",\"ud\",10]]",
+     "pixel_acc": 0.9641,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "09629e4f",
+   "category": "overlay",
+   "subcategory": "overlay.select_cell",
+   "rule": "select the cell with the fewest colored pixels and enlarge each of its pixels to fill the corresponding cell of the grid",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"fill_cells\",\"max_pixels\"],[\"fill_cells\",\"any\"],[\"symmetrize\",\"transpose\",10]]",
+     "pixel_acc": 0.7025,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"fill_cells\",\"max_pixels\"],[\"fill_cells\",\"any\"],[\"symmetrize\",\"both\",10]]",
+     "pixel_acc": 0.7025,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"fill_cells\",\"max_pixels\"],[\"fill_cells\",\"any\"],[\"symmetrize\",\"ud\",10]]",
+     "pixel_acc": 0.7025,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "a65b410d",
+   "category": "pattern",
+   "subcategory": "pattern.continue_sequence",
+   "rule": "from the horizontal 2 line build a staircase: rows above in 3 grow by one per row; rows below in 1 shrink by one per row",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.7391,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.7228,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"flip_ud\"],[\"mirror_tile\",\"ud\"],[\"downscale\",2,1]]",
+     "pixel_acc": 0.7011,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "bd4472b8",
+   "category": "pattern",
+   "subcategory": "pattern.continue_sequence",
+   "rule": "below the gray separator fill rows repeating the top-row colors one color per full row cyclically",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"crop_bbox\"],[\"crop_bbox\"],[\"resize_crop\",[\"lin\",\"w\",2,2],\"formula_fbe415b1\"]]",
+     "pixel_acc": 0.3553,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_bbox\"],[\"crop_bbox\"],[\"tile_n\",[\"lin\",\"w\",2,2],[\"const\",1]]]",
+     "pixel_acc": 0.3553,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_bbox\"],[\"tile_n\",[\"lin\",\"w\",1,1],[\"const\",1]]]",
+     "pixel_acc": 0.3553,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "e40b9e2f",
+   "category": "pattern",
+   "subcategory": "pattern.make_symmetric",
+   "rule": "complete the object so it is 4-fold rotationally symmetric about its center",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.95,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"transpose\",0]]",
+     "pixel_acc": 0.93,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"flip_lr\"],[\"symmetrize\",\"transpose\",0],[\"flip_lr\"]]",
+     "pixel_acc": 0.9267,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "760b3cac",
+   "category": "pattern",
+   "subcategory": "pattern.make_symmetric",
+   "rule": "mirror the azure shape left or right depending on which way the yellow shape points",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9012,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"flip_ud\"],[\"extend_from\",\"4multi\",\"h\",3,{\"scope\":\"object\",\"sel\":[\"nearest_other_color\",\"4same\"],\"prop\":\"dir_to\"}],[\"flip_ud\"]]",
+     "pixel_acc": 0.8519,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.8457,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "4938f0c2",
+   "category": "pattern",
+   "subcategory": "pattern.make_symmetric",
+   "rule": "mirror the shape across both axes of the green 2x2 center",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9447,
+     "train_correct": "1/3"
+    },
+    {
+     "program": "[[\"fill_holes\",2]]",
+     "pixel_acc": 0.9435,
+     "train_correct": "1/3"
+    },
+    {
+     "program": "[[\"fill_enclosed\"]]",
+     "pixel_acc": 0.9435,
+     "train_correct": "1/3"
+    }
+   ]
+  },
+  {
+   "task_id": "3345333e",
+   "category": "pattern",
+   "subcategory": "pattern.symmetry_repair",
+   "rule": "remove the solid occluding block and restore the hidden half of the shape by its mirror symmetry",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.9453,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"rot\",10]]",
+     "pixel_acc": 0.9414,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"transpose\",10]]",
+     "pixel_acc": 0.9355,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "bda2d7a6",
+   "category": "recolor",
+   "subcategory": "recolor.global_map",
+   "rule": "cyclically shift the concentric ring colors so each ring takes the color of the ring outside it",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"delete_sel\",\"4same\",\"pred\",\"pred_01b2a01d\"],[\"gravity\",\"up\"],[\"gravity\",\"right\"]]",
+     "pixel_acc": 0.3676,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"delete_sel\",\"4same\",\"pred\",\"pred_01b2a01d\"],[\"gravity\",\"up\"],[\"gravity\",\"left\"]]",
+     "pixel_acc": 0.3676,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"delete_sel\",\"4same\",\"pred\",\"pred_01b2a01d\"],[\"gravity\",\"down\"],[\"gravity\",\"right\"]]",
+     "pixel_acc": 0.3676,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "85c4e7cd",
+   "category": "recolor",
+   "subcategory": "recolor.by_position",
+   "rule": "reverse the order of concentric ring colors so the outer ring takes the inner color",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"mirror_tile\",\"quad\"],[\"downscale\",2,2],[\"fill_cells\",\"majority\"]]",
+     "pixel_acc": 0.1948,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"ud\"],[\"downscale\",2,1],[\"fill_cells\",\"majority\"]]",
+     "pixel_acc": 0.1919,
+     "train_correct": "0/4"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"downscale\",1,2],[\"fill_cells\",\"majority\"]]",
+     "pixel_acc": 0.1919,
+     "train_correct": "0/4"
+    }
+   ]
+  },
+  {
+   "task_id": "272f95fa",
+   "category": "recolor",
+   "subcategory": "recolor.by_position",
+   "rule": "color the 3x3 grid cells by position: top 2 left 4 center 6 right 3 bottom 1",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"lr\",10],[\"fill_enclosed\"]]",
+     "pixel_acc": 0.5843,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"both\",10]]",
+     "pixel_acc": 0.5843,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"fill_enclosed\"],[\"symmetrize\",\"ud\",10]]",
+     "pixel_acc": 0.5843,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "ce9e57f2",
+   "category": "recolor",
+   "subcategory": "recolor.by_position",
+   "rule": "recolor the lower half of each vertical bar to 8",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[]",
+     "pixel_acc": 0.875,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.8333,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"ud\"],[\"downscale\",2,1],[\"symmetrize\",\"lr\",0]]",
+     "pixel_acc": 0.7917,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "6b9890af",
+   "category": "reshape",
+   "subcategory": "reshape.assemble",
+   "rule": "crop the 2 frame and scale the small shape up to fill its interior",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"crop_object\",\"4same\",\"largest\"]]",
+     "pixel_acc": 0.6667,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"4same\",\"largest\"],[\"mirror_tile\",\"ud\"],[\"downscale\",2,1]]",
+     "pixel_acc": 0.5571,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"4same\",\"largest\"],[\"gravity\",\"left\"]]",
+     "pixel_acc": 0.5524,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "017c7c7b",
+   "category": "reshape",
+   "subcategory": "reshape.extend_canvas",
+   "rule": "extend the periodic column pattern to 9 rows and recolor 1 to 2",
+   "train_pass_wrong": false,
+   "near_misses": []
+  },
+  {
+   "task_id": "a8c38be5",
+   "category": "reshape",
+   "subcategory": "reshape.assemble",
+   "rule": "assemble the nine 3x3 pieces into a 9x9 square placing each by the position its colored corner/edge marks indicate",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"crop_object\",\"4same\",\"largest\"],[\"upscale\",3,3]]",
+     "pixel_acc": 0.6543,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"transpose\"],[\"crop_object\",\"8multi\",\"smallest\"],[\"self_tile\",\"pos\"]]",
+     "pixel_acc": 0.6481,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"crop_object\",\"8multi\",\"smallest\"],[\"self_tile\",\"pos\"]]",
+     "pixel_acc": 0.6358,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "eb281b96",
+   "category": "reshape",
+   "subcategory": "reshape.extend_canvas",
+   "rule": "extend the canvas downward by repeatedly reflecting the strip vertically",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"resize_crop\",\"formula_63f88e8b\",[\"const\",17]],[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.8503,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"resize_crop\",\"formula_63f88e8b\",[\"const\",17]],[\"flip_ud\"]]",
+     "pixel_acc": 0.738,
+     "train_correct": "0/2"
+    },
+    {
+     "program": "[[\"resize_crop\",\"formula_63f88e8b\",[\"const\",17]]]",
+     "pixel_acc": 0.738,
+     "train_correct": "0/2"
+    }
+   ]
+  },
+  {
+   "task_id": "f5b8619d",
+   "category": "scale_tile",
+   "subcategory": "scale_tile.tile_plus",
+   "rule": "draw azure columns below each colored pixel then tile the result 2x2",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"tile\",2,2],[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.5918,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"tile\",2,2]]",
+     "pixel_acc": 0.5918,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"rot90\"],[\"tile\",2,2],[\"symmetrize\",\"ud\",0]]",
+     "pixel_acc": 0.5714,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "469497ad",
+   "category": "scale_tile",
+   "subcategory": "scale_tile.tile_plus",
+   "rule": "upscale by the number of colors on the border strip and draw red diagonals out from the corners of the central square",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"upscale_n\",\"formula_fb26a2f6\",\"formula_fb26a2f6\"]]",
+     "pixel_acc": 0.9586,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"upscale_n\",\"formula_fb26a2f6\",\"formula_fb26a2f6\"],[\"symmetrize\",\"transpose\",0]]",
+     "pixel_acc": 0.9255,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"transpose\"],[\"upscale_n\",\"formula_fb26a2f6\",\"formula_fb26a2f6\"]]",
+     "pixel_acc": 0.8883,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "f8ff0b80",
+   "category": "summary",
+   "subcategory": "summary.sort_rank",
+   "rule": "output object colors as a column sorted by object size descending",
+   "train_pass_wrong": false,
+   "near_misses": [
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"smallest\"],[\"crop_object\",\"4same\",\"smallest\"],[\"upscale\",3,1]]",
+     "pixel_acc": 0.1111,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"largest\"],[\"crop_object\",\"4same\",\"smallest\"],[\"upscale\",3,1]]",
+     "pixel_acc": 0.1111,
+     "train_correct": "0/3"
+    },
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"largest\"],[\"m_crop_object__upscale_d1e901\"],[\"split_overlay\",\"v\",\"nor\"]]",
+     "pixel_acc": 0.0,
+     "train_correct": "0/3"
+    }
+   ]
+  },
+  {
+   "task_id": "6e02f1e3",
+   "category": "summary",
+   "subcategory": "summary.classify",
+   "rule": "output a fixed line pattern chosen by the number of distinct colors (1 top row; 2 diagonal; 3 antidiagonal)",
+   "train_pass_wrong": true,
+   "near_misses": [
+    {
+     "program": "[[\"m_mirror_tile__split_overlay_fbb38a\"],[\"m_mirror_tile__split_overlay_fbb38a\"]]",
+     "pixel_acc": 0.6667,
+     "train_correct": "0/5"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"m_mirror_tile__split_overlay_fbb38a\"],[\"split_overlay\",\"v\",\"left\"]]",
+     "pixel_acc": 0.6444,
+     "train_correct": "0/5"
+    },
+    {
+     "program": "[[\"mirror_tile\",\"lr\"],[\"split_overlay\",\"v\",\"left\"],[\"m_mirror_tile__split_overlay_fbb38a\"]]",
+     "pixel_acc": 0.6444,
+     "train_correct": "0/5"
+    }
+   ]
+  },
+  {
+   "task_id": "d9fac9be",
+   "category": "summary",
+   "subcategory": "summary.select_color",
+   "rule": "output 1x1 of the color of the center pixel enclosed by a 3x3 ring",
+   "train_pass_wrong": true,
+   "near_misses": [
+    {
+     "program": "[[\"crop_object\",\"8multi\",\"smallest\"]]",
+     "pixel_acc": 0.75,
+     "train_correct": "3/4"
+    },
+    {
+     "program": "[[\"m_flip_ud__crop_object_862544\"]]",
+     "pixel_acc": 0.25,
+     "train_correct": "1/4"
+    }
+   ]
+  }
+ ]
+}

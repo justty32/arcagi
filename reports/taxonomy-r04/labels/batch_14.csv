@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+ccd554ac,scale_tile,scale_tile.tile,high,tile the input n x n times where n is the input side length
+ed98d772,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input and its 90/180/270 degree rotations
+f0afb749,scale_tile,scale_tile.other,medium,upscale each pixel to 2x2 then draw blue diagonal lines through the empty blocks along the main diagonals of each colored block
+fb791726,scale_tile,scale_tile.other,medium,double the canvas copying the input to top-left and bottom-right; draw a green row between each pair of same-column pixels
+007bbfb7,scale_tile,scale_tile.self_kron,high,place a copy of the input in each 3x3 block where the input pixel is colored
+10fcaaa3,scale_tile,scale_tile.tile,medium,tile the input 2x2 then paint the diagonal neighbours of every colored pixel azure
+3af2c5a8,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirror copies
+4522001f,scale_tile,scale_tile.other,medium,output 9x9 with two diagonal 4x4 green squares extending from the corner the red pixel points to
+46442a0e,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input rotated by 0/90/180/270 degrees
+469497ad,scale_tile,scale_tile.upscale,medium,upscale by the number of colors on the border strip and draw red diagonals out from the corners of the central square
+46f33fce,scale_tile,scale_tile.upscale,medium,each pixel on the sparse lattice becomes a 4x4 block at doubled coordinates on a 20x20 canvas
+4c4377d9,scale_tile,scale_tile.mirror_tile,high,stack the vertically flipped input above the input
+539a4f51,reshape,reshape.extend_canvas,medium,double the canvas and continue the nested L-shaped color sequence outward to fill it
+62c24649,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirror copies
+67e8384a,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirror copies
+6d0aefbc,scale_tile,scale_tile.mirror_tile,high,append the horizontally mirrored input to the right
+6fa7a44f,scale_tile,scale_tile.mirror_tile,high,append the vertically mirrored input below
+7fe24cdd,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input rotated by 0/90/180/270 degrees
+8be77c9e,scale_tile,scale_tile.mirror_tile,high,append the vertically mirrored input below
+8d5021e8,scale_tile,scale_tile.mirror_tile,high,mirror the input horizontally beside itself then stack 3 times with vertical flips
+91413438,scale_tile,scale_tile.tile,medium,canvas side = 3 x zero count; repeat the input left-to-right then down as many times as it has colored cells
+9172f3a0,scale_tile,scale_tile.upscale,high,upscale each pixel to 3x3
+963e52fc,reshape,reshape.extend_canvas,high,double the width and continue the periodic row pattern
+a416b8f3,scale_tile,scale_tile.tile,high,repeat the input twice horizontally
+ac0a08a4,scale_tile,scale_tile.upscale,high,upscale by k where k is the number of colored pixels
+b91ae062,scale_tile,scale_tile.upscale,high,upscale by k where k is the number of distinct colors
+bbc9ae5d,reshape,reshape.extend_canvas,high,add rows (half the width in total) each extending the colored prefix by one cell
+c3e719e8,scale_tile,scale_tile.self_kron,high,place a copy of the input in each 3x3 block where the input has its most frequent color
+c59eb873,scale_tile,scale_tile.upscale,high,upscale each pixel to 2x2
+c9e6f938,scale_tile,scale_tile.mirror_tile,high,append the horizontally mirrored input to the right
+cce03e0d,scale_tile,scale_tile.self_kron,high,place a copy of the input in each 3x3 block where the input pixel is red
+d13f3404,reshape,reshape.extend_canvas,high,on a 6x6 canvas extend every pixel as a diagonal ray toward bottom-right
+f5b8619d,scale_tile,scale_tile.tile,medium,draw azure columns below each colored pixel then tile the result 2x2
+feca6190,reshape,reshape.render_from_spec,high,canvas side = 5 x number of colors; shoot each pixel diagonally up-right from the bottom row
+0bb8deee,reshape,reshape.assemble,high,the cross of lines splits the grid into four quadrants; assemble each quadrant's 3x3 shape into a 6x6 in the same layout
+0c9aba6e,overlay,overlay.boolean,high,nor of the top and bottom halves colored azure
+136b0064,reshape,reshape.render_from_spec,low,decode each 3x3 glyph in the left panel into a fixed colored stroke and chain the strokes as a snake path starting from the 5 pixel
+195ba7dc,overlay,overlay.boolean,high,or of the left and right halves colored blue
+281123b4,overlay,overlay.priority,high,overlay the four panels with color priority 9 > 4 > 5 > 8
+34b99a2b,overlay,overlay.boolean,high,xor of the left and right halves colored red
+351d6448,reshape,reshape.other,medium,panels separated by 5 lines form a sequence; output the next panel of the progression
+4c177718,reshape,reshape.assemble,low,below the line keep the shape and stack the matching top-panel shape next to it according to the shape correspondence in the top panel
+506d28a5,overlay,overlay.boolean,high,or of the top and bottom halves colored green
+5d2a5c43,overlay,overlay.boolean,high,or of the left and right halves colored azure
+81c0276b,summary,summary.sort_rank,high,count blocks of each non-separator color and output a bar chart sorted by count
+8597cfd7,summary,summary.select_color,medium,output 2x2 of the color whose column grows more from the top panel to the bottom panel
+93b4f4b3,reshape,reshape.assemble,high,fit each colored shape on the right into the hole of the same shape in the left frame
+b0f4d537,reshape,reshape.render_from_spec,low,redraw the small line pattern beside the 5 block at the positions of the 4 markers on the right keeping its colors and crossing priority
+bbb1b8b6,overlay,overlay.priority,medium,place the right shape into the left shape's holes only if it fills them exactly; otherwise output the left half
+ce8d95cc,reshape,reshape.downscale,high,collapse runs of identical rows and columns to one each

@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+9bebae7a,pattern,pattern.make_symmetric,medium,mirror the yellow shape across its edge in the direction the magenta arrow points; then delete the arrow
+9c56f360,move,move.gravity,high,slide each green block left until it hits an azure cell or the border
+a04b2602,draw,draw.ring_around,high,draw a blue 3x3 ring around every red pixel lying inside a green region
+a3f84088,pattern,pattern.continue_sequence,medium,fill the grey frame inward with concentric rings cycling red; grey; black; grey
+aa4ec2a5,objects,objects.outline_hollow,medium,outline every blue blob in red; blobs containing holes become azure with magenta holes
+ac2e8ecf,move,move.by_rule,high,move hollow rings to the top and plus shapes to the bottom keeping columns
+ac3e2b04,draw,draw.ray_to_border,medium,through each green box draw a blue line perpendicular to its red line and ring blue boxes where it crosses other red lines
+af22c60d,pattern,pattern.symmetry_repair,high,fill the black holes using the grid's mirror symmetry
+b7f8a4d8,draw,draw.connect_points,high,connect same-colored odd tiles in the tile grid along rows and columns with lines of their inner color
+b9630600,draw,draw.connect_points,low,join neighboring hollow rectangles into one network by opening 2-wide corridors between them
+baf41dbf,objects,objects.transform_each,medium,stretch the green rectangle so each side reaches the cell next to a magenta marker; extending internal dividers
+bcb3040b,draw,draw.connect_points,high,draw a line between the two red endpoints; turning crossed blue cells green and empty cells red
+c074846d,objects,objects.transform_each,medium,rotate the red arm 90 degrees clockwise around the grey pivot and recolor the old arm green
+c62e2108,pattern,pattern.continue_sequence,medium,repeat each hollow square tile toward the border edge marked by the blue bar until the edge
+c663677b,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+c6e1b8da,move,move.by_rule,high,move each rectangle along its protruding tail by the tail length and delete the tail
+ca8f78db,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic stripe pattern
+d282b262,move,move.gravity,high,push all small objects right until they hit the border or another object
+d2acf2cb,recolor,recolor.global_map,medium,between each pair of yellow markers on a row or column swap colors 6<->8 and 0<->7
+dc2aa30b,multi,multi.other,medium,sort the 3x3 cells of the grid by their count of red cells (gap: sort cells by count)
+dd2401ed,move,move.by_rule,medium,move the grey divider from column c to column 2c+1 and recolor red pixels it passes to blue
+df8cc377,fill,fill.enclosed,medium,fill each hollow box with a checkerboard of a scattered color matched by count; then remove the scattered pixels
+e1d2900e,move,move.toward_object,high,slide blue pixels sharing a row or column with a red 2x2 block until they touch it
+e2092e0c,draw,draw.ring_around,low,find the region matching the corner template and frame it with a grey square
+e41c6fd3,move,move.align,high,move every object vertically to align with the row of the azure object
+e760a62e,draw,draw.connect_points,high,fill grid cells between same-colored marked cells along rows and columns; red-green crossings become magenta
+e7b06bea,pattern,pattern.continue_sequence,medium,merge the stripe colors into one column cycling them in runs whose length equals the count of grey cells
+e95e3d8e,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+e9ac8c9e,recolor,recolor.by_contact,medium,recolor each quadrant of the grey square with the color of its nearest corner pixel and delete the corners
+e9bb6954,draw,draw.grid_lines,high,each solid 3x3 block emits full row and column lines through its center in its color; crossings of different colors become black
+ecaa0ec1,objects,objects.transform_each,low,rotate the 3x3 blue-azure object in the direction set by the yellow markers and keep one marker at its corner
+f21745ec,objects,objects.copy_stamp,medium,copy the inner pattern of the patterned frame into every same-sized empty frame in its color; delete frames of other sizes
+f3cdc58f,summary,summary.count,medium,count pixels of colors 1-4 and draw bars of those heights in columns 1-4 at the bottom left (gap: same-size histogram)
+f3e62deb,move,move.by_rule,high,move the hollow square to the border in the direction determined by its color
+f45f5ca7,move,move.by_rule,high,shift each first-column pixel right by an offset fixed by its color
+f5c89df1,objects,objects.copy_stamp,medium,stamp the azure pattern around the green center at each red marker position and remove center and markers
+f83cb3f6,move,move.gravity,medium,pull pixels onto the azure line only at columns where the line is solid; delete the rest
+f9d67f8b,pattern,pattern.symmetry_repair,high,replace the maroon mask with content from the grid's mirror symmetry
+025d127b,objects,objects.transform_each,medium,shear each shape right by one cell except its bottom row and right edge
+05f2a901,move,move.toward_object,high,slide the red shape toward the azure square until they touch
+0dfd9992,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+0e206a2e,objects,objects.copy_stamp,medium,move each template shape onto the marker triplet matching its colored anchor cells with rotation; delete originals
+1a07d186,move,move.toward_object,high,move each pixel matching a line color next to that line; delete pixels matching no line
+1caeab9d,move,move.align,high,move all blocks vertically to the row of the blue block
+1e0a9b12,move,move.gravity,high,drop all pixels to the bottom
+1f0c79e5,draw,draw.ray_to_border,high,extend the 2x2 block diagonally toward its red corners as a 3-wide trail to the border; red becomes the block color
+228f6490,objects,objects.shape_complete,medium,move the colored shape that exactly fits each grey shape's hole into it and delete other pieces
+25ff71a9,geometry,geometry.shift,high,shift the whole grid down by one row
+264363fd,draw,draw.grid_lines,medium,through each marker in a panel draw full row and column lines and stamp the outside template pattern at the marker
+29623171,recolor,recolor.by_count,medium,fill the cell(s) with the most pixels solid in that color and clear all other cells

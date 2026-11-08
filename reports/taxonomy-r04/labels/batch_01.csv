@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+12422b43,pattern,pattern.continue_sequence,medium,repeat the stack of rows beside the 5 column (excluding the first) downward until the grid bottom
+13713586,draw,draw.ray_to_border,medium,extrude each line segment as a solid rectangle toward the 5 wall; nearer segments overwrite farther ones
+17b80ad2,draw,draw.ray_to_border,medium,in each column marked by 5 at the bottom extend every colored pixel downward until the next colored pixel
+18419cfa,pattern,pattern.make_symmetric,high,mirror the half 2 pattern inside each 8 frame across the frame axis indicated by the frame notches
+1d398264,draw,draw.ray_to_border,high,each outer cell of the 3x3 block shoots a ray of its color in its direction from the center to the border
+2546ccf6,pattern,pattern.make_symmetric,high,complete each pattern around a grid-line intersection to be 4-fold mirror symmetric across the lines
+2685904e,multi,multi.compositional,low,the number n of 8s in the top row selects colors appearing n times in the bottom row; draw those as columns of height n above the 5 line
+29700607,draw,draw.connect_points,high,extend each top color pixel down to the row of its matching edge pixel then turn and connect to it
+3a301edc,objects,objects.outline_hollow,medium,add a border around the object in its inner color with thickness equal to the inner square size
+42918530,objects,objects.copy_stamp,high,copy the interior pattern of a patterned box into every empty box of the same color
+4cd1b7b2,multi,multi.other,medium,complete the 4x4 latin square so each row and column contains 1 2 3 4 once (sudoku-like fill; no fitting subcategory)
+52fd389e,objects,objects.outline_hollow,medium,add a border around each 4 block in the color of its inner dots with thickness equal to the dot count
+55783887,draw,draw.connect_points,medium,connect pairs of 1 pixels on a diagonal with 1; a 6 on such diagonal draws its own 6 diagonal instead
+5af49b42,objects,objects.copy_stamp,high,place the edge color sequence containing each lone pixel's color so that color lands on the pixel
+62b74c02,pattern,pattern.continue_sequence,low,copy the left pattern block to the right edge and fill the gap in each row with that row's first color
+642248e4,draw,draw.ring_around,low,add one pixel next to each 1 on the side toward the nearer colored border using that border's color
+69889d6e,draw,draw.path_bounce,high,draw a 2-wide diagonal staircase from the 2 toward the top right sidestepping around 1 obstacles
+705a3229,draw,draw.ray_to_border,high,each pixel draws an L of its color toward the nearest vertical and horizontal borders
+712bf12e,draw,draw.path_bounce,high,each bottom 2 grows upward and steps right when blocked by 5
+72207abc,pattern,pattern.continue_sequence,high,repeat the color sequence along the row at triangular-number gap positions
+72a961c9,draw,draw.ray_to_border,medium,each non-1 pixel on the line shoots a ray upward of fixed length by color (2 longer than 8) capped by its color
+762cd429,pattern,pattern.continue_sequence,medium,the 2x2 seed is repeated rightward with each copy doubling in scale
+79fb03f4,draw,draw.path_bounce,medium,draw a 1 line rightward from each left 1 detouring around obstacles with a 3x3 bump
+7c8af763,fill,fill.enclosed,medium,fill each cell bounded by 5 lines with the majority color of the marker pixels on its walls
+88207623,pattern,pattern.make_symmetric,medium,mirror each shape across its 2 axis onto the side with a marker pixel and color it by the marker
+92e50de0,pattern,pattern.continue_sequence,medium,copy the single grid-cell pattern into every other cell along rows and columns with period 2 cells
+94414823,fill,fill.enclosed,medium,fill the empty box with 2x2 checkered quadrants using the two corner marker colors oriented by marker position
+963f59bc,objects,objects.copy_stamp,medium,stamp a mirrored copy of the template shape at each marker aligned by the matching cell and colored by the marker
+96a8c0cd,draw,draw.path_bounce,high,draw a 2 path from the start pixel that goes around each obstacle bar and continues to the border
+97239e3d,draw,draw.ring_around,medium,draw a rectangle outline in the marker color around the grid cells spanned by two markers and mark the enclosed cell centers
+99306f82,fill,fill.enclosed,high,fill the 1 box with concentric rings colored by the diagonal marker sequence outside-in
+9b2a60aa,objects,objects.copy_stamp,high,stamp the template shape at each legend-indicated row or column recolored by the legend color
+9c1e755f,pattern,pattern.continue_sequence,medium,extend the color row or column pattern adjacent to the 5 bar along the full length of the bar
+9ddd00f0,pattern,pattern.symmetry_repair,high,complete the grid of blocks so the whole image is 4-fold mirror symmetric
+9def23fe,draw,draw.ray_to_border,medium,extend the 2 rectangle to the borders in all directions except rows and columns containing a marker pixel
+a406ac07,draw,draw.grid_lines,low,for each color block in the bottom row and right column fill the square where its column span meets its row span
+ac0c5833,objects,objects.copy_stamp,high,stamp the 2 template beside every 4 marker triple with the same relative orientation
+b942fd60,draw,draw.path_bounce,medium,draw a 2 line from the left that turns perpendicular at each obstacle and branches both ways until the border
+bb52a14b,objects,objects.copy_stamp,medium,stamp the 4-colored template around every partial match of its 1-8 core pattern
+c87289bb,draw,draw.path_bounce,medium,extend the 8 lines downward routing around each side of 2 obstacles
+cf133acc,draw,draw.ray_to_border,low,close the gaps in each horizontal line and from each gap extend a vertical line of the line color until the next line
+cfb2ce5a,pattern,pattern.symmetry_repair,medium,mirror the top-left quadrant into the other three quadrants recoloring by the seed pixels given in each
+d37a1ef5,fill,fill.enclosed,medium,fill the 2 box interior with 2 except inside the bounding box of the 5 pixels
+d492a647,recolor,recolor.by_position,medium,fill empty cells with the same row and column parity as the seed pixel with the seed color
+da515329,draw,draw.path_bounce,medium,grow a square spiral of 8 outward from each arm of the cross to the border
+e5790162,draw,draw.path_bounce,high,draw a 3 path rightward that turns down at 6 and up or right at 8 obstacles
+e5c44e8f,draw,draw.path_bounce,medium,draw a square spiral of 3 out from the seed stopping where it would hit a 2
+e619ca6e,pattern,pattern.continue_sequence,medium,emit repeated copies of each object diagonally downward to both sides until the border
+e69241bd,fill,fill.flood_from_seed,high,flood fill each seed color through connected empty cells bounded by 5 walls
+ea959feb,pattern,pattern.periodic_repair,high,restore the 1-masked regions using the periodic tiling of the background

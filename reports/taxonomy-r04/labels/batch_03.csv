@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+a3df8b1e,draw,draw.path_bounce,high,from the bottom-left seed draw a diagonal line upward that bounces between the left and right borders
+b527c5c6,draw,draw.ray_to_border,medium,from each red marker in a green bar extend a red line perpendicular to the bar to the border flanked by green of the bar's thickness
+b7249182,draw,draw.connect_points,medium,two same-row/column points each grow a line toward the other ending in a fixed bracket shape meeting in the middle
+b775ac94,pattern,pattern.make_symmetric,medium,reflect each main shape across the side where a single colored marker pixel touches it; the reflected copy takes the marker color
+b8cdaf2b,draw,draw.ray_to_border,medium,from the ends of the top layer of the bottom stack draw diagonal rays upward in the stack's inner color
+bd4472b8,pattern,pattern.continue_sequence,high,below the gray separator fill rows repeating the top-row colors one color per full row cyclically
+c444b776,objects,objects.copy_stamp,medium,copy the contents of the only non-empty grid cell into every other cell of the separator grid
+cbded52d,draw,draw.connect_points,medium,when two blocks in a row or column share a special colored cell at the same position mark that position in the block between them
+d037b0a7,draw,draw.ray_to_border,high,each colored pixel drips its color straight down to the bottom border
+d22278a0,pattern,pattern.continue_sequence,low,each corner seed generates a staircase of alternating stripes over the cells closer to it than to other seeds
+d43fd935,draw,draw.ray_to_border,high,singleton pixels aligned with the green 2x2 block draw a line of their color toward the block until touching it
+d8c310e9,pattern,pattern.continue_sequence,high,continue the periodic bottom pattern to the right edge
+d9f24cd1,draw,draw.path_bounce,medium,draw vertical red lines upward from bottom red pixels; when a gray pixel blocks the line it steps one column right and continues
+ded97339,draw,draw.connect_points,high,connect every pair of 8 pixels sharing a row or column with 8
+e21d9049,pattern,pattern.continue_sequence,high,extend the cross's horizontal and vertical color sequences periodically to the borders
+e40b9e2f,pattern,pattern.make_symmetric,high,complete the object so it is 4-fold rotationally symmetric about its center
+e8dc4411,objects,objects.copy_stamp,medium,repeatedly stamp the hole shape diagonally away from the marker in the marker color until the border
+ea786f4a,draw,draw.ray_to_border,high,draw both diagonals through the central black pixel to the borders in black
+ec883f72,draw,draw.ray_to_border,medium,from the outer corners of the open container draw diagonal rays outward in the color of the enclosed object
+f15e1fac,draw,draw.path_bounce,medium,8 lines run from their edge seeds across the grid and shift one step sideways at each row/column marked by a 2
+f25ffba3,pattern,pattern.make_symmetric,high,mirror the bottom half of the grid into the top half vertically
+00dbd492,fill,fill.enclosed,high,fill the interior of each red square frame with a color determined by the frame size
+0b17323b,pattern,pattern.continue_sequence,high,continue the evenly spaced diagonal sequence of blue dots with red dots to the border
+0e671a1a,draw,draw.connect_points,medium,connect the three colored points with gray L-shaped paths in a fixed color order
+11e1fe23,multi,multi.other,low,place shrunken copies of the three points toward their centroid with a gray center; geometric point construction fits no subcategory
+137f0df0,fill,fill.bbox_or_gap,high,fill gaps between the gray blocks with red and extend those gap lines to the borders in blue
+212895b5,draw,draw.path_bounce,medium,from the 8 block draw diagonal red rays from the corners and orthogonal yellow zigzag paths from the sides until blocked by gray
+21f83797,draw,draw.grid_lines,high,draw full row and column lines through both red points and fill the rectangle between them with blue
+292dd178,fill,fill.enclosed,medium,fill each open box interior with red and extend a red ray out of its gap to the border
+31adaf00,fill,fill.bbox_or_gap,low,fill every empty square region of at least 2x2 in the noise grid with blue
+332efdb3,draw,draw.grid_lines,medium,draw blue lines on every even row and column of an empty grid producing a lattice
+3490cc26,draw,draw.connect_points,medium,starting at the red block chain-connect aligned 8 blocks with orange paths
+3f23242b,draw,draw.ring_around,medium,stamp a fixed house-shaped template around each green point with its base line extending to the borders
+45bbe264,draw,draw.grid_lines,high,draw a full row and column through each point in its color with red at the intersections
+4e469f39,fill,fill.enclosed,medium,fill the inside of each gray cup with red and draw a red line above it extending from the gap toward one side
+5207a7b5,pattern,pattern.continue_sequence,low,around the gray vertical line draw staircase regions of 8 to the left and 6 to the right whose steps depend on line length
+55059096,draw,draw.connect_points,high,connect diagonally aligned green plus shapes with red diagonal lines
+551d5bf1,fill,fill.enclosed,medium,fill each box interior with 8 and leak an 8 ray out of any gap to the border
+5b526a93,objects,objects.copy_stamp,medium,stamp an 8 hollow square at every intersection of the rows of the left column boxes and columns of the bottom row boxes
+60a26a3e,draw,draw.connect_points,high,connect aligned red diamonds by blue lines between their tips
+62ab2642,recolor,recolor.by_size,medium,recolor the largest background region 8 and the smallest region 7
+692cd3b6,draw,draw.connect_points,medium,draw a yellow rectangle band joining the openings of the two red boxes
+759f3fd3,draw,draw.ring_around,medium,draw concentric yellow square rings at every other distance around the green cross intersection
+770cc55f,draw,draw.connect_points,low,in columns shared by the top and bottom bars draw yellow between the red line and the longer bar
+84f2aca1,fill,fill.enclosed,medium,fill each object's hole with 5 if one cell or 7 if two cells
+8fbca751,fill,fill.bbox_or_gap,medium,fill empty cells inside each object's 4x4-aligned bounding box with red
+9772c176,objects,objects.shape_complete,medium,add yellow triangular caps on each flat side of the octagons to complete them into diamonds
+992798f6,draw,draw.connect_points,medium,draw a green king-move path from the red point to the blue point straight then diagonal
+9caba7c3,recolor,recolor.by_shape,low,where red pixels form a specific small pattern in the gray noise mark its center yellow and surrounding cells orange
+a8610ef7,recolor,recolor.by_position,medium,recolor each 8 to 2 if its vertical mirror cell is also 8 else to 5

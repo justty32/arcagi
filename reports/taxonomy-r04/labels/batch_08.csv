@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+94133066,crop,crop.then_transform,medium,crop the large 1-colored rectangle and flip it so its inner marker pixels match the arrangement of the outside marker pixels
+a680ac02,reshape,reshape.assemble,high,drop solid squares and concatenate the hollow squares in a row or column following their layout in the input
+aab50785,crop,crop.by_frame,medium,for each pair of 2x2 color-8 blocks extract the strip between them and stack the strips vertically
+af24b4cc,overlay,overlay.cell_summary,high,each 3x2 block separated by black lines becomes one cell of its majority color inside a black border
+b0722778,multi,multi.other,low,analogy per row; the transform (color map or rotation) between the two left 2x2 blocks is applied to the right block; gap: analogy A:B::C:?
+b1fc8b8e,summary,summary.classify,high,output one of two fixed 5x5 patterns depending on whether the 8 shape has a protruding arm
+b4a43f3b,scale_tile,scale_tile.self_kron,medium,downscale the top pattern to 3x3 and stamp it at every colored cell of the bottom mask (kron of mask with pattern); gap: kron with a separate mask
+b7999b51,summary,summary.sort_rank,high,each object becomes a column of its color with length equal to its height; columns sorted by height descending
+b7cb93ac,reshape,reshape.assemble,high,fit the three separate pieces together into a solid 3x4 rectangle
+c64f1187,reshape,reshape.render_from_spec,medium,each 5-cell in the grid with a colored marker is replaced by the legend shape of that marker color; plain 5 cells become empty
+c658a4bd,reshape,reshape.assemble,high,nest the hollow squares concentrically ordered by size with the largest outside
+ca8de6ea,reshape,reshape.assemble,high,compress the X-shaped scattered pixels into a 3x3 grid by removing the gaps
+d017b73f,reshape,reshape.assemble,medium,remove empty columns and shift each object vertically so it connects end to end with the previous one
+d19f7514,overlay,overlay.boolean,high,OR the top and bottom halves and paint the result color 4
+d4b1c2b1,scale_tile,scale_tile.upscale,high,upscale each cell by k where k is the number of distinct colors in the input
+d4c90558,summary,summary.sort_rank,high,each frame becomes a bar of its color whose length is the count of 5 pixels inside; bars sorted by length ascending
+d5c634a2,summary,summary.count,medium,count T shapes by facing direction; left-facing counts fill 3s on the left and right-facing counts fill 1s on the right of a 3x6 grid
+de493100,pattern,pattern.symmetry_repair,high,use the symmetry of the pattern to reconstruct and output the region hidden by the 7 mask
+e1baa8a4,reshape,reshape.downscale,high,each uniform rectangular block of uneven size becomes one cell of its color
+e345f17b,overlay,overlay.boolean,high,NOR the left and right halves and paint the result color 4
+e57337a4,reshape,reshape.downscale,high,downscale 15x15 by 5x5 blocks; a block containing a 0 pixel becomes 0
+e633a9e5,reshape,reshape.other,medium,stretch 3x3 to 5x5 by doubling the first and last row and column; gap: border-duplicating stretch
+e66aafb8,pattern,pattern.symmetry_repair,high,use the symmetry of the pattern to reconstruct and output the region hidden by the 0 mask
+e6de6e8f,reshape,reshape.render_from_spec,medium,read the input pieces left to right as path segments and draw a descending path of 2 starting from a 3 at the top
+e78887d1,multi,multi.other,low,output is a single 3-row strip of shapes derived from the input strips; rule for which shapes appear is unclear
+e7a25a18,crop,crop.then_transform,high,crop the 2 frame and scale the inner 2x2-block pattern up to fill its interior
+e9b4f6fc,crop,crop.then_transform,high,crop the large object and recolor its pixels using the scattered color pairs as a legend
+ea9794b1,overlay,overlay.priority,high,overlay the four quadrants with color priority 3 over 9 over 8 over 4
+ed74f2f2,crop,crop.then_transform,medium,output the right 3x3 shape recolored by a color determined by the shape of the left 3x3 piece
+f4081712,pattern,pattern.symmetry_repair,high,use the symmetry of the pattern to reconstruct and output the region hidden by the 3 mask
+017c7c7b,reshape,reshape.extend_canvas,high,extend the periodic column pattern to 9 rows and recolor 1 to 2
+137eaa0f,reshape,reshape.assemble,high,gather the pieces around each 5 pixel into one 3x3 grid aligning all 5s at the center
+234bbc79,reshape,reshape.assemble,medium,chain the pieces left to right joining them at the 5 connectors and recoloring 5 to the neighboring color
+28bf18c6,crop,crop.then_transform,high,crop the single object and tile it twice horizontally
+3de23699,crop,crop.then_transform,high,crop the area inside the four corner markers and recolor the shape with the marker color
+4290ef0e,reshape,reshape.assemble,medium,nest the corner-shaped fragments concentrically by size into a square
+49d1d64f,reshape,reshape.extend_canvas,high,pad the grid by one cell on each side copying edge colors with 0 corners
+4be741c5,summary,summary.sort_rank,high,output the colors of the bands in left-to-right or top-to-bottom order as a 1-row or 1-column strip
+5117e062,crop,crop.then_transform,high,crop the object containing the 8 pixel and recolor 8 to the object color
+53b68214,reshape,reshape.extend_canvas,high,extend the canvas to 10x10 and continue the repeating pattern downward
+5614dbcf,reshape,reshape.downscale,high,downscale each 3x3 block to its majority color ignoring 5 noise
+5ad4f10b,reshape,reshape.downscale,high,downscale the large blocky object to 3x3 and color it with the noise color
+6b9890af,reshape,reshape.assemble,medium,crop the 2 frame and scale the small shape up to fill its interior
+6ecd11f4,crop,crop.then_transform,medium,crop the small multicolor patch and zero the cells where the downscaled large shape is empty
+7468f01a,crop,crop.then_transform,high,crop the object and flip it horizontally
+746b3537,reshape,reshape.other,medium,collapse repeated identical rows or columns into one; gap: run-length dedupe
+75b8110e,overlay,overlay.priority,high,overlay the four quadrants with color priority 5 over 9 over 4 over 6
+77fdfe62,crop,crop.then_transform,high,crop the 8 pattern inside the frame and recolor each quadrant with the nearest corner color
+780d0b14,overlay,overlay.cell_summary,high,each noisy block separated by black lines becomes one cell of its color
+7837ac64,overlay,overlay.cell_summary,medium,each grid cell becomes colored when all four corner intersections share a marker color

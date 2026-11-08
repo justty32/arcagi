@@ -1,0 +1,801 @@
+task_id,category,subcategory,confidence,rule
+00576224,scale_tile,scale_tile.mirror_tile,high,tile 3x3 with the middle row of tiles flipped horizontally
+007bbfb7,scale_tile,scale_tile.self_kron,high,place a copy of the input in each 3x3 block where the input pixel is colored
+009d5c81,recolor,recolor.by_shape,medium,recolor the 8 object by a color determined by the shape of the small blue marker then delete the marker
+00d62c1b,fill,fill.enclosed,high,fill regions fully enclosed by 3 with 4
+00dbd492,fill,fill.color_by_region,high,fill the interior of each red square frame with a color determined by the frame size
+017c7c7b,reshape,reshape.extend_canvas,high,extend the periodic column pattern to 9 rows and recolor 1 to 2
+025d127b,objects,objects.transform_each,medium,shear each shape right by one cell except its bottom row and right edge
+03560426,move,move.align,medium,stack the bottom objects diagonally from the top-left corner each overlapping the previous one's corner
+045e512c,objects,objects.copy_stamp,medium,repeat the template shape stepwise in the direction of each colored fragment beside it using that fragment's color
+0520fde7,overlay,overlay.boolean,high,AND of left and right halves split by the 5 column; result colored 2
+05269061,pattern,pattern.periodic_repair,high,fill the grid with the diagonal 3-color period implied by the visible diagonals
+05a7bcf2,draw,draw.ray_to_border,low,extend each yellow object as a bar perpendicular through the 8 line to the red band; recoloring segments 3/4/8/2 by zone
+05f2a901,move,move.toward_object,high,slide the red shape toward the azure square until they touch
+0607ce86,pattern,pattern.periodic_repair,high,restore each repeated tile to the common template and delete the stray noise pixels
+0692e18c,scale_tile,scale_tile.tile_plus,high,place the color-inverted input at each colored cell of the input
+06df4c85,draw,draw.connect_points,high,connect same-colored cells lying in the same row or column of the grid by filling the cells between
+070dd51e,draw,draw.connect_points,high,connect each same-colored pixel pair with a line; vertical lines drawn over horizontal
+08573cc6,draw,draw.path_bounce,medium,draw an outward square spiral around the blue cell alternating the two corner colors with growing arm lengths
+08ed6ac7,recolor,recolor.by_size,high,recolor bars by height rank tallest 1 to shortest 4
+0934a4d8,pattern,pattern.repair_patch,medium,output the content hidden under the 8 mask recovered from the grid's mirror symmetry
+09629e4f,overlay,overlay.select_cell,medium,select the cell with the fewest colored pixels and enlarge each of its pixels to fill the corresponding cell of the grid
+0962bcdd,draw,draw.ring_around,high,expand each small plus seed into a larger fixed cross pattern with diagonal arms in the corner color
+09c534e7,fill,fill.flood_from_seed,medium,flood the interior (non-edge) cells of each connected 1 region with the color of the seed pixel inside that region
+0a1d4ef5,reshape,reshape.downscale,medium,denoise and shrink each solid rectangle to one cell keeping the block layout
+0a2355a6,recolor,recolor.by_count,high,recolor each 8 shape by its number of holes (1 hole to 1; 2 to 3; 3 to 2; 4 to 4)
+0a938d79,pattern,pattern.continue_sequence,high,turn the two seed pixels into full stripes and repeat them alternately at their spacing to the far edge
+0b148d64,crop,crop.by_object,high,crop the quadrant block whose color differs from the other three
+0b17323b,pattern,pattern.continue_sequence,high,continue the evenly spaced diagonal sequence of blue dots with red dots to the border
+0bb8deee,reshape,reshape.assemble,high,the cross of lines splits the grid into four quadrants; assemble each quadrant's 3x3 shape into a 6x6 in the same layout
+0becf7df,recolor,recolor.by_legend,high,swap colors in the object according to the 2x2 legend in the corner (pairs on each row and column swap)
+0c786b71,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input rotated 180 and its mirrors
+0c9aba6e,overlay,overlay.boolean,high,nor of the top and bottom halves colored azure
+0ca9ddb6,draw,draw.ring_around,high,draw 4 diagonal corners around 2 and 7 orthogonal neighbors around 1; other colors untouched
+0d3d703e,recolor,recolor.global_map,high,apply a fixed color mapping to every pixel
+0d87d2a6,draw,draw.connect_points,medium,connect paired blue border markers with lines and recolor every red rectangle the line crosses to blue
+0dfd9992,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+0e206a2e,objects,objects.stamp_transformed,medium,move each template shape onto the marker triplet matching its colored anchor cells with rotation; delete originals
+0e671a1a,draw,draw.connect_points,medium,connect the three colored points with gray L-shaped paths in a fixed color order
+0f63c0b9,draw,draw.grid_lines,medium,each pixel draws a full-width row line plus side borders of its band split midway between pixels
+103eff5b,recolor,recolor.by_legend,medium,color the large 8 shape by the small colored template after rotating and scaling it to match
+10fcaaa3,scale_tile,scale_tile.tile_plus,medium,tile the input 2x2 then paint the diagonal neighbours of every colored pixel azure
+11852cab,pattern,pattern.make_symmetric,high,complete each pixel arrangement to full 4-fold symmetry about its center
+1190e5a7,summary,summary.count,high,output a background grid sized by the number of row and column cells between divider lines
+11e1fe23,multi,multi.other,low,place shrunken copies of the three points toward their centroid with a gray center; geometric point construction fits no subcategory
+12422b43,pattern,pattern.continue_sequence,medium,repeat the stack of rows beside the 5 column (excluding the first) downward until the grid bottom
+12997ef3,reshape,reshape.render_from_spec,medium,stamp the blue template once per colored dot recolored with that dot's color in dot order
+12eac192,recolor,recolor.by_size,medium,recolor every object with fewer than 3 cells to 3
+136b0064,reshape,reshape.render_from_spec,low,decode each 3x3 glyph in the left panel into a fixed colored stroke and chain the strokes as a snake path starting from the 5 pixel
+13713586,draw,draw.ray_to_border,medium,extrude each line segment as a solid rectangle toward the 5 wall; nearer segments overwrite farther ones
+137eaa0f,reshape,reshape.assemble,high,gather the pieces around each 5 pixel into one 3x3 grid aligning all 5s at the center
+137f0df0,fill,fill.bbox_or_gap,high,fill gaps between the gray blocks with red and extend those gap lines to the borders in blue
+140c817e,draw,draw.grid_lines,high,draw a full blue row and column through each dot; mark the dot red and its diagonal neighbors green
+14754a24,recolor,recolor.by_shape,medium,recolor 5 cells to 2 where they complete a plus shape together with 4 cells
+150deff5,recolor,recolor.by_shape,high,decompose the shape into 2x2 squares colored 8 and 1x3 bars colored 2
+15113be4,recolor,recolor.by_shape,medium,recolor 1 patterns in grid cells that match the shape of the large colored template to the template color
+15663ba9,recolor,recolor.by_count,medium,recolor corner cells of each closed loop: convex corners to 4 and concave corners to 2 based on neighbor configuration
+15696249,scale_tile,scale_tile.other,medium,tile the input three times along the uniform row or column and place it at that row or column band
+16b78196,move,move.fit_into_hole,low,move the loose shapes to interlock into the notches of the solid band stacking them in matching order
+178fcbfb,draw,draw.grid_lines,high,draw full columns for red pixels and full rows for green and blue pixels; rows over columns
+17b80ad2,draw,draw.ray_to_border,medium,in each column marked by 5 at the bottom extend every colored pixel downward until the next colored pixel
+17cae0c1,recolor,recolor.by_shape,high,each 3x3 block is filled with a color determined by the shape of the 5 pattern in it
+18419cfa,pattern,pattern.make_symmetric,high,mirror the half 2 pattern inside each 8 frame across the frame axis indicated by the frame notches
+184a9768,move,move.fit_into_hole,medium,move each small piece into the hole of the large shape that matches it and delete gray noise
+195ba7dc,overlay,overlay.boolean,high,or of the left and right halves colored blue
+1990f7a8,reshape,reshape.assemble,high,gather the four 3x3 shapes into a 7x7 grid by their relative quadrant
+19bb5feb,reshape,reshape.downscale,medium,output a 2x2 map of which quadrant of the 8 rectangle each colored square occupies
+1a07d186,move,move.toward_object,high,move each pixel matching a line color next to that line; delete pixels matching no line
+1a2e2828,summary,summary.select_color,high,output 1x1 of the color of the only full line that is never crossed by another line
+1a6449f1,crop,crop.by_frame,high,crop the interior of the largest rectangular frame
+1acc24af,recolor,recolor.by_shape,low,recolor 5 objects that would fit into the openings of the 1 structure to 2
+1b2d62fb,overlay,overlay.boolean,high,NOR of left and right halves split by the 1 column; result colored 8
+1b60fb0c,pattern,pattern.make_symmetric,high,complete the 1 shape to 4-fold rotational symmetry with the missing left part drawn in 2
+1bfc4729,draw,draw.grid_lines,low,render a fixed frame-and-row pattern in the top half and bottom half using each seed's color
+1c02dbbe,recolor,recolor.by_contact,medium,recolor the gray rectangle region spanned by each pair of edge marker pixels with the marker color
+1c0d0a4b,objects,objects.transform_each,medium,invert each 3x3 glyph within its cell turning empty cells red and 8 cells black
+1c56ad9f,move,move.by_rule,medium,shift rows of the lattice shape left/right in a repeating wave pattern
+1c786137,crop,crop.by_frame,high,crop the interior of the rectangular frame
+1caeab9d,move,move.align,high,move all blocks vertically to the row of the blue block
+1cf80156,crop,crop.by_object,high,crop the bounding box of the single object
+1d0a4b61,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+1d398264,draw,draw.ray_to_border,high,each outer cell of the 3x3 block shoots a ray of its color in its direction from the center to the border
+1da012fc,recolor,recolor.by_legend,high,recolor each 8 shape with the color at the matching position in the 5 legend panel
+1e0a9b12,move,move.gravity,high,drop all pixels to the bottom
+1e32b0e9,objects,objects.copy_stamp,medium,copy the top-left cell's shape into every other grid cell filling missing parts with the divider color
+1e81d6f9,objects,objects.delete_filter,high,delete all pixels whose color equals the pixel inside the top-left corner box
+1e97544e,pattern,pattern.periodic_repair,high,fill black holes by continuing the diagonal periodic number sequence
+1f0c79e5,draw,draw.ray_to_border,high,extend the 2x2 block diagonally toward its red corners as a 3-wide trail to the border; red becomes the block color
+1f642eb9,recolor,recolor.by_contact,medium,each edge marker recolors the cell of the 8 block nearest to it in its row or column
+1f85a75f,crop,crop.by_object,high,crop the bounding box of the largest object in the noise
+1f876c06,draw,draw.connect_points,high,connect each pair of same-colored pixels with a diagonal line
+1fad071e,summary,summary.count,high,count the 2x2 blue squares and output a 1x5 bar with that many 1s
+2013d3e2,crop,crop.by_object,medium,crop the top-left quarter of the 4-fold symmetric object
+2037f2c7,overlay,overlay.boolean,low,mark in 8 the cells where the two near-identical objects differ
+2072aba6,scale_tile,scale_tile.upscale,high,upscale 2x with each gray cell becoming the 2x2 pattern 12/21
+20818e16,reshape,reshape.assemble,medium,stack the rectangles by size into the top-left corner with smaller on top
+20981f0e,move,move.align,high,move each object to be centered in its cell between the red grid markers
+212895b5,draw,draw.path_bounce,medium,from the 8 block draw diagonal red rays from the corners and orthogonal yellow zigzag paths from the sides until blocked by gray
+21f83797,draw,draw.grid_lines,high,draw full row and column lines through both red points and fill the rectangle between them with blue
+2204b7a8,recolor,recolor.by_position,high,recolor each 3 dot with the color of the nearer border line
+22168020,fill,fill.bbox_or_gap,high,fill horizontally between the two arms of each V shape with its color
+22233c11,draw,draw.ring_around,medium,for each diagonal 3 pair place 8 blocks at the perpendicular diagonal positions outside it
+2281f1f4,draw,draw.grid_lines,medium,place 2 at every intersection of columns marked in the top row and rows marked in the right column
+228f6490,move,move.fit_into_hole,medium,move the colored shape that exactly fits each grey shape's hole into it and delete other pieces
+22a4bbc2,recolor,recolor.by_position,medium,recolor every third color band (counting bands from the top) from blue/8 to red
+22eb0ac0,draw,draw.connect_points,high,connect the left and right edge pixels of a row with a line when they share a color
+234bbc79,reshape,reshape.assemble,medium,chain the pieces left to right joining them at the 5 connectors and recoloring 5 to the neighboring color
+23581191,draw,draw.grid_lines,high,draw full row and column lines from each point in its color with 2 at the crossings
+239be575,summary,summary.classify,high,output 8 if the two 2x2 red squares are connected by an 8 path; else 0
+23b5c85d,crop,crop.by_object,high,crop the smallest rectangle
+25094a63,recolor,recolor.by_size,medium,recolor every large solid single-color rectangle in the noise to yellow
+253bf280,draw,draw.connect_points,high,connect 8 points sharing a row or column with 3 lines
+2546ccf6,pattern,pattern.make_symmetric,high,complete each pattern around a grid-line intersection to be 4-fold mirror symmetric across the lines
+256b0a75,multi,multi.compositional,low,fill the box formed by the 8 corner brackets and extend its arms with the box color; then project pixels in line with the box into it
+25d487eb,draw,draw.ray_to_border,high,shoot a ray in the tip color from the triangle's odd pixel out through the apex to the border
+25d8a9c8,summary,summary.classify,medium,rows that are a single color become 5 and other rows become 0
+25ff71a9,geometry,geometry.shift,high,shift the whole grid down by one row
+264363fd,draw,draw.grid_lines,medium,through each marker in a panel draw full row and column lines and stamp the outside template pattern at the marker
+2685904e,multi,multi.compositional,low,the number n of 8s in the top row selects colors appearing n times in the bottom row; draw those as columns of height n above the 5 line
+2697da3f,reshape,reshape.assemble,medium,place four rotated copies of the shape around a center in a cross layout
+272f95fa,recolor,recolor.by_position,high,color the 3x3 grid cells by position: top 2 left 4 center 6 right 3 bottom 1
+2753e76c,summary,summary.sort_rank,high,draw a right-aligned bar chart of object counts per color sorted descending
+27a28665,summary,summary.classify,high,classify the 3x3 shape pattern and output a fixed color per shape
+27a77e38,multi,multi.other,medium,place the most frequent color of the top section at the bottom-center cell; no subcategory for computing a single pixel
+27f8ce4f,scale_tile,scale_tile.self_kron,high,place the input at each cell holding the most frequent color of the input
+281123b4,overlay,overlay.priority,high,overlay the four panels with color priority 9 > 4 > 5 > 8
+28bf18c6,crop,crop.then_transform,high,crop the single object and tile it twice horizontally
+28e73c20,draw,draw.path_bounce,medium,draw a 3 inward square spiral starting from the top-left on the empty canvas
+292dd178,fill,fill.leak_ray,medium,fill each open box interior with red and extend a red ray out of its gap to the border
+29623171,recolor,recolor.by_count,medium,fill the cell(s) with the most pixels solid in that color and clear all other cells
+29700607,draw,draw.connect_points,high,extend each top color pixel down to the row of its matching edge pixel then turn and connect to it
+29c11459,draw,draw.connect_points,high,extend the two endpoint colors toward each other meeting at a 5 in the middle
+29ec7d0e,pattern,pattern.periodic_repair,high,fill the black holes in the multiplication-table style periodic pattern from its period
+2a5f8217,recolor,recolor.by_shape,high,recolor each 1 object to the color of the other object with the identical shape
+2b01abd0,pattern,pattern.make_symmetric,medium,mirror the object across the blue line and swap the two colors in the original copy
+2bcee788,pattern,pattern.make_symmetric,medium,mirror the object across the side marked by color 2 recoloring the 2 part to the object color; background becomes 3
+2bee17df,draw,draw.grid_lines,high,fill with 3 every row and column that is completely open between the two border walls
+2c0b0aff,crop,crop.by_object,medium,crop the rectangle containing the most plus-shaped 3 patterns
+2c608aff,draw,draw.ray_to_border,high,extend each lone pixel toward the big rectangle with a line when it is aligned with it
+2c737e39,objects,objects.copy_stamp,high,copy the multicolor template to each lone 5 marker aligning the template's own 5 cell onto the marker
+2dc579da,crop,crop.by_cell,high,select the quadrant (cut by the cross lines) that contains the odd pixel
+2dd70a9a,draw,draw.path_bounce,medium,draw a green path from the green segment turning at walls until it reaches the red segment
+2dee498d,crop,crop.fixed,high,input is the pattern tiled three times horizontally; output one copy
+2f0c5170,crop,crop.then_transform,medium,crop the empty box containing a lone marker and copy the shape there aligned on the matching marker
+310f3251,scale_tile,scale_tile.tile_plus,medium,tile the input 3x3 and add a red pixel up-left diagonal of each colored pixel
+3194b014,summary,summary.select_color,high,output 3x3 filled with the color of the largest solid square in the noise
+319f2597,draw,draw.grid_lines,high,the rows and columns through the 2x2 black block become 0 except cells already colored 2
+31aa019c,objects,objects.delete_filter,high,keep only the pixel whose color occurs once; delete all others and surround it with a 2 ring
+31adaf00,fill,fill.bbox_or_gap,low,fill every empty square region of at least 2x2 in the noise grid with blue
+31d5ba1a,overlay,overlay.boolean,high,xor the top and bottom halves and paint the result 6
+321b1fc6,objects,objects.copy_stamp,high,stamp the multicolor template onto every 8 shape of the same shape and delete the original template
+32597951,fill,fill.bbox_or_gap,medium,recolor the 1 cells inside the bounding box of the 8 region to 3
+32e9702f,geometry,geometry.shift,medium,shift the whole grid left by one column; then paint the background 5
+332efdb3,draw,draw.grid_lines,medium,draw blue lines on every even row and column of an empty grid producing a lattice
+3345333e,pattern,pattern.symmetry_repair,high,remove the solid occluding block and restore the hidden half of the shape by its mirror symmetry
+3391f8c0,objects,objects.copy_stamp,medium,two shape types swap: each instance of shape A is replaced by shape B with B's color and vice versa
+33b52de3,recolor,recolor.by_legend,high,color each 5 block in the block grid by the corresponding cell of the small legend grid
+3428a4f5,overlay,overlay.boolean,high,XOR of top and bottom halves split by the 4 row; result colored 3
+3490cc26,draw,draw.connect_points,medium,starting at the red block chain-connect aligned 8 blocks with orange paths
+34b99a2b,overlay,overlay.boolean,high,xor of the left and right halves colored red
+351d6448,reshape,reshape.other,medium,panels separated by 5 lines form a sequence; output the next panel of the progression
+358ba94e,crop,crop.by_object,high,crop the one square whose hole pattern differs from the others
+3618c87e,move,move.gravity,medium,each 1 sitting on a 5 pillar drops to the bottom row swapping with the 5 there
+3631a71a,pattern,pattern.symmetry_repair,high,replace the 9 occluder cells using the grid's mirror symmetry
+363442ee,objects,objects.copy_stamp,high,copy the 3x3 template to the 3x3 cell around each 1 marker
+36d67576,objects,objects.shape_complete,medium,add the colored attachments of the reference shape onto each other rotated copy of the shape
+36fdfd69,fill,fill.bbox_or_gap,high,within the bounding box of each 2 cluster recolor the non-2 cells to 4
+37d3e8b2,recolor,recolor.by_count,high,recolor each 8 shape by its number of holes
+3906de3d,move,move.gravity,high,push the 2 segments upward into the gaps of the 1 block until they hit it
+3979b1a8,reshape,reshape.extend_canvas,medium,double the canvas and extend the concentric color rings outward in the new space
+39a8645d,crop,crop.by_object,high,crop the shape that occurs most often
+39e1d7f9,objects,objects.copy_stamp,high,copy the full multi-cell motif around every cell having the motif's center color
+3a301edc,objects,objects.outline_hollow,medium,add a border around the object in its inner color with thickness equal to the inner square size
+3aa6fb7a,objects,objects.shape_complete,high,complete each 3-cell 8 L into a 2x2 square by adding a 1 at the missing corner
+3ac3eb23,pattern,pattern.continue_sequence,high,extend each top pixel downward as a repeating zigzag pattern
+3af2c5a8,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirror copies
+3b4c2228,summary,summary.count,high,count green 2x2 squares and place that many 1s on the 3x3 diagonal
+3bd67248,draw,draw.ray_to_border,medium,draw a 2 anti-diagonal from the top-right to the left column and a 4 line along the bottom row
+3bdb4ada,objects,objects.outline_hollow,medium,punch alternating holes along the middle row of each 3-row bar
+3befdf3e,multi,multi.compositional,medium,swap the frame and core colors of the square and extend frame-colored arms outward by the core width
+3c9b0459,geometry,geometry.flip_rot,high,rotate the grid 180 degrees
+3d31c5b3,overlay,overlay.priority,high,overlay the four color layers with priority 5 over 4 over 8 over 2
+3de23699,crop,crop.then_transform,high,crop the area inside the four corner markers and recolor the shape with the marker color
+3e980e27,objects,objects.copy_stamp,high,stamp the template containing a given color onto each lone pixel of that color; mirrored for green
+3ed85e70,objects,objects.shape_complete,medium,complete each fragment that matches the center of a legend template in the top band into the full bordered template
+3eda0437,fill,fill.bbox_or_gap,medium,fill the largest all-black rectangle (at least 2 tall) with 6
+3ee1011a,reshape,reshape.assemble,medium,nest the lines as concentric square rings with side equal to line length longest outside
+3f23242b,draw,draw.ring_around,medium,stamp a fixed house-shaped template around each green point with its base line extending to the borders
+3f7978a0,crop,crop.by_frame,high,crop the rectangle bounded by the two 5 columns capped with 8s
+40853293,draw,draw.connect_points,high,connect same-colored pixel pairs with lines; vertical lines drawn over horizontal
+4093f84a,move,move.toward_object,high,move every stray pixel perpendicular to the 5 band until it touches it and recolor it 5
+40f6cd08,objects,objects.copy_stamp,medium,copy the nested color layering of the decorated rectangle onto the plain rectangles scaled to their size
+414297c0,crop,crop.then_transform,medium,crop the big rectangle and stamp each small shape onto the marker of its center color
+41e4d17e,draw,draw.grid_lines,high,draw 6 full row and column lines through the center of each 1 square on the background
+423a55dc,objects,objects.transform_each,high,shear each outline so every row shifts left by its distance from the bottom row
+4258a5f9,draw,draw.ring_around,high,surround each 5 with a 3x3 ring of 1
+4290ef0e,reshape,reshape.assemble,medium,nest the corner-shaped fragments concentrically by size into a square
+42918530,objects,objects.copy_stamp,high,copy the interior pattern of a patterned box into every empty box of the same color
+42a15761,move,move.sort,medium,reorder the 3-wide block columns by their number of holes (fewest holes first)
+42a50994,objects,objects.delete_filter,high,delete pixels that have no 8-neighbor of the same color
+4347f46a,objects,objects.outline_hollow,high,hollow out each solid rectangle leaving its border
+4364c1c4,move,move.by_rule,high,of each stacked pair of colored blocks the upper block shifts left one cell and the lower shifts right one
+444801d8,fill,fill.enclosed,high,fill the cup interior and the row above its opening with the color of the pixel inside
+445eab21,summary,summary.select_color,high,output a 2x2 filled with the color of the largest hollow rectangle
+447fd412,objects,objects.stamp_transformed,medium,stamp the template at each red marker block scaled to the marker size
+44d8ac46,fill,fill.enclosed,medium,fill with 2 the holes inside 5 shapes only when the hole is a square
+44f52bb0,summary,summary.classify,high,output 1 if the 3x3 is left-right symmetric else 7
+4522001f,scale_tile,scale_tile.other,medium,output 9x9 with two diagonal 4x4 green squares extending from the corner the red pixel points to
+456873bc,multi,multi.compositional,low,remove the 3 occluding band and continue the repeating 2 tile pattern into it; then mark the tile tips touching the old band with 8
+45737921,objects,objects.transform_each,low,within each 3x3 object swap its two colors
+45bbe264,draw,draw.grid_lines,high,draw a full row and column through each point in its color with red at the intersections
+4612dd53,objects,objects.shape_complete,medium,complete the dashed 1 rectangle and its partial inner line by filling gaps with 2
+46442a0e,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input rotated by 0/90/180/270 degrees
+469497ad,scale_tile,scale_tile.tile_plus,medium,upscale by the number of colors on the border strip and draw red diagonals out from the corners of the central square
+46f33fce,scale_tile,scale_tile.upscale,medium,each pixel on the sparse lattice becomes a 4x4 block at doubled coordinates on a 20x20 canvas
+477d2879,fill,fill.flood_from_seed,medium,each region bounded by the 1 curves is flooded with the color of the seed pixel inside it and the curves take an adjacent seed color
+47996f11,pattern,pattern.symmetry_repair,high,restore the 6-occluded area using the diagonal symmetry of the grid
+47c1f68c,scale_tile,scale_tile.mirror_tile,medium,take the shape in the top-left quadrant; recolor it with the divider color and mirror it into all four quadrants dropping the divider lines
+48131b3c,scale_tile,scale_tile.tile_plus,high,tile the color-inverted input 2x2
+484b58aa,pattern,pattern.periodic_repair,high,fill the black holes from the periodic tiling
+4852f2fa,reshape,reshape.render_from_spec,medium,crop the 8 shape and repeat it horizontally once per 4 pixel
+48d8fb45,crop,crop.by_object,high,crop the object marked by the 5 pixel above it
+48f8583b,scale_tile,scale_tile.self_kron,high,place the input at each cell holding the least frequent color of the input
+4938f0c2,pattern,pattern.make_symmetric,high,mirror the shape across both axes of the green 2x2 center
+496994bd,pattern,pattern.make_symmetric,high,mirror the top colored rows onto the bottom of the grid
+49d1d64f,reshape,reshape.extend_canvas,high,pad the grid by one cell on each side copying edge colors with 0 corners
+4aab4007,pattern,pattern.periodic_repair,high,fill the black holes by continuing the diagonal periodic color sequence
+4acc7107,move,move.gravity,medium,objects drop to the bottom grouped by color into separate columns with the smaller one stacked on the larger
+4b6b68e5,fill,fill.enclosed,high,fill each closed outline with the majority color of the noise pixels inside it; delete noise and leave unclosed shapes empty
+4be741c5,summary,summary.sort_rank,high,output the colors of the bands in left-to-right or top-to-bottom order as a 1-row or 1-column strip
+4c177718,reshape,reshape.assemble,low,below the line keep the shape and stack the matching top-panel shape next to it according to the shape correspondence in the top panel
+4c4377d9,scale_tile,scale_tile.mirror_tile,high,stack the vertically flipped input above the input
+4c5c2cf0,pattern,pattern.make_symmetric,high,mirror the shape into all four quadrants around the small center object
+4cd1b7b2,multi,multi.other,medium,complete the 4x4 latin square so each row and column contains 1 2 3 4 once (sudoku-like fill; no fitting subcategory)
+4e45f183,multi,multi.other,low,3x3 grid of 5x5 cells is rebuilt so each cell shows the part of a template pattern matching its position; rule unclear
+4e469f39,fill,fill.enclosed,medium,fill the inside of each gray cup with red and draw a red line above it extending from the gap toward one side
+4f537728,draw,draw.grid_lines,high,extend the odd-colored block color along its full row and column of blocks
+4ff4c9da,objects,objects.copy_stamp,low,copy the 8 overlay to every other location in the periodic line grid whose underlying local pattern matches the one under the 8
+505fff84,reshape,reshape.assemble,medium,extract the segment between the 1 and 8 markers in each row and stack them
+506d28a5,overlay,overlay.boolean,high,or of the top and bottom halves colored green
+50846271,objects,objects.shape_complete,high,complete each partial 2 plus cross of arm length 2 by drawing the missing cells in 8
+508bd3b6,draw,draw.path_bounce,high,continue the 8 diagonal as a 3 line that bounces off the 2 wall
+50a16a69,pattern,pattern.periodic_repair,medium,extend the periodic tile over the uniform border region and shift the whole pattern by one column
+50aad11f,reshape,reshape.assemble,medium,crop each 6 shape recolor it with its adjacent marker color and concatenate along the layout axis
+50cb2852,objects,objects.outline_hollow,high,recolor the interior of each rectangle to 8 keeping a 1-cell border
+50f325b5,recolor,recolor.by_shape,high,recolor every 3-colored group whose shape matches the 8 template shape to 8
+5117e062,crop,crop.then_transform,high,crop the object containing the 8 pixel and recolor 8 to the object color
+5168d44c,move,move.by_rule,high,move the 2 box two steps along the dotted 3 line in its direction
+516b51b7,recolor,recolor.by_position,medium,recolor each rectangle's cells by depth from its border as concentric rings 1;2;3;2
+5207a7b5,pattern,pattern.continue_sequence,low,around the gray vertical line draw staircase regions of 8 to the left and 6 to the right whose steps depend on line length
+5289ad53,summary,summary.count,high,count green and red lines and fill a 2x3 grid in reading order with that many 3s then 2s
+52fd389e,objects,objects.outline_hollow,medium,add a border around each 4 block in the color of its inner dots with thickness equal to the dot count
+539a4f51,reshape,reshape.extend_canvas,medium,double the canvas and continue the nested L-shaped color sequence outward to fill it
+53b68214,reshape,reshape.extend_canvas,high,extend the canvas to 10x10 and continue the repeating pattern downward
+543a7ed5,objects,objects.outline_hollow,medium,draw a 3 outline around each 6 object and fill its holes with 4
+54d82841,draw,draw.ray_to_border,low,project each cup's open center down to the bottom row and mark it 4
+54d9e175,recolor,recolor.global_map,medium,fill each separator-delimited cell with the color of its center pixel plus 5
+54db823b,objects,objects.delete_filter,high,delete the green block containing the fewest 9 cells
+55059096,draw,draw.connect_points,high,connect diagonally aligned green plus shapes with red diagonal lines
+551d5bf1,fill,fill.leak_ray,medium,fill each box interior with 8 and leak an 8 ray out of any gap to the border
+5521c0d9,move,move.by_rule,high,move each object upward by its own height
+55783887,draw,draw.connect_points,medium,connect pairs of 1 pixels on a diagonal with 1; a 6 on such diagonal draws its own 6 diagonal instead
+5582e5ca,summary,summary.select_color,medium,fill the whole grid with the most frequent color
+5614dbcf,reshape,reshape.downscale,high,downscale each 3x3 block to its majority color ignoring 5 noise
+56dc2b01,move,move.toward_object,high,move the 3 shape until it touches the 2 line and draw an 8 line on its far side
+56ff96f3,fill,fill.bbox_or_gap,high,fill the rectangle spanned by each pair of same-colored pixels
+575b1a71,recolor,recolor.by_position,high,recolor background cells by the rank of their column among columns containing them (left to right 1;2;3;4)
+5783df64,reshape,reshape.downscale,high,shrink each 3x3 block to its single colored pixel
+57aa92db,objects,objects.stamp_transformed,medium,stamp the template onto each other block sharing its anchor color scaled to that block's size
+5833af48,reshape,reshape.render_from_spec,low,crop the big rectangle and place the template shape at each block marked in the mask pattern
+58743b76,recolor,recolor.by_legend,high,recolor each dot by the 2x2 corner legend color of the quadrant of the field it lies in
+58e15b12,draw,draw.path_bounce,medium,each pair of vertical bars shoots zigzag diagonal lines up and down to the edges; crossings of the two colors become 6
+59341089,scale_tile,scale_tile.mirror_tile,high,tile four copies horizontally alternating horizontal flip and original
+5a5a2103,objects,objects.copy_stamp,high,copy the template shape into every grid cell recolored with the color of the square at the start of that row
+5ad4f10b,reshape,reshape.downscale,high,downscale the large blocky object to 3x3 and color it with the noise color
+5af49b42,objects,objects.copy_stamp,high,place the edge color sequence containing each lone pixel's color so that color lands on the pixel
+5b526a93,objects,objects.copy_stamp,medium,stamp an 8 hollow square at every intersection of the rows of the left column boxes and columns of the bottom row boxes
+5b692c0f,pattern,pattern.make_symmetric,high,make each object mirror symmetric about its 4 axis line using the more complete side
+5b6cbef5,scale_tile,scale_tile.self_kron,high,place the input at each colored cell of the input
+5bd6f4ac,crop,crop.fixed,high,crop the top-right 3x3 block
+5c0a986e,draw,draw.ray_to_border,high,shoot a diagonal ray from the blue square up-left and from the red square down-right
+5c2c9af4,pattern,pattern.continue_sequence,high,draw concentric squares around the middle point with spacing set by the three diagonal points out to the border
+5d2a5c43,overlay,overlay.boolean,high,or of the left and right halves colored azure
+5daaa586,crop,crop.then_transform,medium,crop the rectangle bounded by four colored lines; then extend each dot as a bar toward the line of its own color
+5ffb2104,move,move.gravity,high,push all objects to the right edge stacking against each other
+604001fa,recolor,recolor.by_contact,medium,recolor each 1 object by the shape of the 7 marker attached to it and delete the marker
+60a26a3e,draw,draw.connect_points,high,connect aligned red diamonds by blue lines between their tips
+60b61512,fill,fill.bbox_or_gap,high,fill empty cells in each object's 3x3 bounding box with 7
+60c09cac,scale_tile,scale_tile.upscale,high,upscale each cell 2x2
+6150a2bd,geometry,geometry.flip_rot,high,rotate the grid 180 degrees
+623ea044,draw,draw.ray_to_border,high,draw the four diagonal rays from the single pixel to the border
+626c0bcc,recolor,recolor.by_shape,medium,split the 8 shape into small pieces and color each piece by its piece shape/orientation
+62ab2642,fill,fill.color_by_region,medium,recolor the largest background region 8 and the smallest region 7
+62b74c02,pattern,pattern.continue_sequence,low,copy the left pattern block to the right edge and fill the gap in each row with that row's first color
+62c24649,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirror copies
+63613498,recolor,recolor.by_shape,high,recolor the shape matching the one in the corner box to 5
+639f5a19,recolor,recolor.by_position,high,color each rectangle by region: four corner quadrants 6;1;2;3 and a 2-cell-inset interior 4
+642248e4,draw,draw.ring_around,low,add one pixel next to each 1 on the side toward the nearer colored border using that border's color
+642d658d,summary,summary.select_color,medium,output 1x1 of the center color that most often appears inside a plus of 4s
+6430c8c4,overlay,overlay.boolean,high,NOR of top and bottom halves split by the 4 row; result colored 3
+6455b5f5,fill,fill.color_by_region,high,color the largest background region 1 and the smallest region(s) 8
+64a7c07e,move,move.by_rule,high,shift each object right by its own width
+662c240a,crop,crop.by_cell,high,select the 3x3 block that is not symmetric about its main diagonal
+66e6c45b,move,move.by_rule,high,move the four cells of the central 2x2 block to the four corners of the grid
+66f2d22f,overlay,overlay.boolean,high,nor the left and right halves and paint the result 5
+67385a82,recolor,recolor.by_size,high,recolor 3 objects of size at least 2 to 8 leaving single pixels
+673ef223,draw,draw.ray_to_border,medium,shoot 8 rays from the 2 wall to each 8 dot ending in 4 and copy the ray rows to the opposite wall as full rays
+67636eac,reshape,reshape.assemble,high,crop each plus-like shape and concatenate them along their dominant axis
+6773b310,overlay,overlay.cell_summary,high,each 3x3 cell of the 8 grid becomes 1 if it holds exactly two 6 pixels else 0
+67a3c6ac,geometry,geometry.flip_rot,high,flip the grid horizontally
+67a423a3,draw,draw.ring_around,high,draw a 4 square ring around the crossing point of the two lines
+67b4a34d,pattern,pattern.repair_patch,medium,output the 4x4 region hidden under the mask recovered from the grid's symmetry
+67c52801,move,move.gravity,medium,drop each floating block down into the floor gap whose width matches the block
+67e8384a,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirror copies
+681b3aeb,reshape,reshape.assemble,high,fit the two separated pieces together into a filled 3x3 square
+6855a6e4,objects,objects.transform_each,medium,mirror each 5 object across its nearby 2 bracket so it lands inside the bracket pair
+68b16354,geometry,geometry.flip_rot,high,flip the grid vertically
+68b67ca3,reshape,reshape.downscale,high,keep every other row and column to shrink the sparse 6x6 to 3x3
+692cd3b6,draw,draw.connect_points,medium,draw a yellow rectangle band joining the openings of the two red boxes
+694f12f3,recolor,recolor.by_size,high,fill the interior of the larger rectangle with 2 and the smaller with 1
+695367ec,reshape,reshape.render_from_spec,high,draw a 15x15 grid of lines in the input color with spacing given by the input size
+696d4842,draw,draw.connect_points,low,extend the line from its end to reach the lone pixel and repaint an equal length of the line from the far end in the pixel's color
+69889d6e,draw,draw.path_bounce,high,draw a 2-wide diagonal staircase from the 2 toward the top right sidestepping around 1 obstacles
+6a11f6da,overlay,overlay.priority,high,overlay the three 5x5 layers with priority 6 over 1 over 8
+6a1e5592,move,move.fit_into_hole,low,fit each 5 piece into the matching hole of the 2 wall and recolor it 1 (jigsaw fit)
+6aa20dc0,objects,objects.stamp_transformed,medium,stamp the template (rotated and scaled) onto each block group matching its corner colors
+6ad5bdfd,move,move.gravity,high,slide all objects toward the 2 wall until they stack against it or each other
+6b9890af,reshape,reshape.assemble,medium,crop the 2 frame and scale the small shape up to fill its interior
+6c434453,recolor,recolor.by_shape,medium,replace each 3x3 hollow 1 square with a 2 plus sign
+6cdd2623,draw,draw.connect_points,high,connect the pair of same-colored border pixels with a full line and erase all other pixels
+6cf79266,fill,fill.bbox_or_gap,medium,fill every empty 3x3 square region with 1
+6d0160f0,move,move.by_rule,medium,copy the grid cell containing 4 to the cell position given by the 4's position inside it and clear the rest
+6d0aefbc,scale_tile,scale_tile.mirror_tile,high,append the horizontally mirrored input to the right
+6d58a25d,draw,draw.ray_to_border,medium,draw vertical lines down from the hat shape in the columns of dots below it to the border
+6d75e8bb,fill,fill.bbox_or_gap,high,fill empty cells inside the 8 object's bounding box with 2
+6df30ad6,recolor,recolor.by_count,medium,recolor the 5 object with the most frequent noise color and delete all noise
+6e02f1e3,summary,summary.classify,high,output a fixed line pattern chosen by the number of distinct colors (1 top row; 2 diagonal; 3 antidiagonal)
+6e19193c,draw,draw.ray_to_border,high,shoot a diagonal ray from each L shape's missing corner outward to the border
+6e82a1ae,recolor,recolor.by_size,high,recolor objects by size 4 cells to 1 3 cells to 2 2 cells to 3
+6ea4a07e,recolor,recolor.global_map,high,invert the mask: background cells take a fixed color determined by the input color (8 to 2; 3 to 1; 5 to 4) and foreground becomes 0
+6ecd11f4,crop,crop.then_transform,medium,crop the small multicolor patch and zero the cells where the downscaled large shape is empty
+6f473927,scale_tile,scale_tile.tile_plus,medium,concatenate the input with its horizontal mirror whose colors are inverted to 8 and 0
+6f8cd79b,objects,objects.outline_hollow,high,draw an 8 border around the edge of the grid
+6fa7a44f,scale_tile,scale_tile.mirror_tile,high,append the vertically mirrored input below
+7039b2d7,summary,summary.count,high,output a background grid whose size equals the number of cells formed by the divider lines
+705a3229,draw,draw.ray_to_border,high,each pixel draws an L of its color toward the nearest vertical and horizontal borders
+712bf12e,draw,draw.path_bounce,high,each bottom 2 grows upward and steps right when blocked by 5
+72207abc,pattern,pattern.continue_sequence,high,repeat the color sequence along the row at triangular-number gap positions
+72322fa7,objects,objects.shape_complete,high,complete each partial fragment into the full template motif that contains it
+72a961c9,draw,draw.ray_to_border,medium,each non-1 pixel on the line shoots a ray upward of fixed length by color (2 longer than 8) capped by its color
+72ca375d,crop,crop.by_object,high,crop the one object that is left-right mirror symmetric
+73182012,crop,crop.by_object,medium,crop the top-left quarter of the 4-fold symmetric object
+73251a56,pattern,pattern.symmetry_repair,high,fill the black holes using the diagonal mirror symmetry of the pattern
+73c3b0d8,draw,draw.ray_to_border,low,each 4 pixel moves down one; if it lands just above the 2 line it emits two diagonal rays upward to the edges
+73ccf9c2,crop,crop.by_object,medium,crop the one object that is not mirror symmetric
+7447852a,fill,fill.bbox_or_gap,low,fill with 4 every third region between the 2 zigzag strokes continuing the period along the strip
+7468f01a,crop,crop.then_transform,high,crop the object and flip it horizontally
+746b3537,reshape,reshape.other,medium,collapse repeated identical rows or columns into one; gap: run-length dedupe
+74dd1130,geometry,geometry.transpose,high,transpose the grid
+759f3fd3,draw,draw.ring_around,medium,draw concentric yellow square rings at every other distance around the green cross intersection
+75b8110e,overlay,overlay.priority,high,overlay the four quadrants with color priority 5 over 9 over 4 over 6
+760b3cac,pattern,pattern.make_symmetric,high,mirror the azure shape left or right depending on which way the yellow shape points
+762cd429,pattern,pattern.continue_sequence,medium,the 2x2 seed is repeated rightward with each copy doubling in scale
+770cc55f,draw,draw.connect_points,low,in columns shared by the top and bottom bars draw yellow between the red line and the longer bar
+776ffc46,recolor,recolor.by_shape,high,recolor shapes matching the shape inside a 5 box to that shape's color
+77fdfe62,crop,crop.then_transform,high,crop the 8 pattern inside the frame and recolor each quadrant with the nearest corner color
+780d0b14,overlay,overlay.cell_summary,high,each noisy block separated by black lines becomes one cell of its color
+782b5218,fill,fill.flood_from_seed,medium,everything below the 2 boundary line becomes the main color and everything above becomes background
+7837ac64,overlay,overlay.cell_summary,medium,each grid cell becomes colored when all four corner intersections share a marker color
+79369cc6,recolor,recolor.by_shape,low,find other 3x3 windows whose 6 cells match the 6 layout of the 4/6 template and recolor their remaining cells to 4
+794b24be,summary,summary.count,high,count the 1 pixels and fill that many 2 cells in a fixed order in the top row then center
+7953d61e,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input and its 90 180 270 rotations
+79fb03f4,draw,draw.path_bounce,medium,draw a 1 line rightward from each left 1 detouring around obstacles with a 3x3 bump
+7b6016b9,fill,fill.enclosed,high,fill regions enclosed by the lines with 2 and the remaining background with 3
+7b7f7511,crop,crop.fixed,high,input is the pattern repeated twice; output one half
+7bb29440,crop,crop.by_object,high,crop the 1-rectangle containing the fewest 4/6 marker pixels
+7c008303,crop,crop.then_transform,medium,crop the 6x6 region of 3 pixels and recolor each quadrant by the matching color of the 2x2 key in the corner
+7c8af763,fill,fill.enclosed,medium,fill each cell bounded by 5 lines with the majority color of the marker pixels on its walls
+7c9b52a0,overlay,overlay.priority,medium,cut out the holes in the frame color and overlay their contents into one small grid
+7d18a6fb,reshape,reshape.assemble,medium,place each shape into the 7x7 output quadrant given by its color's position in the legend box
+7d1f7ee8,recolor,recolor.by_contact,high,recolor everything nested inside each outer frame with that outer frame's color
+7d419a02,recolor,recolor.by_position,medium,recolor 8 blocks to 4 along the diagonal cone emanating from the 6 block
+7ddcd7ec,draw,draw.ray_to_border,high,extend diagonal rays from each corner pixel attached to the block out to the border
+7df24a62,objects,objects.stamp_transformed,medium,find yellow dot groups matching the template pattern under rotation and stamp the blue frame around them
+7e02026e,recolor,recolor.by_shape,medium,background regions shaped like a 3-wide plus cross are filled with 3
+7e0986d6,objects,objects.delete_filter,high,remove the noise color pixels; noise inside objects becomes the object color
+7ee1c6ea,recolor,recolor.by_position,high,swap the two colors only inside the 5 frame
+7f4411dc,objects,objects.delete_filter,high,remove isolated noise pixels keeping only solid rectangles
+7fe24cdd,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input rotated by 0/90/180/270 degrees
+80af3007,multi,multi.compositional,medium,crop the gray shape and downscale it by 3 to a 3x3 mask; then self-kron the mask with itself to 9x9
+810b9b61,recolor,recolor.by_shape,high,recolor closed loops (shapes with a hole) to 3
+817e6c09,recolor,recolor.by_position,medium,recolor alternate 2x2 blocks to 8 counting from the rightmost block in column order
+81c0276b,summary,summary.sort_rank,high,count blocks of each non-separator color and output a bar chart sorted by count
+82819916,pattern,pattern.continue_sequence,high,continue each partial row with the full row's pattern using the partial row's color mapping
+83302e8f,fill,fill.color_by_region,medium,grid cells fully closed by walls become 3; cells joined through wall gaps become 4 including the gaps
+833dafe3,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with horizontal and vertical mirrors of the input
+834ec97d,draw,draw.grid_lines,medium,move the pixel down one and draw 4 columns of same parity above its row up to the top
+8403a5d5,pattern,pattern.continue_sequence,high,from the seed column draw lines every other column to the right with 5 caps alternating top and bottom
+845d6e51,recolor,recolor.by_legend,high,recolor each 3-colored shape with the color of the legend shape (top-left box) it matches
+846bdb03,reshape,reshape.assemble,medium,crop the 4-cornered frame and place the loose shape inside it flipped so its two colors face the matching colored frame sides
+84db8fc4,fill,fill.enclosed,high,background regions enclosed by 1/3 become 5; background regions touching the border become 2
+84f2aca1,fill,fill.color_by_region,medium,fill each object's hole with 5 if one cell or 7 if two cells
+855e0971,draw,draw.ray_to_border,medium,extend each black hole into a line across its color band perpendicular to the band orientation
+8597cfd7,summary,summary.select_color,medium,output 2x2 of the color whose column grows more from the top panel to the bottom panel
+85b81ff1,multi,multi.other,low,filled and hollow 2x2 blocks are permuted within each block row by an unclear rule (counts per row preserved)
+85c4e7cd,recolor,recolor.by_position,high,reverse the order of concentric ring colors so the outer ring takes the inner color
+85fa5666,draw,draw.ray_to_border,medium,each 2x2 block shoots diagonal rays from its corner pixels with corner colors rotated one step clockwise
+868de0fa,fill,fill.color_by_region,medium,fill each square frame interior with 2 if interior side is even and 7 if odd
+8719f442,scale_tile,scale_tile.other,medium,upscale the input 3x in the center of a 5x canvas and place original copies outside at mask positions
+8731374e,crop,crop.then_transform,high,crop the large uniform rectangle from the noise and extend each odd pixel inside it into a full row and column line
+88207623,pattern,pattern.make_symmetric,medium,mirror each shape across its 2 axis onto the side with a marker pixel and color it by the marker
+88a10436,objects,objects.copy_stamp,high,copy the multicolor template centered onto the 5 marker
+88a62173,crop,crop.by_cell,high,select the one 2x2 quadrant that differs from the other three
+890034e9,objects,objects.copy_stamp,medium,copy the hollow rectangle frame around the other black region of the same interior size
+891232d6,draw,draw.path_bounce,medium,a line rises from each 6 marker and detours around 7 segments it hits with 8/4/3 corner marks
+896d5239,fill,fill.bbox_or_gap,medium,fill the interior of each triangle outlined by 3 corner diagonals with 8
+8a004b2b,reshape,reshape.assemble,medium,crop the region between the four yellow corners and complete the small template by scaling it to match the large blocks already inside
+8a371977,recolor,recolor.by_position,high,grid cells on the outer ring become 2 and interior cells become 3
+8b28cd80,reshape,reshape.render_from_spec,medium,draw a fixed 9x9 spiral in the pixel color whose center is set by the pixel position
+8ba14f53,summary,summary.count,high,for each object fill one output row group with its color as many cells as its hole size
+8be77c9e,scale_tile,scale_tile.mirror_tile,high,append the vertically mirrored input below
+8cb8642d,objects,objects.outline_hollow,medium,hollow each rectangle and draw its diagonals from the corners in the color of its marker pixel
+8d5021e8,scale_tile,scale_tile.mirror_tile,high,mirror the input horizontally beside itself then stack 3 times with vertical flips
+8d510a79,draw,draw.ray_to_border,high,extend red pixels vertically to the gray line and blue pixels vertically to the border
+8dae5dfc,recolor,recolor.by_position,medium,reverse the color sequence of concentric layers in each nested-square object
+8e1813be,reshape,reshape.render_from_spec,medium,output a square whose side equals the gray block size with one row per line color in top-to-bottom (or left-to-right) order
+8e2edd66,scale_tile,scale_tile.tile_plus,high,place the color-inverted input at each empty cell of the input
+8e5a5113,objects,objects.transform_each,low,fill the two empty panels with the first panel rotated 90 and 180 degrees
+8eb1be9a,pattern,pattern.continue_sequence,high,repeat the patterned band vertically across the whole grid
+8ee62060,move,move.by_rule,medium,reverse the diagonal staircase so each unit moves to the mirrored position without flipping the unit itself
+8efcae92,crop,crop.by_object,high,crop the 1-rectangle containing the most 2 pixels
+8f2ea7aa,scale_tile,scale_tile.self_kron,medium,place the 3x3 shape in each 3x3 block where the shape itself has a cell (same-size grid)
+8fbca751,fill,fill.bbox_or_gap,medium,fill empty cells inside each object's 4x4-aligned bounding box with red
+90347967,objects,objects.transform_each,medium,rotate the object 180 degrees about its 5 pixel
+903d1b4a,pattern,pattern.symmetry_repair,high,restore the 3 occluded areas from the grid's mirror symmetry
+90c28cc7,reshape,reshape.downscale,high,collapse each uniform color block of the non-background region into one cell
+90f3ed37,objects,objects.shape_complete,medium,extend each 8 line pattern to the full length of the top template filling the missing part with 1
+9110e3c5,summary,summary.classify,medium,output a fixed 3x3 pattern of 8 chosen by the dominant non-background color
+913fb3ed,draw,draw.ring_around,high,surround each pixel with a 3x3 ring colored by map 3->6 8->4 2->1
+91413438,scale_tile,scale_tile.tile,medium,canvas side = 3 x zero count; repeat the input left-to-right then down as many times as it has colored cells
+91714a58,objects,objects.delete_filter,high,keep only the largest solid rectangle and erase all noise
+9172f3a0,scale_tile,scale_tile.upscale,high,upscale each pixel to 3x3
+917bccba,move,move.align,medium,the line crossing through the box moves to run along the box's edge outside it
+928ad970,draw,draw.ring_around,high,draw a rectangle in the shape color just inside the four gray marker pixels
+929ab4e9,pattern,pattern.symmetry_repair,high,restore the 2 occluded areas from the grid's mirror symmetry
+92e50de0,pattern,pattern.continue_sequence,medium,copy the single grid-cell pattern into every other cell along rows and columns with period 2 cells
+9356391f,draw,draw.ring_around,high,draw concentric square rings around the seed pixel using the legend color sequence from the top row
+93b4f4b3,move,move.fit_into_hole,high,fit each colored shape on the right into the hole of the same shape in the left frame
+93b581b8,draw,draw.ring_around,high,place a 2x2 block at each diagonal corner of the 2x2 square in the color of the opposite cell
+93c31fbe,pattern,pattern.make_symmetric,medium,inside each bracket frame make the 1 pattern mirror symmetric; delete 1 pixels outside frames
+94133066,crop,crop.then_transform,medium,crop the large 1-colored rectangle and flip it so its inner marker pixels match the arrangement of the outside marker pixels
+941d9a10,recolor,recolor.by_position,high,color the top-left grid cell 1 the center cell 2 and the bottom-right cell 3
+94414823,fill,fill.enclosed,medium,fill the empty box with 2x2 checkered quadrants using the two corner marker colors oriented by marker position
+94be5b80,objects,objects.copy_stamp,medium,stack copies of the template shape vertically recolored in the order given by the color legend columns
+94f9d214,overlay,overlay.boolean,high,NOR of top and bottom halves; result colored 2
+952a094c,move,move.by_rule,high,move the four inner corner pixels outside the frame to the diagonally opposite outer corners
+9565186b,recolor,recolor.by_count,medium,keep the majority color and recolor all other cells to 5
+95990924,draw,draw.ring_around,high,place 1 2 3 4 at the four diagonal corners around each 2x2 5 square
+95a58926,objects,objects.delete_filter,medium,delete noise pixels and paint the grid line intersections with the noise color
+963e52fc,reshape,reshape.extend_canvas,high,double the width and continue the periodic row pattern
+963f59bc,objects,objects.stamp_transformed,medium,stamp a mirrored copy of the template shape at each marker aligned by the matching cell and colored by the marker
+96a8c0cd,draw,draw.path_bounce,high,draw a 2 path from the start pixel that goes around each obstacle bar and continues to the border
+97239e3d,draw,draw.ring_around,medium,draw a rectangle outline in the marker color around the grid cells spanned by two markers and mark the enclosed cell centers
+9772c176,objects,objects.shape_complete,medium,add yellow triangular caps on each flat side of the octagons to complete them into diamonds
+97999447,draw,draw.ray_to_border,high,from each colored pixel draw a ray rightward to the border alternating the pixel color and 5
+97a05b5b,move,move.fit_into_hole,medium,crop the big red shape and insert each small piece (rotated as needed) into the hole whose shape matches it
+981571dc,pattern,pattern.symmetry_repair,high,restore the black holes using the diagonal symmetry of the grid
+98cf29f8,move,move.toward_object,high,remove the connecting stick and pull the attached shape until it touches the other block
+992798f6,draw,draw.connect_points,medium,draw a green king-move path from the red point to the blue point straight then diagonal
+99306f82,fill,fill.enclosed,high,fill the 1 box with concentric rings colored by the diagonal marker sequence outside-in
+995c5fa3,overlay,overlay.cell_summary,medium,each of the three 4x4 blocks is classified by its hole shape into a color that fills one output row
+99b1bc43,overlay,overlay.boolean,high,XOR of top and bottom halves split by the 4 row; result colored 3
+99fa7670,draw,draw.path_bounce,high,draw a line right from each pixel to the border then down the border to the next pixel's row
+9a4bb226,crop,crop.by_object,high,crop the 3x3 object that has three colors instead of two
+9aec4887,reshape,reshape.assemble,medium,crop the four-sided colored frame and place the 8 shape inside; recoloring each 8 cell to the color of the nearest frame side
+9af7a82c,summary,summary.sort_rank,high,sort colors by pixel count and output one column per color whose length equals its count
+9b2a60aa,objects,objects.copy_stamp,high,stamp the template shape at each legend-indicated row or column recolored by the legend color
+9b365c51,recolor,recolor.by_legend,high,split the 8 shape into vertical chunks and color them left to right by the legend stripe order; delete the legend
+9b4c17c4,move,move.gravity,medium,2 objects slide right in the 1-background half and left in the 8-background half
+9bebae7a,pattern,pattern.make_symmetric,medium,mirror the yellow shape across its edge in the direction the magenta arrow points; then delete the arrow
+9c1e755f,pattern,pattern.continue_sequence,medium,extend the color row or column pattern adjacent to the 5 bar along the full length of the bar
+9c56f360,move,move.gravity,high,slide each green block left until it hits an azure cell or the border
+9caba7c3,recolor,recolor.by_shape,low,where red pixels form a specific small pattern in the gray noise mark its center yellow and surrounding cells orange
+9d9215db,pattern,pattern.make_symmetric,medium,make the corner pattern 4-fold symmetric and join the blue ends with dotted lines
+9ddd00f0,pattern,pattern.symmetry_repair,high,complete the grid of blocks so the whole image is 4-fold mirror symmetric
+9def23fe,draw,draw.ray_to_border,medium,extend the 2 rectangle to the borders in all directions except rows and columns containing a marker pixel
+9dfd6313,geometry,geometry.transpose,high,transpose the grid along the main diagonal of 5
+9ecd008a,pattern,pattern.repair_patch,medium,use the grid's mirror symmetry to recover the cells under the black mask and output only that patch
+9edfc990,fill,fill.flood_from_seed,high,flood fill each black region that contains a blue pixel with blue
+9f236235,overlay,overlay.cell_summary,high,shrink each grid cell to its color then flip the result horizontally
+9f27f097,objects,objects.copy_stamp,high,copy the pattern into the empty hole of the same size mirrored horizontally
+a04b2602,draw,draw.ring_around,high,draw a blue 3x3 ring around every red pixel lying inside a green region
+a096bf4d,draw,draw.connect_points,medium,an anomalous pixel found in two cells of a row/column of the cell grid is copied to all cells between them
+a1570a43,move,move.align,high,shift the 2 shape so it sits inside the box defined by the four 3 corners
+a2fd1cf0,draw,draw.connect_points,high,connect the 2 and the 3 with an L-shaped path of 8 (horizontal from 2 then vertical to 3)
+a3325580,summary,summary.sort_rank,medium,keep colors of the largest objects ordered left to right; output columns of those colors with height equal to the max object size
+a3df8b1e,draw,draw.path_bounce,high,from the bottom-left seed draw a diagonal line upward that bounces between the left and right borders
+a3f84088,pattern,pattern.continue_sequence,medium,fill the grey frame inward with concentric rings cycling red; grey; black; grey
+a406ac07,draw,draw.grid_lines,low,for each color block in the bottom row and right column fill the square where its column span meets its row span
+a416b8f3,scale_tile,scale_tile.tile,high,repeat the input twice horizontally
+a48eeaf7,move,move.toward_object,high,move each 5 pixel straight or diagonally toward the 2 square until adjacent
+a5313dff,fill,fill.enclosed,high,fill the fully enclosed interior cells of the 2 walls with 1
+a57f2f04,pattern,pattern.continue_sequence,medium,tile the seed pattern in the corner of each enclosed region across the whole region
+a59b95c0,scale_tile,scale_tile.tile,high,tile the input n x n where n is the number of distinct colors
+a5f85a15,recolor,recolor.by_position,high,recolor every second cell along each diagonal line to 4
+a61ba2ce,reshape,reshape.assemble,high,assemble the four L-shaped corner pieces into a 4x4 square by their corner orientation
+a61f2674,recolor,recolor.by_size,high,recolor the tallest bar 1 and the shortest bar 2 and delete the others
+a64e4611,fill,fill.bbox_or_gap,medium,fill the largest empty band/cross region with 3 leaving a one-cell margin from the noise pixels
+a65b410d,pattern,pattern.continue_sequence,medium,from the horizontal 2 line build a staircase: rows above in 3 grow by one per row; rows below in 1 shrink by one per row
+a680ac02,reshape,reshape.assemble,high,drop solid squares and concatenate the hollow squares in a row or column following their layout in the input
+a68b268e,overlay,overlay.priority,high,overlay the four quadrants with priority 7 over 4 over 8 over 6
+a699fb00,draw,draw.connect_points,high,fill the single gap between horizontally adjacent pairs of 1 with 2
+a740d043,crop,crop.then_transform,high,crop the bounding box of non-blue pixels and turn blue background to black
+a78176bb,draw,draw.ray_to_border,medium,draw a parallel diagonal line offset beyond each 5 triangle attached to the diagonal and delete the triangle
+a79310a0,move,move.by_rule,medium,shift the 8 object down one row and recolor it 2
+a85d4709,recolor,recolor.by_position,high,color each row by the column position of its 5 pixel
+a8610ef7,recolor,recolor.by_position,medium,recolor each 8 to 2 if its vertical mirror cell is also 8 else to 5
+a87f7484,crop,crop.by_cell,high,select the 3x3 block whose shape differs from the others
+a8c38be5,reshape,reshape.assemble,high,assemble the nine 3x3 pieces into a 9x9 square placing each by the position its colored corner/edge marks indicate
+a8d7556c,fill,fill.bbox_or_gap,medium,fill every empty 2x2 square region with 2
+a934301b,objects,objects.delete_filter,high,delete blue blocks that contain more than one 8 cell
+a9f96cdd,draw,draw.ring_around,high,replace the 2 pixel by four diagonal neighbors with fixed colors 3 6 8 7
+aa18de87,fill,fill.bbox_or_gap,high,fill with 2 the cells between the two arms of each V/zigzag line in every row
+aa300dc3,draw,draw.path_bounce,medium,draw the longest diagonal line of 8 that fits through the empty interior
+aa4ec2a5,objects,objects.outline_hollow,medium,outline every blue blob in red; blobs containing holes become azure with magenta holes
+aab50785,crop,crop.by_frame,medium,for each pair of 2x2 color-8 blocks extract the strip between them and stack the strips vertically
+aabf363d,recolor,recolor.by_legend,high,recolor the shape with the color of the corner marker pixel and delete the marker
+aba27056,fill,fill.leak_ray,medium,fill the open container interior with 4 and shoot 4 rays (straight and diagonal) out of its opening to the border
+ac0a08a4,scale_tile,scale_tile.upscale,high,upscale by k where k is the number of colored pixels
+ac0c5833,objects,objects.copy_stamp,high,stamp the 2 template beside every 4 marker triple with the same relative orientation
+ac2e8ecf,move,move.by_rule,high,move hollow rings to the top and plus shapes to the bottom keeping columns
+ac3e2b04,draw,draw.ray_to_border,medium,through each green box draw a blue line perpendicular to its red line and ring blue boxes where it crosses other red lines
+ac605cbb,draw,draw.path_bounce,low,each colored pixel emits a fixed-length 5 line in a color-specific direction then turns; crossings marked 4 and continue diagonally
+ad7e01d0,scale_tile,scale_tile.self_kron,high,place the input at each gray cell of the input
+ae3edfdc,move,move.toward_object,high,pull the satellite pixels toward the center pixel of their pair color until adjacent
+ae4f1146,crop,crop.by_object,high,crop the 3x3 block containing the most 1 pixels
+ae58858e,recolor,recolor.by_size,high,recolor objects with 4 or more cells to 6
+aedd82e4,recolor,recolor.by_size,high,recolor isolated single 2 pixels to 1
+aee291af,crop,crop.by_object,high,crop the one 8-bordered square whose inner 2 pattern differs from the others
+af22c60d,pattern,pattern.symmetry_repair,high,fill the black holes using the grid's mirror symmetry
+af24b4cc,overlay,overlay.cell_summary,high,each 3x2 block separated by black lines becomes one cell of its majority color inside a black border
+af902bf9,fill,fill.bbox_or_gap,high,fill the interior between each set of four 4 corner pixels with 2
+b0722778,multi,multi.other,low,analogy per row; the transform (color map or rotation) between the two left 2x2 blocks is applied to the right block; gap: analogy A:B::C:?
+b0c4d837,summary,summary.count,high,count the empty rows above the 8 fill inside the 5 container and output that many 8 cells in a 3x3 snake order
+b0f4d537,reshape,reshape.render_from_spec,low,redraw the small line pattern beside the 5 block at the positions of the 4 markers on the right keeping its colors and crossing priority
+b15fca0b,draw,draw.connect_points,medium,draw a 4 path connecting the two 2 endpoints routing around the 1 walls
+b190f7f5,scale_tile,scale_tile.self_kron,medium,split input into a mask half and a color half; place the 8 mask at each colored cell of the other half recolored by that cell
+b1948b0a,recolor,recolor.global_map,high,recolor 6 to 2
+b1fc8b8e,summary,summary.classify,high,output one of two fixed 5x5 patterns depending on whether the 8 shape has a protruding arm
+b20f7c8b,recolor,recolor.by_legend,medium,swap each box between pattern and solid fill using the legend that pairs patterns with colors
+b230c067,recolor,recolor.by_shape,high,recolor the odd-one-out shape to 2 and the repeated shapes to 1
+b27ca6d3,draw,draw.ring_around,high,draw a 3 ring around every 2-cell domino of 2 while leaving single 2 pixels unchanged
+b2862040,recolor,recolor.by_shape,high,recolor closed loops to 8 leaving open shapes 1
+b457fec5,recolor,recolor.by_position,medium,color the diagonal band stripe by stripe by distance from its edge using the color sequence given at the top
+b4a43f3b,scale_tile,scale_tile.self_kron,medium,downscale the top pattern to 3x3 and stamp it at every colored cell of the bottom mask (kron of mask with pattern); gap: kron with a separate mask
+b527c5c6,draw,draw.ray_to_border,medium,from each red marker in a green bar extend a red line perpendicular to the bar to the border flanked by green of the bar's thickness
+b548a754,objects,objects.transform_each,medium,stretch the framed box toward the 8 marker until it reaches it and delete the marker
+b60334d2,draw,draw.ring_around,high,replace each gray pixel with a 3x3 ring of alternating 5 corners and 1 edges with empty center
+b6afb2da,objects,objects.outline_hollow,medium,recolor each gray rectangle so corners become 1; edges become 4; interior becomes 2
+b7249182,draw,draw.connect_points,medium,two same-row/column points each grow a line toward the other ending in a fixed bracket shape meeting in the middle
+b775ac94,pattern,pattern.make_symmetric,medium,reflect each main shape across the side where a single colored marker pixel touches it; the reflected copy takes the marker color
+b782dc8a,fill,fill.flood_from_seed,high,flood the maze corridors from the seed pixels alternating the two seed colors by path distance
+b7999b51,summary,summary.sort_rank,high,each object becomes a column of its color with length equal to its height; columns sorted by height descending
+b7cb93ac,reshape,reshape.assemble,high,fit the three separate pieces together into a solid 3x4 rectangle
+b7f8a4d8,draw,draw.connect_points,high,connect same-colored odd tiles in the tile grid along rows and columns with lines of their inner color
+b7fb29bc,draw,draw.ring_around,medium,inside the 3 frame draw concentric square rings around the interior seed pixel alternating 4 and 2 by chebyshev distance
+b8825c91,pattern,pattern.symmetry_repair,high,restore the 4 occluded areas from the grid's mirror symmetry
+b8cdaf2b,draw,draw.ray_to_border,medium,from the ends of the top layer of the bottom stack draw diagonal rays upward in the stack's inner color
+b91ae062,scale_tile,scale_tile.upscale,high,upscale by k where k is the number of distinct colors
+b942fd60,draw,draw.path_bounce,medium,draw a 2 line from the left that turns perpendicular at each obstacle and branches both ways until the border
+b94a9452,crop,crop.then_transform,high,crop the two-color square and swap its two colors
+b9630600,draw,draw.connect_points,low,join neighboring hollow rectangles into one network by opening 2-wide corridors between them
+b9b7f026,summary,summary.select_color,high,output 1x1 of the color of the rectangle that has a hole
+ba26e723,recolor,recolor.by_position,high,recolor every 4 in columns whose index is a multiple of 3 to 6
+ba97ae07,multi,multi.other,medium,swap which bar is on top at the crossing; no layer-order subcategory
+ba9d41b8,objects,objects.outline_hollow,medium,carve a checkerboard of background into the interior of each rectangle keeping a one-cell border
+baf41dbf,objects,objects.transform_each,medium,stretch the green rectangle so each side reaches the cell next to a magenta marker; extending internal dividers
+bb43febb,objects,objects.outline_hollow,high,recolor the interior of each rectangle to 2 keeping a 1-cell border
+bb52a14b,objects,objects.copy_stamp,medium,stamp the 4-colored template around every partial match of its 1-8 core pattern
+bbb1b8b6,move,move.fit_into_hole,medium,place the right shape into the left shape's holes only if it fills them exactly; otherwise output the left half
+bbc9ae5d,reshape,reshape.extend_canvas,high,add rows (half the width in total) each extending the colored prefix by one cell
+bc1d5164,overlay,overlay.boolean,high,OR the four 3x3 corners of the 5x7 grid (overlapping middle column/row) into one 3x3
+bc4146bd,scale_tile,scale_tile.mirror_tile,high,tile five copies horizontally alternating original and horizontal flip
+bcb3040b,draw,draw.connect_points,high,draw a line between the two red endpoints; turning crossed blue cells green and empty cells red
+bd14c3bf,recolor,recolor.by_shape,high,recolor every 1 shape congruent to the 2-colored reference shape to 2
+bd4472b8,pattern,pattern.continue_sequence,high,below the gray separator fill rows repeating the top-row colors one color per full row cyclically
+bda2d7a6,recolor,recolor.global_map,high,cyclically shift the concentric ring colors so each ring takes the color of the ring outside it
+bdad9b1f,draw,draw.ray_to_border,high,extend the 8 line and the 2 line across the grid; mark their intersection with 4
+be03b35f,crop,crop.then_transform,medium,crop the top-left 2x2 block and rotate it 90 degrees counterclockwise
+be94b721,crop,crop.by_object,high,crop the largest object
+beb8660c,move,move.align,medium,sort the horizontal bars by length and stack them right-aligned above the base bar shortest on top
+bf32578f,pattern,pattern.make_symmetric,medium,mirror the half outline into a symmetric shape then output only its filled interior with the outline removed
+bf699163,crop,crop.by_object,medium,crop the 3x3 ring that lies inside the dashed 7 frame
+bf89d739,draw,draw.connect_points,high,connect all 2 points with axis-aligned 3 lines forming a tree through shared rows and columns
+c074846d,objects,objects.transform_each,medium,rotate the red arm 90 degrees clockwise around the grey pivot and recolor the old arm green
+c0f76784,fill,fill.color_by_region,medium,fill each hollow 5 square interior with a color chosen by interior size (1x1 to 6; 2x2 to 7; 3x3 to 8)
+c1990cce,reshape,reshape.extend_canvas,medium,extend the 1xN row into an NxN canvas drawing a red triangle from the apex and parallel blue diagonals inside
+c1d99e64,draw,draw.grid_lines,high,color every fully empty row and column with 2
+c3202e5a,crop,crop.by_cell,high,select the grid cell whose pixels all share a single color
+c35c1b4c,pattern,pattern.make_symmetric,medium,make the central blob left-right symmetric by mirroring its wider side
+c3e719e8,scale_tile,scale_tile.self_kron,high,place a copy of the input in each 3x3 block where the input has its most frequent color
+c3f564a4,pattern,pattern.periodic_repair,high,fill the black holes by continuing the diagonal periodic color sequence
+c444b776,objects,objects.copy_stamp,medium,copy the contents of the only non-empty grid cell into every other cell of the separator grid
+c48954c1,scale_tile,scale_tile.mirror_tile,high,tile 3x3 with flipped copies so neighbors mirror each other around the center input
+c59eb873,scale_tile,scale_tile.upscale,high,upscale each pixel to 2x2
+c62e2108,pattern,pattern.continue_sequence,medium,repeat each hollow square tile toward the border edge marked by the blue bar until the edge
+c64f1187,reshape,reshape.render_from_spec,medium,each 5-cell in the grid with a colored marker is replaced by the legend shape of that marker color; plain 5 cells become empty
+c658a4bd,reshape,reshape.assemble,high,nest the hollow squares concentrically ordered by size with the largest outside
+c663677b,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+c6e1b8da,move,move.by_rule,high,move each rectangle along its protruding tail by the tail length and delete the tail
+c7d4e6ad,recolor,recolor.by_legend,high,recolor each 5 cell with the legend color in the left column of the same row
+c87289bb,draw,draw.path_bounce,medium,extend the 8 lines downward routing around each side of 2 obstacles
+c8b7cc0f,summary,summary.count,high,count marker pixels inside the 1 frame and fill that many cells of a 3x3 in reading order with the marker color
+c8cbb738,reshape,reshape.assemble,high,overlay the corner-sets of each 4-point shape (square diamond rectangle) centered into one canvas sized by the largest
+c8f0f002,recolor,recolor.global_map,high,recolor every 7 to 5
+c909285e,crop,crop.by_frame,high,crop the square framed by the uniquely colored border
+c92b942c,scale_tile,scale_tile.tile_plus,medium,tile the input 3x3 then draw a blue row through each pixel and green diagonal pixels around it
+c97c0139,draw,draw.ring_around,high,draw an 8 diamond around each 2 line segment with radius growing to half the segment length
+c9e6f938,scale_tile,scale_tile.mirror_tile,high,append the horizontally mirrored input to the right
+c9f8e694,recolor,recolor.by_position,high,recolor each gray cell by the color in column 0 of its row
+ca8de6ea,reshape,reshape.assemble,high,compress the X-shaped scattered pixels into a 3x3 grid by removing the gaps
+ca8f78db,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic stripe pattern
+caa06a1f,pattern,pattern.continue_sequence,medium,extend the checkerboard tiling over the whole grid replacing the filler border; shifted by one phase
+cad67732,reshape,reshape.extend_canvas,high,double the canvas and continue the diagonal pattern to the new corner
+cb227835,draw,draw.connect_points,medium,connect the two 8 points with a 3 parallelogram outline made of a diagonal and a straight run
+cbded52d,draw,draw.connect_points,medium,when two blocks in a row or column share a special colored cell at the same position mark that position in the block between them
+ccd554ac,scale_tile,scale_tile.tile,high,tile the input n x n times where n is the input side length
+cce03e0d,scale_tile,scale_tile.self_kron,high,place a copy of the input in each 3x3 block where the input pixel is red
+cd3c21df,crop,crop.by_object,high,crop the object whose shape/color appears only once
+cdecee7f,summary,summary.sort_rank,medium,list pixels ordered by column and write them into a 3x3 in snake order
+ce039d91,recolor,recolor.by_position,medium,recolor 5 cells that have a left-right mirror partner about the vertical center line to 1
+ce22a75a,draw,draw.ring_around,high,replace each gray pixel with a 3x3 block of 1 centered on it
+ce4f8723,overlay,overlay.boolean,high,OR of top and bottom halves split by the 4 row; result colored 3
+ce602527,crop,crop.by_object,medium,crop the small object whose shape matches the large partly offscreen object
+ce8d95cc,reshape,reshape.downscale,high,collapse runs of identical rows and columns to one each
+ce9e57f2,recolor,recolor.by_position,high,recolor the lower half of each vertical bar to 8
+cf133acc,draw,draw.ray_to_border,low,close the gaps in each horizontal line and from each gap extend a vertical line of the line color until the next line
+cf98881b,overlay,overlay.priority,high,overlay the three 4x4 blocks with priority 4 over 9 over 1
+cfb2ce5a,objects,objects.stamp_transformed,medium,mirror the top-left quadrant into the other three quadrants recoloring by the seed pixels given in each
+d017b73f,reshape,reshape.assemble,medium,remove empty columns and shift each object vertically so it connects end to end with the previous one
+d037b0a7,draw,draw.ray_to_border,high,each colored pixel drips its color straight down to the bottom border
+d06dbe63,draw,draw.path_bounce,high,from the 8 pixel draw 5 staircase paths going up-right and down-left (two cells across then two up) to the border
+d07ae81c,draw,draw.path_bounce,medium,shoot diagonal rays from each marker pixel; ray color depends on which background region it crosses
+d0f5fe59,summary,summary.count,high,count the objects n and output an n x n diagonal of 8
+d10ecb37,crop,crop.fixed,high,crop the top-left 2x2
+d13f3404,reshape,reshape.extend_canvas,high,on a 6x6 canvas extend every pixel as a diagonal ray toward bottom-right
+d19f7514,overlay,overlay.boolean,high,OR the top and bottom halves and paint the result color 4
+d22278a0,pattern,pattern.continue_sequence,low,each corner seed generates a staircase of alternating stripes over the cells closer to it than to other seeds
+d23f8c26,objects,objects.delete_filter,high,keep only the middle column and erase everything else
+d282b262,move,move.gravity,high,push all small objects right until they hit the border or another object
+d2abd087,recolor,recolor.by_size,high,recolor objects of exactly 6 cells to 2 and all others to 1
+d2acf2cb,recolor,recolor.global_map,medium,between each pair of yellow markers on a row or column swap colors 6<->8 and 0<->7
+d304284e,pattern,pattern.continue_sequence,medium,repeat the 7 shape rightward with one-cell gaps coloring every third copy 6; 6 copies also repeat downward to the edge
+d364b489,draw,draw.ring_around,high,around each 1 pixel stamp a fixed plus pattern: 2 above; 7 left; 6 right; 8 below
+d37a1ef5,fill,fill.enclosed,medium,fill the 2 box interior with 2 except inside the bounding box of the 5 pixels
+d406998b,recolor,recolor.by_position,high,recolor every other gray cell counting columns from the right to 3
+d43fd935,draw,draw.ray_to_border,high,singleton pixels aligned with the green 2x2 block draw a line of their color toward the block until touching it
+d4469b4b,summary,summary.classify,high,output a fixed gray 3x3 pattern (plus/T/corner) chosen by the input color
+d47aa2ff,overlay,overlay.boolean,medium,compare left and right halves split by the 5 line; keep pixels in both; mark left-only with 2 and right-only with 1
+d492a647,recolor,recolor.by_position,medium,fill empty cells with the same row and column parity as the seed pixel with the seed color
+d4a91cb9,draw,draw.connect_points,high,connect the 8 and the 2 with an L-shaped path of 4 (vertical from 8 then horizontal to 2)
+d4b1c2b1,scale_tile,scale_tile.upscale,high,upscale each cell by k where k is the number of distinct colors in the input
+d4c90558,summary,summary.sort_rank,high,each frame becomes a bar of its color whose length is the count of 5 pixels inside; bars sorted by length ascending
+d4f3cd78,fill,fill.leak_ray,medium,fill the 5 box interior with 8 and leak a ray of 8 out of the gap in its wall to the border
+d511f180,recolor,recolor.global_map,high,swap colors 5 and 8
+d56f2372,crop,crop.by_object,high,crop the one object that is left-right mirror symmetric
+d5c634a2,summary,summary.count,medium,count T shapes by facing direction; left-facing counts fill 3s on the left and right-facing counts fill 1s on the right of a 3x6 grid
+d5d6de2d,fill,fill.enclosed,medium,fill the interior of each hollow red rectangle with 3 and delete all red; solid shapes vanish
+d631b094,summary,summary.count,high,output a 1xN row of the single color where N is its pixel count
+d687bc17,move,move.toward_object,medium,move each stray pixel to the border line of its own color adjacent to it; delete pixels with no matching border
+d6ad076f,fill,fill.bbox_or_gap,high,fill the gap between the two rectangles with 8 inset by one cell on each side of the shared span
+d89b689b,move,move.toward_object,high,move the four scattered pixels into the 2x2 block cell closest to each; replacing the block
+d8c310e9,pattern,pattern.continue_sequence,high,continue the periodic bottom pattern to the right edge
+d90796e8,recolor,recolor.by_contact,high,where a 3 is orthogonally adjacent to a 2 the 3 becomes 8 and the 2 is erased
+d931c21c,objects,objects.outline_hollow,medium,for each closed 1 loop add a 2 border outside and a 3 border inside; open loops unchanged
+d94c3b52,recolor,recolor.by_shape,medium,glyphs identical to the 8 glyph become 8 and glyphs lying between two such in a row or column become 7
+d9f24cd1,draw,draw.path_bounce,medium,draw vertical red lines upward from bottom red pixels; when a gray pixel blocks the line it steps one column right and continues
+d9fac9be,summary,summary.select_color,high,output 1x1 of the color of the center pixel enclosed by a 3x3 ring
+da2b0fe3,draw,draw.grid_lines,medium,draw a full 3 line across the grid through the empty gap row or column splitting the symmetric shape
+da515329,draw,draw.path_bounce,medium,grow a square spiral of 8 outward from each arm of the cross to the border
+dae9d2b5,overlay,overlay.boolean,high,OR the two 3x3 halves and color the union magenta
+db3e9e38,pattern,pattern.continue_sequence,medium,from the vertical 7 line grow a V of columns alternating 7 and 8 whose heights decrease by one per column outward
+db93a21d,multi,multi.compositional,medium,draw a 3 border around each 9 square with thickness half its side; then drop a 1 ray of the square width downward to the bottom
+dbc1a6ce,draw,draw.connect_points,high,connect pairs of 1 pixels sharing a row or column with 8 lines
+dc0a314f,pattern,pattern.repair_patch,medium,use the grid's mirror symmetry to recover the cells under the green mask and output only that patch
+dc1df850,draw,draw.ring_around,high,draw a ring of 1 around every 2 pixel; other colors untouched
+dc2aa30b,move,move.sort,medium,sort the 3x3 cells of the grid by their count of red cells (gap: sort cells by count)
+dc2e9a9d,objects,objects.copy_stamp,medium,copy each 3 shape with a protrusion adjacent in the protrusion direction coloring copy 1 if horizontal and 8 if vertical
+dc433765,move,move.toward_object,high,move the 3 pixel one step toward the 4 pixel
+dd2401ed,move,move.by_rule,medium,move the grey divider from column c to column 2c+1 and recolor red pixels it passes to blue
+ddf7fa4f,recolor,recolor.by_contact,high,recolor each gray block by the color of the marker pixel in the top row above it
+de1cd16c,summary,summary.select_color,high,output 1x1 of the region color containing the most noise pixels
+de493100,pattern,pattern.symmetry_repair,high,use the symmetry of the pattern to reconstruct and output the region hidden by the 7 mask
+ded97339,draw,draw.connect_points,high,connect every pair of 8 pixels sharing a row or column with 8
+df8cc377,fill,fill.enclosed,medium,fill each hollow box with a checkerboard of a scattered color matched by count; then remove the scattered pixels
+e0fb7511,recolor,recolor.by_size,high,recolor background components of size 2 or more to 8
+e133d23d,overlay,overlay.boolean,high,OR of the left and right 3x3 halves around the 4 divider; result colored 2
+e179c5f4,draw,draw.path_bounce,high,from the bottom-left 1 draw a diagonal path that bounces between the side walls; fill the rest with 8
+e1baa8a4,reshape,reshape.downscale,high,each uniform rectangular block of uneven size becomes one cell of its color
+e1d2900e,move,move.toward_object,high,slide blue pixels sharing a row or column with a red 2x2 block until they touch it
+e2092e0c,draw,draw.ring_around,low,find the region matching the corner template and frame it with a grey square
+e21a174a,move,move.sort,high,reverse the vertical order of the stacked objects keeping each object's shape
+e21d9049,pattern,pattern.continue_sequence,high,extend the cross's horizontal and vertical color sequences periodically to the borders
+e26a3af2,objects,objects.delete_filter,high,denoise each stripe by setting it to its majority color
+e345f17b,overlay,overlay.boolean,high,NOR the left and right halves and paint the result color 4
+e3497940,overlay,overlay.priority,high,fold the right half onto the left half across the 5 column mirroring it and union the colors
+e4075551,draw,draw.grid_lines,low,the four outer markers define a rectangle whose sides take their colors; draw a 5 cross from the 2 center to the sides
+e40b9e2f,pattern,pattern.make_symmetric,high,complete the object so it is 4-fold rotationally symmetric about its center
+e41c6fd3,move,move.align,high,move every object vertically to align with the row of the azure object
+e48d4e1a,move,move.by_rule,high,shift the cross left and down by the number of gray pixels in the corner and delete the gray
+e5062a87,objects,objects.copy_stamp,medium,stamp the red template shape into every empty region where it fits exactly
+e509e548,recolor,recolor.by_shape,high,recolor each green path by its shape; L-shape to 1; U-shape to 6; other to 2
+e50d258f,crop,crop.by_object,high,crop the rectangle containing the most 2 pixels
+e57337a4,reshape,reshape.downscale,high,downscale 15x15 by 5x5 blocks; a block containing a 0 pixel becomes 0
+e5790162,draw,draw.path_bounce,high,draw a 3 path rightward that turns down at 6 and up or right at 8 obstacles
+e5c44e8f,draw,draw.path_bounce,medium,draw a square spiral of 3 out from the seed stopping where it would hit a 2
+e619ca6e,pattern,pattern.continue_sequence,medium,emit repeated copies of each object diagonally downward to both sides until the border
+e633a9e5,reshape,reshape.other,medium,stretch 3x3 to 5x5 by doubling the first and last row and column; gap: border-duplicating stretch
+e66aafb8,pattern,pattern.symmetry_repair,high,use the symmetry of the pattern to reconstruct and output the region hidden by the 0 mask
+e6721834,objects,objects.copy_stamp,medium,move each template pattern from the busy half onto the empty half at the position matching its marker pixels
+e681b708,recolor,recolor.by_contact,medium,recolor each 1 dot with the color of the line-junction marker at the corner of its compartment
+e69241bd,fill,fill.flood_from_seed,high,flood fill each seed color through connected empty cells bounded by 5 walls
+e6de6e8f,reshape,reshape.render_from_spec,medium,read the input pieces left to right as path segments and draw a descending path of 2 starting from a 3 at the top
+e73095fd,fill,fill.enclosed,medium,fill with 4 only the enclosed rectangular rooms formed by the 5 lines
+e74e1818,objects,objects.transform_each,high,flip each colored object vertically in place
+e760a62e,draw,draw.connect_points,high,fill grid cells between same-colored marked cells along rows and columns; red-green crossings become magenta
+e7639916,draw,draw.ring_around,medium,draw the 1 bounding rectangle outline through all 8 points
+e76a88a6,objects,objects.copy_stamp,high,copy the multicolor template onto every gray block of the same size
+e78887d1,multi,multi.other,low,output is a single 3-row strip of shapes derived from the input strips; rule for which shapes appear is unclear
+e7a25a18,crop,crop.then_transform,high,crop the 2 frame and scale the inner 2x2-block pattern up to fill its interior
+e7b06bea,pattern,pattern.continue_sequence,medium,merge the stripe colors into one column cycling them in runs whose length equals the count of grey cells
+e7dd8335,recolor,recolor.by_position,high,recolor the bottom half of the shape to 2
+e8593010,recolor,recolor.by_size,high,recolor background holes by size; 1 cell to 3; 2 cells to 2; 3 cells to 1
+e872b94a,summary,summary.count,high,output a black column whose height is the number of objects plus one
+e88171ec,fill,fill.bbox_or_gap,medium,find the largest empty square region and fill its 1-cell-inset interior with 8
+e8dc4411,objects,objects.copy_stamp,medium,repeatedly stamp the hole shape diagonally away from the marker in the marker color until the border
+e95e3d8e,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+e9614598,draw,draw.ring_around,high,draw a 3 plus sign at the midpoint between the two 1 pixels
+e98196ab,overlay,overlay.priority,high,union of the top and bottom halves split by the 5 row; colors kept
+e99362f0,overlay,overlay.priority,high,overlay the four quadrants split by 4 lines using a fixed color priority order
+e9ac8c9e,recolor,recolor.by_contact,medium,recolor each quadrant of the grey square with the color of its nearest corner pixel and delete the corners
+e9afcf9a,recolor,recolor.by_position,high,alternate the two row colors column by column into a checkerboard
+e9b4f6fc,crop,crop.then_transform,high,crop the large object and recolor its pixels using the scattered color pairs as a legend
+e9bb6954,draw,draw.grid_lines,high,each solid 3x3 block emits full row and column lines through its center in its color; crossings of different colors become black
+e9c9d9a1,recolor,recolor.by_position,high,in the 3 grid fill the four corner cells with 2/4/1/8 and all interior cells with 7
+ea32f347,recolor,recolor.by_size,high,recolor bars by length rank; longest 1; middle 4; shortest 2
+ea786f4a,draw,draw.ray_to_border,high,draw both diagonals through the central black pixel to the borders in black
+ea959feb,pattern,pattern.periodic_repair,high,restore the 1-masked regions using the periodic tiling of the background
+ea9794b1,overlay,overlay.priority,high,overlay the four quadrants with color priority 3 over 9 over 8 over 4
+eb281b96,reshape,reshape.extend_canvas,high,extend the canvas downward by repeatedly reflecting the strip vertically
+eb5a1d5d,reshape,reshape.downscale,medium,reduce the nested rectangles to one-cell-thick concentric rings
+ec883f72,draw,draw.ray_to_border,medium,from the outer corners of the open container draw diagonal rays outward in the color of the enclosed object
+ecaa0ec1,objects,objects.transform_each,low,rotate the 3x3 blue-azure object in the direction set by the yellow markers and keep one marker at its corner
+ecdecbb3,draw,draw.ray_to_border,medium,shoot a ray from each red pixel to the nearest azure lines and draw a 3x3 azure box with red center at each hit
+ed36ccf7,geometry,geometry.flip_rot,high,rotate the grid 90 degrees counterclockwise
+ed74f2f2,crop,crop.then_transform,medium,output the right 3x3 shape recolored by a color determined by the shape of the left 3x3 piece
+ed98d772,scale_tile,scale_tile.mirror_tile,high,tile 2x2 with the input and its 90/180/270 degree rotations
+ef135b50,fill,fill.bbox_or_gap,high,fill horizontal gaps between pairs of red blocks in the same rows with 9
+ef26cbf6,recolor,recolor.by_contact,high,recolor 1 shapes with the marker color in the paired cell across the divider
+f0afb749,scale_tile,scale_tile.tile_plus,medium,upscale each pixel to 2x2 then draw blue diagonal lines through the empty blocks along the main diagonals of each colored block
+f0df5ff0,draw,draw.ring_around,high,paint the empty cells of the 3x3 neighbourhood of every blue pixel blue
+f15e1fac,draw,draw.path_bounce,medium,8 lines run from their edge seeds across the grid and shift one step sideways at each row/column marked by a 2
+f1cefba8,draw,draw.grid_lines,medium,the defect pixels in the frame mark rows and columns; draw those lines through the inner box and extend them outside the shape
+f21745ec,objects,objects.copy_stamp,medium,copy the inner pattern of the patterned frame into every same-sized empty frame in its color; delete frames of other sizes
+f25fbde4,crop,crop.then_transform,high,crop the yellow object bounding box and upscale it by 2
+f25ffba3,pattern,pattern.make_symmetric,high,mirror the bottom half of the grid into the top half vertically
+f2829549,overlay,overlay.boolean,high,NOR of left and right halves split by the 1 column; result colored 3
+f35d900a,multi,multi.compositional,medium,draw rings around the four corner pixels in the partner color and connect them with dotted 5 lines
+f3b10344,fill,fill.bbox_or_gap,medium,fill the gap between facing same-color rectangles with an 8 bridge narrower by one cell on each side
+f3cdc58f,summary,summary.count,medium,count pixels of colors 1-4 and draw bars of those heights in columns 1-4 at the bottom left (gap: same-size histogram)
+f3e62deb,move,move.by_rule,high,move the hollow square to the border in the direction determined by its color
+f4081712,pattern,pattern.symmetry_repair,high,use the symmetry of the pattern to reconstruct and output the region hidden by the 3 mask
+f45f5ca7,move,move.by_rule,high,shift each first-column pixel right by an offset fixed by its color
+f5aa3634,crop,crop.by_object,high,crop the multi-color object that appears most times
+f5b8619d,scale_tile,scale_tile.tile_plus,medium,draw azure columns below each colored pixel then tile the result 2x2
+f5c89df1,objects,objects.copy_stamp,medium,stamp the azure pattern around the green center at each red marker position and remove center and markers
+f76d97a5,recolor,recolor.global_map,high,recolor 5 to the other color and the other color to 0
+f823c43c,pattern,pattern.periodic_repair,high,remove the 6 noise and restore the periodic 8/4 or 7/8 lattice
+f83cb3f6,move,move.gravity,medium,pull pixels onto the azure line only at columns where the line is solid; delete the rest
+f8a8fe49,move,move.by_rule,medium,mirror the gray shape inside the red brackets to the outside across the bracket line
+f8b3ba0a,summary,summary.sort_rank,high,count block colors and output the non-majority colors sorted by count descending as a column
+f8be4b64,draw,draw.grid_lines,medium,for each green plus with a colored center draw a full row and column through the center in that center color
+f8c80d96,pattern,pattern.continue_sequence,medium,continue the nested line pattern outward with the same spacing to the border and fill the background with 5
+f8ff0b80,summary,summary.sort_rank,high,output object colors as a column sorted by object size descending
+f9012d9b,pattern,pattern.repair_patch,medium,output only the hidden black patch filled in from the periodic tiling (size change but key step is repair)
+f9a67cb5,draw,draw.path_bounce,medium,red flow runs across open space and through wall gaps; spreading along each wall it hits and dropping through gaps
+f9d67f8b,pattern,pattern.symmetry_repair,high,replace the maroon mask with content from the grid's mirror symmetry
+fafd9572,recolor,recolor.by_legend,medium,recolor the 1 shapes by the legend arranged in the same relative layout as the shapes
+fafffa47,overlay,overlay.boolean,high,NOR the two 3x3 halves and color the result red
+fb791726,scale_tile,scale_tile.tile_plus,medium,double the canvas copying the input to top-left and bottom-right; draw a green row between each pair of same-column pixels
+fc754716,draw,draw.ring_around,medium,draw a border around the whole grid in the single pixel's color and erase the pixel
+fcb5c309,crop,crop.by_frame,medium,crop the frame containing the most marker dots and recolor its border with the marker color
+fcc82909,draw,draw.ray_to_border,low,below each 2x2 block draw a 2-wide column of 3 whose height equals the number of distinct colors in the block
+fd096ab6,objects,objects.shape_complete,medium,complete each partial colored fragment into the full shape given by the one complete template
+fd4b2b02,pattern,pattern.continue_sequence,medium,from the seed bar unfold alternating 6/3 bars rotated 90 degrees at each end spiraling outward to the border
+fe9372f3,draw,draw.ray_to_border,high,from the 2 plus emit diagonal 1 rays and orthogonal rays colored periodically 8 8 4 to the border
+fea12743,recolor,recolor.by_shape,low,recolor shapes in the 3x2 grid to 8 or 3 based on comparing their shapes with other cells
+feca6190,reshape,reshape.render_from_spec,high,canvas side = 5 x number of colors; shoot each pixel diagonally up-right from the bottom row
+ff28f65a,summary,summary.count,high,count the 2x2 red squares and mark that many cells in a fixed checker order on a 3x3
+ff72ca3e,draw,draw.ring_around,high,draw a 2 square around each 4 with radius just short of the nearest 5 pixel
+ff805c23,pattern,pattern.repair_patch,medium,use the grid's mirror symmetry to recover the cells under the blue mask and output only that patch

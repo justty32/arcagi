@@ -1,0 +1,64 @@
+category,subcategory,definition,examples
+geometry,geometry.flip_rot,整圖旋轉／翻轉,6150a2bd 67a3c6ac
+geometry,geometry.transpose,轉置／反轉置,74dd1130 9dfd6313
+geometry,geometry.shift,整圖平移、捲動、循環位移,25ff71a9
+scale_tile,scale_tile.upscale,每格放大成 k×k 塊（k 可由顏色數等決定）,c59eb873 ac0a08a4
+scale_tile,scale_tile.tile,原樣重複鋪成 a×b,a416b8f3
+scale_tile,scale_tile.mirror_tile,鋪的各份含翻轉／旋轉,46442a0e 7fe24cdd
+scale_tile,scale_tile.self_kron,以輸入自身當遮罩放置輸入（分形）,007bbfb7
+scale_tile,scale_tile.tile_plus,鋪／放大／kron 之後再反色或補畫（v1.1）,0692e18c f0afb749
+scale_tile,scale_tile.other,其他倍數放大（加框、間隔放大…）,
+crop,crop.by_object,選某個物件（最大、唯一色、唯一形狀…）裁出其外框,1f85a75f be94b721
+crop,crop.by_frame,裁出被框線／角點圈住的區域,
+crop,crop.by_cell,在格線切出的格子中選一格,
+crop,crop.fixed,固定位置／大小的裁切（例：左上角 3×3）,
+crop,crop.then_transform,裁出後再翻轉／換色／去雜訊等,
+overlay,overlay.boolean,兩半疊合做 and／or／xor／nor，結果上固定色,0520fde7 99b1bc43 3428a4f5
+overlay,overlay.priority,多層疊合依顏色優先序覆蓋,
+overlay,overlay.select_cell,各塊比較、選出不同／相同的那塊,
+overlay,overlay.cell_summary,每格縮成一格（多數色、有無）組成小圖,
+summary,summary.count,數物件／顏色，輸出長度或格數＝數量,d631b094
+summary,summary.select_color,輸出單一顏色（最大物件色、最多色…）的小圖,445eab21
+summary,summary.sort_rank,依數量／大小排序輸出顏色序列,f8b3ba0a
+summary,summary.classify,依形狀／性質判斷（是否對稱等）輸出固定圖案,27a28665 44f52bb0
+reshape,reshape.downscale,每 k×k 塊縮成一格（含去雜訊縮小）,5614dbcf
+reshape,reshape.assemble,把物件／片段排列、拼接成新圖,
+reshape,reshape.extend_canvas,畫布變大、在新空間延伸或畫出圖案,
+reshape,reshape.render_from_spec,輸出尺寸與內容由輸入參數（數量、顏色）生成,
+reshape,reshape.other,其他尺寸改變,
+recolor,recolor.global_map,全圖固定換色表,0d3d703e
+recolor,recolor.by_size,依物件大小／排名換色,6e82a1ae 08ed6ac7
+recolor,recolor.by_shape,依物件形狀（方形、線、特定圖樣）換色,
+recolor,recolor.by_contact,色來自接觸／鄰近／包含的物件或標記,
+recolor,recolor.by_legend,依圖上的色例（對照表）換色,
+recolor,recolor.by_position,依位置、行列、方向、奇偶換色,
+recolor,recolor.by_count,依計數（孔數、鄰接數、格數）換色,
+fill,fill.enclosed,填封閉區域內部,00d62c1b a5313dff
+fill,fill.bbox_or_gap,填物件外框內／物件之間的空隙,
+fill,fill.flood_from_seed,從種子點往外漫填到牆,
+fill,fill.color_by_region,填色由區域性質（大小、孔大小、框大小、是否開口）決定（v1.1）,00dbd492 868de0fa
+fill,fill.leak_ray,填框內，並從框的缺口往外射線（v1.1）,292dd178 d4f3cd78
+pattern,pattern.periodic_repair,週期圖樣中被遮住／缺漏的部分補回,484b58aa 0dfd9992
+pattern,pattern.symmetry_repair,依對稱補回遮住部分,b8825c91 3631a71a
+pattern,pattern.make_symmetric,把物件／整圖補成對稱,
+pattern,pattern.continue_sequence,依規律延續序列／圖樣到畫布邊,
+pattern,pattern.repair_patch,以對稱／週期補回遮住部分，但輸出只有被遮那一塊（尺寸改變也歸這裡，v1.1）,9ecd008a ff805c23
+draw,draw.ray_to_border,從點／物件沿方向畫射線到邊或撞牆,
+draw,draw.connect_points,同色／同行列的點連線,a699fb00 40853293
+draw,draw.ring_around,在點或物件周圍畫框、十字、固定圖樣,4258a5f9
+draw,draw.path_bounce,會轉彎／反彈／斜向的路徑,
+draw,draw.grid_lines,依標記畫整行整列,
+move,move.gravity,物件往某邊落下／推到底,1e0a9b12 3906de3d
+move,move.toward_object,移到碰到另一物件為止,05f2a901
+move,move.align,依參考物對齊、排列,
+move,move.by_rule,位移量／方向依屬性或標記決定,
+move,move.fit_into_hole,把碎片移進形狀相符的洞（拼圖，v1.1）,6a1e5592 228f6490
+move,move.sort,依屬性重排物件／格子的順序（v1.1）,42a15761
+objects,objects.delete_filter,依屬性刪掉／保留物件、去雜訊,42a50994
+objects,objects.copy_stamp,把範本複製到標記處,88a10436
+objects,objects.stamp_transformed,範本縮放／旋轉／翻轉／換色後才貼到標記處（v1.1）,447fd412 0e206a2e
+objects,objects.outline_hollow,畫輪廓、挖空、加邊框,4347f46a 6f8cd79b
+objects,objects.shape_complete,補全物件形狀（缺角、殘缺範本）,
+objects,objects.transform_each,每個物件各自翻轉／旋轉／放大,
+multi,multi.compositional,兩個以上規則合成且各自不小,
+multi,multi.other,看不出單一主類,

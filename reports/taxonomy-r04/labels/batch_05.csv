@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+97999447,draw,draw.ray_to_border,high,from each colored pixel draw a ray rightward to the border alternating the pixel color and 5
+a2fd1cf0,draw,draw.connect_points,high,connect the 2 and the 3 with an L-shaped path of 8 (horizontal from 2 then vertical to 3)
+a5313dff,fill,fill.enclosed,high,fill the fully enclosed interior cells of the 2 walls with 1
+a64e4611,fill,fill.bbox_or_gap,medium,fill the largest empty band/cross region with 3 leaving a one-cell margin from the noise pixels
+a65b410d,pattern,pattern.continue_sequence,medium,from the horizontal 2 line build a staircase: rows above in 3 grow by one per row; rows below in 1 shrink by one per row
+a699fb00,draw,draw.connect_points,high,fill the single gap between horizontally adjacent pairs of 1 with 2
+aba27056,draw,draw.ray_to_border,medium,fill the open container interior with 4 and shoot 4 rays (straight and diagonal) out of its opening to the border
+af902bf9,fill,fill.bbox_or_gap,high,fill the interior between each set of four 4 corner pixels with 2
+b27ca6d3,draw,draw.ring_around,high,draw a 3 ring around every 2-cell domino of 2 while leaving single 2 pixels unchanged
+ba26e723,recolor,recolor.by_position,high,recolor every 4 in columns whose index is a multiple of 3 to 6
+bdad9b1f,draw,draw.ray_to_border,high,extend the 8 line and the 2 line across the grid; mark their intersection with 4
+c0f76784,fill,fill.enclosed,medium,fill each hollow 5 square interior with a color chosen by interior size (1x1 to 6; 2x2 to 7; 3x3 to 8)
+d06dbe63,draw,draw.path_bounce,high,from the 8 pixel draw 5 staircase paths going up-right and down-left (two cells across then two up) to the border
+d364b489,draw,draw.ring_around,high,around each 1 pixel stamp a fixed plus pattern: 2 above; 7 left; 6 right; 8 below
+d4a91cb9,draw,draw.connect_points,high,connect the 8 and the 2 with an L-shaped path of 4 (vertical from 8 then horizontal to 2)
+d4f3cd78,fill,fill.enclosed,medium,fill the 5 box interior with 8 and leak a ray of 8 out of the gap in its wall to the border
+d6ad076f,fill,fill.bbox_or_gap,high,fill the gap between the two rectangles with 8 inset by one cell on each side of the shared span
+db3e9e38,pattern,pattern.continue_sequence,medium,from the vertical 7 line grow a V of columns alternating 7 and 8 whose heights decrease by one per column outward
+db93a21d,multi,multi.compositional,medium,draw a 3 border around each 9 square with thickness half its side; then drop a 1 ray of the square width downward to the bottom
+dbc1a6ce,draw,draw.connect_points,high,connect pairs of 1 pixels sharing a row or column with 8 lines
+dc1df850,draw,draw.ring_around,high,draw a ring of 1 around every 2 pixel; other colors untouched
+e179c5f4,draw,draw.path_bounce,high,from the bottom-left 1 draw a diagonal path that bounces between the side walls; fill the rest with 8
+e73095fd,fill,fill.enclosed,medium,fill with 4 only the enclosed rectangular rooms formed by the 5 lines
+e9614598,draw,draw.ring_around,high,draw a 3 plus sign at the midpoint between the two 1 pixels
+f35d900a,multi,multi.compositional,medium,draw rings around the four corner pixels in the partner color and connect them with dotted 5 lines
+f8c80d96,pattern,pattern.continue_sequence,medium,continue the nested line pattern outward with the same spacing to the border and fill the background with 5
+fcc82909,draw,draw.ray_to_border,low,below each 2x2 block draw a 2-wide column of 3 whose height equals the number of distinct colors in the block
+3c9b0459,geometry,geometry.flip_rot,high,rotate the grid 180 degrees
+6150a2bd,geometry,geometry.flip_rot,high,rotate the grid 180 degrees
+67a3c6ac,geometry,geometry.flip_rot,high,flip the grid horizontally
+68b16354,geometry,geometry.flip_rot,high,flip the grid vertically
+74dd1130,geometry,geometry.transpose,high,transpose the grid
+9dfd6313,geometry,geometry.transpose,high,transpose the grid along the main diagonal of 5
+ed36ccf7,geometry,geometry.flip_rot,high,rotate the grid 90 degrees counterclockwise
+09c534e7,fill,fill.flood_from_seed,medium,flood the interior (non-edge) cells of each connected 1 region with the color of the seed pixel inside that region
+0a2355a6,recolor,recolor.by_count,high,recolor each 8 shape by its number of holes (1 hole to 1; 2 to 3; 3 to 2; 4 to 4)
+0becf7df,recolor,recolor.by_legend,high,swap colors in the object according to the 2x2 legend in the corner (pairs on each row and column swap)
+103eff5b,recolor,recolor.by_legend,medium,color the large 8 shape by the small colored template after rotating and scaling it to match
+12eac192,recolor,recolor.by_size,medium,recolor every object with fewer than 3 cells to 3
+14754a24,recolor,recolor.by_shape,medium,recolor 5 cells to 2 where they complete a plus shape together with 4 cells
+15113be4,recolor,recolor.by_shape,medium,recolor 1 patterns in grid cells that match the shape of the large colored template to the template color
+15663ba9,recolor,recolor.by_count,medium,recolor corner cells of each closed loop: convex corners to 4 and concave corners to 2 based on neighbor configuration
+1acc24af,recolor,recolor.by_shape,low,recolor 5 objects that would fit into the openings of the 1 structure to 2
+1da012fc,recolor,recolor.by_legend,high,recolor each 8 shape with the color at the matching position in the 5 legend panel
+2a5f8217,recolor,recolor.by_shape,high,recolor each 1 object to the color of the other object with the identical shape
+33b52de3,recolor,recolor.by_legend,high,color each 5 block in the block grid by the corresponding cell of the small legend grid
+37d3e8b2,recolor,recolor.by_count,high,recolor each 8 shape by its number of holes
+40f6cd08,objects,objects.copy_stamp,medium,copy the nested color layering of the decorated rectangle onto the plain rectangles scaled to their size
+45737921,objects,objects.transform_each,low,within each 3x3 object swap its two colors
+4f537728,draw,draw.grid_lines,high,extend the odd-colored block color along its full row and column of blocks

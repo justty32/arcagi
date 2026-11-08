@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+ce9e57f2,recolor,recolor.by_position,high,recolor the lower half of each vertical bar to 8
+d2abd087,recolor,recolor.by_size,high,recolor objects of exactly 6 cells to 2 and all others to 1
+d406998b,recolor,recolor.by_position,high,recolor every other gray cell counting columns from the right to 3
+ddf7fa4f,recolor,recolor.by_contact,high,recolor each gray block by the color of the marker pixel in the top row above it
+e509e548,recolor,recolor.by_shape,high,recolor each green path by its shape; L-shape to 1; U-shape to 6; other to 2
+e76a88a6,objects,objects.copy_stamp,high,copy the multicolor template onto every gray block of the same size
+e8593010,recolor,recolor.by_size,high,recolor background holes by size; 1 cell to 3; 2 cells to 2; 3 cells to 1
+ea32f347,recolor,recolor.by_size,high,recolor bars by length rank; longest 1; middle 4; shortest 2
+1e81d6f9,objects,objects.delete_filter,high,delete all pixels whose color equals the pixel inside the top-left corner box
+54db823b,objects,objects.delete_filter,high,delete the green block containing the fewest 9 cells
+a934301b,objects,objects.delete_filter,high,delete blue blocks that contain more than one 8 cell
+ba9d41b8,objects,objects.outline_hollow,medium,carve a checkerboard of background into the interior of each rectangle keeping a one-cell border
+c35c1b4c,pattern,pattern.make_symmetric,medium,make the central blob left-right symmetric by mirroring its wider side
+3bdb4ada,objects,objects.outline_hollow,medium,punch alternating holes along the middle row of each 3-row bar
+42a50994,objects,objects.delete_filter,high,delete pixels that have no 8-neighbor of the same color
+4347f46a,objects,objects.outline_hollow,high,hollow out each solid rectangle leaving its border
+5582e5ca,summary,summary.select_color,medium,fill the whole grid with the most frequent color
+7f4411dc,objects,objects.delete_filter,high,remove isolated noise pixels keeping only solid rectangles
+91714a58,objects,objects.delete_filter,high,keep only the largest solid rectangle and erase all noise
+d23f8c26,objects,objects.delete_filter,high,keep only the middle column and erase everything else
+0934a4d8,pattern,pattern.symmetry_repair,medium,output the content hidden under the 8 mask recovered from the grid's mirror symmetry
+0a1d4ef5,reshape,reshape.downscale,medium,denoise and shrink each solid rectangle to one cell keeping the block layout
+12997ef3,reshape,reshape.render_from_spec,medium,stamp the blue template once per colored dot recolored with that dot's color in dot order
+1990f7a8,reshape,reshape.assemble,high,gather the four 3x3 shapes into a 7x7 grid by their relative quadrant
+19bb5feb,reshape,reshape.downscale,medium,output a 2x2 map of which quadrant of the 8 rectangle each colored square occupies
+2037f2c7,overlay,overlay.boolean,low,mark in 8 the cells where the two near-identical objects differ
+20818e16,reshape,reshape.assemble,medium,stack the rectangles by size into the top-left corner with smaller on top
+2697da3f,reshape,reshape.assemble,medium,place four rotated copies of the shape around a center in a cross layout
+2753e76c,summary,summary.sort_rank,high,draw a right-aligned bar chart of object counts per color sorted descending
+2f0c5170,crop,crop.then_transform,medium,crop the empty box containing a lone marker and copy the shape there aligned on the matching marker
+31d5ba1a,overlay,overlay.boolean,high,xor the top and bottom halves and paint the result 6
+3b4c2228,summary,summary.count,high,count green 2x2 squares and place that many 1s on the 3x3 diagonal
+3d31c5b3,overlay,overlay.priority,high,overlay the four color layers with priority 5 over 4 over 8 over 2
+3ee1011a,reshape,reshape.assemble,medium,nest the lines as concentric square rings with side equal to line length longest outside
+414297c0,crop,crop.then_transform,medium,crop the big rectangle and stamp each small shape onto the marker of its center color
+4852f2fa,reshape,reshape.render_from_spec,medium,crop the 8 shape and repeat it horizontally once per 4 pixel
+505fff84,reshape,reshape.assemble,medium,extract the segment between the 1 and 8 markers in each row and stack them
+50aad11f,reshape,reshape.assemble,medium,crop each 6 shape recolor it with its adjacent marker color and concatenate along the layout axis
+5289ad53,summary,summary.count,high,count green and red lines and fill a 2x3 grid in reading order with that many 3s then 2s
+5783df64,reshape,reshape.downscale,high,shrink each 3x3 block to its single colored pixel
+5833af48,reshape,reshape.render_from_spec,low,crop the big rectangle and place the template shape at each block marked in the mask pattern
+66f2d22f,overlay,overlay.boolean,high,nor the left and right halves and paint the result 5
+67636eac,reshape,reshape.assemble,high,crop each plus-like shape and concatenate them along their dominant axis
+67b4a34d,pattern,pattern.symmetry_repair,medium,output the 4x4 region hidden under the mask recovered from the grid's symmetry
+68b67ca3,reshape,reshape.downscale,high,keep every other row and column to shrink the sparse 6x6 to 3x3
+695367ec,reshape,reshape.render_from_spec,high,draw a 15x15 grid of lines in the input color with spacing given by the input size
+6a11f6da,overlay,overlay.priority,high,overlay the three 5x5 layers with priority 6 over 1 over 8
+7c9b52a0,overlay,overlay.priority,medium,cut out the holes in the frame color and overlay their contents into one small grid
+7d18a6fb,reshape,reshape.assemble,medium,place each shape into the 7x7 output quadrant given by its color's position in the legend box
+8ba14f53,summary,summary.count,high,for each object fill one output row group with its color as many cells as its hole size

@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+d47aa2ff,overlay,overlay.boolean,medium,compare left and right halves split by the 5 line; keep pixels in both; mark left-only with 2 and right-only with 1
+e133d23d,overlay,overlay.boolean,high,OR of the left and right 3x3 halves around the 4 divider; result colored 2
+e99362f0,overlay,overlay.priority,high,overlay the four quadrants split by 4 lines using a fixed color priority order
+0520fde7,overlay,overlay.boolean,high,AND of left and right halves split by the 5 column; result colored 2
+1b2d62fb,overlay,overlay.boolean,high,NOR of left and right halves split by the 1 column; result colored 8
+3428a4f5,overlay,overlay.boolean,high,XOR of top and bottom halves split by the 4 row; result colored 3
+47c1f68c,scale_tile,scale_tile.mirror_tile,medium,take the shape in the top-left quadrant; recolor it with the divider color and mirror it into all four quadrants dropping the divider lines
+5daaa586,crop,crop.then_transform,medium,crop the rectangle bounded by four colored lines; then extend each dot as a bar toward the line of its own color
+6430c8c4,overlay,overlay.boolean,high,NOR of top and bottom halves split by the 4 row; result colored 3
+6773b310,overlay,overlay.cell_summary,high,each 3x3 cell of the 8 grid becomes 1 if it holds exactly two 6 pixels else 0
+7c008303,crop,crop.then_transform,medium,crop the 6x6 region of 3 pixels and recolor each quadrant by the matching color of the 2x2 key in the corner
+94f9d214,overlay,overlay.boolean,high,NOR of top and bottom halves; result colored 2
+995c5fa3,overlay,overlay.cell_summary,medium,each of the three 4x4 blocks is classified by its hole shape into a color that fills one output row
+99b1bc43,overlay,overlay.boolean,high,XOR of top and bottom halves split by the 4 row; result colored 3
+9f236235,overlay,overlay.cell_summary,high,shrink each grid cell to its color then flip the result horizontally
+a68b268e,overlay,overlay.priority,high,overlay the four quadrants with priority 7 over 4 over 8 over 6
+ce4f8723,overlay,overlay.boolean,high,OR of top and bottom halves split by the 4 row; result colored 3
+cf98881b,overlay,overlay.priority,high,overlay the three 4x4 blocks with priority 4 over 9 over 1
+e3497940,overlay,overlay.priority,high,fold the right half onto the left half across the 5 column mirroring it and union the colors
+e6721834,objects,objects.copy_stamp,medium,move each template pattern from the busy half onto the empty half at the position matching its marker pixels
+e98196ab,overlay,overlay.priority,high,union of the top and bottom halves split by the 5 row; colors kept
+f2829549,overlay,overlay.boolean,high,NOR of left and right halves split by the 1 column; result colored 3
+9110e3c5,summary,summary.classify,medium,output a fixed 3x3 pattern of 8 chosen by the dominant non-background color
+be03b35f,crop,crop.then_transform,medium,crop the top-left 2x2 block and rotate it 90 degrees counterclockwise
+c8b7cc0f,summary,summary.count,high,count marker pixels inside the 1 frame and fill that many cells of a 3x3 in reading order with the marker color
+1fad071e,summary,summary.count,high,count the 2x2 blue squares and output a 1x5 bar with that many 1s
+27a28665,summary,summary.classify,high,classify the 3x3 shape pattern and output a fixed color per shape
+445eab21,summary,summary.select_color,high,output a 2x2 filled with the color of the largest hollow rectangle
+44f52bb0,summary,summary.classify,high,output 1 if the 3x3 is left-right symmetric else 7
+681b3aeb,reshape,reshape.assemble,high,fit the two separated pieces together into a filled 3x3 square
+b0c4d837,summary,summary.count,high,count the empty rows above the 8 fill inside the 5 container and output that many 8 cells in a 3x3 snake order
+b94a9452,crop,crop.then_transform,high,crop the two-color square and swap its two colors
+d631b094,summary,summary.count,high,output a 1xN row of the single color where N is its pixel count
+fcb5c309,crop,crop.by_frame,medium,crop the frame containing the most marker dots and recolor its border with the marker color
+17cae0c1,recolor,recolor.by_shape,high,each 3x3 block is filled with a color determined by the shape of the 5 pattern in it
+4e45f183,multi,multi.other,low,3x3 grid of 5x5 cells is rebuilt so each cell shows the part of a template pattern matching its position; rule unclear
+903d1b4a,pattern,pattern.symmetry_repair,high,restore the 3 occluded areas from the grid's mirror symmetry
+929ab4e9,pattern,pattern.symmetry_repair,high,restore the 2 occluded areas from the grid's mirror symmetry
+bf32578f,pattern,pattern.make_symmetric,medium,mirror the half outline into a symmetric shape then output only its filled interior with the outline removed
+e21a174a,move,move.sort,high,reverse the vertical order of the stacked objects keeping each object's shape
+e74e1818,objects,objects.transform_each,high,flip each colored object vertically in place
+f823c43c,pattern,pattern.periodic_repair,high,remove the 6 noise and restore the periodic 8/4 or 7/8 lattice
+fc754716,draw,draw.ring_around,medium,draw a border around the whole grid in the single pixel's color and erase the pixel
+0d3d703e,recolor,recolor.global_map,high,apply a fixed color mapping to every pixel
+25d8a9c8,summary,summary.classify,medium,rows that are a single color become 5 and other rows become 0
+85c4e7cd,recolor,recolor.by_position,high,reverse the order of concentric ring colors so the outer ring takes the inner color
+a85d4709,recolor,recolor.by_position,high,color each row by the column position of its 5 pixel
+b8825c91,pattern,pattern.symmetry_repair,high,restore the 4 occluded areas from the grid's mirror symmetry
+bda2d7a6,recolor,recolor.global_map,high,cyclically shift the concentric ring colors so each ring takes the color of the ring outside it
+e26a3af2,objects,objects.delete_filter,high,denoise each stripe by setting it to its majority color

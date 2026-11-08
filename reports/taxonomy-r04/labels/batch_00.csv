@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+1a2e2828,summary,summary.select_color,high,output 1x1 of the color of the only full line that is never crossed by another line
+1a6449f1,crop,crop.by_frame,high,crop the interior of the largest rectangular frame
+2c0b0aff,crop,crop.by_object,medium,crop the rectangle containing the most plus-shaped 3 patterns
+3194b014,summary,summary.select_color,high,output 3x3 filled with the color of the largest solid square in the noise
+358ba94e,crop,crop.by_object,high,crop the one square whose hole pattern differs from the others
+642d658d,summary,summary.select_color,medium,output 1x1 of the center color that most often appears inside a plus of 4s
+7039b2d7,summary,summary.count,high,output a background grid whose size equals the number of cells formed by the divider lines
+73182012,crop,crop.by_object,medium,crop the top-left quarter of the 4-fold symmetric object
+73ccf9c2,crop,crop.by_object,medium,crop the one object that is not mirror symmetric
+7bb29440,crop,crop.by_object,high,crop the 1-rectangle containing the fewest 4/6 marker pixels
+9a4bb226,crop,crop.by_object,high,crop the 3x3 object that has three colors instead of two
+aee291af,crop,crop.by_object,high,crop the one 8-bordered square whose inner 2 pattern differs from the others
+bf699163,crop,crop.by_object,medium,crop the 3x3 ring that lies inside the dashed 7 frame
+c3202e5a,crop,crop.by_cell,high,select the grid cell whose pixels all share a single color
+cd3c21df,crop,crop.by_object,high,crop the object whose shape/color appears only once
+d56f2372,crop,crop.by_object,high,crop the one object that is left-right mirror symmetric
+e872b94a,summary,summary.count,high,output a black column whose height is the number of objects plus one
+f5aa3634,crop,crop.by_object,high,crop the multi-color object that appears most times
+0b148d64,crop,crop.by_object,high,crop the quadrant block whose color differs from the other three
+1190e5a7,summary,summary.count,high,output a background grid sized by the number of row and column cells between divider lines
+1c786137,crop,crop.by_frame,high,crop the interior of the rectangular frame
+1cf80156,crop,crop.by_object,high,crop the bounding box of the single object
+1f85a75f,crop,crop.by_object,high,crop the bounding box of the largest object in the noise
+2013d3e2,crop,crop.by_object,medium,crop the top-left quarter of the 4-fold symmetric object
+239be575,summary,summary.classify,high,output 8 if the two 2x2 red squares are connected by an 8 path; else 0
+23b5c85d,crop,crop.by_object,high,crop the smallest rectangle
+2dc579da,crop,crop.by_cell,high,select the quadrant (cut by the cross lines) that contains the odd pixel
+2dee498d,crop,crop.fixed,high,input is the pattern tiled three times horizontally; output one copy
+39a8645d,crop,crop.by_object,high,crop the shape that occurs most often
+3f7978a0,crop,crop.by_frame,high,crop the rectangle bounded by the two 5 columns capped with 8s
+48d8fb45,crop,crop.by_object,high,crop the object marked by the 5 pixel above it
+5bd6f4ac,crop,crop.fixed,high,crop the top-right 3x3 block
+662c240a,crop,crop.by_cell,high,select the 3x3 block that is not symmetric about its main diagonal
+72ca375d,crop,crop.by_object,high,crop the one object that is left-right mirror symmetric
+7b7f7511,crop,crop.fixed,high,input is the pattern repeated twice; output one half
+88a62173,crop,crop.by_cell,high,select the one 2x2 quadrant that differs from the other three
+8efcae92,crop,crop.by_object,high,crop the 1-rectangle containing the most 2 pixels
+a87f7484,crop,crop.by_cell,high,select the 3x3 block whose shape differs from the others
+ae4f1146,crop,crop.by_object,high,crop the 3x3 block containing the most 1 pixels
+b9b7f026,summary,summary.select_color,high,output 1x1 of the color of the rectangle that has a hole
+be94b721,crop,crop.by_object,high,crop the largest object
+c909285e,crop,crop.by_frame,high,crop the square framed by the uniquely colored border
+ce602527,crop,crop.by_object,medium,crop the small object whose shape matches the large partly offscreen object
+d10ecb37,crop,crop.fixed,high,crop the top-left 2x2
+d9fac9be,summary,summary.select_color,high,output 1x1 of the color of the center pixel enclosed by a 3x3 ring
+de1cd16c,summary,summary.select_color,high,output 1x1 of the region color containing the most noise pixels
+e50d258f,crop,crop.by_object,high,crop the rectangle containing the most 2 pixels
+f9012d9b,pattern,pattern.periodic_repair,medium,output only the hidden black patch filled in from the periodic tiling (size change but key step is repair)
+070dd51e,draw,draw.connect_points,high,connect each same-colored pixel pair with a line; vertical lines drawn over horizontal
+0f63c0b9,draw,draw.grid_lines,medium,each pixel draws a full-width row line plus side borders of its band split midway between pixels

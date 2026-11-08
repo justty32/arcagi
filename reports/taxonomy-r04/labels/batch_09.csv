@@ -1,0 +1,51 @@
+task_id,category,subcategory,confidence,rule
+80af3007,multi,multi.compositional,medium,crop the gray shape and downscale it by 3 to a 3x3 mask; then self-kron the mask with itself to 9x9
+846bdb03,reshape,reshape.assemble,medium,crop the 4-cornered frame and place the loose shape inside it flipped so its two colors face the matching colored frame sides
+8731374e,crop,crop.then_transform,high,crop the large uniform rectangle from the noise and extend each odd pixel inside it into a full row and column line
+8a004b2b,reshape,reshape.assemble,medium,crop the region between the four yellow corners and complete the small template by scaling it to match the large blocks already inside
+8e1813be,reshape,reshape.render_from_spec,medium,output a square whose side equals the gray block size with one row per line color in top-to-bottom (or left-to-right) order
+90c28cc7,reshape,reshape.downscale,high,collapse each uniform color block of the non-background region into one cell
+97a05b5b,reshape,reshape.assemble,medium,crop the big red shape and insert each small piece (rotated as needed) into the hole whose shape matches it
+9aec4887,reshape,reshape.assemble,medium,crop the four-sided colored frame and place the 8 shape inside; recoloring each 8 cell to the color of the nearest frame side
+9af7a82c,summary,summary.sort_rank,high,sort colors by pixel count and output one column per color whose length equals its count
+9ecd008a,pattern,pattern.symmetry_repair,medium,use the grid's mirror symmetry to recover the cells under the black mask and output only that patch
+a3325580,summary,summary.sort_rank,medium,keep colors of the largest objects ordered left to right; output columns of those colors with height equal to the max object size
+a61ba2ce,reshape,reshape.assemble,high,assemble the four L-shaped corner pieces into a 4x4 square by their corner orientation
+a740d043,crop,crop.then_transform,high,crop the bounding box of non-blue pixels and turn blue background to black
+a8c38be5,reshape,reshape.assemble,high,assemble the nine 3x3 pieces into a 9x9 square placing each by the position its colored corner/edge marks indicate
+b190f7f5,scale_tile,scale_tile.self_kron,medium,split input into a mask half and a color half; place the 8 mask at each colored cell of the other half recolored by that cell
+bc1d5164,overlay,overlay.boolean,high,OR the four 3x3 corners of the 5x7 grid (overlapping middle column/row) into one 3x3
+c8cbb738,reshape,reshape.assemble,high,overlay the corner-sets of each 4-point shape (square diamond rectangle) centered into one canvas sized by the largest
+cdecee7f,summary,summary.sort_rank,medium,list pixels ordered by column and write them into a 3x3 in snake order
+d0f5fe59,summary,summary.count,high,count the objects n and output an n x n diagonal of 8
+d4469b4b,summary,summary.classify,high,output a fixed gray 3x3 pattern (plus/T/corner) chosen by the input color
+dae9d2b5,overlay,overlay.boolean,high,OR the two 3x3 halves and color the union magenta
+dc0a314f,pattern,pattern.symmetry_repair,medium,use the grid's mirror symmetry to recover the cells under the green mask and output only that patch
+eb281b96,reshape,reshape.extend_canvas,high,extend the canvas downward by repeatedly reflecting the strip vertically
+eb5a1d5d,reshape,reshape.downscale,medium,reduce the nested rectangles to one-cell-thick concentric rings
+f25fbde4,crop,crop.then_transform,high,crop the yellow object bounding box and upscale it by 2
+f8b3ba0a,summary,summary.sort_rank,high,count block colors and output the non-majority colors sorted by count descending as a column
+f8ff0b80,summary,summary.sort_rank,high,output object colors as a column sorted by object size descending
+fafffa47,overlay,overlay.boolean,high,NOR the two 3x3 halves and color the result red
+ff28f65a,summary,summary.count,high,count the 2x2 red squares and mark that many cells in a fixed checker order on a 3x3
+ff805c23,pattern,pattern.symmetry_repair,medium,use the grid's mirror symmetry to recover the cells under the blue mask and output only that patch
+009d5c81,recolor,recolor.by_shape,medium,recolor the 8 object by a color determined by the shape of the small blue marker then delete the marker
+03560426,move,move.align,medium,stack the bottom objects diagonally from the top-left corner each overlapping the previous one's corner
+05a7bcf2,draw,draw.ray_to_border,low,extend each yellow object as a bar perpendicular through the 8 line to the red band; recoloring segments 3/4/8/2 by zone
+0607ce86,pattern,pattern.periodic_repair,high,restore each repeated tile to the common template and delete the stray noise pixels
+08573cc6,draw,draw.path_bounce,medium,draw an outward square spiral around the blue cell alternating the two corner colors with growing arm lengths
+0d87d2a6,draw,draw.connect_points,medium,connect paired blue border markers with lines and recolor every red rectangle the line crosses to blue
+140c817e,draw,draw.grid_lines,high,draw a full blue row and column through each dot; mark the dot red and its diagonal neighbors green
+16b78196,move,move.align,low,move the loose shapes to interlock into the notches of the solid band stacking them in matching order
+184a9768,move,move.align,medium,move each small piece into the hole of the large shape that matches it and delete gray noise
+1c02dbbe,recolor,recolor.by_contact,medium,recolor the gray rectangle region spanned by each pair of edge marker pixels with the marker color
+1c0d0a4b,objects,objects.transform_each,medium,invert each 3x3 glyph within its cell turning empty cells red and 8 cells black
+1c56ad9f,move,move.by_rule,medium,shift rows of the lattice shape left/right in a repeating wave pattern
+1d0a4b61,pattern,pattern.periodic_repair,high,fill black holes by continuing the periodic tiling
+1e97544e,pattern,pattern.periodic_repair,high,fill black holes by continuing the diagonal periodic number sequence
+20981f0e,move,move.align,high,move each object to be centered in its cell between the red grid markers
+22a4bbc2,recolor,recolor.by_position,medium,recolor every third color band (counting bands from the top) from blue/8 to red
+25094a63,recolor,recolor.by_size,medium,recolor every large solid single-color rectangle in the noise to yellow
+256b0a75,multi,multi.compositional,low,fill the box formed by the 8 corner brackets and extend its arms with the box color; then project pixels in line with the box into it
+27a77e38,multi,multi.other,medium,place the most frequent color of the top section at the bottom-center cell; no subcategory for computing a single pixel
+2b01abd0,pattern,pattern.make_symmetric,medium,mirror the object across the blue line and swap the two colors in the original copy
