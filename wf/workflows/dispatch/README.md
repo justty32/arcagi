@@ -49,6 +49,9 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
+| r07-A 起點樹 | opus | `src/arcagi/seed/`、`tests/seed/`、`scripts/r07_purity.sh` | 其他全部；seed 不得 import dsl/objrule/blocks/solvers | 2026-11-08 15:23 |
+| r07-B 學習循環 | opus | `src/arcagi/grow/`、`tests/grow/`、`scripts/r07_{taskset,curve}.py`、`data/r07/`、`reports/curve-r07/`、`aos/seedlib/`、`aos/meta/ledger.jsonl`（追加） | `seed/` 唯讀、`aos/blocks/`、`aos/pool/` | 2026-11-08 15:23 |
+| r07-C 守門 | opus | `solvers/{guard,gated}.py`、`tests/solvers/test_guard.py`、`scripts/r07_gate_eval.py`、`reports/gate-r07/` | `native/`、`dsl/ext/`、`objrule/families/`、`search.py`、`vote.py` | 2026-11-08 15:23 |
 
 ### 保留給主 agent，任何線都不得寫
 
