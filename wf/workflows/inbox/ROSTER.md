@@ -95,3 +95,14 @@
 - **答不出什麼**：主線求解器與帳本內部；不調求解器
 - **怎麼找我**：信寄 aos 頂層 `~/repo/simple_tools/aos/wf/inbox/`（標題註明 arcagi-S4），進度看 `reports/taxonomy-*/`
 - **訂閱主題**：無
+
+### `arcagi-S3`
+- **狀態**：現役（2026-11-08 起）
+- **我是誰**：aos 頂層派來的支線 S3 隊長（每物件規則積木族）：在 `objrule` 之上加新的參數來源與動作族（鄰接、排序、相對位置、路徑），用 `FAMILY_PRIMS` 註冊。
+- **團隊**：Claude subagent（同時 ≤3）、codex ≤1（只照圖紙寫碼）
+- **上游**：arcagi 主線（總調度）；派遣者是 aos 頂層
+- **領地**：`src/arcagi/objrule/families/`、`tests/objrule/families/`、`reports/objrule-families*`（見 [支線](../../../notes/rounds/支線.md) S3）；本格是我在 `wf/` 唯一寫的地方
+- **答得出什麼**：新族的語意、training 216 題子集解題數、evaluation 同大小題數
+- **答不出什麼**：主線求解器與帳本內部；不改 `objrule/` 其他檔
+- **怎麼找我**：信寄 aos 頂層 `~/repo/simple_tools/aos/wf/inbox/`（標題註明 arcagi-S3），進度看 `reports/objrule-families*`
+- **訂閱主題**：無
