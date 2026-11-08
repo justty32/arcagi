@@ -49,7 +49,7 @@
 
 ## 支線狀態
 
-S1、S2 上線（13:13）；S4、S5 13:35 通知開；S3 等第五輪收輪劃好 `src/arcagi/objrule/families/` 再開。
+S1 第二任收（第三任等 r06 結果，轉速度）；S2 線收（14:57，交接 reports/llm-handoff.md，A/B 工具 `python -m arcagi.llm distill reuse` 待 r07 決定）；S3 現任做完收；S4、S5 已完成。
 
 ## 第七輪主軸候選（使用者 11-08 14:51，aos 轉達）
 
