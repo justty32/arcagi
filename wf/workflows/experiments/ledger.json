@@ -137,6 +137,17 @@
    "baseline": "dsl-search-r06 56",
    "verdict": "是：退步 0、答錯 29→10；+1（5af49b42）來自 S3 families 非守門",
    "record_path": "../../../reports/gate-r07/README.md"
+  },
+  {
+   "id": "2026-11-08-gated-r07-training",
+   "date": "2026-11-08",
+   "hypothesis": "r07 C 守門在 training 全量線上是否與離線一致（擋錯 ≥15、誤擋 ≤3）",
+   "solver": "python -m arcagi.solvers.gated（head 132a0b7、native 45668f9）",
+   "split": "training",
+   "result": "training 147/400，errors 0；守門放棄 32、改判對 1、誤擋 0；過 train 答錯 57→20",
+   "baseline": "dsl-search-r06 138",
+   "verdict": "是：+10 多來自 S3 families；退步 1（6cdd2623，native 期限雜訊）",
+   "record_path": "../../../reports/gate-r07/README.md"
   }
  ]
 }
