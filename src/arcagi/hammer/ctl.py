@@ -66,7 +66,9 @@ def cmd_run(root: Path, a) -> None:
         (root / "live" / "daemon.pid").write_text(f"{os.getpid()}\n")
         sys.exit(subprocess.call(cmd, cwd=ROOT_PY))
     log = open(root / "live" / "daemon.log", "ab")
-    full = ["setsid", "nohup", "nice", "-n", "19"] + cmd
+    # start_new_session already detaches; a "setsid" wrapper would fork and
+    # leave daemon.pid pointing at a dead parent.
+    full = ["nohup", "nice", "-n", "19"] + cmd
     p = subprocess.Popen(full, cwd=ROOT_PY, stdout=log, stderr=log,
                          stdin=subprocess.DEVNULL, start_new_session=True)
     (root / "live" / "daemon.pid").write_text(f"{p.pid}\n")

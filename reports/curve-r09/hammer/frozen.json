@@ -1,0 +1,52 @@
+{
+ "budgets": {
+  "L": 100000,
+  "P0": 25000,
+  "P_cap": 400000,
+  "P_mult": 2.0,
+  "epochs": 8,
+  "shadow_slow": 100000
+ },
+ "foundry_wait_sec": 0,
+ "h24_floor": "per-epoch no regress",
+ "holdout": {
+  "H24": {
+   "n": 24,
+   "sha": "f03397ae6879"
+  },
+  "H8": {
+   "n": 8,
+   "sha": "56bf95d88954"
+  }
+ },
+ "judge": {
+  "ablate_max": 3,
+  "no_crowd": {
+   "ntf_ratio_max": 2.0,
+   "solved_superset": true
+  },
+  "stage1": {
+   "h24_regress": false,
+   "new_solves_min": 1
+  },
+  "stage2": {
+   "drop_min": 1.0,
+   "not_worse_frac": 0.8,
+   "se_mult": 2
+  }
+ },
+ "layers_max": 3,
+ "llm_tax_evals": 100000,
+ "priors": [],
+ "purity": {
+  "script": "scripts/r07_purity.sh"
+ },
+ "schema": "hammer-frozen/1",
+ "split_ab": "sha1(task_id+'r09AB')",
+ "taskset": {
+  "p_key": "P48",
+  "path": "data/r09/taskset.json",
+  "sha1": "983c3af9e52a0b24fee9d918ea9cc9822aaa0490"
+ },
+ "tree": "hammer"
+}
