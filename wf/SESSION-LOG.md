@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] r09 停手（使用者 20:00 起不推進）：活樹 ~/code/playground-arc1/ws/hammer、AUC_L 40、H24 1→2；白話進度 notes/rounds/r09/05-白話進度.md → 等使用者裁 v4 方向題與是否開 r10
+- [rounds] r09 停手、主 session 11-08 19:5x 關閉；v4 方向題五題全 A（19:44）→ 使用者說開工才動：先插 v4 M1～M7 收 r09，再開 r10；接手照 [交棒總表](../notes/rounds/README.md)「主 session 交接」
 
 ## 各工作流 session-log
 
