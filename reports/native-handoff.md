@@ -1,7 +1,7 @@
-支線 S1（C++ 搜尋引擎）交接：給下一任 arcagi-S1 隊長。
+支線 S1（C++ 搜尋引擎＋新原語）交接：給下一任 arcagi-S1 隊長。
 
-- 讀：[04 總結](native-s1/04-總結.md)（成績、代定、下一步）、[02 設計](native-s1/02-設計.md)、[03 量測](native-s1/03-量測.md)。
-- 程式：`native/src/`（C++20，`make -C native`；bin/ 與 spec.json 由 Makefile 產生）、`native/hybrid.py`（外部協議入口，主線先跑、C++ 補、Python 重驗）、`native/export_spec.py`、`native/tools/parity_smoke.py`；測試 `tests/native/`（parity 43,762 筆＋搜尋）。
-- 現況：evaluation 42/400（r04 37），退步 0，每題 ≤19 秒。已寄 PROGRESS 給主線；ROSTER 已追加 `arcagi-S1`，但那份檔沒 commit（wf/ 是主線的）。
-- 規矩：只寫 native/、reports/native-*/、tests/native/；全量評測前先跑 `pgrep -af "arcagi eval"`，用 workers ≤6、MemoryMax=8G、nice 19；codex 照圖紙寫碼，圖紙範例在 aos scratchpad，已不在。
-- 下一步：見 04 總結「下一步」第 1 項：要新原語，得先寫信請主線開註冊介面。
+- 讀：[05 第二輪](native-s1/05-第二輪.md)（新原語語意、數字、代定、下一步），以及第一輪 [04 總結](native-s1/04-總結.md)、[02 設計](native-s1/02-設計.md)。
+- 程式：C++ 在 `native/src/`（新原語在 `prims_ext.cpp`）；Python 在 `src/arcagi/dsl/ext/prims.py`，經 `EXT_PRIMS` 註冊。`PYTHON_SEARCH = False`：Python 只負責執行與重驗，不出候選。入口是 `native/hybrid.py`。開發量法用 `native/tools/cpp_only.py`（可帶 `--spec`；用 `ARCSEARCH_BIN` 換 binary）。測試：`tests/native/`（含 ext parity）、`tests/dsl/ext/`。
+- 現況：commit `45668f9`，新原語 6 個（x_ray、x_connect、x_compress、x_crop_color、x_period、x_vrule）。parity 127,390 筆全一致；training 子集 C++ 單跑 1→9/53。evaluation 全量交主線 15:20 用 45668f9 跑，**結果還沒回信**，驗收是退步 0、≥45、每題 ≤20 秒。
+- 規矩（r06 起）：入口契約、trace 格式由主線決定，不能改；`aos/blocks/` 不能寫。全量評測由主線跑，主線量的是已 commit 的 native/。**工作樹跟主線共用**：主線量測期間，native/ 不要留沒 commit 的改動，開發請用 git worktree 或 scratchpad 編的 binary。
+- 下一步：先看主線的全量回信（若有退步，先查是不是 x_vrule 或 x_ray 的便宜程式在投票時贏了）。之後照 S4 優先序加 stamp（往標記處蓋印範本）、halo（描邊／畫框）、以物件為中心的對稱修補。
