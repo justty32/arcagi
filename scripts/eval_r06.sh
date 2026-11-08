@@ -6,7 +6,8 @@
 #   --tasks  copies those task JSONs into artifacts/<name>/<split>-tasks/ and
 #            evaluates only them (for trial runs); other args go to `arcagi eval`.
 # Outputs: artifacts/<name>/<split>.json, <split>-traces.jsonl, <split>-env.txt
-# Env ARCAGI_MEM overrides the 16G memory cap (sub-lines use 8G).
+# Env ARCAGI_MEM overrides the 16G memory cap (sub-lines use 8G); ARCAGI_FORCE=1
+# skips the running-eval check (e.g. a branch subset run is using other cores).
 set -eu
 cd "$(dirname "$0")/.." || exit 1
 
@@ -28,7 +29,7 @@ esac
 # Only real eval processes (uv / python / arcagi argv[0]), not e.g. an agent
 # whose prompt text happens to contain "arcagi eval".
 running=$(pgrep -af "arcagi eval" | grep -E '^[0-9]+ ([^ ]*/)?(uv|python[0-9.]*|arcagi) ' || true)
-if [ -n "$running" ]; then
+if [ -n "$running" ] && [ "${ARCAGI_FORCE:-0}" != 1 ]; then
     echo "another 'arcagi eval' is running; not starting:" >&2
     echo "$running" >&2
     exit 1

@@ -5,7 +5,7 @@
   "cost": 1,
   "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned_other_color\", \"4same\"], \"prop\": \"color\"}",
   "status": "live",
-  "counter_uses": 4,
+  "counter_uses": 5,
   "generator": "_gen/extract",
   "score": 3,
   "length": 4,

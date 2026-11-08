@@ -5,7 +5,7 @@
   "cost": 1,
   "doc": "Generated object predicate [\"and\", [\"eq\", \"is_largest\", 0], [\"rank\", \"color_count\", \"min\"]]",
   "status": "live",
-  "counter_uses": 0,
+  "counter_uses": 1,
   "generator": "_gen/pred_combiner",
   "score": 4.0,
   "literals": 2,

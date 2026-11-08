@@ -5,7 +5,7 @@
   "params": [],
   "cost": 1,
   "status": "live",
-  "counter_uses": 0,
+  "counter_uses": 1,
   "generator": "_gen/llm",
   "source": "llm",
   "origin": "087f839827",

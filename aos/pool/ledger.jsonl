@@ -1362,3 +1362,601 @@
 {"type": "retire", "epoch": 5, "block": "formula_eccad5e8"}
 {"type": "retire", "epoch": 5, "block": "formula_f445226a"}
 {"type": "retire", "epoch": 5, "block": "formula_fb0bd8e9"}
+{"type": "epoch", "epoch": 6, "split": "training", "report_sha256": "5ff415f09a32c8c84d33f839c523a6b6b77b8948f2b672f0e48df20a610b00bd", "income": 138000, "retained": 27600.0, "conservation_ok": true}
+{"type": "block", "epoch": 6, "block": "_gen/extract", "balance": 691.55, "dividend": 480.0, "spend": 3.49, "rent": 100, "refs": 0, "zero_streak": 0, "income_total": 1120.0}
+{"type": "block", "epoch": 6, "block": "_gen/formula", "balance": 578.686668, "dividend": 426.666667, "spend": 2.38, "rent": 100, "refs": 0, "zero_streak": 0, "income_total": 986.666668}
+{"type": "block", "epoch": 6, "block": "_gen/llm", "balance": -33.333333, "dividend": 66.666667, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 0, "income_total": 66.666667}
+{"type": "block", "epoch": 6, "block": "_gen/pred_combiner", "balance": -126.666667, "dividend": 53.333333, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 0, "income_total": 373.333333}
+{"type": "block", "epoch": 6, "block": "anti_transpose", "balance": -1153.647, "dividend": 0.0, "spend": 2.079, "rent": 100, "refs": 0, "zero_streak": 7, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "bbox_fill_key", "balance": 3099.99, "dividend": 3200.0, "spend": 0.01, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 3200.0}
+{"type": "block", "epoch": 6, "block": "bridge", "balance": 5499.992, "dividend": 5600.0, "spend": 0.008, "rent": 100, "refs": 7, "zero_streak": 0, "income_total": 5600.0}
+{"type": "block", "epoch": 6, "block": "canvas", "balance": 1199.996, "dividend": 400.0, "spend": 0.001, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 1600.0}
+{"type": "block", "epoch": 6, "block": "cells_to_pixels", "balance": 599.896, "dividend": 1200.0, "spend": 0.04, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 1200.0}
+{"type": "block", "epoch": 6, "block": "colormap", "balance": 36967.636333, "dividend": 10133.333333, "spend": 4.129, "rent": 100, "refs": 22, "zero_streak": 0, "income_total": 38933.333333}
+{"type": "block", "epoch": 6, "block": "crop_bbox", "balance": 2046.353, "dividend": 3200.0, "spend": 2.079, "rent": 100, "refs": 7, "zero_streak": 0, "income_total": 3200.0}
+{"type": "block", "epoch": 6, "block": "crop_extract", "balance": -400.019, "dividend": 0.0, "spend": 0.013, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "crop_object", "balance": 13129.53, "dividend": 4200.0, "spend": 14.2, "rent": 100, "refs": 6, "zero_streak": 0, "income_total": 16200.0}
+{"type": "block", "epoch": 6, "block": "delete_sel", "balance": 198.662, "dividend": 800.0, "spend": 0.106, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 800.0}
+{"type": "block", "epoch": 6, "block": "downscale", "balance": 5262.724, "dividend": 1200.0, "spend": 0.231, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 6000.0}
+{"type": "block", "epoch": 6, "block": "extend_from", "balance": 2492.381, "dividend": 2000.0, "spend": 0.036, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2800.0}
+{"type": "block", "epoch": 6, "block": "extend_sel", "balance": 331.680333, "dividend": 933.333333, "spend": 0.062, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 933.333333}
+{"type": "block", "epoch": 6, "block": "extract_014eb176", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_022bd313", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_0429852a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_04a698eb", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_051f248f", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_05a78d5b", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_0664759a", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_0aac4779", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_0ff7b494", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_1037130e", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_11a2cbab", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_12011bfb", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_14ab2cbc", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_1601303d", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_185fa22c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_1ae684d5", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_1c9d14db", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_1cc2469a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_22e9a1c3", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_25b5577e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_25fc9dfa", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_26b1f79f", "balance": 340.0, "dividend": 640.0, "spend": 0.0, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 640.0}
+{"type": "block", "epoch": 6, "block": "extract_282661a7", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_2c93abee", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_2e594482", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_31eb6be5", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_32d847af", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_36120d51", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_3ae22ea9", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_3b2005e4", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_3b3c6ab5", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_3f43bf9e", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_4071bc78", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_42999fb4", "balance": 220.0, "dividend": 320.0, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 320.0}
+{"type": "block", "epoch": 6, "block": "extract_47309d01", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_4819fa70", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_4874be9d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_498be010", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_49a2feb9", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_4c807fc5", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_4f968a1d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_50ca3340", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_51692a07", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_5689ce5d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_5b492f99", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_5fbdaee4", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_618ba9ad", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_63730837", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_63911e16", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_64a4c506", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_64ab9d8d", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_6cf118fc", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_6db413d1", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_702ceac3", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_70aaf235", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_713b1328", "balance": 1300.0, "dividend": 320.0, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 1600.0}
+{"type": "block", "epoch": 6, "block": "extract_75321abe", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_75586959", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_77453432", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_79c5355e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_7a1b9b5e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_7b3e94ec", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_7b88caae", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_7eb95800", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_8023fefb", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_80817797", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_81804511", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_87186985", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_88fd4460", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_8925c4f6", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_89deab11", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_89e8a72a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_8d284121", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_8f34b138", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_96814760", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_96a7b0fb", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_98a3b005", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_9b1cab1a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_9ba939b5", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_9c1f0730", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_9e569a4f", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a07c0a37", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a0ae5a0a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a1a29247", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a21fae0d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a3a38a22", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a3a9bd17", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a5d352a5", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a80e5925", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_a8321fed", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_ab5ddae3", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_ac99c89d", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_b841b52d", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_bc0f0b7c", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c09d7a5b", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c0af4e8d", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c15ba0c8", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c2529930", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c25424e2", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c5dd0c7b", "balance": 20.0, "dividend": 320.0, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 320.0}
+{"type": "block", "epoch": 6, "block": "extract_c6c0e0a6", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c7f89d8d", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_c9d28605", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d19a47ba", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d26a1a28", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d30c37d0", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d3461963", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d365f53a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d71ce6f2", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d8f805ad", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_d956bb5e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_dac30f73", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_dbb17779", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_de542ebf", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_e2650625", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_e405b766", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_e5ed22ce", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_e5fb9aa7", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_e81e4d78", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_e9c1f920", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f017356f", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f23ec080", "balance": 1300.0, "dividend": 320.0, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 1600.0}
+{"type": "block", "epoch": 6, "block": "extract_f310f92c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f38d01c7", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f484d052", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f4b23b90", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f5217734", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f97e7b69", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "extract_f9faae9e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "fill_cells", "balance": -256.052, "dividend": 400.0, "spend": 0.088, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 400.0}
+{"type": "block", "epoch": 6, "block": "fill_enclosed", "balance": 1907.251, "dividend": 800.0, "spend": 0.558, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 2800.0}
+{"type": "block", "epoch": 6, "block": "fill_extract", "balance": -400.112, "dividend": 0.0, "spend": 0.011, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "fill_holes", "balance": 1666.439667, "dividend": 2266.666667, "spend": 0.012, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2266.666667}
+{"type": "block", "epoch": 6, "block": "flip_lr", "balance": 2046.353002, "dividend": 1600.0, "spend": 2.079, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 3200.000002}
+{"type": "block", "epoch": 6, "block": "flip_ud", "balance": 579.686333, "dividend": 1733.333333, "spend": 2.079, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 1733.333333}
+{"type": "block", "epoch": 6, "block": "formula_014e6829", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_0366991c", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_067f6180", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_06e2b145", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_07d76a82", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_07e04a9a", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_0832d6a3", "balance": 560.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 960.0}
+{"type": "block", "epoch": 6, "block": "formula_087dcb99", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_0cea363a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_0d787e0f", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_0db6aabe", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_10f2913a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_11c77b40", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_130e5a89", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_136e1668", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_13fdd706", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_14d79b41", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_1625be3d", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_17ce1ca0", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_18533524", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_1b82380f", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_1c41926f", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_1e04a14a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_1e1275b6", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_1f911902", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_223558d3", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2367bc71", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2716bfa0", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2a367c56", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2ae328e7", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2af1e31e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2c6169cd", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2dbee604", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2dcaf23d", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_2ed374a5", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_3048f4cc", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_3583cec5", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_3673b1b5", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_38988b46", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_3a11ebd3", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_3f2c0474", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_421278fe", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_46fc881d", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_47b127d9", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_4d8a3257", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_4e51b3eb", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_502664b0", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_505394c0", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_5130ec98", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_5515ab28", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_5645e516", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_5742e416", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_5cc6937c", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_61b984fe", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_62228070", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_63f88e8b", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_6618f874", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_6a3df00c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_6adb6d81", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_6dca6ab2", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_703d798b", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_71cb8826", "balance": -80.0, "dividend": 320.0, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 320.0}
+{"type": "block", "epoch": 6, "block": "formula_7289445c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_73b0166a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_759b1983", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_788786c1", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_78a70845", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_7c2e30e9", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_7c57293c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_7d114ee0", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_7fe81f8b", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_81f10843", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_83b4ab2f", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_841283fb", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_86f4d24a", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_89e96942", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_8c1dfd34", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_90b198fa", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_9114cc7c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_92193be6", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_93429933", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_95d770d3", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_96d1261c", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_98bad324", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_9990bb1f", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_9a76b7bb", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_9ad771a0", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_a0c41c5f", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_a28dea9b", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_a6e08f36", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_a8aa19d1", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_ac167ca6", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_ad77d799", "balance": 26.666667, "dividend": 426.666667, "spend": 0.0, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 426.666667}
+{"type": "block", "epoch": 6, "block": "formula_ae1bb70c", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_b0c568f1", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_b3d00459", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_b6a0c242", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_b8dd5603", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_bef1e7ac", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_bfb75206", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_bfdd171c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c098336c", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c234000d", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c3af6fdc", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c435c7c1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c44dfdcf", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c6ad406c", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c71478e3", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c77d9e9c", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c800a122", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_c8733ead", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_cf989e82", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_cfc986b8", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_d7253bf1", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_d8566444", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_e1c8cd8f", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_e3fd8ff1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_e70dac0d", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_e93ee361", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_ea52ae02", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_eccad5e8", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_f445226a", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_f45893b1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_f96c049b", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_fa847a75", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_fad4ae05", "balance": -300.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 3, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_fb07e29e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_fb0bd8e9", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_fb26a2f6", "balance": 453.333333, "dividend": 853.333333, "spend": 0.0, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 853.333333}
+{"type": "block", "epoch": 6, "block": "formula_fbe415b1", "balance": 986.666668, "dividend": 106.666667, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 1386.666668}
+{"type": "block", "epoch": 6, "block": "formula_fd3d919e", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_fec0c555", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "formula_ffa442ea", "balance": -400.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 4, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "gravity", "balance": 662.337333, "dividend": 2133.333333, "spend": 2.232, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2133.333333}
+{"type": "block", "epoch": 6, "block": "halo4_key", "balance": 566.666667, "dividend": 666.666667, "spend": 0.0, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 666.666667}
+{"type": "block", "epoch": 6, "block": "halo8_key", "balance": 4166.654667, "dividend": 4266.666667, "spend": 0.012, "rent": 100, "refs": 7, "zero_streak": 0, "income_total": 4266.666667}
+{"type": "block", "epoch": 6, "block": "holes_fill_key", "balance": -100.006, "dividend": 0.0, "spend": 0.006, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "inner_key", "balance": 3099.992, "dividend": 3200.0, "spend": 0.008, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 3200.0}
+{"type": "block", "epoch": 6, "block": "keep_sel", "balance": 31.120333, "dividend": 633.333333, "spend": 0.15, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 633.333333}
+{"type": "block", "epoch": 6, "block": "llm_087f839827", "balance": 57.921, "dividend": 160.0, "spend": 2.079, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 160.0}
+{"type": "block", "epoch": 6, "block": "llm_129466bfab", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_277b40492f", "balance": 6.666667, "dividend": 106.666667, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 106.666667}
+{"type": "block", "epoch": 6, "block": "llm_28d1efd575", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_75210ea617", "balance": -102.079, "dividend": 0.0, "spend": 2.079, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_80875e5ba1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_89271108c6", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_999cf69827", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_c2a3720e71", "balance": -102.079, "dividend": 0.0, "spend": 2.079, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_cb1618e21d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "llm_e67436c9b5", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "local_rule", "balance": 300.969667, "dividend": 2266.666667, "spend": 4.129, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2266.666667}
+{"type": "block", "epoch": 6, "block": "m_crop_object__upscale_d1e901", "balance": -853.631, "dividend": 200.0, "spend": 2.079, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 200.0}
+{"type": "block", "epoch": 6, "block": "m_flip_ud__crop_object_862544", "balance": -1053.631, "dividend": 0.0, "spend": 2.079, "rent": 100, "refs": 0, "zero_streak": 6, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "m_flip_ud__crop_object__upscale_e8abd8", "balance": -1053.631, "dividend": 0.0, "spend": 2.079, "rent": 100, "refs": 0, "zero_streak": 6, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "m_mirror_tile__split_overlay_fbb38a", "balance": -920.296667, "dividend": 133.333333, "spend": 2.079, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 133.333333}
+{"type": "block", "epoch": 6, "block": "m_sub_00fed9e8", "balance": -2970.064, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 2, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "m_sub_133be74a", "balance": -1238.774, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 2, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "m_sub_b181a7a9", "balance": -892.516, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 2, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "mirror_tile", "balance": 11072.392335, "dividend": 6733.333333, "spend": 6.237, "rent": 100, "refs": 10, "zero_streak": 0, "income_total": 13133.333335}
+{"type": "block", "epoch": 6, "block": "move_by", "balance": 599.992, "dividend": 800.0, "spend": 0.005, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 800.0}
+{"type": "block", "epoch": 6, "block": "move_from", "balance": 898.899, "dividend": 400.0, "spend": 0.036, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 1200.0}
+{"type": "block", "epoch": 6, "block": "move_sel", "balance": 3399.841, "dividend": 0.0, "spend": 0.012, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 4000.0}
+{"type": "block", "epoch": 6, "block": "object_colormap", "balance": 20000.969667, "dividend": 9866.666667, "spend": 4.129, "rent": 100, "refs": 13, "zero_streak": 0, "income_total": 21866.666667}
+{"type": "block", "epoch": 6, "block": "overlay_cells", "balance": 8198.14, "dividend": 2800.0, "spend": 0.138, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 8800.0}
+{"type": "block", "epoch": 6, "block": "paint_count", "balance": -100.001, "dividend": 0.0, "spend": 0.001, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pick_cell", "balance": 4997.761, "dividend": 1600.0, "spend": 0.152, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 5600.0}
+{"type": "block", "epoch": 6, "block": "pred_00c43cf8", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_01b2a01d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_0282034c", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_02860a2b", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_02f734d6", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_04e75e15", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_06f2dc53", "balance": 780.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 1280.0}
+{"type": "block", "epoch": 6, "block": "pred_09b1a3d6", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_0a9a7b1b", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_0c9c5060", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_0fec3b8b", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_11e62dbe", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_13a81ee1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_155f4f37", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_1651901a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_1731e9f2", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_1774abeb", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_1c6292a4", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_1db93345", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_1e9fe651", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_2037c374", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_213052a1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_22c7ec94", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_23b9bb5a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_25a54388", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_25b2f59a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_277dd5ea", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_2a0890bc", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_2a3b5bea", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_2b11d3f1", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_2cdacac1", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_2fa5c8e7", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_328616eb", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3295827d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_334571b0", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_36bf0975", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_37d133e4", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3acd7d3f", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3ce8e37e", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3e17e1c3", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3e5ecc48", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3ead1281", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_3f9e6efa", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_41510f60", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_43aa889c", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_44746037", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_4aeafa84", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_4c9f6c03", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_4cf3a709", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_4ee662e5", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_5178a339", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_56270eec", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_56a46c4a", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_56bd4cad", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_57c85a5e", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_58662886", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_5b986a94", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_611f3739", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_62d378ef", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_6395710a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_63957277", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_6577db90", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_68c2296f", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_6ccbe9e2", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_70164a9d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_708b6c5e", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_70a63249", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_75bf86fa", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_775ca73f", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_777dd522", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_7bbd0f17", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_7f10560c", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_80e09b20", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_81e0c55c", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_8366c1af", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_8439dd0b", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_851e9e9b", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_891392c1", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_891ee027", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_8a651d8f", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_8bcfbf2e", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_8c1cbd7e", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_900f7743", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_9081183c", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_90b2a475", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_90e90408", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_9217a476", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_926eaf0d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_92d0cc4c", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_9869979a", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_988c1402", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_9b41a6c0", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_9cdf81f8", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_9fa2fc1d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a03c9d31", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a1b40bc2", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a1c018c0", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a2115a7e", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a344d828", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a508040c", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a5396171", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a6651c8d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a6d52848", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a6dec29d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_a90dc2f5", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_ada36436", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_af92a9a9", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_b4328121", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_b4790fce", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_b497c086", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_b73200d3", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_bc3bc915", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_bd3e18cc", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_bd5d8514", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_bd873fbc", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_be81ffc6", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_bf6ab07c", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_c3b8095a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_c4ee1519", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_c501af92", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_c68a4d2d", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_c70746ba", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_c89ad21f", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_cbbc85a0", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_cd56ce6a", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_d08a544c", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_d14ea983", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_d4e49fbd", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_d6c069e3", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_dd17e008", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_df9c5bee", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_dfb3435e", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e0099bc3", "balance": 113.333333, "dividend": 213.333333, "spend": 0.0, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 213.333333}
+{"type": "block", "epoch": 6, "block": "pred_e136a1e8", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e204f7f6", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e31075e8", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e440d7ce", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e448a93d", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e51dc4f0", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e56e3308", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e62470f3", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e6608a27", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e66c6de5", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e9ac4f96", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_e9e76873", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_eada5245", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f0aa9bb1", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f1e3131f", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f2990432", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f46ba153", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f47e3401", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f4b919ab", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f4d19463", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f6464d25", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f6cb96f6", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_f81da432", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_fb51a759", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_fd672293", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_fe574324", "balance": -100.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_fec67205", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_ffbb3253", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "pred_ffea57a7", "balance": -500.0, "dividend": 0.0, "spend": 0.0, "rent": 100, "refs": 0, "zero_streak": 5, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "rays_key", "balance": 1766.656667, "dividend": 1866.666667, "spend": 0.01, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 1866.666667}
+{"type": "block", "epoch": 6, "block": "recolor_from", "balance": 4899.912, "dividend": 1200.0, "spend": 0.018, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 5200.0}
+{"type": "block", "epoch": 6, "block": "recolor_sel", "balance": 2198.672, "dividend": 1200.0, "spend": 0.101, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2800.0}
+{"type": "block", "epoch": 6, "block": "resize_crop", "balance": 234.018667, "dividend": 666.666667, "spend": 0.183, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 666.666667}
+{"type": "block", "epoch": 6, "block": "rot180", "balance": 5246.353, "dividend": 1600.0, "spend": 2.079, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 6400.0}
+{"type": "block", "epoch": 6, "block": "rot270", "balance": -353.647, "dividend": 800.0, "spend": 2.079, "rent": 100, "refs": 1, "zero_streak": 0, "income_total": 800.0}
+{"type": "block", "epoch": 6, "block": "rot90", "balance": -1153.647, "dividend": 0.0, "spend": 2.079, "rent": 100, "refs": 0, "zero_streak": 7, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "self_tile", "balance": -702.656, "dividend": 0.0, "spend": 0.044, "rent": 100, "refs": 0, "zero_streak": 7, "income_total": 0.0}
+{"type": "block", "epoch": 6, "block": "split_overlay", "balance": 22847.511667, "dividend": 3666.666667, "spend": 0.595, "rent": 100, "refs": 9, "zero_streak": 0, "income_total": 23666.666667}
+{"type": "block", "epoch": 6, "block": "stamp_key", "balance": 2566.644667, "dividend": 2666.666667, "spend": 0.022, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2666.666667}
+{"type": "block", "epoch": 6, "block": "symmetrize", "balance": 13447.613333, "dividend": 2933.333333, "spend": 1.385, "rent": 100, "refs": 7, "zero_streak": 0, "income_total": 14933.333333}
+{"type": "block", "epoch": 6, "block": "tile", "balance": 2091.038002, "dividend": 1200.0, "spend": 0.088, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 2800.000002}
+{"type": "block", "epoch": 6, "block": "tile_n", "balance": 2799.680001, "dividend": 0.0, "spend": 0.02, "rent": 100, "refs": 0, "zero_streak": 1, "income_total": 3200.000001}
+{"type": "block", "epoch": 6, "block": "transpose", "balance": 446.353, "dividend": 1600.0, "spend": 2.079, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 1600.0}
+{"type": "block", "epoch": 6, "block": "upscale", "balance": 6191.038, "dividend": 2100.0, "spend": 0.088, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 6900.0}
+{"type": "block", "epoch": 6, "block": "upscale_n", "balance": 2533.013333, "dividend": 533.333333, "spend": 0.02, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 2933.333333}
+{"type": "block", "epoch": 6, "block": "x_compress", "balance": 2300.0, "dividend": 2400.0, "spend": 0.0, "rent": 100, "refs": 4, "zero_streak": 0, "income_total": 2400.0}
+{"type": "block", "epoch": 6, "block": "x_connect", "balance": 433.333333, "dividend": 533.333333, "spend": 0.0, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 533.333333}
+{"type": "block", "epoch": 6, "block": "x_period", "balance": 966.666667, "dividend": 1066.666667, "spend": 0.0, "rent": 100, "refs": 2, "zero_streak": 0, "income_total": 1066.666667}
+{"type": "block", "epoch": 6, "block": "x_ray", "balance": 1233.333333, "dividend": 1333.333333, "spend": 0.0, "rent": 100, "refs": 3, "zero_streak": 0, "income_total": 1333.333333}
+{"type": "block", "epoch": 6, "block": "x_vrule", "balance": 2433.333333, "dividend": 2533.333333, "spend": 0.0, "rent": 100, "refs": 6, "zero_streak": 0, "income_total": 2533.333333}
+{"type": "retire", "epoch": 6, "block": "extract_014eb176"}
+{"type": "retire", "epoch": 6, "block": "extract_04a698eb"}
+{"type": "retire", "epoch": 6, "block": "extract_0664759a"}
+{"type": "retire", "epoch": 6, "block": "extract_0ff7b494"}
+{"type": "retire", "epoch": 6, "block": "extract_22e9a1c3"}
+{"type": "retire", "epoch": 6, "block": "extract_282661a7"}
+{"type": "retire", "epoch": 6, "block": "extract_32d847af"}
+{"type": "retire", "epoch": 6, "block": "extract_3ae22ea9"}
+{"type": "retire", "epoch": 6, "block": "extract_3f43bf9e"}
+{"type": "retire", "epoch": 6, "block": "extract_51692a07"}
+{"type": "retire", "epoch": 6, "block": "extract_5b492f99"}
+{"type": "retire", "epoch": 6, "block": "extract_618ba9ad"}
+{"type": "retire", "epoch": 6, "block": "extract_63730837"}
+{"type": "retire", "epoch": 6, "block": "extract_702ceac3"}
+{"type": "retire", "epoch": 6, "block": "extract_75321abe"}
+{"type": "retire", "epoch": 6, "block": "extract_79c5355e"}
+{"type": "retire", "epoch": 6, "block": "extract_7b3e94ec"}
+{"type": "retire", "epoch": 6, "block": "extract_a8321fed"}
+{"type": "retire", "epoch": 6, "block": "extract_ac99c89d"}
+{"type": "retire", "epoch": 6, "block": "extract_d365f53a"}
+{"type": "retire", "epoch": 6, "block": "formula_06e2b145"}
+{"type": "retire", "epoch": 6, "block": "formula_0cea363a"}
+{"type": "retire", "epoch": 6, "block": "formula_0d787e0f"}
+{"type": "retire", "epoch": 6, "block": "formula_130e5a89"}
+{"type": "retire", "epoch": 6, "block": "formula_13fdd706"}
+{"type": "retire", "epoch": 6, "block": "formula_17ce1ca0"}
+{"type": "retire", "epoch": 6, "block": "formula_1c41926f"}
+{"type": "retire", "epoch": 6, "block": "formula_1e04a14a"}
+{"type": "retire", "epoch": 6, "block": "formula_2716bfa0"}
+{"type": "retire", "epoch": 6, "block": "formula_2a367c56"}
+{"type": "retire", "epoch": 6, "block": "formula_2af1e31e"}
+{"type": "retire", "epoch": 6, "block": "formula_2c6169cd"}
+{"type": "retire", "epoch": 6, "block": "formula_2dbee604"}
+{"type": "retire", "epoch": 6, "block": "formula_2dcaf23d"}
+{"type": "retire", "epoch": 6, "block": "formula_3673b1b5"}
+{"type": "retire", "epoch": 6, "block": "formula_38988b46"}
+{"type": "retire", "epoch": 6, "block": "formula_3a11ebd3"}
+{"type": "retire", "epoch": 6, "block": "formula_3f2c0474"}
+{"type": "retire", "epoch": 6, "block": "formula_5645e516"}
+{"type": "retire", "epoch": 6, "block": "formula_61b984fe"}
+{"type": "retire", "epoch": 6, "block": "formula_6a3df00c"}
+{"type": "retire", "epoch": 6, "block": "formula_703d798b"}
+{"type": "retire", "epoch": 6, "block": "formula_7289445c"}
+{"type": "retire", "epoch": 6, "block": "formula_73b0166a"}
+{"type": "retire", "epoch": 6, "block": "formula_7c2e30e9"}
+{"type": "retire", "epoch": 6, "block": "formula_7d114ee0"}
+{"type": "retire", "epoch": 6, "block": "formula_7fe81f8b"}
+{"type": "retire", "epoch": 6, "block": "formula_81f10843"}
+{"type": "retire", "epoch": 6, "block": "formula_841283fb"}
+{"type": "retire", "epoch": 6, "block": "formula_89e96942"}
+{"type": "retire", "epoch": 6, "block": "formula_8c1dfd34"}
+{"type": "retire", "epoch": 6, "block": "formula_90b198fa"}
+{"type": "retire", "epoch": 6, "block": "formula_9114cc7c"}
+{"type": "retire", "epoch": 6, "block": "formula_93429933"}
+{"type": "retire", "epoch": 6, "block": "formula_95d770d3"}
+{"type": "retire", "epoch": 6, "block": "formula_98bad324"}
+{"type": "retire", "epoch": 6, "block": "formula_9ad771a0"}
+{"type": "retire", "epoch": 6, "block": "formula_a6e08f36"}
+{"type": "retire", "epoch": 6, "block": "formula_a8aa19d1"}
+{"type": "retire", "epoch": 6, "block": "formula_b6a0c242"}
+{"type": "retire", "epoch": 6, "block": "formula_b8dd5603"}
+{"type": "retire", "epoch": 6, "block": "formula_bfb75206"}
+{"type": "retire", "epoch": 6, "block": "formula_c098336c"}
+{"type": "retire", "epoch": 6, "block": "formula_c3af6fdc"}
+{"type": "retire", "epoch": 6, "block": "formula_c71478e3"}
+{"type": "retire", "epoch": 6, "block": "formula_cfc986b8"}
+{"type": "retire", "epoch": 6, "block": "formula_e93ee361"}
+{"type": "retire", "epoch": 6, "block": "formula_ea52ae02"}
+{"type": "retire", "epoch": 6, "block": "formula_eccad5e8"}
+{"type": "retire", "epoch": 6, "block": "formula_f445226a"}
+{"type": "retire", "epoch": 6, "block": "formula_f96c049b"}
+{"type": "retire", "epoch": 6, "block": "formula_fa847a75"}
+{"type": "retire", "epoch": 6, "block": "formula_fb0bd8e9"}
+{"type": "retire", "epoch": 6, "block": "formula_ffa442ea"}
+{"type": "retire", "epoch": 6, "block": "pred_04e75e15"}
+{"type": "retire", "epoch": 6, "block": "pred_1774abeb"}
+{"type": "retire", "epoch": 6, "block": "pred_2a3b5bea"}
+{"type": "retire", "epoch": 6, "block": "pred_3295827d"}
+{"type": "retire", "epoch": 6, "block": "pred_41510f60"}
+{"type": "retire", "epoch": 6, "block": "pred_43aa889c"}
+{"type": "retire", "epoch": 6, "block": "pred_4c9f6c03"}
+{"type": "retire", "epoch": 6, "block": "pred_5b986a94"}
+{"type": "retire", "epoch": 6, "block": "pred_6577db90"}
+{"type": "retire", "epoch": 6, "block": "pred_70a63249"}
+{"type": "retire", "epoch": 6, "block": "pred_7f10560c"}
+{"type": "retire", "epoch": 6, "block": "pred_8366c1af"}
+{"type": "retire", "epoch": 6, "block": "pred_a03c9d31"}
+{"type": "retire", "epoch": 6, "block": "pred_a1c018c0"}
+{"type": "retire", "epoch": 6, "block": "pred_a6d52848"}
+{"type": "retire", "epoch": 6, "block": "pred_bc3bc915"}
+{"type": "retire", "epoch": 6, "block": "pred_bd5d8514"}
+{"type": "retire", "epoch": 6, "block": "pred_c89ad21f"}
+{"type": "retire", "epoch": 6, "block": "pred_e440d7ce"}
+{"type": "retire", "epoch": 6, "block": "pred_f6cb96f6"}
+{"type": "retire", "epoch": 6, "block": "pred_fb51a759"}
+{"type": "retire", "epoch": 6, "block": "pred_ffbb3253"}

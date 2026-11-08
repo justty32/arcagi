@@ -4,7 +4,7 @@
   "params": [],
   "cost": 1,
   "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned\", \"4same\"], \"prop\": \"dir_to\"}",
-  "status": "covered",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/extract",
   "score": 7,

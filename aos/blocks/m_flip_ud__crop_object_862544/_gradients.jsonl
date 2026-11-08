@@ -7,3 +7,4 @@
 {"epoch": 4, "from": "pool", "task": "19bb5feb", "program": "[[\"m_flip_ud__crop_object_862544\"]]", "train_correct": 0, "train_total": 3, "score": 0.25, "says": "near miss on an unsolved task"}
 {"epoch": 4, "from": "pool", "task": "e633a9e5", "program": "[[\"rot90\"],[\"m_flip_ud__crop_object_862544\"],[\"upscale\",5,5]]", "train_correct": 0, "train_total": 3, "score": 0.2133, "says": "near miss on an unsolved task"}
 {"epoch": 5, "from": "pool", "task": "e633a9e5", "program": "[[\"rot90\"],[\"m_flip_ud__crop_object_862544\"],[\"upscale\",5,5]]", "train_correct": 0, "train_total": 3, "score": 0.2133, "says": "near miss on an unsolved task"}
+{"epoch": 6, "from": "pool", "task": "a61ba2ce", "program": "[[\"m_flip_ud__crop_object_862544\"],[\"mirror_tile\",\"quad\"]]", "train_correct": 0, "train_total": 2, "score": 0.4375, "says": "near miss on an unsolved task"}
