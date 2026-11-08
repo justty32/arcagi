@@ -29,6 +29,7 @@
 - [generation](../../../src/arcagi/generation/__init__.py)：固定 seed 的 RE-ARC adapter、生成驗證與 provenance；[測試](../../../tests/generation/)。
 - [visualization](../../../src/arcagi/visualization.py)：純 stdlib 離線 HTML 題目瀏覽器；[測試](../../../tests/test_visualization.py)。
 - [inventory_training](../../../scripts/inventory_training.py)：training 400 題特徵盤點，產生 `docs/inventory/` 的 HTML 與 CSV（繪圖在 [inventory_render](../../../scripts/inventory_render.py)）。
+- `scripts/taxonomy_*.py`（支線 S4）：題型標類——features 粗分、show 看題、merge 合併驗證、rates 每類解題率、failsample 抽 training 未解題；產物在 [docs/taxonomy/](../../../docs/taxonomy/)。
 - [setup_data](../../../scripts/setup_data.py)：取得與核對固定來源；[CI](../../../.github/workflows/tests.yml)：lint、pytest 與官方題庫檢查。
 
 ## 真相層與維護鏈
