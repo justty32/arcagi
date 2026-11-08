@@ -49,6 +49,9 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
+| r04-A 每物件規則 | opus | `src/arcagi/objrule/`、`dsl/extract*.py`、`blocks/gen_extract.py`、`aos/blocks/extract_*`、`_gen/extract/`、對應 tests | 其餘；不跑 evaluation | 2026-11-08 13:00 |
+| r04-B 公式＋預算＋拆 pool | opus | `blocks/pool*`、`dsl/features.py`、`dsl/formula*.py`、`blocks/gen_formula.py`、`gen_predicates.py`、`aos/blocks/formula_*`、`pred_*`、`_gen/formula|pred_combiner/`、`aos/pool/config.json`、對應 tests | 其餘；不跑 evaluation | 2026-11-08 13:00 |
+| r04-C 搜尋預算＋並行 | opus | `solvers/search.py`、`vote.py`、`runtime.py`、`eval/`、`cli*.py`、對應 tests、`docs/solvers.md` | 其餘；evaluation baseline 一次 | 2026-11-08 13:00 |
 
 ### 保留給主 agent，任何線都不得寫
 

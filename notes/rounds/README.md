@@ -9,7 +9,7 @@
 - **第一輪已收輪**（2026-11-08）：evaluation **21/400**、training 57/400（identity 0、template 0／6）。產物 [r01/](r01/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結簡報＋[代定清單](r01/代定清單.md)；程式 `src/arcagi/dsl/`＋`src/arcagi/solvers/search.py`；跑分 `reports/dsl-search-r01/`。
 - **第二輪已收輪**（2026-11-08）：evaluation **28/400**、training **79/400**（r01 21／57，退步 0）。產物 [r02/](r02/04-總結簡報.md)：01 簡報（含 §9 使用者 12:05 新想法「優化產生積木」）→ 02 fable 規劃＋02b 增補 → 03 設計 → 04 總結＋[代定清單](r02/代定清單.md)；aos 接入在 repo 根 `aos/`（積木資料夾、求解器資料夾程式、node-pool 帳 epoch 0～2、謂詞產生器）；跑分 `reports/dsl-search-r02/`。
 - **第三輪已收輪**（2026-11-08）：evaluation **32/400**、training **86/400**（r02 28／79，退步 0）。產物 [r03/](r03/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r03/代定清單.md)；公式型／抽取型積木產生器（`blocks/gen_formula.py`、`gen_extract.py`，落地 `aos/blocks/formula_*`、`extract_*`）、題目背景、投票、帳 epoch 3；跑分 `reports/dsl-search-r03/`。
-- **第四輪進行中**（2026-11-08）：[01 簡報](r04/01-簡報.md) 完成 → fable 規劃中。
+- **第四輪進行中**（2026-11-08）：[01 簡報](r04/01-簡報.md)、[02 fable 規劃](r04/02-規劃-fable.md)、[03 設計](r04/03-設計.md) 完成 → 三線施工中（A 每物件規則、B 公式＋預算＋拆 pool、C 搜尋預算＋並行評測）。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
 ## 使用者經 aos 轉達的前提（原文在 wf/inbox 的信，處理完在 wf/inbox/done/）
