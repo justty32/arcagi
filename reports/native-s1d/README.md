@@ -66,3 +66,47 @@ native/bin/arcbatch --mode seed-sub --subproblems SUBS.jsonl [--threads 6] [--ou
   - `cond_budget`：等於 Python `_direct` 的 budget，limit＝cond_budget − nodes。
   - `xs`／`outs` 分開給。
   - 輸出 `{"id", "program", "nodes", "nodes_to_first", "near", "cond": {"program", "used"}, "eval_steps", "seconds"}`。
+
+### 2.2 跟 Python 的一致性（Python 是 b67dc2a 之後的 `src/arcagi/seed/`）
+
+| 測試 | 規模 | 結果 |
+|---|---|---|
+| golden 原語（`tests/seed/golden_prims.json`） | 747 組 | 全部一致（含型別：int／bool 不混） |
+| 求值器差分：純枚舉 bank 裡的程式 × 該題所有 train／test 輸入 | 400 題、79,309 支程式、340,533 個值 | 0 差異 |
+| 整題，純枚舉，100k 節點 | training 400 題 | 400 題的 program、nodes、nodes_to_first、near 全一致 |
+| 整題，r07 拆法，100k 節點 | training 400 題 | 400／400 一致 |
+| 整題，1M 節點 | r08 L16＋P32 | 全一致（693da13 修好 rehash bug 之後） |
+| 子搜尋重播（`native/tools/seed_record.py`，九種拆法全開，含 halves、nest） | r08 learn＋practice＋holdout＋holdout24 共 80 題，1,547 次子搜尋 | 0 差異（program、nodes、nodes_to_first、near、cond） |
+
+- 這些測試抓到兩個 bug：
+  - Python 3.12 的 `sum()` 對浮點數做 Neumaier 補償加總，near 分數要照這個算法才會逐位元相同。
+  - 去重表擴容（rehash）時漏掉正在加入的那一筆，造成 1M 節點時差 1 個節點。693da13 已修。
+- 重跑：`native/tools/seed_parity.py`（solve／compare／evalgen／evalcmp）、`native/tools/seed_record.py`（record／compare）、`tests/native/test_seed_native.py`。
+
+### 2.3 速度（同樣 6 個 worker，牆鐘秒數；Python＝`seed.enum.solve` 用 fork pool）
+
+| 題組 | 預算 | 模式 | Python | C++ | 倍數 |
+|---|---|---|---|---|---|
+| r08 L16 | 100k | 純枚舉 | 2.14 | 0.111 | 19× |
+| r08 L16 | 100k | r07 拆法 | 1.01 | 0.063 | 16× |
+| r08 L16 | 1M | 純枚舉 | 20.65 | 1.58 | 13× |
+| r08 L16 | 1M | r07 拆法 | 11.97 | 0.97 | 12× |
+| r08 P32（practice） | 100k | 純枚舉 | 4.90 | 0.232 | 21× |
+| r08 P32 | 100k | r07 拆法 | 2.76 | 0.167 | 17× |
+| r08 P32 | 1M | 純枚舉 | 68.2 | 3.48 | 20× |
+| r08 P32 | 1M | r07 拆法 | 39.8 | 2.50 | 16× |
+| training 400 | 100k | 純枚舉 | 45.8 | 2.59 | 18× |
+| training 400 | 100k | r07 拆法 | 32.2 | 1.46 | 22× |
+| training 376（r07 時的練習池） | 100k | 純枚舉 | 40.5 | 2.96* | 14× |
+
+\* 376 那一列是較早的 binary，後來加了 sort 快路徑和較便宜的雜湊，又快了約 20%。
+
+- training 400 題、1M 節點：C++ 純枚舉 25.3 秒、拆法 26.7 秒（6 執行緒，記憶體峰值 1.8G）。Python 同樣設定用 6 workers 時超過 8G 被 OOM 砍掉，沒有可比的數字；1M 的一致性測試因此只做 L16＋P32。
+- 小題組的倍數受限於最慢那一題，因為 16 題分給 6 個 worker。熱點是 list 雜湊合併（`Store::make`，約 37%），其次是比較與原語本身。
+
+### 2.4 跟 05 規格不同的地方
+
+1. `--mode seed` 的 `decomp` 除了 `false`，也接受 `true` 和 r07 的拆法名單（map、zip_pos、if、take、conj_transpose、conj_reverse、append），C++ 自己跑 decomp。用了 halves、nest 會回錯，請改用 seed-sub。主線照 D-r8-13 只用 `false`＋seed-sub 也行。
+2. seed-sub 的 `budget` 是 Enumerator 的預算（Python `_direct` 裡的 `int(budget*0.95)`）。`cond_limit` 是絕對上限；另外也收 `cond_budget`，limit＝cond_budget − nodes。輸出的 `program` 只放枚舉找到的，cond 找到的放在 `cond.program`。
+3. `eval_steps` 是精確計數，包括 HOF 裡 lambda 的步數，跟 Python 的近似值不同，只當參考。
+4. 子目標錄製工具已經做好（`native/tools/seed_record.py`），主線不用另外寫；它只在執行期包住 `decomp.search`／`cond_witness`，不改 seed 原始碼。
