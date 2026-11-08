@@ -1,0 +1,11 @@
+{
+  "name": "fill_cells",
+  "kind": "primitive",
+  "doc": "Same-size board with every cell painted by its summary (separators kept).",
+  "params": [
+    "mode"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

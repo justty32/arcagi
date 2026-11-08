@@ -1,0 +1,9 @@
+{
+  "name": "flip_lr",
+  "kind": "primitive",
+  "doc": "Grid primitive flip_lr.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 2
+}

@@ -1,0 +1,11 @@
+[
+  [
+    "mirror_tile",
+    "ud"
+  ],
+  [
+    "split_overlay",
+    "h",
+    "xor"
+  ]
+]

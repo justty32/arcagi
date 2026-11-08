@@ -1,0 +1,12 @@
+{
+  "name": "symmetrize",
+  "kind": "primitive",
+  "doc": "Fill ``hole`` cells from their mirror images under the chosen symmetry.",
+  "params": [
+    "mode",
+    "hole"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 6
+}

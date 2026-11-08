@@ -1,0 +1,9 @@
+{
+  "name": "transpose",
+  "kind": "primitive",
+  "doc": "Grid primitive transpose.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

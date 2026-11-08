@@ -1,0 +1,18 @@
+{
+  "name": "m_mirror_tile__split_overlay_fbb38a",
+  "kind": "macro",
+  "doc": "Grid primitive m_mirror_tile__split_overlay_fbb38a.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "source_tasks": [
+    "4cd1b7b2",
+    "5582e5ca",
+    "88a62173"
+  ],
+  "source_traces": [
+    "artifacts/r01/dsl-training-traces.jsonl",
+    "artifacts/r01/dsl-evaluation-traces.jsonl"
+  ]
+}

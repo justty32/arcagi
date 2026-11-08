@@ -1,0 +1,11 @@
+{
+  "name": "gravity",
+  "kind": "primitive",
+  "doc": "Slide every non-background cell toward ``direction`` until blocked.",
+  "params": [
+    "direction"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

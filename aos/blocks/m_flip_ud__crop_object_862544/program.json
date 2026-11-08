@@ -1,0 +1,10 @@
+[
+  [
+    "flip_ud"
+  ],
+  [
+    "crop_object",
+    "4same",
+    "smallest"
+  ]
+]

@@ -1,0 +1,12 @@
+{
+  "name": "downscale",
+  "kind": "primitive",
+  "doc": "Keep the top-left cell of every fy x fx block (requires exact division).",
+  "params": [
+    "fy",
+    "fx"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 2
+}

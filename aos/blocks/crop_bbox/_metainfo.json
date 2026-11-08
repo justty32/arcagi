@@ -1,0 +1,9 @@
+{
+  "name": "crop_bbox",
+  "kind": "primitive",
+  "doc": "Grid primitive crop_bbox.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

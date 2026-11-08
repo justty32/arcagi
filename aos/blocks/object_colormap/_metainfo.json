@@ -1,0 +1,11 @@
+{
+  "name": "object_colormap",
+  "kind": "learner",
+  "doc": "Terminal object table: recolor whole objects by one learned attribute.",
+  "params": [
+    "table"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 4
+}

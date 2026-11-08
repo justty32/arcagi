@@ -1,0 +1,13 @@
+{
+  "name": "keep_sel",
+  "kind": "primitive",
+  "doc": "Grid primitive keep_sel.",
+  "params": [
+    "conn",
+    "attr",
+    "value"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

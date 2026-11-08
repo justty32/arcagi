@@ -1,0 +1,9 @@
+{
+  "price_per_task": 1000,
+  "retain": 0.2,
+  "rent": 100,
+  "calls_per_unit": 1000,
+  "retire_after": 3,
+  "gradient_cap": 50,
+  "near_misses_per_task": 1
+}

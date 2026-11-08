@@ -1,0 +1,9 @@
+{
+  "name": "fill_enclosed",
+  "kind": "primitive",
+  "doc": "Paint background cells that cannot reach the border with the marker.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 1
+}

@@ -1,0 +1,14 @@
+{
+  "name": "extend_sel",
+  "kind": "primitive",
+  "doc": "Draw a ray from each selected object's cells to the border over background.",
+  "params": [
+    "conn",
+    "attr",
+    "value",
+    "direction"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

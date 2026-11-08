@@ -1,0 +1,12 @@
+{
+  "name": "crop_object",
+  "kind": "primitive",
+  "doc": "Grid primitive crop_object.",
+  "params": [
+    "conn",
+    "how"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 6
+}

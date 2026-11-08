@@ -1,0 +1,11 @@
+{
+  "name": "cells_to_pixels",
+  "kind": "primitive",
+  "doc": "One pixel per cell: majority color, any-content / max-pixels marker, uniform.",
+  "params": [
+    "mode"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

@@ -1,0 +1,196 @@
+{
+  "epoch": 0,
+  "split": "evaluation",
+  "report": "artifacts/r01/dsl-evaluation.json",
+  "report_sha256": "2c75d1002b47b012f77a762db9b06d364ab6c3a6d0ddce669eb2b0a956f6fd02",
+  "income": 21000,
+  "tasks_solved": 21,
+  "tasks_total": 400,
+  "retained": 4200.0,
+  "dividends_total": 16800.0,
+  "conservation_ok": true,
+  "suggest_retire": [],
+  "blocks": {
+    "anti_transpose": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "colormap": {
+      "balance": 4700.0,
+      "dividend": 4800.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 12,
+      "zero_streak": 0,
+      "income_total": 4800.0
+    },
+    "crop_bbox": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "crop_object": {
+      "balance": 1900.0,
+      "dividend": 2000.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 2000.0
+    },
+    "downscale": {
+      "balance": 700.0,
+      "dividend": 800.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 800.0
+    },
+    "fill_enclosed": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "flip_lr": {
+      "balance": 166.666667,
+      "dividend": 266.666667,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 266.666667
+    },
+    "flip_ud": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "gravity": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "local_rule": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "mirror_tile": {
+      "balance": 966.666667,
+      "dividend": 1066.666667,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 1066.666667
+    },
+    "rot180": {
+      "balance": 700.0,
+      "dividend": 800.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 2,
+      "zero_streak": 0,
+      "income_total": 800.0
+    },
+    "rot270": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "rot90": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "self_tile": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "split_overlay": {
+      "balance": 3900.0,
+      "dividend": 4000.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 10,
+      "zero_streak": 0,
+      "income_total": 4000.0
+    },
+    "symmetrize": {
+      "balance": 1900.0,
+      "dividend": 2000.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 3,
+      "zero_streak": 0,
+      "income_total": 2000.0
+    },
+    "tile": {
+      "balance": 166.666667,
+      "dividend": 266.666667,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 266.666667
+    },
+    "transpose": {
+      "balance": -100.0,
+      "dividend": 0.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 0,
+      "zero_streak": 1,
+      "income_total": 0.0
+    },
+    "upscale": {
+      "balance": 700.0,
+      "dividend": 800.0,
+      "spend": 0.0,
+      "rent": 100,
+      "refs": 1,
+      "zero_streak": 0,
+      "income_total": 800.0
+    }
+  },
+  "gradients_written": 303
+}

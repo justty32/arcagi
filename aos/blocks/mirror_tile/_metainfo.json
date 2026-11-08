@@ -1,0 +1,11 @@
+{
+  "name": "mirror_tile",
+  "kind": "primitive",
+  "doc": "Grid primitive mirror_tile.",
+  "params": [
+    "mode"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 6
+}

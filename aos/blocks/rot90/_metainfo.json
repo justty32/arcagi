@@ -1,0 +1,9 @@
+{
+  "name": "rot90",
+  "kind": "primitive",
+  "doc": "Rotate clockwise by 90 degrees.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

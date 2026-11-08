@@ -1,0 +1,11 @@
+{
+  "name": "self_tile",
+  "kind": "primitive",
+  "doc": "Place a copy of the grid at every (non-)background cell of itself.",
+  "params": [
+    "mode"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

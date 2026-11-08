@@ -1,0 +1,2 @@
+{"epoch": 1, "from": "pool", "task": "c8b7cc0f", "program": "[[\"flip_lr\"],[\"crop_object\",\"4same\",\"largest\"],[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "score": 0.5556, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "ca8de6ea", "program": "[[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "score": 0.2222, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}

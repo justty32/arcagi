@@ -11,6 +11,7 @@ from arcagi.tasks import Grid
 
 from . import grid as g
 from .learners import apply_colormap, apply_local_rule
+from .objects_learner import apply_object_colormap
 from .registry import PRIMITIVES
 
 type Step = tuple[object, ...]
@@ -21,6 +22,8 @@ def run_step(step: Step, grid: Grid) -> Grid:
     name, *params = step
     if name == "colormap":
         return apply_colormap(grid, params[0])  # type: ignore[arg-type]
+    if name == "object_colormap":
+        return apply_object_colormap(grid, params[0])  # type: ignore[arg-type]
     if name == "local_rule":
         return apply_local_rule(grid, params[0], params[1])  # type: ignore[arg-type]
     return PRIMITIVES[name].apply(grid, *params)  # type: ignore[index]
@@ -43,6 +46,8 @@ def cost(program: Program) -> float:
     total = 0.0
     for step in program:
         for param in step[1:]:
+            if step[0] == "object_colormap":
+                param = param[2]  # type: ignore[index]  # the key -> color rows
             total += 0.05 * len(param) if isinstance(param, list) else 0.1
         total += 1
     return total

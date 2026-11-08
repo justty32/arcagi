@@ -1,0 +1,11 @@
+{
+  "name": "overlay_cells",
+  "kind": "primitive",
+  "doc": "MARK where ``op`` holds over the cells' non-background masks, else 0.",
+  "params": [
+    "op"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 3
+}

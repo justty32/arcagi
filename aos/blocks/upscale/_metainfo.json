@@ -1,0 +1,12 @@
+{
+  "name": "upscale",
+  "kind": "primitive",
+  "doc": "Grid primitive upscale.",
+  "params": [
+    "fy",
+    "fx"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 2
+}

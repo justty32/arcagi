@@ -1,0 +1,10 @@
+{"epoch": 0, "from": "pool", "task": "20818e16", "program": "[[\"flip_ud\"],[\"crop_object\",\"4same\",\"largest\"],[\"gravity\",\"right\"]]", "score": 0.5181, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 0, "from": "pool", "task": "73ccf9c2", "program": "[[\"rot180\"],[\"crop_object\",\"8multi\",\"most_colors\"],[\"flip_ud\"]]", "score": 0.7746, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 0, "from": "pool", "task": "dc2aa30b", "program": "[[\"flip_ud\"]]", "score": 0.7466, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 0, "from": "pool", "task": "e21a174a", "program": "[[\"flip_ud\"]]", "score": 0.8191, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "140c817e", "program": "[[\"extend_sel\",\"4same\",\"all\",1,\"down\"],[\"flip_ud\"],[\"fill_cells\",\"uniform\"]]", "score": 0.6469, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "20818e16", "program": "[[\"flip_ud\"],[\"crop_object\",\"4same\",\"largest\"],[\"gravity\",\"right\"]]", "score": 0.5181, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "50a16a69", "program": "[[\"extend_sel\",\"8multi\",\"has_hole\",1,\"down\"],[\"flip_ud\"],[\"gravity\",\"left\"]]", "score": 0.3101, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "73ccf9c2", "program": "[[\"rot180\"],[\"crop_object\",\"8multi\",\"most_colors\"],[\"flip_ud\"]]", "score": 0.7746, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "dc2aa30b", "program": "[[\"flip_ud\"]]", "score": 0.7466, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 1, "from": "pool", "task": "e21a174a", "program": "[[\"flip_ud\"]]", "score": 0.8191, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}

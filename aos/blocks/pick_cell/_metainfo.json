@@ -1,0 +1,12 @@
+{
+  "name": "pick_cell",
+  "kind": "primitive",
+  "doc": "Grid primitive pick_cell.",
+  "params": [
+    "how",
+    "color"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 1
+}

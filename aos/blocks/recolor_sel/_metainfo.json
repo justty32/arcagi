@@ -1,0 +1,14 @@
+{
+  "name": "recolor_sel",
+  "kind": "primitive",
+  "doc": "Grid primitive recolor_sel.",
+  "params": [
+    "conn",
+    "attr",
+    "value",
+    "color"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

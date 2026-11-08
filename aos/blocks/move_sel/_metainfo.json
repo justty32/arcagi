@@ -1,0 +1,14 @@
+{
+  "name": "move_sel",
+  "kind": "primitive",
+  "doc": "Slide each selected object in ``direction`` until the border or a cell.",
+  "params": [
+    "conn",
+    "attr",
+    "value",
+    "direction"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 1
+}

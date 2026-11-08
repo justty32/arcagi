@@ -1,0 +1,12 @@
+{
+  "name": "local_rule",
+  "kind": "learner",
+  "doc": "Terminal neighborhood rule table over n4/n8 features.",
+  "params": [
+    "features",
+    "rule"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

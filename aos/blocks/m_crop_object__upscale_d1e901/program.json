@@ -1,0 +1,12 @@
+[
+  [
+    "crop_object",
+    "4same",
+    "smallest"
+  ],
+  [
+    "upscale",
+    3,
+    3
+  ]
+]

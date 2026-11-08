@@ -1,0 +1,13 @@
+{
+  "name": "delete_sel",
+  "kind": "primitive",
+  "doc": "Grid primitive delete_sel.",
+  "params": [
+    "conn",
+    "attr",
+    "value"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

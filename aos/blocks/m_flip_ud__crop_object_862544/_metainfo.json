@@ -1,0 +1,18 @@
+{
+  "name": "m_flip_ud__crop_object_862544",
+  "kind": "macro",
+  "doc": "Grid primitive m_flip_ud__crop_object_862544.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "source_tasks": [
+    "48d8fb45",
+    "7837ac64",
+    "a87f7484"
+  ],
+  "source_traces": [
+    "artifacts/r01/dsl-training-traces.jsonl",
+    "artifacts/r01/dsl-evaluation-traces.jsonl"
+  ]
+}

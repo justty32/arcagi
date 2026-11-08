@@ -1,0 +1,25 @@
+{
+  "name": "m_crop_object__upscale_d1e901",
+  "kind": "macro",
+  "doc": "Grid primitive m_crop_object__upscale_d1e901.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "source_tasks": [
+    "3194b014",
+    "48d8fb45",
+    "5bd6f4ac",
+    "662c240a",
+    "7837ac64",
+    "9110e3c5",
+    "a87f7484",
+    "cdecee7f",
+    "d037b0a7",
+    "d4469b4b"
+  ],
+  "source_traces": [
+    "artifacts/r01/dsl-training-traces.jsonl",
+    "artifacts/r01/dsl-evaluation-traces.jsonl"
+  ]
+}

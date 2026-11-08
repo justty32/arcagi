@@ -1,0 +1,9 @@
+{
+  "name": "rot180",
+  "kind": "primitive",
+  "doc": "Grid primitive rot180.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 4
+}

@@ -1,0 +1,9 @@
+{
+  "name": "anti_transpose",
+  "kind": "primitive",
+  "doc": "Grid primitive anti_transpose.",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

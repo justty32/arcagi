@@ -1,0 +1,12 @@
+{
+  "name": "tile",
+  "kind": "primitive",
+  "doc": "Grid primitive tile.",
+  "params": [
+    "ny",
+    "nx"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 2
+}

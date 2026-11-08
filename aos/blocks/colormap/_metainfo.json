@@ -1,0 +1,11 @@
+{
+  "name": "colormap",
+  "kind": "learner",
+  "doc": "Terminal color table: replace each color by its learned target color.",
+  "params": [
+    "table"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 24
+}

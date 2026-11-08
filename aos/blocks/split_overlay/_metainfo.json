@@ -1,0 +1,12 @@
+{
+  "name": "split_overlay",
+  "kind": "primitive",
+  "doc": "Grid primitive split_overlay.",
+  "params": [
+    "axis",
+    "op"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 18
+}

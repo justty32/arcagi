@@ -1,0 +1,11 @@
+{
+  "name": "fill_holes",
+  "kind": "primitive",
+  "doc": "Paint background cells enclosed by a single (8-connected) object.",
+  "params": [
+    "color"
+  ],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0
+}

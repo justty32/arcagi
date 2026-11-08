@@ -22,14 +22,15 @@ from arcagi.dsl.learners import (
     fit_colormap,
     fit_local_rule,
 )
+from arcagi.dsl.objects_learner import apply_object_colormap, fit_object_colormap
 from arcagi.dsl.program import Program, cost, to_json
-from arcagi.dsl.registry import PRIMITIVES
+from arcagi.dsl.registry import FIRST_STEP_ONLY, PRIMITIVES
 from arcagi.tasks import Grid, SolverTask
 
 from .trace import SolverResult, TraceRecorder
 
 MAX_DEPTH = 3
-TIME_BUDGET = 2.5
+TIME_BUDGET = 5.0
 MAX_NODES = 20000
 MAX_SOLUTIONS = 30
 MAX_NEAR = 20
@@ -92,6 +93,12 @@ class _Search:
             self._add_solution(
                 (*program, step), [apply_colormap(t, table) for t in tests]
             )
+        self.result.block_calls["object_colormap"] += 1
+        table = fit_object_colormap(train, self.targets, tests)
+        if table is not None:
+            step = ("object_colormap", table)
+            outs = [apply_object_colormap(t, table) for t in tests]
+            self._add_solution((*program, step), outs)
         for features in ("n4", "n8"):
             rule = fit_local_rule(train, self.targets, tests, features)
             if rule is not None:
@@ -119,6 +126,8 @@ class _Search:
         for program, grids in frontier:
             train = grids[: self.n]
             for name, primitive in PRIMITIVES.items():
+                if program and name in FIRST_STEP_ONLY:
+                    continue
                 for params in primitive.candidates(train, self.targets):
                     if self.over_budget():
                         return nxt
