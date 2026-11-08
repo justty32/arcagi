@@ -9,7 +9,8 @@ const std::unordered_set<std::string>& ported() {
         "flip_lr","flip_ud","transpose","rot90","rot180","rot270","anti_transpose",
         "upscale","downscale","tile","mirror_tile","crop_bbox","split_overlay","crop_object",
         "fill_enclosed","self_tile","symmetrize","gravity","pick_cell","overlay_cells","cells_to_pixels","fill_cells",
-        "recolor_sel","delete_sel","keep_sel","fill_holes","move_sel","extend_sel"};
+        "recolor_sel","delete_sel","keep_sel","fill_holes","move_sel","extend_sel",
+        "x_ray","x_connect","x_compress","x_crop_color","x_period"};
     return names;
 }
 Spec::Spec(const Json& j) {
@@ -25,6 +26,9 @@ Spec::Spec(const Json& j) {
     }
     for (const auto& name:j["live"].items())
         if (ported().contains(name.str()) || macros.contains(name.str())) names.push_back(name.str());
+}
+void Spec::enable_ext() {
+    for (const auto& name:ext_names()) if (live.insert(name).second) names.push_back(name);
 }
 std::pair<Grid,Grid> halves(const Grid& g,const std::string& axis) {
     Grid work=axis=="h"?g:transform(g,"transpose");
@@ -133,6 +137,7 @@ Grid apply_step(const Step& s,const Grid& g,const Spec& spec,bool in_macro) {
     }
     if (!ported().contains(name)) fail();
     if (is_object_primitive(name)) return apply_objects(s,g,spec);
+    if (is_ext_primitive(name)) return apply_ext(s,g);
     if (name=="self_tile" || name=="symmetrize" || name=="gravity") return apply_more(s,g);
     if (name=="pick_cell" || name=="overlay_cells" || name=="cells_to_pixels" || name=="fill_cells") return apply_cells(s,g);
     return apply_base(s,g);

@@ -95,6 +95,7 @@ std::vector<Step> narrow(const std::string& name,const Grids& states,const Grids
 }
 std::vector<Step> candidates(const std::string& name,const Grids& states,const Grids& targets,bool last,const Spec& spec) {
     if (is_object_primitive(name)) return object_candidates(name,states,targets,spec);
+    if (is_ext_primitive(name)) return ext_candidates(name,states,targets);
     if (name=="colormap") {
         std::vector<Step> out;
         auto destinations=colors(targets); destinations.insert(0);

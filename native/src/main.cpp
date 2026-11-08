@@ -2,18 +2,20 @@
 #include "background.hpp"
 #include <cmath>
 #include <filesystem>
+#include <cstdlib>
 #include <iostream>
 
 int main(int argc,char** argv) {
     using namespace arc;
     try {
         Options options;
-        bool run_mode=false,list_ported=false;
+        bool run_mode=false,list_ported=false,ext=std::getenv("ARCSEARCH_EXT")!=nullptr;
         std::string request_path,out_path,spec_path,seeds_path;
         for (int i=1;i<argc;++i) {
             std::string arg=argv[i];
             if (arg=="--run") { run_mode=true; continue; }
             if (arg=="--list-ported") { list_ported=true; continue; }
+            if (arg=="--ext") { ext=true; continue; }
             if (arg=="--help") {
                 std::cout<<"arcsearch --run [--spec PATH]\narcsearch --list-ported [--spec PATH]\narcsearch --request PATH [--budget SECONDS] [--max-depth D] [--max-nodes N] [--max-solutions N] [--seeds PATH] [--dump-prefixes K --prefix-out PATH] [--spec PATH] [--out PATH]\n";
                 return 0;
@@ -38,6 +40,7 @@ int main(int argc,char** argv) {
             spec_path=(binary.parent_path()/"../spec.json").lexically_normal().string();
         }
         Spec spec(read_json(spec_path));
+        if (ext) spec.enable_ext();
         if (list_ported) {
             Json::Array names;
             for (const auto& name:spec.names) names.emplace_back(name);

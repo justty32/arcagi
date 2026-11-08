@@ -19,10 +19,15 @@ struct Spec {
     std::vector<std::string> predicate_names;
     std::map<std::string,Json> predicates;
     explicit Spec(const Json& j);
+    void enable_ext();
 };
 Grid apply_base(const Step& s,const Grid& g);
 Grid apply_more(const Step& s,const Grid& g);
 Grid apply_cells(const Step& s,const Grid& g);
+const std::vector<std::string>& ext_names();
+bool is_ext_primitive(const std::string& name);
+Grid apply_ext(const Step& s,const Grid& g);
+std::vector<Step> ext_candidates(const std::string& name,const Grids& states,const Grids& targets);
 Grid apply_step(const Step& s,const Grid& g,const Spec& spec,bool in_macro=false);
 Grid run(const Program& program,Grid grid,const Spec& spec);
 std::pair<Grid,Grid> halves(const Grid& g,const std::string& axis);
