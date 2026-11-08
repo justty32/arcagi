@@ -1,120 +1,131 @@
 {
-  "contract": "wf-table/1",
-  "source": "README.md",
-  "extracted": "2026-11-08",
-  "link_columns": [
-    "record_path"
-  ],
-  "columns": [
-    "id",
-    "date",
-    "hypothesis",
-    "solver",
-    "split",
-    "result",
-    "baseline",
-    "verdict",
-    "record_path"
-  ],
-  "rows": [
-    {
-      "id": "2026-11-08-baseline-identity",
-      "date": "2026-11-08",
-      "hypothesis": "identity 只是流程基線，預期 0 題",
-      "solver": "identity (data rev 3990304)",
-      "split": "evaluation＋training",
-      "result": "evaluation 0/400、training 0/400, errors=0",
-      "baseline": "（本身即基線）",
-      "verdict": "是：流程通、0 題，作為後續比較的下限",
-      "record_path": "../../../reports/baseline-identity/README.md"
-    },
-    {
-      "id": "2026-11-08-dsl-search-r01",
-      "date": "2026-11-08",
-      "hypothesis": "網格 DSL＋深度 ≤3 枚舉（觀察等價、終端換色表／鄰域規則）在 evaluation 解 ≥8 題",
-      "solver": "arcagi.solvers.search:solve (bee6426)",
-      "split": "evaluation＋training",
-      "result": "evaluation 21/400、training 57/400, errors=0",
-      "baseline": "identity 0/400、0/400；template 0/400、6/400",
-      "verdict": "是：超過驗收 8／30 與目標 12／45；瓶頸是原語覆蓋不是算力",
-      "record_path": "../../../reports/dsl-search-r01/README.md"
-    },
-    {
-      "id": "2026-11-08-dsl-search-r02",
-      "date": "2026-11-08",
-      "hypothesis": "物件層＋格線切塊＋自動產生謂詞積木在 evaluation 解 ≥30 題（同大小 ≥10）",
-      "solver": "arcagi.solvers.search:solve (75b90ed)",
-      "split": "evaluation＋training",
-      "result": "evaluation 28/400、training 79/400, errors=0；top-2 同 top-1",
-      "baseline": "dsl-search-r01 evaluation 21/400、training 57/400；退步 0",
-      "verdict": "否：evaluation +7 未達 30（同大小 3→7）；training 達 75；一題由自動產生的謂詞解出",
-      "record_path": "../../../reports/dsl-search-r02/README.md"
-    },
-    {
-      "id": "2026-11-08-dsl-search-r03",
-      "date": "2026-11-08",
-      "hypothesis": "自動產生的公式型與抽取型積木（＋題目背景、投票、帳修正）讓 evaluation 解 ≥36 題",
-      "solver": "arcagi.solvers.search:solve (e743cd4)",
-      "split": "evaluation＋training",
-      "result": "evaluation 32/400、training 86/400, errors=0；top-2 同 top-1",
-      "baseline": "dsl-search-r02 evaluation 28/400、training 79/400；退步 0",
-      "verdict": "否：evaluation +4 未達 36，但 4 題全由公式型積木解出；尺寸隨輸入 54 題 2→6",
-      "record_path": "../../../reports/dsl-search-r03/README.md"
-    },
-    {
-      "id": "2026-11-08-dsl-search-r04",
-      "date": "2026-11-08",
-      "hypothesis": "每物件各自規則（物件視角抽取積木當動作參數）＋產生器預算執行＋公式 2 層讓 evaluation 解 ≥38、同大小 ≥13",
-      "solver": "arcagi.solvers.search:solve (9dcf110)",
-      "split": "evaluation＋training",
-      "result": "evaluation 37/400、training 92/400, errors=0；同大小 evaluation 13/270",
-      "baseline": "dsl-search-r03 evaluation 32/400、training 86/400；退步 0",
-      "verdict": "部分：同大小 8→13 達標、evaluation 差 1 題；新解 5 題全由每物件規則；加大搜尋預算單獨 0 增量",
-      "record_path": "../../../reports/dsl-search-r04/README.md"
-    },
-    {
-      "id": "2026-11-08-dsl-search-r05",
-      "date": "2026-11-08",
-      "hypothesis": "原始碼空間改寫搜尋＋帶槽子樹積木＋每物件規則 8 向／兩步讓 evaluation ≥40（挑戰 42）、同大小 ≥16",
-      "solver": "arcagi.solvers.search:solve (ae8f213＋slot rewrite-only)",
-      "split": "evaluation＋training",
-      "result": "evaluation 38/400（同大小 14/270）、training 96/400（收緊後 95）, errors=0；過 train 答錯 eval 14／train 26",
-      "baseline": "dsl-search-r04 evaluation 37、training 92；退步 0",
-      "verdict": "否：+1／+4；改寫搜尋 eval 0 解、train 1～2 解；子樹槽積木進 BFS 增誤判→只給改寫用",
-      "record_path": "../../../reports/dsl-search-r05/README.md"
-    },
-    {
-      "id": "2026-11-08-native-s1",
-      "date": "2026-11-08",
-      "hypothesis": "（支線 S1）C++ 寬樹枚舉補主線無解題：evaluation ≥主線＋3、退步 0",
-      "solver": "native/bin/solve（external，主線 search 先跑）",
-      "split": "evaluation",
-      "result": "evaluation 42/400, errors=0；每題 ≤19 秒",
-      "baseline": "dsl-search-r05 38（核 artifacts/native-s1/eval-v2.json：+4／−0）",
-      "verdict": "是：物件原語不限第一步＋寬選擇器有效；跑在 r05 施工中工作樹，r06 最新 HEAD 重跑",
-      "record_path": "../../../reports/native-s1/04-總結.md"
-    },
-    {
-      "id": "2026-11-08-synth-s5",
-      "date": "2026-11-08",
-      "hypothesis": "（支線 S5）re-arc 合成 pair 量產生積木背答案比例",
-      "solver": "scripts/synth_overfit.py（commit 764528f、b76c139）",
-      "split": "training 合成（400×24 pair）",
-      "result": "245 blocks／8461 claims：strict 40.4%、majority 18.7%、heldout 3.1%",
-      "baseline": "原 test 對照 3.1%",
-      "verdict": "是：原題範例太少看不出背答案；建議產生器評分軟接合成集（r06）",
-      "record_path": "../../../reports/synth-s5/README.md"
-    },
-    {
-      "id": "2026-11-08-dsl-search-r06",
-      "date": "2026-11-08",
-      "hypothesis": "r06：混合入口（Python 先跑、C++ 補）＋合成集門檻元優化＋S2 候選影子入庫＋改寫預設關（含支線 S1 x_* 原語、S3 families 7220e25）",
-      "solver": "scripts/eval_r06.sh（native/bin/solve；training head 541ddb6、evaluation head 4f4a646；工作樹含 S3 families＝7220e25）",
-      "split": "evaluation／training",
-      "result": "evaluation 56/400（同大小 23/270）、training 138/400，errors 0；每題最長 19.0 秒",
-      "baseline": "dsl-search-r05 38／96；native-s1 42",
-      "verdict": "是：+18 eval、退步 0；增量來自 S1 x_* 7＋C++ 舊補 4＋C++ 新 1、S3 families 5、n_holes 1；主線三線本身 eval 0 增量；過 train 答錯增（Python 17／30、native 12／27）",
-      "record_path": "../../../reports/dsl-search-r06/README.md"
-    }
-  ]
+ "contract": "wf-table/1",
+ "source": "README.md",
+ "extracted": "2026-11-08",
+ "link_columns": [
+  "record_path"
+ ],
+ "columns": [
+  "id",
+  "date",
+  "hypothesis",
+  "solver",
+  "split",
+  "result",
+  "baseline",
+  "verdict",
+  "record_path"
+ ],
+ "rows": [
+  {
+   "id": "2026-11-08-baseline-identity",
+   "date": "2026-11-08",
+   "hypothesis": "identity 只是流程基線，預期 0 題",
+   "solver": "identity (data rev 3990304)",
+   "split": "evaluation＋training",
+   "result": "evaluation 0/400、training 0/400, errors=0",
+   "baseline": "（本身即基線）",
+   "verdict": "是：流程通、0 題，作為後續比較的下限",
+   "record_path": "../../../reports/baseline-identity/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r01",
+   "date": "2026-11-08",
+   "hypothesis": "網格 DSL＋深度 ≤3 枚舉（觀察等價、終端換色表／鄰域規則）在 evaluation 解 ≥8 題",
+   "solver": "arcagi.solvers.search:solve (bee6426)",
+   "split": "evaluation＋training",
+   "result": "evaluation 21/400、training 57/400, errors=0",
+   "baseline": "identity 0/400、0/400；template 0/400、6/400",
+   "verdict": "是：超過驗收 8／30 與目標 12／45；瓶頸是原語覆蓋不是算力",
+   "record_path": "../../../reports/dsl-search-r01/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r02",
+   "date": "2026-11-08",
+   "hypothesis": "物件層＋格線切塊＋自動產生謂詞積木在 evaluation 解 ≥30 題（同大小 ≥10）",
+   "solver": "arcagi.solvers.search:solve (75b90ed)",
+   "split": "evaluation＋training",
+   "result": "evaluation 28/400、training 79/400, errors=0；top-2 同 top-1",
+   "baseline": "dsl-search-r01 evaluation 21/400、training 57/400；退步 0",
+   "verdict": "否：evaluation +7 未達 30（同大小 3→7）；training 達 75；一題由自動產生的謂詞解出",
+   "record_path": "../../../reports/dsl-search-r02/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r03",
+   "date": "2026-11-08",
+   "hypothesis": "自動產生的公式型與抽取型積木（＋題目背景、投票、帳修正）讓 evaluation 解 ≥36 題",
+   "solver": "arcagi.solvers.search:solve (e743cd4)",
+   "split": "evaluation＋training",
+   "result": "evaluation 32/400、training 86/400, errors=0；top-2 同 top-1",
+   "baseline": "dsl-search-r02 evaluation 28/400、training 79/400；退步 0",
+   "verdict": "否：evaluation +4 未達 36，但 4 題全由公式型積木解出；尺寸隨輸入 54 題 2→6",
+   "record_path": "../../../reports/dsl-search-r03/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r04",
+   "date": "2026-11-08",
+   "hypothesis": "每物件各自規則（物件視角抽取積木當動作參數）＋產生器預算執行＋公式 2 層讓 evaluation 解 ≥38、同大小 ≥13",
+   "solver": "arcagi.solvers.search:solve (9dcf110)",
+   "split": "evaluation＋training",
+   "result": "evaluation 37/400、training 92/400, errors=0；同大小 evaluation 13/270",
+   "baseline": "dsl-search-r03 evaluation 32/400、training 86/400；退步 0",
+   "verdict": "部分：同大小 8→13 達標、evaluation 差 1 題；新解 5 題全由每物件規則；加大搜尋預算單獨 0 增量",
+   "record_path": "../../../reports/dsl-search-r04/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r05",
+   "date": "2026-11-08",
+   "hypothesis": "原始碼空間改寫搜尋＋帶槽子樹積木＋每物件規則 8 向／兩步讓 evaluation ≥40（挑戰 42）、同大小 ≥16",
+   "solver": "arcagi.solvers.search:solve (ae8f213＋slot rewrite-only)",
+   "split": "evaluation＋training",
+   "result": "evaluation 38/400（同大小 14/270）、training 96/400（收緊後 95）, errors=0；過 train 答錯 eval 14／train 26",
+   "baseline": "dsl-search-r04 evaluation 37、training 92；退步 0",
+   "verdict": "否：+1／+4；改寫搜尋 eval 0 解、train 1～2 解；子樹槽積木進 BFS 增誤判→只給改寫用",
+   "record_path": "../../../reports/dsl-search-r05/README.md"
+  },
+  {
+   "id": "2026-11-08-native-s1",
+   "date": "2026-11-08",
+   "hypothesis": "（支線 S1）C++ 寬樹枚舉補主線無解題：evaluation ≥主線＋3、退步 0",
+   "solver": "native/bin/solve（external，主線 search 先跑）",
+   "split": "evaluation",
+   "result": "evaluation 42/400, errors=0；每題 ≤19 秒",
+   "baseline": "dsl-search-r05 38（核 artifacts/native-s1/eval-v2.json：+4／−0）",
+   "verdict": "是：物件原語不限第一步＋寬選擇器有效；跑在 r05 施工中工作樹，r06 最新 HEAD 重跑",
+   "record_path": "../../../reports/native-s1/04-總結.md"
+  },
+  {
+   "id": "2026-11-08-synth-s5",
+   "date": "2026-11-08",
+   "hypothesis": "（支線 S5）re-arc 合成 pair 量產生積木背答案比例",
+   "solver": "scripts/synth_overfit.py（commit 764528f、b76c139）",
+   "split": "training 合成（400×24 pair）",
+   "result": "245 blocks／8461 claims：strict 40.4%、majority 18.7%、heldout 3.1%",
+   "baseline": "原 test 對照 3.1%",
+   "verdict": "是：原題範例太少看不出背答案；建議產生器評分軟接合成集（r06）",
+   "record_path": "../../../reports/synth-s5/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r06",
+   "date": "2026-11-08",
+   "hypothesis": "r06：混合入口（Python 先跑、C++ 補）＋合成集門檻元優化＋S2 候選影子入庫＋改寫預設關（含支線 S1 x_* 原語、S3 families 7220e25）",
+   "solver": "scripts/eval_r06.sh（native/bin/solve；training head 541ddb6、evaluation head 4f4a646；工作樹含 S3 families＝7220e25）",
+   "split": "evaluation／training",
+   "result": "evaluation 56/400（同大小 23/270）、training 138/400，errors 0；每題最長 19.0 秒",
+   "baseline": "dsl-search-r05 38／96；native-s1 42",
+   "verdict": "是：+18 eval、退步 0；增量來自 S1 x_* 7＋C++ 舊補 4＋C++ 新 1、S3 families 5、n_holes 1；主線三線本身 eval 0 增量；過 train 答錯增（Python 17／30、native 12／27）",
+   "record_path": "../../../reports/dsl-search-r06/README.md"
+  },
+  {
+   "id": "2026-11-08-objrule-families-s3",
+   "date": "2026-11-08",
+   "hypothesis": "S3：objrule families（part_key、mirror_about、move_ex、template_paste、group 範圍、stamp_key 支持 ≥3）在純 Python search 上加多少",
+   "solver": "python search＋FAMILY_PRIMS（06f6779，HEAD 543e062 快照；基準清空 families）",
+   "split": "evaluation／training",
+   "result": "evaluation 44/400（同大小 19/270）、training 130/400，errors 0",
+   "baseline": "同快照清空 families：39（15）／95",
+   "verdict": "是：eval +5、退步 0（主線核 artifacts/s3-families/ev-*2.json）；過 train 答錯 eval 16→17、train 27→28",
+   "record_path": "../../../reports/objrule-families/README.md"
+  }
+ ]
 }
