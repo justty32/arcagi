@@ -51,3 +51,25 @@
 - **答不出什麼**：arcagi 內部實作細節
 - **怎麼找我**：`~/repo/simple_tools/aos/wf/inbox/`
 - **訂閱主題**：無
+
+### `arcagi-S1`
+- **狀態**：現役（2026-11-08 起）
+- **我是誰**：arcagi 支線 S1「C++／CUDA 搜尋引擎」隊長（aos 頂層派出）
+- **團隊**：無
+- **上游**：arcagi 主線（總調度）、aos 頂層
+- **領地**：`native/`、`reports/native-*/`、`tests/native/`
+- **答得出什麼**：C++ 枚舉器的設計、跑分、原語移植差異
+- **答不出什麼**：主線求解器與積木產生器的內部決策
+- **怎麼找我**：`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`（標 arcagi-S1）
+- **訂閱主題**：無
+
+### `arcagi-S2`
+- **狀態**：現役
+- **我是誰**：aos 頂層派來的支線 S2 隊長（aos-llm 接上、蒸餾第一步）：LLM（Claude subagent）讀未解題寫四型 JSON，程式驗 train，過的落成候選積木。
+- **團隊**：無
+- **上游**：arcagi 主線（總調度）；派遣者是 aos 頂層
+- **領地**：`src/arcagi/llm/`、`aos/llm/`、`reports/llm-*/`、`tests/llm/`（見 [支線](../../../notes/rounds/支線.md) S2）；本格是我在 `wf/` 唯一寫的地方
+- **答得出什麼**：LLM 提出規則的通過率、候選積木 `aos/llm/candidates/<hash>/_rule.json`、蒸餾軌跡 JSONL
+- **答不出什麼**：主線求解器與帳本內部；不寫 `aos/blocks/`
+- **怎麼找我**：信寄 aos 頂層 `~/repo/simple_tools/aos/wf/inbox/`（標題註明 arcagi-S2），進度看 `reports/llm-*/`
+- **訂閱主題**：無
