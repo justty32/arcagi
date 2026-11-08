@@ -8,7 +8,7 @@
 - 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
 - **第一輪已收輪**（2026-11-08）：evaluation **21/400**、training 57/400（identity 0、template 0／6）。產物 [r01/](r01/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結簡報＋[代定清單](r01/代定清單.md)；程式 `src/arcagi/dsl/`＋`src/arcagi/solvers/search.py`；跑分 `reports/dsl-search-r01/`。
 - **第二輪已收輪**（2026-11-08）：evaluation **28/400**、training **79/400**（r01 21／57，退步 0）。產物 [r02/](r02/04-總結簡報.md)：01 簡報（含 §9 使用者 12:05 新想法「優化產生積木」）→ 02 fable 規劃＋02b 增補 → 03 設計 → 04 總結＋[代定清單](r02/代定清單.md)；aos 接入在 repo 根 `aos/`（積木資料夾、求解器資料夾程式、node-pool 帳 epoch 0～2、謂詞產生器）；跑分 `reports/dsl-search-r02/`。
-- **第三輪進行中**（2026-11-08 12:25 開）：[r03/01-簡報](r03/01-簡報.md) 已寫 → 下一步 fable 規劃 02。
+- **第三輪進行中**（2026-11-08 12:25 開）：[r03/01-簡報](r03/01-簡報.md) 、[02 fable 規劃](r03/02-規劃-fable.md) 已定 → 下一步 03 設計與施工。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
 ## 使用者經 aos 轉達的前提（原文在 wf/inbox 的信，處理完在 wf/inbox/done/）
@@ -27,7 +27,7 @@
 
 - 發帖 `/home/lorkhan/repo/simple_tools/aos/wf/tools/forum_post.sh arcagi '<標題>' <檔|-> --tag arcagi [--source <檔>]`；回帖 `--reply <id>`；精華／置頂 `.../forum_admin.sh feature|pin <id> --as arcagi`。
 - 時機：開輪、fable 規劃定稿、每輪總結（加精華）、重要代定、卡住。ELI5、結論先、細節摺疊。
-- 已發：p-20261108-112500-3b33（開工）、p-20261108-113306-a220（r01 開輪）、p-20261108-113529-042d（r01 規劃，精華）、p-20261108-114523-7780（r01 總結，精華）；r01 PROGRESS 已寄 aos（20261108T1145）；p-20261108-114831-133b（r02 開輪）、p-20261108-115110-5d4e（r02 規劃，精華）、p-20261108-122252-d66d（r02 總結，精華）；r02 PROGRESS 已寄 aos；p-20261108-122524-d037（r03 開輪）。
+- 已發：p-20261108-112500-3b33（開工）、p-20261108-113306-a220（r01 開輪）、p-20261108-113529-042d（r01 規劃，精華）、p-20261108-114523-7780（r01 總結，精華）；r01 PROGRESS 已寄 aos（20261108T1145）；p-20261108-114831-133b（r02 開輪）、p-20261108-115110-5d4e（r02 規劃，精華）、p-20261108-122252-d66d（r02 總結，精華）；r02 PROGRESS 已寄 aos；p-20261108-122524-d037（r03 開輪）、p-20261108-122741-4a4b（r03 規劃，精華）。
 
 ## 額度
 

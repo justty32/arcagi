@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] 第三輪進行中（隊長 opus）：01 簡報已寫 → 下一步 fable 規劃 02 → notes/rounds/r03/
+- [rounds] 第三輪進行中（隊長 opus）：01 簡報、02 fable 規劃已存 → 下一步 03 設計＋施工 → notes/rounds/r03/
 
 ## 各工作流 session-log
 
