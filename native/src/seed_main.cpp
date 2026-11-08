@@ -213,6 +213,7 @@ int mode_run(const std::map<std::string, std::vector<std::string>>& a, int threa
         Json::Array vals;
         if (has(j, "inputs")) for (const auto& x : j["inputs"].items()) vals.push_back(run_json(progs[i], x, lib, ex));
         Json::Object o{{"values", Json(vals)}};
+        if (has(j, "input")) o["value"] = run_json(progs[i], j["input"], lib, ex);  // single-input form
         if (has(j, "id")) o["id"] = j["id"];
         outs[i] = Json(o).dump();
     });

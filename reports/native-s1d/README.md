@@ -61,7 +61,7 @@ native/bin/arcbatch --mode seed-sub --subproblems SUBS.jsonl [--threads 6] [--ou
   - `exclude` 只在搜尋時生效；train_ok／test_ok 的重驗用全部原語，跟 grow 的 `solve_task` 一樣。
 - 輸出（每題 × 設定一行）：`task_id, config, program, train_ok, test_ok, nodes, nodes_to_first, seconds, near, eval_steps[, error]`；每個設定最後一行是 summary（`solved, train_ok, errors, nodes, task_seconds, wall_seconds`）。
   - `eval_steps` 是 C++ 實際執行的原語呼叫數，包括 HOF 裡 lambda body 的步數，所以跟 Python 的近似值不同，不拿來比對。
-- seed-run：每行 `{"id", "program", "inputs": [...], "lib"?, "exclude"?}`，回傳 `{"id", "values": [值或 "ERR", ...]}`。
+- seed-run：每行 `{"id", "program", "inputs": [...], "lib"?, "exclude"?}`，回傳 `{"id", "values": [值或 "ERR", ...]}`；規格 §8 的單一 `input` 也吃，回傳多一欄 `value`。
 - seed-sub：照規格 §7，`examples`、`extra[].leaf`、`lam_body_max`、`cond_limit` 都吃。另外多收兩種寫法：
   - `cond_budget`：等於 Python `_direct` 的 budget，limit＝cond_budget − nodes。
   - `xs`／`outs` 分開給。

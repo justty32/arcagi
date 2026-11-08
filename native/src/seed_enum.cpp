@@ -3,6 +3,8 @@
 #include "seed_enum.hpp"
 #include <algorithm>
 #include <cmath>
+#include <cstdio>
+#include <cstdlib>
 #include <map>
 #include <set>
 #include <stdexcept>
@@ -305,6 +307,11 @@ struct BodyPool {
                 while (t2[q] >= 0) q = (q + 1) & m2;
                 t2[q] = int32_t(k);
             }
+            {  // the pending entry is not in ``bodies`` yet
+                size_t q = size_t(h) & m2;
+                while (t2[q] >= 0) q = (q + 1) & m2;
+                t2[q] = int32_t(idx);
+            }
             seen_tab.swap(t2);
         }
         return true;
@@ -500,13 +507,16 @@ struct Enumerator {
     std::vector<Op> ops;
     std::map<std::vector<int>, std::unique_ptr<BodyPool>> pools;
     long steps = 0;
+    FILE* trace = nullptr;  // ARC_SEED_TRACE=path: every candidate (debugging, one thread)
 
     Enumerator(Types& T_, const LibView& l, const SubProblem& p, long b, int ld,
                const std::vector<std::pair<int, double>>& order, bool kn)
         : T(T_), lib(l), sp(p), n(p.xs.size()), budget(b), lam_depth(ld), keep_near(kn) {
         ops = build_ops(T, lib, order, false);
         seen_tab.assign(1 << 12, -1);
+        if (const char* p = std::getenv("ARC_SEED_TRACE")) trace = std::fopen(p, "a");
     }
+    ~Enumerator() { if (trace) std::fclose(trace); }
 
     bool seen_insert(int typ, const V* v, uint32_t idx) {
         uint64_t h = Seen::hash(typ, v, n);
@@ -524,6 +534,11 @@ struct Enumerator {
                 size_t q = size_t(Seen::hash(entries[k].typ, flat.data() + entries[k].voff, n)) & m2;
                 while (t2[q] >= 0) q = (q + 1) & m2;
                 t2[q] = int32_t(k);
+            }
+            {  // the pending entry is not in ``entries`` yet
+                size_t q = size_t(h) & m2;
+                while (t2[q] >= 0) q = (q + 1) & m2;
+                t2[q] = int32_t(idx);
             }
             seen_tab.swap(t2);
         }
@@ -674,6 +689,7 @@ struct Enumerator {
         bool ok;
         if (!op.block) ok = eval_prim(op, chosen, vals);
         else ok = run_expanded(build_prog(op, chosen), vals);
+        if (trace) fprintf(trace, "%ld %c %s\n", nodes + 1, ok ? 'o' : 'f', to_json(build_prog(op, chosen)).dump().c_str());
         if (ok) {
             offer(size, [&] { return build_prog(op, chosen); }, ret, vals.data());
         } else {

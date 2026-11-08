@@ -225,7 +225,7 @@ struct Solver {
         b = std::min(b, budget - spent);
         if (b <= 0) return nullptr;
         bool sub = !free;
-        bool use_cond = long(xs.size()) >= MIN_COND;
+        bool use_cond = long(xs.size()) >= MIN_COND && (allowed.empty() || allowed.count("if"));
         SubProblem sp{xs, outs, in_t, out_t, extra, sub, consts};
         long eb = use_cond ? long(double(b) * (1 - COND)) : b;
         DirectOut d = run_enum(T, sub ? sublib : lib, sp, eb, lam_depth, order, use_cond, b, top);
@@ -248,7 +248,8 @@ struct Solver {
         if (prog) return prog;
         std::vector<Split> sp;
         for (auto& s : witness_splits(T, xs, outs, in_t, out_t))
-            if (allowed.empty() || allowed.count(s.name)) sp.push_back(std::move(s));
+            if (allowed.empty() || allowed.count(s.name.rfind("append", 0) == 0 ? "append" : s.name))
+                sp.push_back(std::move(s));
         for (const Split& s : sp) {
             long share = long(double(b) * SPLIT / double(sp.size()));
             PP sub;
@@ -287,8 +288,8 @@ SolveOut solve_task(const std::vector<Example>& train, const std::vector<Example
         if (st.decompose) {
             Solver sv{T, lib, sub_library(lib), order, st.budget, st.lam_depth, task_consts(all)};
             for (const auto& n : st.splits) {
-                static const std::set<std::string> known{"map", "zip_pos", "take", "append_pre", "append_suf",
-                                                         "conj_transpose", "conj_reverse"};
+                static const std::set<std::string> known{"map", "zip_pos", "if", "take", "conj_transpose",
+                                                         "conj_reverse", "append"};
                 if (!known.count(n)) throw std::runtime_error("split " + n + " is not ported (C++ has the r07 DEFAULT_SPLITS); use seed-sub");
                 sv.allowed.insert(n);
             }
