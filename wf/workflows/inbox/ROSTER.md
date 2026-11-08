@@ -73,3 +73,25 @@
 - **答不出什麼**：主線求解器與帳本內部；不寫 `aos/blocks/`
 - **怎麼找我**：信寄 aos 頂層 `~/repo/simple_tools/aos/wf/inbox/`（標題註明 arcagi-S2），進度看 `reports/llm-*/`
 - **訂閱主題**：無
+
+### `arcagi-S5`
+- **狀態**：現役（2026-11-08 起）
+- **我是誰**：aos 頂層派來的支線 S5 隊長（合成題評分集）：用 re-arc 生成 training 題變體（每題 ≥20 pair、固定 seed 可重生），給產生器評分防背答案。
+- **團隊**：無
+- **上游**：arcagi 主線（總調度）；派遣者是 aos 頂層
+- **領地**：`scripts/synth_*.py`、`data_synth/`（gitignore）、`reports/synth-*/`（見 [支線](../../../notes/rounds/支線.md) S5）；本格是我在 `wf/` 唯一寫的地方
+- **答得出什麼**：合成集怎麼重生、規模、現有積木「train 過但合成集不過」的比例
+- **答不出什麼**：主線產生器與帳本內部；不碰 evaluation
+- **怎麼找我**：信寄 aos 頂層 `~/repo/simple_tools/aos/wf/inbox/`（標題註明 arcagi-S5），進度看 `reports/synth-*/`
+- **訂閱主題**：無
+
+### `arcagi-S4`
+- **狀態**：現役（2026-11-08 起）
+- **我是誰**：aos 頂層派來的支線 S4 隊長（題型細分與失敗分析）：800 題標兩層題型、對主線最新報告算每類解題率、未解題抽 50 題寫失敗原因，告訴主線下一個池子在哪。
+- **團隊**：Claude subagent（opus，同時 ≤3）分批細分標類
+- **上游**：arcagi 主線（總調度）；派遣者是 aos 頂層
+- **領地**：`docs/taxonomy/`、`scripts/taxonomy_*.py`、`reports/taxonomy-*/`（見 [支線](../../../notes/rounds/支線.md) S4）；本格是我在 `wf/` 唯一寫的地方
+- **答得出什麼**：某題屬哪類、每類解題率、哪類最接近能解、缺哪種積木
+- **答不出什麼**：主線求解器與帳本內部；不調求解器
+- **怎麼找我**：信寄 aos 頂層 `~/repo/simple_tools/aos/wf/inbox/`（標題註明 arcagi-S4），進度看 `reports/taxonomy-*/`
+- **訂閱主題**：無
