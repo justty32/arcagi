@@ -1,26 +1,28 @@
-# S2 交接（aos-llm 蒸餾第一步）
+# S2 交接（aos-llm 蒸餾）
 
-← [S2 報告](llm-s2/README.md)
+← [第一任報告](llm-s2/README.md)｜[第二任報告](llm-s2b/README.md)
 
-## 現況（2026-11-08）
+## 現況（2026-11-08 15:00，第二任）
 
-- 驗收：20 題 evaluation 已跑完，test exact 7/20；有 ≥1 個候選在 training 重評分後是 live（`087f839827` 巨集、`72c8aab4f1` pred，細節見報告）。主線第六輪的線 C 會唯讀 `aos/llm/candidates/*/_rule.json` 影子跑一遍，收編進 `aos/blocks/llm_*`，沒收的理由寫在 `reports/llm-intake-r06/`。
-- 程式：`src/arcagi/llm/`，子模組 tasks／verify／candidates／rescore／mainline／trace／`__main__`；測試在 `tests/llm/`（10 個，綠）。
+- 第一任：eval20 test exact 7/20；候選 34 個、live 2 個。
+- 第二任已做：
+  - `dsl.md` 加了 `n_holes` 和 S1 的 `x_ray`／`x_connect`／`x_compress`／`x_crop_color`／`x_period`／`x_vrule`（`prompt_hash` 因此改變）。
+  - s40：r05 沒解的 training 40 題（seed 20261108，清單 [s40-ids.txt](llm-s2b/s40-ids.txt)）。15 題過 train，15 題 test 全對。
+  - gen1：10 題靠大表硬湊過的解法（表最大 1656 列）叫 LLM 改寫成短規則（表 ≤8 列）。9/10 過，test 全對。
+  - 工具 `python -m arcagi.llm distill stage|reuse`：把解法切成片段積木，在兩份 blocks root（`ARCAGI_BLOCKS`）上跑 search A/B，再用合成集算每個用法的通過率。
+  - 缺原語分類：[llm-s2b/missing.csv](llm-s2b/missing.csv)。
+- 正在跑：A/B（`<scratchpad>/ab.sh`），等主線全量跑完才開始。腳本內容：先 `distill stage OUT`，然後在 `OUT/base` 和 `OUT/llm` 各跑一次 `arcagi eval --split training --solver arcagi.solvers.search:solve --timeout 45 --workers 6`（nice、MemoryMax=8G），最後 `ARCAGI_BLOCKS=OUT/llm python -m arcagi.llm distill reuse OUT OUT/base.json OUT/llm.json --record`。
 
 ## 怎麼接著跑
 
-1. 先寫提示：`nice -n 19 uv run python -m arcagi.llm prompts --split training --ids …`
-2. 開 opus subagent（同時 ≤3 個），提示照抄：「Follow the instructions in /home/lorkhan/repo/arcagi/aos/llm/prompts/solver.md exactly, once per task…: TASKS=… SPLIT=… RUN=…」，4 題一批。
-3. subagent 回報後跑 `record`。token 和秒數取自通知裡的 `subagent_tokens`／`duration_ms`，按批平均：`python -m arcagi.llm record ID aos/llm/responses/RUN/ID.json --split S --run RUN --model claude-opus-5-5 --tokens T --seconds X`
-4. `python -m arcagi.llm rescore`，再 `summary --split S --run RUN --csv reports/llm-s2/RUN.csv`
+1. 寫提示：`nice -n 19 uv run python -m arcagi.llm prompts --split training --ids …`
+2. 開 opus subagent，同時最多 3 個，4 題一批。提示照抄：「Follow the instructions in …/aos/llm/prompts/solver.md exactly, once per task… Step 5 is mandatory: unless train already passes, run `check` at least 4 times…: TASKS=… SPLIT=… RUN=…」。不寫「至少 4 次」的話，agent 常常 check 一次就放棄。
+3. `record`，token 和秒數按批平均。之後跑 `rescore`、`summary --csv reports/llm-s2b/RUN.csv`。
+4. 改寫大表（gen 型）：同一份提示，再加「表 ≤8 列、colormap ≤4 對」的限制。
 
 ## 坑
 
-- 工作樹是和 S1、S4、S5 共用的。`git pull --rebase` 會因為別人沒 commit 的檔而被拒：改成先 `git fetch`，`HEAD..@{u}` 是空的就直接 push。add 時只 add 自己的路徑。
-- `aos-llm` 只寫 `aos/llm/`，不寫 `aos/blocks/`。evaluation 題不落候選。
-- 改 `solver.md`／`dsl.md` 會讓 `prompt_hash` 跟著變。evaluation 不可以拿來調提示。
-
-## 下一步建議
-
-- 把 [missing.csv](llm-s2/missing.csv) 裡重複出現的需求做成主線原語：物件原語可指定背景色、物件屬性 `n_holes`、顏色當變數的 `local_rule`。做完後重跑 eval20，看 LLM 解出的題數升不升。
-- 剩下 280 題左右的 training 未解題，也可以照同樣流程大量跑，累積軌跡當蒸餾原料。
+- `macro` 只要含 `colormap`／`object_colormap`／`local_rule`，registry 就不會載入。所以 distill 會跳過含這些學習終端的片段，`x_vrule` 也一起跳過。
+- `x_*` 原語在 Python search 裡不會被提出（`PYTHON_SEARCH=False`）。包成 macro，Python search 才拿得到，例如 `x_period fill 0`、`x_connect hv`。
+- 合成集會換顏色。寫死顏色的積木（`x_period fill 0`）在合成集上大多不過。
+- 工作樹是共用的：先 `git fetch`，只 add 自己的路徑。
