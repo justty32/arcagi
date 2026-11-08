@@ -11,7 +11,8 @@
 
 ## 最新進度
 
-（目前無）
+- [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
+- [feature-dev] 量具補缺口（外部求解器、嘗試軌跡、逐題對照、求解器範本）opus 線進行中 → 收線後開第一輪
 
 ## 各工作流 session-log
 
