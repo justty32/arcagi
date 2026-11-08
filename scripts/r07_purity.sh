@@ -72,6 +72,17 @@ if [ -n "$imp" ]; then
   note "banned imports:"; echo "$imp"; fail=1
 fi
 
+# 2b. r09: src/arcagi/hammer/ must not import the old tree (no word scan).
+if [ -d src/arcagi/hammer ]; then
+  imp=$(grep -rnE --include='*.py' \
+    -e '^\s*(from|import)\s+arcagi\.(dsl|solvers|objrule|blocks|srcspace|shadow|llm)\b' \
+    -e '^\s*from\s+\.\.+\s*(import\s+.*\b)?(dsl|solvers|objrule|blocks|srcspace|shadow|llm)\b' \
+    src/arcagi/hammer || true)
+  if [ -n "$imp" ]; then
+    note "banned imports in src/arcagi/hammer:"; echo "$imp"; fail=1
+  fi
+fi
+
 # 3. seed library must start empty.
 lib=aos/seedlib/blocks.json
 if [ -e "$lib" ]; then
