@@ -203,3 +203,10 @@ def test_backend_split_sets():
         import pytest
         with pytest.raises(RuntimeError):
             backend.split_set("default+halves")
+
+
+def test_r08_row_fields():
+    sc = {"logcost": [10.0] * 5, "auc": [3] * 5, "cost_s": 1.0,
+          "task": {"t0": [10.0] * 5}}
+    row = meta.r08_row("r08", sc, sc, knob="m", before=3, after=5)
+    assert row["before"] == 3 and row["after"] == 5 and not row["accepted"]

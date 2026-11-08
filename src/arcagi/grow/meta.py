@@ -192,13 +192,13 @@ def score_r08(cfg_for, knobs: kn.Knobs, tag: str, seeds, out_root: Path,
             "cost_s": round(time.perf_counter() - t0, 1)}
 
 
-def r08_row(kind: str, before: dict, after: dict, **kw) -> dict:
+def r08_row(kind: str, s_before: dict, s_after: dict, **kw) -> dict:
     return {
         "kind": kind, "time": time.strftime("%Y-%m-%dT%H:%M:%S"), **kw,
-        "logcost_before_seeds": before["logcost"],
-        "logcost_after_seeds": after["logcost"],
-        "auc_before_seeds": before["auc"], "auc_after_seeds": after["auc"],
-        **crn_judge(before, after), "cost_s": after["cost_s"],
+        "logcost_before_seeds": s_before["logcost"],
+        "logcost_after_seeds": s_after["logcost"],
+        "auc_before_seeds": s_before["auc"], "auc_after_seeds": s_after["auc"],
+        **crn_judge(s_before, s_after), "cost_s": s_after["cost_s"],
     }
 
 
