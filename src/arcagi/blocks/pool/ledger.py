@@ -68,9 +68,9 @@ def _refs(steps) -> list[str]:
 
 
 def _is_pred(param: object) -> bool:
-    # Generated-block references: pred_*, formula_* and extract_* names.
+    # Generated-block references: pred_*, formula_*, extract_* and llm_* names.
     return isinstance(param, str) and param.startswith(
-        ("pred_", "formula_", "extract_")
+        ("pred_", "formula_", "extract_", "llm_")
     )
 
 
