@@ -27,6 +27,17 @@
    "baseline": "（本身即基線）",
    "verdict": "是：流程通、0 題，作為後續比較的下限",
    "record_path": "../../../reports/baseline-identity/README.md"
+  },
+  {
+   "id": "2026-11-08-dsl-search-r01",
+   "date": "2026-11-08",
+   "hypothesis": "網格 DSL＋深度 ≤3 枚舉（觀察等價、終端換色表／鄰域規則）在 evaluation 解 ≥8 題",
+   "solver": "arcagi.solvers.search:solve (bee6426)",
+   "split": "evaluation＋training",
+   "result": "evaluation 21/400、training 57/400, errors=0",
+   "baseline": "identity 0/400、0/400；template 0/400、6/400",
+   "verdict": "是：超過驗收 8／30 與目標 12／45；瓶頸是原語覆蓋不是算力",
+   "record_path": "../../../reports/dsl-search-r01/README.md"
   }
  ]
 }

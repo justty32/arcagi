@@ -27,7 +27,7 @@ uv run arcagi eval --split evaluation --solver my_solver:solve --output artifact
 
 ### 回報嘗試軌跡與範本
 
-想保留「試了哪些假設、對訓練範例的驗證結果、最後選哪個」，回傳 `SolverResult(predictions, trace)`；格式見 [嘗試軌跡](traces.md)。[src/arcagi/solvers/template.py](../src/arcagi/solvers/template.py) 是可複製的骨架：試幾個整張網格的對稱變換、用 `check_on_train` 驗證、用 `TraceRecorder` 記錄，本身不是正式解法（training 解出 6/400、evaluation 0/400）。
+想保留「試了哪些假設、對訓練範例的驗證結果、最後選哪個」，回傳 `SolverResult(predictions, trace)`；格式見 [嘗試軌跡](traces.md)。[src/arcagi/solvers/template.py](../src/arcagi/solvers/template.py) 是可複製的骨架：試幾個整張網格的對稱變換、用 `check_on_train` 驗證、用 `TraceRecorder` 記錄，本身不是正式解法（training 解出 6/400、evaluation 0/400）。第一輪正式解法是 [search.py](../src/arcagi/solvers/search.py)（`arcagi.solvers.search:solve`，網格 DSL＋枚舉，evaluation 21/400、training 57/400，見 [reports/dsl-search-r01](../reports/dsl-search-r01/README.md)）。
 
 ```sh
 uv run arcagi eval --split training --solver arcagi.solvers.template:solve --name template \

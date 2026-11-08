@@ -12,6 +12,8 @@
 - [runtime](../../../src/arcagi/solvers/runtime.py)：每題獨立程序執行與可選逾時；[測試](../../../tests/solvers/test_runtime.py)。
 - [external](../../../src/arcagi/solvers/external.py)：跨語言 JSON request／response、可選 `{trace}` 軌跡檔、程序逾時與逐次 artifacts；sh／C 範例在 [examples](../../../examples/)；[測試](../../../tests/solvers/test_external.py)。
 - [trace](../../../src/arcagi/solvers/trace.py)：`arcagi-trace/1` 驗證、`SolverResult`、`TraceRecorder`、`check_on_train`；[template](../../../src/arcagi/solvers/template.py) 是附軌跡的 plugin 骨架；[測試](../../../tests/solvers/test_trace.py)；格式文件 [traces](../../../docs/traces.md)。
+- [dsl](../../../src/arcagi/dsl/__init__.py)：網格 DSL——[grid](../../../src/arcagi/dsl/grid.py) 純函式、[primitives](../../../src/arcagi/dsl/primitives.py)／[primitives_more](../../../src/arcagi/dsl/primitives_more.py) 原語與參數推斷、[registry](../../../src/arcagi/dsl/registry.py) 總表、[learners](../../../src/arcagi/dsl/learners.py) 終端換色表／鄰域規則、[program](../../../src/arcagi/dsl/program.py) JSON 程式執行與成本；[測試](../../../tests/dsl/)。
+- [search](../../../src/arcagi/solvers/search.py)：第一輪 DSL 枚舉求解器（`arcagi.solvers.search:solve`，觀察等價去重、最短程式勝出、軌跡記過 train 程式與近失敗）；[測試](../../../tests/solvers/test_search.py)；輪次紀錄 [r01](../../../notes/rounds/r01/03-設計.md)。
 - [experiments](../../../src/arcagi/experiments/__init__.py)：設定驗證、task／method／seed／repeat 矩陣、JSON／CSV／HTML 報告；[測試](../../../tests/experiments/)。
 - [eval](../../../src/arcagi/eval/__init__.py)：top-1 exact match、逐題報告（含耗時與軌跡）、外部 JSON 預測評分；[測試](../../../tests/eval/)。
 - [compare](../../../src/arcagi/experiments/compare.py)、[labels](../../../src/arcagi/experiments/labels.py)：多份 eval／experiment 報告逐題對照、相對基線新增解出／退步、任意 task_id→category 對照檔分組；CLI 在 [cli_experiment](../../../src/arcagi/cli_experiment.py)；[測試](../../../tests/experiments/test_compare.py)。
