@@ -2,11 +2,10 @@
 higher-order functions. Nothing here knows about any task domain.
 
 Values: ``int``, ``bool`` and ``tuple`` (lists). Integer literals are program
-leaves, not primitives: {0, 1, -1} plus every integer occurring in the task's
-train inputs and outputs (``task_consts``). Generic resource caps keep
-enumeration bounded:
-lists longer than ``MAX_LEN`` or integers beyond ``MAX_INT`` raise
-``OverflowLimitError``.
+leaves, not primitives: {0, 1, -1} plus every integer and every list length
+occurring in the task's train inputs and outputs (``task_consts``). Generic
+resource caps keep enumeration bounded: lists longer than ``MAX_LEN`` or
+integers beyond ``MAX_INT`` raise ``OverflowLimitError``.
 Partial functions (head of an empty list, nth out of range, mod by zero) raise
 ordinary Python errors that the interpreter maps to ``EvalError``.
 """
@@ -192,12 +191,15 @@ def without(*names: str) -> Iterator[None]:
 
 
 def task_consts(values: Iterable) -> tuple[int, ...]:
-    """Sorted distinct integers of ``CONSTS`` and all ints nested in ``values``."""
+    """Sorted distinct integers of ``CONSTS``, all ints nested in each of
+    ``values`` and the lengths of all lists nested in them (sizes of data
+    structures are generic information)."""
     seen = set(CONSTS)
     stack = list(values)
     while stack:
         v = stack.pop()
         if isinstance(v, (tuple, list)):
+            seen.add(len(v))
             stack.extend(v)
         elif isinstance(v, int) and not isinstance(v, bool):
             seen.add(v)

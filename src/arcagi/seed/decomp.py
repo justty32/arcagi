@@ -14,6 +14,9 @@ the same machinery (sharing one node budget) and rebuilds a full program:
   ``zipwith (lam2 g) $in (range (len $in))``.
 * ``if`` (``seed.cond``, subproblems only): combine banked terms into
   ``if c t e`` when no single term fits all examples.
+* ``take``: all outputs have the same length k -> solve from ``take k $in``.
+* ``conj_transpose`` / ``conj_reverse``: solve ``op x -> op y`` and return
+  ``op (f (op $in))`` (both are involutions on lists).
 * ``append``: the output starts (or ends) with the input -> solve for the
   other part; result ``append $in r`` (or ``append r $in``).
 
@@ -29,38 +32,15 @@ from .cond import cond_witness
 from .enum import Enumerator, search
 from .interp import Program, expand, run, to_value
 from .library import Library, free_vars, hole_count
-from .types import INPUT, INT, ListT
+from .prims import task_consts
+from .types import INPUT
+from .witness import witness_splits
 
 PROBE = 0.05  # share of a problem's budget for a first direct search
 SPLIT = 0.6  # share for all splits together (the rest: final direct search)
 MAX_DEPTH = 2
-MIN_EXAMPLES = 2
-COND = 0.2  # share of a subproblem's direct budget for the conditional witness
+COND = 0.05  # share of a subproblem's direct budget for the conditional witness
 MIN_COND = 3
-
-
-def subst_leaves(prog: Program, repl: dict[str, Program]) -> Program | None:
-    """Replace leaves named in ``repl`` outside lambdas; None if one is inside."""
-
-    def go(p: Program, depth: int) -> Program:
-        if isinstance(p, int):
-            return p
-        if len(p) == 1:
-            if p[0] in repl:
-                if depth:
-                    raise ValueError(p[0])
-                return repl[p[0]]
-            return p
-        if p[0] == "lam":
-            return ("lam", p[1], go(p[2], depth + 1))
-        if p[0] == "blk":
-            return ("blk", p[1], *(go(a, depth) for a in p[2:]))
-        return (p[0], *(go(a, depth) for a in p[1:]))
-
-    try:
-        return go(prog, 0)
-    except ValueError:
-        return None
 
 
 def _hole_under_lambda(p: Program, depth: int = 0) -> bool:
@@ -101,6 +81,7 @@ class _Solver:
     def __init__(self, lib: Library, order: dict | None, budget: int) -> None:
         self.lib, self.sublib, self.order = lib, sub_library(lib), order
         self.budget = budget
+        self.consts: tuple[int, ...] | None = None  # task-level integer leaves
         self.spent = 0
         self.first: int | None = None
         self.near: list = []
@@ -130,6 +111,7 @@ class _Solver:
             out_type=types[1],
             extra=extra,
             sub=sub,
+            consts=self.consts,
         )
         search(en)
         if en.found is not None:
@@ -161,7 +143,7 @@ class _Solver:
         prog = self._direct(xs, outs, types, int(budget * PROBE), free, top)
         if prog is not None:
             return prog
-        splits = list(self._splits(xs, outs, types))
+        splits = list(witness_splits(xs, outs, types))
         for name, sub_xs, sub_outs, sub_types, extra, build in splits:
             share = int(budget * SPLIT / len(splits))
             if name == "zip_pos":
@@ -186,76 +168,6 @@ class _Solver:
         except Exception:
             return False
 
-    def _splits(self, xs: tuple, outs: tuple, types: tuple):
-        in_t, out_t = types
-        lists = all(
-            isinstance(x, tuple) and isinstance(y, tuple) for x, y in zip(xs, outs)
-        )
-        if not lists or not isinstance(in_t, ListT) or not isinstance(out_t, ListT):
-            return
-        same_len = all(len(x) == len(y) for x, y in zip(xs, outs))
-        if same_len:
-            ex = _table(((a,), b) for x, y in zip(xs, outs) for a, b in zip(x, y))
-            if ex is not None:
-                sx, sy = tuple(k[0] for k in ex), tuple(ex.values())
-                yield "map", sx, sy, (in_t.elem, out_t.elem), (), _wrap_map
-            ex = _table(
-                ((a, i), b)
-                for x, y in zip(xs, outs)
-                for i, (a, b) in enumerate(zip(x, y))
-            )
-            if ex is not None:
-                sx = tuple(k[0] for k in ex)
-                pos = (("$i",), INT, tuple(k[1] for k in ex))
-                yield (
-                    "zip_pos",
-                    sx,
-                    tuple(ex.values()),
-                    (in_t.elem, out_t.elem),
-                    (pos,),
-                    _wrap_zip,
-                )
-        if in_t == out_t:
-            if all(y[: len(x)] == x for x, y in zip(xs, outs)):
-                rest = tuple(y[len(x) :] for x, y in zip(xs, outs))
-                if any(rest):
-                    yield "append_pre", xs, rest, types, (), _wrap_pre
-            if all(
-                len(y) >= len(x) and y[len(y) - len(x) :] == x for x, y in zip(xs, outs)
-            ):
-                rest = tuple(y[: len(y) - len(x)] for x, y in zip(xs, outs))
-                if any(rest):
-                    yield "append_suf", xs, rest, types, (), _wrap_suf
-
-
-def _table(pairs) -> dict | None:
-    """Input-key -> output dict in first-seen order; None on conflict/too few."""
-    out: dict = {}
-    for k, v in pairs:
-        if out.setdefault(k, v) != v:
-            return None
-    return out if len(out) >= MIN_EXAMPLES else None
-
-
-def _wrap_map(f: Program) -> Program | None:
-    body = subst_leaves(f, {"$in": ("$0",)})
-    return None if body is None else ("map", ("lam", 1, body), ("$in",))
-
-
-def _wrap_zip(g: Program) -> Program | None:
-    body = subst_leaves(g, {"$in": ("$0",), "$i": ("$1",)})
-    if body is None:
-        return None
-    return ("zipwith", ("lam", 2, body), ("$in",), ("range", ("len", ("$in",))))
-
-
-def _wrap_pre(r: Program) -> Program:
-    return ("append", ("$in",), r)
-
-
-def _wrap_suf(r: Program) -> Program:
-    return ("append", r, ("$in",))
-
 
 def solve_split(
     train: list[tuple[Any, Any]], lib: Library, budget: int, order: dict | None
@@ -264,5 +176,6 @@ def solve_split(
     xs = tuple(to_value(i) for i, _ in train)
     outs = tuple(to_value(o) for _, o in train)
     st = _Solver(lib, order, budget)
+    st.consts = task_consts((*xs, *outs))
     prog = st.solve(xs, outs, (INPUT, INPUT), MAX_DEPTH, budget, True, True)
     return prog, st.spent, st.first if prog is not None else None, st.near

@@ -1,5 +1,5 @@
 from arcagi.seed import Library, run, solve
-from arcagi.seed.decomp import subst_leaves
+from arcagi.seed.witness import subst_leaves
 
 A = ((1, 2, 3), (4, 1, 6), (1, 1, 0))
 B = ((7, 1), (9, 0), (1, 1))
@@ -71,3 +71,20 @@ def test_subst_leaves_only_outside_lambdas():
         ("$0",),
     )
     assert subst_leaves(("map", ("lam", 1, ("$in",)), 3), {"$in": ("$0",)}) is None
+
+
+def test_take_and_transpose_conjugation_splits():
+    def crop(g):
+        return tuple(r[:2] for r in g[:2])
+
+    a = ((1, 2, 3, 4), (5, 6, 7, 8), (9, 1, 2, 3))
+    b = ((4, 4, 0), (3, 1, 2), (0, 0, 7))
+    res = solve([(a, crop(a)), (b, crop(b))], Library(), 100_000)
+    assert res.program is not None and run(res.program, C) == crop(C)
+
+    def colsort(g):
+        return tuple(zip(*(sorted(c) for c in zip(*g)), strict=True))
+
+    res = solve([(a, colsort(a)), (b, colsort(b))], Library(), 100_000)
+    assert res.program is not None and res.program[0] == "transpose"
+    assert run(res.program, C) == colsort(C)
