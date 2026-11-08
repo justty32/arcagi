@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] r06 已收（commit 5e19d8a）；11-08 15:15 新主 session 接手、開 inbox 監看、派 r07 隊長（主軸：元優化＋從零長出＋收過 train 答錯，見交棒總表）→ 產物 notes/rounds/r07/
+- [rounds] r07 已收（commit 131881a；AUC_L 空樹 16～分解 32、gated eval 57/400、過 train 答錯 eval 29→10）；11-08 主 session 派 r08 隊長（冷啟動：training 其餘題當壓縮料、預算遞增、補通用表達力）→ 產物 notes/rounds/r08/
 
 ## 各工作流 session-log
 
