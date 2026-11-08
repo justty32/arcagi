@@ -74,6 +74,7 @@ def build() -> dict:
         "learn": r08["learn"], "holdout": r08["holdout"],
         "holdout24": r08["holdout24"],
         "practice": practice,
+        "P48": practice,  # key name read by hammer.formats.taskset_ids
     }
 
 

@@ -1,4 +1,374 @@
 {
+ "P48": [
+  {
+   "fold": "B",
+   "sha1": "5398856b0cb704da91e1f321e55b8a5947009ca0",
+   "src": "foot32",
+   "task_id": "6d0aefbc",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "B",
+   "sha1": "c67c83acf414ed6576e47597577bffc8b32af294",
+   "src": "foot32",
+   "task_id": "62c24649",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "B",
+   "sha1": "3ae4dad62ec7155b47660aed875f9fdf9cb2078d",
+   "src": "foot32",
+   "task_id": "67e8384a",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "B",
+   "sha1": "a6ab60548cc39c28e53a3bea5f84f6561a105ab5",
+   "src": "foot32",
+   "task_id": "c9e6f938",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "B",
+   "sha1": "5bc70419eabea53e0315213095ab349523029b2f",
+   "src": "foot32",
+   "task_id": "4c4377d9",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "B",
+   "sha1": "ad01a0028fc1c891c6b60c302ca77f2de0adff5c",
+   "src": "foot32",
+   "task_id": "6fa7a44f",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "A",
+   "sha1": "598647f3d1fcd99412f84a77272ed7c12e713dc2",
+   "src": "foot32",
+   "task_id": "47c1f68c",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "A",
+   "sha1": "f8c8b2715214c5b646f77c889553825395ba9900",
+   "src": "foot32",
+   "task_id": "8d5021e8",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "B",
+   "sha1": "c29f2cc06ac880039f0b499eeacfea7ddcc5defa",
+   "src": "foot32",
+   "task_id": "7fe24cdd",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "A",
+   "sha1": "1d25a716456ff3ff29374f886643041af5920a3b",
+   "src": "foot32",
+   "task_id": "46442a0e",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "A",
+   "sha1": "118698db238c4150c2a74ce68f3845db3bcb32e8",
+   "src": "foot32",
+   "task_id": "8be77c9e",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "fold": "A",
+   "sha1": "bd078b1d5a88d2952f7ba13ef9ffbe1007f38a1f",
+   "src": "foot32",
+   "task_id": "6150a2bd",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "fold": "A",
+   "sha1": "f88a07b3241eab5aa66f188c095227f7261a7dfd",
+   "src": "foot32",
+   "task_id": "ed36ccf7",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "fold": "B",
+   "sha1": "74259d82629dd0f3402466f7540f66984eb86284",
+   "src": "foot32",
+   "task_id": "3c9b0459",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "fold": "A",
+   "sha1": "ad6551c573f0790f09bce785822611948dab4d9f",
+   "src": "foot32",
+   "task_id": "67a3c6ac",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "fold": "A",
+   "sha1": "effd823f00ffaf8a8fbe50addd9e9e29d4f067ac",
+   "src": "foot32",
+   "task_id": "74dd1130",
+   "theme": "geometry.transpose",
+   "theme_hits": 2
+  },
+  {
+   "fold": "A",
+   "sha1": "d99b1afa7d0874b5faac65e6ac06db8559a8e9c1",
+   "src": "foot32",
+   "task_id": "9dfd6313",
+   "theme": "geometry.transpose",
+   "theme_hits": 2
+  },
+  {
+   "fold": "A",
+   "sha1": "a0004fdc2935f88630a22ef1e975ed20cef838ce",
+   "src": "foot32",
+   "task_id": "b1948b0a",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "fold": "A",
+   "sha1": "de4f47b0eee03971ef663ed18b503cbe46aab8ab",
+   "src": "foot32",
+   "task_id": "0d3d703e",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "fold": "A",
+   "sha1": "d469cba820fd8c6c34f6735376df170c396d29dc",
+   "src": "foot32",
+   "task_id": "54d9e175",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "fold": "B",
+   "sha1": "1ea2f70790c42930e27fe802817b2ee9d20a0099",
+   "src": "foot32",
+   "task_id": "f76d97a5",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "fold": "A",
+   "sha1": "62cb1bf4bc8b22f7d62835b99353af23542c263b",
+   "src": "foot32",
+   "task_id": "c8f0f002",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "fold": "B",
+   "sha1": "972e199677bca705011f1c40f5d5ecc54ef76810",
+   "src": "foot32",
+   "task_id": "d511f180",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "fold": "A",
+   "sha1": "f74bca42360821d1b7d2964b3c32af517850c68b",
+   "src": "foot32",
+   "task_id": "d4a91cb9",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "B",
+   "sha1": "96ef801dbfd543fd338c72e875ddd02a9010d770",
+   "src": "foot32",
+   "task_id": "1f876c06",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "A",
+   "sha1": "56ef542e8758400bba5d33f75c21d4f570349f38",
+   "src": "foot32",
+   "task_id": "a2fd1cf0",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "B",
+   "sha1": "32e9608516c7e749ac8d5afa46213e6c55c0e463",
+   "src": "foot32",
+   "task_id": "06df4c85",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "B",
+   "sha1": "aa590e805974bd58db65bd40320b2ed6830ad7d4",
+   "src": "foot32",
+   "task_id": "ded97339",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "B",
+   "sha1": "7a4eb2786a590d6b4cff8a9bfc6927398050a5e1",
+   "src": "foot32",
+   "task_id": "b7249182",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "A",
+   "sha1": "4e7080a7e8716f3b7e005690abad257ede88fbe4",
+   "src": "foot32",
+   "task_id": "40853293",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "A",
+   "sha1": "20cc9451ec584c08b32877197d02cf02cf28a0a2",
+   "src": "foot32",
+   "task_id": "dbc1a6ce",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "fold": "B",
+   "sha1": "2a4b4f945da95723a8990760accc56ff58ec0e53",
+   "src": "foot32",
+   "task_id": "cbded52d",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "dist": 0.03204793,
+   "fold": "A",
+   "sha1": "9c18bff3e9583006a02a9b2a0d3daf67d8640a04",
+   "src": "near_unsolved_L16",
+   "task_id": "b27ca6d3"
+  },
+  {
+   "dist": 0.068333333,
+   "fold": "B",
+   "sha1": "85b94306d3806b187b44ed992d07623983ee5370",
+   "src": "near_unsolved_L16",
+   "task_id": "2204b7a8"
+  },
+  {
+   "dist": 0.075991593,
+   "fold": "B",
+   "sha1": "c7aef856a863717f8cef4fa5afb89444c008a228",
+   "src": "near_unsolved_L16",
+   "task_id": "e73095fd"
+  },
+  {
+   "dist": 0.096695894,
+   "fold": "B",
+   "sha1": "9c44a8a1c4f56a16343073fa06ade60df9d84e73",
+   "src": "near_unsolved_L16",
+   "task_id": "ef135b50"
+  },
+  {
+   "dist": 0.121666667,
+   "fold": "A",
+   "sha1": "9178d1361ad7d2d5de5c1c6549efcec884bde689",
+   "src": "near_unsolved_L16",
+   "task_id": "ddf7fa4f"
+  },
+  {
+   "dist": 0.12345841,
+   "fold": "B",
+   "sha1": "42f0bae505721e07c015d692f23953f3f273405d",
+   "src": "near_unsolved_L16",
+   "task_id": "a5313dff"
+  },
+  {
+   "dist": 0.139248366,
+   "fold": "A",
+   "sha1": "c6a46468e97fc4d5397821236d27205c9b5e989f",
+   "src": "near_unsolved_L16",
+   "task_id": "90f3ed37"
+  },
+  {
+   "dist": 0.149540434,
+   "fold": "A",
+   "sha1": "6d1568ab6cae3648c6938748ddf2b7be1eeb6db5",
+   "src": "near_unsolved_L16",
+   "task_id": "28e73c20"
+  },
+  {
+   "dist": 0.15213539,
+   "fold": "B",
+   "sha1": "716a1a443e5530b456830e8d9eac5a3a33f67263",
+   "src": "near_unsolved_L16",
+   "task_id": "00d62c1b"
+  },
+  {
+   "dist": 0.154473941,
+   "fold": "B",
+   "sha1": "2b38ac9b3fbb8af02a1c0c62c0ea1aad632371d7",
+   "src": "near_unsolved_L16",
+   "task_id": "6d75e8bb"
+  },
+  {
+   "dist": 0.1690923,
+   "fold": "A",
+   "sha1": "7ee05844c327e1917a7808fa41b08d405c41a963",
+   "src": "near_unsolved_L16",
+   "task_id": "2281f1f4"
+  },
+  {
+   "dist": 0.186645465,
+   "fold": "B",
+   "sha1": "d642a35b993171af174e3aba0edaccb5c8f858f9",
+   "src": "near_unsolved_L16",
+   "task_id": "d6ad076f"
+  },
+  {
+   "dist": 0.204889663,
+   "fold": "B",
+   "sha1": "689569630bc7e6b1f06409a7b3097474789b618f",
+   "src": "near_unsolved_L16",
+   "task_id": "3aa6fb7a"
+  },
+  {
+   "dist": 0.206293973,
+   "fold": "A",
+   "sha1": "901327ea49e0d04206a4333cfa6b0e93e26cd9e0",
+   "src": "near_unsolved_L16",
+   "task_id": "ec883f72"
+  },
+  {
+   "dist": 0.219619444,
+   "fold": "B",
+   "sha1": "d03cb91a45b257ee3a12e49fb31ce20429a871fe",
+   "src": "near_unsolved_L16",
+   "task_id": "508bd3b6"
+  },
+  {
+   "dist": 0.223963016,
+   "fold": "A",
+   "sha1": "a5fd70ccbbf881d1f7adb962e1eda2c6a811dd7b",
+   "src": "near_unsolved_L16",
+   "task_id": "41e4d17e"
+  }
+ ],
  "holdout": [
   {
    "category": "recolor",
