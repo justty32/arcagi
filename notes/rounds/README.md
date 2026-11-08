@@ -5,8 +5,8 @@
 ## 現況（2026-11-08 11:35）
 
 - 準備：資料已下載、pytest 全綠、identity 基線 0/400（`reports/baseline-identity/`）；題庫盤點 `docs/inventory/training.html`＋`training-features.csv`（commit 4af1160）。
-- 量具補缺口 opus 線進行中（外部求解器協議、嘗試軌跡紀錄、逐題對照、求解器範本）。
-- 下一步：量具收線 → 第一輪（opus 簡報 → fable 一次性規劃 → opus 設計 → 施工試跑 → 總結簡報），每輪一個子資料夾 `rNN/`。
+- 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
+- **第一輪進行中**（opus 隊長線，產物 notes/rounds/r01/）：（opus 簡報 → fable 一次性規劃 → opus 設計 → 施工試跑 → 總結簡報），每輪一個子資料夾 `rNN/`。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
 ## 使用者經 aos 轉達的前提（原文在 wf/inbox 的信，處理完在 wf/inbox/done/）
