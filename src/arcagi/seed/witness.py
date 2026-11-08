@@ -11,6 +11,17 @@ from .prims import PRIMS
 from .types import INT, ListT
 
 MIN_EXAMPLES = 2
+# Split names of r07 (``append`` covers both ``append_pre`` and ``append_suf``;
+# ``if`` is the conditional witness of ``seed.cond``).
+R07_SPLITS: tuple[str, ...] = (
+    "map",
+    "zip_pos",
+    "if",
+    "take",
+    "conj_transpose",
+    "conj_reverse",
+    "append",
+)
 
 
 def subst_leaves(prog: Program, repl: dict[str, Program]) -> Program | None:
@@ -37,8 +48,11 @@ def subst_leaves(prog: Program, repl: dict[str, Program]) -> Program | None:
         return None
 
 
-def witness_splits(xs: tuple, outs: tuple, types: tuple) -> Iterator[tuple]:
-    """Yield (name, sub_xs, sub_outs, sub_types, extra_leaves, build)."""
+def witness_splits(
+    xs: tuple, outs: tuple, types: tuple, names: frozenset[str] = frozenset(R07_SPLITS)
+) -> Iterator[tuple]:
+    """Yield (name, sub_xs, sub_outs, sub_types, extra_leaves, build) for the
+    r07 splits listed in ``names``."""
     in_t, out_t = types
     lists = all(isinstance(x, tuple) and isinstance(y, tuple) for x, y in zip(xs, outs))
     if not lists or not isinstance(in_t, ListT) or not isinstance(out_t, ListT):
@@ -46,13 +60,13 @@ def witness_splits(xs: tuple, outs: tuple, types: tuple) -> Iterator[tuple]:
     same_len = all(len(x) == len(y) for x, y in zip(xs, outs))
     if same_len and _has("map"):
         ex = _table(((a,), b) for x, y in zip(xs, outs) for a, b in zip(x, y))
-        if ex is not None:
+        if ex is not None and "map" in names:
             sx, sy = tuple(k[0] for k in ex), tuple(ex.values())
             yield "map", sx, sy, (in_t.elem, out_t.elem), (), _wrap_map
         ex = _table(
             ((a, i), b) for x, y in zip(xs, outs) for i, (a, b) in enumerate(zip(x, y))
         )
-        if ex is not None and _has("zipwith", "range", "len"):
+        if ex is not None and _has("zipwith", "range", "len") and "zip_pos" in names:
             sx = tuple(k[0] for k in ex)
             pos = (("$i",), INT, tuple(k[1] for k in ex))
             yield (
@@ -64,12 +78,12 @@ def witness_splits(xs: tuple, outs: tuple, types: tuple) -> Iterator[tuple]:
                 _wrap_zip,
             )
     ks = {len(y) for y in outs}
-    if len(ks) == 1 and _has("take"):
+    if len(ks) == 1 and _has("take") and "take" in names:
         (k,) = ks
         if all(len(x) >= k for x in xs) and any(len(x) > k for x in xs):
             sx = tuple(x[:k] for x in xs)
             yield "take", sx, outs, types, (), _wrap_in(("take", k, ("$in",)))
-    if in_t == out_t and _has("append"):
+    if in_t == out_t and _has("append") and "append" in names:
         if all(y[: len(x)] == x for x, y in zip(xs, outs)):
             rest = tuple(y[len(x) :] for x, y in zip(xs, outs))
             if any(rest):
@@ -81,7 +95,7 @@ def witness_splits(xs: tuple, outs: tuple, types: tuple) -> Iterator[tuple]:
             if any(rest):
                 yield "append_suf", xs, rest, types, (), _wrap_suf
     for op in ("transpose", "reverse"):
-        if not _has(op):
+        if not _has(op) or "conj_" + op not in names:
             continue
         if op == "transpose" and not (
             isinstance(in_t.elem, ListT) and isinstance(out_t.elem, ListT)

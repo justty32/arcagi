@@ -22,8 +22,9 @@ from typing import Any
 from .interp import MAX_STEPS, Program, compile_prog, expand, to_value
 from .lam import BodyPool, Op, build_ops, leaf_entries, splits
 from .library import Library
-from .prims import CONSTS, task_consts
-from .types import BOOL, INPUT, INT, FnT, ListT, Type, is_ground, resolve, unify
+from .prims import task_consts
+from .probe import probes
+from .types import INPUT, FnT, Type, is_ground, resolve, unify
 
 MAX_SIZE = 24
 NEAR_KEEP = 8
@@ -36,6 +37,7 @@ class Result:
     nodes_to_first: int | None
     seconds: float
     near: list[tuple[Program, float]] = field(default_factory=list)
+    eval_steps: int = 0  # approximate interpreter work (see Enumerator.steps)
 
 
 class _DoneError(Exception):
@@ -74,11 +76,16 @@ class Enumerator:
         extra: tuple = (),
         sub: bool = False,
         consts: tuple[int, ...] | None = None,
+        lam_depth: int | None = None,
+        lam_body_max: int | None = None,
     ) -> None:
         """``sub``: a decomposition subproblem; lambda bodies then cannot see
         ``$in`` and no near list is kept. ``extra``: more (prog, type, vals)
         leaves, e.g. a position variable. ``consts``: integer leaves (default:
-        ``task_consts`` of these examples)."""
+        ``task_consts`` of these examples). ``lam_depth``/``lam_body_max``:
+        lambda body pool limits (None: ``seed.lam`` defaults)."""
+        self.lam_depth, self.lam_body_max = lam_depth, lam_body_max
+        self._steps = 0
         self.xs = tuple(to_value(i) for i, _ in train)
         self.outs = tuple(to_value(o) for _, o in train)
         if consts is None:
@@ -96,6 +103,14 @@ class Enumerator:
         self.near: list[tuple[float, int, Program]] = []
         self.ops: list[Op] = build_ops(lib, order or {}, bodies=False)
         self.pools: dict[tuple[Type, ...], BodyPool] = {}
+
+    @property
+    def steps(self) -> int:
+        """Approximate evaluation work: primitive applications on train
+        examples and lambda probes, plus interpreter steps of expanded runs
+        (calls of lambda arguments inside higher-order primitives are not
+        counted)."""
+        return self._steps + sum(p.steps for p in self.pools.values())
 
     # -- bookkeeping -------------------------------------------------------
     def _offer(self, size: int, prog: Program, typ: Type, vals: tuple) -> None:
@@ -121,11 +136,18 @@ class Enumerator:
             raise _DoneError
 
     def _run_expanded(self, prog: Program) -> tuple | None:
+        out = []
         try:
             node = compile_prog(expand(prog, self.lib))
-            return tuple(node([x, MAX_STEPS], ()) for x in self.xs)
+            for x in self.xs:
+                ctx = [x, MAX_STEPS]
+                try:
+                    out.append(node(ctx, ()))
+                finally:
+                    self._steps += MAX_STEPS - ctx[1]
         except Exception:
             return None
+        return tuple(out)
 
     # -- search ------------------------------------------------------------
     def run(self) -> None:
@@ -167,6 +189,7 @@ class Enumerator:
 
     def _eval_prim(self, op: Op, chosen: list) -> tuple | None:
         fn = op.fn
+        self._steps += len(self.xs)
         out = []
         try:
             for j, x in enumerate(self.xs):
@@ -218,49 +241,14 @@ class Enumerator:
             pool = BodyPool(
                 arg_types,
                 self.lib,
-                self._probes(arg_types),
+                probes(self.bank, self.xs, arg_types),
                 self.consts,
                 None if self.sub else self.in_type,
+                self.lam_depth,
+                self.lam_body_max,
             )
             self.pools[arg_types] = pool
         return pool
-
-    def _probes(self, arg_types: tuple[Type, ...]) -> list[tuple[Any, tuple]]:
-        per = [self._probe_values(t) for t in arg_types]
-        if any(not p for p in per):
-            return []
-        if len(per) == 1:
-            return [(x, (v,)) for v, x in per[0]]
-        a, b = per
-        n = max(len(a), len(b))
-        out = [
-            (a[i % len(a)][1], (a[i % len(a)][0], b[i % len(b)][0])) for i in range(n)
-        ]
-        out += [(x, (u, v)) for u, x in a[:3] for v, _ in b[:3]]
-        return out
-
-    def _probe_values(self, t: Type, cap: int = 10) -> list[tuple[Any, Any]]:
-        seen: set = set()
-        out: list[tuple[Any, Any]] = []
-
-        def add(v: Any, x: Any) -> None:
-            k = (type(v), v)
-            if k not in seen and len(out) < cap:
-                seen.add(k)
-                out.append((v, x))
-
-        for size in range(1, min(4, len(self.bank))):
-            for e in self.bank[size].get(t, ()):
-                for v, x in zip(e.vals, self.xs, strict=True):
-                    add(v, x)
-            for e in self.bank[size].get(ListT(t), ()):
-                for vs, x in zip(e.vals, self.xs, strict=True):
-                    for v in vs[:6]:
-                        add(v, x)
-        extra: tuple = CONSTS if t == INT else ((True, False) if t == BOOL else ())
-        for v in extra:
-            add(v, self.xs[0])
-        return out
 
 
 def search(en: Enumerator) -> Enumerator:
@@ -277,19 +265,29 @@ def solve(
     lib: Library,
     budget_nodes: int,
     order: dict | None = None,
-    decompose: bool = True,
+    decompose: bool | frozenset[str] = True,
+    sub_lam_depth: int | None = None,
 ) -> Result:
     """Search for the smallest program mapping every train input to its output.
 
     With ``decompose`` (default) the budget is shared between direct search and
-    generic deductive splits (``seed.decomp``); ``decompose=False`` is the plain
-    bottom-up enumerator."""
-    t0 = time.perf_counter()
-    if decompose:
-        from .decomp import solve_split
+    generic deductive splits (``seed.decomp``). ``True`` means
+    ``seed.decomp.DEFAULT_SPLITS``, a frozenset turns on exactly the named
+    splits (``seed.decomp.SPLITS``); ``False`` or an empty set is the plain
+    bottom-up enumerator. ``sub_lam_depth``: lambda body depth limit inside
+    split subproblems (None: ``seed.lam.LAM_DEPTH``, or ``NEST_DEPTH`` when
+    ``nest`` is on). Every node of every subsearch, failed ones included, counts against
+    ``budget_nodes``."""
+    from .decomp import normalize, solve_split
 
-        prog, nodes, first, near = solve_split(train, lib, budget_nodes, order)
-        return Result(prog, nodes, first, time.perf_counter() - t0, near)
+    t0 = time.perf_counter()
+    names = normalize(decompose)
+    if names:
+        prog, nodes, first, near, steps = solve_split(
+            train, lib, budget_nodes, order, names, sub_lam_depth
+        )
+        return Result(prog, nodes, first, time.perf_counter() - t0, near, steps)
     en = search(Enumerator(train, lib, budget_nodes, order))
     near = [(p, sc) for sc, _, p in sorted(en.near, reverse=True)]
-    return Result(en.found, en.nodes, en.nodes_to_first, time.perf_counter() - t0, near)
+    secs = time.perf_counter() - t0
+    return Result(en.found, en.nodes, en.nodes_to_first, secs, near, en.steps)

@@ -4,7 +4,8 @@ A ``BodyPool`` enumerates lambda bodies for one parameter environment (the
 concrete parameter types), smallest first, with body depth at most
 ``LAM_DEPTH`` (a leaf has depth 0, an application 1 + its deepest argument).
 Bodies are deduplicated by their values on probe environments drawn from the
-task's own data; bodies never contain nested lambdas.
+task's own data; bodies never contain nested lambdas. Decomposition
+subproblems may use a deeper pool (``depth``/``body_max``, see ``seed.decomp``).
 """
 
 from __future__ import annotations
@@ -118,7 +119,14 @@ class BodyPool:
         probes: list,
         consts: tuple[int, ...],
         in_type: Type | None = INPUT,
+        depth: int | None = None,
+        body_max: int | None = None,
     ) -> None:
+        # None: the module limits at construction time (a runtime knob may
+        # reassign ``LAM_DEPTH``).
+        self.depth = LAM_DEPTH if depth is None else depth
+        self.body_max = LAM_BODY_MAX if body_max is None else body_max
+        self.steps = 0  # primitive applications evaluated on probes
         self.consts = consts
         self.in_type = in_type  # None: bodies cannot reference $in
         self.arg_types = arg_types
@@ -131,7 +139,7 @@ class BodyPool:
         self.lams: dict[int, list[tuple[Type, list[LamEntry]]]] = {}
 
     def lambdas(self, body_size: int) -> list[tuple[Type, list[LamEntry]]]:
-        if body_size > LAM_BODY_MAX:
+        if body_size > self.body_max:
             return []
         got = self.lams.get(body_size)
         if got is None:
@@ -210,11 +218,12 @@ class BodyPool:
             if s2 is None:
                 continue
             for b in bodies:
-                if b.depth >= LAM_DEPTH:
+                if b.depth >= self.depth:
                     continue
                 yield from self._choose(op, comp, i + 1, s2, [*chosen, b])
 
     def _eval(self, fn: Callable, chosen: list) -> tuple:
+        self.steps += len(self.probes)
         out = []
         for j in range(len(self.probes)):
             args = [c.vals[j] for c in chosen]

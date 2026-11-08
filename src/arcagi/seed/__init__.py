@@ -49,6 +49,7 @@ class Solution:
     nodes_to_first: int | None
     seconds: float
     near: tuple = ()
+    eval_steps: int = 0
 
 
 def _check(prog: Program, pairs: Any, lib: Library) -> bool:
@@ -65,10 +66,10 @@ def _check(prog: Program, pairs: Any, lib: Library) -> bool:
     return True
 
 
-def _one(job: tuple[Library, Any, int, dict | None, bool]) -> Solution:
-    lib, task, budget, order, decompose = job
+def _one(job: tuple) -> Solution:
+    lib, task, budget, order, decompose, sub_lam_depth = job
     train = [(ex.input, ex.output) for ex in task.train]
-    res = solve(train, lib, budget, order, decompose)
+    res = solve(train, lib, budget, order, decompose, sub_lam_depth)
     prog = res.program
     ok_train = prog is not None and _check(prog, task.train, lib)
     ok_test = ok_train and _check(prog, task.test, lib)
@@ -81,6 +82,7 @@ def _one(job: tuple[Library, Any, int, dict | None, bool]) -> Solution:
         res.nodes_to_first,
         res.seconds,
         tuple(res.near),
+        res.eval_steps,
     )
 
 
@@ -90,13 +92,16 @@ def enumerate(  # noqa: A001 - name fixed by the r07 interface
     budget_nodes: int,
     workers: int = 1,
     order: dict | None = None,
-    decompose: bool = True,
+    decompose: bool | frozenset[str] = True,
+    sub_lam_depth: int | None = None,
 ) -> list[Solution]:
     """Solve each task with ``budget_nodes`` candidates; results in task order.
 
-    ``decompose=False`` disables the deductive splits of ``seed.decomp``.
+    ``decompose`` and ``sub_lam_depth`` are passed to ``seed.enum.solve``
+    (``False`` disables the deductive splits of ``seed.decomp``, a frozenset
+    picks names from ``seed.decomp.SPLITS``).
     Primitive ablations: run inside ``with seed.prims.without(...)``."""
-    jobs = [(lib, t, budget_nodes, order, decompose) for t in tasks]
+    jobs = [(lib, t, budget_nodes, order, decompose, sub_lam_depth) for t in tasks]
     if workers <= 1 or len(jobs) <= 1:
         return [_one(j) for j in jobs]
     ctx = multiprocessing.get_context("fork")
