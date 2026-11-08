@@ -11,7 +11,6 @@ from collections import defaultdict
 from dataclasses import dataclass
 
 from arcagi.blocks import LEARNER_NAMES
-from arcagi.blocks.library import is_covered
 
 type Step = tuple[object, ...]
 type Fragment = tuple[Step, ...]
@@ -126,6 +125,8 @@ def shared_subtrees(
         kept.append((window, tasks))
     out = []
     for window, tasks in kept[:limit]:
+        from arcagi.blocks.library import is_covered  # lazy: registry imports us
+
         status = "covered" if is_covered(window, frozen) else "live"  # type: ignore[arg-type]
         out.append(Subtree(window, tuple(sorted(tasks)), status))
     return out

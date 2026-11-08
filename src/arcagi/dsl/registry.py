@@ -58,5 +58,9 @@ PRIMITIVES: dict[str, Primitive] = {
 for _name, _program in CATALOG.macros().items():
     if all(step[0] in ALL for step in _program):
         PRIMITIVES[_name] = Primitive(_name, _macro(_program), _no_params)
+# Round 5: anti-unified subtree blocks with parameter slots (``kind=slot_macro``).
+from arcagi.srcspace.slot_prims import slot_primitives  # noqa: E402
+
+PRIMITIVES.update(slot_primitives(CATALOG, known=frozenset(ALL)))
 
 __all__ = ["ALL", "FIRST_STEP_ONLY", "MARK", "PRIMITIVES", "Primitive"]
