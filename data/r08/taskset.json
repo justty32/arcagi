@@ -1,0 +1,739 @@
+{
+ "foot_pass0_sha1": "0ff62ab2658584964c877779c9f6666cd479dc0d",
+ "holdout": [
+  {
+   "category": "recolor",
+   "r06_solved": true,
+   "sha1": "7644e3ffa5701096400e3ba03c03854518f59772",
+   "task_id": "ea32f347"
+  },
+  {
+   "category": "reshape",
+   "r06_solved": true,
+   "sha1": "530a26151b5a29436f6d9cf8a9613e92abf0988f",
+   "task_id": "bbc9ae5d"
+  },
+  {
+   "category": "scale_tile",
+   "r06_solved": true,
+   "sha1": "9cdf49578917a66e95d1dc072d5b0955377487d6",
+   "task_id": "9172f3a0"
+  },
+  {
+   "category": "summary",
+   "r06_solved": true,
+   "sha1": "28c2b41f4a80b8f5e01cde6e30cf373e2974d48d",
+   "task_id": "44f52bb0"
+  },
+  {
+   "category": "recolor",
+   "r06_solved": false,
+   "sha1": "e5ba9aec80345595762dc51e765c8561aabe355e",
+   "task_id": "bda2d7a6"
+  },
+  {
+   "category": "reshape",
+   "r06_solved": false,
+   "sha1": "d6633a99a34cfc4221af505017eb735d4378e915",
+   "task_id": "137eaa0f"
+  },
+  {
+   "category": "scale_tile",
+   "r06_solved": false,
+   "sha1": "93580520b37e79cb7e9f38ab6faed3be61107a9d",
+   "task_id": "cce03e0d"
+  },
+  {
+   "category": "summary",
+   "r06_solved": false,
+   "sha1": "6586907dfa6661dace441380c504dd1dc0d9d1c1",
+   "task_id": "ff28f65a"
+  }
+ ],
+ "holdout24": [
+  {
+   "sha1": "22a10b3ba003d58e0d7ee14002a6db11a4b3c107",
+   "task_id": "05f2a901"
+  },
+  {
+   "sha1": "7b6015e5f897a6633d1a1882ae3b7cc8571ffe4e",
+   "task_id": "1e32b0e9"
+  },
+  {
+   "sha1": "39dbada6e017c4e281f51c6c0e12b5cea53fa322",
+   "task_id": "29ec7d0e"
+  },
+  {
+   "sha1": "161d6fdbc2f65d7dc69fa5d9298ef007501c0455",
+   "task_id": "2bcee788"
+  },
+  {
+   "sha1": "86cf564327febd38a16048575ef5c18dec66d857",
+   "task_id": "3631a71a"
+  },
+  {
+   "sha1": "7782ab77b00903902f8077f1afeb13b0e5a34388",
+   "task_id": "36d67576"
+  },
+  {
+   "sha1": "3a130f5ad020d312dab7bece8292f353c2c6b134",
+   "task_id": "3af2c5a8"
+  },
+  {
+   "sha1": "d5a5482caea0e90f953b67c2643cb66bd68e140b",
+   "task_id": "469497ad"
+  },
+  {
+   "sha1": "442a0c19173ba7cca0ff0ea76f09d9d8fb6c83a8",
+   "task_id": "5bd6f4ac"
+  },
+  {
+   "sha1": "b5358e96547b704cd0a83aec3eeced372b3c6c3f",
+   "task_id": "6773b310"
+  },
+  {
+   "sha1": "a2f36a551fd6adb8debec44440a8ae973f33c085",
+   "task_id": "7468f01a"
+  },
+  {
+   "sha1": "628eb37ff1ca10d34786491d1f0b3624a3c8650e",
+   "task_id": "760b3cac"
+  },
+  {
+   "sha1": "8fa0095226d11fbc4e576a548aa8f190acdd5876",
+   "task_id": "a1570a43"
+  },
+  {
+   "sha1": "d0a21a808b358782c4ed0d2c698f24f4e76a942f",
+   "task_id": "a3325580"
+  },
+  {
+   "sha1": "d12be497f3711b931a2cfd3f72bf3c96fa86ec5d",
+   "task_id": "a699fb00"
+  },
+  {
+   "sha1": "16b8152d086e3c4939397280cf8d0092e5b9cf7b",
+   "task_id": "a78176bb"
+  },
+  {
+   "sha1": "12fbd743a47bf1dc6a7cb36c40928236bfdb3dd9",
+   "task_id": "a8d7556c"
+  },
+  {
+   "sha1": "ee252f3be655c864ce0d51b85682e9642a70a60b",
+   "task_id": "aabf363d"
+  },
+  {
+   "sha1": "accd89b1c53bc2288275bff385a891ca691539a4",
+   "task_id": "b190f7f5"
+  },
+  {
+   "sha1": "75b02e81cc4b05a4d9c87f4b6751eebe04b0b1b0",
+   "task_id": "b91ae062"
+  },
+  {
+   "sha1": "689793d18aeeebce2d10f813968372580e84395a",
+   "task_id": "ce22a75a"
+  },
+  {
+   "sha1": "596ab63ec6c1170a4ea3a3d4d8bb40ccca8c1609",
+   "task_id": "d037b0a7"
+  },
+  {
+   "sha1": "eb90ac3296e54dc1cdd084e6d0e56367cd7e3b2b",
+   "task_id": "e9614598"
+  },
+  {
+   "sha1": "f8dc1ed801ea0426383cbe8a5d820d919fde1242",
+   "task_id": "f1cefba8"
+  }
+ ],
+ "learn": [
+  {
+   "category": "crop",
+   "r06_solved": true,
+   "sha1": "3ef40a4b5176e89d341a97dbd7b6543c68e55b65",
+   "task_id": "a740d043"
+  },
+  {
+   "category": "draw",
+   "r06_solved": true,
+   "sha1": "823d5fbeecadb55fc7075bc886257e46ef636392",
+   "task_id": "95990924"
+  },
+  {
+   "category": "fill",
+   "r06_solved": true,
+   "sha1": "93ef81105a6b73fadecc4dd5f06f62e34bcaed5e",
+   "task_id": "c0f76784"
+  },
+  {
+   "category": "geometry",
+   "r06_solved": true,
+   "sha1": "9a283116ae7313d1c98c726e8ef81d7be8006114",
+   "task_id": "68b16354"
+  },
+  {
+   "category": "move",
+   "r06_solved": true,
+   "sha1": "4cd85728457e1cfdfc2bfe6d11ffa814d69836ce",
+   "task_id": "1e0a9b12"
+  },
+  {
+   "category": "objects",
+   "r06_solved": true,
+   "sha1": "9c6c9827036e4a0254e8c5a8d75f157c16a08b01",
+   "task_id": "6f8cd79b"
+  },
+  {
+   "category": "overlay",
+   "r06_solved": true,
+   "sha1": "cb52187e1134a0b586cf6a6ab552862f02b000e4",
+   "task_id": "ce4f8723"
+  },
+  {
+   "category": "pattern",
+   "r06_solved": true,
+   "sha1": "28bba430c18b9db00c5f97f3c7cbcfebfbe42cca",
+   "task_id": "496994bd"
+  },
+  {
+   "category": "crop",
+   "r06_solved": false,
+   "sha1": "1f7723a6151756c5ba7ac08b921dfd55753bc2ed",
+   "task_id": "d10ecb37"
+  },
+  {
+   "category": "draw",
+   "r06_solved": false,
+   "sha1": "958fb4addba050355846542a9e3be925544f4956",
+   "task_id": "22233c11"
+  },
+  {
+   "category": "fill",
+   "r06_solved": false,
+   "sha1": "1b6010e25a45b79622f53347792f235814639650",
+   "task_id": "af902bf9"
+  },
+  {
+   "category": "move",
+   "r06_solved": false,
+   "sha1": "8d734e6cbed4a6cb82d85b309ade19f9644bef72",
+   "task_id": "beb8660c"
+  },
+  {
+   "category": "multi",
+   "r06_solved": false,
+   "sha1": "b0746c7969c4debd1a18f85977bd17e7830adee2",
+   "task_id": "ba97ae07"
+  },
+  {
+   "category": "objects",
+   "r06_solved": false,
+   "sha1": "2e44b09e0069a6db6438d6ff0d99a25fe2a4571d",
+   "task_id": "e76a88a6"
+  },
+  {
+   "category": "overlay",
+   "r06_solved": false,
+   "sha1": "a6d00c299c438f5ab83f9745ea314fa14e0fa742",
+   "task_id": "995c5fa3"
+  },
+  {
+   "category": "pattern",
+   "r06_solved": false,
+   "sha1": "19a0872cff186a20da7bbf5d7ebef4857af4df7c",
+   "task_id": "1b60fb0c"
+  }
+ ],
+ "pool_foot32": [
+  {
+   "sha1": "5398856b0cb704da91e1f321e55b8a5947009ca0",
+   "task_id": "6d0aefbc",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "c67c83acf414ed6576e47597577bffc8b32af294",
+   "task_id": "62c24649",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "3ae4dad62ec7155b47660aed875f9fdf9cb2078d",
+   "task_id": "67e8384a",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "a6ab60548cc39c28e53a3bea5f84f6561a105ab5",
+   "task_id": "c9e6f938",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "5bc70419eabea53e0315213095ab349523029b2f",
+   "task_id": "4c4377d9",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "ad01a0028fc1c891c6b60c302ca77f2de0adff5c",
+   "task_id": "6fa7a44f",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "598647f3d1fcd99412f84a77272ed7c12e713dc2",
+   "task_id": "47c1f68c",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "f8c8b2715214c5b646f77c889553825395ba9900",
+   "task_id": "8d5021e8",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "c29f2cc06ac880039f0b499eeacfea7ddcc5defa",
+   "task_id": "7fe24cdd",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "1d25a716456ff3ff29374f886643041af5920a3b",
+   "task_id": "46442a0e",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "118698db238c4150c2a74ce68f3845db3bcb32e8",
+   "task_id": "8be77c9e",
+   "theme": "scale_tile.mirror_tile",
+   "theme_hits": 5
+  },
+  {
+   "sha1": "bd078b1d5a88d2952f7ba13ef9ffbe1007f38a1f",
+   "task_id": "6150a2bd",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "sha1": "f88a07b3241eab5aa66f188c095227f7261a7dfd",
+   "task_id": "ed36ccf7",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "sha1": "74259d82629dd0f3402466f7540f66984eb86284",
+   "task_id": "3c9b0459",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "sha1": "ad6551c573f0790f09bce785822611948dab4d9f",
+   "task_id": "67a3c6ac",
+   "theme": "geometry.flip_rot",
+   "theme_hits": 4
+  },
+  {
+   "sha1": "effd823f00ffaf8a8fbe50addd9e9e29d4f067ac",
+   "task_id": "74dd1130",
+   "theme": "geometry.transpose",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "d99b1afa7d0874b5faac65e6ac06db8559a8e9c1",
+   "task_id": "9dfd6313",
+   "theme": "geometry.transpose",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "a0004fdc2935f88630a22ef1e975ed20cef838ce",
+   "task_id": "b1948b0a",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "de4f47b0eee03971ef663ed18b503cbe46aab8ab",
+   "task_id": "0d3d703e",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "d469cba820fd8c6c34f6735376df170c396d29dc",
+   "task_id": "54d9e175",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "1ea2f70790c42930e27fe802817b2ee9d20a0099",
+   "task_id": "f76d97a5",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "62cb1bf4bc8b22f7d62835b99353af23542c263b",
+   "task_id": "c8f0f002",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "972e199677bca705011f1c40f5d5ecc54ef76810",
+   "task_id": "d511f180",
+   "theme": "recolor.global_map",
+   "theme_hits": 2
+  },
+  {
+   "sha1": "f74bca42360821d1b7d2964b3c32af517850c68b",
+   "task_id": "d4a91cb9",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "96ef801dbfd543fd338c72e875ddd02a9010d770",
+   "task_id": "1f876c06",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "56ef542e8758400bba5d33f75c21d4f570349f38",
+   "task_id": "a2fd1cf0",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "32e9608516c7e749ac8d5afa46213e6c55c0e463",
+   "task_id": "06df4c85",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "aa590e805974bd58db65bd40320b2ed6830ad7d4",
+   "task_id": "ded97339",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "7a4eb2786a590d6b4cff8a9bfc6927398050a5e1",
+   "task_id": "b7249182",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "4e7080a7e8716f3b7e005690abad257ede88fbe4",
+   "task_id": "40853293",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "20cc9451ec584c08b32877197d02cf02cf28a0a2",
+   "task_id": "dbc1a6ce",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  },
+  {
+   "sha1": "2a4b4f945da95723a8990760accc56ff58ec0e53",
+   "task_id": "cbded52d",
+   "theme": "draw.connect_points",
+   "theme_hits": 1
+  }
+ ],
+ "pool_foot32_rule": "subcategories by train_ok count in data/r08/foot_pass0.json (empty lib, DEFAULT splits, 100k, train only) desc, ties by name; all remaining tasks of a theme (<=16, by sha1(task_id+'r08F')) until 32 (D-r8-18)",
+ "practice": [
+  {
+   "sha1": "34ac18b818cbc77ec783bf1e7830cf18c2d43979",
+   "task_id": "913fb3ed",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "9c18bff3e9583006a02a9b2a0d3daf67d8640a04",
+   "task_id": "b27ca6d3",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "7fcf3d2dee41db70d45ff615e0361fdae99b4420",
+   "task_id": "928ad970",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "9cac38ced60643c26980408f6bcb14e1c018cc24",
+   "task_id": "0ca9ddb6",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "34554e974f7a64b26404a85c91c974e6cd264714",
+   "task_id": "4258a5f9",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "784098de1013a0fb918514acdeb62ea4fdd8c1d7",
+   "task_id": "93b581b8",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "cf094dc5cc973b215a89fbe9ff8a42bd24765848",
+   "task_id": "67a423a3",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "7f6790ce58a7dde8bf994730bcfdf76f69c9a2e4",
+   "task_id": "0962bcdd",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "fe4ce3b61a62094fc8c0cb1cbbf6eb870514407d",
+   "task_id": "a9f96cdd",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "dbf3fa18afae118b9d130a7c74f56a09623fd61b",
+   "task_id": "d364b489",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "147a6ddf87c1ad51387cb8cbdc31156ab3f06cb0",
+   "task_id": "dc1df850",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "653260360e024f875d77ab8e611fc6e61c024d06",
+   "task_id": "b60334d2",
+   "theme": "draw.ring_around"
+  },
+  {
+   "sha1": "03921844236ad1d7296187ba62af249819711c54",
+   "task_id": "4c5c2cf0",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "3822863476cff4b6cd403bbb31583f0da3d363bd",
+   "task_id": "4938f0c2",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "5ff4f0e707480d7a09d631c5a601799f8bc0eeaa",
+   "task_id": "f25ffba3",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "2d19be4e5035d67ee2121a2c96862edf81ec241a",
+   "task_id": "9d9215db",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "b7262d340017dce7fa39144d2e99a939b5189d40",
+   "task_id": "e40b9e2f",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "5258d8e7dbe094af1715839b4c0af54891bc97ec",
+   "task_id": "11852cab",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "a097bd5d0440a7967df12f01c2a8513832c44f66",
+   "task_id": "b775ac94",
+   "theme": "pattern.make_symmetric"
+  },
+  {
+   "sha1": "44bbcaadfea3fc70d4a41398bdce9c029f699f5a",
+   "task_id": "3e980e27",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "ec83a598c68bbb3e5dcfac2c0d6f15a1340595b4",
+   "task_id": "890034e9",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "ebd6485e8710353ae0a7f2507b9c4022be7b978c",
+   "task_id": "e5062a87",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "c94bde11486ca9dd615b9dc7ed0f79f9959c844f",
+   "task_id": "39e1d7f9",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "9d4eaf5c1523e8b945d08c299fbb7c64fa5d1360",
+   "task_id": "363442ee",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "59b401c1b03e7c664d02893d2190c623cf9797e0",
+   "task_id": "e6721834",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "eef7aafdcf8a3cd3d92df6211c91dc60d84dc3e0",
+   "task_id": "045e512c",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "918f837d67b3b7b7076fd571731add0260022fec",
+   "task_id": "e8dc4411",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "b1bbd1ca911bd7e317587fd81c8d97ea3f350b85",
+   "task_id": "321b1fc6",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "89b8404eff5da667ab233be2fbcc99d4de732e9d",
+   "task_id": "c444b776",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "932b49600f155f0eda66fa7ad92b578e9a984c14",
+   "task_id": "88a10436",
+   "theme": "objects.copy_stamp"
+  },
+  {
+   "sha1": "74e8e218ac1d0722b75103e489c3df12f340e2c0",
+   "task_id": "6430c8c4",
+   "theme": "overlay.boolean"
+  },
+  {
+   "sha1": "e84bf11f377d4a022f3f3cb91fbcf9aefac81132",
+   "task_id": "bc1d5164",
+   "theme": "overlay.boolean"
+  }
+ ],
+ "r07_taskset_sha1": "9ce7c7ea16bb80c93a84fbd96746d1eb608a52b9",
+ "rand32": [
+  {
+   "sha1": "860745c7e9355b9a17d1759a36dae29e32801695",
+   "task_id": "025d127b"
+  },
+  {
+   "sha1": "3959905d786f8e25fb05844524ed9f3b42a9a448",
+   "task_id": "0a938d79"
+  },
+  {
+   "sha1": "6e7caa1004da85bdcfebba16ba4799e01519e98b",
+   "task_id": "10fcaaa3"
+  },
+  {
+   "sha1": "78d3cfe79c28f2f2f24326cae65f6551ae3d7ca9",
+   "task_id": "25d487eb"
+  },
+  {
+   "sha1": "d343914b11e521fa5eb6d6e35cc6f47a2b3eb89a",
+   "task_id": "264363fd"
+  },
+  {
+   "sha1": "97ee5dd0f94281c0813aa123be925dac46371e74",
+   "task_id": "28bf18c6"
+  },
+  {
+   "sha1": "da8823a9cf278e791b43f229ecd07e574039cb2e",
+   "task_id": "29c11459"
+  },
+  {
+   "sha1": "dd97fe2cecdc56fd3cfd5fd9f65e483a02b9fdd7",
+   "task_id": "2dd70a9a"
+  },
+  {
+   "sha1": "74259d82629dd0f3402466f7540f66984eb86284",
+   "task_id": "3c9b0459"
+  },
+  {
+   "sha1": "8e45ef47b20c1e320e927acf9e91b152dccbe423",
+   "task_id": "445eab21"
+  },
+  {
+   "sha1": "53b2c3b8e3a3f4c908a47ca072770536694086c4",
+   "task_id": "4612dd53"
+  },
+  {
+   "sha1": "d469cba820fd8c6c34f6735376df170c396d29dc",
+   "task_id": "54d9e175"
+  },
+  {
+   "sha1": "386cbae4326a6fb592f1f9667dca44806a253dea",
+   "task_id": "60b61512"
+  },
+  {
+   "sha1": "74e8e218ac1d0722b75103e489c3df12f340e2c0",
+   "task_id": "6430c8c4"
+  },
+  {
+   "sha1": "559213e70ffb4da883d0c3b57ce7fe268d68544e",
+   "task_id": "673ef223"
+  },
+  {
+   "sha1": "0eecd36dffc469e6c29c6c1b197fb775ce373080",
+   "task_id": "6aa20dc0"
+  },
+  {
+   "sha1": "2b38ac9b3fbb8af02a1c0c62c0ea1aad632371d7",
+   "task_id": "6d75e8bb"
+  },
+  {
+   "sha1": "8998d866b020de771082bbd29e89a96c21da9f13",
+   "task_id": "7b7f7511"
+  },
+  {
+   "sha1": "932b49600f155f0eda66fa7ad92b578e9a984c14",
+   "task_id": "88a10436"
+  },
+  {
+   "sha1": "858aae065ac60cd75a56b8110dda1a655b9b4a8b",
+   "task_id": "88a62173"
+  },
+  {
+   "sha1": "7fcf3d2dee41db70d45ff615e0361fdae99b4420",
+   "task_id": "928ad970"
+  },
+  {
+   "sha1": "d92c435dd2a53a7018893af7f5ed8ab806897c54",
+   "task_id": "963e52fc"
+  },
+  {
+   "sha1": "46f35072c10137421876261cb3bd3ee95d2163f1",
+   "task_id": "ae4f1146"
+  },
+  {
+   "sha1": "6a705f7779f10708334be9ed5246ec8c610a103c",
+   "task_id": "b2862040"
+  },
+  {
+   "sha1": "0f28822688b0b1bd126221d92d9069eade68e900",
+   "task_id": "bdad9b1f"
+  },
+  {
+   "sha1": "f01a43a4ab2d8ed60ab15f142d30cd957ac786c1",
+   "task_id": "be94b721"
+  },
+  {
+   "sha1": "2b2e44d6a602ba72c665238e2e3a2151846e8116",
+   "task_id": "cdecee7f"
+  },
+  {
+   "sha1": "2f164c41a4288fb3b0e7bd9fad087e89fbd211da",
+   "task_id": "de1cd16c"
+  },
+  {
+   "sha1": "3b8e9355b8aba10557d75a11a791726fe7e6866a",
+   "task_id": "e179c5f4"
+  },
+  {
+   "sha1": "2cfa77f206de5a92d58e76f2a03ce9e565c76ada",
+   "task_id": "eb281b96"
+  },
+  {
+   "sha1": "b92e777be31776595affb9acaaa11f34f914871e",
+   "task_id": "f8ff0b80"
+  },
+  {
+   "sha1": "6544ba824130c3b45c74ad112a691a33461f9099",
+   "task_id": "feca6190"
+  }
+ ],
+ "rule": "learn/holdout = data/r07/taskset.json unchanged; holdout24 = first 24 of the other training tasks by sha1(task_id+'r08H24') (D-r8-9); practice = 32 tasks by S4 subcategory theme: subcategories seen >=2 times in L16 first, then the other L16 subcategories by training count desc (ties by name); <=16 per theme ordered by sha1(task_id+'r08P'); excluding L16/H8/H24 (D-r8-14); rand32 = first 32 of the same remaining tasks by sha1(task_id+'r08R32') (D-r8-15)",
+ "schema": "r08-taskset/1"
+}

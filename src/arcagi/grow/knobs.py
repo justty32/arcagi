@@ -1,5 +1,8 @@
-"""The r07 meta-optimisation knobs (data/r07/knobs.json): the six of the plan
-plus ``decomp`` (seed deductive decomposition on/off, added after line A)."""
+"""The meta-optimisation knobs: the six of the r07 plan, ``decomp`` (seed
+deductive decomposition on/off, r07 line A) and the r08 practice-pool knobs
+``budget_mult``, ``lib_cap``, ``decomp_set``, ``sub_lam_depth``.
+
+r07 knobs live in data/r07/knobs.json, r08 knobs in data/r08/knobs.json."""
 
 import json
 from dataclasses import asdict, dataclass, replace
@@ -17,7 +20,16 @@ CHOICES: dict[str, list] = {
     "order": ["size", "prior"],
     "lam_depth": [1, 2],
     "decomp": [False, True],
+    "budget_mult": [1.5, 2.0, 3.0],
+    "lib_cap": [8, 16, 24],
+    "decomp_set": ["default", "default+halves", "default+nest",
+                   "default+halves+nest"],
+    "sub_lam_depth": [None, 3],
 }
+# Knobs that need the r08 seed interface (split sets, sub_lam_depth).
+SPLIT_KNOBS = ("decomp_set", "sub_lam_depth")
+# Knobs that only matter with a practice pool.
+POOL_KNOBS = ("budget_mult", "lib_cap")
 
 
 @dataclass(frozen=True)
@@ -29,6 +41,10 @@ class Knobs:
     order: str = "prior"  # "size" = size-first only, "prior" = + log-use prior
     lam_depth: int = 2  # lambda body depth (passed to seed when it exposes it)
     decomp: bool = False  # seed deductive decomposition (map/zipwith witness)
+    budget_mult: float = 2.0  # practice-pool budget growth per pass
+    lib_cap: int = 16  # active G1 library cap (D-r8-12; r07 used 40)
+    decomp_set: str = "default"  # split set when decomp is on (backend.split_set)
+    sub_lam_depth: int | None = None  # lambda depth inside split subsearches
 
     def to_dict(self) -> dict:
         return asdict(self)

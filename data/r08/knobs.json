@@ -1,0 +1,20 @@
+{
+ "budget_mult": 2.0,
+ "crn_seeds": [
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "decomp": true,
+ "decomp_set": "default",
+ "g4_frac": 0.2,
+ "k": 2.0,
+ "lam_depth": 2,
+ "lib_cap": 16,
+ "m": 3,
+ "max_holes": 2,
+ "order": "prior",
+ "sub_lam_depth": null
+}

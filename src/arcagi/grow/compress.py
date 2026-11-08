@@ -139,6 +139,7 @@ def block_name(body) -> str:
 
 def update(lib_blocks: list[dict], programs: dict[str, object], params: Params,
            pass_no: int, extra: dict[str, object] | None = None,
+           cap: int = LIB_CAP, retire_after: int = RETIRE_AFTER,
            ) -> tuple[list[dict], list[dict]]:
     """Return (new library blocks, added blocks) after one pass.
 
@@ -155,7 +156,7 @@ def update(lib_blocks: list[dict], programs: dict[str, object], params: Params,
         n = used.get(b["name"], 0)
         b["uses"] = int(b.get("uses", 0)) + n
         b["idle"] = 0 if n else int(b.get("idle", 0)) + 1
-        if b["idle"] < RETIRE_AFTER:
+        if b["idle"] < retire_after:
             kept.append(b)
     from .sig import infer_sig
 
@@ -170,7 +171,7 @@ def update(lib_blocks: list[dict], programs: dict[str, object], params: Params,
     known = {b["name"]: b for b in kept}
     added = []
     for c in candidates({**programs, **(extra or {})}, params):
-        if len(added) >= params.m or len(kept) + len(added) >= LIB_CAP:
+        if len(added) >= params.m or len(kept) + len(added) >= cap:
             break
         if pg.key(c["body"]) in bodies:
             continue
