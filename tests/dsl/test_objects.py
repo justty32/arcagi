@@ -158,3 +158,18 @@ def test_live_predicate_selectors_feed_every_action() -> None:
             assert params in solves(name, [P_STATE], [target]), name
     finally:
         pr.install(saved)
+
+
+def test_n_holes_counts_enclosed_components() -> None:
+    from arcagi.dsl.objects_props import extract
+
+    grid = (
+        (0, 0, 0, 0, 0, 0, 0),
+        (0, 1, 1, 1, 1, 1, 0),
+        (0, 1, 0, 1, 0, 1, 0),
+        (0, 1, 1, 1, 1, 1, 0),
+        (0, 0, 0, 0, 0, 0, 0),
+    )
+    (obj,) = extract(grid, "4same")
+    assert obj.props["n_holes"] == 2
+    assert obj.props["has_hole"] == 1

@@ -32,6 +32,7 @@ ATTRS = (
     "size",
     "touches_border",
     "has_hole",
+    "n_holes",
     "h",
     "w",
     "shape",
@@ -79,6 +80,22 @@ def hole_cells(grid: Grid, cells: Sequence[Cell]) -> list[Cell]:
     ]
 
 
+def n_holes(grid: Grid, cells: Sequence[Cell]) -> int:
+    """Number of 4-connected components among the object's hole cells."""
+    left = set(hole_cells(grid, cells))
+    count = 0
+    while left:
+        stack = [left.pop()]
+        count += 1
+        while stack:
+            y, x = stack.pop()
+            for nb in ((y - 1, x), (y + 1, x), (y, x - 1), (y, x + 1)):
+                if nb in left:
+                    left.remove(nb)
+                    stack.append(nb)
+    return count
+
+
 def extract(grid: Grid, conn: str) -> tuple[Obj, ...]:
     """Objects of ``grid`` under ``conn`` with all attributes filled in."""
     return _extract(grid, conn, bgc.of(grid))
@@ -110,6 +127,7 @@ def _extract(grid: Grid, conn: str, bg: int) -> tuple[Obj, ...]:
             "size": sizes[i],
             "touches_border": int(border),
             "has_hole": int(bool(hole_cells(grid, cells))),
+            "n_holes": n_holes(grid, cells),
             "color_count": color_counts[colors[i]],
             "shape_count": shape_counts[shapes[i]],
             "h": h,
