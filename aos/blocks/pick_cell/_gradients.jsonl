@@ -2,3 +2,4 @@
 {"epoch": 2, "from": "pool", "task": "136b0064", "program": "[[\"pick_cell\",\"least_colors\"],[\"symmetrize\",\"ud\",0],[\"gravity\",\"up\"]]", "score": 0.8052, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
 {"epoch": 3, "from": "pool", "task": "136b0064", "program": "[[\"pick_cell\",\"least_colors\"],[\"symmetrize\",\"ud\",0],[\"gravity\",\"up\"]]", "train_correct": 0, "train_total": 3, "score": 0.8052, "says": "near miss on an unsolved task"}
 {"epoch": 4, "from": "pool", "task": "136b0064", "program": "[[\"pick_cell\",\"least_colors\"],[\"symmetrize\",\"ud\",0],[\"gravity\",\"up\"]]", "train_correct": 0, "train_total": 3, "score": 0.8052, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "136b0064", "program": "[[\"pick_cell\",\"least_colors\"],[\"symmetrize\",\"ud\",0],[\"gravity\",\"up\"]]", "train_correct": 0, "train_total": 3, "score": 0.8052, "says": "near miss on an unsolved task"}

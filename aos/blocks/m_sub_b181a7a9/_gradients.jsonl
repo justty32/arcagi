@@ -1,0 +1,1 @@
+{"epoch": 5, "from": "pool", "task": "d5c634a2", "program": "[[\"m_sub_b181a7a9\",3,2],[\"split_overlay\",\"h\",\"nor\"]]", "train_correct": 0, "train_total": 7, "score": 0.7698, "says": "near miss on an unsolved task"}

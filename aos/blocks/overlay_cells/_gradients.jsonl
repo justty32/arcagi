@@ -14,3 +14,7 @@
 {"epoch": 4, "from": "pool", "task": "351d6448", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "train_correct": 0, "train_total": 2, "score": 0.8974, "says": "near miss on an unsolved task"}
 {"epoch": 4, "from": "pool", "task": "d47aa2ff", "program": "[[\"overlay_cells\",\"stack\"]]", "train_correct": 0, "train_total": 3, "score": 0.9667, "says": "near miss on an unsolved task"}
 {"epoch": 4, "from": "pool", "task": "e99362f0", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "train_correct": 0, "train_total": 6, "score": 0.6917, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "281123b4", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "train_correct": 0, "train_total": 6, "score": 0.7188, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "351d6448", "program": "[[\"overlay_cells\",\"stack_rev\"]]", "train_correct": 0, "train_total": 2, "score": 0.8974, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "d47aa2ff", "program": "[[\"overlay_cells\",\"stack\"]]", "train_correct": 0, "train_total": 3, "score": 0.9667, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "e99362f0", "program": "[[\"overlay_cells\",\"stack_rev\"],[\"extend_from\",\"4multi\",\"pred\",\"pred_63957277\",{\"scope\":\"object\",\"sel\":[\"nearest_same_color\",\"4multi\"],\"prop\":\"dir8_to\"}]]", "train_correct": 0, "train_total": 6, "score": 0.7083, "says": "near miss on an unsolved task"}

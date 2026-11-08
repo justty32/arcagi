@@ -5,7 +5,7 @@
   "cost": 1,
   "doc": "Generated integer formula [\"lin\", \"n_shape\", 1, 1]",
   "status": "live",
-  "counter_uses": 2,
+  "counter_uses": 3,
   "generator": "_gen/formula",
   "score": 4,
   "length": 2,

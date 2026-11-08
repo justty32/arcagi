@@ -1,1 +1,2 @@
 {"epoch": 0, "from": "pool", "task": "5783df64", "program": "[[\"rot270\"],[\"crop_object\",\"8multi\",\"smallest\"],[\"upscale\",3,3]]", "score": 0.1111, "train_correct": 0, "train_total": 3, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "7c9b52a0", "program": "[[\"rot270\"],[\"m_sub_133be74a\",\"8multi\",\"most_colors\"],[\"anti_transpose\"]]", "train_correct": 0, "train_total": 3, "score": 0.625, "says": "near miss on an unsolved task"}

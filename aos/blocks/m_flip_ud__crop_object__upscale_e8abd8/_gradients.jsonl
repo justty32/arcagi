@@ -6,3 +6,5 @@
 {"epoch": 3, "from": "pool", "task": "ca8de6ea", "program": "[[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "train_correct": 0, "train_total": 3, "score": 0.2222, "says": "near miss on an unsolved task"}
 {"epoch": 4, "from": "pool", "task": "c8b7cc0f", "program": "[[\"flip_lr\"],[\"crop_object\",\"4same\",\"largest\"],[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "train_correct": 0, "train_total": 3, "score": 0.5556, "says": "near miss on an unsolved task"}
 {"epoch": 4, "from": "pool", "task": "ca8de6ea", "program": "[[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "train_correct": 0, "train_total": 3, "score": 0.2222, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "c8b7cc0f", "program": "[[\"m_sub_133be74a\",\"4same\",\"largest\"],[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "train_correct": 0, "train_total": 3, "score": 0.5556, "says": "near miss on an unsolved task"}
+{"epoch": 5, "from": "pool", "task": "ca8de6ea", "program": "[[\"m_flip_ud__crop_object__upscale_e8abd8\"]]", "train_correct": 0, "train_total": 3, "score": 0.2222, "says": "near miss on an unsolved task"}

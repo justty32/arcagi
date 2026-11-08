@@ -39,6 +39,10 @@ for _module, _table, _kind in (
 from arcagi.objrule import OBJRULE_PRIMS  # noqa: E402
 
 ALL.update(OBJRULE_PRIMS)
+# Side line S1 registration point (dsl/ext/); built-ins take priority.
+from .ext import EXT_PRIMS  # noqa: E402
+
+ALL.update({k: v for k, v in EXT_PRIMS.items() if k not in ALL})
 # Object selectors widen the tree a lot; they are only tried as the first step.
 FIRST_STEP_ONLY = frozenset(OBJECTS)
 

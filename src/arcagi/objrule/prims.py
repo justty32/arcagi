@@ -97,3 +97,7 @@ OBJRULE_PRIMS: dict[str, Primitive] = {
         Primitive("move_by", param_source.move_by, param_source.candidates),
     )
 }
+# Side line S3 registration point (objrule/families/); built-ins take priority.
+from .families import FAMILY_PRIMS  # noqa: E402
+
+OBJRULE_PRIMS.update({k: v for k, v in FAMILY_PRIMS.items() if k not in OBJRULE_PRIMS})
