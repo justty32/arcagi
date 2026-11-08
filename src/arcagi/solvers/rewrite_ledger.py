@@ -2,8 +2,10 @@
 
 ``tried`` counts evaluated candidates per rule, ``hits`` counts train-consistent
 programs per rule (a two-edit program credits both of its rules), ``macros``
-counts macro names inside hit programs. ``to_json`` goes into the trace
-metadata (``rewrite``) so a later epoch can pay out per rule.
+counts macro names inside hit programs. ``seed_iou`` is the best seed's
+foreground IoU; ``gated`` means it fell below ``gate`` and nothing was edited.
+``to_json`` goes into the trace metadata (``rewrite``) so a later epoch can pay
+out per rule.
 """
 
 from collections import Counter
@@ -23,6 +25,9 @@ class RewriteLedger:
     seconds: float = 0.0
     out_of_budget: bool = False
     solved: bool = False
+    gate: float = 0.0
+    seed_iou: float | None = None
+    gated: bool = False
 
     def try_(self, rules: tuple[str, ...]) -> None:
         self.candidates += 1
@@ -44,6 +49,9 @@ class RewriteLedger:
             "seconds": round(self.seconds, 3),
             "out_of_budget": self.out_of_budget,
             "solved": self.solved,
+            "gate": self.gate,
+            "seed_iou": None if self.seed_iou is None else round(self.seed_iou, 4),
+            "gated": self.gated,
         }
 
 

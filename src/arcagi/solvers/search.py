@@ -2,7 +2,7 @@
 
 Programs up to ``MAX_DEPTH`` steps, deduplicated by observational equivalence,
 terminal learners on every node; the first solved depth wins, cheapest first
-(votes break ties). If none fits, ``solvers.rewrite`` edits the near misses.
+(votes break ties). If none fits, ``ARCAGI_REWRITE=1`` rewrites near misses.
 """
 
 import heapq
@@ -34,9 +34,9 @@ MAX_NODES = 100000
 MAX_SOLUTIONS = 200  # whole first solved depth, capped
 MAX_RECORDED = 30  # program attempts written to the trace
 MAX_NEAR = 20
-PENALIZED = frozenset({"local_rule"})
+PENALIZED = frozenset({"local_rule", "x_vrule"})  # x_vrule: S1 (D-r6-11)
 SOLVER_NAME = "dsl-search-r05"
-REWRITE = os.environ.get("ARCAGI_REWRITE", "1") != "0"  # True unless env says 0
+REWRITE = os.environ.get("ARCAGI_REWRITE", "0") != "0"  # opt-in since r06
 DEFER_GRACE = 5.0  # extra seconds for deferred learner fits after the deadline
 
 

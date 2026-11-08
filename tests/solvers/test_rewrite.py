@@ -1,5 +1,7 @@
 """Rewrite search: rules, gates, budget, and the search.py hook."""
 
+import os
+
 from arcagi.dsl import grid as g
 from arcagi.solvers import rewrite, search
 from arcagi.solvers.rewrite import Budget
@@ -104,6 +106,7 @@ def test_solve_tags_rewrite_and_records_ledger(monkeypatch) -> None:
         return result
 
     monkeypatch.setattr(search, "search", no_bfs)
+    monkeypatch.setattr(search, "REWRITE", True)  # opt-in since r06
     task = _task(lambda grid: g.rot90(g.flip_lr(grid))).to_solver_task()
     result = search.solve(task)
     trace = validate_trace(result.trace)
@@ -114,3 +117,40 @@ def test_solve_tags_rewrite_and_records_ledger(monkeypatch) -> None:
     monkeypatch.setattr(search, "REWRITE", False)
     off = validate_trace(search.solve(task).trace)
     assert off["metadata"]["rewrite"] is None and off["selected"] is None
+
+
+def test_gate_skips_low_iou_seeds() -> None:
+    task = _task(lambda grid: g.rot90(g.flip_lr(grid))).to_solver_task()
+    seeds = [(), (("flip_lr",), ("flip_ud",))]
+    ledger = RewriteLedger()
+    assert rewrite.search(task, seeds, ledger=ledger, gate=1.01) == []
+    assert ledger.gated and ledger.candidates == 0
+    assert ledger.seed_iou is not None and ledger.seed_iou < 1.01
+    open_ledger = RewriteLedger()
+    assert rewrite.search(task, seeds, ledger=open_ledger, gate=0.0)
+    assert not open_ledger.gated and open_ledger.seed_iou == ledger.seed_iou
+
+
+def test_rescue_records_gate_in_trace(monkeypatch) -> None:
+    def no_bfs(task, **_kw):
+        result = search.SearchResult()
+        result.near.append((0.5, 1, (("flip_lr",), ("flip_ud",)), [False, False]))
+        return result
+
+    monkeypatch.setattr(search, "search", no_bfs)
+    monkeypatch.setattr(search, "REWRITE", True)
+    monkeypatch.setattr(rewrite, "GATE_IOU", 1.01)
+    task = _task(lambda grid: g.rot90(g.flip_lr(grid))).to_solver_task()
+    trace = validate_trace(search.solve(task).trace)
+    ledger = trace["metadata"]["rewrite"]
+    assert ledger["gated"] is True and ledger["gate"] == 1.01
+    assert ledger["solved"] is False and ledger["candidates"] == 0
+    assert isinstance(ledger["seed_iou"], float)
+    assert trace["selected"] is None
+
+
+def test_rewrite_and_gate_are_opt_in() -> None:
+    if "ARCAGI_REWRITE" not in os.environ:
+        assert search.REWRITE is False
+    if "ARCAGI_REWRITE_GATE" not in os.environ:
+        assert rewrite.GATE_IOU == 0.0

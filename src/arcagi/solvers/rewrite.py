@@ -9,8 +9,13 @@ differ). Only train pairs are checked (all of them must match). The first
 level with a solution wins, so fewer edits beat shorter programs;
 ``vote.choose`` then ranks by cost. Guards against memorising: no >=3x3
 literal grid parameters; at most one per-object rule step, and only last.
+
+Optional gate (``rescue`` only): with ``ARCAGI_REWRITE_GATE=x`` the search runs
+only when the best seed's foreground IoU (the score above) reaches x; otherwise
+the ledger records the skip and the score. Default 0 = always run.
 """
 
+import os
 import time
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -27,6 +32,10 @@ from .rewrite_rules import RULES, has_literal_grid, objrule_misplaced
 MAX_LEN = 5
 MAX_SOLUTIONS = 50
 CACHE_LIMIT = 50000
+# Suggested 0.75: r05 training rewrite solves had best seed IoU 0.865
+# (feca6190) and 0.833 (239be575); 0.75 keeps both and skips ~88% of r05
+# rewrite runs. Off by default: calibrated on n=2 solved tasks.
+GATE_IOU = float(os.environ.get("ARCAGI_REWRITE_GATE", "0"))
 
 type Found = tuple[float, Program, list[Grid]]
 
@@ -94,7 +103,14 @@ class _Context:
 
 
 class _Rewriter:
-    def __init__(self, task: SolverTask, budget: Budget, ledger: RewriteLedger):
+    def __init__(
+        self,
+        task: SolverTask,
+        budget: Budget,
+        ledger: RewriteLedger,
+        gate: float = 0.0,
+    ):
+        self.gate = gate
         self.ctx = _Context(task)
         self.budget = budget
         self.ledger = ledger
@@ -189,6 +205,10 @@ class _Rewriter:
                 frontier.append((self._accuracy(train) or 0.0, seed, ()))
         # Best foreground score first; [] is one seed but never crowds others out.
         frontier.sort(key=lambda f: (-f[0], len(f[1]) == 0))
+        self.ledger.seed_iou = frontier[0][0] if frontier else 0.0
+        if self.ledger.seed_iou < self.gate:
+            self.ledger.gated = True
+            return []
         empty = [f for f in frontier if not f[1]]
         frontier = [f for f in frontier if f[1]][: self.budget.seeds - len(empty)]
         frontier += empty
@@ -209,32 +229,36 @@ def search(
     seeds: Sequence[Program],
     budget: Budget | None = None,
     ledger: RewriteLedger | None = None,
+    gate: float = 0.0,
 ) -> list[Found]:
     """Train-consistent rewrites of ``seeds``: (cost, program, test outputs).
 
     Only the fewest-edit level that has any solution is returned, cheapest first.
+    Nothing is edited (``ledger.gated``) when the best seed scores below ``gate``.
     """
     ledger = ledger if ledger is not None else RewriteLedger()
     start = time.perf_counter()
     grids = [e.input for e in task.train] + [e.output for e in task.train]
     with bgc.task_context(bgc.task_background(grids)):
-        found = _Rewriter(task, budget or Budget(), ledger).run(seeds)
+        found = _Rewriter(task, budget or Budget(), ledger, gate).run(seeds)
     ledger.seconds = time.perf_counter() - start
     ledger.solved = bool(found)
     return found
 
 
-def rescue(task: SolverTask, result) -> RewriteLedger:
+def rescue(task: SolverTask, result, gate: float | None = None) -> RewriteLedger:
     """Seed with ``[]`` plus the best near misses of a BFS ``SearchResult``;
     append rewritten solutions to ``result.solutions`` with negative orders.
+    ``gate`` defaults to ``GATE_IOU`` (see the module docstring).
     """
     ranked = [entry[2] for entry in result.near]
     seeds = [(), *ranked]  # ranked, deduplicated and capped by ``search``
     ledger = RewriteLedger()
-    found = search(task, seeds, ledger=ledger)
+    ledger.gate = GATE_IOU if gate is None else gate
+    found = search(task, seeds, ledger=ledger, gate=ledger.gate)
     for i, (cost_value, program, tests) in enumerate(found):
         result.solutions.append((cost_value, i - len(found), program, tests))
     return ledger
 
 
-__all__ = ["Budget", "rescue", "search"]
+__all__ = ["GATE_IOU", "Budget", "rescue", "search"]
