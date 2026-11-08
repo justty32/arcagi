@@ -1,0 +1,21 @@
+# S2 20-task evaluation list: unsolved by dsl-search-r04, no train-passing program; 10 same-shape + 10 other, random.Random(20261108)
+05a7bcf2
+37d3e8b2
+50a16a69
+551d5bf1
+639f5a19
+79369cc6
+94414823
+94be5b80
+ca8f78db
+e9ac8c9e
+00576224
+2037f2c7
+2697da3f
+695367ec
+81c0276b
+8ba14f53
+94133066
+af24b4cc
+e633a9e5
+e7a25a18
