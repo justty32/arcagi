@@ -17,6 +17,7 @@
 - **使用者 11-08 17:15 看板裁 arcagi-20261108165249-3c56 選 A**（原信 wf/inbox/done/20261108T1715-aos-PROGRESS.md）：r07 代定 D-r7-7（transpose 留空樹主基準）、D-r7-13／14（演繹分解、list 長度常數算通用優化器）、D-r7-15（正式入口 gated）轉為已定；r08 不另做無 transpose 主基準。
 - **S3 第一任已收**（15:43）：families 06f6779 讓純 Python search evaluation 39→44（同大小 15→19，退步 0）、training 95→130；ledger 已核寫。給 S2 的話（S2 已收線，記此備查）：families 的 conn 參數可寫 `"4same@5"`（以 5 當背景重抽物件）或 `"group"`（同色全算一物件），實作在 `objrule/families/scope.py`。仍過 train 答錯：training 60b61512、d687bc17、10fcaaa3；evaluation e7dd8335。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
+  - **11-08 起（使用者交代，主 session 轉）**：arcagi 與 aos 頂層改用 SendMessage（a2a）直接互傳——給 aos 的 PROGRESS、請 Argon 審的稿、給 S1 的回信都 SendMessage to `aos-28`（S1 的由它轉 S1 隊長）；內容照舊完整（結論先、附絕對路徑）。a2a 送不出去才退回 `inbox_send.sh`。論壇發帖照舊。
 
 - **支線**（aos 人力加入後可並行的工作，路徑劃清）→ [支線.md](支線.md)。
 
