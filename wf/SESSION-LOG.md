@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] r07 已收（commit 131881a；AUC_L 空樹 16～分解 32、gated eval 57/400、過 train 答錯 eval 29→10）；11-08 主 session 派 r08 隊長（冷啟動：training 其餘題當壓縮料、預算遞增、補通用表達力）→ 產物 notes/rounds/r08/
+- [rounds] r08 已收（commit c80c6ac；練習池 32 題主樹 AUC_L 32 無增量、foot32 學到 8 積木但 L16 降、gated eval 56/400）；r09 主方向＝使用者晚間 7 條，等 aos alt-fable Q7「錘子設計圖 v1」來信再派隊長 → notes/rounds/README.md
 
 ## 各工作流 session-log
 
