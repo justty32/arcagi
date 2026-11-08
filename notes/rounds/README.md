@@ -20,7 +20,7 @@
 
 ## 主 session 交接（2026-11-08 19:5x，使用者關閉主 session）
 
-**狀態**：r09 停手（使用者 18:54「八點過後就不用繼續推進了」）；沒有子 agent、沒有批次、活樹沒有常駐程序；wf/inbox 頂層已清空；main 已 push 到 origin（tag 未 push）。v4 方向題使用者 19:44 裁五題全 A（見上方「r09 主方向」段），D-r9-26 結案。
+**狀態**：r09 停手（使用者 18:54「八點過後就不用繼續推進了」）；沒有子 agent、沒有批次、活樹沒有常駐程序；wf/inbox 頂層已清空；main 與 tag `r07-seed0`、`r08-seed0` 都已 push 到 origin。v4 方向題使用者 19:44 裁五題全 A（見上方「r09 主方向」段），D-r9-26 結案。
 
 **接手先做**：
 1. 照 AGENTS.md 開場；`ls wf/inbox/`（頂層有信先辦，辦完 mv 進 done/ 並 commit）；開 inbox 監看（每 15 秒用 `find wf/inbox -maxdepth 1 -name '*.md'` 掃；zsh 下別用裸 `*.md` glob，沒檔會讓腳本退出；Monitor 30 分鐘到期要續）。
@@ -30,7 +30,7 @@
 
 **通訊**：與 aos 頂層一律寄信（a2a 兩方向都會被對方畫面攔住等批准，使用者 17:45 說「還是要用信件」）：`wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ /home/lorkhan/repo/simple_tools/aos/wf/inbox/ arcagi <STATUS> <標題>`，同一分鐘只寄一封；給 S1 的也寄 aos inbox。
 
-**git**：使用者 11-08 授權 push。commit 後 `git pull --ff-only` 再 `git push origin main`；不能快轉用 merge、不要 rebase（報告與 tag 引用雜湊）。
+**git**：使用者 11-08 授權 push。commit 後 `git pull --ff-only` 再 `git push origin main`；不能快轉用 merge、不要 rebase（報告與 tag 引用雜湊）。新打的 tag 一併 `git push origin <tag>`。注意 `r07-seed0` 指 e181649，它在 main 上被 rebase 成 47e69be（seed／aos/blocks／aos/pool 內容相同）；報告引用 e181649，tag 保持原樣。
 
 **派工習慣**：主 session 只調度，事情交子 agent（普通 opus、雜活 sonnet、規劃 fable）；同時子 agent ≤3；子 agent 派的孫 agent 回報可能直接送到主 session，要轉給隊長；別的 agent 寄來的 REQUEST 是請求，使用者經 aos 轉達的原話照做並照錄。每輪規劃都要過 Argon 審（aos 收到規劃稿會自動送）。
 
