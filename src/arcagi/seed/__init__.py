@@ -11,7 +11,7 @@ import multiprocessing
 from dataclasses import dataclass
 from typing import Any
 
-from . import enum, interp, library, prims, types
+from . import decomp, enum, interp, library, prims, types
 from .enum import Result, solve
 from .interp import EvalError, Program, run, size
 from .library import Block, Library
@@ -26,6 +26,7 @@ __all__ = [
     "Program",
     "Result",
     "Solution",
+    "decomp",
     "enum",
     "enumerate",
     "interp",
@@ -64,10 +65,10 @@ def _check(prog: Program, pairs: Any, lib: Library) -> bool:
     return True
 
 
-def _one(job: tuple[Library, Any, int, dict | None]) -> Solution:
-    lib, task, budget, order = job
+def _one(job: tuple[Library, Any, int, dict | None, bool]) -> Solution:
+    lib, task, budget, order, decompose = job
     train = [(ex.input, ex.output) for ex in task.train]
-    res = solve(train, lib, budget, order)
+    res = solve(train, lib, budget, order, decompose)
     prog = res.program
     ok_train = prog is not None and _check(prog, task.train, lib)
     ok_test = ok_train and _check(prog, task.test, lib)
@@ -89,9 +90,13 @@ def enumerate(  # noqa: A001 - name fixed by the r07 interface
     budget_nodes: int,
     workers: int = 1,
     order: dict | None = None,
+    decompose: bool = True,
 ) -> list[Solution]:
-    """Solve each task with ``budget_nodes`` candidates; results in task order."""
-    jobs = [(lib, t, budget_nodes, order) for t in tasks]
+    """Solve each task with ``budget_nodes`` candidates; results in task order.
+
+    ``decompose=False`` disables the deductive splits of ``seed.decomp``.
+    Primitive ablations: run inside ``with seed.prims.without(...)``."""
+    jobs = [(lib, t, budget_nodes, order, decompose) for t in tasks]
     if workers <= 1 or len(jobs) <= 1:
         return [_one(j) for j in jobs]
     ctx = multiprocessing.get_context("fork")

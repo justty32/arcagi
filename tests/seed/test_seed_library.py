@@ -129,7 +129,9 @@ def test_blocks_cost_one_node():
     assert res.program == ("blk", "b_rot2")
     en = Enumerator(train, Library([LR]), 10**9)
     en.bank.append({})
-    for prog, typ, vals in leaf_entries(en.lib, en.xs, en.consts, en._run_expanded):
+    for prog, typ, vals in leaf_entries(
+        en.lib, en.xs, en.in_type, en.consts, en._run_expanded
+    ):
         en._offer(1, prog, typ, vals)
     en.bank.append({})
     for op in en.ops:
