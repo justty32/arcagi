@@ -69,6 +69,18 @@ class Catalog:
                     found[name] = body
         return found
 
+    def rules(self, kind: str) -> dict[str, Any]:
+        """Live blocks of ``kind`` (e.g. formula, extract): name -> ``_rule.json``."""
+        found: dict[str, Any] = {}
+        for name, block in sorted(self.blocks.items()):
+            if block.kind != kind or block.status != "live":
+                continue
+            try:
+                found[name] = json.loads((block.path / "_rule.json").read_text())
+            except (OSError, ValueError):
+                continue
+        return found
+
 
 def load_macro_program(folder: Path) -> Program | None:
     try:

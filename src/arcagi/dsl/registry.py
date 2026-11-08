@@ -6,6 +6,8 @@ add macro primitives (fixed JSON sub-programs) and live predicates (object
 selectors). Without that folder the registry is exactly the Python tables.
 """
 
+import importlib
+
 from arcagi.blocks.catalog import load_catalog
 
 from . import predicates
@@ -17,6 +19,21 @@ from .primitives_more import MORE
 ALL: dict[str, Primitive] = {**BASE, **MORE, **CELLS, **OBJECTS}
 CATALOG = load_catalog()
 predicates.install(CATALOG.predicates())  # live pred blocks become selectors
+
+# Round 3: formula / extract generated blocks feed parameterised primitives.
+for _module, _table, _kind in (
+    ("formula_prims", "FORMULA_PRIMS", "formula"),
+    ("extract_prims", "EXTRACT_PRIMS", "extract"),
+):
+    try:
+        _mod = importlib.import_module(f"{__package__}.{_module}")
+    except ModuleNotFoundError as _err:
+        if _err.name != f"{__package__}.{_module}":
+            raise
+        continue
+    if hasattr(_mod, "install"):
+        _mod.install(CATALOG.rules(_kind))
+    ALL.update(getattr(_mod, _table))
 # Object selectors widen the tree a lot; they are only tried as the first step.
 FIRST_STEP_ONLY = frozenset(OBJECTS)
 
