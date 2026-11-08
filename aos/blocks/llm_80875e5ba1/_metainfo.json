@@ -4,7 +4,7 @@
   "doc": "LLM candidate 80875e5ba1 (transform) [[\"symmetrize\",\"both\",4],[\"symmetrize\",\"transpose\",4]]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/llm",
   "source": "llm",
@@ -26,5 +26,6 @@
   "shadow": {
     "synth_ok": 1,
     "synth_frac": 1.0
-  }
+  },
+  "note": "r06 D-r6-12: macro with training support 1 kept out of BFS"
 }

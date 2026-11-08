@@ -4,7 +4,7 @@
   "doc": "LLM candidate 28d1efd575 (transform) [[\"flip_lr\"],[\"resize_crop\",[\"const\",3],[\"const\",3]],[\"flip_lr\"]]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/llm",
   "source": "llm",
@@ -26,5 +26,6 @@
   "shadow": {
     "synth_ok": 1,
     "synth_frac": 1.0
-  }
+  },
+  "note": "r06 D-r6-12: macro with training support 1 kept out of BFS"
 }
