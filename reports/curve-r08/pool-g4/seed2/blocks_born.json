@@ -1,0 +1,320 @@
+[
+ {
+  "body": [
+   "repeat",
+   3,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 0,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_82c739c4e2",
+  "saving": 5.0,
+  "sig": "(a) -> list[a]",
+  "src_tasks": [
+   "6f8cd79b~near",
+   "995c5fa3~near",
+   "a740d043~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   3,
+   [
+    "repeat",
+    [
+     "$h0"
+    ],
+    [
+     "$h1"
+    ]
+   ]
+  ],
+  "born": 0,
+  "holes": 2,
+  "idle": 0,
+  "name": "g1_2119d64b73",
+  "saving": 1.0,
+  "sig": "(int, a) -> list[list[a]]",
+  "src_tasks": [
+   "995c5fa3~near",
+   "a740d043~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   4,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 0,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_1a40b22956",
+  "saving": 1.0,
+  "sig": "(a) -> list[a]",
+  "src_tasks": [
+   "ce4f8723~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "transpose",
+   [
+    "$in"
+   ]
+  ],
+  "born": 1,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_0652240849",
+  "saving": 2.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "1e0a9b12",
+   "beb8660c~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "sort",
+   [
+    "transpose",
+    [
+     "$h0"
+    ]
+   ]
+  ],
+  "born": 1,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_d417bb28c8",
+  "saving": 1.0,
+  "sig": "(list[list[a]]) -> list[list[a]]",
+  "src_tasks": [
+   "beb8660c~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   3,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 3,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_82c739c4e2",
+  "saving": 5.0,
+  "sig": "(a) -> list[a]",
+  "src_tasks": [
+   "6f8cd79b~near",
+   "995c5fa3~near",
+   "a740d043~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   3,
+   [
+    "repeat",
+    [
+     "$h0"
+    ],
+    [
+     "$h1"
+    ]
+   ]
+  ],
+  "born": 3,
+  "holes": 2,
+  "idle": 0,
+  "name": "g1_2119d64b73",
+  "saving": 1.0,
+  "sig": "(int, a) -> list[list[a]]",
+  "src_tasks": [
+   "995c5fa3~near",
+   "a740d043~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "transpose",
+   [
+    "$in"
+   ]
+  ],
+  "born": 4,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_0652240849",
+  "saving": 2.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "1e0a9b12",
+   "beb8660c~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   4,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 4,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_1a40b22956",
+  "saving": 1.0,
+  "sig": "(a) -> list[a]",
+  "src_tasks": [
+   "ce4f8723~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "sort",
+   [
+    "transpose",
+    [
+     "$h0"
+    ]
+   ]
+  ],
+  "born": 4,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_d417bb28c8",
+  "saving": 1.0,
+  "sig": "(list[list[a]]) -> list[list[a]]",
+  "src_tasks": [
+   "beb8660c~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   3,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 6,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_82c739c4e2",
+  "saving": 5.0,
+  "sig": "(a) -> list[a]",
+  "src_tasks": [
+   "6f8cd79b~near",
+   "995c5fa3~near",
+   "a740d043~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   3,
+   [
+    "repeat",
+    [
+     "$h0"
+    ],
+    [
+     "$h1"
+    ]
+   ]
+  ],
+  "born": 6,
+  "holes": 2,
+  "idle": 0,
+  "name": "g1_2119d64b73",
+  "saving": 1.0,
+  "sig": "(int, a) -> list[list[a]]",
+  "src_tasks": [
+   "995c5fa3~near",
+   "a740d043~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "transpose",
+   [
+    "$in"
+   ]
+  ],
+  "born": 7,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_0652240849",
+  "saving": 2.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "1e0a9b12",
+   "beb8660c~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "repeat",
+   4,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 7,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_1a40b22956",
+  "saving": 1.0,
+  "sig": "(a) -> list[a]",
+  "src_tasks": [
+   "ce4f8723~near"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "sort",
+   [
+    "transpose",
+    [
+     "$h0"
+    ]
+   ]
+  ],
+  "born": 7,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_d417bb28c8",
+  "saving": 1.0,
+  "sig": "(list[list[a]]) -> list[list[a]]",
+  "src_tasks": [
+   "beb8660c~near"
+  ],
+  "uses": 0
+ }
+]

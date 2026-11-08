@@ -1,0 +1,252 @@
+[
+ {
+  "kind": "r08",
+  "time": "2026-11-08T17:31:36",
+  "round": 1,
+  "knob": "lam_depth",
+  "before": 2,
+  "after": 1,
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "note": "r08 line B meta: CRN capped logcost_L, paired task bootstrap, Gaussian Thompson (D-r8-3, D-r8-10)",
+  "logcost_before_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "logcost_after_seeds": [
+   738.435,
+   738.435,
+   738.435,
+   738.435,
+   738.435
+  ],
+  "auc_before_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "auc_after_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "accepted": false,
+  "mean_drop": 0.002,
+  "se": 0.002,
+  "reward": 1.0,
+  "not_worse": 5,
+  "cost_s": 79.7
+ },
+ {
+  "kind": "r08",
+  "time": "2026-11-08T17:33:03",
+  "round": 2,
+  "knob": "m",
+  "before": 3,
+  "after": 2,
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "note": "r08 line B meta: CRN capped logcost_L, paired task bootstrap, Gaussian Thompson (D-r8-3, D-r8-10)",
+  "logcost_before_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "logcost_after_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "auc_before_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "auc_after_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "accepted": false,
+  "mean_drop": 0.0,
+  "se": 0.0,
+  "reward": 0.0,
+  "not_worse": 5,
+  "cost_s": 87.1
+ },
+ {
+  "kind": "r08",
+  "time": "2026-11-08T17:34:30",
+  "round": 3,
+  "knob": "k",
+  "before": 2.0,
+  "after": 3.0,
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "note": "r08 line B meta: CRN capped logcost_L, paired task bootstrap, Gaussian Thompson (D-r8-3, D-r8-10)",
+  "logcost_before_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "logcost_after_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "auc_before_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "auc_after_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "accepted": false,
+  "mean_drop": 0.0,
+  "se": 0.0,
+  "reward": 0.0,
+  "not_worse": 5,
+  "cost_s": 87.1
+ },
+ {
+  "kind": "r08",
+  "time": "2026-11-08T17:35:57",
+  "round": 4,
+  "knob": "sub_lam_depth",
+  "before": null,
+  "after": 3,
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "note": "r08 line B meta: CRN capped logcost_L, paired task bootstrap, Gaussian Thompson (D-r8-3, D-r8-10)",
+  "logcost_before_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "logcost_after_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "auc_before_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "auc_after_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "accepted": false,
+  "mean_drop": 0.0,
+  "se": 0.0,
+  "reward": 0.0,
+  "not_worse": 5,
+  "cost_s": 87.3
+ },
+ {
+  "kind": "r08",
+  "time": "2026-11-08T17:37:17",
+  "round": 5,
+  "knob": "lam_depth",
+  "before": 2,
+  "after": 1,
+  "seeds": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "note": "r08 line B meta: CRN capped logcost_L, paired task bootstrap, Gaussian Thompson (D-r8-3, D-r8-10)",
+  "logcost_before_seeds": [
+   738.438,
+   738.438,
+   738.438,
+   738.438,
+   738.438
+  ],
+  "logcost_after_seeds": [
+   738.435,
+   738.435,
+   738.435,
+   738.435,
+   738.435
+  ],
+  "auc_before_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "auc_after_seeds": [
+   12,
+   12,
+   12,
+   12,
+   12
+  ],
+  "accepted": false,
+  "mean_drop": 0.002,
+  "se": 0.002,
+  "reward": 1.0,
+  "not_worse": 5,
+  "cost_s": 79.8
+ }
+]

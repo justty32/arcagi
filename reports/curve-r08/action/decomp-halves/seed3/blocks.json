@@ -1,0 +1,91 @@
+[
+ {
+  "body": [
+   "reverse",
+   [
+    "$in"
+   ]
+  ],
+  "born": 0,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_019b408846",
+  "saving": 12.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "496994bd",
+   "68b16354",
+   "ce4f8723",
+   "f25ffba3"
+  ],
+  "uses": 3
+ },
+ {
+  "body": [
+   "drop",
+   5,
+   [
+    "reverse",
+    [
+     "$in"
+    ]
+   ]
+  ],
+  "born": 0,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_5155638a35",
+  "saving": 8.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "496994bd",
+   "ce4f8723"
+  ],
+  "uses": 6
+ },
+ {
+  "body": [
+   "take",
+   5,
+   [
+    "reverse",
+    [
+     "$in"
+    ]
+   ]
+  ],
+  "born": 0,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_fb2d62800d",
+  "saving": 4.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "f25ffba3"
+  ],
+  "uses": 6
+ },
+ {
+  "body": [
+   "take",
+   4,
+   [
+    "reverse",
+    [
+     "$in"
+    ]
+   ]
+  ],
+  "born": 3,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_13411ba1ce",
+  "saving": 4.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "6430c8c4",
+   "ce4f8723"
+  ],
+  "uses": 0
+ }
+]

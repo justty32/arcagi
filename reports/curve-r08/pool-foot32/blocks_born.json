@@ -1,0 +1,195 @@
+[
+ {
+  "body": [
+   "map",
+   [
+    "lam",
+    1,
+    [
+     "append",
+     [
+      "$0"
+     ],
+     [
+      "reverse",
+      [
+       "$0"
+      ]
+     ]
+    ]
+   ],
+   [
+    "$in"
+   ]
+  ],
+  "born": 0,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_2ff25d9c21",
+  "saving": 7.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "6d0aefbc",
+   "c9e6f938"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "reverse",
+   [
+    "$in"
+   ]
+  ],
+  "born": 0,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_019b408846",
+  "saving": 6.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "4c4377d9",
+   "68b16354",
+   "6fa7a44f",
+   "8be77c9e"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "transpose",
+   [
+    "$in"
+   ]
+  ],
+  "born": 0,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_0652240849",
+  "saving": 6.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "1e0a9b12",
+   "74dd1130",
+   "9dfd6313",
+   "ed36ccf7"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "transpose",
+   [
+    "reverse",
+    [
+     "blk",
+     "g1_0652240849"
+    ]
+   ]
+  ],
+  "born": 1,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_6b6baf343b",
+  "saving": 6.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "3c9b0459",
+   "6150a2bd",
+   "67a3c6ac"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "reverse",
+   [
+    "blk",
+    "g1_0652240849"
+   ]
+  ],
+  "born": 1,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_e6ba9d8a6f",
+  "saving": 6.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "3c9b0459",
+   "6150a2bd",
+   "67a3c6ac",
+   "ed36ccf7"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "append",
+   [
+    "blk",
+    "g1_2ff25d9c21"
+   ],
+   [
+    "reverse",
+    [
+     "blk",
+     "g1_2ff25d9c21"
+    ]
+   ]
+  ],
+  "born": 1,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_996048a4bc",
+  "saving": 4.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "62c24649",
+   "67e8384a"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "append",
+   [
+    "$in"
+   ],
+   [
+    "blk",
+    "g1_019b408846"
+   ]
+  ],
+  "born": 2,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_0392d6a5b1",
+  "saving": 3.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "6fa7a44f",
+   "8be77c9e"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "reverse",
+   [
+    "blk",
+    "g1_6b6baf343b"
+   ]
+  ],
+  "born": 2,
+  "holes": 0,
+  "idle": 0,
+  "name": "g1_ab1fc6264d",
+  "saving": 2.0,
+  "sig": "list[list[int]]",
+  "src_tasks": [
+   "3c9b0459",
+   "6150a2bd"
+  ],
+  "uses": 0
+ }
+]
