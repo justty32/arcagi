@@ -12,7 +12,7 @@
 
 ## 結論
 
-fable 的 r09 規劃將後端全面換成 [`arcbatch`](file:///home/lorkhan/repo/arcagi/native/bin/arcbatch)、延後鍛造爐與園區快取以保半天收輪，取捨務實。但現行 [`02-規劃-fable.md`](file:///home/lorkhan/repo/arcagi/notes/rounds/r09/02-規劃-fable.md) 與 [`03-設計.md`](file:///home/lorkhan/repo/arcagi/notes/rounds/r09/03-設計.md) 存在**四個結構性破口**，不修就直接開工會導致「曲線假陽性、算力爆表或管線死鎖」：
+fable 的 r09 規劃將後端全面換成 [`arcbatch`](../../../native/bin/arcbatch)、延後鍛造爐與園區快取以保半天收輪，取捨務實。但現行 [`02-規劃-fable.md`](02-規劃-fable.md) 與 [`03-設計.md`](03-設計.md) 存在**四個結構性破口**，不修就直接開工會導致「曲線假陽性、算力爆表或管線死鎖」：
 1. **大鍋飯影子跑毒化歸因與速度**：全部 `incubating` 列混跑一鍋，既因 `halves`/`nest` 迫使整鍋（含 P48 高預算）退回慢速 Python，又無法歸因誰救題、誰擠掉已解題，且 `env_hash` 回滾會觸發 `dormant` 無窮復活。
 2. **內迴圈洩漏 H24＋元層算力超標 30 倍**：`gate-scan` 與 `sieve` 在篩選時直接看 H24 逾 50 次，把盲測底線刷成驗證集；240 個短 epoch 更讓元層算力反客為主，`ΔAUC_total` 必為負。
 3. **單蠟模帶題目常數零遷移**：逐段擬合出的閉合程式未抽離字面顏色／整數常數，既違背 v3 無菌鎖規範，跨題遷移率也趨近 0。
@@ -22,71 +22,7 @@ fable 的 r09 規劃將後端全面換成 [`arcbatch`](file:///home/lorkhan/repo
 
 ---
 
-## (A) 審查
-
-### 1. 盲點與風險（技術、量測／過擬合、成本）
-
-- **技術一：大鍋飯影子跑（Pooled Shadow）的退化與漏判**
-  `02` §5 步驟 ④ 把 `live` 與**所有** `incubating` 列混跑單一影子 pass：(a) 只要 `decomp:halves` 或 `nest` 在孵化（TTL 3 輪，且每次 `env_hash` 變動又復活），整個影子跑（含 P48 最高 400k 預算）就從 C++ `arcbatch` 退回 Python [`seed.enum.solve`](file:///home/lorkhan/repo/arcagi/src/arcagi/seed/enum.py)，不僅打破「8 epoch ≤5 分鐘」承諾，在 `rt_pool` 翻倍預算時更逼近 16G OOM 紅線；(b) 多條 `sieve/exclude` 與 `comb` 混跑時無法歸因，且**漏掉了 r08 交辦的「不擠掉已解題」檢查**——若新積木在 P48 多解 1 題卻把 L16 的 `beb8660c` 擠出 100k 預算，只要 H24 維持 1 題就不會觸發回滾，L16 將靜默退步。
-- **技術二：`env_hash` 回滾死迴圈**
-  `02` §1.1 規定「任何 `dormant` 列在 `env_hash` 變動時自動回 `incubating`、TTL 重設」。當某列 $X$ 在 epoch $n$ 升 `live`（`hash_0 → hash_1`），epoch $n+1$ 因 H24 退步被標為 `dormant` 並回滾題庫（`hash_1 → hash_0`），`env_hash` 再次變動（或下輪任一 `gate` 微調變動雜湊），剛被 `blamed_by:"h24"` 處死的 $X$ 會立刻復活重進孵化，造成反覆回滾震盪。
-- **技術三：單蠟模閉合常數與 `mdl_ok` 矛盾、短曲線卡死**
-  `02` §2 讓單一蠟模經 `seed-sub` 擬合出的 `g_i` 直接進 `comb`。但單題 `g_i` 常寫死題目專屬顏色或座標常數（無 `free_slots`），在 L16 上幾乎不可能跨題命中；且 G1 的多題壓縮門 `mdl_ok` 在出現次數 $m=1$ 時數學上恆不過（定義成本＋1 次呼叫 > 原長）。此外，若 `LTO-SCF∪` 的 A 折或測試曲線觸發 `stall=stop`，預設輪詢等待 30 分鐘會把自動化批次直接卡死。
-- **量測／過擬合：H24 在 `gate-scan` 與 `sieve` 被當成訓練集刷**
-  裁定 (5) 要求 H24 逐 epoch 不退，這已使 H24 從純盲測降格為外層熔斷校準集（`cal`）。但 `02` §4 竟在 `gate-scan`（20 變體）與 `sieve/exclude`（32 原語）的**內迴圈選拔**直接要求「且 H24 不退」，等於對 H24 洩漏逾 50 次查詢，隨後又在 `ΔAUC_total` 與 `M2(d)` 拿 `H8+H24` 當盲測指標，直接擊穿 v3 真值隔離矩陣。
-- **成本：`gate-scan` 元層算力是本體 30 倍**
-  `gate-scan` 跑 `20 變體 × 3 seed × 4 epoch = 240 短 epoch`，相當於主跑 8 epoch 的 **30 倍算力**。這不僅違反 v3「元層算力 ≤ 省下 50%」，一旦照 N10 計入 `ΔAUC_total` 橫軸，起點直接右移逾 1 個數量級，面積增益必為負值。
-
-### 2. 偏離使用者意見 1～8 與 v3 設計圖之處
-
-- **偏離意見 1、4 與 v3 A2（仍是固定管線披資料夾皮）**：[`ws/hammer/nodes/`](file:///home/lorkhan/code/playground-arc1/ws/hammer/nodes) 只有 `solve` 等 7 個寫死的靜態階段資料夾，拆解出的子目標與新算子並未長成獨立可定址節點。
-- **偏離意見 2（放棄低成本分層審查）**：意見 2 強調單純節點的審查應極度低廉。`gate_g1` 只是過濾既有解答的公式門，明明可先在已落盤的 `solutions.jsonl` 上做 0 成本離線預篩，規劃卻直接暴力重跑 240 輪 C++ 枚舉。
-- **偏離意見 7（活樹干預延遲與空殼回應）**：`ctl say` 對無 LLM 的 Python 節點只回制式檔案卻無語意動作；且當 daemon 卡在 epoch 邊界等鑄模（最長 30 分鐘）時不讀 `inbox/`，`ctl pause/say` 形同凍結。
-- **偏離 v3 N9（無菌鎖放行題目常數）**：v3 要求「反合一成不含題目常數的算子才准進無菌室」，單模直入卻保留了字面常數。
-
-### 3. 過度保守與過度複雜之處
-
-- **過度保守**：步 2 連現成 [`src/arcagi/seed/witness.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/seed/witness.py) 的 `witness_splits` 都砍掉，導致 `decomp` 全場只有 r08 手寫的 `halves`/`nest` 兩列；3 個 epoch 後 `rt_vsplit` 臂完全沒有新拆法可試，淪為空轉臂。
-- **過度複雜**：全場僅 **8 個 epoch** 卻實作 **4 臂 UCB＋50% `parent_route` 延遲分潤**。前 4 輪強制各拉一次暖機，延遲分潤又要等影子跑 2 輪才入帳，真正由 UCB 決策的只剩最後 1～2 輪，統計上純屬雜訊，卻耗費大量帳務程式碼。
-
-### 4. 驗收門檻（M0～M5）能否分辨真進步？
-
-**不能。現行 `M2`（四中二）存在 100% 無學習保送漏洞**：
-1. 預載進 `incubating` 的 `decomp:halves` 標記為 `by:"agent-r08"`（滿足 `by≠user`），在 r08 已知能讓 L16 從 4 題升至 6 題；換成 r09 兩段判準後第 1 輪必升 `live`，並把 `AUC_L` 拉到 46～48（`>32`）——**光靠 r08 舊手寫拆法就同時保送 `M2(a)` 與 `M2(d)`**。
-2. 32 個原語中必有當前已解題未用到的原語，`sieve/exclude` 在樣本內剔除它必然「0 掉題且減枝 ≥5%」，**自動保送 `M2(b)`**（卻可能暗殺盲測題所需原語）。
-3. 蠟模只要切出一段恆等或常數變換進 `incubating`（不必升 `live`），**自動保送 `M2(c)`**。
-
----
-
-## (B) 提案：最想改的 4 條高槓桿做法
-
-### 提案 1：快慢道隔離微影子＋補「不擠掉門」＋`tried_env_hashes`（步 4／5）
-- **檔案**：[`src/arcagi/hammer/epoch.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/epoch.py)、[`judge.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/judge.py)、[`formats.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/formats.py)
-- **步驟**：
-  1. 將 `epoch.py` 步驟 ④ 拆為兩道：**C++ 快道**只跑 `live + incubating comb`，由解答 AST 實際呼叫的 `op_id` 精確記 `evidence.new_solves`；**Python 慢道**（`decomp:halves/nest`）只在路由選中 `rt_vsplit` 時，針對**當輪 C++ 未解題子集**跑 `seed.enum.solve`（省去已解題重跑，記憶體與耗時砍半）。`sieve/exclude` 移出每輪大鍋飯，只在 `scan.py` 獨立驗。
-  2. 在 `judge.py` 升 `live` 前加**不擠掉門**：必須滿足 `Solved_L(shadow) ⊇ Solved_L(live)` 且共同已解題 `max(nodes_shadow / nodes_live) ≤ 2.0`。
-  3. 在 `formats.py` 將算子列改記集合 `tried_env_hashes: list[str]`：淘汰或 H24 回滾時寫入當前 `env_hash`，僅當 `current_env_hash ∉ tried_env_hashes` 才允許從 `dormant` 喚醒，根除回滾死迴圈。
-
-### 提案 2：單蠟模「常數抽槽」＋預設零等待與信箱熱輪詢（步 6）
-- **檔案**：[`src/arcagi/hammer/foundry.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/foundry.py)、[`epoch.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/epoch.py)
-- **步驟与門檻**：
-  1. `foundry.ingest()` 在 `seed-sub` 擬合出段程式 `g_i` 後，掃描 AST 中未同時出現在全部 train 輸入盤面的字面 `Color` 與非結構 `Int`（`∉ {-1,0,1,2}`），自動抽成帶型別槽位（`max_holes ≤ 2`），產出不含題目常數的 `comb` 候選，讓單一蠟模即具備跨題遷移力。
-  2. 入 `incubating` 門檻改用**段殘差壓縮門**：段輸入輸出差異 `info_bits ≥ 8`、`prog_bits(g_i) ≤ 0.6 × diff_bits` 且 `loo_ok` 全過；升 `live` 仍嚴守裁定 (2)。
-  3. `epoch.py` 預設 `foundry_wait_sec=0`（短曲線遇 `stop` 只寫請求檔不阻塞）；唯 `ctl run --daemon` 開啟等待，且等待迴圈每 5 秒同步檢查 `RUN` 與處理 `inbox/`，讓 `ctl stop/pause/add-op` 秒級生效。
-
-### 提案 3：`gate-scan` 離線等效去重＋將 H24 移出內迴圈（步 4／7）
-- **檔案**：[`src/arcagi/hammer/scan.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/scan.py)、[`sieve.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/sieve.py)、[`metrics.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/metrics.py)
-- **步驟與門檻**：
-  1. **快取預篩（落實意見 2）**：`scan.py` 先在歷史 `solutions.jsonl` 與 LOO 快取上離線重放 20 組 `gate_g1` 變體（0 次 `arcbatch`、<0.2 秒），按產出的積木集 `blocks_sha` 分群去重，只對**積木集確實改變**的 ≤4 個代表變體跑 `3 seed × 4 epoch` 短曲線，砍掉 ≥80% 元層算力以守住「元層算力 ≤ 省下 50%」。
-  2. **真值隔離**：`scan.py` 與 `sieve.py` **嚴禁讀取 H24／H8**，一律在 `P48` 的 A/B 兩折＋`L16` 上判決（`sieve/exclude` 必須在 A 折提煉、**B 折折外** 0 掉題且總節點降 ≥5% 才准進 `incubating`）；H24 僅留給主迴圈每 epoch 邊界做熔斷。
-  3. `metrics.py` 將 `ΔAUC_total` 拆報 `H8`（純盲測）與 `H24`（熔斷集），並隨 `LTO-SCF∪` 強制印出聯集題數 `|U|`。
-
-### 提案 4：改用「可搜尋狀態路由表」救活縱拆＋封死 M2 保送漏洞（步 2／5／9）
-- **檔案**：[`src/arcagi/hammer/route.py`](file:///home/lorkhan/repo/arcagi/src/arcagi/hammer/route.py)、[`03-設計.md`](file:///home/lorkhan/repo/arcagi/notes/rounds/r09/03-設計.md)
-- **步驟與門檻**：
-  1. 拔掉 8-epoch UCB 與延遲分潤，`kind:route` 改為純資料狀態表 `{"when_stall":"starve|saturate|ok", "arm":"...", "priority":int}`，交給 `scan.py` 做鄰域替換搜尋（真正滿足意見 6）；同時讓 `rt_vsplit` 呼叫現成 `witness.witness_splits` 為未解 L16 題寫入反向子目標，用 `seed-sub` 求解，不再空轉。
-  2. **修訂 `03-設計.md` §1 的 `M2` 硬門檻**：
-     - `M2(a)` 限定 **`by ∈ {"sleep", "foundry"}`**（排除 `agent-r08` 手寫 `halves` 保送）；
-     - `M2(b)` 要求 `gate`/`sieve` 列在 **P48 B 折折外** 0 掉題且節點降 ≥5% 或多解 ≥1 題；
-     - `M2(c)` 要求蠟模產出**含至少 1 個抽象槽位或跨對非平凡變換**的 `comb incubating` 列；
-     - `M2(d)` 改為扣除靜態 `halves` 對照後的淨增益 **`AUC_L(hammer) > AUC_L(hammer-static-decomp)`**，或純盲測 `H8` +1 題。
+<!-- wf-nav -->
+以下章節按語意拆到同名資料夾 `02c-Argon審-規劃/`，原文照搬：
+- [(A) 審查](02c-Argon審-規劃/A-審查.md)
+- [(B) 提案：最想改的 4 條高槓桿做法](02c-Argon審-規劃/B-四條提案.md)
