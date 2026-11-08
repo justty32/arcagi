@@ -1,0 +1,5 @@
+{"task":"662c240a","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_extract",["subgrid",["pred","4same",["and",["ne","h","w"],["eq","shape_count",1]]]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_extract",["subgrid",["pred","4same",["ne","h","w"]]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","transpose",0],["resize_crop",["const",3],["const",3]]]}
+],"idea":"The input is three stacked 3x3 blocks; output the one block that is not symmetric about its main diagonal (not equal to its transpose).","missing":"A block-split primitive (cut into equal 3x3 tiles without separator lines) plus a selector for the tile that is not transpose-symmetric."}

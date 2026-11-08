@@ -69,8 +69,8 @@ def test_emit_writes_candidates(tmp_path, monkeypatch):
     assert set(rule) == {"kind", "in", "out", "body"}
 
 
-def test_judge_transform_needs_two_tasks():
-    assert rs.judge("transform", GOOD["body"], {"a"})["verdict"] == "solution_only"
+def test_judge_transform_needs_three_tasks():
+    assert rs.judge("transform", GOOD["body"], {"a", "b"})["verdict"] == "solution_only"
     assert rs.judge("pred", ["eq", "size", 1], set())["verdict"] == "dropped"
 
 

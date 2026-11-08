@@ -1,0 +1,3 @@
+{"task":"7b7f7511","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["resize_crop",["max","h","w"],["lin","w",1,0]],["resize_crop",["div","h",2],["lin","w",1,0]],["resize_crop",["lin","h",1,0],["min","h","w"]]]}
+],"idea":"The grid is two identical copies along its longer axis; output the first copy (top-left half). Pad to max(h,w) rows, halve rows, then cap width at height.","missing":""}

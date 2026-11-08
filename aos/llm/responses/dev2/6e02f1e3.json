@@ -1,0 +1,4 @@
+{"task":"6e02f1e3","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["canvas",["const",3],["const",3],0],["paint_count",["count",["all","4same"]],5,"row"],["resize_crop",["const",3],["const",3]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["canvas",["lin","n_color",1,1],["const",3],5],["resize_crop",["const",3],["const",3]],["colormap",[[0,0]]]]}
+],"idea":"Number of distinct colors decides the 5-pattern: 1 color -> top row, 2 colors -> main diagonal, 3 colors -> anti-diagonal; rest 0.","missing":"A conditional choosing among fixed output patterns (top row / main diagonal / anti-diagonal) keyed on the number of distinct input colors; the DSL cannot draw diagonals."}

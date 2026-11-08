@@ -1,0 +1,4 @@
+{"task":"137eaa0f","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","8multi","most_colors"],["resize_crop",["const",3],["const",3]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","8multi","largest"]]}
+],"idea":"Each 8-connected piece contains one grey 5 cell; overlay all pieces into a 3x3 so that every 5 lands at the centre, keeping the pieces' other colors.","missing":"a primitive that stacks/overlays all objects aligned on an anchor color cell (translate each object so its anchor cell coincides) into one output"}

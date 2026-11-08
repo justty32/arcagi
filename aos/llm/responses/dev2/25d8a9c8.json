@@ -1,0 +1,4 @@
+{"task":"25d8a9c8","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["object_colormap",["4same","shape",[["1x3:111",5]],0]],["object_colormap",["4same","color",[[5,5]],0]],["object_colormap",["4same","color",[[5,5]],0]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["object_colormap",["4same","shape",[["1x3:111",5]],0]]]}
+],"idea":"Rows made of a single color become 5; every other cell becomes 0.","missing":"object primitives with an explicit bg parameter (or bg=none so every color forms objects); here the per-grid majority color is treated as bg and its uniform row is never recolored"}

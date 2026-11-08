@@ -1,0 +1,4 @@
+{"task":"a61ba2ce","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["gravity","up"],["gravity","left"],["resize_crop",["const",4],["const",4]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_bbox"]]}
+],"idea":"Four L-shaped 3-cell corners are assembled into a 4x4 frame, each placed in the corner of the output matching its missing-cell orientation.","missing":"An 'assemble objects by shape into corners of a new canvas' primitive (place each object at the output corner its L-shape points to)."}

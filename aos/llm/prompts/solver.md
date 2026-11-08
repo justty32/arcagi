@@ -19,7 +19,7 @@ Do NOT open `data/`, `artifacts/`, `reports/`, `aos/blocks/`, traces, other resp
 3. Check on train: `nice -n 19 uv run python -m arcagi.llm check <TASK> aos/llm/responses/<RUN>/<TASK>.json --split <SPLIT>`
    It prints, per rule, train_pass and per-pair ok / error / the grid it produced.
 4. Revise and re-check, at most 8 checks in total. Prefer general rules (parameters derived from the grid via inline extract / predicate / formula bodies) over constants that only fit these examples; a rule that hard-codes positions or a whole output is worthless on test.
-5. If the DSL cannot express the rule, keep your closest attempt and write in `missing` exactly what primitive or parameter would be needed (one sentence). That is useful output too.
+5. Before concluding the DSL cannot do it, try at least two genuinely different decompositions with `check` (e.g. crop then transform, per-object rule, separator cells, MARK + colormap). If it still cannot express the rule, keep your closest attempt and write in `missing` exactly what primitive or parameter would be needed (one sentence). That is useful output too.
 
 ## Final reply (one line only)
 

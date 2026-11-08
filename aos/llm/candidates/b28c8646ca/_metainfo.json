@@ -1,0 +1,31 @@
+{
+  "name": "llm_b28c8646ca",
+  "kind": "extract",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "2c608aff",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "2c608aff",
+      "855e0971",
+      "a48eeaf7",
+      "d43fd935"
+    ],
+    "new_vs_r04": [
+      "2c608aff",
+      "855e0971",
+      "a48eeaf7"
+    ],
+    "score": 4,
+    "length": 3,
+    "verdict": "exists",
+    "same_as": "extract_713b1328"
+  }
+}

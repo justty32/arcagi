@@ -1,0 +1,4 @@
+{"task":"7837ac64","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["delete_sel","4same","is_largest",1],["crop_bbox"],["resize_crop",["const",12],["const",12]],["downscale",3,3],["resize_crop",["const",3],["const",3]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["fill_cells","majority"],["cells_to_pixels","majority"],["crop_bbox"]]}
+],"idea":"Colored grid-line intersections form a lattice of 4x4 points; output 3x3 where each cell gets color c iff all four of its corner intersections have color c, else 0.","missing":"Sampling the intersection lattice at the grid-line spacing (downscale by a derived period) and a 2x2 pooling primitive that outputs c when all four corner values equal c, else 0."}

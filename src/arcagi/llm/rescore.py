@@ -26,7 +26,7 @@ from .candidates import all_folders
 from .verify import _try, background
 
 BLOCKS = tk.REPO_ROOT / "aos" / "blocks"
-MIN_MACRO_TASKS = 2  # a transform used by one task is a solution, not a block
+MIN_MACRO_TASKS = 3  # as library.find_macros: fewer tasks = a solution, not a block
 
 
 def _tasks():
@@ -49,6 +49,11 @@ def support_extract(body: list, tasks) -> set[str]:
     from arcagi.dsl import extract as ex
     from arcagi.dsl import grid as g
 
+    if isinstance(body, dict) and ex.is_object(body):
+        from arcagi.objrule import gen as objgen
+
+        ((_, ids),) = objgen.score(tasks, [ex.unwrap_object(body)])
+        return set(ids)
     name, sel = ex.unwrap(body)
     hit = set()
     for task in tasks:
@@ -93,29 +98,58 @@ def length(kind: str, body: object) -> float:
     return pg.cost(tuple(tuple(s) for s in body))  # type: ignore[union-attr]
 
 
-def existing(kind: str) -> list[tuple[str, set[str], float]]:
-    """(name, support, length) of live / covered blocks of ``kind``."""
+def existing(kind: str) -> list[tuple[str, set[str], float, object]]:
+    """(name, support, length, body) of live / covered blocks of ``kind``."""
     out = []
     prefix = {"transform": "m_"}.get(kind, kind + "_")
     for meta_path in sorted(BLOCKS.glob(prefix + "*/_metainfo.json")):
         meta = json.loads(meta_path.read_text())
         if meta.get("status") == "retired":
             continue
-        tasks = set(meta.get("support_tasks") or meta.get("source_tasks") or [])
+        tasks = set(
+            meta.get("support_tasks")
+            or meta.get("tasks")
+            or meta.get("source_tasks")
+            or []
+        )
         size = meta.get("length", meta.get("literals", meta.get("cost", 1)))
-        out.append((meta["name"], tasks, float(size)))
+        rule = meta_path.parent / (
+            "program.json" if kind == "transform" else "_rule.json"
+        )
+        body = json.loads(rule.read_text()) if rule.exists() else None
+        body = body.get("body") if isinstance(body, dict) else body
+        out.append((meta["name"], tasks, float(size), body))
     return out
+
+
+def solved_r04() -> set[str]:
+    """Training tasks the main-line r04 report solved (empty if absent)."""
+    path = Path(str(tk.DEFAULT_REPORT).format(split="training"))
+    if not path.exists():
+        return set()
+    return {t["task_id"] for t in json.loads(path.read_text())["tasks"] if t["correct"]}
 
 
 def judge(kind: str, body: object, support: set[str]) -> dict:
     size = length(kind, body)
     score = len(support) - (0.5 * size if kind == "pred" else 0)
-    verdict = {"support_tasks": sorted(support), "score": score, "length": size}
+    verdict = {
+        "support_tasks": sorted(support),
+        "new_vs_r04": sorted(support - solved_r04()),
+        "score": score,
+        "length": size,
+    }
     if score <= 0:
         return verdict | {"verdict": "dropped"}
     if kind == "transform" and len(support) < MIN_MACRO_TASKS:
         return verdict | {"verdict": "solution_only"}
-    for name, tasks, other in existing(kind):
+    blocks = existing(kind)
+    for name, _tasks, _size, other_body in blocks:
+        if other_body == body:
+            return verdict | {"verdict": "exists", "same_as": name}
+    if kind == "pred" and isinstance(body, list) and body[:1] == ["eq"]:
+        return verdict | {"verdict": "covered", "covered_by": "builtin selector"}
+    for name, tasks, other, _body in blocks:
         if support <= tasks and other <= size:
             return verdict | {"verdict": "covered", "covered_by": name}
     return verdict | {"verdict": "live"}

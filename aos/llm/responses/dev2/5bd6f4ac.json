@@ -1,0 +1,1 @@
+{"task":"5bd6f4ac","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["flip_lr"],["resize_crop",["const",3],["const",3]],["flip_lr"]]}],"idea":"Output the top-right 3x3 corner of the grid.","missing":""}

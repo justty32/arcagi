@@ -1,0 +1,21 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "crop_bbox"
+    ],
+    [
+      "resize_crop",
+      [
+        "const",
+        3
+      ],
+      [
+        "const",
+        3
+      ]
+    ]
+  ]
+}

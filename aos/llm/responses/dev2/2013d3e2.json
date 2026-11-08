@@ -1,0 +1,4 @@
+{"task":"2013d3e2","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_bbox"],["resize_crop",["const",3],["const",3]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_bbox"],["resize_crop",["div","h",2],["div","w",2]]]}
+],"idea":"Crop the symmetric figure to its bounding box and output its top-left quadrant (3x3).","missing":""}

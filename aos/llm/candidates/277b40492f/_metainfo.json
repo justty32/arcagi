@@ -1,0 +1,26 @@
+{
+  "name": "llm_277b40492f",
+  "kind": "formula",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "2013d3e2",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "bbc9ae5d"
+    ],
+    "new_vs_r04": [
+      "bbc9ae5d"
+    ],
+    "score": 1,
+    "length": 2,
+    "verdict": "covered",
+    "covered_by": "formula_fbe415b1"
+  }
+}

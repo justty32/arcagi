@@ -1,0 +1,10 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "min",
+    "h",
+    "w"
+  ]
+}

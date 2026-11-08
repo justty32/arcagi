@@ -1,0 +1,27 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "recolor_from",
+      "4same",
+      "is_largest",
+      1,
+      {
+        "scope": "object",
+        "sel": [
+          "nearest_other_color",
+          "8same"
+        ],
+        "prop": "color"
+      }
+    ],
+    [
+      "delete_sel",
+      "4same",
+      "is_smallest",
+      1
+    ]
+  ]
+}

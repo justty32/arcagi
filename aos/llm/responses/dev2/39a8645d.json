@@ -1,0 +1,1 @@
+{"task":"39a8645d","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["keep_sel","8same","pred",["rank","shape_count","max"]],["crop_object","8multi","top_left"]]}],"idea":"Output the shape that occurs most often among the objects (crop one copy).","missing":""}

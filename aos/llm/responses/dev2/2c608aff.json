@@ -1,0 +1,4 @@
+{"task":"2c608aff","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["extend_from","4same","is_largest",0,{"scope":"object","sel":["largest","4same"],"prop":"dir_to"}]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["extend_from","4same","all",1,{"scope":"object","sel":["largest","4same"],"prop":"dir_to"}]]}
+],"idea":"Each single dot that shares rows or columns with the big rectangle shoots a ray of its own color toward the rectangle until it touches it; unaligned dots stay.","missing":""}

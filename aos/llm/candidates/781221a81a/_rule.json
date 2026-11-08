@@ -1,0 +1,49 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "resize_crop",
+      [
+        "max",
+        "h",
+        "w"
+      ],
+      [
+        "lin",
+        "w",
+        1,
+        0
+      ]
+    ],
+    [
+      "resize_crop",
+      [
+        "div",
+        "h",
+        2
+      ],
+      [
+        "lin",
+        "w",
+        1,
+        0
+      ]
+    ],
+    [
+      "resize_crop",
+      [
+        "lin",
+        "h",
+        1,
+        0
+      ],
+      [
+        "min",
+        "h",
+        "w"
+      ]
+    ]
+  ]
+}

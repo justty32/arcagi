@@ -44,6 +44,12 @@ def components(program: list) -> Iterator[tuple[str, object]]:
         if not isinstance(node, (list, dict)):
             return
         if not top:
+            if isinstance(node, dict) and ex.is_object(node):
+                try:
+                    yield "extract", ex.unwrap_object(node)
+                except (ValueError, KeyError, TypeError):
+                    pass
+                return
             if ex.validate(node):
                 yield "extract", node
             elif isinstance(node, list) and node[:1] != ["const"] and fm.validate(node):

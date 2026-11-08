@@ -1,0 +1,21 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "extend_from",
+      "4same",
+      "is_largest",
+      0,
+      {
+        "scope": "object",
+        "sel": [
+          "largest",
+          "4same"
+        ],
+        "prop": "dir_to"
+      }
+    ]
+  ]
+}

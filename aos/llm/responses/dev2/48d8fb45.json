@@ -1,0 +1,1 @@
+{"task":"48d8fb45","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["keep_sel","8multi","pred",["rank","h","max"]],["colormap",[[5,0]]],["crop_bbox"]]}],"idea":"Crop the shape that has the gray 5 marker on top of it, dropping the marker.","missing":""}
