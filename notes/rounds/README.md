@@ -7,7 +7,7 @@
 - 準備：資料已下載、pytest 全綠、identity 基線 0/400（`reports/baseline-identity/`）；題庫盤點 `docs/inventory/training.html`＋`training-features.csv`（commit 4af1160）。
 - 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
 - **第一輪已收輪**（2026-11-08）：evaluation **21/400**、training 57/400（identity 0、template 0／6）。產物 [r01/](r01/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結簡報＋[代定清單](r01/代定清單.md)；程式 `src/arcagi/dsl/`＋`src/arcagi/solvers/search.py`；跑分 `reports/dsl-search-r01/`。
-- **第二輪進行中**（2026-11-08 11:48 起）：[r02/01-簡報](r02/01-簡報.md) 完成（主攻同大小題 270 題只解 3、格線切塊；**開始接 aos 體系**，見 wf/inbox/done/20261108T1145）→ fable 規劃中。每輪一個子資料夾 `rNN/`，節奏同上。
+- **第二輪進行中**（2026-11-08 11:48 起）：[r02/01-簡報](r02/01-簡報.md) 完成（主攻同大小題 270 題只解 3、格線切塊；**開始接 aos 體系**，見 wf/inbox/done/20261108T1145）→ [02 fable 規劃](r02/02-規劃-fable.md)、[03 設計](r02/03-設計.md) 完成；三條 opus 線施工中（L1 物件層 `dsl/objects*.py`、L2 格線＋top-2 `dsl/cells.py`＋`scripts/score_top2.py`、L3 aos 接入 `aos/`＋`src/arcagi/blocks/`），隊長已改 `solvers/search.py`（top-2 第二候選、local_rule 排後、block_calls）。每輪一個子資料夾 `rNN/`，節奏同上。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
 ## 使用者經 aos 轉達的前提（原文在 wf/inbox 的信，處理完在 wf/inbox/done/）
@@ -26,7 +26,7 @@
 
 - 發帖 `/home/lorkhan/repo/simple_tools/aos/wf/tools/forum_post.sh arcagi '<標題>' <檔|-> --tag arcagi [--source <檔>]`；回帖 `--reply <id>`；精華／置頂 `.../forum_admin.sh feature|pin <id> --as arcagi`。
 - 時機：開輪、fable 規劃定稿、每輪總結（加精華）、重要代定、卡住。ELI5、結論先、細節摺疊。
-- 已發：p-20261108-112500-3b33（開工）、p-20261108-113306-a220（r01 開輪）、p-20261108-113529-042d（r01 規劃，精華）、p-20261108-114523-7780（r01 總結，精華）；r01 PROGRESS 已寄 aos（20261108T1145）；p-20261108-114831-133b（r02 開輪）。
+- 已發：p-20261108-112500-3b33（開工）、p-20261108-113306-a220（r01 開輪）、p-20261108-113529-042d（r01 規劃，精華）、p-20261108-114523-7780（r01 總結，精華）；r01 PROGRESS 已寄 aos（20261108T1145）；p-20261108-114831-133b（r02 開輪）、p-20261108-115110-5d4e（r02 規劃，精華）。
 
 ## 額度
 

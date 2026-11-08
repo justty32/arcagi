@@ -12,6 +12,7 @@ submits the cheapest program that reproduces every train pair.
 
 import heapq
 import time
+from collections import Counter
 from dataclasses import dataclass, field
 
 from arcagi.dsl import grid as g
@@ -32,6 +33,8 @@ TIME_BUDGET = 2.5
 MAX_NODES = 20000
 MAX_SOLUTIONS = 30
 MAX_NEAR = 20
+PENALIZED = frozenset({"local_rule"})
+SOLVER_NAME = "dsl-search-r02"
 
 
 @dataclass
@@ -42,6 +45,7 @@ class SearchResult:
     near: list[tuple[float, int, Program, list[bool]]] = field(default_factory=list)
     nodes_per_depth: list[int] = field(default_factory=list)
     out_of_budget: bool = False
+    block_calls: Counter[str] = field(default_factory=Counter)
 
 
 def _valid_outputs(grids: list[Grid]) -> bool:
@@ -80,6 +84,8 @@ class _Search:
         )
         if not shapes_match:
             return
+        self.result.block_calls["colormap"] += 1
+        self.result.block_calls["local_rule"] += 1
         table = fit_colormap(train, self.targets, tests)
         if table is not None:
             step = ("colormap", table)
@@ -117,6 +123,7 @@ class _Search:
                     if self.over_budget():
                         return nxt
                     self.nodes += 1
+                    self.result.block_calls[name] += 1
                     try:
                         new = [primitive.apply(grid, *params) for grid in grids]
                     except (ValueError, IndexError, KeyError):
@@ -172,11 +179,25 @@ def _features(task: SolverTask) -> dict[str, object]:
     }
 
 
+def _rank(item: tuple[float, int, Program, list[Grid]]) -> tuple[bool, float, int]:
+    """Neighbourhood-rule programs overfit most, so they rank after the others."""
+    cost_value, order, program, _tests = item
+    return (any(step[0] in PENALIZED for step in program), cost_value, order)
+
+
+def _second(solutions: list[tuple[float, int, Program, list[Grid]]]):
+    """Test outputs of the best solution that predicts differently from the top."""
+    for _cost, _order, _program, tests in solutions[1:]:
+        if tests != solutions[0][3]:
+            return [[list(row) for row in grid] for grid in tests]
+    return None
+
+
 def solve(task: SolverTask) -> SolverResult:
-    """Return the cheapest train-consistent program's outputs plus a trace."""
-    recorder = TraceRecorder(solver="dsl-search-r01")
+    """Return the best-ranked train-consistent program's outputs plus a trace."""
+    recorder = TraceRecorder(solver=SOLVER_NAME)
     result = search(task)
-    solutions = sorted(result.solutions, key=lambda item: (item[0], item[1]))
+    solutions = sorted(result.solutions, key=_rank)
     ids = []
     for cost_value, _order, program, _tests in solutions:
         ids.append(
@@ -201,11 +222,13 @@ def solve(task: SolverTask) -> SolverResult:
         "nodes_per_depth": result.nodes_per_depth,
         "out_of_budget": result.out_of_budget,
         "solutions": len(solutions),
+        "block_calls": dict(result.block_calls),
+        "second": _second(solutions) if solutions else None,
     }
     if not solutions:
         recorder.reasoning = "No program reproduces every train pair; echo inputs."
         recorder.select(None)
         return recorder.result(list(task.test))
-    recorder.reasoning = "Cheapest train-consistent program (MDL)."
+    recorder.reasoning = "Cheapest train-consistent program (MDL), local_rule last."
     recorder.select(ids[0])
     return recorder.result(solutions[0][3])
