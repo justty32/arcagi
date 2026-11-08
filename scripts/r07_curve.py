@@ -46,6 +46,7 @@ def run_old(out: Path, passes: int, workers: int, scratch: Path) -> list[dict]:
                             if s["task_id"] not in learn_ids),
             "wall_s": round(wall, 2), "nodes": None, "llm_calls": 0,
             "lib_size": n_blocks, "lib_bits": None, "mean_prog_nodes": None,
+            "nodes_solved": None,
         })
         sols_log += [{"pass": p, **s} for s in sols]
         print(f"[old] pass {p}: L={rows[-1]['solved_L']} H={rows[-1]['solved_H']} "
@@ -62,7 +63,11 @@ def run_old(out: Path, passes: int, workers: int, scratch: Path) -> list[dict]:
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--tree", required=True,
-                    choices=["empty", "empty-g1g4", "old", "meta"])
+                    choices=["empty", "empty-g1", "empty-noT", "empty-g1g4",
+                             "dec", "dec-g1", "dec-g1g4", "old", "meta"])
+    ap.add_argument("--decomp", action="store_true",
+                    help="meta: start from decomp=True")
+    ap.add_argument("--seeds", default="0,1,2", help="meta CRN seeds")
     ap.add_argument("--rounds", type=int, default=3, help="meta rounds")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--passes", type=int, default=curve.N_PASSES)
@@ -73,23 +78,31 @@ def main(argv: list[str] | None = None) -> None:
     a = ap.parse_args(argv)
     if a.workers > 6:
         sys.exit("workers <= 6 (r07 resource rule)")
-    name = a.tree if a.tree != "empty-g1g4" else f"empty-g1g4/seed{a.seed}"
+    name = f"{a.tree}/seed{a.seed}" if a.tree.endswith("g1g4") else a.tree
     out = a.out or REPORTS / name
     if a.tree == "meta":
+        seeds = tuple(int(s) for s in a.seeds.split(","))
         hist = meta.run_meta(a.rounds, a.passes, out, ROOT / "aos/seedlib/meta",
-                             seed=a.seed, workers=a.workers)
+                             seeds=seeds, workers=a.workers,
+                             start=kn.load(a.knobs).with_(decomp=a.decomp))
         (out / "rounds.json").write_text(json.dumps(hist, indent=1) + "\n")
         return
     if a.tree == "old":
         rows = run_old(out, a.passes, a.workers, SCRATCH)
     else:
-        g = a.tree == "empty-g1g4"
-        cfg = curve.Config(tree=a.tree, knobs=kn.load(a.knobs), seed=a.seed,
+        knobs = kn.load(a.knobs)
+        if a.tree.startswith("dec"):
+            knobs = knobs.with_(decomp=True)
+        cfg = curve.Config(tree=a.tree, knobs=knobs, seed=a.seed,
                            passes=a.passes, budget=a.budget, workers=a.workers,
-                           learn=g, g4=g)
+                           learn=a.tree in ("empty-g1", "empty-g1g4", "dec-g1",
+                                            "dec-g1g4"),
+                           g4=a.tree.endswith("g1g4"),
+                           exclude=("transpose",) if a.tree == "empty-noT" else ())
         lib_dir = ROOT / "aos" / "seedlib" / name.replace("/", "-")
         rows = curve.run_curve(cfg, out, lib_dir)
     print(json.dumps({"tree": name, "AUC_L": curve.auc_l(rows),
+                      "delta": curve.delta(rows),
                       "curve_sha": curve.curve_sha(out / "curve.csv")}))
 
 

@@ -1,4 +1,5 @@
-"""The six r07 meta-optimisation knobs (data/r07/knobs.json)."""
+"""The r07 meta-optimisation knobs (data/r07/knobs.json): the six of the plan
+plus ``decomp`` (seed deductive decomposition on/off, added after line A)."""
 
 import json
 from dataclasses import asdict, dataclass, replace
@@ -15,6 +16,7 @@ CHOICES: dict[str, list] = {
     "g4_frac": [0.0, 0.1, 0.2, 0.3, 0.5],
     "order": ["size", "prior"],
     "lam_depth": [1, 2],
+    "decomp": [False, True],
 }
 
 
@@ -26,6 +28,7 @@ class Knobs:
     g4_frac: float = 0.2  # share of the node budget given to G4
     order: str = "prior"  # "size" = size-first only, "prior" = + log-use prior
     lam_depth: int = 2  # lambda body depth (passed to seed when it exposes it)
+    decomp: bool = False  # seed deductive decomposition (map/zipwith witness)
 
     def to_dict(self) -> dict:
         return asdict(self)

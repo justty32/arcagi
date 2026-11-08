@@ -1,0 +1,21 @@
+[
+ {
+  "body": [
+   "take",
+   2,
+   [
+    "$h0"
+   ]
+  ],
+  "born": 0,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_0fe6fca1dc",
+  "saving": 1.0,
+  "sig": "(list[a]) -> list[a]",
+  "src_tasks": [
+   "d10ecb37~near"
+  ],
+  "uses": 16
+ }
+]

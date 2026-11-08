@@ -138,10 +138,12 @@ def block_name(body) -> str:
 
 
 def update(lib_blocks: list[dict], programs: dict[str, object], params: Params,
-           pass_no: int) -> tuple[list[dict], list[dict]]:
+           pass_no: int, extra: dict[str, object] | None = None,
+           ) -> tuple[list[dict], list[dict]]:
     """Return (new library blocks, added blocks) after one pass.
 
-    ``programs`` are the solved learn-set programs of this pass.
+    ``programs`` are the solved learn-set programs of this pass (they count
+    uses); ``extra`` (cold-start near misses) only feeds template mining.
     """
     used: dict[str, int] = {}
     for p in programs.values():
@@ -167,7 +169,7 @@ def update(lib_blocks: list[dict], programs: dict[str, object], params: Params,
         kept = ok
     known = {b["name"]: b for b in kept}
     added = []
-    for c in candidates(programs, params):
+    for c in candidates({**programs, **(extra or {})}, params):
         if len(added) >= params.m or len(kept) + len(added) >= LIB_CAP:
             break
         if pg.key(c["body"]) in bodies:

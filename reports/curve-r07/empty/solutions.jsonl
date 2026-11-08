@@ -1,216 +1,216 @@
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.313, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.252, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.333, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 0, "program": ["reverse", ["$in"]], "seconds": 0.001, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.285, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.365, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.387, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.186, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.298, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.421, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.275, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 0, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.087, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.386, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.194, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.456, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.281, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.268, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.283, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.448, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.197, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.247, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.303, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.33, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 1, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 1, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 2, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 2, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 3, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 3, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 4, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 4, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 5, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 5, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 6, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 6, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 7, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 7, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.315, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.405, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.397, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
-{"nodes": 27, "nodes_to_first": 27, "pass": 8, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.299, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.229, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.403, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.189, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.302, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.408, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.368, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
-{"nodes": 26212, "nodes_to_first": 26212, "pass": 8, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.084, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.38, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.196, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.465, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.385, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.289, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.439, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.289, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.425, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.203, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.35, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.339, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
-{"nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.379, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.533, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 1.079, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 1.58, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 0, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.298, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.442, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.822, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.449, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.356, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.67, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.612, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 0, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.083, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.807, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.615, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.749, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 1.46, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.78, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.456, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.479, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.582, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.495, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.447, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.462, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 0, "program": null, "seconds": 0.935, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.66, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 1.284, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 1.101, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 1, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.528, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.625, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.553, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.618, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.367, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.7, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.615, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 1, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.083, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.54, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.63, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.778, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 1.544, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.772, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.472, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.444, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.509, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.508, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.434, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.464, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 1, "program": null, "seconds": 0.939, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.552, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 1.462, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 1.25, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 2, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.293, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.443, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.734, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.442, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.402, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.721, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.625, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 2, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.09, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.925, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.79, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.844, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 1.598, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.744, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.688, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.359, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.859, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.736, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.442, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.375, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 2, "program": null, "seconds": 0.884, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.557, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 1.062, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 1.427, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 3, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.33, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.47, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.578, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.483, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.377, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.722, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 1.216, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 3, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.089, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.532, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.621, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.777, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 1.701, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.79, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.514, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.378, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.776, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.507, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.501, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.516, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 3, "program": null, "seconds": 0.932, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.59, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 1.27, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 1.584, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 4, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.285, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.603, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.692, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.45, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.571, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.707, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.85, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 4, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.088, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.592, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.84, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.815, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 1.441, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.838, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.629, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.49, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.515, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.563, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.446, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.572, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 4, "program": null, "seconds": 0.941, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.708, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 1.042, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 1.521, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 5, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.534, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.448, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.855, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.466, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.377, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.69, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.941, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 5, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.088, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.523, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.647, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.806, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 1.448, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.767, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.647, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.365, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.739, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.528, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.457, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.366, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 5, "program": null, "seconds": 0.849, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.544, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 1.216, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 1.013, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 6, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.559, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.614, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.745, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.438, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.546, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.717, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.692, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 6, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.088, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.532, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.595, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 1.286, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 1.535, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.968, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.514, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.36, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.462, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.518, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.551, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.364, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 6, "program": null, "seconds": 0.823, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.554, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.944, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 1.014, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 7, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.306, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.479, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.532, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.458, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.41, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.684, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.622, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 7, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.09, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.558, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.619, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.753, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 1.459, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.756, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.472, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.376, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.507, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.511, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.436, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.322, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 7, "program": null, "seconds": 0.94, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 2, 5]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.545, "source": null, "task_id": "a740d043", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.981, "source": null, "task_id": "95990924", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.991, "source": null, "task_id": "c0f76784", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 23, "nodes_to_first": 23, "pass": 8, "program": ["reverse", ["$in"]], "seconds": 0.0, "source": "enum", "task_id": "68b16354", "test_ok": true, "train_ok": true}
+{"near_top": ["sort", ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.349, "source": null, "task_id": "1e0a9b12", "test_ok": false, "train_ok": false}
+{"near_top": ["map", ["lam", 1, ["repeat", ["len", ["$0"]], 8]], ["$in"]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.473, "source": null, "task_id": "6f8cd79b", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 4, ["repeat", 4, 3]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.537, "source": null, "task_id": "ce4f8723", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.46, "source": null, "task_id": "496994bd", "test_ok": false, "train_ok": false}
+{"near_top": ["take", 2, ["transpose", ["take", 2, ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.378, "source": null, "task_id": "d10ecb37", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.678, "source": null, "task_id": "22233c11", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.615, "source": null, "task_id": "af902bf9", "test_ok": false, "train_ok": false}
+{"near_top": ["sort", ["$in"]], "nodes": 26045, "nodes_to_first": 26045, "pass": 8, "program": ["sort", ["map", ["lam", 1, ["sort", ["$0"]]], ["$in"]]], "seconds": 0.088, "source": "enum", "task_id": "beb8660c", "test_ok": true, "train_ok": true}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.528, "source": null, "task_id": "ba97ae07", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.611, "source": null, "task_id": "e76a88a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 2]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.773, "source": null, "task_id": "995c5fa3", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 1.417, "source": null, "task_id": "1b60fb0c", "test_ok": false, "train_ok": false}
+{"near_top": ["$in"], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.731, "source": null, "task_id": "ea32f347", "test_ok": false, "train_ok": false}
+{"near_top": ["concat", ["repeat", 3, ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.469, "source": null, "task_id": "bbc9ae5d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["concat", ["transpose", ["$in"]]]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.371, "source": null, "task_id": "9172f3a0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 1, ["repeat", 1, 1]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.477, "source": null, "task_id": "44f52bb0", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", ["len", ["$in"]], ["map", ["lam", 1, 0], ["$in"]]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.508, "source": null, "task_id": "bda2d7a6", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["range", 3]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.38, "source": null, "task_id": "137eaa0f", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 9, ["repeat", 9, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.366, "source": null, "task_id": "cce03e0d", "test_ok": false, "train_ok": false}
+{"near_top": ["repeat", 3, ["repeat", 3, 0]], "nodes": 100000, "nodes_to_first": null, "pass": 8, "program": null, "seconds": 0.669, "source": null, "task_id": "ff28f65a", "test_ok": false, "train_ok": false}

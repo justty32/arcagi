@@ -80,6 +80,8 @@ def test_meta_ledger_and_thompson(tmp_path):
     meta.append_ledger({"kind": "r07", "knob": "m", "accepted": False}, ledger)
     meta.append_ledger({"kind": "other", "knob": "m"}, ledger)
     st = meta.knob_stats(ledger)
+    assert meta.real_gain([2, 2, 2], [3, 3, 2]) is False
+    assert meta.real_gain([2, 2, 2], [3, 3, 3]) is True
     assert st["m"] == (2, 1) and st["k"] == (0, 0)
     a = meta.pick_knob(random.Random(1), st, kn.Knobs())
     b = meta.pick_knob(random.Random(1), st, kn.Knobs())
@@ -101,3 +103,18 @@ def test_taskset_rule():
 def test_baseline_seedlib_stays_empty():
     base = ROOT / "aos" / "seedlib" / "blocks.json"
     assert not base.exists() or json.loads(base.read_text()) == []
+
+
+def test_change_score_ignores_copied_cells():
+    inp = [[1, 1], [1, 1]]
+    target = [[1, 2], [1, 1]]
+    assert pg.change_score(inp, target, inp) == 0.0  # copying the input
+    assert pg.change_score([[1, 2], [0, 0]], target, inp) == 1.0 - 0.0
+    assert pg.change_score([[1]], target, inp) == 0.0
+
+
+def test_cold_start_extra_feeds_templates_only():
+    sub = ("sort", ("transpose", ("reverse", IN)))
+    blocks, added = g1.update([], {}, g1.Params(m=1, k=1.0), 0,
+                              {"a~near": ("transpose", sub), "b~near": sub})
+    assert added and all(b["uses"] == 0 for b in blocks)
