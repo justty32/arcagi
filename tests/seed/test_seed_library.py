@@ -109,3 +109,31 @@ def test_enumerate_deterministic_with_workers():
     assert [s.task_id for s in one] == ["ud", "lr", "hard"]
     assert one[0].test_ok and one[1].test_ok and not one[2].train_ok
     assert one[2].nodes == 5_000
+
+
+ROT2 = Block(  # expanded size 5, enumerated as a single node
+    name="b_rot2",
+    body=("reverse", ("map", ("lam", 1, ("reverse", ("$0",))), ("$in",))),
+    sig=parse("list[list[int]]"),
+)
+
+
+def test_blocks_cost_one_node():
+    from arcagi.seed.enum import Enumerator
+    from arcagi.seed.lam import leaf_entries
+
+    assert seed.size(("blk", "b_lr", ("$in",))) == 2
+    assert seed.size(("blk", "b_rot2")) == 1
+    train = [(A, rot2(A)), (B, rot2(B))]
+    res = solve(train, Library([ROT2]), 50_000)
+    assert res.program == ("blk", "b_rot2")
+    en = Enumerator(train, Library([LR]), 10**9)
+    en.bank.append({})
+    for prog, typ, vals in leaf_entries(en.lib, en.xs, en.consts, en._run_expanded):
+        en._offer(1, prog, typ, vals)
+    en.bank.append({})
+    for op in en.ops:
+        if op.name == "b_lr":
+            en._apply(2, op, (1,))
+    progs = [e.prog for es in en.bank[2].values() for e in es]
+    assert ("blk", "b_lr", ("$in",)) in progs

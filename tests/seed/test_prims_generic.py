@@ -103,3 +103,20 @@ def test_run_on_ragged_input():
     total = ("fold", ("lam", 2, ("add", ("$0",), ("len", ("$1",)))), 0, ("$in",))
     assert run(total, x) == 8
     assert run(("sort", ("concat", ("$in",))), x) == (-3000, -4, 1, 2, 3, 7, 10, 200)
+
+
+def test_task_consts_and_without():
+    from arcagi.seed import prims, solve
+    from arcagi.seed.library import Library
+
+    assert prims.task_consts(([(3, 12), (-7,)], ((True, 3),))) == (-7, -1, 0, 1, 3, 12)
+    a = ((1, 2), (3, 4))
+    train = [(a, ((1, 3), (2, 4))), (((5, 6, 7),), ((5,), (6,), (7,)))]
+    assert solve(train, Library(), 20_000).program == ("transpose", ("$in",))
+    with prims.without("transpose"):
+        assert "transpose" not in PRIMS
+        res = solve(train, Library(), 20_000)
+        assert res.program is None or "transpose" not in repr(res.program)
+        with pytest.raises(EvalError):
+            run(("transpose", ("$in",)), a)
+    assert "transpose" in PRIMS and len(PRIMS) == 32

@@ -15,7 +15,7 @@ from typing import Any
 
 from .interp import MAX_STEPS, Program, compile_prog, expand
 from .library import Block, Library, free_vars
-from .prims import CONSTS, PRIMS
+from .prims import PRIMS
 from .types import INPUT, INT, FnT, Type, resolve, unify
 
 LAM_DEPTH = 2
@@ -72,10 +72,14 @@ def build_ops(lib: Library, order: dict, bodies: bool) -> list[Op]:
 
 
 def leaf_entries(
-    lib: Library, xs: tuple, run_expanded: Callable[[Program], tuple | None]
+    lib: Library,
+    xs: tuple,
+    consts: tuple[int, ...],
+    run_expanded: Callable[[Program], tuple | None],
 ) -> Iterator[tuple[Program, Type, tuple]]:
+    """Size-1 terms; blocks count as one node whatever their expanded size."""
     yield ("$in",), INPUT, xs
-    for c in CONSTS:
+    for c in consts:
         yield c, INT, (c,) * len(xs)
     for b in lib.blocks:
         if b.holes == 0 and not isinstance(b.sig, FnT) and not free_vars(b.body):
@@ -106,7 +110,14 @@ class _Body:
 
 
 class BodyPool:
-    def __init__(self, arg_types: tuple[Type, ...], lib: Library, probes: list) -> None:
+    def __init__(
+        self,
+        arg_types: tuple[Type, ...],
+        lib: Library,
+        probes: list,
+        consts: tuple[int, ...],
+    ) -> None:
+        self.consts = consts
         self.arg_types = arg_types
         self.n = len(arg_types)
         self.lib = lib
@@ -163,7 +174,7 @@ class BodyPool:
                     1, (f"${k}",), self.arg_types[k], tuple(a[k] for _, a in pr), 0
                 )
             self._add(1, ("$in",), INPUT, tuple(x for x, _ in pr), 0)
-            for c in CONSTS:
+            for c in self.consts:
                 self._add(1, c, INT, (c,) * len(pr), 0)
             return
         for op in self.ops:
