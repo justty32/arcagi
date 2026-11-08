@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # wf-lint-checks.sh — wf-lint.sh 的檢查函式；由 wf-lint.sh source，不單獨執行。
-# 用到呼叫端已設好的 $tools／$have_py／$quiet／$strict／checked_broken 與 total_* 計數。
+# 用到呼叫端已設好的 $tools／$have_py／$quiet／$strict／checked_broken、total_* 計數與 run_local_hook()。
 
 extract_links() {
   awk '/^[[:space:]]*```/{c=!c; next} !c' "$1" \
@@ -42,7 +42,7 @@ list_owned_files() {
   local root=${1%/} _ rel
   shift
   local -a prunes=(
-    -path '*/.git' -o -path '*/node_modules' -o -path '*/__pycache__'
+    -path '*/.git' -o -path '*/node_modules' -o -path '*/.venv' -o -path '*/venv' -o -path '*/__pycache__'
     -o -path '*/archive' -o -path '*/reference' -o -path '*/references' -o -path '*/vendor'
     -o -path '*/done' -o -path '*/superseded'
     -o \( -path '*/inbox' ! -path '*/workflows/inbox' \)
@@ -53,17 +53,31 @@ list_owned_files() {
     [[ -n $rel ]] && prunes+=( -o -path "$root/${rel%/}" -o -path "*/${rel%/}" )
   done < <(git -C "${top:-$root}" config --file "${top:-$root}/.gitmodules" --get-regexp '^submodule\..*\.path$' 2>/dev/null || true)
   find "$root" \( -type d \( "${prunes[@]}" \) \) -prune \
-    -o -type f \( "$@" \) -print | sort
+    -o -type f \( "$@" \) -print | drop_ignored "$root" | sort
+}
+
+# git repo 內丟掉 .gitignore 命中的檔（他人 clone、產物）；tracked 檔不算 ignored。非 repo、或 $root 本身被 ignore（明指要掃）時照舊。
+drop_ignored() {
+  local root=$1 f
+  if ! git -C "$root" rev-parse --is-inside-work-tree >/dev/null 2>&1 || git -C "$root" check-ignore -q . 2>/dev/null; then
+    cat; return
+  fi
+  local -a files=(); local -A ign=()
+  mapfile -t files
+  [[ ${#files[@]} -eq 0 ]] && return
+  while IFS= read -r -d '' f; do ign[$f]=1; done \
+    < <(printf '%s\0' "${files[@]#"$root"/}" | git -C "$root" check-ignore -z --stdin 2>/dev/null)
+  for f in "${files[@]}"; do [[ -n ${ign[${f#"$root"/}]:-} ]] || printf '%s\n' "$f"; done
 }
 
 list_md() { list_owned_files "$1" -name '*.md'; }
 list_data() { list_owned_files "$1" -name '*.json' -o -name '*.csv'; }
 
-# 全 repo 超標掃描：排除 .git／__pycache__、agent 工具的 worktree 暫存區（repo 的巢狀副本）
-# 與 .gitmodules 宣告的 submodule（上游 vendor 碼不受 8 KB 限制）。
+# 全 repo 超標掃描：排除 .git／__pycache__、.venv／venv（Python 虛擬環境）、agent 工具的
+# worktree 暫存區（repo 的巢狀副本）與 .gitmodules 宣告的 submodule（上游 vendor 碼不受 8 KB 限制）。
 list_oversize_files() {
   local root=${1%/} _ rel
-  local -a prunes=( -path '*/.git' -o -path '*/__pycache__' -o -path '*/.claude/worktrees' )
+  local -a prunes=( -path '*/.git' -o -path '*/.venv' -o -path '*/venv' -o -path '*/__pycache__' -o -path '*/.claude/worktrees' )
   while read -r _ rel; do
     [[ -n $rel ]] && prunes+=( -o -path "$root/${rel%/}" )
   done < <(git -C "$root" config --file .gitmodules --get-regexp '^submodule\..*\.path$' 2>/dev/null || true)
@@ -79,7 +93,7 @@ count_literal() {
 
 lint_dir() {
   local root=${1%/} label=${2:-$1}
-  local broken=0 oversize=0 ph=0 note=0 judge=0 inbox=0 biglist=0 bl_links=0 querycmd=0
+  local broken=0 oversize=0 ph=0 note=0 judge=0 inbox=0 biglist=0 bl_links=0 querycmd=0 lcl=0
   local out df n rel
   local -a md_files=()
 
@@ -150,6 +164,8 @@ lint_dir() {
     done < <(grep -nE 'tabledb\.py' "$f" | grep -E 'python3 |tools/tabledb\.py' | cut -d: -f1)
   done
 
+  run_local_hook "$root" || lcl=1
+
   ph=$(count_literal '{{' "${md_files[@]}")
   note=$(count_literal '〔模板說明〕' "${md_files[@]}")
   judge=$(count_literal '〔導入判斷〕' "${md_files[@]}")
@@ -159,7 +175,7 @@ lint_dir() {
   local residue=$((ph + note + judge))
 
   if [[ $quiet -eq 0 || $broken -gt 0 ]]; then
-    echo "SUMMARY $label: broken=$broken oversize=$oversize biglist=$biglist biglist_links=$bl_links querycmd=$querycmd residue={{=$ph 模板說明=$note 導入判斷=$judge inbox_pending=$inbox"
+    echo "SUMMARY $label: broken=$broken oversize=$oversize biglist=$biglist biglist_links=$bl_links querycmd=$querycmd local=$lcl residue={{=$ph 模板說明=$note 導入判斷=$judge inbox_pending=$inbox"
   fi
   total_broken=$((total_broken + broken))
   if [[ $strict -eq 1 ]]; then
@@ -167,6 +183,7 @@ lint_dir() {
     total_oversize=$((total_oversize + oversize))
     total_biglist=$((total_biglist + biglist))
     total_querycmd=$((total_querycmd + querycmd))
+    total_local=$((total_local + lcl))
   fi
   return 0
 }
