@@ -73,13 +73,17 @@ class Enumerator:
         out_type: Type = INPUT,
         extra: tuple = (),
         sub: bool = False,
+        consts: tuple[int, ...] | None = None,
     ) -> None:
         """``sub``: a decomposition subproblem; lambda bodies then cannot see
         ``$in`` and no near list is kept. ``extra``: more (prog, type, vals)
-        leaves, e.g. a position variable."""
+        leaves, e.g. a position variable. ``consts``: integer leaves (default:
+        ``task_consts`` of these examples)."""
         self.xs = tuple(to_value(i) for i, _ in train)
         self.outs = tuple(to_value(o) for _, o in train)
-        self.consts = task_consts((self.xs, self.outs))
+        if consts is None:
+            consts = task_consts((*self.xs, *self.outs))
+        self.consts = consts
         self.in_type, self.out_type = in_type, out_type
         self.extra, self.sub = extra, sub
         self.lib = lib
