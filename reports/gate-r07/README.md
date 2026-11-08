@@ -49,3 +49,10 @@
 ## 沒擋到的錯答（training 22、evaluation 12）
 
 這些錯答在 csv 裡是 `outcome=pass` 且 `base_correct=0`。多半是 S3 `stamp_key`（0962bcdd、3ac3eb23、10fcaaa3）、物件移動和裁切的組合，以及 `colormap` 寫死顏色的題。它們不帶格表，(b)(e) 也抓不到；目前唯一抓得到的是合成否決，但代價太高。r08 可考慮兩條路：把 `stamp_key` 這類 pattern 表接進同一套薄列證據量，或者先把合成 pair 做顏色正規化再校準。
+
+## 線上全量 evaluation（隊長跑，2026-11-08 15:44）
+
+- 指令：`systemd-run --user --scope -q -p MemoryMax=16G nice -n 19 uv run arcagi eval --split evaluation --name gated-r07 --external '.venv/bin/python -m arcagi.solvers.gated {input} {output} {trace}' --timeout 45 --workers 6`；head 272b76f（含 S3 families 06f6779、guard 3129cc4），native 45668f9（`native/bin` 為當時建置）。輸出 `artifacts/gated-r07/evaluation.json`、`evaluation-traces.jsonl`。
+- 結果：**57/400**、errors 0；每題最長 19.2 秒；逐題耗時合計 5217 秒（r06 5093）。
+- 對 r06（56）：新解 5af49b42（S3 families 06f6779，非守門所致）、退步 0。
+- 守門：放棄 16 題（`all distrusted`，全是 r06 會答錯的題；離線預估 17）、誤擋 0；仍答錯 10 題（r06 過 train 答錯 29 → 10）。

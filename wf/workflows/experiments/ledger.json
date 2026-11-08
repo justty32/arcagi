@@ -126,6 +126,17 @@
    "baseline": "同快照清空 families：39（15）／95",
    "verdict": "是：eval +5、退步 0（主線核 artifacts/s3-families/ev-*2.json）；過 train 答錯 eval 16→17、train 27→28",
    "record_path": "../../../reports/objrule-families/README.md"
+  },
+  {
+   "id": "2026-11-08-gated-r07",
+   "date": "2026-11-08",
+   "hypothesis": "r07 C：通用守門（unseen＋synth 降級＋table 自由度門）包在混合入口外，能否擋過 train 答錯而不誤擋",
+   "solver": "python -m arcagi.solvers.gated（native/bin/solve＋guard；head 272b76f、native 45668f9、families 06f6779）",
+   "split": "evaluation",
+   "result": "evaluation 57/400，errors 0；守門放棄 16、誤擋 0；過 train 答錯 29→10；每題最長 19.2 秒",
+   "baseline": "dsl-search-r06 56",
+   "verdict": "是：退步 0、答錯 29→10；+1（5af49b42）來自 S3 families 非守門",
+   "record_path": "../../../reports/gate-r07/README.md"
   }
  ]
 }
