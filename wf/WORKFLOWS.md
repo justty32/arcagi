@@ -48,6 +48,7 @@
 | 「記個想法」「以後要做」「排進 roadmap」「幫我規劃」 | **planning** | [workflows/planning.md](workflows/planning.md) |
 | 「記個決定」「為什麼選 A 不選 B」 | **decisions** | [workflows/decisions.md](workflows/decisions.md) |
 | 「我的偏好是…」「以後直接做 / 先問」 | **user** | [workflows/common/user.md](workflows/common/user.md) |
+| 「看看信箱」「寄信給別資料夾的 agent」 | **inbox** | [workflows/inbox/README.md](workflows/inbox/README.md) |
 
 **都不符 → 看 [INDEX.md](INDEX.md)**。新開工作流 → 複製 [workflows/TEMPLATE.workflow.md](workflows/TEMPLATE.workflow.md) 並在上表加一列。要定期喚醒合 heartbeat 包、多 agent 協作合 multi-agent 包（都在模板 repo 的 `flavors/`）。
 
@@ -57,4 +58,4 @@
 |--------|--------|
 | 等**使用者**做 / 驗證 / 決定 | [WAIT_USER.md](WAIT_USER.md) |
 | 等**同 repo 另一個 session / fork** | [SESSION-LOG.md](SESSION-LOG.md) 一行 open |
-| 等**別資料夾的 agent** | 信件軸：multi-agent 包提供（派發表有 inbox 才有）|
+| 等**別資料夾的 agent** | [workflows/inbox/README.md](workflows/inbox/README.md)（放信處 `wf/inbox/`）|
