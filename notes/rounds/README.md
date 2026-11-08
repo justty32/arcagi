@@ -41,3 +41,11 @@
 ## 第二意見（Gemini Argon，11-08 起）
 
 每輪 fable 規劃定稿後、施工前，寄 PROGRESS 給 aos 附規劃稿與簡報絕對路徑；aos 頂層叫 Argon 唯讀審，意見寄回；不用等，直接開工，採不採納由隊長定、記代定。
+
+## arknights 帶來的經驗（11-08 13:34）
+
+只讀：`~/repo/simple_tools/aos/proto8/thinking/2026-11/07/arknights-kb/28-帶去arcagi清單.md`（配套 27-第五輪總結簡報.md）。最重要：雙基準量雜訊、tag 前 diff aos/blocks/ 與 aos/pool/、學不動先查可對答案、積木影子跑過門檻才上線、元優化另記 meta 帳。每輪簡報要帶到。
+
+## 支線狀態
+
+S1、S2 上線（13:13）；S4、S5 13:35 通知開；S3 等第五輪收輪劃好 `src/arcagi/objrule/families/` 再開。
