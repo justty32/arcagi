@@ -2,7 +2,7 @@
 
 冷啟動接手先讀本檔，再讀 [wf/SESSION-LOG](../../wf/SESSION-LOG.md) 與 `wf/inbox/` 頂層未辦的信。
 
-## 現況（2026-11-08 15:02，主 session 交接見文末）
+## 現況（2026-11-08 16:30，主 session 交接見文末）
 
 - 準備：資料已下載、pytest 全綠、identity 基線 0/400（`reports/baseline-identity/`）；題庫盤點 `docs/inventory/training.html`＋`training-features.csv`（commit 4af1160）。
 - 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
@@ -12,7 +12,7 @@
 - **第四輪已收輪**（2026-11-08）：evaluation **37/400**、training **92/400**（r03 32／86，退步 0；同大小 8→13）。產物 [r04/](r04/04-總結簡報.md)：01 簡報（含 §8 使用者 12:56 遞迴元優化想法）→ 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r04/代定清單.md)；每物件規則 `src/arcagi/objrule/`、產生器預算執行 `blocks/pool/budget.py`、產生器的產生器 `aos/blocks/_gen/_meta/`；跑分 `reports/dsl-search-r04/`。
 - **第五輪已收輪**（2026-11-08）：evaluation **38/400**、training **96/400**（收緊後 95；r04 37／92，退步 0；同大小 13→14）；支線 S1 native 42/400。產物 [r05/](r05/04-總結簡報.md)：01 簡報（含使用者 13:13「子樹也是一種積木」）→ 02 fable 規劃 → [02b Argon 審](r05/02b-Argon審.md) → 03 設計 → 04 總結＋[代定清單](r05/代定清單.md)；積木⇄janet `src/arcagi/srcspace/`、改寫搜尋 `solvers/rewrite*.py`、帶槽子樹積木 `aos/blocks/m_sub_*`；跑分 `reports/dsl-search-r05/`。
 - **第六輪已收輪**（2026-11-08）：evaluation **56/400**（同大小 23/270）、training **138/400**（r05 38／96，evaluation 退步 0）；入口改混合 `native/bin/solve`。增量多來自支線原語（S1 x_* 7、C++ 5、S3 families 5）、主線 n_holes 1；主線三線（合成集門檻元優化、改寫預設關＋歸因、S2 候選影子入庫）本身 eval 0 增量。產物 [r06/](r06/04-總結簡報.md)：01 → 02 fable → [02b Argon 審](r06/02b-Argon審.md) → 03 → 04＋[代定清單](r06/代定清單.md)；跑分 `reports/dsl-search-r06/`。**r07 主軸＝元優化（小題組學習曲線）**，見 r06/04 §6。
-- **第七輪進行中**（2026-11-08 15:16 起，隊長 opus 子 agent）：主軸元優化（小題組學習曲線）＋從空樹長出＋產積木不經 LLM＋收過 train 答錯。產物 [r07/](r07/01-簡報.md)：01 簡報、[02 fable 規劃](r07/02-規劃-fable.md)、[03 設計](r07/03-設計.md)、[代定清單](r07/代定清單.md)完成；15:23 三條 opus 線施工中（A `src/arcagi/seed/` 空樹語言、B `src/arcagi/grow/` 學習循環＋曲線＋元優化、C `solvers/guard.py` 守門）。論壇開輪 p-20261108-151631-35ea、規劃 p-20261108-152039-d68c（精華）；規劃已寄 aos 請 Argon 審（20261108T1520，不等）；回 S1 第三任 arcbatch 介面（20261108T1521）。
+- **第七輪已收輪**（2026-11-08 16:30）：主指標改學習曲線。空樹（32 通用原語，`src/arcagi/seed/`，tag `r07-seed0`）L16 AUC_L：純枚舉 16、只壓縮 24（Δ+1）、演繹分解 32（壓縮省 17 倍節點）、舊手寫樹 72；H8 0；冷啟動卡住。守門入口 `python -m arcagi.solvers.gated`（D-r7-15 正式入口）：evaluation **57/400**（r06 56，退步 0）、過 train 答錯 29→10；training 147、57→20；S1 ee869e5 後再量 57。產物 [r07/](r07/04-總結簡報.md)：01 → 02 fable → [02b Argon 審](r07/02b-Argon審.md) → 03 → 04＋[代定清單](r07/代定清單.md)（18 條）；曲線 `reports/curve-r07/`、守門 `reports/gate-r07/`。論壇開輪 p-20261108-151631-35ea、規劃 p-20261108-152039-d68c、總結 p-20261108-162835-d941（皆精華除開輪）；收輪 PROGRESS 已寄 aos（16:29）；S1 三封回信已寄（15:21、16:09、16:28）。**r08 方向**見 r07/04 §6（解冷啟動：只練不計分的壓縮料）。
 - **S3 第一任已收**（15:43）：families 06f6779 讓純 Python search evaluation 39→44（同大小 15→19，退步 0）、training 95→130；ledger 已核寫。給 S2 的話（S2 已收線，記此備查）：families 的 conn 參數可寫 `"4same@5"`（以 5 當背景重抽物件）或 `"group"`（同色全算一物件），實作在 `objrule/families/scope.py`。仍過 train 答錯：training 60b61512、d687bc17、10fcaaa3；evaluation e7dd8335。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
