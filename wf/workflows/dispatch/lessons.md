@@ -43,3 +43,7 @@ Agent 工具的 worktree 不保證從 main HEAD 開；worktree 線第一步確�
 ## 10. 數「有幾份評測在跑」別用 `pgrep -fc`
 
 它會把含該字串的 shell、等待迴圈都算進去；用「命令列開頭就是那支程式」的比對法。
+
+## 11. inbox_send 同一分鐘寄兩封會互蓋
+
+檔名只到分鐘（`<YYYYMMDDTHHMM>-<sender>-<STATUS>.md`），同分鐘、同寄件者、同狀態的第二封會覆蓋第一封。連寄兩封時隔一分鐘，或寄完 `ls` 對方 inbox 確認兩個檔都在（r07 收輪踩到，回 S1 那封重寄）。
