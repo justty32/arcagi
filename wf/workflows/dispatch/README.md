@@ -62,6 +62,8 @@
 
 | 線 | 完成證據 | 收線時間 |
 |----|---------|---------|
+| r08-A 表達力 | b67dc2a；purity ok、tests/seed 85 綠；+halves L16 pass 0 4→6、nest 無效；golden_prims 747 組＋05 規格 | 2026-11-08 17:05 |
+| r08-B 練習池曲線＋meta | fcf3f1c／51fe268／424d0d0；pytest 564 綠；pool AUC_L 32（=noG1）、foot32 26（clean_P 10→15）、meta 5 回合＋2 動作全不採用 | 2026-11-08 18:10 |
 | r07-A 起點樹 seed | purity ok（32 原語）、pytest 523 綠；L16 pass 0 2→4（fe9b759→35049ef→0349a1d→efdee5d） | 2026-11-08 16:15 |
 | r07-B 學習循環 | 曲線 e181649：empty 16、empty-g1 24（Δ+1）、dec-g1 32（節點 120160→7053）、old 72；pytest 524 綠 | 2026-11-08 16:20 |
 | r07-C 守門 | 3129cc4；training 離線擋錯 35／誤擋 0／淨 138；gated evaluation 全量 57/400、答錯 29→10 | 2026-11-08 15:35 |

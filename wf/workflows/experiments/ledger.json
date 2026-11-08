@@ -170,6 +170,28 @@
    "baseline": "old（r06 手寫樹）72",
    "verdict": "部分：壓縮能讓曲線動（+1 題、省 17 倍節點），但冷啟動死鎖，meta 3 回合 Δ0",
    "record_path": "../../../reports/curve-r07/README.md"
+  },
+  {
+   "id": "2026-11-08-curve-r08",
+   "date": "2026-11-08",
+   "hypothesis": "r08：練習池（只練不計分，32 題主題，預算 25k→400k 迭代加深）＋train 留一／MDL 門能否解空樹冷啟動",
+   "solver": "scripts/r08_curve.py（seed b67dc2a、grow 424d0d0、tag r08-seed0）",
+   "split": "training L16＋H8＋H24＋P32",
+   "result": "AUC_L：dec-g1 32、pool 32（Δ0，P32 全程 0 題過 train）、pool-noG1 32、pool-rand32 32、pool-foot32 26（Δ−1，clean_P 10→15、8 積木、H24 1→2）、pool-halves 48（Δ0，手加拆法、未採用）；H8 全 0；meta 5 回合＋halves／nest 動作全不採用；llm_calls 0",
+   "baseline": "dec-g1 32",
+   "verdict": "否定：主題練習池沒料，冷啟動照舊；立足點主題能長積木但不轉移到 L16",
+   "record_path": "../../../reports/curve-r08/README.md"
+  },
+  {
+   "id": "2026-11-08-gated-r08",
+   "date": "2026-11-08",
+   "hypothesis": "S1 cf83c7f（只用 training 重選支持度門，D-r7-18）後 gated 入口 evaluation",
+   "solver": "python -m arcagi.solvers.gated（tag r08-seed0）",
+   "split": "evaluation",
+   "result": "56/400、errors 0、退步 1（be03b35f，被 training 選的 colormap 支持度門擋）、新解 0；過 train 答錯 10→9",
+   "baseline": "gated-r07s1 57",
+   "verdict": "接受：−1 是不看 evaluation 選門檻的誠實代價",
+   "record_path": "../../../reports/gate-r08/README.md"
   }
  ]
 }
