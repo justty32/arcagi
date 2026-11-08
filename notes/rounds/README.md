@@ -33,6 +33,12 @@
 - 意見 4：epoch＝對 ground truth 收差異改程式；停滯時往上長（改進「改進程式」）或往下長（拆開）。
 - 意見 6：「你要用這套暴力型模式匹配，去優化我們的節點樹，不管是審查或改進或是本體，全都要」。
 - 意見 7：學習迴圈要成為試驗場裡活的 aos 樹，使用者能 cd 進去看、對節點發訊息。
+- **v4 方向題五題全 A**（使用者 19:44 裁；原信 wf/inbox/done/20261108T1945-aos-PROGRESS.md；設計圖 `~/repo/simple_tools/aos/proto8/thinking/2026-11/08/alt-fable/out2/v4-Argon整合.md` §六）。下次開工照做，D-r9-26 結案：
+  1. H24 改純盲測，改用 canary 折配 3-epoch 棘輪守門（取代 v3 裁定 5「H24 逐輪不退」）；
+  2. 無菌鎖允許繳清全額 MDL 先驗稅、過雙折的純 seed AST 進孵化（仍禁 Python 與題目常數）；
+  3. 園區前置夾具 gate(pre)/jig 用「同預算淨解題 ≥+1」，純等價 sieve 仍要 0 掉題；
+  4. `_gradients.jsonl` 改名 `_grad_log.jsonl`；干預全走 `inbox/`，人類提示記 `human_prior_bits`（不分紅），lv2 考核時 `inbox_lock=true`；
+  5. r09 只插 M1～M7 就收輪，`kind:xform` 留作 r10 第一步。
 - 意見 8（18:05，看完 r08 收輪；原信 wf/inbox/done/20261108T1807-aos-PROGRESS.md）：「效果往後退是正常的，這不可能是線性增長，這會是上上下下，但是整體趨勢往上。重點是方向要對」→ 判準不要求每輪單調上升，看多輪趨勢與方向。
 
 ## 使用者經 aos 轉達的前提（原文在 wf/inbox 的信，處理完在 wf/inbox/done/）
