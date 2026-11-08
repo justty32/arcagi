@@ -1,4 +1,5 @@
 #include "prims.hpp"
+#include "objects.hpp"
 #include <algorithm>
 #include <iterator>
 
@@ -92,10 +93,12 @@ std::vector<Step> narrow(const std::string& name,const Grids& states,const Grids
     } else out.push_back({name});
     return out;
 }
-std::vector<Step> candidates(const std::string& name,const Grids& states,const Grids& targets,bool last) {
+std::vector<Step> candidates(const std::string& name,const Grids& states,const Grids& targets,bool last,const Spec& spec) {
+    if (is_object_primitive(name)) return object_candidates(name,states,targets,spec);
     if (name=="colormap") {
         std::vector<Step> out;
-        if (!last) for (int a:colors(states)) for (int b=0;b<=9;++b)
+        auto destinations=colors(targets); destinations.insert(0);
+        if (!last) for (int a:colors(states)) for (int b:destinations)
             if (a!=b) out.push_back({name,Json::Array{Json::Array{a,b}}});
         return out;
     }

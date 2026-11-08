@@ -1,23 +1,55 @@
-"""Run the unchanged Python solver, then verify and vote on native programs."""
+"""Run Python search, native seeded search, then Python prefix completion."""
+
+# Capture process time before importing the solver and its live catalog.
+# ruff: noqa: E402
 
 import time
 
 T0 = time.perf_counter()
+DEADLINE = T0 + 19.0
 
 import json
 import os
+import signal
 import subprocess
 import sys
 import tempfile
+from contextlib import contextmanager
 from pathlib import Path
 
 from arcagi.dsl import background
 from arcagi.dsl.program import cost, from_json, run, to_json
+from arcagi.dsl.registry import PRIMITIVES
 from arcagi.solvers import search, vote
 from arcagi.solvers.trace import TraceRecorder, validate_trace
+from arcagi.tasks import Example, SolverTask
 from arcagi.tasks.validation import task_from_dict
 
 ROOT = Path(__file__).resolve().parent.parent
+ERRORS = (ValueError, IndexError, KeyError)
+
+
+class DeadlineReached(BaseException):
+    """End a bounded Python phase, including candidate generation and learners."""
+
+
+def _alarm(_signum, _frame):
+    raise DeadlineReached
+
+
+@contextmanager
+def until(deadline):
+    """Use wall time so cooperative Python checks cannot overrun the task."""
+    left = deadline - time.perf_counter()
+    if left <= 0:
+        raise DeadlineReached
+    previous = signal.signal(signal.SIGALRM, _alarm)
+    signal.setitimer(signal.ITIMER_REAL, left)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous)
 
 
 def write_result(request, output, trace_path, predictions, trace):
@@ -28,71 +60,243 @@ def write_result(request, output, trace_path, predictions, trace):
         Path(trace_path).write_text(json.dumps(validate_trace(trace)) + "\n")
 
 
+def make_seeds(task, ported, seeds):
+    """Apply unported live primitives once; dedupe by train states."""
+    states = [e.input for e in task.train]
+    targets = [e.output for e in task.train]
+    grids = states + list(task.test)
+    seen = set()
+    for name, primitive in PRIMITIVES.items():
+        if name in ported:
+            continue
+        try:
+            for params in primitive.candidates(states, targets):
+                try:
+                    new = [primitive.apply(grid, *params) for grid in grids]
+                    if any(not (0 < len(g) <= 30 and 0 < len(g[0]) <= 30) for g in new):
+                        continue
+                    signature = tuple(new[: len(states)])
+                    if signature in seen:
+                        continue
+                    seen.add(signature)
+                    seeds.append({"program": [[name, *params]], "grids": new})
+                    if len(seeds) >= 300:
+                        return
+                except ERRORS:
+                    continue
+        except ERRORS:
+            continue
+
+
 def main():
     request_path, output_path = sys.argv[1:3]
     request = json.loads(Path(request_path).read_text())
     trace_path = sys.argv[3] if len(sys.argv) > 3 else request.get("trace_path")
     task = task_from_dict(request["task"], task_id=request["task_id"]).to_solver_task()
-    result = search.solve(task)
-    if result.trace and result.trace.get("metadata", {}).get("solutions", 0) > 0:
+    phases = {
+        "startup": time.perf_counter() - T0,
+        "python": 0.0,
+        "seeds": 0.0,
+        "cpp": 0.0,
+        "prefix_py": 0.0,
+        "verify": 0.0,
+    }
+    origins = {"cpp": 0, "seed": 0, "prefix_py": 0}
+    start = time.perf_counter()
+    result = None
+    try:
+        # Keep the baseline solver call and successful result unchanged. The
+        # external task deadline also bounds deferred fits and rewrite rescue.
+        with until(DEADLINE - 0.15):
+            result = search.solve(task)
+    except DeadlineReached:
+        pass
+    phases["python"] = time.perf_counter() - start
+    if (
+        result
+        and result.trace
+        and result.trace.get("metadata", {}).get("solutions", 0) > 0
+    ):
         trace = validate_trace(result.trace)
         trace["solver"] = "native-s1"
-        trace["metadata"].update({
-            "source": "python", "arcsearch": {}, "cpp_solutions": 0, "verified": 0,
-        })
+        trace["metadata"].update(
+            {
+                "source": "python",
+                "top1_origin": "python",
+                "arcsearch": {},
+                "cpp_solutions": 0,
+                "verified": trace["metadata"]["solutions"],
+                "seeds": 0,
+                "prefixes_tried": 0,
+                "solutions_by_origin": origins,
+                "phase_seconds": phases,
+            }
+        )
         write_result(request, output_path, trace_path, result.predictions, trace)
         return
 
     native = {"solutions": [], "stats": {}}
     native_error = None
-    remaining = 19.0 - (time.perf_counter() - T0)
-    if remaining > 1.0:
-        with tempfile.TemporaryDirectory(prefix="arcsearch-", dir=ROOT / "native" / "bin") as tmp:
-            path = Path(tmp) / "solutions.json"
+    seeds, prefixes, solutions = [], [], []
+    solution_origins = {}
+    prefixes_tried = 0
+    bg = background.task_background(
+        [e.input for e in task.train] + [e.output for e in task.train]
+    )
+    with tempfile.TemporaryDirectory(
+        prefix="arcsearch-", dir=ROOT / "native" / "bin"
+    ) as tmp:
+        tmp = Path(tmp)
+        start = time.perf_counter()
+        try:
+            with until(min(DEADLINE - 0.15, start + 1.5)), background.task_context(bg):
+                ported = json.loads(
+                    subprocess.check_output(
+                        [str(ROOT / "native" / "bin" / "arcsearch"), "--list-ported"],
+                        text=True,
+                        timeout=max(
+                            0.01, min(1.5, DEADLINE - time.perf_counter() - 0.15)
+                        ),
+                    )
+                )
+                make_seeds(task, set(ported), seeds)
+        except (DeadlineReached, subprocess.SubprocessError, OSError, ValueError):
+            pass
+        phases["seeds"] = time.perf_counter() - start
+        budget = DEADLINE - time.perf_counter() - 4.0
+        if budget >= 1.0:
+            start = time.perf_counter()
+            path, seed_path, prefix_path = (
+                tmp / "solutions.json",
+                tmp / "seeds.json",
+                tmp / "prefixes.json",
+            )
+            seed_path.write_text(json.dumps(seeds))
             try:
-                completed = subprocess.run([
-                    str(ROOT / "native" / "bin" / "arcsearch"),
-                    "--request", str(Path(request_path).resolve()),
-                    "--budget", str(remaining - 0.5), "--out", str(path),
-                ], timeout=remaining + 2, check=True, capture_output=True, text=True)
+                completed = subprocess.run(
+                    [
+                        str(ROOT / "native" / "bin" / "arcsearch"),
+                        "--request",
+                        str(Path(request_path).resolve()),
+                        "--budget",
+                        str(budget),
+                        "--seeds",
+                        str(seed_path),
+                        "--dump-prefixes",
+                        "20",
+                        "--prefix-out",
+                        str(prefix_path),
+                        "--out",
+                        str(path),
+                    ],
+                    timeout=max(0.01, DEADLINE - time.perf_counter() - 0.8),
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
                 native = json.loads(path.read_text())
+                prefixes = json.loads(prefix_path.read_text())
                 if completed.stderr:
                     native_error = completed.stderr.strip()
             except (subprocess.SubprocessError, OSError, ValueError) as exc:
                 native_error = str(exc)
+            phases["cpp"] = time.perf_counter() - start
 
-    solutions = []
-    grids = [e.input for e in task.train] + [e.output for e in task.train]
-    with background.task_context(background.task_background(grids)):
-        for order, solution in enumerate(native["solutions"]):
+        def verify(raw_program, origin):
             try:
-                program = from_json(json.dumps(solution["program"]))
-                if not all(run(program, e.input) == e.output for e in task.train):
+                with until(DEADLINE - 0.15), background.task_context(bg):
+                    program = from_json(json.dumps(raw_program))
+                    if len(program) > 4 and program[-1][0] == "local_rule":
+                        return
+                    if not all(run(program, e.input) == e.output for e in task.train):
+                        return
+                    tests = [run(program, grid) for grid in task.test]
+                    order = len(solutions)
+                    solutions.append((cost(program), order, program, tests))
+                    solution_origins[order] = origin
+                    origins[origin] += 1
+            except (*ERRORS, DeadlineReached):
+                return
+
+        start = time.perf_counter()
+        for solution in native["solutions"]:
+            if time.perf_counter() >= DEADLINE - 0.15:
+                break
+            verify(solution["program"], solution.get("origin", "cpp"))
+        phases["verify"] += time.perf_counter() - start
+
+        start = time.perf_counter()
+        verify_before = phases["verify"]
+        if not solutions:
+            for prefix in prefixes:
+                if time.perf_counter() >= DEADLINE - 0.8:
+                    break
+                prefixes_tried += 1
+                try:
+                    with until(DEADLINE - 0.8), background.task_context(bg):
+                        program = from_json(json.dumps(prefix["program"]))
+                        sub = SolverTask(
+                            task.task_id,
+                            tuple(
+                                Example(run(program, e.input), e.output)
+                                for e in task.train
+                            ),
+                            tuple(run(program, grid) for grid in task.test),
+                        )
+                    left = DEADLINE - 0.8 - time.perf_counter()
+                    with until(min(DEADLINE - 0.8, time.perf_counter() + 0.4)):
+                        finished = search.search(
+                            sub, max_depth=1, budget=min(0.4, left)
+                        )
+                    for _value, _order, suffix, _tests in finished.solutions:
+                        before = time.perf_counter()
+                        verify([*program, *suffix], "prefix_py")
+                        phases["verify"] += time.perf_counter() - before
+                except (*ERRORS, DeadlineReached):
                     continue
-                tests = [run(program, grid) for grid in task.test]
-                solutions.append((cost(program), order, program, tests))
-            except Exception:
-                continue
-    chosen = vote.choose(solutions, penalized=search.PENALIZED, shape_hint=vote.predict_hint(task))
+        phases["prefix_py"] = (
+            time.perf_counter() - start - (phases["verify"] - verify_before)
+        )
+
+    chosen = vote.choose(
+        solutions, penalized=search.PENALIZED, shape_hint=vote.predict_hint(task)
+    )
     recorder = TraceRecorder(solver="native-s1")
     ids = []
     for solution in chosen.ranked[:30]:
-        value, _order, program, _tests = solution
-        ids.append(recorder.attempt(
-            f"program of cost {value:.1f}", kind="program", program=to_json(program),
-            train_results=[True] * len(task.train),
-            data={"cost": value, "votes": chosen.votes_of(solution)},
-        ))
+        value, order, program, _tests = solution
+        ids.append(
+            recorder.attempt(
+                f"program of cost {value:.1f}",
+                kind="program",
+                program=to_json(program),
+                train_results=[True] * len(task.train),
+                data={
+                    "cost": value,
+                    "votes": chosen.votes_of(solution),
+                    "origin": solution_origins[order],
+                },
+            )
+        )
     recorder.select(ids[0] if ids else None)
     recorder.reasoning = (
-        "Python-verified native program selected by the standard vote."
-        if ids else "No verified program; echo test inputs."
+        "Python-verified program selected by the standard vote."
+        if ids
+        else "No verified program; echo test inputs."
     )
     recorder.metadata = {
-        "source": "native", "arcsearch": native["stats"],
-        "cpp_solutions": len(native["solutions"]), "verified": len(solutions),
-        "solutions": len(chosen.ranked), "second": chosen.second,
+        "source": "native",
+        "top1_origin": solution_origins[chosen.ranked[0][1]] if ids else None,
+        "arcsearch": native["stats"],
+        "cpp_solutions": len(native["solutions"]),
+        "verified": len(solutions),
+        "solutions": len(chosen.ranked),
+        "second": chosen.second,
         "shape_hint_applied": chosen.hint_applied,
+        "seeds": len(seeds),
+        "prefixes_tried": prefixes_tried,
+        "solutions_by_origin": origins,
+        "phase_seconds": phases,
     }
     if native_error:
         recorder.metadata["native_error"] = native_error

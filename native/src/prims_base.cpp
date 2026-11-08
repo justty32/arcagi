@@ -1,5 +1,6 @@
 #include "prims.hpp"
 #include "learners.hpp"
+#include "objects.hpp"
 #include <algorithm>
 
 namespace arc {
@@ -7,10 +8,15 @@ const std::unordered_set<std::string>& ported() {
     static const std::unordered_set<std::string> names={
         "flip_lr","flip_ud","transpose","rot90","rot180","rot270","anti_transpose",
         "upscale","downscale","tile","mirror_tile","crop_bbox","split_overlay","crop_object",
-        "fill_enclosed","self_tile","symmetrize","gravity","pick_cell","overlay_cells","cells_to_pixels","fill_cells"};
+        "fill_enclosed","self_tile","symmetrize","gravity","pick_cell","overlay_cells","cells_to_pixels","fill_cells",
+        "recolor_sel","delete_sel","keep_sel","fill_holes","move_sel","extend_sel"};
     return names;
 }
 Spec::Spec(const Json& j) {
+    if (j.fields().contains("predicates")) predicates=j["predicates"].fields();
+    if (j.fields().contains("predicate_names")) {
+        for (const auto& name:j["predicate_names"].items()) predicate_names.push_back(name.str());
+    } else for (const auto& [name,body]:predicates) { (void)body; predicate_names.push_back(name); }
     for (const auto& name:j["live"].items()) live.insert(name.str());
     for (const auto& [name,program]:j["macros"].fields()) {
         bool ok=live.contains(name);
@@ -118,6 +124,7 @@ Grid apply_step(const Step& s,const Grid& g,const Spec& spec,bool in_macro) {
     const std::string& name=s.at(0).str();
     if (!in_macro && name=="colormap") return apply_colormap(g,s.at(1));
     if (!in_macro && name=="local_rule") return apply_local_rule(g,s.at(1).str(),s.at(2));
+    if (!in_macro && name=="object_colormap") return apply_object_colormap(g,s.at(1));
     if (!in_macro && !spec.live.contains(name)) fail();
     if (auto it=spec.macros.find(name);it!=spec.macros.end() && !in_macro) {
         Grid out=g;
@@ -125,6 +132,7 @@ Grid apply_step(const Step& s,const Grid& g,const Spec& spec,bool in_macro) {
         return out;
     }
     if (!ported().contains(name)) fail();
+    if (is_object_primitive(name)) return apply_objects(s,g,spec);
     if (name=="self_tile" || name=="symmetrize" || name=="gravity") return apply_more(s,g);
     if (name=="pick_cell" || name=="overlay_cells" || name=="cells_to_pixels" || name=="fill_cells") return apply_cells(s,g);
     return apply_base(s,g);

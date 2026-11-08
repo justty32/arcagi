@@ -16,6 +16,8 @@ struct Spec {
     std::vector<std::string> names;
     std::unordered_set<std::string> live;
     std::map<std::string,Program> macros;
+    std::vector<std::string> predicate_names;
+    std::map<std::string,Json> predicates;
     explicit Spec(const Json& j);
 };
 Grid apply_base(const Step& s,const Grid& g);
@@ -28,6 +30,6 @@ struct Layout { int color; std::vector<Point> rows,cols; };
 std::optional<Layout> split(const Grid& g);
 Grids cut(const Grid& g,const Layout& layout);
 std::vector<Step> narrow(const std::string& name,const Grids& states,const Grids& targets);
-std::vector<Step> candidates(const std::string& name,const Grids& states,const Grids& targets,bool last);
+std::vector<Step> candidates(const std::string& name,const Grids& states,const Grids& targets,bool last,const Spec& spec);
 double cost(const Program& program);
 }

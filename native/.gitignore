@@ -1,2 +1,6 @@
 bin/
 spec.json
+.uv-cache/
+.pytest-tmp/
+build.log
+validation/
