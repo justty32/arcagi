@@ -74,11 +74,12 @@ def build_ops(lib: Library, order: dict, bodies: bool) -> list[Op]:
 def leaf_entries(
     lib: Library,
     xs: tuple,
+    in_type: Type,
     consts: tuple[int, ...],
     run_expanded: Callable[[Program], tuple | None],
 ) -> Iterator[tuple[Program, Type, tuple]]:
     """Size-1 terms; blocks count as one node whatever their expanded size."""
-    yield ("$in",), INPUT, xs
+    yield ("$in",), in_type, xs
     for c in consts:
         yield c, INT, (c,) * len(xs)
     for b in lib.blocks:
@@ -116,8 +117,10 @@ class BodyPool:
         lib: Library,
         probes: list,
         consts: tuple[int, ...],
+        in_type: Type | None = INPUT,
     ) -> None:
         self.consts = consts
+        self.in_type = in_type  # None: bodies cannot reference $in
         self.arg_types = arg_types
         self.n = len(arg_types)
         self.lib = lib
@@ -173,12 +176,13 @@ class BodyPool:
                 self._add(
                     1, (f"${k}",), self.arg_types[k], tuple(a[k] for _, a in pr), 0
                 )
-            self._add(1, ("$in",), INPUT, tuple(x for x, _ in pr), 0)
+            if self.in_type is not None:
+                self._add(1, ("$in",), self.in_type, tuple(x for x, _ in pr), 0)
             for c in self.consts:
                 self._add(1, c, INT, (c,) * len(pr), 0)
             return
         for op in self.ops:
-            for comp in _splits(size - 1, op.arity):
+            for comp in splits(size - 1, op.arity):
                 if op.comm and comp[0] > comp[1]:
                     continue
                 for subst, chosen in self._choose(op, comp, 0, {}, []):
@@ -237,11 +241,14 @@ class BodyPool:
         return tuple(out)
 
 
-def _splits(total: int, k: int) -> Iterator[tuple[int, ...]]:
+def splits(total: int, k: int) -> Iterator[tuple[int, ...]]:
+    """Ordered ways to split ``total`` among ``k`` arguments, each at least 1."""
+    if k <= 0:
+        return
     if k == 1:
         if total >= 1:
             yield (total,)
         return
     for s in range(1, total - k + 2):
-        for tail in _splits(total - s, k - 1):
+        for tail in splits(total - s, k - 1):
             yield (s, *tail)

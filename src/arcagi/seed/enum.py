@@ -20,7 +20,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 from .interp import MAX_STEPS, Program, compile_prog, expand, to_value
-from .lam import BodyPool, Op, build_ops, leaf_entries
+from .lam import BodyPool, Op, build_ops, leaf_entries, splits
 from .library import Library
 from .prims import CONSTS, task_consts
 from .types import BOOL, INPUT, INT, FnT, ListT, Type, is_ground, resolve, unify
@@ -69,10 +69,19 @@ class Enumerator:
         lib: Library,
         budget_nodes: int,
         order: dict | None = None,
+        in_type: Type = INPUT,
+        out_type: Type = INPUT,
+        extra: tuple = (),
+        sub: bool = False,
     ) -> None:
+        """``sub``: a decomposition subproblem; lambda bodies then cannot see
+        ``$in`` and no near list is kept. ``extra``: more (prog, type, vals)
+        leaves, e.g. a position variable."""
         self.xs = tuple(to_value(i) for i, _ in train)
         self.outs = tuple(to_value(o) for _, o in train)
         self.consts = task_consts((self.xs, self.outs))
+        self.in_type, self.out_type = in_type, out_type
+        self.extra, self.sub = extra, sub
         self.lib = lib
         self.budget = budget_nodes
         self.nodes = 0
@@ -93,11 +102,11 @@ class Enumerator:
             self.bank[size].setdefault(typ, []).append(
                 _Entry(prog, typ, vals, len(self.seen))
             )
-            if typ == INPUT:
-                if vals == self.outs:
-                    self.found = prog
-                    self.nodes_to_first = self.nodes
-                    raise _DoneError
+            if typ == self.out_type and vals == self.outs:
+                self.found = prog
+                self.nodes_to_first = self.nodes
+                raise _DoneError
+            if typ == INPUT and not self.sub:
                 sc = sum(map(elem_score, vals, self.outs)) / len(self.outs)
                 item = (sc, -self.nodes, prog)
                 if len(self.near) < NEAR_KEEP:
@@ -118,13 +127,15 @@ class Enumerator:
     def run(self) -> None:
         self.bank.append({})
         for prog, typ, vals in leaf_entries(
-            self.lib, self.xs, self.consts, self._run_expanded
+            self.lib, self.xs, self.in_type, self.consts, self._run_expanded
         ):
+            self._offer(1, prog, typ, vals)
+        for prog, typ, vals in self.extra:
             self._offer(1, prog, typ, vals)
         for size in range(2, MAX_SIZE + 1):
             self.bank.append({})
             for op in self.ops:
-                for comp in _compositions(size - 1, op.arity):
+                for comp in splits(size - 1, op.arity):
                     if op.comm and comp[0] > comp[1]:
                         continue
                     self._apply(size, op, comp)
@@ -200,7 +211,13 @@ class Enumerator:
             return None
         pool = self.pools.get(arg_types)
         if pool is None:
-            pool = BodyPool(arg_types, self.lib, self._probes(arg_types), self.consts)
+            pool = BodyPool(
+                arg_types,
+                self.lib,
+                self._probes(arg_types),
+                self.consts,
+                None if self.sub else self.in_type,
+            )
             self.pools[arg_types] = pool
         return pool
 
@@ -242,23 +259,13 @@ class Enumerator:
         return out
 
 
-def _compositions(total: int, k: int) -> Iterator[tuple[int, ...]]:
-    """Ordered ways to split ``total`` among args (each at least 1)."""
-    if k == 0:
-        return
-    mins = [1] * k
-
-    def rec(i: int, left: int) -> Iterator[tuple[int, ...]]:
-        if i == k - 1:
-            if left >= mins[i]:
-                yield (left,)
-            return
-        rest = sum(mins[i + 1 :])
-        for s in range(mins[i], left - rest + 1):
-            for tail in rec(i + 1, left - s):
-                yield (s, *tail)
-
-    yield from rec(0, total)
+def search(en: Enumerator) -> Enumerator:
+    """Run an enumerator until it finds a program or spends its budget."""
+    try:
+        en.run()
+    except _DoneError:
+        pass
+    return en
 
 
 def solve(
@@ -266,13 +273,19 @@ def solve(
     lib: Library,
     budget_nodes: int,
     order: dict | None = None,
+    decompose: bool = True,
 ) -> Result:
-    """Search for the smallest program mapping every train input to its output."""
+    """Search for the smallest program mapping every train input to its output.
+
+    With ``decompose`` (default) the budget is shared between direct search and
+    generic deductive splits (``seed.decomp``); ``decompose=False`` is the plain
+    bottom-up enumerator."""
     t0 = time.perf_counter()
-    en = Enumerator(train, lib, budget_nodes, order)
-    try:
-        en.run()
-    except _DoneError:
-        pass
+    if decompose:
+        from .decomp import solve_split
+
+        prog, nodes, first, near = solve_split(train, lib, budget_nodes, order)
+        return Result(prog, nodes, first, time.perf_counter() - t0, near)
+    en = search(Enumerator(train, lib, budget_nodes, order))
     near = [(p, sc) for sc, _, p in sorted(en.near, reverse=True)]
     return Result(en.found, en.nodes, en.nodes_to_first, time.perf_counter() - t0, near)
