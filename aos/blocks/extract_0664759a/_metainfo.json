@@ -1,26 +1,31 @@
 {
   "name": "extract_0664759a",
   "kind": "extract",
-  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned\", \"4multi\"], \"prop\": \"dir_to\"}",
   "params": [],
   "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned\", \"4multi\"], \"prop\": \"dir_to\"}",
   "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/extract",
-  "score": 12,
+  "score": 7,
   "length": 4,
   "support_tasks": [
     "05f2a901",
-    "29c11459",
-    "2c608aff",
-    "56dc2b01",
     "673ef223",
     "6855a6e4",
     "a48eeaf7",
     "b548a754",
     "b7249182",
-    "dc433765",
-    "ded97339",
+    "f8a8fe49"
+  ],
+  "synth_rate": 0.531,
+  "synth_support": [
+    "05f2a901",
+    "673ef223",
+    "6855a6e4",
+    "a48eeaf7",
+    "b548a754",
+    "b7249182",
     "f8a8fe49"
   ],
   "covered_by": "extract_51692a07"

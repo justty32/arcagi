@@ -7,7 +7,7 @@
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",
-  "score": 7,
+  "score": 3,
   "length": 1,
   "targets": [
     "h_out",
@@ -16,11 +16,13 @@
     "w_out"
   ],
   "support_tasks": [
-    "3bd67248",
-    "7447852a",
     "ac0a08a4",
-    "ba26e723",
-    "d406998b",
+    "d631b094",
+    "feca6190"
+  ],
+  "synth_rate": 0.393,
+  "synth_support": [
+    "ac0a08a4",
     "d631b094",
     "feca6190"
   ]

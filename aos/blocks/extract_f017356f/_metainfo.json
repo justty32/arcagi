@@ -1,0 +1,21 @@
+{
+  "name": "extract_f017356f",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction [\"size\", [\"smallest\", \"4same\"]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 2,
+  "length": 2,
+  "support_tasks": [
+    "681b3aeb",
+    "b94a9452"
+  ],
+  "synth_rate": 0.812,
+  "synth_support": [
+    "681b3aeb",
+    "b94a9452"
+  ]
+}

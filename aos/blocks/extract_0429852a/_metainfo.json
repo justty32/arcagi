@@ -1,0 +1,19 @@
+{
+  "name": "extract_0429852a",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"same_shape_other_color\", \"4same\"], \"prop\": \"color\"}",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 1,
+  "length": 4,
+  "support_tasks": [
+    "776ffc46"
+  ],
+  "synth_rate": 1.0,
+  "synth_support": [
+    "776ffc46"
+  ]
+}

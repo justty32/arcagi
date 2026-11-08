@@ -9,6 +9,7 @@ enumerating and print what they got.
 """
 
 import json
+import os
 from pathlib import Path
 
 from .. import REPO_ROOT, read_json
@@ -19,6 +20,12 @@ DEFAULT_TOTAL = 25000  # ~ r03 enumeration: 1500 extract + 1620 formula + 21321 
 DEFAULT_FLOOR = 0.2
 MIN_CANDIDATES = 40
 TOP_EXTRACTS = 20
+
+
+def pool_root() -> Path:
+    """``$ARCAGI_POOL`` if set (e.g. an empty scratch pool), else ``aos/pool``."""
+    env = os.environ.get("ARCAGI_POOL")
+    return Path(env) if env else POOL
 
 
 def shares(rows: dict[str, dict], gens: list[str], floor: float) -> dict:
@@ -34,8 +41,9 @@ def shares(rows: dict[str, dict], gens: list[str], floor: float) -> dict:
     }
 
 
-def latest_epoch(pool: Path = POOL) -> Path | None:
+def latest_epoch(pool: Path | None = None) -> Path | None:
     """Newest ``epochs/<n>.json`` by epoch number, or None."""
+    pool = pool or pool_root()
     files = [p for p in (pool / "epochs").glob("*.json") if p.stem.isdigit()]
     return max(files, key=lambda p: int(p.stem)) if files else None
 
@@ -48,7 +56,7 @@ def allocate(epoch_file: Path | str | None = None) -> dict[str, int]:
     generator gets an equal share.
     """
     path = Path(epoch_file) if epoch_file is not None else latest_epoch()
-    pool = path.parent.parent if path is not None else POOL
+    pool = path.parent.parent if path is not None else pool_root()
     config = read_json(pool / "config.json", {}) or {}
     total = int(config.get("generator_total", DEFAULT_TOTAL))  # type: ignore[union-attr]
     floor = float(config.get("generator_floor", DEFAULT_FLOOR))  # type: ignore[union-attr]
@@ -64,8 +72,9 @@ def allocate(epoch_file: Path | str | None = None) -> dict[str, int]:
     return out
 
 
-def income(pool: Path = POOL) -> dict[str, float]:
+def income(pool: Path | None = None) -> dict[str, float]:
     """Ledger score per block: total dividends so far (``wallets.json``)."""
+    pool = pool or pool_root()
     rows = (read_json(pool / "wallets.json", {}) or {}).get("blocks", {})  # type: ignore[union-attr]
     return {n: float(r.get("income_total", 0)) for n, r in rows.items()}
 
@@ -97,6 +106,7 @@ __all__ = [
     "allocate",
     "announce",
     "income",
+    "pool_root",
     "shares",
     "top_extracts",
 ]

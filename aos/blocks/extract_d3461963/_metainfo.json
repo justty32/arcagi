@@ -4,7 +4,7 @@
   "doc": "Generated extraction [\"color\", [\"smallest\", \"8multi\"]]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/extract",
   "score": 4,

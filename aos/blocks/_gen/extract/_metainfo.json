@@ -3,22 +3,48 @@
   "kind": "generator",
   "doc": "Enumerates selector x property extractions; scored on training.",
   "params": [
-    "live_cap"
+    "live_cap",
+    "config"
   ],
   "cost": 1,
   "status": "live",
   "counter_uses": 0,
   "produces": "extract",
-  "gen_seconds": 8.49,
+  "gen_seconds": 3.49,
   "last_run": {
-    "split": "training",
     "tasks": 400,
-    "scored": 1572,
-    "object_scored": 72,
-    "live": 50,
+    "scored": 380,
+    "object_scored": 80,
+    "live": 14,
     "covered": 40,
     "over_cap": 0,
-    "dropped": 580,
-    "gen_seconds": 8.49
+    "dropped": 269,
+    "synth": {
+      "claims": 461,
+      "failed": 170,
+      "protected": [
+        "extract_713b1328",
+        "extract_f23ec080"
+      ]
+    },
+    "gen_seconds": 3.49
+  },
+  "config": {
+    "props": [
+      "subgrid",
+      "object",
+      "color",
+      "size",
+      "count"
+    ],
+    "conns": [
+      "4same",
+      "8same",
+      "4multi",
+      "8multi"
+    ],
+    "pred_selectors": false,
+    "object_scope": true,
+    "min_support": 1
   }
 }

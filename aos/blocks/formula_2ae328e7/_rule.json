@@ -1,0 +1,12 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "lin",
+    "n_color",
+    2,
+    1
+  ],
+  "score": 1
+}

@@ -1,17 +1,22 @@
 {
   "name": "extract_79c5355e",
   "kind": "extract",
-  "doc": "Generated extraction [\"size\", [\"smallest\", \"8same\"]]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "doc": "Generated extraction [\"size\", [\"smallest\", \"8same\"]]",
+  "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/extract",
-  "score": 3,
+  "score": 2,
   "length": 2,
   "support_tasks": [
     "681b3aeb",
-    "b94a9452",
-    "d631b094"
-  ]
+    "b94a9452"
+  ],
+  "synth_rate": 0.542,
+  "synth_support": [
+    "681b3aeb",
+    "b94a9452"
+  ],
+  "covered_by": "extract_f017356f"
 }

@@ -1,0 +1,12 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": [
+    "color",
+    [
+      "smallest",
+      "8same"
+    ]
+  ]
+}

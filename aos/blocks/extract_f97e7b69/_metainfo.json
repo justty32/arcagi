@@ -1,0 +1,19 @@
+{
+  "name": "extract_f97e7b69",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction [\"color\", [\"smallest\", \"8same\"]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 1,
+  "length": 2,
+  "support_tasks": [
+    "aabf363d"
+  ],
+  "synth_rate": 0.333,
+  "synth_support": [
+    "aabf363d"
+  ]
+}

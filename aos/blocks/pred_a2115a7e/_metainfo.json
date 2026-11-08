@@ -1,0 +1,29 @@
+{
+  "name": "pred_a2115a7e",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"eq\", \"is_smallest\", 0], [\"rank\", \"w\", \"max\"]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 5.0,
+  "literals": 2,
+  "tasks": [
+    "0e206a2e",
+    "1f642eb9",
+    "5168d44c",
+    "a1570a43",
+    "c1d99e64",
+    "ecdecbb3"
+  ],
+  "synth_rate": 0.562,
+  "synth_support": [
+    "0e206a2e",
+    "1f642eb9",
+    "5168d44c",
+    "a1570a43",
+    "c1d99e64",
+    "ecdecbb3"
+  ]
+}

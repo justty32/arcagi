@@ -1,0 +1,35 @@
+{
+  "name": "pred_00c43cf8",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"rank\", \"color_count\", \"min\"]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 8.5,
+  "literals": 1,
+  "tasks": [
+    "0dfd9992",
+    "29ec7d0e",
+    "3345333e",
+    "484b58aa",
+    "5168d44c",
+    "a1570a43",
+    "a78176bb",
+    "b8825c91",
+    "ba97ae07"
+  ],
+  "synth_rate": 0.682,
+  "synth_support": [
+    "0dfd9992",
+    "29ec7d0e",
+    "3345333e",
+    "484b58aa",
+    "5168d44c",
+    "a1570a43",
+    "a78176bb",
+    "b8825c91",
+    "ba97ae07"
+  ]
+}

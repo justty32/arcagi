@@ -1,0 +1,23 @@
+{
+  "name": "formula_2ae328e7",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"n_color\", 2, 1]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 3,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "eb5a1d5d"
+  ],
+  "synth_rate": 1.0,
+  "synth_support": [
+    "eb5a1d5d"
+  ]
+}

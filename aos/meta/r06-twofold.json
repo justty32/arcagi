@@ -1,0 +1,1080 @@
+{
+ "folds": {
+  "odd->even": {
+   "A0": {
+    "score": -111.0,
+    "explained": 83,
+    "bad": 194,
+    "kinds": {
+     "pred": {
+      "live": 60,
+      "claims": 256,
+      "bad": 166
+     },
+     "extract": {
+      "live": 26,
+      "claims": 27,
+      "bad": 11
+     },
+     "formula": {
+      "live": 16,
+      "claims": 143,
+      "bad": 17
+     }
+    },
+    "paired": null
+   },
+   "A1": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": null
+   },
+   "A1-shuffled": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "extract/1": {
+    "score": 18.0,
+    "explained": 82,
+    "bad": 64,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 10,
+      "claims": 17,
+      "bad": 5
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 3,
+     "losses": 1,
+     "net": 2
+    }
+   },
+   "extract/2": {
+    "score": 20.0,
+    "explained": 83,
+    "bad": 63,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 10,
+      "claims": 14,
+      "bad": 4
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 4,
+     "losses": 0,
+     "net": 4
+    }
+   },
+   "extract/3": {
+    "score": 14.0,
+    "explained": 81,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 11,
+      "claims": 20,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 2,
+     "net": -2
+    }
+   },
+   "extract/4": {
+    "score": 14.0,
+    "explained": 81,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 15,
+      "claims": 21,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 2,
+     "net": -2
+    }
+   },
+   "extract/5": {
+    "score": 13.0,
+    "explained": 80,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 12,
+      "claims": 18,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 3,
+     "net": -3
+    }
+   },
+   "extract/6": {
+    "score": 18.0,
+    "explained": 83,
+    "bad": 65,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 12,
+      "claims": 18,
+      "bad": 6
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 2,
+     "losses": 0,
+     "net": 2
+    }
+   },
+   "extract/7": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/1": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/2": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/3": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/4": {
+    "score": 12.0,
+    "explained": 80,
+    "bad": 68,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 6,
+      "claims": 178,
+      "bad": 10
+     }
+    },
+    "paired": {
+     "wins": 1,
+     "losses": 5,
+     "net": -4
+    }
+   },
+   "formula/5": {
+    "score": 16.0,
+    "explained": 83,
+    "bad": 67,
+    "kinds": {
+     "pred": {
+      "live": 23,
+      "claims": 104,
+      "bad": 50
+     },
+     "extract": {
+      "live": 16,
+      "claims": 23,
+      "bad": 8
+     },
+     "formula": {
+      "live": 8,
+      "claims": 130,
+      "bad": 9
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   }
+  },
+  "even->odd": {
+   "A0": {
+    "score": -61.0,
+    "explained": 95,
+    "bad": 156,
+    "kinds": {
+     "pred": {
+      "live": 60,
+      "claims": 240,
+      "bad": 115
+     },
+     "extract": {
+      "live": 26,
+      "claims": 42,
+      "bad": 19
+     },
+     "formula": {
+      "live": 23,
+      "claims": 165,
+      "bad": 22
+     }
+    },
+    "paired": null
+   },
+   "A1": {
+    "score": -30.0,
+    "explained": 93,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": null
+   },
+   "A1-shuffled": {
+    "score": -30.0,
+    "explained": 93,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "extract/1": {
+    "score": -28.0,
+    "explained": 93,
+    "bad": 121,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 8,
+      "claims": 15,
+      "bad": 5
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 2,
+     "losses": 0,
+     "net": 2
+    }
+   },
+   "extract/2": {
+    "score": -28.0,
+    "explained": 92,
+    "bad": 120,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 8,
+      "claims": 18,
+      "bad": 4
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 3,
+     "losses": 1,
+     "net": 2
+    }
+   },
+   "extract/3": {
+    "score": -29.0,
+    "explained": 93,
+    "bad": 122,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 7,
+      "claims": 17,
+      "bad": 6
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 1,
+     "losses": 0,
+     "net": 1
+    }
+   },
+   "extract/4": {
+    "score": -31.0,
+    "explained": 92,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 9,
+      "claims": 22,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 1,
+     "net": -1
+    }
+   },
+   "extract/5": {
+    "score": -33.0,
+    "explained": 90,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 7,
+      "claims": 18,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 3,
+     "net": -3
+    }
+   },
+   "extract/6": {
+    "score": -33.0,
+    "explained": 92,
+    "bad": 125,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 9,
+      "claims": 23,
+      "bad": 9
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 3,
+     "net": -3
+    }
+   },
+   "extract/7": {
+    "score": -27.0,
+    "explained": 93,
+    "bad": 120,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 9,
+      "claims": 20,
+      "bad": 4
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 3,
+     "losses": 0,
+     "net": 3
+    }
+   },
+   "formula/1": {
+    "score": -30.0,
+    "explained": 93,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/2": {
+    "score": -30.0,
+    "explained": 93,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/3": {
+    "score": -30.0,
+    "explained": 93,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   },
+   "formula/4": {
+    "score": -40.0,
+    "explained": 93,
+    "bad": 133,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 11,
+      "claims": 185,
+      "bad": 28
+     }
+    },
+    "paired": {
+     "wins": 2,
+     "losses": 11,
+     "net": -9
+    }
+   },
+   "formula/5": {
+    "score": -30.0,
+    "explained": 93,
+    "bad": 123,
+    "kinds": {
+     "pred": {
+      "live": 47,
+      "claims": 234,
+      "bad": 98
+     },
+     "extract": {
+      "live": 10,
+      "claims": 23,
+      "bad": 7
+     },
+     "formula": {
+      "live": 15,
+      "claims": 156,
+      "bad": 18
+     }
+    },
+    "paired": {
+     "wins": 0,
+     "losses": 0,
+     "net": 0
+    }
+   }
+  }
+ },
+ "verdict": {
+  "extract/1": {
+   "nets": [
+    2,
+    2
+   ],
+   "accepted": true,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "size",
+     "count"
+    ],
+    "conns": [
+     "4same",
+     "8same",
+     "4multi",
+     "8multi"
+    ],
+    "pred_selectors": true,
+    "object_scope": false,
+    "min_support": 1
+   }
+  },
+  "extract/2": {
+   "nets": [
+    4,
+    2
+   ],
+   "accepted": true,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "size",
+     "count"
+    ],
+    "conns": [
+     "4same",
+     "8same",
+     "4multi",
+     "8multi"
+    ],
+    "pred_selectors": false,
+    "object_scope": true,
+    "min_support": 1
+   }
+  },
+  "extract/3": {
+   "nets": [
+    -2,
+    1
+   ],
+   "accepted": false,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "size",
+     "count"
+    ],
+    "conns": [
+     "4same",
+     "8same",
+     "4multi",
+     "8multi"
+    ],
+    "pred_selectors": true,
+    "object_scope": true,
+    "min_support": 2
+   }
+  },
+  "extract/4": {
+   "nets": [
+    -2,
+    -1
+   ],
+   "accepted": false,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "size"
+    ],
+    "conns": [
+     "4same",
+     "8same",
+     "4multi",
+     "8multi"
+    ],
+    "pred_selectors": true,
+    "object_scope": true,
+    "min_support": 1
+   }
+  },
+  "extract/5": {
+   "nets": [
+    -3,
+    -3
+   ],
+   "accepted": false,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "count"
+    ],
+    "conns": [
+     "4same",
+     "8same",
+     "4multi",
+     "8multi"
+    ],
+    "pred_selectors": true,
+    "object_scope": true,
+    "min_support": 1
+   }
+  },
+  "extract/6": {
+   "nets": [
+    2,
+    -3
+   ],
+   "accepted": false,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "size",
+     "count"
+    ],
+    "conns": [
+     "4same",
+     "4multi"
+    ],
+    "pred_selectors": true,
+    "object_scope": true,
+    "min_support": 1
+   }
+  },
+  "extract/7": {
+   "nets": [
+    0,
+    3
+   ],
+   "accepted": false,
+   "setting": {
+    "props": [
+     "subgrid",
+     "object",
+     "color",
+     "size",
+     "count"
+    ],
+    "conns": [
+     "4same",
+     "8same"
+    ],
+    "pred_selectors": true,
+    "object_scope": true,
+    "min_support": 1
+   }
+  },
+  "formula/1": {
+   "nets": [
+    0,
+    0
+   ],
+   "accepted": false,
+   "setting": {
+    "n_extracts": 0,
+    "two_layer": true,
+    "min_support": 1,
+    "forms": [
+     "lin",
+     "mul",
+     "max",
+     "min",
+     "const",
+     "lin2",
+     "mulc"
+    ]
+   }
+  },
+  "formula/2": {
+   "nets": [
+    0,
+    0
+   ],
+   "accepted": false,
+   "setting": {
+    "n_extracts": 10,
+    "two_layer": true,
+    "min_support": 1,
+    "forms": [
+     "lin",
+     "mul",
+     "max",
+     "min",
+     "const",
+     "lin2",
+     "mulc"
+    ]
+   }
+  },
+  "formula/3": {
+   "nets": [
+    0,
+    0
+   ],
+   "accepted": false,
+   "setting": {
+    "n_extracts": 20,
+    "two_layer": false,
+    "min_support": 1,
+    "forms": [
+     "lin",
+     "mul",
+     "max",
+     "min",
+     "const",
+     "lin2",
+     "mulc"
+    ]
+   }
+  },
+  "formula/4": {
+   "nets": [
+    -4,
+    -9
+   ],
+   "accepted": false,
+   "setting": {
+    "n_extracts": 20,
+    "two_layer": true,
+    "min_support": 2,
+    "forms": [
+     "lin",
+     "mul",
+     "max",
+     "min",
+     "const",
+     "lin2",
+     "mulc"
+    ]
+   }
+  },
+  "formula/5": {
+   "nets": [
+    0,
+    0
+   ],
+   "accepted": false,
+   "setting": {
+    "n_extracts": 20,
+    "two_layer": true,
+    "min_support": 1,
+    "forms": [
+     "lin",
+     "mul",
+     "sq",
+     "max",
+     "min",
+     "div",
+     "const",
+     "lin2",
+     "mulc"
+    ]
+   }
+  }
+ }
+}

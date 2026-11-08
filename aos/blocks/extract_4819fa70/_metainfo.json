@@ -1,0 +1,24 @@
+{
+  "name": "extract_4819fa70",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction [\"subgrid\", [\"largest\", \"8same\"]]",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 3,
+  "length": 2,
+  "support_tasks": [
+    "1cf80156",
+    "1f85a75f",
+    "be94b721"
+  ],
+  "synth_rate": 0.958,
+  "synth_support": [
+    "1cf80156",
+    "1f85a75f",
+    "be94b721"
+  ],
+  "covered_by": "extract_3b3c6ab5"
+}

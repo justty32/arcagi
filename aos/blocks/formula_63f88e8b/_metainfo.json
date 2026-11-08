@@ -14,5 +14,9 @@
   ],
   "support_tasks": [
     "eb281b96"
+  ],
+  "synth_rate": 0.875,
+  "synth_support": [
+    "eb281b96"
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "lt",
+    "color_count",
+    4
+  ]
+}

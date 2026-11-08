@@ -14,7 +14,9 @@ subset of a kept no-longer predicate's, are ``covered``. A plain ``eq``
 literal is covered by the built-in single-attribute selector. At most
 ``--live-cap`` predicates stay live. Output: ``<root>/pred_<hash>/`` with
 ``_metainfo.json`` (kind=pred, generator), ``_rule.json`` and ``_entry``; the
-generator node is ``<root>/_gen/pred_combiner/_metainfo.json``.
+generator node is ``<root>/_gen/pred_combiner/_metainfo.json``. With
+``data_synth`` (``--no-synth`` off) task sets are first narrowed to tasks passing
+the synthetic majority (``synth_score``).
 """
 
 import argparse
@@ -30,6 +32,7 @@ from arcagi.dsl.objects_props import CONNS, changed, extract, same_shapes
 from arcagi.tasks import Task, load_tasks
 
 from . import REPO_ROOT, default_blocks_root, read_json, write_json
+from . import synth_score as ss
 from .pool.budget import allocate, announce
 
 GENERATOR = "_gen/pred_combiner"
@@ -196,21 +199,12 @@ def judge(cands: Sequence[Candidate], live_cap: int = LIVE_CAP) -> dict[str, lis
 def _write_pred(root: Path, c: Candidate, status: str, covered_by: str | None) -> None:
     folder = root / c.name
     old = read_json(folder / "_metainfo.json", {}) or {}
-    meta = {
-        "name": c.name,
-        "kind": "pred",
-        "doc": "Generated object predicate " + json.dumps(c.body),
-        "params": [],
-        "cost": 1,
-        "status": status,
-        "counter_uses": old.get("counter_uses", 0),  # type: ignore[union-attr]
-        "generator": GENERATOR,
-        "score": c.score,
-        "literals": c.literals,
-        "tasks": sorted(c.tasks),
-    }
-    if covered_by:
-        meta["covered_by"] = covered_by
+    meta = {"name": c.name, "kind": "pred", "params": [], "cost": 1}
+    meta["doc"] = "Generated object predicate " + json.dumps(c.body)
+    meta |= {"status": status, "counter_uses": old.get("counter_uses", 0)}  # type: ignore[union-attr]
+    meta |= {"generator": GENERATOR, "score": c.score, "literals": c.literals}
+    meta |= {"tasks": sorted(c.tasks)} | ss.meta_fields(c)
+    meta |= {"covered_by": covered_by} if covered_by else {}
     write_json(folder / "_metainfo.json", meta)
     write_json(
         folder / "_rule.json",
@@ -253,6 +247,23 @@ def write_blocks(root: Path, verdict: dict[str, list], stats: dict) -> list[str]
     return written
 
 
+def run(
+    tasks: Sequence[Task],
+    max_literals: int = 2,
+    budget: int | None = None,
+    live_cap: int = LIVE_CAP,
+    synth: ss.Views | None = None,
+) -> tuple[dict, dict]:
+    """Score and judge ``tasks``; ``synth``: synthetic-majority narrowing first."""
+    segs = segments(tasks)
+    cands = score_candidates(segs, max_literals, budget)
+    checked = ss.check("pred", cands, synth)
+    verdict = judge(cands, live_cap)
+    stats = {"max_literals": max_literals, "budget": budget, "segments": len(segs)}
+    stats |= {"scored": len(cands)} | {k: len(verdict[k]) for k in verdict}
+    return verdict, stats | {"synth": checked}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Generate predicate blocks.")
     parser.add_argument("--split", default="training")
@@ -262,6 +273,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--live-cap", type=int, default=LIVE_CAP)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--budget", type=int, default=None, help="default: pool")
+    ss.add_args(parser)
     args = parser.parse_args(argv)
     budget = args.budget or allocate()[GENERATOR]
     announce(GENERATOR, budget)
@@ -269,20 +281,9 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("predicates are scored on training only")
     nested = args.data_root / "data" / args.split
     tasks = load_tasks(nested if nested.is_dir() else args.data_root / args.split)
-    segs = segments(tasks)
-    cands = score_candidates(segs, args.max_literals, budget)
-    verdict = judge(cands, args.live_cap)
-    stats = {
-        "split": args.split,
-        "max_literals": args.max_literals,
-        "budget": budget,
-        "segments": len(segs),
-        "scored": len(cands),
-        "live": len(verdict["live"]),
-        "covered": len(verdict["covered"]),
-        "over_cap": len(verdict["over_cap"]),
-        "dropped": len(verdict["dropped"]),
-    }
+    synth = ss.from_args(args)
+    verdict, stats = run(tasks, args.max_literals, budget, args.live_cap, synth)
+    stats = {"split": args.split, **stats}
     if not args.dry_run:
         write_blocks(args.root or default_blocks_root(), verdict, stats)
     print(json.dumps(stats))

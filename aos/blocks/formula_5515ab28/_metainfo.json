@@ -7,14 +7,17 @@
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",
-  "score": 2,
+  "score": 1,
   "length": 2,
   "targets": [
     "h_out",
     "w_out"
   ],
   "support_tasks": [
-    "47c1f68c",
-    "e21d9049"
+    "47c1f68c"
+  ],
+  "synth_rate": 0.438,
+  "synth_support": [
+    "47c1f68c"
   ]
 }

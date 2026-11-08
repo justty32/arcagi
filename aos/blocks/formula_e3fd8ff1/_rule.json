@@ -1,0 +1,20 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "min",
+    "h",
+    "extract_c9d28605"
+  ],
+  "score": 55,
+  "extracts": {
+    "extract_c9d28605": [
+      "size",
+      [
+        "all",
+        "4same"
+      ]
+    ]
+  }
+}

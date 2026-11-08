@@ -13,12 +13,11 @@ reproduces some target on every train pair and that target takes at least two
 values (constants are not formulas). Score = number of supported tasks;
 evaluation tasks never take part.
 
-Score 0 is not written. Bodies with the same support set keep the shortest
-(then first enumerated); the others, and those whose support lies inside the
-union of supports of kept no-longer bodies (greedy, simplest first), are
-``covered``. At most ``--live-cap`` stay live.
-Output: ``<root>/formula_<hash>/{_metainfo.json,_rule.json,_entry}`` and the
-generator node ``<root>/_gen/formula/{_metainfo.json,_entry}``.
+With ``data_synth`` (``--no-synth`` off) supports are first narrowed to tasks
+passing the synthetic majority (``synth_score``). Score 0 is not written; same
+support keeps the shortest; bodies inside the union of kept no-longer ones are
+``covered`` (greedy, simplest first). At most ``--live-cap`` live. Output:
+``<root>/formula_<hash>/`` and the generator node ``<root>/_gen/formula/``.
 """
 
 import argparse
@@ -38,6 +37,7 @@ from arcagi.dsl import grid as g
 from arcagi.tasks import Task, load_tasks
 
 from . import REPO_ROOT, default_blocks_root, read_json, write_json
+from . import synth_score as ss
 from .pool.budget import allocate, announce, top_extracts
 
 GENERATOR = "_gen/formula"
@@ -173,8 +173,7 @@ def _write_block(root: Path, c: Candidate, status: str, by: str | None) -> None:
     meta |= {"status": status, "counter_uses": old.get("counter_uses", 0)}  # type: ignore[union-attr]
     meta |= {"generator": GENERATOR, "score": c.score, "length": c.length}
     meta |= {"targets": sorted(c.targets), "support_tasks": sorted(c.tasks)}
-    if by:
-        meta["covered_by"] = by
+    meta |= ss.meta_fields(c) | ({"covered_by": by} if by else {})
     write_json(folder / "_metainfo.json", meta)
     rule = {"kind": "formula", "in": "features", "out": "int", "body": c.body}
     rule |= {"score": c.score} | ({"extracts": c.extracts} if c.extracts else {})
@@ -243,8 +242,10 @@ def run(
     budget: int | None = None,
     extracts: dict | None = None,
     config: dict | None = None,
+    synth: ss.Views | None = None,
 ) -> tuple[dict, dict]:
-    """Score ``tasks`` and judge under ``config`` (see ``CONFIG``)."""
+    """Score ``tasks`` and judge under ``config`` (see ``CONFIG``); ``synth``:
+    narrow supports to synthetic-majority tasks first (``synth_score``)."""
     start, cfg = time.perf_counter(), {**CONFIG, **(config or {})}
     ext = dict(list((extracts or {}).items())[: cfg["n_extracts"]])
     probs = problems(tasks, ext)
@@ -255,11 +256,13 @@ def run(
     cands += score_candidates(unfit, two, len(one))
     for c in cands:
         c.extracts = {src: ext[src] for src in _sources(c.body)}
+    checked = ss.check("formula", cands, synth, ext)
     verdict = judge(cands, live_cap, cfg["min_support"])
     sizes = {"tasks": tasks, "problems": probs, "extracts": ext, "scored": cands}
     sizes |= {"one_layer": one, "two_layer": two, "unfit_problems": unfit}
     sizes |= {k: verdict[k] for k in ("live", "covered", "over_cap", "dropped")}
     stats: dict = {"budget": budget, **{k: len(v) for k, v in sizes.items()}}
+    stats["synth"] = checked
     stats["gen_seconds"] = round(time.perf_counter() - start, 2)
     return verdict, stats
 
@@ -272,6 +275,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--live-cap", type=int, default=LIVE_CAP)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--budget", type=int, default=None, help="default: pool")
+    ss.add_args(parser)
     args = parser.parse_args(argv)
     if args.split != "training":
         parser.error("formulas are scored on training only")
@@ -281,7 +285,8 @@ def main(argv: list[str] | None = None) -> int:
     tasks = load_tasks(nested if nested.is_dir() else args.data_root / args.split)
     node = (args.root or default_blocks_root()) / GENERATOR / "_metainfo.json"
     cfg = (read_json(node, {}) or {}).get("config")  # type: ignore[union-attr]
-    verdict, stats = run(tasks, args.live_cap, budget, top_extracts(args.root), cfg)
+    ext = top_extracts(args.root)
+    verdict, stats = run(tasks, args.live_cap, budget, ext, cfg, ss.from_args(args))
     stats = {"split": args.split, **stats}
     if not args.dry_run:
         write_blocks(args.root or default_blocks_root(), verdict, stats)

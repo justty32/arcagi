@@ -1,0 +1,23 @@
+{
+  "name": "extract_36120d51",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction [\"count\", [\"all\", \"4same\"]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 3,
+  "length": 2,
+  "support_tasks": [
+    "4be741c5",
+    "746b3537",
+    "d0f5fe59"
+  ],
+  "synth_rate": 0.708,
+  "synth_support": [
+    "4be741c5",
+    "746b3537",
+    "d0f5fe59"
+  ]
+}

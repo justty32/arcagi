@@ -1,0 +1,24 @@
+{
+  "name": "extract_47309d01",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"touching\", \"4same\"], \"prop\": \"color\"}",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 3,
+  "length": 4,
+  "support_tasks": [
+    "1f0c79e5",
+    "2bcee788",
+    "3befdf3e"
+  ],
+  "synth_rate": 1.0,
+  "synth_support": [
+    "1f0c79e5",
+    "2bcee788",
+    "3befdf3e"
+  ],
+  "covered_by": "extract_c5dd0c7b"
+}

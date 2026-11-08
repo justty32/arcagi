@@ -4,7 +4,7 @@
   "params": [],
   "cost": 1,
   "doc": "Generated integer formula [\"mul\", \"n_obj\", \"max_obj_size\"]",
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 8,

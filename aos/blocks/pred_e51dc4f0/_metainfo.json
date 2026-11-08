@@ -1,0 +1,31 @@
+{
+  "name": "pred_e51dc4f0",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"rank\", \"h\", \"max\"]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 6.5,
+  "literals": 1,
+  "tasks": [
+    "0dfd9992",
+    "1f642eb9",
+    "5168d44c",
+    "a1570a43",
+    "a78176bb",
+    "c1d99e64",
+    "e76a88a6"
+  ],
+  "synth_rate": 0.653,
+  "synth_support": [
+    "0dfd9992",
+    "1f642eb9",
+    "5168d44c",
+    "a1570a43",
+    "a78176bb",
+    "c1d99e64",
+    "e76a88a6"
+  ]
+}

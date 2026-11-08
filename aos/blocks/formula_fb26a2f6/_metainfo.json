@@ -7,7 +7,7 @@
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",
-  "score": 5,
+  "score": 4,
   "length": 1,
   "targets": [
     "rep_x",
@@ -18,7 +18,13 @@
     "469497ad",
     "ac0a08a4",
     "b91ae062",
-    "beb8660c",
+    "feca6190"
+  ],
+  "synth_rate": 0.675,
+  "synth_support": [
+    "469497ad",
+    "ac0a08a4",
+    "b91ae062",
     "feca6190"
   ]
 }

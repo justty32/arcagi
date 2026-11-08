@@ -14,5 +14,9 @@
   ],
   "support_tasks": [
     "49d1d64f"
+  ],
+  "synth_rate": 1.0,
+  "synth_support": [
+    "49d1d64f"
   ]
 }

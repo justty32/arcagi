@@ -1,0 +1,13 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": {
+    "scope": "object",
+    "sel": [
+      "touching",
+      "4same"
+    ],
+    "prop": "color"
+  }
+}

@@ -1,9 +1,9 @@
 {
   "name": "extract_713b1328",
   "kind": "extract",
-  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"largest\", \"4same\"], \"prop\": \"dir_to\"}",
   "params": [],
   "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"largest\", \"4same\"], \"prop\": \"dir_to\"}",
   "status": "live",
   "counter_uses": 4,
   "generator": "_gen/extract",
@@ -14,5 +14,11 @@
     "855e0971",
     "a48eeaf7",
     "d43fd935"
-  ]
+  ],
+  "synth_rate": 0.438,
+  "synth_support": [
+    "2c608aff",
+    "a48eeaf7"
+  ],
+  "synth_protected": true
 }

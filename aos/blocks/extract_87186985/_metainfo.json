@@ -1,15 +1,19 @@
 {
   "name": "extract_87186985",
   "kind": "extract",
-  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"largest\", \"4same\"], \"prop\": \"color\"}",
   "params": [],
   "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"largest\", \"4same\"], \"prop\": \"color\"}",
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/extract",
   "score": 1,
   "length": 3,
   "support_tasks": [
+    "2bcee788"
+  ],
+  "synth_rate": 0.625,
+  "synth_support": [
     "2bcee788"
   ]
 }

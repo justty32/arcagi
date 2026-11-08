@@ -1,4 +1,5 @@
-"""Generator of generator settings: one level of meta search over ``gen_formula``.
+"""Generator of generator settings: one level of meta search over ``gen_formula``
+(and, via ``extract_mutations`` + ``arcagi.blocks.meta``, ``gen_extract``).
 
 Run: ``uv run python -m arcagi.blocks.gen_meta [--dry-run]``. Starting from the
 formula generator's current ``config`` (node metainfo, default
@@ -26,6 +27,7 @@ from arcagi.dsl import formula as fm
 from arcagi.tasks import Task, load_tasks
 
 from . import REPO_ROOT, default_blocks_root, read_json, write_json
+from . import gen_extract as gx
 from . import gen_formula as gf
 from .pool.budget import allocate, top_extracts
 
@@ -57,6 +59,33 @@ def mutations(base: dict) -> list[dict]:
     for key, values in knobs.items():
         out += [{**base, key: v} for v in values if v != base[key]]
     return out[:MAX_TRIALS]
+
+
+def extract_mutations(base: dict) -> list[dict]:
+    """Extract-generator ``base`` then single-knob mutations, <= ``MAX_TRIALS``."""
+    base = {**gx.CONFIG, **base}
+    props, conns = list(base["props"]), list(base["conns"])
+    knobs = [
+        ("object_scope", not base["object_scope"]),
+        ("pred_selectors", not base["pred_selectors"]),
+        ("min_support", 2 if base["min_support"] == 1 else 1),
+        ("props", [p for p in props if p != "count"]),
+        ("props", [p for p in props if p != "size"]),
+        ("conns", [c for c in conns if c.startswith("4")]),
+        ("conns", [c for c in conns if c.endswith("same")]),
+    ]
+    out = [base]
+    for key, value in knobs:
+        cfg = {**base, key: value}
+        if value != base[key] and cfg not in out:
+            out.append(cfg)
+    return out[:MAX_TRIALS]
+
+
+def write_extract_config(root: Path, config: dict) -> None:
+    """Store an adopted extract setting in ``<root>/_gen/extract/_metainfo.json``."""
+    node = root / gx.GENERATOR / "_metainfo.json"
+    write_json(node, {**(read_json(node, {}) or {}), "config": config})  # type: ignore[dict-item]
 
 
 def score(verdict: dict, stats: dict) -> float:

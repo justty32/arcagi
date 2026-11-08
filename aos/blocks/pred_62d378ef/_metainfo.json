@@ -1,0 +1,27 @@
+{
+  "name": "pred_62d378ef",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"ne\", \"color\", 1], [\"lt\", \"color_count\", 4]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 4.0,
+  "literals": 2,
+  "tasks": [
+    "0dfd9992",
+    "1caeab9d",
+    "a78176bb",
+    "b8825c91",
+    "c3f564a4"
+  ],
+  "synth_rate": 0.531,
+  "synth_support": [
+    "0dfd9992",
+    "1caeab9d",
+    "a78176bb",
+    "b8825c91",
+    "c3f564a4"
+  ]
+}

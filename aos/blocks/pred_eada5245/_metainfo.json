@@ -1,0 +1,40 @@
+{
+  "name": "pred_eada5245",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"eq\", \"is_largest\", 0], [\"lt\", \"color_count\", 5]]",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 10.0,
+  "literals": 2,
+  "tasks": [
+    "1a07d186",
+    "2bcee788",
+    "54d9e175",
+    "673ef223",
+    "6855a6e4",
+    "6a1e5592",
+    "952a094c",
+    "9dfd6313",
+    "beb8660c",
+    "f1cefba8",
+    "f8a8fe49"
+  ],
+  "synth_rate": 0.642,
+  "synth_support": [
+    "1a07d186",
+    "2bcee788",
+    "54d9e175",
+    "673ef223",
+    "6855a6e4",
+    "6a1e5592",
+    "952a094c",
+    "9dfd6313",
+    "beb8660c",
+    "f1cefba8",
+    "f8a8fe49"
+  ],
+  "covered_by": "pred_d4e49fbd"
+}

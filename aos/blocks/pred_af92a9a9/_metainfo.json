@@ -1,0 +1,27 @@
+{
+  "name": "pred_af92a9a9",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"lt\", \"color_count\", 4]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 4.5,
+  "literals": 1,
+  "tasks": [
+    "0dfd9992",
+    "a1570a43",
+    "a78176bb",
+    "b8825c91",
+    "c3f564a4"
+  ],
+  "synth_rate": 0.812,
+  "synth_support": [
+    "0dfd9992",
+    "a1570a43",
+    "a78176bb",
+    "b8825c91",
+    "c3f564a4"
+  ]
+}

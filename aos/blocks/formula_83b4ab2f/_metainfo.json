@@ -4,7 +4,7 @@
   "params": [],
   "cost": 1,
   "doc": "Generated integer formula [\"lin2\", \"n_obj8\", -1, \"max_obj_h\", 1]",
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 1,

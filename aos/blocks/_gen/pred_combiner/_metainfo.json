@@ -11,13 +11,20 @@
   "counter_uses": 0,
   "produces": "pred",
   "last_run": {
-    "split": "training",
     "max_literals": 2,
+    "budget": 6390,
     "segments": 323,
-    "scored": 21321,
+    "scored": 6390,
     "live": 60,
     "covered": 40,
-    "over_cap": 335,
-    "dropped": 13187
+    "over_cap": 21,
+    "dropped": 5114,
+    "synth": {
+      "claims": 20150,
+      "failed": 13259,
+      "protected": [
+        "pred_06f2dc53"
+      ]
+    }
   }
 }

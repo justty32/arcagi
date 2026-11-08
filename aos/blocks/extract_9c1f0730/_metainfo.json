@@ -1,0 +1,26 @@
+{
+  "name": "extract_9c1f0730",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned_same_color\", \"8same\"], \"prop\": \"dir_to\"}",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 4,
+  "support_tasks": [
+    "1a07d186",
+    "22eb0ac0",
+    "40853293",
+    "6855a6e4"
+  ],
+  "synth_rate": 0.625,
+  "synth_support": [
+    "1a07d186",
+    "22eb0ac0",
+    "40853293",
+    "6855a6e4"
+  ],
+  "covered_by": "extract_42999fb4"
+}

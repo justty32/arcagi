@@ -4,7 +4,7 @@
   "params": [],
   "cost": 1,
   "doc": "Generated integer formula [\"max\", \"w\", \"extract_a5d352a5\"]",
-  "status": "covered",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 107,

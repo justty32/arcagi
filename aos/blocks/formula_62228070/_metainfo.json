@@ -7,17 +7,17 @@
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",
-  "score": 5,
+  "score": 1,
   "length": 1,
   "targets": [
     "h_out",
     "w_out"
   ],
   "support_tasks": [
-    "3bd67248",
-    "67a423a3",
-    "a3325580",
-    "bd4472b8",
-    "beb8660c"
+    "a3325580"
+  ],
+  "synth_rate": 0.25,
+  "synth_support": [
+    "a3325580"
   ]
 }

@@ -10,22 +10,29 @@
   "status": "live",
   "counter_uses": 0,
   "produces": "formula",
-  "gen_seconds": 2.49,
+  "gen_seconds": 2.38,
   "last_run": {
-    "split": "training",
-    "budget": 11993,
+    "budget": 8199,
     "tasks": 400,
     "problems": 366,
-    "extracts": 20,
-    "scored": 7068,
-    "one_layer": 4070,
-    "two_layer": 2998,
-    "unfit_problems": 35,
-    "live": 35,
+    "extracts": 3,
+    "scored": 3858,
+    "one_layer": 1809,
+    "two_layer": 2049,
+    "unfit_problems": 44,
+    "live": 19,
     "covered": 60,
     "over_cap": 0,
-    "dropped": 4924,
-    "gen_seconds": 2.49
+    "dropped": 3377,
+    "synth": {
+      "claims": 9998,
+      "failed": 3645,
+      "protected": [
+        "formula_0832d6a3",
+        "formula_fbe415b1"
+      ]
+    },
+    "gen_seconds": 2.38
   },
   "config": {
     "n_extracts": 20,

@@ -1,0 +1,33 @@
+{
+  "name": "pred_1db93345",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"ne\", \"color\", 4], [\"rank\", \"w\", \"max\"]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 7.0,
+  "literals": 2,
+  "tasks": [
+    "0e206a2e",
+    "1f642eb9",
+    "5168d44c",
+    "890034e9",
+    "a1570a43",
+    "a78176bb",
+    "c1d99e64",
+    "dc433765"
+  ],
+  "synth_rate": 0.49,
+  "synth_support": [
+    "0e206a2e",
+    "1f642eb9",
+    "5168d44c",
+    "890034e9",
+    "a1570a43",
+    "a78176bb",
+    "c1d99e64",
+    "dc433765"
+  ]
+}

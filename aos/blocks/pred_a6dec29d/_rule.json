@@ -1,0 +1,10 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "rank",
+    "h",
+    "min"
+  ]
+}

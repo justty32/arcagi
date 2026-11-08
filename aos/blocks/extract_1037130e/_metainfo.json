@@ -1,0 +1,22 @@
+{
+  "name": "extract_1037130e",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction [\"subgrid\", [\"smallest\", \"8same\"]]",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 2,
+  "length": 2,
+  "support_tasks": [
+    "1cf80156",
+    "23b5c85d"
+  ],
+  "synth_rate": 1.0,
+  "synth_support": [
+    "1cf80156",
+    "23b5c85d"
+  ],
+  "covered_by": "extract_e5ed22ce"
+}

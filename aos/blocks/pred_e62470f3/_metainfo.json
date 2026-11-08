@@ -4,7 +4,7 @@
   "doc": "Generated object predicate [\"and\", [\"rank\", \"h\", \"min\"], [\"rank\", \"w\", \"min\"]]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/pred_combiner",
   "score": 16.0,

@@ -1,9 +1,9 @@
 {
   "name": "extract_f23ec080",
   "kind": "extract",
-  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned_other_color\", \"4same\"], \"prop\": \"color\"}",
   "params": [],
   "cost": 1,
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned_other_color\", \"4same\"], \"prop\": \"color\"}",
   "status": "live",
   "counter_uses": 4,
   "generator": "_gen/extract",
@@ -13,5 +13,11 @@
     "2204b7a8",
     "2bcee788",
     "ddf7fa4f"
-  ]
+  ],
+  "synth_rate": 0.75,
+  "synth_support": [
+    "2204b7a8",
+    "2bcee788"
+  ],
+  "synth_protected": true
 }

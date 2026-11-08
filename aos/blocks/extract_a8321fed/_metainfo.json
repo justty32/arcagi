@@ -1,23 +1,30 @@
 {
   "name": "extract_a8321fed",
   "kind": "extract",
-  "doc": "Generated extraction [\"color\", [\"largest\", \"4multi\"]]",
   "params": [],
   "cost": 1,
-  "status": "retired",
+  "doc": "Generated extraction [\"color\", [\"largest\", \"4multi\"]]",
+  "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/extract",
-  "score": 8,
+  "score": 6,
   "length": 2,
   "support_tasks": [
     "1f85a75f",
     "3345333e",
-    "445eab21",
     "47c1f68c",
-    "7e0986d6",
     "91714a58",
     "be94b721",
     "e48d4e1a"
   ],
-  "covered_by": "extract_282661a7"
+  "synth_rate": 0.766,
+  "synth_support": [
+    "1f85a75f",
+    "3345333e",
+    "47c1f68c",
+    "91714a58",
+    "be94b721",
+    "e48d4e1a"
+  ],
+  "covered_by": "extract_b841b52d"
 }

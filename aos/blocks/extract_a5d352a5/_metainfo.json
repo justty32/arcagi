@@ -4,7 +4,7 @@
   "doc": "Generated extraction [\"count\", [\"pred\", \"4same\", \"pred_02f734d6\"]]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/extract",
   "score": 2,

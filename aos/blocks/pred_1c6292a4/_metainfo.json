@@ -1,0 +1,40 @@
+{
+  "name": "pred_1c6292a4",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"eq\", \"is_largest\", 0], [\"lt\", \"size\", 6]]",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 10.0,
+  "literals": 2,
+  "tasks": [
+    "1a07d186",
+    "2204b7a8",
+    "363442ee",
+    "54d9e175",
+    "673ef223",
+    "7e0986d6",
+    "88a10436",
+    "952a094c",
+    "9dfd6313",
+    "a48eeaf7",
+    "f8a8fe49"
+  ],
+  "synth_rate": 0.672,
+  "synth_support": [
+    "1a07d186",
+    "2204b7a8",
+    "363442ee",
+    "54d9e175",
+    "673ef223",
+    "7e0986d6",
+    "88a10436",
+    "952a094c",
+    "9dfd6313",
+    "a48eeaf7",
+    "f8a8fe49"
+  ],
+  "covered_by": "pred_c4ee1519"
+}

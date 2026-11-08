@@ -14,5 +14,9 @@
   ],
   "support_tasks": [
     "1c786137"
+  ],
+  "synth_rate": 0.75,
+  "synth_support": [
+    "1c786137"
   ]
 }

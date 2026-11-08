@@ -7,7 +7,7 @@
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",
-  "score": 2,
+  "score": 1,
   "length": 1,
   "targets": [
     "rep_x",
@@ -15,7 +15,10 @@
     "w_out"
   ],
   "support_tasks": [
-    "91413438",
-    "ba26e723"
+    "91413438"
+  ],
+  "synth_rate": 0.438,
+  "synth_support": [
+    "91413438"
   ]
 }

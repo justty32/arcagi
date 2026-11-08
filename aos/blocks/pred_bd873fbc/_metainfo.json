@@ -1,0 +1,25 @@
+{
+  "name": "pred_bd873fbc",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"gt\", \"size\", 8]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 3.5,
+  "literals": 1,
+  "tasks": [
+    "0dfd9992",
+    "484b58aa",
+    "5168d44c",
+    "c1d99e64"
+  ],
+  "synth_rate": 0.403,
+  "synth_support": [
+    "0dfd9992",
+    "484b58aa",
+    "5168d44c",
+    "c1d99e64"
+  ]
+}

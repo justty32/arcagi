@@ -4,7 +4,7 @@
   "params": [],
   "cost": 1,
   "doc": "Generated integer formula [\"lin2\", \"extract_6cf118fc\", 1, \"extract_64ab9d8d\", 1]",
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 1,

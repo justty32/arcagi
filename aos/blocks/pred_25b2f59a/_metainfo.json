@@ -1,0 +1,29 @@
+{
+  "name": "pred_25b2f59a",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"eq\", \"touches_border\", 0], [\"eq\", \"has_hole\", 0]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 5.0,
+  "literals": 2,
+  "tasks": [
+    "1f642eb9",
+    "363442ee",
+    "673ef223",
+    "952a094c",
+    "a78176bb",
+    "f1cefba8"
+  ],
+  "synth_rate": 0.556,
+  "synth_support": [
+    "1f642eb9",
+    "363442ee",
+    "673ef223",
+    "952a094c",
+    "a78176bb",
+    "f1cefba8"
+  ]
+}

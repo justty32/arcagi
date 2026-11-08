@@ -1,0 +1,26 @@
+{
+  "name": "extract_8023fefb",
+  "kind": "extract",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated extraction [\"size\", [\"all\", \"8same\"]]",
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 2,
+  "support_tasks": [
+    "234bbc79",
+    "846bdb03",
+    "9aec4887",
+    "d631b094"
+  ],
+  "synth_rate": 0.938,
+  "synth_support": [
+    "234bbc79",
+    "846bdb03",
+    "9aec4887",
+    "d631b094"
+  ],
+  "covered_by": "extract_c9d28605"
+}

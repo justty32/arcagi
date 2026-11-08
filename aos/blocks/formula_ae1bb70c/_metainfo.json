@@ -1,0 +1,27 @@
+{
+  "name": "formula_ae1bb70c",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"min_obj_h\", 1, 0]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 3,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "1cf80156",
+    "23b5c85d",
+    "272f95fa"
+  ],
+  "synth_rate": 0.446,
+  "synth_support": [
+    "1cf80156",
+    "23b5c85d",
+    "272f95fa"
+  ]
+}

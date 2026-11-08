@@ -1,0 +1,27 @@
+{
+  "name": "pred_ada36436",
+  "kind": "pred",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated object predicate [\"and\", [\"ne\", \"color\", 0], [\"eq\", \"is_smallest\", 0]]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/pred_combiner",
+  "score": 4.0,
+  "literals": 2,
+  "tasks": [
+    "1f642eb9",
+    "67385a82",
+    "a1570a43",
+    "a78176bb",
+    "ecdecbb3"
+  ],
+  "synth_rate": 0.375,
+  "synth_support": [
+    "1f642eb9",
+    "67385a82",
+    "a1570a43",
+    "a78176bb",
+    "ecdecbb3"
+  ]
+}
