@@ -1,0 +1,254 @@
+{
+ "split": "evaluation",
+ "run": "dsl-search-r06",
+ "base_correct": 56,
+ "tasks_with_candidates": 85,
+ "base_wrong_with_answer": 29,
+ "not_faithful": [],
+ "sets": {
+  "none": {
+   "gates": [],
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "support": {
+   "gates": [
+    "support"
+   ],
+   "synth_demote": false,
+   "pass": 83,
+   "block_right": 2,
+   "stopped_wrong": 0,
+   "false_blocks": 2,
+   "net_correct": 54
+  },
+  "unseen": {
+   "gates": [
+    "unseen"
+   ],
+   "synth_demote": false,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "synth": {
+   "gates": [
+    "synth"
+   ],
+   "synth_demote": false,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "table": {
+   "gates": [
+    "table"
+   ],
+   "synth_demote": false,
+   "pass": 68,
+   "block_wrong": 17,
+   "stopped_wrong": 17,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "shape": {
+   "gates": [
+    "shape"
+   ],
+   "synth_demote": false,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "synth(demote)": {
+   "gates": [
+    "synth"
+   ],
+   "synth_demote": true,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "support+unseen": {
+   "gates": [
+    "support",
+    "unseen"
+   ],
+   "synth_demote": false,
+   "pass": 83,
+   "block_right": 2,
+   "stopped_wrong": 0,
+   "false_blocks": 2,
+   "net_correct": 54
+  },
+  "support+synth": {
+   "gates": [
+    "support",
+    "synth"
+   ],
+   "synth_demote": false,
+   "pass": 83,
+   "block_right": 2,
+   "stopped_wrong": 0,
+   "false_blocks": 2,
+   "net_correct": 54
+  },
+  "support+table": {
+   "gates": [
+    "support",
+    "table"
+   ],
+   "synth_demote": false,
+   "pass": 67,
+   "block_wrong": 17,
+   "block_right": 1,
+   "stopped_wrong": 17,
+   "false_blocks": 1,
+   "net_correct": 55
+  },
+  "support+shape": {
+   "gates": [
+    "support",
+    "shape"
+   ],
+   "synth_demote": false,
+   "pass": 83,
+   "block_right": 2,
+   "stopped_wrong": 0,
+   "false_blocks": 2,
+   "net_correct": 54
+  },
+  "unseen+synth": {
+   "gates": [
+    "unseen",
+    "synth"
+   ],
+   "synth_demote": false,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "unseen+table": {
+   "gates": [
+    "unseen",
+    "table"
+   ],
+   "synth_demote": false,
+   "pass": 68,
+   "block_wrong": 17,
+   "stopped_wrong": 17,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "unseen+shape": {
+   "gates": [
+    "unseen",
+    "shape"
+   ],
+   "synth_demote": false,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "synth+table": {
+   "gates": [
+    "synth",
+    "table"
+   ],
+   "synth_demote": false,
+   "pass": 68,
+   "block_wrong": 17,
+   "stopped_wrong": 17,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "synth+shape": {
+   "gates": [
+    "synth",
+    "shape"
+   ],
+   "synth_demote": false,
+   "pass": 85,
+   "stopped_wrong": 0,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "table+shape": {
+   "gates": [
+    "table",
+    "shape"
+   ],
+   "synth_demote": false,
+   "pass": 68,
+   "block_wrong": 17,
+   "stopped_wrong": 17,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "support+unseen+synth": {
+   "gates": [
+    "support",
+    "unseen",
+    "synth"
+   ],
+   "synth_demote": false,
+   "pass": 83,
+   "block_right": 2,
+   "stopped_wrong": 0,
+   "false_blocks": 2,
+   "net_correct": 54
+  },
+  "support+unseen+table+synth(demote)": {
+   "gates": [
+    "support",
+    "unseen",
+    "synth",
+    "table"
+   ],
+   "synth_demote": true,
+   "pass": 67,
+   "block_wrong": 17,
+   "block_right": 1,
+   "stopped_wrong": 17,
+   "false_blocks": 1,
+   "net_correct": 55
+  },
+  "default": {
+   "gates": [
+    "unseen",
+    "synth",
+    "table"
+   ],
+   "synth_demote": true,
+   "pass": 68,
+   "block_wrong": 17,
+   "stopped_wrong": 17,
+   "false_blocks": 0,
+   "net_correct": 56
+  },
+  "all": {
+   "gates": [
+    "support",
+    "unseen",
+    "synth",
+    "table",
+    "shape"
+   ],
+   "synth_demote": false,
+   "pass": 67,
+   "block_wrong": 17,
+   "block_right": 1,
+   "stopped_wrong": 17,
+   "false_blocks": 1,
+   "net_correct": 55
+  }
+ }
+}

@@ -1,0 +1,196 @@
+task_id,source,base_correct,programs,rerun,faithful,top1_support,top1_synth,outcome,verdict,reason,only_support,only_unseen,only_synth,only_table,only_shape
+00d62c1b,python,1,3,3,1,3,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+025d127b,native,1,4,4,1,4,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+0520fde7,python,1,2,2,1,2,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+05269061,native,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+05f2a901,python,1,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+06df4c85,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+08ed6ac7,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+0962bcdd,python,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+0b148d64,native,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+0ca9ddb6,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+0d3d703e,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+10fcaaa3,python,0,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+1190e5a7,native,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+137eaa0f,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+1b2d62fb,python,1,3,3,1,3,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+1c786137,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+1caeab9d,python,0,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+1cf80156,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+1e0a9b12,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+1f85a75f,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+1f876c06,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+2013d3e2,python,0,2,2,1,1,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+2204b7a8,python,1,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+22168020,python,1,1,1,1,1,2/4,pass,pass,kept,pass,pass,block_right,pass,pass
+22eb0ac0,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+23581191,native,1,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+239be575,native,0,2,2,1,2,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+23b5c85d,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+253bf280,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+25d487eb,native,0,2,2,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+25d8a9c8,python,0,3,3,1,3,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+25ff71a9,python,1,5,5,1,1,1/4,pass,pass,kept,block_right,pass,block_right,pass,pass
+27a28665,native,0,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+28bf18c6,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+2c608aff,python,1,1,1,1,1,2/4,pass,pass,kept,pass,pass,block_right,pass,pass
+2dc579da,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+2dee498d,python,1,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+31aa019c,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+3428a4f5,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+3618c87e,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+3906de3d,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+39a8645d,python,0,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+3aa6fb7a,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+3ac3eb23,native,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+3af2c5a8,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+3bd67248,native,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+3c9b0459,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+3de23699,native,0,2,2,1,2,2/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+40853293,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+4258a5f9,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+42a50994,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+4347f46a,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+445eab21,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+44f52bb0,python,1,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+4522001f,native,0,17,17,1,9,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+46442a0e,native,0,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+47c1f68c,native,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+48d8fb45,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+496994bd,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+4c4377d9,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+50cb2852,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+5117e062,python,0,10,10,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+543a7ed5,native,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+54d9e175,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+5521c0d9,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+5582e5ca,python,1,4,4,1,1,4/4,pass,pass,kept,block_right,pass,pass,pass,pass
+5614dbcf,python,1,2,2,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+5ad4f10b,native,0,2,2,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+5bd6f4ac,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+5c0a986e,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+60b61512,python,0,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+6150a2bd,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+623ea044,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+62c24649,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+6430c8c4,python,1,5,5,1,5,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+662c240a,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+67385a82,python,1,1,1,1,1,2/4,pass,pass,kept,pass,pass,block_right,pass,pass
+6773b310,python,1,2,2,1,2,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+67a3c6ac,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+67a423a3,native,1,10,10,1,9,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+67e8384a,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+68b16354,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+694f12f3,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+6c434453,native,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+6cdd2623,native,1,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+6d0aefbc,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+6d75e8bb,python,1,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+6e02f1e3,python,0,5,5,1,5,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+6e82a1ae,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+6ecd11f4,native,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+6f8cd79b,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+6fa7a44f,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+72ca375d,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+7468f01a,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+746b3537,native,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+74dd1130,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+780d0b14,python,0,2,2,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+7837ac64,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+794b24be,python,1,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+7b6016b9,python,1,1,1,1,1,2/4,pass,pass,kept,pass,pass,block_right,pass,pass
+7b7f7511,python,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+7e0986d6,native,0,2,2,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+810b9b61,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+85c4e7cd,native,0,2,2,1,2,1/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+868de0fa,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+88a62173,python,1,2,2,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+8be77c9e,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+8d5021e8,native,0,2,2,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+8eb1be9a,native,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+90c28cc7,native,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+913fb3ed,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+91714a58,native,1,3,3,1,3,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+9172f3a0,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+94f9d214,python,1,3,3,1,3,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+952a094c,native,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+9565186b,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+95990924,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+99b1bc43,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+9dfd6313,python,1,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+9ecd008a,native,0,11,11,1,4,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+9f236235,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+a416b8f3,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+a48eeaf7,python,0,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+a5313dff,python,1,3,3,1,3,3/4,pass,pass,switched: top-1 demoted (support or synth),pass,pass,pass,pass,pass
+a5f85a15,native,0,8,8,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+a61ba2ce,python,0,7,7,1,7,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+a61f2674,native,1,15,15,1,14,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+a68b268e,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+a699fb00,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+a740d043,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+a79310a0,native,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+a85d4709,python,0,2,2,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+a87f7484,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+aabf363d,python,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+ac0a08a4,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+ae4f1146,python,0,3,3,1,3,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+aedd82e4,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b1948b0a,python,1,2,2,1,2,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b230c067,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b27ca6d3,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b2862040,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b8825c91,python,0,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b91ae062,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+b94a9452,native,0,19,19,1,2,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+b9b7f026,native,0,4,4,1,1,0/4,pass,pass,kept,switch_wrong,pass,block_wrong,pass,pass
+ba97ae07,native,0,5,5,1,5,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+bb43febb,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+bbc9ae5d,native,1,1,1,1,1,1/4,pass,pass,kept,pass,pass,block_right,pass,pass
+bda2d7a6,native,0,9,9,1,1,0/4,block_wrong,block,all distrusted,switch_wrong,pass,block_wrong,block_wrong,pass
+bdad9b1f,native,0,2,2,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+be94b721,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+c0f76784,python,1,2,2,1,2,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+c59eb873,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+c8f0f002,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+c909285e,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,block_right
+c9e6f938,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+cdecee7f,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+ce22a75a,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+ce4f8723,python,1,4,4,1,4,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+cf98881b,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+d037b0a7,python,1,3,3,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+d0f5fe59,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+d10ecb37,python,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+d23f8c26,native,0,4,4,1,4,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+d2abd087,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+d364b489,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+d43fd935,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+d4469b4b,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+d511f180,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+d5d6de2d,python,1,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+d631b094,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+d687bc17,python,0,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+d9fac9be,python,0,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+dae9d2b5,python,1,2,2,1,2,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+dbc1a6ce,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+dc1df850,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+dc433765,native,0,1,1,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+ddf7fa4f,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+de1cd16c,python,0,2,2,1,2,1/4,pass,pass,kept,pass,pass,block_wrong,pass,pass
+ded97339,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+e8593010,python,1,1,1,1,1,3/4,pass,pass,kept,pass,pass,block_right,pass,pass
+e98196ab,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+ea32f347,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+ea786f4a,native,1,2,2,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+eb5a1d5d,native,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+ed36ccf7,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+f25fbde4,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
+f25ffba3,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+f2829549,python,1,5,5,1,5,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+f76d97a5,native,0,2,2,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+f8b3ba0a,native,0,2,2,1,1,0/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+f9012d9b,python,0,1,1,1,1,1/4,block_wrong,block,all distrusted,pass,pass,block_wrong,block_wrong,pass
+fafffa47,python,1,3,3,1,3,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+fcb5c309,python,1,1,1,1,1,0/4,pass,pass,kept,pass,pass,block_right,pass,pass
+feca6190,python,1,1,1,1,1,4/4,pass,pass,kept,pass,pass,pass,pass,pass
