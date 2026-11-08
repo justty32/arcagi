@@ -2,7 +2,7 @@
 
 冷啟動接手先讀本檔，再讀 [wf/SESSION-LOG](../../wf/SESSION-LOG.md) 與 `wf/inbox/` 頂層未辦的信。
 
-## 現況（2026-11-08 14:30）
+## 現況（2026-11-08 15:00）
 
 - 準備：資料已下載、pytest 全綠、identity 基線 0/400（`reports/baseline-identity/`）；題庫盤點 `docs/inventory/training.html`＋`training-features.csv`（commit 4af1160）。
 - 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
@@ -11,7 +11,7 @@
 - **第三輪已收輪**（2026-11-08）：evaluation **32/400**、training **86/400**（r02 28／79，退步 0）。產物 [r03/](r03/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r03/代定清單.md)；公式型／抽取型積木產生器（`blocks/gen_formula.py`、`gen_extract.py`，落地 `aos/blocks/formula_*`、`extract_*`）、題目背景、投票、帳 epoch 3；跑分 `reports/dsl-search-r03/`。
 - **第四輪已收輪**（2026-11-08）：evaluation **37/400**、training **92/400**（r03 32／86，退步 0；同大小 8→13）。產物 [r04/](r04/04-總結簡報.md)：01 簡報（含 §8 使用者 12:56 遞迴元優化想法）→ 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r04/代定清單.md)；每物件規則 `src/arcagi/objrule/`、產生器預算執行 `blocks/pool/budget.py`、產生器的產生器 `aos/blocks/_gen/_meta/`；跑分 `reports/dsl-search-r04/`。
 - **第五輪已收輪**（2026-11-08）：evaluation **38/400**、training **96/400**（收緊後 95；r04 37／92，退步 0；同大小 13→14）；支線 S1 native 42/400。產物 [r05/](r05/04-總結簡報.md)：01 簡報（含使用者 13:13「子樹也是一種積木」）→ 02 fable 規劃 → [02b Argon 審](r05/02b-Argon審.md) → 03 設計 → 04 總結＋[代定清單](r05/代定清單.md)；積木⇄janet `src/arcagi/srcspace/`、改寫搜尋 `solvers/rewrite*.py`、帶槽子樹積木 `aos/blocks/m_sub_*`；跑分 `reports/dsl-search-r05/`。
-- **第六輪進行中**（14:20 起）：[01 簡報](r06/01-簡報.md) → [02 fable 規劃](r06/02-規劃-fable.md)（已寄 aos 請 Argon 審）→ [03 設計](r06/03-設計.md)；三線施工中：A 元優化＋合成集軟接、B 改寫門控＋歸因＋混合入口全量腳本、C S2 候選影子入庫。S1 邊界寫入 [支線.md](支線.md)。
+- **第六輪進行中**（14:20 起）：[01 簡報](r06/01-簡報.md) → [02 fable 規劃](r06/02-規劃-fable.md)（已寄 aos 請 Argon 審）→ [03 設計](r06/03-設計.md)；[02b Argon 審](r06/02b-Argon審.md) 已採納多數（[代定清單](r06/代定清單.md)）；三線已收（A 4030ca1 合成集門檻＋雙折 meta、B e4a5867 改寫預設關＋歸因、C ad45c8a 影子工具＋S2 候選入庫）；全量 training（混合入口）跑中，接著 evaluation。S1 邊界寫入 [支線.md](支線.md)。
 - （r05 時的）r06 建議：E3 元優化正式做（`_gen/_meta` 調 gen_extract、training 帳分紅＋合成集軟接）、吸收 S1 寬樹、改寫只對高 IoU 題開；S3 可開（見 r05/04 §6、[支線.md](支線.md)）。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
