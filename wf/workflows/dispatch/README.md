@@ -49,6 +49,9 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
+| r03-A 公式 | opus | dsl/features.py、dsl/formula*.py、blocks/gen_formula.py、aos/blocks/formula_*、_gen/formula、對應測試 | 其餘；不 commit、不跑 evaluation | 2026-11-08 12:40 |
+| r03-B 抽取 | opus | dsl/extract*.py、blocks/gen_extract.py、aos/blocks/extract_*、_gen/extract、對應測試 | 其餘；不 commit、不跑 evaluation | 2026-11-08 12:40 |
+| r03-C 背景投票帳 | opus | dsl/background.py、dsl/objects*.py、solvers/search.py、solvers/vote.py、blocks/pool.py、aos/pool/config.json、對應測試 | 其餘；不 commit、不跑 evaluation | 2026-11-08 12:40 |
 
 ### 保留給主 agent，任何線都不得寫
 
