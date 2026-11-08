@@ -17,6 +17,7 @@ namespace arc {
 namespace {
 const std::set<std::string> LEARNERS_={"colormap","object_colormap","local_rule","x_vrule"};
 const std::set<std::string> PENALIZED_={"local_rule","x_vrule"};
+const std::set<std::string> GUARDED_={"colormap","local_rule","x_vrule"};  // support gate (D-r7-18)
 double gnum(const Json::Object& o,const std::string& k,double d) {
     auto it=o.find(k); return it==o.end()?d:std::get<double>(it->second.value);
 }
@@ -45,7 +46,7 @@ bool Gate::rejects(const Program& p,double train_cells) const {
     if (max_len_penalized>=0 && int(p.size())>max_len_penalized && PENALIZED_.contains(last)) return true;
     if (max_steps_before_learner>=0 && LEARNERS_.contains(last) && int(p.size())-1>max_steps_before_learner) return true;
     if (max_table_rows>=0 && LEARNERS_.contains(last) && int(table_rows(p.back().items()))>max_table_rows) return true;
-    if (PENALIZED_.contains(last)) {
+    if (GUARDED_.contains(last)) {
         double rows=double(table_rows(p.back().items()));
         if (rows>0 && train_cells/rows<(p.size()==1?support_alone:support_after)) return true;
     }
@@ -59,7 +60,7 @@ using Clock=std::chrono::steady_clock;
 const std::set<std::string> LEARNERS={"colormap","object_colormap","local_rule","x_vrule"};
 const std::set<std::string> PENALIZED={"local_rule","x_vrule"};
 
-struct Task { std::string id,text; Json train,test_inputs; Grids test_outputs; };
+struct Task { std::string id,text; Json train,test_inputs; Grids test_outputs; Json synth; };
 struct Config { std::string name; Spec spec; Options opt; Gate gate; std::string key; };
 
 uint64_t fnv(const std::string& s,uint64_t h=1469598103934665603ull) {
@@ -138,6 +139,8 @@ Task load_task(const std::string& path) {
         if (e.fields().contains("output")) t.test_outputs.push_back(from_json(e["output"]));
     }
     t.test_inputs=Json(tests);
+    // Optional label-only pairs (native/tools/gate_select.py): never searched.
+    if (j.fields().contains("synth")) t.synth=j["synth"];
     return t;
 }
 
@@ -207,7 +210,22 @@ Json run_job(const Config& c,const Task& t,bool dump) {
         {"seconds",std::chrono::duration<double>(Clock::now()-started).count()}};
     if (dump) {
         Json::Array all;
-        for (const auto& s:sols) all.emplace_back(Json::Object{{"program",s.program},{"cost",s.cost},{"votes",s.votes},{"correct",correct(s)}});
+        for (const auto& s:sols) {
+            Json::Array hits;
+            for (size_t k=0;k<s.tests.size();++k) hits.emplace_back(k<t.test_outputs.size() && s.tests[k]==t.test_outputs[k]);
+            Json::Object o{{"program",s.program},{"cost",s.cost},{"votes",s.votes},{"correct",correct(s)},
+                           {"out_key",hex(fnv(key_of(s.tests)))},{"test_hits",Json(hits)}};
+            if (t.synth.array()) {
+                Json::Array sh;
+                for (const auto& e:t.synth.items()) {
+                    bool ok=false;
+                    try { ok=run(s.program,from_json(e["input"]),c.spec)==from_json(e["output"]); } catch (const std::exception&) {}
+                    sh.emplace_back(ok);
+                }
+                o["synth_hits"]=Json(sh);
+            }
+            all.emplace_back(Json(o));
+        }
         out["solutions"]=Json(all);
     }
     return Json(out);

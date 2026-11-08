@@ -8,9 +8,10 @@ struct Gate {
     int max_steps_before_learner=-1; // drop learner-terminated programs with more steps before it
     int max_table_rows=-1;           // drop learner tables with more rows
     double min_votes=0;              // abstain when top-1 has fewer votes
-    // Support gate (hybrid.py SUPPORT_MIN): train output cells per row of a
-    // terminal local_rule / x_vrule table; 0 turns it off.
-    double support_alone=4,support_after=16;
+    // Support gate (hybrid.py SUPPORT_MIN, re-selected on training, D-r7-18):
+    // train output cells per row of a terminal colormap / local_rule / x_vrule
+    // table; 0 turns it off.
+    double support_alone=0,support_after=16;
     static Gate from_json(const Json& j);
     bool rejects(const Program& p,double train_cells) const;
 };

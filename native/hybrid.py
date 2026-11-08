@@ -29,19 +29,33 @@ ROOT = Path(__file__).resolve().parent.parent
 ERRORS = (ValueError, IndexError, KeyError)
 # Table learners overfit; the color-variable rule ranks with local_rule.
 PENALIZED = search.PENALIZED | {"x_vrule"}
-# Support gate (S1c, tuned on training only): a program ending in a
-# neighborhood table needs enough train output cells per table row; more
-# steps before the table need more support.
-SUPPORT_MIN = (4.0, 16.0)  # (table is the whole program, table after other steps)
+# Support gate (D-r7-18, re-selected on training only by
+# native/tools/gate_select.py, reports/native-s1d/): a program ending in a
+# table learner needs enough train output cells per table row when other
+# steps come before the table; a table that is the whole program is not gated.
+SUPPORT_MIN = (0.0, 16.0)  # (table is the whole program, table after other steps)
+GUARDED = ("colormap", "local_rule", "x_vrule")
+
+
+def _rows(step):
+    if step[0] in ("local_rule", "x_vrule"):
+        return len(step[2])
+    if step[0] == "colormap":
+        return len(step[1])
+    return 0
 
 
 def unsupported(program, train_cells):
-    """True when a terminal local_rule / x_vrule table has too few cells per row."""
+    """True when a terminal colormap / local_rule / x_vrule table has too few
+    train output cells per row."""
     last = program[-1]
-    if last[0] not in PENALIZED or not last[2]:
+    if last[0] not in GUARDED:
+        return False
+    rows = _rows(last)
+    if not rows:
         return False
     need = SUPPORT_MIN[0] if len(program) == 1 else SUPPORT_MIN[1]
-    return train_cells / len(last[2]) < need
+    return train_cells / rows < need
 
 
 class DeadlineReached(BaseException):

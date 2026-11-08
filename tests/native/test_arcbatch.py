@@ -100,9 +100,11 @@ def test_hybrid_support_gate():
     hybrid = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(hybrid)
     table = [["local_rule", "n4", [[0] * 6] * 10]]
-    assert not hybrid.unsupported(table, 40)  # 4 cells per row, table alone
-    assert hybrid.unsupported(table, 39)
+    assert not hybrid.unsupported(table, 1)  # a table alone is not gated
     deep = [["flip_lr"], *table]
     assert hybrid.unsupported(deep, 150)  # 15 < 16 after another step
     assert not hybrid.unsupported(deep, 160)
-    assert not hybrid.unsupported([["flip_lr"], ["colormap", [[1, 2]]]], 1)
+    cmap = [["flip_lr"], ["colormap", [[1, 2], [3, 4]]]]
+    assert hybrid.unsupported(cmap, 31)  # colormap is gated too (D-r7-18)
+    assert not hybrid.unsupported(cmap, 32)
+    assert not hybrid.unsupported([["colormap", [[1, 2]]]], 1)
