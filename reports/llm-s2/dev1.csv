@@ -1,0 +1,8 @@
+task,split,rules,best_train_pass,train_all,test_exact,tokens,seconds
+025d127b,training,1,1.0,True,True,53859,61.8
+1190e5a7,training,1,1.0,True,True,57467,78.1
+321b1fc6,training,1,0.0,False,False,50100,18.3
+4612dd53,training,2,0.0,False,False,58933,62.2
+5521c0d9,training,2,0.0,False,False,57501,47.0
+a5f85a15,training,2,0.333,False,False,53500,58.6
+b7249182,training,1,0.0,False,False,94442,16.5

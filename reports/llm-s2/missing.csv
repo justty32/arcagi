@@ -1,0 +1,32 @@
+run,task,missing
+dev1,321b1fc6,"A primitive that stamps the template object's colored pattern onto every same-shape object of another color (recolor objects by per-cell copy from a template object), e.g. stamp_template(template_sel, target_sel)."
+dev1,5521c0d9,"A per-object translation by an offset derived from the object itself, e.g. move_by(conn, sel, dir, dist=object h) shifting each selected object up by its own bbox height."
+dev1,b7249182,A primitive to draw a line between two aligned points stopping short of the midpoint and stamp a fixed bracket/T-shape at the end (draw-to-midpoint plus template stamp at an offset).
+dev1,025d127b,"a per-object partial shift (translate all object cells except the bottom row by 1, clipped to the object's bbox) or a color-variable local_rule; currently emulated by a color-replicated n4 table"
+dev1,a5f85a15,"A position-parity primitive (e.g. recolor fg cells whose column/row index, or index along their 8-connected object, is odd), or a sequential/iterated local_rule that propagates alternation along a diagonal line."
+dev1,4612dd53,"A 'complete dashed lines' primitive: for each row/column that is a line of the frame (bbox edges or rows/cols with many fg cells within the fg bbox), fill bg cells between its first and last fg cell (or between collinear segments) with a given color; local 3x3 rules cannot see gaps of length 2-3 and DSL cannot draw lines between points."
+dev2,137eaa0f,a primitive that stacks/overlays all objects aligned on an anchor color cell (translate each object so its anchor cell coincides) into one output
+dev2,25d8a9c8,object primitives with an explicit bg parameter (or bg=none so every color forms objects); here the per-grid majority color is treated as bg and its uniform row is never recolored
+dev2,5117e062,"A way to force bg=0 inside a small cropped grid (e.g. a bg parameter on recolor_from/recolor_extract, or colormap of a color to a grid-derived color like 'fg') so the 8 can take the shape color after cropping."
+dev2,a61ba2ce,An 'assemble objects by shape into corners of a new canvas' primitive (place each object at the output corner its L-shape points to).
+dev2,a87f7484,Train 0 fails only because that grid's 0 covers <40% so bg falls back to 8; a primitive option to force bg=0 (task bg) would fix it.
+dev2,662c240a,A block-split primitive (cut into equal 3x3 tiles without separator lines) plus a selector for the tile that is not transpose-symmetric.
+dev2,6e02f1e3,A conditional choosing among fixed output patterns (top row / main diagonal / anti-diagonal) keyed on the number of distinct input colors; the DSL cannot draw diagonals.
+dev2,7837ac64,"Sampling the intersection lattice at the grid-line spacing (downscale by a derived period) and a 2x2 pooling primitive that outputs c when all four corner values equal c, else 0."
+dev2,de1cd16c,An object attribute counting holes / contained objects (e.g. n_holes) so the region with the most noise dots can be selected via rank.
+dev2,cdecee7f,A reshape primitive that lays a 1xN sequence of cells into an HxW grid (with optional snake order) is needed.
+dev2,d0f5fe59,"A primitive that draws the main diagonal (identity pattern) on an n x n canvas, or diagonal rays from a corner cell, is needed."
+eval20,05a7bcf2,"A multi-segment ray (recolor source, paint bar in color A up to the separator, then color B through the opposite region) and pushing the 2 cells it displaces to the border."
+eval20,37d3e8b2,An object attribute n_holes (count of enclosed bg components inside the object) usable in object_colormap.
+eval20,50a16a69,Periodic pattern continuation into a filler region plus a whole-grid cyclic shift / translate by a fixed offset.
+eval20,639f5a19,a per-object quadrant/inset primitive (paint object by relative position) would replace the long local_rule chains
+eval20,79369cc6,template matching: find occurrences (under rotation/reflection) of a grid-derived pattern and stamp the template's other cells there
+eval20,94be5b80,copying/stamping an object at a vertical offset of its own height with a new color taken from an ordered legend
+eval20,e9ac8c9e,"a per-cell nearest-object (Voronoi) recolor, or splitting an object into quadrants and coloring each from the corner dot diagonal to it"
+eval20,00576224,"vertical concatenation of two different derived grids (e.g. stack G-tile over flip_lr G-tile), or a per-band shift"
+eval20,2037f2c7,"aligning two objects by their own bboxes and diffing them cell by cell (object-pair overlay), since split_overlay needs exactly aligned halves"
+eval20,94133066,a step that picks the dihedral transform (of the crop) whose corner-marker layout matches the scattered outside dots
+eval20,af24b4cc,"a cell-majority mode that counts every color in the cell (fill_cells/cells_to_pixels majority exclude the inside-cell majority color as cell bg, so the true majority is lost)"
+eval20,2697da3f,resize_crop (or a pad primitive) with an explicit pad color / task bg instead of the grid's majority color
+eval20,81c0276b,"per-color counting and sorting into a histogram layout (sort colors by object count, one row per color)"
+eval20,8ba14f53,counting enclosed hole cells per object and writing multi-color runs in row-major order into a fixed 3x3 canvas
