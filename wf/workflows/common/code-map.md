@@ -18,6 +18,7 @@
 - [CLI](../../../src/arcagi/cli.py)、[進入點](../../../src/arcagi/__main__.py)：驗證、求解、評測、評分、生成與瀏覽；[測試](../../../tests/test_cli.py)。
 - [generation](../../../src/arcagi/generation/__init__.py)：固定 seed 的 RE-ARC adapter、生成驗證與 provenance；[測試](../../../tests/generation/)。
 - [visualization](../../../src/arcagi/visualization.py)：純 stdlib 離線 HTML 題目瀏覽器；[測試](../../../tests/test_visualization.py)。
+- [inventory_training](../../../scripts/inventory_training.py)：training 400 題特徵盤點，產生 `docs/inventory/` 的 HTML 與 CSV（繪圖在 [inventory_render](../../../scripts/inventory_render.py)）。
 - [setup_data](../../../scripts/setup_data.py)：取得與核對固定來源；[CI](../../../.github/workflows/tests.yml)：lint、pytest 與官方題庫檢查。
 
 ## 真相層與維護鏈
