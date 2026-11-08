@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] 第二輪進行中（隊長 opus）：01～03 完成，L1/L2/L3 三條 opus 子線施工中（隊長監看）→ 下一步整合＋全量評測；進度見 [notes/rounds/README.md](../notes/rounds/README.md) 現況段
+- [rounds] 第二輪進行中（隊長 opus）：第一批整合完（eval 27、training 79）；L4 謂詞產生器施工中（隊長監看）→ 下一步 evaluation 再跑一次、epoch 2、04 總結＋代定、PROGRESS；進度見 [notes/rounds/README.md](../notes/rounds/README.md) 現況段
 
 ## 各工作流 session-log
 
