@@ -1,10 +1,10 @@
 CXX := g++
-CXXFLAGS := -std=c++20 -O2 -Wall -Wextra
+CXXFLAGS := -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread
 SOURCES := $(wildcard src/*.cpp)
 HEADERS := $(wildcard src/*.hpp)
 
 .PHONY: all spec
-all: bin/arcsearch spec bin/solve
+all: bin/arcsearch spec bin/solve bin/arcbatch
 
 bin:
 	mkdir -p bin
@@ -17,4 +17,8 @@ spec:
 
 bin/solve: solve.sh | bin
 	cp solve.sh $@
+	chmod +x $@
+
+bin/arcbatch: arcbatch.sh | bin
+	cp arcbatch.sh $@
 	chmod +x $@

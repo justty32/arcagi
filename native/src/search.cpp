@@ -14,7 +14,7 @@ struct Search {
     Grids root,targets;
     size_t n;
     Clock::time_point started=Clock::now();
-    uint64_t nodes=0,prefix_order=0;
+    uint64_t nodes=0,prefix_order=0,first_nodes=0;
     std::vector<uint64_t> per_depth;
     int limit=0;
     bool stopped=false,out_of_budget=false,seeded=false;
@@ -57,6 +57,7 @@ struct Search {
         if (solutions.size()>=opt.max_solutions) return;
         for (const auto& t:tests) if (!t.valid()) return;
         if (step) path.emplace_back(*step);
+        if (solutions.empty()) first_nodes=nodes;
         solutions.push_back({path,cost(path),seeded});
         if (step) path.pop_back();
     }
@@ -96,18 +97,18 @@ struct Search {
         remember_prefix(grids,hash);
         if (!fitted.insert(hash).second || exhausted()) return;
         Grids train(grids.begin(),grids.begin()+n);
-        if (auto table=fit_colormap(train,targets,tests)) {
+        if (opt.learn_colormap) if (auto table=fit_colormap(train,targets,tests)) {
             Step step={"colormap",*table};
             Grids outs; for (const auto& t:tests) outs.push_back(apply_colormap(t,*table));
             add(outs,&step);
         }
         if (exhausted()) return;
-        if (auto table=fit_object_colormap(train,targets,tests)) {
+        if (opt.learn_object_colormap) if (auto table=fit_object_colormap(train,targets,tests)) {
             Step step={"object_colormap",*table};
             Grids outs; for (const auto& t:tests) outs.push_back(apply_object_colormap(t,*table));
             add(outs,&step);
         }
-        for (const auto& features:{"n4","n8"}) {
+        if (opt.learn_local_rule) for (const auto& features:{"n4","n8"}) {
             if (exhausted()) return;
             auto table=fit_local_rule(train,targets,tests,features);
             if (!table) continue;
@@ -115,7 +116,7 @@ struct Search {
             Grids outs; for (const auto& t:tests) outs.push_back(apply_local_rule(t,features,*table));
             add(outs,&step); break;
         }
-        if (!spec.live.contains("x_vrule")) return;
+        if (!opt.learn_vrule || !spec.live.contains("x_vrule")) return;
         for (const auto& features:{"n4","n8"}) {
             if (exhausted()) return;
             auto table=fit_vrule(train,targets,tests,features);
@@ -160,7 +161,7 @@ struct Search {
             }
         };
         for (const auto& name:spec.names) { expand(name); if (stopped) return; }
-        expand("colormap");
+        if (opt.colormap_step) expand("colormap");
     }
     Json run() {
         uint64_t root_hash=signature(root,n);
@@ -196,7 +197,7 @@ struct Search {
         return Json::Object{{"solutions",sols},{"stats",Json::Object{
             {"nodes",double(nodes)},{"nodes_per_depth",depths},{"depth_reached",reached},
             {"elapsed",seconds},{"nodes_per_second",seconds>0?nodes/seconds:0},
-            {"seeds",int(seeds.size())},{"prefixes",int(prefixes.size())},{"out_of_budget",out_of_budget}}}};
+            {"first_solution_nodes",double(first_nodes)},{"seeds",int(seeds.size())},{"prefixes",int(prefixes.size())},{"out_of_budget",out_of_budget}}}};
     }
 };
 }

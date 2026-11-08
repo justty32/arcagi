@@ -10,6 +10,8 @@ struct Options {
     Json::Array seeds;
     size_t dump_prefixes=0;
     std::string prefix_out;
+    // Learners fitted at every shape-matching state, and the colormap step.
+    bool learn_colormap=true,learn_object_colormap=true,learn_local_rule=true,learn_vrule=true,colormap_step=true;
 };
 Json search(const Json& request,const Spec& spec,const Options& options);
 }

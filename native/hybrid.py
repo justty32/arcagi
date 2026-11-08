@@ -29,6 +29,19 @@ ROOT = Path(__file__).resolve().parent.parent
 ERRORS = (ValueError, IndexError, KeyError)
 # Table learners overfit; the color-variable rule ranks with local_rule.
 PENALIZED = search.PENALIZED | {"x_vrule"}
+# Support gate (S1c, tuned on training only): a program ending in a
+# neighborhood table needs enough train output cells per table row; more
+# steps before the table need more support.
+SUPPORT_MIN = (4.0, 16.0)  # (table is the whole program, table after other steps)
+
+
+def unsupported(program, train_cells):
+    """True when a terminal local_rule / x_vrule table has too few cells per row."""
+    last = program[-1]
+    if last[0] not in PENALIZED or not last[2]:
+        return False
+    need = SUPPORT_MIN[0] if len(program) == 1 else SUPPORT_MIN[1]
+    return train_cells / len(last[2]) < need
 
 
 class DeadlineReached(BaseException):
@@ -204,11 +217,17 @@ def main():
                 native_error = str(exc)
             phases["cpp"] = time.perf_counter() - start
 
+        train_cells = sum(len(e.output) * len(e.output[0]) for e in task.train)
+        gated = [0]
+
         def verify(raw_program, origin):
             try:
                 with until(DEADLINE - 0.15), background.task_context(bg):
                     program = from_json(json.dumps(raw_program))
                     if len(program) > 4 and program[-1][0] in PENALIZED:
+                        return
+                    if unsupported(program, train_cells):
+                        gated[0] += 1
                         return
                     if not all(run(program, e.input) == e.output for e in task.train):
                         return
@@ -292,6 +311,7 @@ def main():
         "arcsearch": native["stats"],
         "cpp_solutions": len(native["solutions"]),
         "verified": len(solutions),
+        "support_gated": gated[0],
         "solutions": len(chosen.ranked),
         "second": chosen.second,
         "shape_hint_applied": chosen.hint_applied,

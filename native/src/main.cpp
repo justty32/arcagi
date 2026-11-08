@@ -1,14 +1,60 @@
 #include "search.hpp"
 #include "background.hpp"
+#include "batch.hpp"
 #include <cmath>
 #include <filesystem>
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 
 int main(int argc,char** argv) {
     using namespace arc;
     try {
         Options options;
+        if (argc>1 && std::string(argv[1])=="--batch") {
+            // arcsearch --batch --tasks LIST|--task FILE... [--configs JSONL] [--threads N] [--cache DIR] [--dump] [--spec PATH] [--out PATH]
+            BatchArgs b;
+            std::vector<std::string> task_lists;
+            std::string data_dir;
+            b.ext=std::getenv("ARCSEARCH_EXT")!=nullptr;
+            for (int i=2;i<argc;++i) {
+                std::string arg=argv[i];
+                if (arg=="--ext") { b.ext=true; continue; }
+                if (arg=="--dump") { b.dump=true; continue; }
+                if (i+1>=argc) fail();
+                std::string value=argv[++i];
+                if (arg=="--tasks") task_lists.push_back(value);
+                else if (arg=="--task") b.task_paths.push_back(value);
+                else if (arg=="--data-dir") data_dir=value;
+                else if (arg=="--configs") b.configs_path=value;
+                else if (arg=="--threads") b.threads=std::stoi(value);
+                else if (arg=="--cache") b.cache_dir=value;
+                else if (arg=="--spec") b.spec_path=value;
+                else if (arg=="--out") b.out_path=value;
+                else fail();
+            }
+            // A list line is a task file (relative to the list) or, with
+            // --data-dir, a bare task id; anything after whitespace or a comma is ignored.
+            for (const auto& list:task_lists) {
+                std::ifstream in(list);
+                if (!in) fail();
+                auto dir=std::filesystem::path(list).parent_path();
+                std::string line;
+                while (std::getline(in,line)) {
+                    line=line.substr(0,line.find_first_of(" \t\r,"));
+                    if (line.empty() || line[0]=='#') continue;
+                    std::filesystem::path p(line);
+                    if (!data_dir.empty() && p.extension()!=".json") p=std::filesystem::path(data_dir)/(line+".json");
+                    else if (!p.is_absolute()) p=dir/p;
+                    b.task_paths.push_back(p.string());
+                }
+            }
+            if (b.spec_path.empty()) {
+                auto binary=std::filesystem::canonical("/proc/self/exe");
+                b.spec_path=(binary.parent_path()/"../spec.json").lexically_normal().string();
+            }
+            return batch_main(b);
+        }
         bool run_mode=false,list_ported=false,ext=std::getenv("ARCSEARCH_EXT")!=nullptr;
         std::string request_path,out_path,spec_path,seeds_path;
         for (int i=1;i<argc;++i) {

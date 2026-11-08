@@ -3,7 +3,7 @@
 #include <tuple>
 
 namespace arc {
-namespace { std::optional<int> current; }
+namespace { thread_local std::optional<int> current; }
 std::optional<int> task_background(const Grids& grids) {
     std::map<int,int> total,border;
     for (const auto& g:grids) {

@@ -32,10 +32,13 @@ Component hole_cells(const Component& cells) {
 Extracted extract(const Grid& g,const std::string& conn) {
     if (std::find(CONNS.begin(),CONNS.end(),conn)==CONNS.end()) fail();
     int bg=object_background(g);
-    std::string key=std::to_string(g.h)+","+std::to_string(g.w)+","+std::to_string(bg)+","+conn+":";
-    for (int c:g.data) { key+=std::to_string(c); key+=','; }
-    static std::unordered_map<std::string,Extracted> cache;
-    static std::deque<std::string> order;
+    // Binary key: one byte per cell (colors and sizes fit in a char).
+    std::string key;
+    key.reserve(g.data.size()+8);
+    key.push_back(char(g.h)); key.push_back(char(g.w)); key.push_back(char(bg+1)); key+=conn;
+    for (int c:g.data) key.push_back(char(c+1));
+    static thread_local std::unordered_map<std::string,Extracted> cache;
+    static thread_local std::deque<std::string> order;
     if (auto it=cache.find(key);it!=cache.end()) return it->second;
     auto raw=objects(g,bg,conn[0]=='8',conn.ends_with("same"));
     auto out=std::make_shared<Objs>();
