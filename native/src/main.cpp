@@ -1,6 +1,7 @@
 #include "search.hpp"
 #include "background.hpp"
 #include "batch.hpp"
+#include "seed.hpp"
 #include <cmath>
 #include <filesystem>
 #include <cstdlib>
@@ -12,6 +13,9 @@ int main(int argc,char** argv) {
     try {
         Options options;
         if (argc>1 && std::string(argv[1])=="--batch") {
+            for (int i=2;i+1<argc;++i)
+                if (std::string(argv[i])=="--mode") return seed::seed_main(argc,argv);  // seed language
+
             // arcsearch --batch --tasks LIST|--task FILE... [--configs JSONL] [--threads N] [--cache DIR] [--dump] [--spec PATH] [--out PATH]
             BatchArgs b;
             std::vector<std::string> task_lists;
