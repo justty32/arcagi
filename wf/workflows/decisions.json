@@ -11,9 +11,9 @@
  "rows": [
   {
    "date": "2026-11-08",
-   "decision": "跑分紀錄走 `experiments/ledger.json`（`wf-table/1`）＋需要時才開 record 檔",
+   "decision": "跑分紀錄走 `experiments/ledger.json`（`wf-table/1`）一列一跑；細節才開 repo 根 `reports/<slug>/README.md`（沿用主 agent 已用的 baseline-identity 形式）",
    "rejected_alternatives": "學 aos 用 md 表當實驗索引：跑分會累積成同質大表，撞鐵律 3 的 1 KB；每次一檔：一句話的結果也開檔，雜訊多",
-   "premise": "`artifacts/` 仍被 gitignore；實驗量大到 ledger 難查再分檔"
+   "premise": "`artifacts/` 與大型逐題 JSON 不進版控；實驗量大到 ledger 難查再分檔"
   },
   {
    "date": "2026-11-08",

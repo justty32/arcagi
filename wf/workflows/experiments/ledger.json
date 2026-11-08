@@ -18,15 +18,15 @@
  ],
  "rows": [
   {
-   "id": "2026-10-13-identity-baseline",
-   "date": "2026-10-13",
+   "id": "2026-11-08-baseline-identity",
+   "date": "2026-11-08",
    "hypothesis": "identity 只是流程基線，預期 0 題",
-   "solver": "arcagi.solvers.identity (96f94ca)",
-   "split": "evaluation",
-   "result": "0/400, errors=0",
+   "solver": "identity (data rev 3990304)",
+   "split": "evaluation＋training",
+   "result": "evaluation 0/400、training 0/400, errors=0",
    "baseline": "（本身即基線）",
    "verdict": "是：流程通、0 題，作為後續比較的下限",
-   "record_path": ""
+   "record_path": "../../../reports/baseline-identity/README.md"
   }
  ]
 }
