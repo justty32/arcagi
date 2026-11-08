@@ -9,13 +9,13 @@
 
 ## Done when
 
-- 下表新增一列，且「未選方案與原因」「前提」兩欄非空。
+- [decisions.json](decisions.json) 新增一列（**新的放最前**；讀寫照 [data-files](common/data-files.md)），且 `rejected_alternatives`、`premise` 兩欄非空。
 
-## 記錄（新的在上）
+## 記錄
 
-| 日期 | 決定 | 未選方案與原因 | 前提（變了就重看）|
-|------|------|---------------|-----------------|
-| 2026-09-22 | 依賴與虛擬環境用 `uv`，lint／format 用 `ruff` | `pip + venv + requirements.txt`：沒有 lockfile，重現性差；`poetry`：比 uv 慢、多一層設定。**導入時 agent 代選，使用者尚未確認** | 專案是純 Python；使用者沒有指定工具 |
-| 2026-09-22 | ARC-AGI-1 資料集以 git submodule 掛在 `data/ARC-AGI/` | 直接 commit JSON 進 repo：800 題檔案雜訊多、追不到上游更新；每次下載：離線就沒資料 | 上游 `fchollet/ARC-AGI` 仍公開可拉 |
-| 2026-09-22 | 工作流用非侵入式導入（頂層只留 `AGENTS.md`／`CLAUDE.md`／`.claude/`，其餘在 `wf/`），flavor 取 dev＋knowledge | 標準佈局：頂層會多十幾個 `.md`，跟之後的 `src/`、`data/` 混在一起 | 模板 kernel v0.6 |
+已抽到 [decisions.json](decisions.json)（8 列，`wf-table/1`；2026-11-08 表超過 1 KB 依鐵律 3 抽出）。欄位：
 
+- `date`：決定日期。
+- `decision`：定了什麼。
+- `rejected_alternatives`：未選方案與原因。
+- `premise`：前提（變了就重看）。

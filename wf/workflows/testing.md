@@ -46,4 +46,4 @@ CI 在 [tests.yml](../../.github/workflows/tests.yml) 執行固定依賴安裝�
 
 ## 交接
 
-驗證完成後回 [feature-dev](feature-dev/README.md)，同步 code map、文件並依授權 commit／push。
+驗證完成後回 [feature-dev](feature-dev/README.md)，同步 code map、文件並依授權 commit／push。求解器改前／改後的跑分記進 [experiments](experiments/README.md) 的 ledger。

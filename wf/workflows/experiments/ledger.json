@@ -1,0 +1,32 @@
+{
+ "contract": "wf-table/1",
+ "source": "README.md",
+ "extracted": "2026-11-08",
+ "columns": [
+  "id",
+  "date",
+  "hypothesis",
+  "solver",
+  "split",
+  "result",
+  "baseline",
+  "verdict",
+  "record_path"
+ ],
+ "link_columns": [
+  "record_path"
+ ],
+ "rows": [
+  {
+   "id": "2026-10-13-identity-baseline",
+   "date": "2026-10-13",
+   "hypothesis": "identity 只是流程基線，預期 0 題",
+   "solver": "arcagi.solvers.identity (96f94ca)",
+   "split": "evaluation",
+   "result": "0/400, errors=0",
+   "baseline": "（本身即基線）",
+   "verdict": "是：流程通、0 題，作為後續比較的下限",
+   "record_path": ""
+  }
+ ]
+}

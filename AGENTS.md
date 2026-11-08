@@ -6,6 +6,7 @@ arcagi = **嘗試解決 ARC-AGI-1：寫一個 Python 求解器，從每題少量
 
 - 每個 session 先跑 `grep -c '^- \[' wf/SESSION-LOG.md wf/WAIT_USER.md`：非 0 才開 [SESSION-LOG.md](wf/SESSION-LOG.md)（進度）/ [WAIT_USER.md](wf/WAIT_USER.md)（等使用者）；開場也跑 `wf/tools/inbox_read.sh`，有信先讀（[inbox](wf/workflows/inbox/README.md)）。
 - **碰原始碼前**：慣例與 code map → [workflows/common/conventions.md](wf/workflows/common/conventions.md)、[workflows/common/code-map.md](wf/workflows/common/code-map.md)；環境與指令 → [workflows/dev-env.md](wf/workflows/dev-env.md)。
+- **要派子 agent**（普通工作 opus、簡單與雜活 sonnet）→ [workflows/team-model.md](wf/workflows/team-model.md)、[workflows/dispatch/](wf/workflows/dispatch/README.md)。
 <!-- wf-insert:AGENTS -->
 - **要你動手做事** → [WORKFLOWS.md](wf/WORKFLOWS.md) 依意圖派發，再讀該工作流入口檔。
 - **想看專案結構** → [INDEX.md](wf/INDEX.md)。
@@ -18,4 +19,4 @@ arcagi = **嘗試解決 ARC-AGI-1：寫一個 Python 求解器，從每題少量
 3. **條列走資料檔、導航留 md**：給 AI 消化的表／清單 >1 KB 存 `.json`／`.csv`（契約 `wf-table/1`，見 [data-files](wf/workflows/common/data-files.md)），用 `tools/tabledb.py` 讀寫、不整份讀進 context；給人點的導航連結留 md。
 4. **具體流程**在各工作流入口檔，不在頂層。
 
-<!-- wf-kernel v0.6 (2026-09-02) -->
+<!-- wf-kernel v0.6 (2026-09-02)；已套上游 CHANGELOG「未發布」段至 2026-11-08 -->

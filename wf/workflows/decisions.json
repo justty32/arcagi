@@ -1,0 +1,61 @@
+{
+ "contract": "wf-table/1",
+ "source": "decisions.md",
+ "extracted": "2026-11-08",
+ "columns": [
+  "date",
+  "decision",
+  "rejected_alternatives",
+  "premise"
+ ],
+ "rows": [
+  {
+   "date": "2026-11-08",
+   "decision": "跑分紀錄走 `experiments/ledger.json`（`wf-table/1`）＋需要時才開 record 檔",
+   "rejected_alternatives": "學 aos 用 md 表當實驗索引：跑分會累積成同質大表，撞鐵律 3 的 1 KB；每次一檔：一句話的結果也開檔，雜訊多",
+   "premise": "`artifacts/` 仍被 gitignore；實驗量大到 ledger 難查再分檔"
+  },
+  {
+   "date": "2026-11-08",
+   "decision": "從 aos／multi-agent 包帶進 dispatch、team-model、TEMPLATE.handoff，改寫成「主 agent 派 Claude 子 agent＋inbox 連 aos」",
+   "rejected_alternatives": "不帶 `driving-cli-agents`、codex 分級與 aos-teams 隊形：arcagi 不用外部 CLI agent；不帶 `resources.md`（螢幕／裝置鎖）：只剩 CPU 一項，寫成「同時只跑一份全量評測」併進 experiments／team-model；不帶 `wake-policy`／五通道信箱：仍是單一收件匣",
+   "premise": "開始用 codex 等外部 CLI agent、或多台機器分工時重看"
+  },
+  {
+   "date": "2026-11-08",
+   "decision": "不帶 aos 的 ideas／spec／session_logs／HANDOFF＋compact hook／codemap_gen／decide_page／progress_board／common/user 拆檔",
+   "rejected_alternatives": "ideas／spec 在 aos 已封存，arcagi 的 [planning](planning.md) 已涵蓋；session_logs 只帶 STRUCTURE「日誌寫法」規則，SESSION-LOG 膨脹時才開；compact 交接併進 team-model「context 管理」寫 SESSION-LOG，不裝 hook；codemap_gen 綁 C++／proto8，code map 才 2.7 KB；看板與網頁是 aos 專屬；user.md 小、不必拆",
+   "premise": "SESSION-LOG 超 4 KB、code map 超 8 KB、或使用者要網頁看板時重看"
+  },
+  {
+   "date": "2026-11-08",
+   "decision": "套上游 kernel「未發布」段：`tools/` 整包、`STRUCTURE.md`（日誌寫法）、`tidy/` 整夾（原則 5 內容精簡、wf-lint 改可選）",
+   "rejected_alternatives": "不跟 `decisions.md` 表頭改成「來源」：使用者要求取捨記在這裡，保留「未選方案與原因」欄",
+   "premise": "上游 v0.7 發布時再比一次"
+  },
+  {
+   "date": "2026-11-08",
+   "decision": "user.md 補「外出時代定清單」「長期記憶放 wf/」兩段，沿用同一位使用者在 aos 定的偏好",
+   "rejected_alternatives": "只記今天口頭說的：外出時多 agent 分工仍得每次重猜代定規則",
+   "premise": "使用者另有指示就改 user.md"
+  },
+  {
+   "date": "2026-09-22",
+   "decision": "依賴與虛擬環境用 `uv`，lint／format 用 `ruff`",
+   "rejected_alternatives": "`pip + venv + requirements.txt`：沒有 lockfile，重現性差；`poetry`：比 uv 慢、多一層設定。**導入時 agent 代選，使用者尚未確認**",
+   "premise": "專案是純 Python；使用者沒有指定工具"
+  },
+  {
+   "date": "2026-09-22",
+   "decision": "ARC-AGI-1 資料集以 git submodule 掛在 `data/ARC-AGI/`",
+   "rejected_alternatives": "直接 commit JSON 進 repo：800 題檔案雜訊多、追不到上游更新；每次下載：離線就沒資料",
+   "premise": "上游 `fchollet/ARC-AGI` 仍公開可拉"
+  },
+  {
+   "date": "2026-09-22",
+   "decision": "工作流用非侵入式導入（頂層只留 `AGENTS.md`／`CLAUDE.md`／`.claude/`，其餘在 `wf/`），flavor 取 dev＋knowledge",
+   "rejected_alternatives": "標準佈局：頂層會多十幾個 `.md`，跟之後的 `src/`、`data/` 混在一起",
+   "premise": "模板 kernel v0.6"
+  }
+ ]
+}

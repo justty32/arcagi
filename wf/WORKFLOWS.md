@@ -20,11 +20,12 @@
 | 「搬檔案 / 改目錄名 / 拆 repo」 | **refactor**（搬移專章）| [workflows/refactor/moving-things.md](workflows/refactor/moving-things.md) |
 | 「這個陌生專案是怎麼運作的」「幫我分析這個 repo」 | **analysis** | [workflows/analysis.md](workflows/analysis.md) |
 | 「查清楚這是怎麼運作的」「這樣做可不可行」 | **investigation** | [workflows/investigation.md](workflows/investigation.md) |
+| 「跑個實驗看會怎樣」「這個想法在 evaluation 上幾題」「比較 A／B 方法」 | **experiments** | [workflows/experiments/README.md](workflows/experiments/README.md) |
 | 「做一包 patch 給別的專案 / 別的 agent 套」 | **patch** | [workflows/patch.md](workflows/patch.md) |
 | 「環境怎麼裝」「fresh clone 後要做什麼」「指令是什麼」 | **dev-env** | [workflows/dev-env.md](workflows/dev-env.md) |
 | 「討論方案」「寫動工計畫」（spec / plan）| **planning**（kernel 管線的後兩段）| [workflows/planning.md](workflows/planning.md) |
 
-**analysis** ＝初次接觸陌生專案、要建立可延續的分析產物；**investigation** ＝回答一個窄問題。**patch** ＝跨 repo、原專案無 git 或不能直接 push、要交給冷啟動 agent 套用時才用；同一個 repo 內能改能測就走 feature-dev。
+**analysis** ＝初次接觸陌生專案、要建立可延續的分析產物；**investigation** ＝回答一個窄問題（只讀不跑分）；**experiments** ＝拿一個假設去跑分，要的是數字與是／否。**patch** ＝跨 repo、原專案無 git 或不能直接 push、要交給冷啟動 agent 套用時才用；同一個 repo 內能改能測就走 feature-dev。
 ### 知識工作 flavor
 
 | 觸發（你說…）| 工作流 | 入口檔（先讀這個）| 分辨 |
@@ -37,6 +38,16 @@
 | 「整理一堆資訊 / 檔案 / 筆記的結構」 | **organize** | [workflows/organize.md](workflows/organize.md) | 動的是**位置與分類**，不是內容 |
 
 例：「幫我讀懂統計檢定」——只要這次看懂 → digest；要持續學下去 → learn。想法要不要做、何時做（idea / roadmap）走 kernel 的 [planning](workflows/planning.md)。產出文字的工作流共用 [common/writing](workflows/common/writing.md)（文風）、材料導航共用 [common/info-map](workflows/common/info-map.md)。
+
+### 多 agent 分工
+
+主 agent 派子 agent（取自模板 multi-agent 包與 aos 實戰版，改寫成本專案語境）；跟別資料夾的 agent（aos）通信走下方 kernel 表的 inbox。
+
+| 觸發（你說…）| 工作流 | 入口檔（先讀這個）|
+|--------------|--------|-------------------|
+| 「把這件事切成幾條線派出去」「寫交接書」「收線」 | **dispatch** | [workflows/dispatch/README.md](workflows/dispatch/README.md) |
+| 「這件事派哪級模型」「要開幾個子 agent」 | **team-model** | [workflows/team-model.md](workflows/team-model.md) |
+
 <!-- wf-insert:WORKFLOWS -->
 
 ### kernel 內建
@@ -44,13 +55,13 @@
 | 觸發（你說…）| 工作流 | 入口檔 |
 |--------------|--------|--------|
 | 「記 / 查踩坑」 | **gotchas** | [workflows/common/gotchas.md](workflows/common/gotchas.md) |
-| 「整理 X」「封存過時的」「檔案太多／太雜」「太大要拆」 | **tidy** | [workflows/tidy/README.md](workflows/tidy/README.md) |
+| 「整理 X」「封存過時的」「檔案太多／太雜」「太大要拆」「只留結論」 | **tidy** | [workflows/tidy/README.md](workflows/tidy/README.md) |
 | 「記個想法」「以後要做」「排進 roadmap」「幫我規劃」 | **planning** | [workflows/planning.md](workflows/planning.md) |
 | 「記個決定」「為什麼選 A 不選 B」 | **decisions** | [workflows/decisions.md](workflows/decisions.md) |
 | 「我的偏好是…」「以後直接做 / 先問」 | **user** | [workflows/common/user.md](workflows/common/user.md) |
 | 「看看信箱」「寄信給別資料夾的 agent」 | **inbox** | [workflows/inbox/README.md](workflows/inbox/README.md) |
 
-**都不符 → 看 [INDEX.md](INDEX.md)**。新開工作流 → 複製 [workflows/TEMPLATE.workflow.md](workflows/TEMPLATE.workflow.md) 並在上表加一列。要定期喚醒合 heartbeat 包、多 agent 協作合 multi-agent 包（都在模板 repo 的 `flavors/`）。
+**都不符 → 看 [INDEX.md](INDEX.md)**。新開工作流 → 複製 [workflows/TEMPLATE.workflow.md](workflows/TEMPLATE.workflow.md) 並在上表加一列。要定期喚醒合 heartbeat 包（在模板 repo 的 `flavors/`）。
 
 ## 活狀態記哪裡（只列 open，完成即刪）
 

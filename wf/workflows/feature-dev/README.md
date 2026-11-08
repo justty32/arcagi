@@ -39,4 +39,5 @@
 ## 交接
 
 - 驗證怎麼跑 → [testing](../testing.md)；改到一半發現該先整理結構 → [refactor](../refactor/README.md)。
+- 求解器跑分（改前／改後、A／B 比較）→ [experiments](../experiments/README.md)；大到要分線給子 agent → [dispatch](../dispatch/README.md)。
 - 為什麼選這個做法 → [decisions](../decisions.md)；卡在使用者 → [WAIT_USER](../../WAIT_USER.md)。
