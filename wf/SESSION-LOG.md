@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] 第五輪進行中（opus 隊長）：01 簡報已寫、論壇開輪 p-20261108-131350-e59a；fable 規劃中 → 03 設計 → 施工 → 04 總結；產物 notes/rounds/r05/；支線 S1／S2 已上線（全量評測主線 --workers ≤6）
+- [rounds] 第五輪進行中（opus 隊長）：01 簡報已寫、論壇開輪 p-20261108-131350-e59a；02 fable 規劃、03 設計已定（規劃帖 p-20261108-131654-d030 精華；已寄 aos 請 Argon 審）；施工三線 A srcspace／B 改寫搜尋／C 每物件規則（opus）跑中 → 合併、全量、04 總結；產物 notes/rounds/r05/；支線 S1／S2 已上線（全量評測主線 --workers ≤6）
 
 ## 各工作流 session-log
 
