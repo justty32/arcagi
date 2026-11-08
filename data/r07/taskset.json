@@ -1,0 +1,154 @@
+{
+ "holdout": [
+  {
+   "category": "recolor",
+   "r06_solved": true,
+   "sha1": "7644e3ffa5701096400e3ba03c03854518f59772",
+   "task_id": "ea32f347"
+  },
+  {
+   "category": "reshape",
+   "r06_solved": true,
+   "sha1": "530a26151b5a29436f6d9cf8a9613e92abf0988f",
+   "task_id": "bbc9ae5d"
+  },
+  {
+   "category": "scale_tile",
+   "r06_solved": true,
+   "sha1": "9cdf49578917a66e95d1dc072d5b0955377487d6",
+   "task_id": "9172f3a0"
+  },
+  {
+   "category": "summary",
+   "r06_solved": true,
+   "sha1": "28c2b41f4a80b8f5e01cde6e30cf373e2974d48d",
+   "task_id": "44f52bb0"
+  },
+  {
+   "category": "recolor",
+   "r06_solved": false,
+   "sha1": "e5ba9aec80345595762dc51e765c8561aabe355e",
+   "task_id": "bda2d7a6"
+  },
+  {
+   "category": "reshape",
+   "r06_solved": false,
+   "sha1": "d6633a99a34cfc4221af505017eb735d4378e915",
+   "task_id": "137eaa0f"
+  },
+  {
+   "category": "scale_tile",
+   "r06_solved": false,
+   "sha1": "93580520b37e79cb7e9f38ab6faed3be61107a9d",
+   "task_id": "cce03e0d"
+  },
+  {
+   "category": "summary",
+   "r06_solved": false,
+   "sha1": "6586907dfa6661dace441380c504dd1dc0d9d1c1",
+   "task_id": "ff28f65a"
+  }
+ ],
+ "learn": [
+  {
+   "category": "crop",
+   "r06_solved": true,
+   "sha1": "3ef40a4b5176e89d341a97dbd7b6543c68e55b65",
+   "task_id": "a740d043"
+  },
+  {
+   "category": "draw",
+   "r06_solved": true,
+   "sha1": "823d5fbeecadb55fc7075bc886257e46ef636392",
+   "task_id": "95990924"
+  },
+  {
+   "category": "fill",
+   "r06_solved": true,
+   "sha1": "93ef81105a6b73fadecc4dd5f06f62e34bcaed5e",
+   "task_id": "c0f76784"
+  },
+  {
+   "category": "geometry",
+   "r06_solved": true,
+   "sha1": "9a283116ae7313d1c98c726e8ef81d7be8006114",
+   "task_id": "68b16354"
+  },
+  {
+   "category": "move",
+   "r06_solved": true,
+   "sha1": "4cd85728457e1cfdfc2bfe6d11ffa814d69836ce",
+   "task_id": "1e0a9b12"
+  },
+  {
+   "category": "objects",
+   "r06_solved": true,
+   "sha1": "9c6c9827036e4a0254e8c5a8d75f157c16a08b01",
+   "task_id": "6f8cd79b"
+  },
+  {
+   "category": "overlay",
+   "r06_solved": true,
+   "sha1": "cb52187e1134a0b586cf6a6ab552862f02b000e4",
+   "task_id": "ce4f8723"
+  },
+  {
+   "category": "pattern",
+   "r06_solved": true,
+   "sha1": "28bba430c18b9db00c5f97f3c7cbcfebfbe42cca",
+   "task_id": "496994bd"
+  },
+  {
+   "category": "crop",
+   "r06_solved": false,
+   "sha1": "1f7723a6151756c5ba7ac08b921dfd55753bc2ed",
+   "task_id": "d10ecb37"
+  },
+  {
+   "category": "draw",
+   "r06_solved": false,
+   "sha1": "958fb4addba050355846542a9e3be925544f4956",
+   "task_id": "22233c11"
+  },
+  {
+   "category": "fill",
+   "r06_solved": false,
+   "sha1": "1b6010e25a45b79622f53347792f235814639650",
+   "task_id": "af902bf9"
+  },
+  {
+   "category": "move",
+   "r06_solved": false,
+   "sha1": "8d734e6cbed4a6cb82d85b309ade19f9644bef72",
+   "task_id": "beb8660c"
+  },
+  {
+   "category": "multi",
+   "r06_solved": false,
+   "sha1": "b0746c7969c4debd1a18f85977bd17e7830adee2",
+   "task_id": "ba97ae07"
+  },
+  {
+   "category": "objects",
+   "r06_solved": false,
+   "sha1": "2e44b09e0069a6db6438d6ff0d99a25fe2a4571d",
+   "task_id": "e76a88a6"
+  },
+  {
+   "category": "overlay",
+   "r06_solved": false,
+   "sha1": "a6d00c299c438f5ab83f9745ea314fa14e0fa742",
+   "task_id": "995c5fa3"
+  },
+  {
+   "category": "pattern",
+   "r06_solved": false,
+   "sha1": "19a0872cff186a20da7bbf5d7ebef4857af4df7c",
+   "task_id": "1b60fb0c"
+  }
+ ],
+ "n_candidates": 266,
+ "rule": "training tasks with S4 label, S5 synth file, all grids <=15x15; split by r06 training correct; per split round-robin over sorted S4 categories, each bucket ordered by sha1(task_id+'r07'); first 8 -> L16, next 4 -> H8 (the <=15x15 cap is a compute bias)",
+ "schema": "r07-taskset/1",
+ "seed": "r07"
+}
