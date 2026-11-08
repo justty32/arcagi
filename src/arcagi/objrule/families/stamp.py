@@ -9,9 +9,10 @@ are left alone. Keys are ``keyed.KEYS``.
 Fitting: objects are grouped by key; an offset (within ``RADIUS`` of the box)
 joins the group's pattern when every member that sees it on a background input
 cell has the same non-background target color there, and at least
-``keyed.MIN_SUPPORT`` members see it. Same anti-memorization as ``keyed`` (>= 3
-stamping objects, >= 2 per entry, >= 2 distinct values for a non-``const``
-key); candidates must reproduce every train pair.
+``SUPPORT`` (3) members see it. Anti-memorization is stricter than ``keyed``
+(a pattern is a big table: r06 saw stamp_key fits pass train and miss test):
+>= 3 stamping objects, >= ``SUPPORT`` per entry, >= 2 distinct values for a
+non-``const`` key; candidates must reproduce every train pair.
 """
 
 from collections.abc import Sequence
@@ -24,6 +25,7 @@ from arcagi.tasks import Grid
 from . import keyed, scope
 
 RADIUS = 2
+SUPPORT = 3
 MAX_PATTERN = 40
 
 
@@ -70,7 +72,7 @@ def _pattern(views: Sequence[dict], bg: int) -> tuple | None:
             seen.setdefault(off, []).append(c)
     pattern = []
     for (dy, dx), cs in sorted(seen.items()):
-        if len(set(cs)) == 1 and cs[0] != bg and len(cs) >= keyed.MIN_SUPPORT:
+        if len(set(cs)) == 1 and cs[0] != bg and len(cs) >= SUPPORT:
             pattern.append((dy, dx, cs[0]))
     if len(pattern) > MAX_PATTERN:
         return None
@@ -101,7 +103,7 @@ def candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list[Params]:
                     break
                 kinds.add(p)
                 if p:
-                    if len(members) < keyed.MIN_SUPPORT:
+                    if len(members) < SUPPORT:
                         break
                     table.append((k, p))
                     painted += len(members)

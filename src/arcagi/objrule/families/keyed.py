@@ -6,7 +6,8 @@ looked up in a table keyed by an object property.
 color)``), paint the family's region with that color; objects whose key is not
 in the table are left alone. ``conn`` is a ``scope`` (``"4same"``, or
 ``"4same@5"``: objects re-extracted on background color 5). ``key == "const"``
-gives every object the same key ``0``. Regions (computed on the input grid,
+gives every object the same key ``0``; a table color ``-1`` (``OWN``) is the
+object's own color (tried after plain colors). Regions (computed on the input grid,
 all objects read before any paint):
 
 - ``halo4`` / ``halo8``: background cells 4- / 8-adjacent to the object;
@@ -38,7 +39,8 @@ type Cell = tuple[int, int]
 type Region = Callable[[Grid, Obj, int], list[Cell]]
 SKIP = "skip"
 KEYS = ("const", "color", "size", "shape", "is_largest", "is_smallest")
-KEYS += ("touches_border", "has_hole", "size_rank", "h", "w", "h_odd")
+KEYS += ("touches_border", "has_hole", "n_holes", "size_rank", "h", "w", "h_odd")
+OWN = -1  # table value: the object's own color
 MIN_OBJECTS = 3
 MIN_SUPPORT = 2
 MAX_CANDIDATES = 2
@@ -101,15 +103,16 @@ REGIONS: dict[str, Region] = {
 def paint_keyed(region: Region, grid: Grid, conn: str, key: str, table) -> Grid:
     grid = tuple(tuple(row) for row in grid)
     lookup = {k: v for k, v in table}
-    if any(not isinstance(v, int) or not 0 <= v <= 9 for v in lookup.values()):
+    if any(not isinstance(v, int) or not OWN <= v <= 9 for v in lookup.values()):
         raise ValueError("table value is not a color")
     bg = scope.background(grid, conn)
     cells: dict[Cell, int] = {}
     for o in scope.objects(grid, conn):
         k = key_of(o, key)
         if k in lookup:
+            v = o.props["color"] if lookup[k] == OWN else lookup[k]
             for cell in region(grid, o, bg):
-                cells[cell] = lookup[k]
+                cells[cell] = v
     if not cells:
         return grid
     rows = [list(row) for row in grid]
@@ -192,8 +195,9 @@ def fit(
                 v = observe(region, s, t, o, bg)
                 if v is not None:
                     obs.append((o, v))
-        for key in KEYS:
-            table = fit_table(obs, key)
+        own = [(o, OWN if v == o.props["color"] else v) for o, v in obs]
+        for key, rows in [(k, obs) for k in KEYS] + [(k, own) for k in KEYS]:
+            table = fit_table(rows, key)
             if table is None:
                 continue
             params = (conn, key, table)
