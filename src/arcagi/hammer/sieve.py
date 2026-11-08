@@ -13,7 +13,8 @@ gets one ledger row (``layer: 2``, ``by: gate-scan``, ``accepted`` as is).
 
 ``equiv`` (mine only, nothing is applied): 5 random 4x4 probes (fixed seed),
 all first-order programs of size <= 3 over ``$in`` and the constants
-(no lambdas / HOFs), well-typed by ``grow.sig.infer_sig``, values by ``arcbatch --mode seed-run``; prints the
+(no lambdas / HOFs), well-typed by ``grow.sig.infer_sig``, values by
+``arcbatch --mode seed-run``; prints the
 number of observational equivalence classes and the estimated prunable
 fraction (programs that are not their class's first member).
 
@@ -174,7 +175,8 @@ def equiv_scan(work: Path, threads: int = 8) -> dict:
     for i in sorted(valid):
         classes.setdefault(json.dumps(valid[i]), []).append(i)
     big = sorted(classes.values(), key=len, reverse=True)[:8]
-    return {"generated": len(allp), "typed": len(progs), "valid": len(valid), "classes": len(classes),
+    return {"generated": len(allp), "typed": len(progs), "valid": len(valid),
+            "classes": len(classes),
             "prunable": round(1 - len(classes) / len(valid), 4) if valid else 0.0,
             "biggest": [[json.dumps(progs[i]) for i in c[:4]] + [len(c)]
                         for c in big]}

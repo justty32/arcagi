@@ -1,0 +1,437 @@
+{
+ "base": {
+  "k": 2.0,
+  "lib_cap": 16,
+  "loo_frac": 0.25,
+  "loo_min_pairs": 3,
+  "m": 3,
+  "max_holes": 2,
+  "mdl_div": 1.0,
+  "retire_after": 2
+ },
+ "base_sha": "36f214181d24",
+ "groups": 1,
+ "variants": 19,
+ "ran": 4,
+ "ran_offline_same": 4,
+ "accepted": 0,
+ "tried": [
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 0.5,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 399227,
+     "ntf": 399227,
+     "drop": 0.0
+    },
+    "B": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 68576,
+     "ntf": 68576,
+     "drop": 0.0
+    },
+    "selected": false,
+    "accepted": false
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 2.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.1,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.5,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 8,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 399227,
+     "ntf": 399227,
+     "drop": 0.0
+    },
+    "B": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 68576,
+     "ntf": 68576,
+     "drop": 0.0
+    },
+    "selected": false,
+    "accepted": false
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 32,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 1
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 3
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 1.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 399227,
+     "ntf": 399227,
+     "drop": 0.0
+    },
+    "B": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 68576,
+     "ntf": 68576,
+     "drop": 0.0
+    },
+    "selected": false,
+    "accepted": false
+   }
+  },
+  {
+   "params": {
+    "k": 4.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 1,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 1.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 0.5,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 4.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 0.5,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": true,
+   "judge": {
+    "A": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 399227,
+     "ntf": 399227,
+     "drop": 0.0
+    },
+    "B": {
+     "lost": 0,
+     "gained": 0,
+     "ntf_base": 68576,
+     "ntf": 68576,
+     "drop": 0.0
+    },
+    "selected": false,
+    "accepted": false
+   }
+  },
+  {
+   "params": {
+    "k": 1.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 2.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 4.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 2,
+    "mdl_div": 2.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 1.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 1,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 4.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 1,
+    "mdl_div": 1.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 1,
+    "mdl_div": 0.5,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  },
+  {
+   "params": {
+    "k": 2.0,
+    "lib_cap": 16,
+    "loo_frac": 0.25,
+    "loo_min_pairs": 3,
+    "m": 3,
+    "max_holes": 1,
+    "mdl_div": 2.0,
+    "retire_after": 2
+   },
+   "blocks_sha": "36f214181d24",
+   "offline_same": true,
+   "run": false,
+   "judge": {
+    "accepted": false,
+    "note": "offline \u03940"
+   }
+  }
+ ]
+}
