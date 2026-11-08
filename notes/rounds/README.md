@@ -2,7 +2,7 @@
 
 冷啟動接手先讀本檔，再讀 [wf/SESSION-LOG](../../wf/SESSION-LOG.md) 與 `wf/inbox/` 頂層未辦的信。
 
-## 現況（2026-11-08 13:40）
+## 現況（2026-11-08 14:30）
 
 - 準備：資料已下載、pytest 全綠、identity 基線 0/400（`reports/baseline-identity/`）；題庫盤點 `docs/inventory/training.html`＋`training-features.csv`（commit 4af1160）。
 - 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
@@ -11,7 +11,8 @@
 - **第三輪已收輪**（2026-11-08）：evaluation **32/400**、training **86/400**（r02 28／79，退步 0）。產物 [r03/](r03/04-總結簡報.md)：01 簡報 → 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r03/代定清單.md)；公式型／抽取型積木產生器（`blocks/gen_formula.py`、`gen_extract.py`，落地 `aos/blocks/formula_*`、`extract_*`）、題目背景、投票、帳 epoch 3；跑分 `reports/dsl-search-r03/`。
 - **第四輪已收輪**（2026-11-08）：evaluation **37/400**、training **92/400**（r03 32／86，退步 0；同大小 8→13）。產物 [r04/](r04/04-總結簡報.md)：01 簡報（含 §8 使用者 12:56 遞迴元優化想法）→ 02 fable 規劃 → 03 設計 → 04 總結＋[代定清單](r04/代定清單.md)；每物件規則 `src/arcagi/objrule/`、產生器預算執行 `blocks/pool/budget.py`、產生器的產生器 `aos/blocks/_gen/_meta/`；跑分 `reports/dsl-search-r04/`。
 - **第五輪已收輪**（2026-11-08）：evaluation **38/400**、training **96/400**（收緊後 95；r04 37／92，退步 0；同大小 13→14）；支線 S1 native 42/400。產物 [r05/](r05/04-總結簡報.md)：01 簡報（含使用者 13:13「子樹也是一種積木」）→ 02 fable 規劃 → [02b Argon 審](r05/02b-Argon審.md) → 03 設計 → 04 總結＋[代定清單](r05/代定清單.md)；積木⇄janet `src/arcagi/srcspace/`、改寫搜尋 `solvers/rewrite*.py`、帶槽子樹積木 `aos/blocks/m_sub_*`；跑分 `reports/dsl-search-r05/`。
-- **下一輪（r06）建議**：E3 元優化正式做（`_gen/_meta` 調 gen_extract、training 帳分紅＋合成集軟接）、吸收 S1 寬樹、改寫只對高 IoU 題開；S3 可開（見 r05/04 §6、[支線.md](支線.md)）。
+- **第六輪進行中**（14:20 起）：[01 簡報](r06/01-簡報.md) → [02 fable 規劃](r06/02-規劃-fable.md)（已寄 aos 請 Argon 審）→ [03 設計](r06/03-設計.md)；三線施工中：A 元優化＋合成集軟接、B 改寫門控＋歸因＋混合入口全量腳本、C S2 候選影子入庫。S1 邊界寫入 [支線.md](支線.md)。
+- （r05 時的）r06 建議：E3 元優化正式做（`_gen/_meta` 調 gen_extract、training 帳分紅＋合成集軟接）、吸收 S1 寬樹、改寫只對高 IoU 題開；S3 可開（見 r05/04 §6、[支線.md](支線.md)）。
 - 收輪義務：寄 PROGRESS 到 aos inbox（`/home/lorkhan/repo/simple_tools/aos/wf/inbox/`，用 `wf/tools/inbox_send.sh --reply-to /home/lorkhan/repo/arcagi/wf/inbox/ ...`）＋論壇發帖。
 
 - **支線**（aos 人力加入後可並行的工作，路徑劃清）→ [支線.md](支線.md)。
@@ -32,7 +33,7 @@
 
 - 發帖 `/home/lorkhan/repo/simple_tools/aos/wf/tools/forum_post.sh arcagi '<標題>' <檔|-> --tag arcagi [--source <檔>]`；回帖 `--reply <id>`；精華／置頂 `.../forum_admin.sh feature|pin <id> --as arcagi`。
 - 時機：開輪、fable 規劃定稿、每輪總結（加精華）、重要代定、卡住。ELI5、結論先、細節摺疊。
-- 已發：p-20261108-112500-3b33（開工）、p-20261108-113306-a220（r01 開輪）、p-20261108-113529-042d（r01 規劃，精華）、p-20261108-114523-7780（r01 總結，精華）；r01 PROGRESS 已寄 aos（20261108T1145）；p-20261108-114831-133b（r02 開輪）、p-20261108-115110-5d4e（r02 規劃，精華）、p-20261108-122252-d66d（r02 總結，精華）；r02 PROGRESS 已寄 aos；p-20261108-122524-d037（r03 開輪）、p-20261108-122741-4a4b（r03 規劃，精華）、p-20261108-124706-58a8（r03 總結，精華）；r03 PROGRESS 已寄 aos（20261108T1247）；p-20261108-124910-ac52（r04 開輪）、p-20261108-125124-091a（r04 規劃，精華）、p-20261108-131037-fa9e（r04 總結，精華）；r04 PROGRESS（含支線清單）已寄 aos（20261108T1310）。p-20261108-131350-e59a（r05 開輪）、p-20261108-131654-d030（r05 規劃，精華；規劃稿寄 aos 請 Argon 審 20261108T1316）、p-20261108-141541-b14e（r05 總結，精華）；r05 PROGRESS（含 S3 可開、S1 擴充點）已寄 aos（20261108T1416）。
+- 已發：p-20261108-112500-3b33（開工）、p-20261108-113306-a220（r01 開輪）、p-20261108-113529-042d（r01 規劃，精華）、p-20261108-114523-7780（r01 總結，精華）；r01 PROGRESS 已寄 aos（20261108T1145）；p-20261108-114831-133b（r02 開輪）、p-20261108-115110-5d4e（r02 規劃，精華）、p-20261108-122252-d66d（r02 總結，精華）；r02 PROGRESS 已寄 aos；p-20261108-122524-d037（r03 開輪）、p-20261108-122741-4a4b（r03 規劃，精華）、p-20261108-124706-58a8（r03 總結，精華）；r03 PROGRESS 已寄 aos（20261108T1247）；p-20261108-124910-ac52（r04 開輪）、p-20261108-125124-091a（r04 規劃，精華）、p-20261108-131037-fa9e（r04 總結，精華）；r04 PROGRESS（含支線清單）已寄 aos（20261108T1310）。p-20261108-131350-e59a（r05 開輪）、p-20261108-131654-d030（r05 規劃，精華；規劃稿寄 aos 請 Argon 審 20261108T1316）、p-20261108-141541-b14e（r05 總結，精華）；r05 PROGRESS（含 S3 可開、S1 擴充點）已寄 aos（20261108T1416）。p-20261108-141846-7c67（r06 開輪）、p-20261108-142223-204d（r06 規劃，精華；規劃稿寄 aos 請 Argon 審 20261108T1422）。
 
 ## 額度
 

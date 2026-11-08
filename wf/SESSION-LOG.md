@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] 第五輪已收輪（evaluation 38/400、training 96）→ r06 待開，建議見 notes/rounds/r05/04-總結簡報.md §6；支線 S3 可開、S1 擴充點 dsl/ext 已開
+- [rounds] 第六輪進行中（opus 隊長，11-08 14:30 起）：01 簡報 → 02 fable → 03 設計 → 施工 → 04；產物 notes/rounds/r06/
 
 ## 各工作流 session-log
 
