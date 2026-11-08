@@ -12,7 +12,7 @@
 ## 最新進度
 
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
-- [rounds] 第六輪進行中（opus 隊長，11-08 14:30 起）：01 簡報 → 02 fable → 03 設計 → 施工 → 04；產物 notes/rounds/r06/
+- [rounds] 第六輪收輪中（15:02 evaluation 全量在跑；若 notes/rounds/r06/04-總結簡報.md 不存在＝未收完，照交棒總表「主 session 交接」接手）→ 之後開 r07（主軸：元優化＋從零長出，見交棒總表）
 
 ## 各工作流 session-log
 

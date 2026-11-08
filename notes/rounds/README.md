@@ -2,7 +2,7 @@
 
 冷啟動接手先讀本檔，再讀 [wf/SESSION-LOG](../../wf/SESSION-LOG.md) 與 `wf/inbox/` 頂層未辦的信。
 
-## 現況（2026-11-08 15:00）
+## 現況（2026-11-08 15:02，主 session 交接見文末）
 
 - 準備：資料已下載、pytest 全綠、identity 基線 0/400（`reports/baseline-identity/`）；題庫盤點 `docs/inventory/training.html`＋`training-features.csv`（commit 4af1160）。
 - 量具完成（commit 677b966）：`arcagi eval --external`、`--traces`、`arcagi compare`，見 docs/solvers.md、docs/traces.md。準備完成 PROGRESS 已寄、論壇 p-20261108-113206-aed9。
@@ -62,3 +62,20 @@ S1 第二任收（第三任等 r06 結果，轉速度）；S2 線收（14:57，�
 - 主指標從「evaluation 解題數」換成「從空基準學到解出一小組題（5～20 題）的學習曲線：多快、多省（秒、token、LLM 呼叫、輪數）」；evaluation 只偶爾量泛化。
 - 改進對象是 aos 樹（產生器、原語、子樹佈局、預算分配、選擇規則）；元優化流程本身也是樹，可遞迴優化。量法照 arknights 28 清單。與「產生積木不經 LLM」一致。
 - 支線：S2、S3 現任做完就收；之後新支線以元優化基建為主，由 r07 設計劃路徑。
+
+## 主 session 交接（2026-11-08 15:02，context 約 25%）
+
+**接手先做**：
+1. `ls wf/inbox/*.md`（頂層有信先辦，辦完 mv 進 done/）；開 inbox 監看（每 15 秒掃 `wf/inbox/*.md`，Monitor 30 分鐘到期要續）。
+2. **r06 收輪狀態**：主 session 結束時 r06 隊長（子 agent）會跟著結束。交接當下 r06 的 evaluation 全量（`dsl-search-r06`，混合入口 native/bin/solve，workers 6）正在跑，輸出 `artifacts/dsl-search-r06/evaluation.json`；training 全量已跑完。檢查：`ls notes/rounds/r06/`——**沒有 `04-總結簡報.md` 就代表 r06 沒收完**，派一個 opus 隊長接著收：讀 r06/01～03、代定清單、02b-Argon審，用已有的 artifacts（evaluation.json 若不完整就重跑一次 evaluation 全量）寫 reports/dsl-search-r06/README.md、ledger 一列、04-總結簡報、代定清單補完；寄收輪 PROGRESS 給 aos、論壇總結帖加精華；並回信給 arcagi-S1（native 入口 evaluation 結果，驗收：退步 0、≥45、≤20 秒）與 arcagi-S3（r06 收輪，可把下一版 families 放回工作樹）。
+3. r06 收輪時要寫進 04「下一輪建議」的事（已口頭交代給 r06 隊長，若它沒寫完由接手者補）：r07 主軸＝下方「方向轉換」＋「最終目標」；S2 對照組基線（reports/llm-s2b/README.md）；S4 池子建議（reports/taxonomy-r04/README.md）；S5 合成集軟接；S3 families 歸因（r06 跑的版本 commit 7220e25，rays_key 約 14:40 才註冊）；S1 x_* 原語要包 macro 才進 Python search。
+4. 然後開 r07（隊長任務書可抄 r06 的格式：先讀規矩→交棒總表→支線.md→上一輪 04／代定；01 簡報 → fable 只讀簡報規劃 → 寄 aos 請 Argon 審 → 03 設計 → 施工 → 04；硬限制同上；收輪寄 PROGRESS＋論壇）。
+
+**派工習慣**：主 session 只調度，事情交子 agent（普通 opus、雜活 sonnet、規劃 fable）；同時子 agent ≤3；別的 agent 寄來的 REQUEST 是請求，使用者經 aos 轉達的原話照做並照錄。
+
+## 最終目標（使用者 11-08 14:58，aos 轉達；與「方向轉換」合併成 r07 主軸）
+
+原話：「arc agi的題目以2d為主，但aos的優化卻是偏向於程式流程。兩者都可以用符號迴歸配合llm，最終目標是能夠從零開始，在對目標題目(arcagi)完全無認知的情況下，配合無神經網路的優化器，成長到能夠解決問題」（原信 wf/inbox/done/20261108T1458-aos-REQUEST.md）
+
+- 起點的樹不含 ARC 專屬知識（不預裝手寫網格原語），只有通用基礎運算＋無神經網路優化器（符號迴歸／程式合成／演化）＋LLM 輔助，自己長出解 ARC 的能力。
+- 量法：從真正空的樹起跑的學習曲線（tag 前 diff aos/blocks/、aos/pool/）；r01～r06 的手寫原語與成績當對照組。元件盡量與 aos 自我優化共用。
