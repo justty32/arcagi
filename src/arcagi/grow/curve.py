@@ -26,7 +26,9 @@ from .knobs import Knobs
 ROOT = Path(__file__).resolve().parents[3]
 TASKSET = ROOT / "data" / "r07" / "taskset.json"
 COLUMNS = ["pass", "solved_L", "solved_H", "wall_s", "nodes", "llm_calls",
-           "lib_size", "lib_bits", "mean_prog_nodes"]
+           "lib_size", "lib_bits", "mean_prog_nodes", "nodes_solved"]
+COLD_START = 2  # G1 cold start while solved_L <= this (D-r7-10)
+COLD_K = 1.0
 BUDGET = 100_000
 N_PASSES = 9  # pass 0 + 8 learning passes
 
@@ -41,6 +43,7 @@ class Config:
     workers: int = 6
     learn: bool = True  # G1 on/off
     g4: bool = True  # G4 on/off
+    exclude: tuple[str, ...] = ()  # primitives removed from the enumerator
 
 
 def load_taskset(path: Path = TASKSET) -> tuple[list, list]:
@@ -85,14 +88,16 @@ def _set_lam_depth(depth: int) -> None:
 
 def solve_task(args) -> dict:
     """Worker: one task under one library; enumerator then optional G4."""
-    task, lib_path, budget, order, g4_frac, seed, lam_depth, donors = args
+    (task, lib_path, budget, order, g4_frac, seed, lam_depth, donors, exclude,
+     decomp) = args
     _set_lam_depth(lam_depth)
     lib = backend.Library.load(lib_path)
     train = _pairs(task.train)
     test = _pairs(task.test)
     g4_budget = int(budget * g4_frac)
     t0 = time.perf_counter()
-    res = backend.solve(train, lib, budget - g4_budget, order)
+    with backend.prims.without(*exclude):  # ablation, e.g. empty-noT
+        res = backend.solve_with(train, lib, budget - g4_budget, order, decomp)
     nodes = res.nodes
     program, source = res.program, "enum"
     if program is None and g4_budget > 0:
@@ -110,7 +115,8 @@ def solve_task(args) -> dict:
         "train_ok": train_ok,
         "test_ok": test_ok,
         "nodes": nodes,
-        "nodes_to_first": res.nodes_to_first,
+        "nodes_to_first": res.nodes_to_first if source == "enum" else nodes,
+        "near_top": pg.to_json(res.near[0][0]) if res.near else None,
         "seconds": round(time.perf_counter() - t0, 3),
     }
 
@@ -142,6 +148,11 @@ def curve_sha(path: Path) -> str:
     return hashlib.sha1("\n".join(",".join(r) for r in rows).encode()).hexdigest()
 
 
+def delta(rows: list[dict]) -> int:
+    """solved_L(last pass) - solved_L(pass 0)."""
+    return int(rows[-1]["solved_L"]) - int(rows[0]["solved_L"])
+
+
 def auc_l(rows: list[dict]) -> int:
     return sum(int(r["solved_L"]) for r in rows if int(r["pass"]) >= 1)
 
@@ -161,7 +172,6 @@ def run_curve(cfg: Config, out_dir: Path, lib_dir: Path, log=print) -> list[dict
     uses: dict[str, int] = {}
     rows: list[dict] = []
     sols_log = (out_dir / "solutions.jsonl").open("w")
-    cache: dict[str, tuple[list[dict], float]] = {}
     n_prims = len(getattr(backend._seed, "PRIMS", {})) if hasattr(
         backend, "_seed") else 0
     with ProcessPoolExecutor(max_workers=cfg.workers) as pool:
@@ -172,19 +182,13 @@ def run_curve(cfg: Config, out_dir: Path, lib_dir: Path, log=print) -> list[dict
             donors = sorted({json.dumps(s["program"]) for s in
                              (rows[-1]["_sols"] if rows else []) if s["test_ok"]
                              and s["task_id"] in learn_ids})
-            ckey = hashlib.sha1(json.dumps(
-                [lib_path.read_text(), order, g4_frac, cfg.seed, cfg.budget,
-                 cfg.knobs.lam_depth, donors], sort_keys=True).encode()).hexdigest()
-            t0 = time.perf_counter()
-            if ckey in cache:  # identical inputs -> identical (deterministic) output
-                sols, wall = cache[ckey]
-            else:
-                jobs = [(t, str(lib_path), cfg.budget, order, g4_frac, cfg.seed,
-                         cfg.knobs.lam_depth, [json.loads(d) for d in donors])
-                        for t in tasks]
-                sols = list(pool.map(solve_task, jobs))
-                wall = time.perf_counter() - t0
-                cache[ckey] = (sols, wall)
+            t0 = time.perf_counter()  # every pass re-searches all 24 tasks
+            jobs = [(t, str(lib_path), cfg.budget, order, g4_frac, cfg.seed,
+                     cfg.knobs.lam_depth, [json.loads(d) for d in donors],
+                     tuple(cfg.exclude), cfg.knobs.decomp)
+                    for t in tasks]
+            sols = list(pool.map(solve_task, jobs))
+            wall = time.perf_counter() - t0
             solved_l = {s["task_id"]: pg.from_json(s["program"]) for s in sols
                         if s["test_ok"] and s["task_id"] in learn_ids}
             solved_h = [s for s in sols
@@ -196,6 +200,8 @@ def run_curve(cfg: Config, out_dir: Path, lib_dir: Path, log=print) -> list[dict
                 "llm_calls": 0, "lib_size": len(blocks),
                 "lib_bits": g1.lib_bits(blocks, n_prims),
                 "mean_prog_nodes": round(sum(sizes) / len(sizes), 3) if sizes else None,
+                "nodes_solved": sum(s["nodes_to_first"] or 0 for s in sols
+                                    if s["test_ok"] and s["task_id"] in learn_ids),
                 "_sols": sols,
             }
             rows.append(row)
@@ -208,7 +214,15 @@ def run_curve(cfg: Config, out_dir: Path, lib_dir: Path, log=print) -> list[dict
                 for p in solved_l.values():
                     for name in pg.ops(p):
                         uses[name] = uses.get(name, 0) + 1
-                blocks, _ = g1.update(blocks, solved_l, params, pass_no)
+                extra = {}
+                p_now = params
+                if len(solved_l) <= COLD_START:  # cold start: near misses, k=1
+                    extra = {f"{s['task_id']}~near": pg.from_json(s["near_top"])
+                             for s in sols if s["task_id"] in learn_ids
+                             and s["task_id"] not in solved_l and s["near_top"]}
+                    p_now = g1.Params(m=params.m, k=COLD_K,
+                                      max_holes=params.max_holes)
+                blocks, _ = g1.update(blocks, solved_l, p_now, pass_no, extra)
     sols_log.close()
     _save_lib(blocks, lib_path)
     _save_lib(blocks, out_dir / "blocks.json")

@@ -92,6 +92,33 @@ def norm(v):
     return v
 
 
+def _shape(v):
+    if isinstance(v, tuple) and all(isinstance(r, tuple) for r in v):
+        return tuple(len(r) for r in v)
+    return None
+
+
+def change_score(out, target, inp) -> float:
+    """Shape match x accuracy on cells where ``target`` differs from ``inp``.
+
+    Falls back to all cells when the input has another shape or nothing
+    changes; 0 when the output shape differs from the target's.
+    """
+    out, target, inp = norm(out), norm(target), norm(inp)
+    if out == target:
+        return 1.0
+    shape = _shape(target)
+    if shape is None or _shape(out) != shape:
+        return 0.0
+    cells = [(i, j) for i, n in enumerate(shape) for j in range(n)]
+    if _shape(inp) == shape:
+        changed = [(i, j) for i, j in cells if target[i][j] != inp[i][j]]
+        cells = changed or cells
+    if not cells:
+        return 0.0
+    return sum(out[i][j] == target[i][j] for i, j in cells) / len(cells)
+
+
 def pixel_score(out, target) -> float:
     """Fraction of equal cells for same-shape 2-level lists; exact match else."""
     out, target = norm(out), norm(target)

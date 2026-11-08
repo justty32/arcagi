@@ -1,0 +1,80 @@
+[
+ {
+  "body": [
+   "take",
+   2,
+   [
+    "transpose",
+    [
+     "take",
+     2,
+     [
+      "$h0"
+     ]
+    ]
+   ]
+  ],
+  "born": 0,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_dd243ccb11",
+  "saving": 3.0,
+  "sig": "(list[list[a]]) -> list[list[a]]",
+  "src_tasks": [
+   "d10ecb37"
+  ],
+  "uses": 3
+ },
+ {
+  "body": [
+   "lam",
+   1,
+   [
+    "sort",
+    [
+     "$0"
+    ]
+   ]
+  ],
+  "born": 1,
+  "holes": 0,
+  "idle": 2,
+  "name": "g1_0177e4faae",
+  "saving": 3.0,
+  "sig": "(list[a]) -> list[a]",
+  "src_tasks": [
+   "1e0a9b12",
+   "beb8660c"
+  ],
+  "uses": 0
+ },
+ {
+  "body": [
+   "map",
+   [
+    "lam",
+    1,
+    [
+     "sort",
+     [
+      "$0"
+     ]
+    ]
+   ],
+   [
+    "$h0"
+   ]
+  ],
+  "born": 1,
+  "holes": 1,
+  "idle": 0,
+  "name": "g1_f72643d574",
+  "saving": 2.0,
+  "sig": "(list[list[a]]) -> list[list[a]]",
+  "src_tasks": [
+   "1e0a9b12",
+   "beb8660c"
+  ],
+  "uses": 4
+ }
+]

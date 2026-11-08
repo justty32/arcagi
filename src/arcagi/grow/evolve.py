@@ -1,4 +1,6 @@
-"""G4 evolution: mutate / cross near-miss programs, fitness = train pixel rate.
+"""G4 evolution: mutate / cross near-miss programs, fitness = shape match x
+accuracy on the cells where the target differs from the input (D-r7-11), so
+copying the input is no longer a local optimum.
 
 Seeds are the enumerator's ``near`` list. Mutations: subtree replacement with a
 donor subtree (from the near pool, solved programs, leaves) and same-arity
@@ -21,7 +23,7 @@ def fitness(program, train, lib) -> float:
     total = 0.0
     for x, y in train:
         try:
-            total += pg.pixel_score(run(program, x, lib), y)
+            total += pg.change_score(run(program, x, lib), y, x)
         except EvalError:
             return 0.0
         except RecursionError:

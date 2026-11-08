@@ -1,13 +1,15 @@
 """Meta-optimisation over the six knobs.
 
 Layer 1: each round changes one knob to a neighbouring value, runs one curve
-(G1 + G4, fixed seed) and keeps the change only if AUC_L improves.
+per paired seed (G1 + G4, common random numbers) and keeps the change only on
+a real gain (``real_gain``: >= 80% seeds not worse, mean AUC_L gain >= 1).
 Layer 2: the knob to change is chosen by Thompson sampling over per-knob
 Beta(1 + accepted, 1 + tried - accepted), counts read back from the ledger.
 Every attempt appends one line to aos/meta/ledger.jsonl (kind=r07).
 """
 
 import json
+import math
 import random
 import time
 from pathlib import Path
@@ -56,34 +58,51 @@ def append_ledger(row: dict, ledger: Path = LEDGER) -> None:
         f.write(json.dumps(row, sort_keys=True) + "\n")
 
 
+def real_gain(before: list[int], after: list[int]) -> bool:
+    """CRN rule: >= 80% of paired seeds not worse and mean gain >= 1 task."""
+    n = len(before)
+    not_worse = sum(a >= b for a, b in zip(after, before, strict=True))
+    gain = (sum(after) - sum(before)) / n
+    return not_worse >= math.ceil(0.8 * n) and gain >= 1.0
+
+
 def run_meta(rounds: int, passes: int, out_root: Path, lib_root: Path,
-             seed: int = 0, workers: int = 6, ledger: Path = LEDGER,
-             start: kn.Knobs | None = None, log=print) -> list[dict]:
-    rng = random.Random(f"r07-meta-{seed}")
+             seeds: tuple[int, ...] = (0, 1, 2), workers: int = 6,
+             ledger: Path = LEDGER, start: kn.Knobs | None = None,
+             log=print) -> list[dict]:
+    rng = random.Random("r07-meta")
     current = start or kn.load()
 
-    def score(knobs: kn.Knobs, tag: str) -> tuple[int, float, list[dict]]:
-        cfg = curve.Config(tree="g1g4", knobs=knobs, seed=seed, passes=passes,
-                           workers=workers)
+    def score(knobs: kn.Knobs, tag: str) -> tuple[list[int], float]:
         t0 = time.perf_counter()
-        rows = curve.run_curve(cfg, out_root / tag, lib_root / tag, log=log)
-        return curve.auc_l(rows), time.perf_counter() - t0, rows
+        aucs = []
+        for s in seeds:  # common random numbers: same seeds for every variant
+            cfg = curve.Config(tree="g1g4", knobs=knobs, seed=s, passes=passes,
+                               workers=workers)
+            rows = curve.run_curve(cfg, out_root / tag / f"seed{s}",
+                                   lib_root / tag / f"seed{s}", log=log)
+            aucs.append(curve.auc_l(rows))
+        return aucs, time.perf_counter() - t0
 
-    auc_cur, _, _ = score(current, "r0-base")
+    auc_cur, _ = score(current, "r0-base")
     history = []
     for r in range(1, rounds + 1):
         knob = pick_knob(rng, knob_stats(ledger), current)
         options = kn.neighbours(current, knob)
         new_val = options[rng.randrange(len(options))]
         trial = current.with_(**{knob: new_val})
-        auc_new, cost, _ = score(trial, f"r{r}-{knob}")
-        accepted = auc_new > auc_cur
+        auc_new, cost = score(trial, f"r{r}-{knob}")
+        accepted = real_gain(auc_cur, auc_new)
         row = {
             "kind": "r07", "time": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "round": r, "knob": knob, "before": getattr(current, knob),
-            "after": new_val, "auc_before": auc_cur, "auc_after": auc_new,
+            "after": new_val,
+            "auc_before": round(sum(auc_cur) / len(auc_cur), 3),
+            "auc_after": round(sum(auc_new) / len(auc_new), 3),
+            "auc_before_seeds": auc_cur, "auc_after_seeds": auc_new,
             "cost_s": round(cost, 1), "accepted": accepted, "passes": passes,
-            "seed": seed, "note": "r07 line B meta layer 1+2 (Thompson)",
+            "seeds": list(seeds),
+            "note": "r07 line B meta layer 1+2 (Thompson, CRN seeds, D-r7-11)",
         }
         append_ledger(row, ledger)
         history.append(row)
