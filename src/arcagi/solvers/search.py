@@ -1,16 +1,12 @@
-"""DSL search solver: breadth-first program enumeration with tracing.
+"""DSL search solver (``solve``): BFS program enumeration with tracing.
 
-Run: uv run arcagi eval --split evaluation --solver arcagi.solvers.search:solve \\
-         --timeout 40 --workers 8 --output artifacts/dsl-eval.json
-
-Enumerates programs from ``arcagi.dsl.primitives`` up to ``MAX_DEPTH`` steps,
-deduplicates by observational equivalence (identical intermediate train grids),
-tries terminal learners (color table, neighborhood rule) on every node, and
-finishes the first depth that has a solution, and submits the cheapest
-train-consistent program (votes break ties; see ``arcagi.solvers.vote``).
+Programs up to ``MAX_DEPTH`` steps, deduplicated by observational equivalence,
+terminal learners on every node; the first solved depth wins, cheapest first
+(votes break ties). If none fits, ``solvers.rewrite`` edits the near misses.
 """
 
 import heapq
+import os
 import time
 from collections import Counter
 from dataclasses import dataclass, field
@@ -28,6 +24,7 @@ from arcagi.dsl.program import Program, cost, to_json
 from arcagi.dsl.registry import FIRST_STEP_ONLY, PRIMITIVES
 from arcagi.tasks import Grid, SolverTask
 
+from . import rewrite
 from .trace import SolverResult, TraceRecorder
 from .vote import choose, fits, predict_hint
 
@@ -38,7 +35,8 @@ MAX_SOLUTIONS = 200  # whole first solved depth, capped
 MAX_RECORDED = 30  # program attempts written to the trace
 MAX_NEAR = 20
 PENALIZED = frozenset({"local_rule"})
-SOLVER_NAME = "dsl-search-r04"
+SOLVER_NAME = "dsl-search-r05"
+REWRITE = os.environ.get("ARCAGI_REWRITE", "1") != "0"  # True unless env says 0
 DEFER_GRACE = 5.0  # extra seconds for deferred learner fits after the deadline
 
 
@@ -258,14 +256,15 @@ def solve(
     if shape_hint is None:
         shape_hint = predict_hint(task)
     result = search(task, shape_hint=shape_hint)
+    ledger = rewrite.rescue(task, result) if REWRITE and not result.solutions else None
     vote = choose(result.solutions, penalized=PENALIZED, shape_hint=shape_hint)
     solutions = vote.ranked
     ids = []
     for solution in solutions[:MAX_RECORDED]:
-        cost_value, _order, program, _tests = solution
+        cost_value, order, program, _tests = solution
         ids.append(
             recorder.attempt(
-                f"program of cost {cost_value:.1f}",
+                f"{'rewrite ' if order < 0 else ''}program of cost {cost_value:.1f}",
                 kind="program",
                 program=to_json(program),
                 train_results=[True] * len(task.train),
@@ -290,6 +289,7 @@ def solve(
         "block_calls": dict(result.block_calls),
         "deferred_fits": result.deferred,
         "second": vote.second,
+        "rewrite": ledger.to_json() if ledger else None,
     }
     if not solutions:
         recorder.reasoning = "No program reproduces every train pair; echo inputs."
