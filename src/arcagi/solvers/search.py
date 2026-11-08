@@ -21,7 +21,7 @@ from arcagi.dsl.learners import (
 )
 from arcagi.dsl.objects_learner import apply_object_colormap, fit_object_colormap
 from arcagi.dsl.program import Program, cost, to_json
-from arcagi.dsl.registry import FIRST_STEP_ONLY, PRIMITIVES
+from arcagi.dsl.registry import FIRST_STEP_ONLY, PRIMITIVES, REWRITE_ONLY
 from arcagi.tasks import Grid, SolverTask
 
 from . import rewrite
@@ -152,7 +152,7 @@ class _Search:
         for program, grids in frontier:
             train = grids[: self.n]
             for name, primitive in PRIMITIVES.items():
-                if program and name in FIRST_STEP_ONLY:
+                if name in REWRITE_ONLY or (program and name in FIRST_STEP_ONLY):
                     continue
                 for params in primitive.candidates(train, self.targets):
                     if self.over_budget():

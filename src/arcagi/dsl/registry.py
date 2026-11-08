@@ -61,6 +61,10 @@ for _name, _program in CATALOG.macros().items():
 # Round 5: anti-unified subtree blocks with parameter slots (``kind=slot_macro``).
 from arcagi.srcspace.slot_prims import slot_primitives  # noqa: E402
 
-PRIMITIVES.update(slot_primitives(CATALOG, known=frozenset(ALL)))
+_SLOTS = slot_primitives(CATALOG, known=frozenset(ALL))
+PRIMITIVES.update(_SLOTS)
+# Slot macros widen BFS reach into overfitting learner fits (r05 training:
+# 6 of 8 new pass-train-wrong); the enumerator skips them, rewrite still uses them.
+REWRITE_ONLY = frozenset(_SLOTS)
 
-__all__ = ["ALL", "FIRST_STEP_ONLY", "MARK", "PRIMITIVES", "Primitive"]
+__all__ = ["ALL", "FIRST_STEP_ONLY", "MARK", "PRIMITIVES", "REWRITE_ONLY", "Primitive"]
