@@ -1,0 +1,6 @@
+{"task":"5521c0d9","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["move_sel","4same","all",1,"up"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["move_from","4same","all",1,{"scope":"object","sel":["this","4same"],"prop":"wall_dir"}]]}
+],
+"idea":"Every bottom-anchored solid rectangle keeps its color and shape and is translated straight up by exactly its own height (equivalently reflected about its top edge); background stays 0.",
+"missing":"A per-object translation by an offset derived from the object itself, e.g. move_by(conn, sel, dir, dist=object h) shifting each selected object up by its own bbox height."}
