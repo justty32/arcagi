@@ -30,4 +30,5 @@ EXT_PRIMS: dict[str, Primitive] = {
     "x_compress": _prim("x_compress", _p.compress, _p.compress_candidates),
     "x_crop_color": _prim("x_crop_color", _p.crop_color, _p.crop_color_candidates),
     "x_period": _prim("x_period", _p.period, _p.period_candidates),
+    "x_vrule": _prim("x_vrule", _p.vrule, _p.vrule_candidates),
 }

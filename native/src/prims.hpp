@@ -27,6 +27,7 @@ Grid apply_cells(const Step& s,const Grid& g);
 const std::vector<std::string>& ext_names();
 bool is_ext_primitive(const std::string& name);
 Grid apply_ext(const Step& s,const Grid& g);
+std::optional<Json> fit_vrule(const Grids& states,const Grids& targets,const Grids& tests,const std::string& features);
 std::vector<Step> ext_candidates(const std::string& name,const Grids& states,const Grids& targets);
 Grid apply_step(const Step& s,const Grid& g,const Spec& spec,bool in_macro=false);
 Grid run(const Program& program,Grid grid,const Spec& spec);

@@ -65,6 +65,15 @@ def build_cases():
         for step in steps:
             cases.append(([step], grid, None))
             cases.append(([step], grid, bg))
+        with background.task_context(bg):
+            states = [e.input for e in task.train]
+            outs = [e.output for e in task.train]
+            for features in ext.VRULE_NEIGHBORS:
+                table = ext.fit_vrule(states, outs, (), features)
+                if table is not None:
+                    vstep = ["x_vrule", features, table]
+                    cases += [([vstep], grid, bg) for grid in grids]
+                    cases += [([vstep], grid, None) for grid in grids]
         for _ in range(COMPOSITIONS_PER_TASK):
             cases.append(
                 ([rng.choice(steps), rng.choice(steps)], rng.choice(grids), bg)

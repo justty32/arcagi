@@ -67,3 +67,13 @@ def test_python_candidates_follow_engine_rules() -> None:
     targets = [grid_of("0111", "0000")]
     assert ("r", "pass", 1) in ext.ray_candidates(states, targets)
     assert ext.compress_candidates(states, targets) == []
+
+
+def test_vrule_generalizes_over_colors() -> None:
+    states = [grid_of("000", "010", "000"), grid_of("000", "020", "000")]
+    targets = [grid_of("010", "111", "010"), grid_of("020", "222", "020")]
+    table = ext.fit_vrule(states, targets, (), "n4")
+    assert table is not None
+    assert ext.vrule(grid_of("000", "030", "000"), "n4", table) == grid_of(
+        "030", "333", "030"
+    )

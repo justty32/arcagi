@@ -27,6 +27,8 @@ from arcagi.tasks.validation import task_from_dict
 
 ROOT = Path(__file__).resolve().parent.parent
 ERRORS = (ValueError, IndexError, KeyError)
+# Table learners overfit; the color-variable rule ranks with local_rule.
+PENALIZED = search.PENALIZED | {"x_vrule"}
 
 
 class DeadlineReached(BaseException):
@@ -206,7 +208,7 @@ def main():
             try:
                 with until(DEADLINE - 0.15), background.task_context(bg):
                     program = from_json(json.dumps(raw_program))
-                    if len(program) > 4 and program[-1][0] == "local_rule":
+                    if len(program) > 4 and program[-1][0] in PENALIZED:
                         return
                     if not all(run(program, e.input) == e.output for e in task.train):
                         return
@@ -259,7 +261,7 @@ def main():
         )
 
     chosen = vote.choose(
-        solutions, penalized=search.PENALIZED, shape_hint=vote.predict_hint(task)
+        solutions, penalized=PENALIZED, shape_hint=vote.predict_hint(task)
     )
     recorder = TraceRecorder(solver="native-s1")
     ids = []

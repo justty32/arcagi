@@ -334,3 +334,117 @@ def period_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list[P
     if not _same_shapes(states, targets):
         return []
     return [(m, c) for c in _common_colors(states) for m in PERIOD_MODES]
+
+
+VRULE_NEIGHBORS: dict[str, tuple[tuple[int, int], ...]] = {
+    "n4": ((-1, 0), (1, 0), (0, -1), (0, 1)),
+    "n8": ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)),
+}
+type VTable = list[list[int]]
+
+
+def _vkey(
+    grid: Grid, y: int, x: int, steps, bg: int
+) -> tuple[tuple[int, ...], list[int]]:
+    """Abstract key: off-grid -1, bg 0, other colors 1.. by first appearance."""
+    h, w = g.shape(grid)
+    variables: list[int] = []
+    key = []
+    for dy, dx in ((0, 0), *steps):
+        ny, nx = y + dy, x + dx
+        if not (0 <= ny < h and 0 <= nx < w):
+            key.append(-1)
+            continue
+        c = grid[ny][nx]
+        if c == bg:
+            key.append(0)
+            continue
+        if c not in variables:
+            variables.append(c)
+        key.append(variables.index(c) + 1)
+    return tuple(key), variables
+
+
+def _vencode(dst: int, bg: int, variables: list[int]) -> int:
+    if dst == bg:
+        return 0
+    return variables.index(dst) + 1 if dst in variables else 10 + dst
+
+
+def _vdecode(token: int, bg: int, variables: list[int]) -> int:
+    if token == 0:
+        return bg
+    if token >= 10:
+        return token - 10
+    if not 0 < token <= len(variables):
+        raise ValueError("unbound color variable")
+    return variables[token - 1]
+
+
+def vrule(grid: Grid, features: str, table: VTable) -> Grid:
+    """Color-variable local rule: ``local_rule`` over abstracted keys.
+
+    Output tokens: 0 = background, 1..9 = the color bound to that variable,
+    10 + c = literal color c. Unknown keys keep the cell (MARK cells must match).
+    """
+    if features not in VRULE_NEIGHBORS:
+        raise ValueError(f"bad features {features!r}")
+    lookup = {tuple(row[:-1]): row[-1] for row in table}
+    steps = VRULE_NEIGHBORS[features]
+    bg = background.of(grid)
+    out = []
+    for y, row in enumerate(grid):
+        new = []
+        for x, c in enumerate(row):
+            key, variables = _vkey(grid, y, x, steps, bg)
+            if key in lookup:
+                new.append(_vdecode(lookup[key], bg, variables))
+            elif c > 9:
+                raise KeyError("unresolved marker")
+            else:
+                new.append(c)
+        out.append(tuple(new))
+    return tuple(out)
+
+
+def fit_vrule(
+    states: Sequence[Grid],
+    targets: Sequence[Grid],
+    tests: Sequence[Grid],
+    features: str,
+) -> VTable | None:
+    """Fit ``vrule``: consistent over train, some key changes, every test key known."""
+    steps = VRULE_NEIGHBORS[features]
+    lookup: dict[tuple[int, ...], int] = {}
+    for state, target in zip(states, targets, strict=True):
+        if g.shape(state) != g.shape(target):
+            return None
+        bg = background.of(state)
+        for y, row in enumerate(target):
+            for x, dst in enumerate(row):
+                key, variables = _vkey(state, y, x, steps, bg)
+                if lookup.setdefault(key, _vencode(dst, bg, variables)) != _vencode(
+                    dst, bg, variables
+                ):
+                    return None
+    table = sorted([*key, v] for key, v in lookup.items() if key[0] != v)
+    if not table:
+        return None
+    for test in tests:
+        bg = background.of(test)
+        h, w = g.shape(test)
+        if any(
+            _vkey(test, y, x, steps, bg)[0] not in lookup
+            for y in range(h)
+            for x in range(w)
+        ):
+            return None
+    return table
+
+
+def vrule_candidates(states: Sequence[Grid], targets: Sequence[Grid]) -> list[Params]:
+    for features in VRULE_NEIGHBORS:
+        table = fit_vrule(states, targets, (), features)
+        if table is not None:
+            return [(features, table)]
+    return []

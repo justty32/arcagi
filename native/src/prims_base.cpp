@@ -10,7 +10,7 @@ const std::unordered_set<std::string>& ported() {
         "upscale","downscale","tile","mirror_tile","crop_bbox","split_overlay","crop_object",
         "fill_enclosed","self_tile","symmetrize","gravity","pick_cell","overlay_cells","cells_to_pixels","fill_cells",
         "recolor_sel","delete_sel","keep_sel","fill_holes","move_sel","extend_sel",
-        "x_ray","x_connect","x_compress","x_crop_color","x_period"};
+        "x_ray","x_connect","x_compress","x_crop_color","x_period","x_vrule"};
     return names;
 }
 Spec::Spec(const Json& j) {

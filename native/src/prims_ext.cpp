@@ -183,6 +183,96 @@ Grid period(const Grid& g,const std::string& mode,int color) {
     }
     fail();
 }
+// Color-variable local rule: the n4/n8 key is abstracted (off-grid -1, bg 0,
+// other colors numbered 1.. by first appearance, center first) and the output
+// is 0 (bg), a variable 1..9, or 10+c for the literal color c.
+using VKey=std::vector<int>;
+const std::vector<Dir>& vneighbors(const std::string& features) {
+    static const std::vector<Dir> n4={{-1,0},{1,0},{0,-1},{0,1}};
+    static const std::vector<Dir> n8={{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
+    if (features=="n4") return n4;
+    if (features=="n8") return n8;
+    fail();
+}
+VKey vkey(const Grid& g,int y,int x,const std::vector<Dir>& steps,int bg,std::vector<int>& vars) {
+    vars.clear();
+    VKey k;
+    auto token=[&](int ny,int nx) {
+        if (!inside(g,ny,nx)) return -1;
+        int c=g.at(ny,nx);
+        if (c==bg) return 0;
+        auto it=std::find(vars.begin(),vars.end(),c);
+        if (it!=vars.end()) return int(it-vars.begin())+1;
+        vars.push_back(c); return int(vars.size());
+    };
+    k.push_back(token(y,x));
+    for (auto [dy,dx]:steps) k.push_back(token(y+dy,x+dx));
+    return k;
+}
+int vencode(int dst,int bg,const std::vector<int>& vars) {
+    if (dst==bg) return 0;
+    auto it=std::find(vars.begin(),vars.end(),dst);
+    if (it!=vars.end()) return int(it-vars.begin())+1;
+    return 10+dst;
+}
+int vdecode(int token,int bg,const std::vector<int>& vars) {
+    if (token==0) return bg;
+    if (token>=10) return token-10;
+    if (token<0 || size_t(token)>vars.size()) fail();
+    return vars[size_t(token)-1];
+}
+Grid vrule(const Grid& g,const std::string& features,const Json& table) {
+    std::map<VKey,int> lookup;
+    for (const auto& row:table.items()) {
+        if (!row.size()) fail();
+        VKey k;
+        for (size_t i=0;i+1<row.size();++i) k.push_back(row[i].integer());
+        lookup[k]=row[row.size()-1].integer();
+    }
+    const auto& steps=vneighbors(features);
+    int bg=object_background(g);
+    std::vector<int> vars;
+    Grid out=g;
+    for (int y=0;y<g.h;++y) for (int x=0;x<g.w;++x) {
+        auto k=vkey(g,y,x,steps,bg,vars);
+        auto it=lookup.find(k);
+        if (it!=lookup.end()) out.at(y,x)=vdecode(it->second,bg,vars);
+        else if (g.at(y,x)>9) fail();
+    }
+    return out;
+}
+}
+
+std::optional<Json> fit_vrule(const Grids& states,const Grids& targets,const Grids& tests,const std::string& features) {
+    const auto& steps=vneighbors(features);
+    std::map<VKey,int> lookup;
+    std::vector<int> vars;
+    for (size_t i=0;i<states.size();++i) {
+        const Grid& s=states[i]; const Grid& t=targets[i];
+        if (!same_shape(s,t)) return std::nullopt;
+        int bg=object_background(s);
+        for (int y=0;y<s.h;++y) for (int x=0;x<s.w;++x) {
+            auto k=vkey(s,y,x,steps,bg,vars);
+            int v=vencode(t.at(y,x),bg,vars);
+            auto [it,inserted]=lookup.emplace(k,v);
+            if (!inserted && it->second!=v) return std::nullopt;
+        }
+    }
+    Json::Array table;
+    for (const auto& [k,v]:lookup) if (k[0]!=v) {
+        Json::Array row;
+        for (int n:k) row.emplace_back(n);
+        row.emplace_back(v); table.emplace_back(row);
+    }
+    if (table.empty()) return std::nullopt;
+    for (const auto& t:tests) {
+        int bg=object_background(t);
+        for (int y=0;y<t.h;++y) for (int x=0;x<t.w;++x)
+            if (!lookup.contains(vkey(t,y,x,steps,bg,vars))) return std::nullopt;
+    }
+    return Json(table);
+}
+namespace {
 bool same_shapes(const Grids& states,const Grids& targets) {
     for (size_t i=0;i<states.size();++i) if (!same_shape(states[i],targets[i])) return false;
     return true;
@@ -207,7 +297,7 @@ std::set<int> common_colors(const Grids& states) {
 }
 
 const std::vector<std::string>& ext_names() {
-    static const std::vector<std::string> names={"x_ray","x_connect","x_compress","x_crop_color","x_period"};
+    static const std::vector<std::string> names={"x_ray","x_connect","x_compress","x_crop_color","x_period","x_vrule"};
     return names;
 }
 bool is_ext_primitive(const std::string& name) { return name.starts_with("x_"); }
@@ -219,6 +309,7 @@ Grid apply_ext(const Step& s,const Grid& g) {
     if (name=="x_compress") return compress(g,s.at(1).str());
     if (name=="x_crop_color") return crop_color(g,s.at(1).integer(),s.at(2).str());
     if (name=="x_period") return period(g,s.at(1).str(),s.at(2).integer());
+    if (name=="x_vrule") return vrule(g,s.at(1).str(),s.at(2));
     fail();
 }
 

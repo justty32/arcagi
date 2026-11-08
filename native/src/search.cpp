@@ -115,6 +115,17 @@ struct Search {
             Grids outs; for (const auto& t:tests) outs.push_back(apply_local_rule(t,features,*table));
             add(outs,&step); break;
         }
+        if (!spec.live.contains("x_vrule")) return;
+        for (const auto& features:{"n4","n8"}) {
+            if (exhausted()) return;
+            auto table=fit_vrule(train,targets,tests,features);
+            if (!table) continue;
+            Step step={"x_vrule",features,*table};
+            Grids outs;
+            try { for (const auto& t:tests) outs.push_back(apply_step(step,t,spec)); }
+            catch (const std::exception&) { continue; }
+            add(outs,&step); break;
+        }
     }
     void dfs(const Grids& grids,int depth) {
         if (depth>=limit || exhausted()) return;
