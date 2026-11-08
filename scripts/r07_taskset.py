@@ -35,7 +35,9 @@ def _sha(text: str) -> str:
 
 def _small(task: dict) -> bool:
     grids = [p[k] for part in ("train", "test") for p in task[part] for k in p]
-    return all(len(gr) <= MAX_SIDE and all(len(r) <= MAX_SIDE for r in gr) for gr in grids)
+    return all(
+        len(gr) <= MAX_SIDE and all(len(r) <= MAX_SIDE for r in gr) for gr in grids
+    )
 
 
 def _pick(ids: list[str], labels: dict[str, str], n: int) -> list[str]:
