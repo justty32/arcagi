@@ -54,7 +54,7 @@
    "id": "2026-11-08-dsl-search-r03",
    "date": "2026-11-08",
    "hypothesis": "自動產生的公式型與抽取型積木（＋題目背景、投票、帳修正）讓 evaluation 解 ≥36 題",
-   "solver": "arcagi.solvers.search:solve (r03 收輪 commit)",
+   "solver": "arcagi.solvers.search:solve (e743cd4)",
    "split": "evaluation＋training",
    "result": "evaluation 32/400、training 86/400, errors=0；top-2 同 top-1",
    "baseline": "dsl-search-r02 evaluation 28/400、training 79/400；退步 0",
