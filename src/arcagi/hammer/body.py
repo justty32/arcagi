@@ -79,6 +79,7 @@ def _row(task, res: dict, lib) -> dict:
         "nodes_to_first": None if res.get("nodes_to_first") is None
         else int(res["nodes_to_first"]),
         "near_top": near[0][0] if near else None,
+        "near_score": near[0][1] if near else None,
         "seconds": round(float(res.get("seconds", 0.0)), 3),
     }
     if mismatch:

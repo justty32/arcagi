@@ -24,6 +24,8 @@ live ``decomp`` rows switch the main run to the Python backend.
 """
 
 import json
+import shutil
+import time
 from pathlib import Path
 
 from arcagi.grow import compress as g1
@@ -33,7 +35,10 @@ from arcagi.grow import pool as pl
 from arcagi.grow import prog as pg
 
 from . import body
-from . import formats as fm  # noqa: F401  (used by run_epoch)
+from . import formats as fm
+from . import gate as gt
+from . import grow as gw
+from . import judge as jg
 
 R08_TASKSET = gc.TASKSET_R08
 
@@ -123,3 +128,364 @@ def run_compat(out_dir: Path, lib_dir: Path, backend: str = "native",
     gc._save_lib(born, out_dir / "blocks_born.json")
     gc.write_csv(rows, out_dir / "curve.csv")
     return rows
+
+
+# ---------------------------------------------------------------- hammer
+
+ROW_KEYS = ["epoch", "solved_L", "solved_H8", "solved_H24", "solved_P",
+            "logcost_L", "lib_size", "lib_bits", "n_incubating", "n_live",
+            "n_dormant", "gate_in", "promoted", "rolled_back", "stall", "arm",
+            "evals_body", "evals_shadow", "evals_meta", "evals_foundry",
+            "llm_calls", "false_pos", "env_hash", "near_best_L", "wall_s"]
+
+
+def _default_stall(rows):
+    try:
+        from .stall import judge_stall
+    except ImportError:
+        return "ok"
+    return judge_stall(rows)
+
+
+def _default_route(ops, stall):
+    try:
+        from .route import pick_arm
+        return pick_arm(ops, stall)
+    except ImportError:
+        rows = [o for o in ops if o["kind"] == "route" and o["status"] == "live"
+                and o["payload"]["when_stall"] == stall]
+        rows.sort(key=lambda o: (-o["payload"]["priority"], o["id"]))
+        return rows[0]["payload"]["arm"] if rows else None
+
+
+def _default_foundry(root, task_id, epoch):
+    """On stop: line B's ``foundry.pick_task`` + ``request`` (no waiting,
+    foundry_wait_sec = 0); a stub request file if foundry is missing."""
+    try:
+        from .foundry import pick_task, request
+    except ImportError:
+        p = Path(root) / "foundry" / "requests" / "pending" / f"{task_id}.json"
+        fm.write_json(p, {"task": task_id, "time": fm.now(), "stub": True})
+        return p
+    tid = pick_task(root)
+    return request(root, tid, epoch) if tid else None
+
+
+def _inbox(root: Path, n: int, ops: list[dict]) -> None:
+    """Read nodes/*/inbox/*.json at the epoch boundary (02 §6)."""
+    for d in sorted((root / "nodes").glob("*/")):
+        for f in sorted((d / "inbox").glob("*.json")):
+            try:
+                msg = json.loads(f.read_text())
+                cmd = msg["cmd"]
+                reply = _apply(root, d, msg, ops, n)
+                kind = cmd
+            except (ValueError, KeyError) as e:
+                reply, kind = f"bad message: {e!r}", "inbox-error"
+            fm.append_ledger(root, {"kind": kind, "epoch": n, "layer": 1,
+                                    "by": "user", "node": d.name,
+                                    "op_ids": [], "msg": f.read_text()[:2000],
+                                    "reply": reply})
+            fm.write_text(d / "outbox" / f"{f.stem}.reply.md", reply + "\n")
+            f.unlink()
+
+
+def _apply(root, d, msg, ops, n) -> str:
+    cmd = msg["cmd"]
+    if cmd == "say":
+        return f"epoch {n}: noted by {d.name} (no LLM in this node)."
+    if cmd in ("pause", "resume"):
+        if d.name == "solve":
+            return "solve cannot be paused (the body runs every epoch)."
+        m = fm.load_metainfo(d)
+        m["status"] = "paused" if cmd == "pause" else "active"
+        fm.write_metainfo(d, m)
+        return f"{d.name} is now {m['status']}."
+    if cmd == "weight":
+        for o in ops:
+            if o["id"] == msg["route"] and o["kind"] == "route":
+                old = o["payload"]["priority"]
+                o["payload"]["priority"] = msg["w"]
+                return f"{o['id']} priority {old} -> {msg['w']}."
+        return f"no route row {msg['route']}."
+    if cmd == "add-op":
+        row = {**fm.new_op(msg["op"]["id"], msg["op"]["kind"], {}, "user", n),
+               **msg["op"], "by": "user"}
+        row["status"] = "live" if msg.get("live") else "incubating"
+        row["born"] = {"epoch": n, "by": "user"}
+        err = fm.check_op(row)
+        if err or any(o["id"] == row["id"] for o in ops):
+            return f"rejected: {err or 'duplicate id'}"
+        ops.append(row)
+        return f"added {row['id']} as {row['status']}."
+    raise KeyError(f"unknown cmd {cmd}")
+
+
+def _paused(root: Path, name: str) -> bool:
+    m = fm.read_json(root / "nodes" / name / "_metainfo.json", {})
+    return m.get("status") == "paused"
+
+
+def _cfg(ops, threads, backend, root):
+    live_dec = sorted(o["payload"]["name"] for o in ops
+                      if o["kind"] == "decomp" and o["status"] == "live")
+    excl = tuple(sorted({x for o in ops if o["kind"] == "sieve"
+                         and o["status"] == "live"
+                         for x in o["payload"].get("exclude", [])}))
+    gate = gt.live_params(ops)
+    be = "python" if live_dec else backend
+    cfg = body.BodyCfg(backend=be, decomp=True,
+                       decomp_set="+".join(["default", *live_dec]),
+                       sub_lam_depth=3 if "nest" in live_dec else None,
+                       exclude=excl, threads=threads, tmp_dir=str(root / "tmp"),
+                       gate=gt.body_gate(gate))
+    return cfg, gate
+
+
+def _main_run(root, ops, tasks, ids, budgets, threads, backend, n, state):
+    lib = gw.lib_from_ops(ops)
+    lib_path = root / "epochs" / str(n) / "blocks.json"
+    gc._save_lib(lib, lib_path)
+    cfg, gate = _cfg(ops, threads, backend, root)
+    order = g1.order_from_uses(state["uses"]) if state["uses"] else None
+    sols = body.solve_batch(tasks, lib_path, budgets, cfg, order,
+                            gate_ids=set(ids["L16"]) | set(ids["P"]))
+    return {s["task_id"]: s for s in sols}, lib, gate
+
+
+def run_epoch(root: Path, n: int, *, holdout: bool = True, stall_fn=None,
+              route_fn=None, foundry_fn=None, frozen_engine: bool = False,
+              backend: str = "native", threads: int = 6) -> dict:
+    """One epoch (①..⑦) on the tree at ``root``; returns the curve row."""
+    root = Path(root)
+    t0 = time.perf_counter()
+    frozen = fm.load_frozen(root)
+    bud = frozen["budgets"]
+    ops = fm.load_ops(root)
+    state = fm.read_json(root / "live" / "state.json",
+                         {"uses": {}, "cost0": {}, "prev": None, "batch": [],
+                          "pool_mult": 1.0})
+    _inbox(root, n, ops)
+    tr = fm.read_json(root / "truth" / "train" / "taskset.json")
+    ids = {"L16": tr["L16"], "P": tr["P"], "H8": [], "H24": []}
+    if holdout:
+        cal = fm.read_json(root / "truth" / "cal" / "ids.json")
+        ids["H8"], ids["H24"] = cal["H8"], cal["H24"]
+    all_ids = ids["L16"] + ids["H8"] + ids["H24"] + ids["P"]
+    tasks = body.load_tasks(all_ids)
+    b_p = pl.budget(bud["P0"], bud["P_mult"] * state["pool_mult"], bud["P_cap"], n)
+    budgets = {t: (b_p if t in set(ids["P"]) else bud["L"]) for t in all_ids}
+    evals = {"body": 0, "shadow": 0, "meta": 0, "foundry": 0, "llm_tax": 0}
+    main, lib, gate = _main_run(root, ops, tasks, ids, budgets, threads,
+                                backend, n, state)
+    evals["body"] += sum(s["nodes"] + s.get("gate_nodes", 0) for s in main.values())
+    rolled = False
+    prev = state["prev"]
+    h24 = sum(main[t]["test_ok"] for t in ids["H24"])
+    if holdout and state["batch"] and prev and prev.get("solved_H24") is not None \
+            and h24 < prev["solved_H24"]:  # H24 fuse: whole batch back to dormant
+        jg.rollback(ops, state["batch"], n)
+        fm.append_ledger(root, {"kind": "rollback", "epoch": n, "layer": 1,
+                                "by": "judge", "op_ids": state["batch"],
+                                "before": {"solved_H24": prev["solved_H24"]},
+                                "after": {"solved_H24": h24}})
+        main, lib, gate = _main_run(root, ops, tasks, ids, budgets, threads,
+                                    backend, n, state)
+        evals["body"] += sum(s["nodes"] + s.get("gate_nodes", 0)
+                             for s in main.values())
+        rolled = True
+    state["batch"] = []
+    # ② gate feed (train-only LOO + MDL, D-r8-6)
+    feed = {t: pg.from_json(s["program"]) for t, s in main.items()
+            if s.get("gate_ok")}
+    for p in feed.values():
+        for name in pg.ops(p):
+            state["uses"][name] = state["uses"].get(name, 0) + 1
+    n_prims = len(gc.backend._seed.PRIMS)
+    learn = not frozen_engine
+    # ③ grow: sleep word-making -> incubating comb rows
+    if learn and not _paused(root, "grow"):
+        new = gw.sleep_ops(ops, feed, gate, n, n_prims)
+        ops += new
+        for o in new:
+            fm.append_ledger(root, {"kind": "incubate", "epoch": n, "layer": 1,
+                                    "by": "sleep", "op_ids": [o["id"]]})
+    # ④ shadow, fast lane: live + incubating comb (L16 + P, never H)
+    inc = [o for o in ops if o["status"] == "incubating"]
+    tried: set[str] = set()  # ops that got a shadow trial this epoch
+    crowd_ok, worst = True, 1.0
+    lp = [t for t in tasks if t.task_id in set(ids["L16"]) | set(ids["P"])]
+    if learn and any(o["kind"] == "comb" for o in inc):
+        sh_lib = gw.lib_from_ops(ops, ("live", "incubating"))
+        sh_path = root / "epochs" / str(n) / "shadow_blocks.json"
+        gc._save_lib(sh_lib, sh_path)
+        cfg, _ = _cfg(ops, threads, backend, root)
+        cfg = body.BodyCfg(**{**cfg.to_dict(), "gate": None})
+        order = g1.order_from_uses(state["uses"]) if state["uses"] else None
+        shadow = {s["task_id"]: s for s in body.solve_batch(
+            lp, sh_path, budgets, cfg, order)}
+        evals["shadow"] += sum(s["nodes"] for s in shadow.values())
+        crowd_ok, worst = jg.no_crowd(main, shadow, ids["L16"],
+                                      frozen["judge"]["no_crowd"]["ntf_ratio_max"])
+        for o in inc:
+            if o["kind"] != "comb":
+                continue
+            o["evidence"]["shadow_epochs"] += 1
+            tried.add(o["id"])
+            name = o["payload"]["name"]
+            for t, s in shadow.items():
+                ok = s["test_ok"] if t in set(ids["L16"]) else s["train_ok"]
+                was = (main[t]["test_ok"] if t in set(ids["L16"])
+                       else main[t]["train_ok"])
+                if ok and not was and name in pg.ops(pg.from_json(s["program"])):
+                    o["evidence"]["new_solves"] = sorted(
+                        set(o["evidence"]["new_solves"]) | {t})
+    # ⑤ stall / route
+    stall = (stall_fn or _default_stall)(fm.load_ledger(root))
+    arm = (route_fn or _default_route)(ops, stall)
+    if stall == "stop" and learn:
+        unsolved = sorted(t for t in ids["L16"] if not main[t]["test_ok"])
+        if unsolved and not _paused(root, "foundry"):
+            (foundry_fn or _default_foundry)(root, unsolved[0], n)
+    state["pool_mult"] = 2.0 if arm == "rt_pool" else 1.0
+    if learn and arm == "rt_vsplit":  # slow lane: Python decomp rows
+        todo = [t for t in lp if not (main[t.task_id]["test_ok"]
+                                      if t.task_id in set(ids["L16"])
+                                      else main[t.task_id]["train_ok"])]
+        for o in [o for o in inc if o["kind"] == "decomp"]:
+            cfg, _ = _cfg(ops, threads, "python", root)
+            cfg = body.BodyCfg(**{**cfg.to_dict(), "backend": "python",
+                                  "decomp_set": cfg.decomp_set + "+"
+                                  + o["payload"]["name"], "gate": None,
+                                  "sub_lam_depth": 3 if o["payload"]["name"]
+                                  == "nest" else cfg.sub_lam_depth})
+            slow = body.solve_batch(todo, root / "epochs" / str(n) / "blocks.json",
+                                    {t.task_id: bud["shadow_slow"] for t in todo},
+                                    cfg)
+            evals["shadow"] += sum(s["nodes"] for s in slow)
+            o["evidence"]["shadow_epochs"] += 1
+            tried.add(o["id"])
+            got = {s["task_id"] for s in slow if (s["test_ok"] if s["task_id"]
+                   in set(ids["L16"]) else s["train_ok"])}
+            o["evidence"]["new_solves"] = sorted(set(o["evidence"]["new_solves"])
+                                                 | got)
+    # ⑥ judge: one promotion batch per epoch
+    env = fm.env_hash(ops)
+    up, down = ([], []) if not learn or _paused(root, "judge") else \
+        jg.judge(ops, env, crowd_ok, tried)
+    if up:
+        state["batch"] = up
+        fm.append_ledger(root, {"kind": "promote", "epoch": n, "layer": 1,
+                                "by": "judge", "op_ids": up,
+                                "judge": {"stage": 1, "accepted": True,
+                                          "no_crowd": crowd_ok, "ntf_worst": worst}})
+    if down:
+        fm.append_ledger(root, {"kind": "demote", "epoch": n, "layer": 1,
+                                "by": "judge", "op_ids": down})
+    fm.write_ops(root, ops)
+    # ⑦ write epoch files
+    solved_l = [t for t in ids["L16"] if main[t]["test_ok"]]
+    cost0 = state["cost0"]
+    tc = _tcost(main, ids["L16"], bud["L"], 0 if not cost0 else 1, cost0)
+    near = [main[t].get("near_score") or 0.0 for t in ids["L16"]
+            if not main[t]["test_ok"]]
+    row = {
+        "epoch": n, "solved_L": len(solved_l),
+        "solved_H8": sum(main[t]["test_ok"] for t in ids["H8"]) if holdout else None,
+        "solved_H24": h24 if holdout else None,
+        "solved_P": sum(main[t]["train_ok"] for t in ids["P"]),
+        "logcost_L": round(sum(tc.values()), 3), "lib_size": len(lib),
+        "lib_bits": g1.lib_bits(lib, n_prims),
+        "n_incubating": sum(o["status"] == "incubating" for o in ops),
+        "n_live": sum(o["status"] == "live" for o in ops),
+        "n_dormant": sum(o["status"] == "dormant" for o in ops),
+        "gate_in": len(feed), "promoted": len(up), "rolled_back": rolled,
+        "stall": stall, "arm": arm, "evals_body": evals["body"],
+        "evals_shadow": evals["shadow"], "evals_meta": 0, "evals_foundry": 0,
+        "llm_calls": 0,
+        "false_pos": sum(not main[t]["test_ok"] for t in feed if t in set(ids["L16"])),
+        "env_hash": env, "wall_s": round(time.perf_counter() - t0, 2),
+        "near_best_L": round(max(near), 6) if near else None,
+    }
+    ed = root / "epochs" / str(n)
+    fm.write_text(ed / "curve.csv", ",".join(ROW_KEYS) + "\n"
+                  + ",".join(gc._fmt(row.get(k)) for k in ROW_KEYS) + "\n")
+    fm.write_jsonl(ed / "solutions.jsonl",
+                   [{"epoch": n, "set": next(k for k in ("L16", "H8", "H24", "P")
+                                             if t in set(ids[k])), **main[t]}
+                    for t in all_ids])
+    status = {k: row[k] for k in ROW_KEYS}
+    fm.write_json(ed / "status.json", status)
+    fm.write_json(root / "live" / "_status.json", {**status, "time": fm.now()})
+    fm.append_jsonl(root / "live" / "events.jsonl",
+                    {"time": fm.now(), "event": "epoch", "epoch": n,
+                     "promoted": up, "demoted": down, "rolled_back": rolled,
+                     "stall": stall, "arm": arm})
+    for o in ops:
+        if o["kind"] in ("comb", "decomp"):
+            fm.write_json(root / "ops" / o["id"] / "_metainfo.json",
+                          {"id": o["id"], "kind": o["kind"], "status": o["status"],
+                           "by": o["by"], "born": o["born"],
+                           "evidence": o["evidence"], "payload": o["payload"]})
+    fm.append_ledger(root, {"kind": "epoch", "epoch": n, "layer": 1, "by": "solve",
+                            "op_ids": up, "after": {k: row[k] for k in (
+                                "solved_L", "solved_H24", "logcost_L")},
+                            "evals": evals, **{k: row[k] for k in (
+                                "solved_L", "solved_H24", "lib_bits", "gate_in",
+                                "near_best_L")}})
+    state["prev"] = row
+    fm.write_json(root / "live" / "state.json", state)
+    return row
+
+
+TREE_SETUP = {"hammer": ("incubating", False), "hammer-frozen": ("", True),
+              "hammer-static": ("live", True)}
+
+
+def run_tree(root: Path, tree: str, epochs: int = 8, taskset: Path | None = None,
+             backend: str = "native", threads: int = 6, holdout: bool = True,
+             log=print) -> list[dict]:
+    """init_root if needed, then epochs 0..epochs (epoch 0 = start tree)."""
+    root = Path(root)
+    halves_nest, frozen_engine = TREE_SETUP[tree]
+    if not (root / "ops.jsonl").exists():
+        ts = taskset or (fm.ROOT_TASKSET if hasattr(fm, "ROOT_TASKSET") else None)
+        ts = ts or gc.ROOT / "data" / "r09" / "taskset.json"
+        if not Path(ts).exists():
+            ts = R08_TASKSET
+        fm.init_root(root, ts, halves_nest=halves_nest, tree=tree)
+    (root / "RUN").touch()
+    done = [r for r in fm.load_ledger(root) if r["kind"] == "epoch"
+            and r["epoch"] >= 0]
+    start = max((r["epoch"] for r in done), default=-1) + 1
+    rows = [fm.read_json(root / "epochs" / str(e) / "status.json")
+            for e in range(start)]
+    for n in range(start, epochs + 1):
+        if not (root / "RUN").exists():
+            fm.append_jsonl(root / "live" / "events.jsonl",
+                            {"time": fm.now(), "event": "stopped", "epoch": n})
+            break
+        r = run_epoch(root, n, holdout=holdout, frozen_engine=frozen_engine,
+                      backend=backend, threads=threads)
+        rows.append(r)
+        log(f"[{tree}] epoch {n}: L={r['solved_L']} H8={r['solved_H8']} "
+            f"H24={r['solved_H24']} P={r['solved_P']} lib={r['lib_size']} "
+            f"inc={r['n_incubating']} up={r['promoted']} stall={r['stall']} "
+            f"arm={r['arm']} wall={r['wall_s']}s")
+    return rows
+
+
+def export(root: Path, out: Path) -> None:
+    """Snapshot epochs/ curve rows into reports/curve-r09/<tree>/."""
+    root, out = Path(root), Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    rows = []
+    for d in sorted((root / "epochs").glob("*/"), key=lambda p: int(p.name)):
+        st = fm.read_json(d / "status.json")
+        if st:
+            rows.append(st)
+    fm.write_text(out / "curve.csv", ",".join(ROW_KEYS) + "\n" + "".join(
+        ",".join(gc._fmt(r.get(k)) for k in ROW_KEYS) + "\n" for r in rows))
+    for f in ("ops.jsonl", "ledger.jsonl", "frozen.json"):
+        if (root / f).exists():
+            shutil.copy(root / f, out / f)
