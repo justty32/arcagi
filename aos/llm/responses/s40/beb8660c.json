@@ -1,0 +1,5 @@
+{"task":"beb8660c","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["move_sel","4same","all",1,"right"],["move_sel","4same","is_smallest",1,"up"],["move_sel","4same","all",1,"down"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["move_sel","4same","all",1,"right"],["transpose"],["gravity","right"],["transpose"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["move_sel","4same","all",1,"right"],["move_sel","4same","all",1,"down"]]}
+],"idea":"Each horizontal bar is right-aligned and the bars are stacked at the bottom sorted by length (longest at the bottom).","missing":"sorting/stacking objects by size (reorder rows by object size)"}

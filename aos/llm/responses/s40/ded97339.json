@@ -1,0 +1,1 @@
+{"task":"ded97339","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["x_connect","hv"]]}],"idea":"Connect every pair of 8 cells sharing a row or column with a line of 8.","missing":""}

@@ -1,0 +1,4 @@
+{"task":"3e980e27","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","lr",0]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["recolor_from","4same","size",1,{"scope":"object","sel":["nearest_other_color","8same"],"prop":"color"}]]}
+],"idea":"Each multi-color template contains one anchor pixel (2 or 3); every lone pixel of the same anchor color gets a copy of that template stamped around it, mirrored left-right when the anchor color is 2.","missing":"a stamp primitive: copy each multicolor template object onto every lone pixel matching its anchor color (optionally flipped lr per color)"}

@@ -1,0 +1,31 @@
+{
+  "name": "llm_7f350cb6d3",
+  "kind": "pred",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "6e19193c",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [],
+    "new_vs_r04": [],
+    "score": -0.5,
+    "length": 1,
+    "verdict": "dropped"
+  },
+  "mainline": {
+    "name": "pred_1d2ecedb",
+    "score": -0.5,
+    "tasks": 0,
+    "verdict": "dropped",
+    "covered_by": null,
+    "live_rank": null,
+    "enumerated": true,
+    "budget": 5261
+  }
+}

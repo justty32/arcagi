@@ -1,0 +1,12 @@
+{"task":"ba26e723","rules":[{"kind":"transform","in":"grid","out":"grid","body":[
+["local_rule","n4",[[4,-1,4,0,0,5],[4,-1,4,-1,0,5],[4,-1,4,0,-1,5],[4,4,-1,0,0,5],[4,4,-1,-1,0,5],[4,4,-1,0,-1,5]]],
+["local_rule","n4",[[4,5,0,-1,4,6],[4,0,5,-1,4,6]]],
+["local_rule","n4",[[4,5,0,6,4,1],[4,0,5,6,4,1]]],
+["local_rule","n4",[[4,5,0,1,4,2],[4,0,5,1,4,2]]],
+["local_rule","n4",[[4,5,0,2,4,3],[4,0,5,2,4,3]]],
+["local_rule","n4",[[4,5,0,3,4,1],[4,0,5,3,4,1]]],
+["local_rule","n4",[[4,5,0,1,4,2],[4,0,5,1,4,2]]],
+["x_period","fill",4],
+["colormap",[[1,4],[2,4],[3,6],[5,4]]],
+["x_ray","v","stop",6]
+]}],"idea":"Every column with index divisible by 3 has its 4s turned to 6. Tag top/bottom 4s as 5 so the middle row's 4s are the only unknowns, seed the first 6 middle cells with phase markers propagated from the left border, x_period fill repeats the period-6 pattern, map markers back, then shoot 6 rays vertically over 4s.","missing":""}

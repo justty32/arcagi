@@ -1,0 +1,27 @@
+{
+  "name": "llm_595cbf9534",
+  "kind": "extract",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "6e19193c",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "48d8fb45",
+      "7e0986d6"
+    ],
+    "new_vs_r04": [
+      "48d8fb45",
+      "7e0986d6"
+    ],
+    "score": 2,
+    "length": 4,
+    "verdict": "live"
+  }
+}

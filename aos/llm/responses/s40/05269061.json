@@ -1,0 +1,1 @@
+{"task":"05269061","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["x_period","fill",0]]}],"idea":"The three colors form a diagonal period-3 pattern; repair all 0 cells by periodic fill.","missing":""}

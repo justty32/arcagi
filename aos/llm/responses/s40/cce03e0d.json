@@ -1,0 +1,5 @@
+{"task":"cce03e0d","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["colormap",[[1,0]]],["self_tile","pos"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["tile",3,3],["mirror_tile","lr"],["split_overlay","v","and"],["colormap",[[10,2]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["colormap",[[0,1],[1,0]]],["self_tile","neg"],["colormap",[[0,9],[1,0]]],["colormap",[[9,1]]]]}
+],"idea":"Place a copy of the 3x3 input in a 9x9 canvas at every block position where the input has color 2.","missing":"self_tile whose trigger is one chosen color (copy the full grid only at cells of color c)"}

@@ -1,0 +1,4 @@
+{"task":"e3497940","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","lr",0],["resize_crop",["lin","h",1,0],["const",4]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["flip_lr"],["symmetrize","lr",0],["flip_lr"],["overlay_cells","stack"]]}
+],"idea":"Fold the right half (mirrored) onto the left half across the grey column; output is the left half.","missing":""}

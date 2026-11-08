@@ -1,0 +1,33 @@
+{
+  "name": "llm_5aa214b429",
+  "kind": "transform",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "05269061",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "05269061",
+      "0dfd9992",
+      "29ec7d0e",
+      "484b58aa",
+      "c3f564a4"
+    ],
+    "new_vs_r04": [
+      "05269061",
+      "0dfd9992",
+      "29ec7d0e",
+      "484b58aa",
+      "c3f564a4"
+    ],
+    "score": 5,
+    "length": 1.2,
+    "verdict": "live"
+  }
+}

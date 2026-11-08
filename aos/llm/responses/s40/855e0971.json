@@ -1,0 +1,5 @@
+{"task":"855e0971","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["extend_from","4same","color",0,{"scope":"object","sel":["nearest_aligned_other_color","4same"],"prop":"dir_to"}]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["extend_sel","8multi","color",0,"up"],["extend_sel","8multi","color",0,"down"],["extend_sel","8multi","color",0,"left"],["extend_sel","8multi","color",0,"right"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["transpose"],["extend_sel","4same","color",0,"up"],["extend_sel","4same","color",0,"down"],["transpose"]]}
+],"idea":"each 0 dot draws a line of 0 across its own colour band (from band edge to band edge), perpendicular to the band direction; band colour is not the grid bg","missing":"a ray primitive that extends a cell across the cells of its enclosing/same-colour object (stop at a colour change rather than at non-bg), with direction chosen as the axis perpendicular to the band (the object's short bbox axis)"}

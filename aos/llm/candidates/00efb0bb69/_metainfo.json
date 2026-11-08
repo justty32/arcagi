@@ -20,7 +20,7 @@
     "new_vs_r04": [],
     "score": 3,
     "length": 2,
-    "verdict": "covered",
-    "covered_by": "extract_3b3c6ab5"
+    "verdict": "exists",
+    "same_as": "extract_4819fa70"
   }
 }

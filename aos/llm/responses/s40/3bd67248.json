@@ -1,0 +1,3 @@
+{"task":"3bd67248","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["local_rule","n4",[[0,-1,0,0,-1,2],[0,0,-1,0,-1,4]]],["x_ray","l","stop",4],["x_ray","dl","stop",2]]}
+],"idea":"Left column stays; the bottom row right of it becomes 4; the anti-diagonal from the top-right corner down to the column becomes 2.","missing":""}

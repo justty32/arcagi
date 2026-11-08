@@ -1,0 +1,5 @@
+{"task":"f8b3ba0a","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["cells_to_pixels","majority"],["recolor_sel","4same","pred",["rank","color_count","max"],0],["gravity","left"],["gravity","up"],["crop_bbox"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["cells_to_pixels","majority"],["crop_extract",["subgrid",["pred","4same",["rank","color_count","min"]]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["cells_to_pixels","majority"]]}
+],"idea":"Blocks of a dominant color with a few other-colored blocks; output lists the non-dominant colors in a column sorted by how many blocks they have (most first).","missing":"A step that outputs a column of the distinct non-bg colors sorted by cell/object count (a color histogram / sort-by-frequency primitive)."}

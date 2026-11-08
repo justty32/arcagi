@@ -1,0 +1,5 @@
+{"task":"ff805c23","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","both",1],["x_crop_color",1,"bbox"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","transpose",1],["crop_extract",["object",["color","4same",1]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","both",1]]}
+],"idea":"The 24x24 grid is lr/ud symmetric except for a 5x5 block of 1; output is that block's content restored from its mirror images.","missing":"A crop to the bbox a color occupied before a repair step, i.e. symmetrize (or x_period fill) followed by cropping to the former hole region (e.g. symmetrize option 'crop')."}

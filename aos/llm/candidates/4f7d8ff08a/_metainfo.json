@@ -1,0 +1,55 @@
+{
+  "name": "llm_4f7d8ff08a",
+  "kind": "pred",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "6e19193c",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "0dfd9992",
+      "0e206a2e",
+      "1f642eb9",
+      "29ec7d0e",
+      "5168d44c",
+      "74dd1130",
+      "9dfd6313",
+      "a1570a43",
+      "a78176bb",
+      "c3f564a4",
+      "d511f180",
+      "ddf7fa4f",
+      "ecdecbb3"
+    ],
+    "new_vs_r04": [
+      "0dfd9992",
+      "0e206a2e",
+      "1f642eb9",
+      "29ec7d0e",
+      "5168d44c",
+      "a1570a43",
+      "a78176bb",
+      "c3f564a4",
+      "ecdecbb3"
+    ],
+    "score": 12.5,
+    "length": 1,
+    "verdict": "live"
+  },
+  "mainline": {
+    "name": "pred_68c2296f",
+    "score": 12.5,
+    "tasks": 13,
+    "verdict": "live",
+    "covered_by": null,
+    "live_rank": 26,
+    "enumerated": true,
+    "budget": 5261
+  }
+}

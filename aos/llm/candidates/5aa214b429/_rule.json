@@ -1,0 +1,22 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "x_period",
+      "fill",
+      0
+    ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "4dc7c4789d",
+  "support_tasks": [
+    "05269061",
+    "0dfd9992",
+    "29ec7d0e",
+    "484b58aa",
+    "c3f564a4"
+  ]
+}

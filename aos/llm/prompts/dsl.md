@@ -24,6 +24,7 @@ Object attributes (`attr`): every value is an int or a str.
 - `size_rank`: 1 = largest distinct size, 2 = next.
 - `is_largest`, `is_smallest`: 0 or 1; ties all count.
 - `touches_border`, `has_hole`: 0 or 1. A hole is a non-object cell inside the bbox that the outside cannot reach by 4-steps.
+- `n_holes`: how many separate holes (4-connected groups of hole cells) the object has.
 - `h`, `w`: the bbox height and width.
 - `shape`: the str `"HxW:bits"`, with row-major bits of the bbox, e.g. `"2x2:1110"`.
 - `color_count`: how many objects share this object's color.
@@ -195,6 +196,16 @@ E is a grid-scope extract.
 - `["keep_extract",E]`: only E's selector is used. Cells outside the selected objects become bg.
 - `["paint_count",E_n,col,mode]`: a row (1×n), col (n×1) or square (n×n) of `col`. `mode` is `"row"`, `"col"` or `"square"`. `col` is an int or a color extract; n is 1..30.
 
+### Extension steps (rays, lines, compress, color crop, periods)
+
+- `["x_ray",dirs,mode,color]`: every non-bg cell (only `color`, unless -1) shoots rays to the border over bg cells. `dirs` is one of `u d l r h v hv ul ur dl dr x all` (`x` = the four diagonals). `mode` `"pass"` crosses other cells, `"stop"` ends at the first one.
+- `["x_connect",axes]`: fill the bg run between two consecutive same-colored cells on each line; `axes` is `h`, `v`, `hv`, `vh` or `all` (with diagonals).
+- `["x_compress",mode]`: drop rows/cols equal to the previous one (`dup`, `dup_rows`, `dup_cols`) or all-bg ones (`bg`, `bg_rows`, `bg_cols`).
+- `["x_crop_color",color,mode]`: crop to the bbox of `color`: `"bbox"`, `"inner"` (inside its frame) or `"only"` (other colors become bg).
+- `["x_period",mode,color]`: `"fill"` repairs a periodic pattern whose `color` cells are unknown; `"extend"` tiles the smallest period of the non-`color` bbox over the whole grid.
+
+- `["x_vrule","n4"|"n8",[[center,n1,..,nk,out],...]]`: a `local_rule` whose keys use color variables instead of colors. In a key, -1 = off-grid, 0 = bg, 1, 2, ... = the non-bg colors in order of first appearance (center first, then the neighbours in local_rule order). `out`: 0 = bg, 1..9 = the color bound to that variable, 10+c = literal color c. Unmatched keys keep the cell. One short table covers every color.
+
 ### Special steps
 
 - `["colormap",[[src,dst],...]]`: recolor cells. Colors not listed stay. This is the way to resolve MARK (10).
@@ -236,12 +247,12 @@ Names like `pred_*`, `extract_*`, `formula_*` and `m_*` are the repo's own block
 ## Limits (say "not expressible" rather than forcing a fit)
 
 The DSL cannot express:
-- Drawing lines or shapes between two given points or objects, or diagonal rays. `extend_*` only goes up/down/left/right to the first obstacle.
+- Drawing shapes between two given points or objects. Lines only via `x_connect` (same color both ends) and rays via `x_ray`/`extend_*`.
 - Translating or copying an object by a fixed offset, stamping a pattern at markers, or rotating or flipping one object in place. Geometry is whole-grid only.
 - Cropping at explicit coordinates; `resize_crop` is top-left only.
 - Assembling several objects into a new layout; sorting or arranging objects.
-- Pattern or sequence continuation; periodic repair, except mirror symmetry via `symmetrize`.
-- Arithmetic on colors, or conditionals and loops. Per-object choice is limited to the selectors, object_colormap and the object-scope sources above.
+- Pattern or sequence continuation beyond `x_period` and mirror symmetry via `symmetrize`.
+- Arithmetic on colors (but `x_vrule` treats colors as variables), or conditionals and loops. Per-object choice is limited to the selectors, object_colormap and the object-scope sources above.
 - Counting beyond `paint_count`, the formulas and the tables.
 - Output colors that depend on a key never seen in train. colormap passes unseen colors through unchanged.
 - Dense grids whose true background is not the majority color, because bg is per-grid majority.

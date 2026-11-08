@@ -1,0 +1,42 @@
+{
+  "name": "llm_2422a8513d",
+  "kind": "formula",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "b60334d2",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    },
+    {
+      "task": "1190e5a7",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "e21d9049"
+    ],
+    "new_vs_r04": [
+      "e21d9049"
+    ],
+    "score": 1,
+    "length": 2,
+    "verdict": "covered",
+    "covered_by": "formula_ad77d799"
+  },
+  "mainline": {
+    "name": "formula_edaa61aa",
+    "score": 1,
+    "tasks": 1,
+    "verdict": "covered",
+    "covered_by": "beyond covered cap",
+    "live_rank": null,
+    "enumerated": true,
+    "budget": 7078
+  }
+}

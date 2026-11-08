@@ -1,0 +1,21 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": [
+    "color",
+    [
+      "pred",
+      "4same",
+      [
+        "eq",
+        "size",
+        3
+      ]
+    ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "4dc7c4789d",
+  "support_tasks": []
+}

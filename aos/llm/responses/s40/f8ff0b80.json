@@ -1,0 +1,4 @@
+{"task":"f8ff0b80","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["paint_count",["count",["all","8same"]],["color",["largest","8same"]],"col"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","8same","largest"],["resize_crop",["const",3],["const",1]]]}
+],"idea":"Three single-colored objects; output is a 3x1 column of their colors ordered by object size, largest first.","missing":"A step that outputs a column (n x 1) of object colors sorted by an attribute such as size (sort objects by attr -> color list)."}

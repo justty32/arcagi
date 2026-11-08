@@ -1,0 +1,3 @@
+{"task":"f1cefba8","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["x_vrule","n4",[[1,2,1,2,2,19],[1,1,2,2,2,19],[1,2,2,2,1,17],[1,2,2,1,2,17]]],["x_ray","v","pass",9],["x_ray","h","pass",7]]}
+],"idea":"Inner rect B inside frame A has single-cell bumps into the frame; each bump defines a line (column for top/bottom bumps, row for side bumps): along it, inner B cells and the bump become A, and the 0 cells outside the frame become B.","missing":"A full-line paint through a marked cell: a ray that crosses non-bg cells (paint the whole row/column of a marker, recoloring B->A inside the frame and 0->B outside), which x_ray pass/stop and extend_sel cannot do since they start only over adjacent bg."}

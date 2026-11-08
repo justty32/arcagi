@@ -1,0 +1,4 @@
+{"task":"36fdfd69","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["fill_holes",4]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["x_connect","hv"],["local_rule","n4",[]]]}
+],"idea":"The color-2 cells form 8-connected clusters; every non-2 cell inside a cluster's bounding box becomes 4, everything else unchanged.","missing":"a primitive that fills the bbox of each selected object (e.g. 8-connected color-2 clusters) with color c over non-object cells"}

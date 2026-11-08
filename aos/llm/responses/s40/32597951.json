@@ -1,0 +1,4 @@
+{"task":"32597951","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["local_rule","n4",[[1,8,-2,-2,-2,3]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["colormap",[[0,7],[1,0]]],["x_connect","hv"],["colormap",[[0,1],[7,0]]]]}
+],"idea":"Every color-1 cell inside the bounding box of the color-8 cells becomes 3; everything else unchanged.","missing":"a primitive that recolors cells of color a to b only inside the bbox of color c (bbox-masked colormap)"}

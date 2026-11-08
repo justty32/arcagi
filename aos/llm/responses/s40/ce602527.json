@@ -1,0 +1,5 @@
+{"task":"ce602527","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["delete_sel","8same","touches_border",1],["crop_extract",["subgrid",["pred","8same",["rank","h","max"]]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["downscale",2,2],["crop_extract",["subgrid",["unique_shape","8same"]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["delete_sel","8same","touches_border",1],["crop_extract",["subgrid",["pred","8same",["rank","n_holes","max"]]]]]}
+],"idea":"A large 2x-scaled shape is partly cut off by the border; output the crop of the small shape (not touching the border) whose shape matches the big one at half scale.","missing":"matching an object's shape against a downscaled / partially occluded other object"}

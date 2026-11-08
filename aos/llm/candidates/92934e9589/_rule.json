@@ -1,0 +1,37 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "x_compress",
+      "dup"
+    ],
+    [
+      "resize_crop",
+      [
+        "lin",
+        "h",
+        1,
+        1
+      ],
+      [
+        "lin",
+        "w",
+        1,
+        1
+      ]
+    ],
+    [
+      "downscale",
+      2,
+      2
+    ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "0d63f53ec6",
+  "support_tasks": [
+    "1190e5a7"
+  ]
+}

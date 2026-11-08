@@ -9,6 +9,12 @@
       "split": "training",
       "model": "claude-opus-5-5",
       "role": "component"
+    },
+    {
+      "task": "e3497940",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
     }
   ],
   "rescore": {
@@ -245,6 +251,6 @@
     "covered_by": null,
     "live_rank": 2,
     "enumerated": true,
-    "budget": 8199
+    "budget": 7078
   }
 }

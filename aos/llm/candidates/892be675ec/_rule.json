@@ -1,0 +1,62 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "resize_crop",
+      [
+        "const",
+        4
+      ],
+      [
+        "const",
+        11
+      ]
+    ],
+    [
+      "tile",
+      3,
+      1
+    ],
+    [
+      "resize_crop",
+      [
+        "const",
+        11
+      ],
+      [
+        "const",
+        11
+      ]
+    ],
+    [
+      "flip_lr"
+    ],
+    [
+      "symmetrize",
+      "rot",
+      0
+    ],
+    [
+      "flip_lr"
+    ],
+    [
+      "resize_crop",
+      [
+        "const",
+        3
+      ],
+      [
+        "const",
+        11
+      ]
+    ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "4dc7c4789d",
+  "support_tasks": [
+    "8e5a5113"
+  ]
+}

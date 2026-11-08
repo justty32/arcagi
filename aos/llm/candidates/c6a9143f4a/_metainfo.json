@@ -1,0 +1,43 @@
+{
+  "name": "llm_c6a9143f4a",
+  "kind": "formula",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "b60334d2",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    },
+    {
+      "task": "1190e5a7",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    },
+    {
+      "task": "a85d4709",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [],
+    "new_vs_r04": [],
+    "score": 0,
+    "length": 2,
+    "verdict": "dropped"
+  },
+  "mainline": {
+    "name": "formula_44ced092",
+    "score": 0,
+    "tasks": 0,
+    "verdict": "dropped",
+    "covered_by": null,
+    "live_rank": null,
+    "enumerated": true,
+    "budget": 7078
+  }
+}

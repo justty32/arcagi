@@ -1,0 +1,1 @@
+{"task":"694f12f3","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["object_colormap",["4same","is_largest",[[1,7]]]],["local_rule","n4",[[7,7,7,7,7,2],[4,4,4,4,4,1]]],["colormap",[[7,4]]]]}],"idea":"Two solid rectangles; the interior (cells not on the rectangle's edge) of the larger becomes 2, of the smaller becomes 1.","missing":""}

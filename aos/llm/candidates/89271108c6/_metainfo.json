@@ -34,7 +34,8 @@
     ],
     "score": 8.5,
     "length": 1,
-    "verdict": "live"
+    "verdict": "exists",
+    "same_as": "pred_e51dc4f0"
   },
   "mainline": {
     "name": "pred_e51dc4f0",
@@ -44,6 +45,6 @@
     "covered_by": null,
     "live_rank": null,
     "enumerated": true,
-    "budget": 6390
+    "budget": 5261
   }
 }

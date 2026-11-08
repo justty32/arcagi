@@ -8,6 +8,9 @@
   candidates for train-passing rules. Prints the per-task summary row.
 - ``rescore``: training support / verdict of every candidate.
 - ``summary --split S --run R [--csv OUT]``: per-task table from the traces.
+- ``distill stage OUT`` / ``distill reuse OUT BASE LLM [--record]``: cut training
+  solutions into fragment blocks, stage two blocks roots, then read the two
+  search reports (see ``distill``).
 
 A response file is a rule dict or ``{"rules": [rule, ...]}`` (best first).
 """
@@ -144,6 +147,26 @@ def cmd_summary(args) -> int:
     return 0
 
 
+def cmd_distill(args) -> int:
+    from . import distill as ds
+
+    if args.step == "stage":
+        staged = ds.stage(args.out)
+        kinds: dict[str, int] = {}
+        for p in staged.values():
+            kinds[p["kind"]] = kinds.get(p["kind"], 0) + 1
+        print(json.dumps({"staged": len(staged)} | kinds))
+        return 0
+    res = ds.reuse(args.out, args.base, args.llm)
+    verdicts: dict[str, int] = {}
+    for row in res["pieces"].values():
+        verdicts[row["verdict"]] = verdicts.get(row["verdict"], 0) + 1
+    made = ds.record(res) if args.record else []
+    summary = {k: res[k] for k in ("solved", "gained", "regressed", "pass_train_wrong")}
+    print(json.dumps(summary | {"verdicts": verdicts, "recorded": len(made)}))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="arcagi.llm")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -166,6 +189,12 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--split", default="training", choices=tk.SPLITS)
     a.add_argument("--run", required=True)
     a.add_argument("--csv", type=Path)
+    a = sub.add_parser("distill")
+    a.add_argument("step", choices=("stage", "reuse"))
+    a.add_argument("out", type=Path)
+    a.add_argument("base", type=Path, nargs="?")
+    a.add_argument("llm", type=Path, nargs="?")
+    a.add_argument("--record", action="store_true")
     args = p.parse_args(argv)
     return {
         "prompts": cmd_prompts,
@@ -173,6 +202,7 @@ def main(argv: list[str] | None = None) -> int:
         "record": cmd_record,
         "rescore": cmd_rescore,
         "summary": cmd_summary,
+        "distill": cmd_distill,
     }[args.cmd](args)
 
 

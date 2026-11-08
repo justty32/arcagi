@@ -1,0 +1,5 @@
+{"task":"8e5a5113","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["resize_crop",["const",4],["const",11]],["tile",3,1],["resize_crop",["const",11],["const",11]],["symmetrize","rot",0],["resize_crop",["const",3],["const",11]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["resize_crop",["const",4],["const",11]],["tile",3,1],["resize_crop",["const",11],["const",11]],["flip_lr"],["symmetrize","rot",0],["flip_lr"],["resize_crop",["const",3],["const",11]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["resize_crop",["const",4],["const",11]],["tile",3,1],["resize_crop",["const",11],["const",11]],["flip_ud"],["symmetrize","rot",0],["flip_ud"],["resize_crop",["const",3],["const",11]]]}
+],"idea":"the left 3x3 block A is copied into the two empty blocks: middle = A rotated 90 cw, right = A rotated 180 (built by stacking the strip at rows 0,4,8 of an 11x11 canvas and rotation-symmetrizing)","missing":""}

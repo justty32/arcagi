@@ -9,6 +9,12 @@
       "split": "training",
       "model": "claude-opus-5-5",
       "role": "component"
+    },
+    {
+      "task": "b9b7f026",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
     }
   ],
   "rescore": {
@@ -45,6 +51,6 @@
     "covered_by": "beyond covered cap",
     "live_rank": null,
     "enumerated": true,
-    "budget": 6390
+    "budget": 5261
   }
 }

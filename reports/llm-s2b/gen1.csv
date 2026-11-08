@@ -1,0 +1,11 @@
+task,split,rules,best_train_pass,train_all,test_exact,tokens,seconds
+025d127b,training,1,1.0,True,True,16668,55.5
+1190e5a7,training,1,1.0,True,True,27291,177.6
+6e19193c,training,1,1.0,True,True,16668,55.5
+7e0986d6,training,1,1.0,True,True,16668,55.5
+91714a58,training,1,1.0,True,True,16668,55.5
+a85d4709,training,1,1.0,True,True,27291,177.6
+b60334d2,training,1,1.0,True,True,27291,177.6
+ba26e723,training,1,1.0,True,True,27291,177.6
+d90796e8,training,1,1.0,True,True,16668,55.5
+db3e9e38,training,1,0.0,False,False,27291,177.6

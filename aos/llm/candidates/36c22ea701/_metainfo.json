@@ -1,0 +1,25 @@
+{
+  "name": "llm_36c22ea701",
+  "kind": "transform",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "b9b7f026",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "b9b7f026"
+    ],
+    "new_vs_r04": [
+      "b9b7f026"
+    ],
+    "score": 1,
+    "length": 2.3000000000000003,
+    "verdict": "solution_only"
+  }
+}

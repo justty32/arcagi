@@ -173,9 +173,9 @@
     "score": 81,
     "tasks": 81,
     "verdict": "covered",
-    "covered_by": "beyond covered cap",
+    "covered_by": "formula_ad77d799",
     "live_rank": null,
     "enumerated": true,
-    "budget": 8199
+    "budget": 7078
   }
 }

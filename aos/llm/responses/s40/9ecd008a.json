@@ -1,0 +1,5 @@
+{"task":"9ecd008a","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["x_crop_color",0,"bbox"],["colormap",[[0,1]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","both",0]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["x_period","fill",0],["x_crop_color",0,"bbox"]]}
+],"idea":"the grid is mirror-symmetric with a 3x3 block blanked to 0; output the true contents of that block, read from its mirror image (symmetrize fills it correctly, but the hole's position is lost before cropping)","missing":"a crop that uses the bbox of a colour in the input but takes the content from the transformed grid, e.g. symmetrize-then-crop-to-original-hole (['crop_hole_after',mode,hole])"}

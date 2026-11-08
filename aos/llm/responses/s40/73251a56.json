@@ -1,0 +1,3 @@
+{"task":"73251a56","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","transpose",0]]}
+],"idea":"The grid is symmetric about the main diagonal; 0 holes are filled from their transposed mirror cell. Holes that straddle the diagonal (mirror also a hole) must become the diagonal-line color on i==j and the grid's majority color elsewhere.","missing":"a fill for holes whose mirror is also a hole: e.g. colormap 0 -> grid majority color plus continuation of the diagonal line (x_connect over a non-bg hole color)"}
