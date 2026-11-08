@@ -1,0 +1,32 @@
+{
+  "name": "llm_087f839827",
+  "kind": "macro",
+  "doc": "LLM candidate 087f839827 (transform) [[\"keep_sel\",\"8same\",\"pred\",[\"rank\",\"shape_count\",\"max\"]],[\"crop_object\",\"8multi\",\"top_left\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/llm",
+  "source": "llm",
+  "origin": "087f839827",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "llm_origin": [
+    {
+      "task": "39a8645d",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "score": 3,
+  "support_tasks": [
+    "1cf80156",
+    "39a8645d",
+    "d9fac9be"
+  ],
+  "shadow": {
+    "synth_ok": 2,
+    "synth_frac": 0.667
+  }
+}

@@ -1,0 +1,16 @@
+[
+  [
+    "extend_from",
+    "4same",
+    "all",
+    1,
+    {
+      "scope": "object",
+      "sel": [
+        "largest",
+        "4same"
+      ],
+      "prop": "dir_to"
+    }
+  ]
+]

@@ -1,0 +1,19 @@
+[
+  [
+    "flip_lr"
+  ],
+  [
+    "resize_crop",
+    [
+      "const",
+      3
+    ],
+    [
+      "const",
+      3
+    ]
+  ],
+  [
+    "flip_lr"
+  ]
+]

@@ -1,0 +1,30 @@
+{
+  "name": "llm_277b40492f",
+  "kind": "formula",
+  "doc": "LLM candidate 277b40492f (formula) [\"div\",\"w\",2]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/llm",
+  "source": "llm",
+  "origin": "277b40492f",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "llm_origin": [
+    {
+      "task": "2013d3e2",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "score": 1,
+  "support_tasks": [
+    "bbc9ae5d"
+  ],
+  "shadow": {
+    "synth_ok": 1,
+    "synth_frac": 1.0
+  }
+}

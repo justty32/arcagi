@@ -1,0 +1,30 @@
+{
+  "name": "llm_129466bfab",
+  "kind": "macro",
+  "doc": "LLM candidate 129466bfab (transform) [[\"crop_bbox\"],[\"resize_crop\",[\"div\",\"h\",2],[\"div\",\"w\",2]]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/llm",
+  "source": "llm",
+  "origin": "129466bfab",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "llm_origin": [
+    {
+      "task": "2013d3e2",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "score": 1,
+  "support_tasks": [
+    "2013d3e2"
+  ],
+  "shadow": {
+    "synth_ok": 1,
+    "synth_frac": 1.0
+  }
+}

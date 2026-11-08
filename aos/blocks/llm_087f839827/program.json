@@ -1,0 +1,17 @@
+[
+  [
+    "keep_sel",
+    "8same",
+    "pred",
+    [
+      "rank",
+      "shape_count",
+      "max"
+    ]
+  ],
+  [
+    "crop_object",
+    "8multi",
+    "top_left"
+  ]
+]

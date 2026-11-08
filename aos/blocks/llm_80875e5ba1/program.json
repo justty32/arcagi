@@ -1,0 +1,12 @@
+[
+  [
+    "symmetrize",
+    "both",
+    4
+  ],
+  [
+    "symmetrize",
+    "transpose",
+    4
+  ]
+]

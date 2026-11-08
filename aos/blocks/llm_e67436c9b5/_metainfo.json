@@ -1,0 +1,30 @@
+{
+  "name": "llm_e67436c9b5",
+  "kind": "macro",
+  "doc": "LLM candidate e67436c9b5 (transform) [[\"symmetrize\",\"rot\",4]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/llm",
+  "source": "llm",
+  "origin": "e67436c9b5",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "llm_origin": [
+    {
+      "task": "b8825c91",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "score": 1,
+  "support_tasks": [
+    "b8825c91"
+  ],
+  "shadow": {
+    "synth_ok": 1,
+    "synth_frac": 1.0
+  }
+}

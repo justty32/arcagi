@@ -1,0 +1,30 @@
+{
+  "name": "llm_28d1efd575",
+  "kind": "macro",
+  "doc": "LLM candidate 28d1efd575 (transform) [[\"flip_lr\"],[\"resize_crop\",[\"const\",3],[\"const\",3]],[\"flip_lr\"]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/llm",
+  "source": "llm",
+  "origin": "28d1efd575",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "llm_origin": [
+    {
+      "task": "5bd6f4ac",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "score": 1,
+  "support_tasks": [
+    "5bd6f4ac"
+  ],
+  "shadow": {
+    "synth_ok": 1,
+    "synth_frac": 1.0
+  }
+}

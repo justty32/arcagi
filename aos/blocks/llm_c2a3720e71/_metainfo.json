@@ -1,0 +1,31 @@
+{
+  "name": "llm_c2a3720e71",
+  "kind": "macro",
+  "doc": "LLM candidate c2a3720e71 (transform) [[\"extend_from\",\"4same\",\"is_largest\",0,{\"scope\":\"object\",\"sel\":[\"largest\",\"4same\"],\"prop\":\"dir_to\"}]]",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/llm",
+  "source": "llm",
+  "origin": "c2a3720e71",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "llm_origin": [
+    {
+      "task": "2c608aff",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "solution"
+    }
+  ],
+  "score": 2,
+  "support_tasks": [
+    "2c608aff",
+    "d43fd935"
+  ],
+  "shadow": {
+    "synth_ok": 2,
+    "synth_frac": 1.0
+  }
+}

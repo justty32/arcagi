@@ -1,0 +1,349 @@
+{
+ "contract": "wf-table/1",
+ "source": "README.md",
+ "extracted": "2026-11-08",
+ "columns": [
+  "candidate",
+  "llm_kind",
+  "block_kind",
+  "support",
+  "synth_ok",
+  "verdict",
+  "reasons"
+ ],
+ "rows": [
+  {
+   "candidate": "00efb0bb69",
+   "llm_kind": "extract",
+   "block_kind": "extract",
+   "support": "3",
+   "synth_ok": "3/3",
+   "verdict": "fail",
+   "reasons": "duplicate of live extract_3b3c6ab5"
+  },
+  {
+   "candidate": "087f839827",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "3",
+   "synth_ok": "2/3",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "0df5c27764",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['local_rule']; synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "0f21bfecf1",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['colormap']; synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "129466bfab",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "14f13a278a",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['local_rule']; synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "155b3ac577",
+   "llm_kind": "extract",
+   "block_kind": "extract",
+   "support": "6",
+   "synth_ok": "4/6",
+   "verdict": "fail",
+   "reasons": "duplicate of live extract_04a698eb"
+  },
+  {
+   "candidate": "277b40492f",
+   "llm_kind": "formula",
+   "block_kind": "formula",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "28d1efd575",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "2ad6a735e4",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "30e8f21a56",
+   "llm_kind": "formula",
+   "block_kind": "formula",
+   "support": "81",
+   "synth_ok": "19/81",
+   "verdict": "fail",
+   "reasons": "synth majority 19/81 < 0.67"
+  },
+  {
+   "candidate": "37b821396f",
+   "llm_kind": "formula",
+   "block_kind": "formula",
+   "support": "118",
+   "synth_ok": "118/118",
+   "verdict": "fail",
+   "reasons": "duplicate of live formula_ad77d799"
+  },
+  {
+   "candidate": "41dffbaa4d",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "5aa214b429",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "5",
+   "synth_ok": "1/5",
+   "verdict": "fail",
+   "reasons": "synth majority 1/5 < 0.67"
+  },
+  {
+   "candidate": "5bf4cf7d79",
+   "llm_kind": "extract",
+   "block_kind": "extract",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "72c8aab4f1",
+   "llm_kind": "pred",
+   "block_kind": "pred",
+   "support": "12",
+   "synth_ok": "4/12",
+   "verdict": "fail",
+   "reasons": "synth majority 4/12 < 0.67"
+  },
+  {
+   "candidate": "75210ea617",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "2",
+   "synth_ok": "2/2",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "781221a81a",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "80875e5ba1",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "84c8547bbf",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "89271108c6",
+   "llm_kind": "pred",
+   "block_kind": "pred",
+   "support": "9",
+   "synth_ok": "7/9",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "97f68e24d9",
+   "llm_kind": "pred",
+   "block_kind": "pred",
+   "support": "9",
+   "synth_ok": "4/9",
+   "verdict": "fail",
+   "reasons": "synth majority 4/9 < 0.67"
+  },
+  {
+   "candidate": "992c9ca50d",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "999cf69827",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "b28c8646ca",
+   "llm_kind": "extract",
+   "block_kind": "extract",
+   "support": "4",
+   "synth_ok": "2/4",
+   "verdict": "fail",
+   "reasons": "synth majority 2/4 < 0.67; duplicate of live extract_713b1328"
+  },
+  {
+   "candidate": "ba6a9fdf07",
+   "llm_kind": "extract",
+   "block_kind": "extract",
+   "support": "0",
+   "synth_ok": "0/0",
+   "verdict": "fail",
+   "reasons": "no training support"
+  },
+  {
+   "candidate": "bf4f73557a",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['local_rule']; synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "c2a3720e71",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "2",
+   "synth_ok": "2/2",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "c323a0b0f8",
+   "llm_kind": "formula",
+   "block_kind": "formula",
+   "support": "0",
+   "synth_ok": "0/0",
+   "verdict": "fail",
+   "reasons": "no training support"
+  },
+  {
+   "candidate": "cb1618e21d",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "d0230e73c5",
+   "llm_kind": "extract",
+   "block_kind": "extract",
+   "support": "4",
+   "synth_ok": "4/4",
+   "verdict": "fail",
+   "reasons": "duplicate of live extract_c5dd0c7b"
+  },
+  {
+   "candidate": "d834edca4a",
+   "llm_kind": "formula",
+   "block_kind": "formula",
+   "support": "81",
+   "synth_ok": "16/81",
+   "verdict": "fail",
+   "reasons": "synth majority 16/81 < 0.67"
+  },
+  {
+   "candidate": "e67436c9b5",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "1/1",
+   "verdict": "pass",
+   "reasons": "-"
+  },
+  {
+   "candidate": "e9278de828",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['colormap', 'local_rule', 'object_colormap']; synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "eaf85d0df7",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "1",
+   "synth_ok": "0/1",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['local_rule']; synth majority 0/1 < 0.67"
+  },
+  {
+   "candidate": "eeb0d98989",
+   "llm_kind": "formula",
+   "block_kind": "formula",
+   "support": "123",
+   "synth_ok": "123/123",
+   "verdict": "fail",
+   "reasons": "duplicate of live formula_fbe415b1"
+  },
+  {
+   "candidate": "fb211392c1",
+   "llm_kind": "transform",
+   "block_kind": "macro",
+   "support": "2",
+   "synth_ok": "1/2",
+   "verdict": "fail",
+   "reasons": "macro: steps not in registry ['colormap']; synth majority 1/2 < 0.67"
+  }
+ ]
+}
