@@ -1,0 +1,5 @@
+{"task":"94133066","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","8multi","largest"],["anti_transpose"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","8multi","largest"],["flip_ud"]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_extract",["subgrid",["largest","8multi"]]],["transpose"]]}],
+"idea":"Crop the big 1-box, then apply the one rotation/flip that moves its corner marker colors to match the layout of the loose marker dots outside the box (pair0 anti_transpose, pair1 transpose, pair2 flip_ud).","missing":"a step that picks the dihedral transform (of the crop) whose corner-marker layout matches the scattered outside dots"}

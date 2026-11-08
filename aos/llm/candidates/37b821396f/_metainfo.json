@@ -236,5 +236,15 @@
     "length": 1,
     "verdict": "exists",
     "same_as": "formula_ad77d799"
+  },
+  "mainline": {
+    "name": "formula_ad77d799",
+    "score": 118,
+    "tasks": 118,
+    "verdict": "live",
+    "covered_by": null,
+    "live_rank": 2,
+    "enumerated": true,
+    "budget": 8199
   }
 }

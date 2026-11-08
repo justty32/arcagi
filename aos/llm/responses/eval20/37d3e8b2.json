@@ -1,0 +1,4 @@
+{"task":"37d3e8b2","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["recolor_sel","4same","color",8,1]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["fill_enclosed"],["recolor_from","4same","color",8,{"scope":"object","sel":["touching","4same"],"prop":"size"}],["colormap",[[10,0]]]]}
+],"idea":"Each 8 shape is recolored by its number of holes (enclosed bg components): 1 hole->1, 2->2, 3->3, 4->7.","missing":"An object attribute n_holes (count of enclosed bg components inside the object) usable in object_colormap."}

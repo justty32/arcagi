@@ -9,5 +9,14 @@
       "4same"
     ],
     "prop": "dir_to"
-  }
+  },
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": [
+    "2c608aff",
+    "855e0971",
+    "a48eeaf7",
+    "d43fd935"
+  ]
 }

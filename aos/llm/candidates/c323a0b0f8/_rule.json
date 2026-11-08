@@ -6,5 +6,9 @@
     "div",
     "h",
     2
-  ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": []
 }

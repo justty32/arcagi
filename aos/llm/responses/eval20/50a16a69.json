@@ -1,0 +1,4 @@
+{"task":"50a16a69","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["symmetrize","both",1]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","4same","largest"],["tile",3,3],["resize_crop",["lin","h",1,0],["lin","w",1,0]]]}
+],"idea":"The periodic pattern is continued over the solid filler strip covering the whole grid, then the whole pattern is shifted one column left (output[r][c] = pattern[r][c+1]).","missing":"Periodic pattern continuation into a filler region plus a whole-grid cyclic shift / translate by a fixed offset."}

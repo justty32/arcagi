@@ -1,0 +1,24 @@
+{
+  "name": "llm_5bf4cf7d79",
+  "kind": "extract",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "d9fac9be",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "1f85a75f"
+    ],
+    "new_vs_r04": [],
+    "score": 1,
+    "length": 2,
+    "verdict": "covered",
+    "covered_by": "extract_3b3c6ab5"
+  }
+}

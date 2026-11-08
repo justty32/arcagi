@@ -22,5 +22,15 @@
     "length": 2,
     "verdict": "covered",
     "covered_by": "formula_fbe415b1"
+  },
+  "mainline": {
+    "name": "formula_72b9774f",
+    "score": 1,
+    "tasks": 1,
+    "verdict": "covered",
+    "covered_by": "beyond covered cap",
+    "live_rank": null,
+    "enumerated": false,
+    "budget": 8199
   }
 }

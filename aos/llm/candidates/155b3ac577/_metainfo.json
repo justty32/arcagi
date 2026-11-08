@@ -1,0 +1,35 @@
+{
+  "name": "llm_155b3ac577",
+  "kind": "extract",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "d687bc17",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "1a07d186",
+      "22eb0ac0",
+      "40853293",
+      "6855a6e4",
+      "d687bc17",
+      "ded97339"
+    ],
+    "new_vs_r04": [
+      "1a07d186",
+      "40853293",
+      "6855a6e4",
+      "d687bc17",
+      "ded97339"
+    ],
+    "score": 6,
+    "length": 4,
+    "verdict": "exists",
+    "same_as": "extract_04a698eb"
+  }
+}

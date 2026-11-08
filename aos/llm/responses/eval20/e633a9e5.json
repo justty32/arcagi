@@ -1,0 +1,3 @@
+{"task":"e633a9e5","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["upscale",6,6],["resize_crop",["const",20],["const",20]],["downscale",4,4]]}],
+"idea":"The 3x3 grid is stretched to 5x5 by doubling the first and last rows and columns (middle stays single); done as upscale 6, pad to 20, sample every 4th line.","missing":""}

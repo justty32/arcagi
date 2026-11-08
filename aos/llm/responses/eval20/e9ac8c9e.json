@@ -1,0 +1,5 @@
+{"task":"e9ac8c9e","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["recolor_from","4same","color",5,{"scope":"object","sel":["nearest_other_color","8same"],"prop":"color"}],["delete_sel","4same","size",1]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["delete_sel","4same","size",1]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["recolor_from","4same","color",5,{"scope":"object","sel":["touching","8same"],"prop":"color"}],["delete_sel","4same","size",1]]}
+],"idea":"Each gray square is split into four quadrants; each quadrant takes the color of the single dot diagonally off that corner, and the corner dots are erased.","missing":"a per-cell nearest-object (Voronoi) recolor, or splitting an object into quadrants and coloring each from the corner dot diagonal to it"}

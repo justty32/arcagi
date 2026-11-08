@@ -23,5 +23,15 @@
     "score": 0,
     "length": 2,
     "verdict": "dropped"
+  },
+  "mainline": {
+    "name": "formula_84b51839",
+    "score": 0,
+    "tasks": 0,
+    "verdict": "dropped",
+    "covered_by": null,
+    "live_rank": null,
+    "enumerated": false,
+    "budget": 8199
   }
 }

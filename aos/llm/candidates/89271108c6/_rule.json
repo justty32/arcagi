@@ -6,5 +6,19 @@
     "rank",
     "h",
     "max"
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": [
+    "0dfd9992",
+    "1f642eb9",
+    "5168d44c",
+    "74dd1130",
+    "a1570a43",
+    "a78176bb",
+    "c1d99e64",
+    "d511f180",
+    "e76a88a6"
   ]
 }

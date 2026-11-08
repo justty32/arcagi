@@ -66,7 +66,8 @@ def test_emit_writes_candidates(tmp_path, monkeypatch):
     )
     assert len(made) == 3
     rule = json.loads((tmp_path / made[0] / "_rule.json").read_text())
-    assert set(rule) == {"kind", "in", "out", "body"}
+    assert {"kind", "in", "out", "body", "source", "model", "prompt_hash"} <= set(rule)
+    assert rule["source"] == "llm" and rule["support_tasks"] == []
 
 
 def test_judge_transform_needs_three_tasks():

@@ -1,0 +1,50 @@
+{
+  "name": "llm_97f68e24d9",
+  "kind": "pred",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "d9fac9be",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [
+      "0dfd9992",
+      "3eda0437",
+      "5168d44c",
+      "6c434453",
+      "810b9b61",
+      "855e0971",
+      "b2862040",
+      "e5062a87",
+      "ef135b50"
+    ],
+    "new_vs_r04": [
+      "0dfd9992",
+      "3eda0437",
+      "5168d44c",
+      "6c434453",
+      "855e0971",
+      "e5062a87",
+      "ef135b50"
+    ],
+    "score": 8.5,
+    "length": 1,
+    "verdict": "covered",
+    "covered_by": "builtin selector"
+  },
+  "mainline": {
+    "name": "pred_aca02ddd",
+    "score": 8.5,
+    "tasks": 9,
+    "verdict": "covered",
+    "covered_by": "beyond covered cap",
+    "live_rank": null,
+    "enumerated": true,
+    "budget": 6390
+  }
+}

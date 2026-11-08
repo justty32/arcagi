@@ -1,0 +1,49 @@
+{
+  "kind": "transform",
+  "in": "grid",
+  "out": "grid",
+  "body": [
+    [
+      "crop_extract",
+      [
+        "subgrid",
+        [
+          "pred",
+          "4same",
+          [
+            "eq",
+            "has_hole",
+            1
+          ]
+        ]
+      ]
+    ],
+    [
+      "fill_extract",
+      [
+        "color",
+        [
+          "unique_color",
+          "4same"
+        ]
+      ]
+    ],
+    [
+      "resize_crop",
+      [
+        "const",
+        1
+      ],
+      [
+        "const",
+        1
+      ]
+    ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": [
+    "d9fac9be"
+  ]
+}

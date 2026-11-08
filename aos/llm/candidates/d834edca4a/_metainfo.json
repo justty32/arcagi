@@ -167,5 +167,15 @@
     "score": 81,
     "length": 3,
     "verdict": "live"
+  },
+  "mainline": {
+    "name": "formula_fb07e29e",
+    "score": 81,
+    "tasks": 81,
+    "verdict": "covered",
+    "covered_by": "beyond covered cap",
+    "live_rank": null,
+    "enumerated": true,
+    "budget": 8199
   }
 }

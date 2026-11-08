@@ -1,0 +1,3 @@
+{"task":"e7a25a18","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["delete_sel","4same","color",2],["move_sel","8multi","all",1,"up"],["move_sel","8multi","all",1,"left"],["upscale",2,2],["rot180"],["resize_crop",["const",29],["const",29]],["rot180"],["resize_crop",["lin","max_obj_w",2,2],["lin","max_obj_h",2,2]],["colormap",[[0,2]]]]}],
+"idea":"Output is the 2-colored frame whose interior is completely filled by the 2x2-quadrant color block scaled x2 (block size doubles, frame = 4k+2); built by removing the frame, parking the block in the corner, upscaling, padding 1 and recoloring the pad to 2.","missing":""}

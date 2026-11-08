@@ -1,0 +1,4 @@
+{"task":"de1cd16c","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["fill_extract",["color",["pred","4same",["and",["gt","size",4],["rank","size","max"]]]]],["resize_crop",["const",1],["const",1]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["recolor_from","4same","size",1,{"scope":"object","sel":["touching","4same"],"prop":"color"}],["fill_extract",["color",["pred","4same",["rank","size","max"]]]],["resize_crop",["const",1],["const",1]]]}
+],"idea":"The board is split into colored regions sprinkled with single noise dots; output is the color of the region containing the most noise dots.","missing":"An object attribute counting holes / contained objects (e.g. n_holes) so the region with the most noise dots can be selected via rank."}

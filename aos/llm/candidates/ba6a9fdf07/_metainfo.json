@@ -1,0 +1,21 @@
+{
+  "name": "llm_ba6a9fdf07",
+  "kind": "extract",
+  "source": "llm",
+  "status": "candidate",
+  "origin": [
+    {
+      "task": "d9fac9be",
+      "split": "training",
+      "model": "claude-opus-5-5",
+      "role": "component"
+    }
+  ],
+  "rescore": {
+    "support_tasks": [],
+    "new_vs_r04": [],
+    "score": 0,
+    "length": 5,
+    "verdict": "dropped"
+  }
+}

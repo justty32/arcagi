@@ -53,6 +53,7 @@ def cmd_record(args) -> int:
     notes = (
         {k: data.get(k) for k in ("idea", "missing")} if isinstance(data, dict) else {}
     )
+    prompt_hash = cd.prompt_hash()
     for rank, rule in enumerate(_rules(args.response)):
         res = vf.score(args.task, args.split, rule)
         made: list[str] = []
@@ -80,6 +81,7 @@ def cmd_record(args) -> int:
                 "tokens": args.tokens,
                 "seconds": args.seconds,
                 "candidates": made,
+                "prompt_hash": prompt_hash,
             }
             | notes,
         )
@@ -89,23 +91,26 @@ def cmd_record(args) -> int:
 
 
 def cmd_rescore(_args) -> int:
-    from .mainline import pred_verdict
+    from .mainline import formula_verdict, pred_verdict
     from .rescore import rescore
 
     rows = rescore()
-    preds = [r for r in rows if r["kind"] == "pred"]
     folders = {f.parent.name: f.parent for f in cd.all_folders()}
-    bodies = [
-        json.loads((folders[r["candidate"]] / "_rule.json").read_text())["body"]
-        for r in preds
-    ]
-    for row, exact in zip(preds, pred_verdict(bodies) if bodies else [], strict=True):
-        exact.pop("body")
-        row["mainline"] = exact
-        meta_path = folders[row["candidate"]] / "_metainfo.json"
-        meta = json.loads(meta_path.read_text())
-        meta["mainline"] = exact
-        meta_path.write_text(json.dumps(meta, indent=2) + "\n")
+    for kind, exact_fn in (("pred", pred_verdict), ("formula", formula_verdict)):
+        picked = [r for r in rows if r["kind"] == kind]
+        if not picked:
+            continue
+        bodies = [
+            json.loads((folders[r["candidate"]] / "_rule.json").read_text())["body"]
+            for r in picked
+        ]
+        for row, exact in zip(picked, exact_fn(bodies), strict=True):
+            exact.pop("body")
+            row["mainline"] = exact
+            meta_path = folders[row["candidate"]] / "_metainfo.json"
+            meta = json.loads(meta_path.read_text())
+            meta["mainline"] = exact
+            meta_path.write_text(json.dumps(meta, indent=2) + "\n")
     for row in rows:
         row["support_tasks"] = len(row["support_tasks"])
         row["new_vs_r04"] = len(row["new_vs_r04"])

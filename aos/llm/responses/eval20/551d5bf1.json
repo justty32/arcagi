@@ -1,0 +1,7 @@
+{"task":"551d5bf1","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[
+ ["local_rule","n8",[[0,0,1,0,0,0,0,1,0,7],[0,0,0,0,1,1,0,0,0,9]]],
+ ["fill_enclosed"],
+ ["extend_sel","4same","color",9,"up"],["extend_sel","4same","color",9,"down"],["extend_sel","4same","color",7,"left"],["extend_sel","4same","color",7,"right"],
+ ["colormap",[[7,8],[9,8],[10,8]]]]}
+],"idea":"Each 1-box is filled with 8; a one-cell gap in a box wall becomes 8 and shoots an 8 ray outward (perpendicular to the wall) to the border.","missing":""}

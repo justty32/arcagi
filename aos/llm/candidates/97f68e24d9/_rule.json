@@ -1,0 +1,24 @@
+{
+  "kind": "pred",
+  "in": "object",
+  "out": "bool",
+  "body": [
+    "eq",
+    "has_hole",
+    1
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": [
+    "0dfd9992",
+    "3eda0437",
+    "5168d44c",
+    "6c434453",
+    "810b9b61",
+    "855e0971",
+    "b2862040",
+    "e5062a87",
+    "ef135b50"
+  ]
+}

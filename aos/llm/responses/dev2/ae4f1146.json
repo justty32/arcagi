@@ -1,0 +1,3 @@
+{"task":"ae4f1146","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["colormap",[[8,0]]],["crop_extract",["subgrid",["largest","8same"]]],["colormap",[[0,8]]]]}
+],"idea":"Crop the 3x3 block containing the most 1s. Erase 8s, take the bbox of the largest 8-connected 1-object (it spans the whole block), and fill the non-1 cells back with 8.","missing":""}

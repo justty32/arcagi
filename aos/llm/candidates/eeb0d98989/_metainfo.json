@@ -247,5 +247,15 @@
     "length": 1,
     "verdict": "exists",
     "same_as": "formula_fbe415b1"
+  },
+  "mainline": {
+    "name": "formula_fbe415b1",
+    "score": 123,
+    "tasks": 123,
+    "verdict": "live",
+    "covered_by": null,
+    "live_rank": 1,
+    "enumerated": true,
+    "budget": 8199
   }
 }

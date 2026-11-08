@@ -1,0 +1,18 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": [
+    "color",
+    [
+      "unique_color",
+      "4same"
+    ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": [
+    "1f85a75f"
+  ]
+}

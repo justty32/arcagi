@@ -1,0 +1,4 @@
+{"task":"d0f5fe59","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["paint_count",["count",["all","8multi"]],0,"square"],["local_rule","n4",[[0,-1,0,-1,0,8],[0,0,-1,0,-1,8]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["paint_count",["count",["all","8multi"]],8,"square"]]}
+],"idea":"Count the 8-objects n; output an n x n grid of 0 with 8 on the main diagonal.","missing":"A primitive that draws the main diagonal (identity pattern) on an n x n canvas, or diagonal rays from a corner cell, is needed."}

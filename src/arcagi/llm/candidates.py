@@ -1,8 +1,9 @@
 """Candidate blocks from train-passing LLM rules (``aos/llm/candidates/<hash>/``).
 
-Each folder has ``_rule.json`` (the four-kind shell, exactly what a block in
-``aos/blocks/`` would hold) and ``_metainfo.json`` (provenance: ``source``
-``"llm"``, origin tasks, model; ``rescore`` adds training support). A passing
+Each folder has ``_rule.json`` (the four-kind shell ``kind`` / ``in`` / ``out``
+/ ``body`` plus ``source: "llm"``, ``model``, ``prompt_hash`` and the training
+``support_tasks`` that ``rescore`` fills in) and ``_metainfo.json``
+(provenance: origin tasks and roles; ``rescore`` adds its verdict). A passing
 transform also yields its inline sub-rules (extract bodies, predicate ASTs,
 formula bodies) as separate candidates, since those are the reusable parts.
 """
@@ -20,6 +21,14 @@ ROOT = LLM_ROOT / "candidates"
 
 def digest(kind: str, body: object) -> str:
     text = kind + ":" + json.dumps(body, separators=(",", ":"), sort_keys=True)
+    return hashlib.sha1(text.encode()).hexdigest()[:10]
+
+
+def prompt_hash() -> str:
+    """Version of the prompt template (solver instructions + DSL reference)."""
+    text = "".join(
+        (LLM_ROOT / "prompts" / name).read_text() for name in ("solver.md", "dsl.md")
+    )
     return hashlib.sha1(text.encode()).hexdigest()[:10]
 
 
@@ -86,7 +95,11 @@ def write(
     folder.mkdir(parents=True, exist_ok=True)
     rule = folder / "_rule.json"
     if not rule.exists():
-        rule.write_text(json.dumps(shell(kind, body), indent=2) + "\n")
+        extra = {"source": "llm", "model": model, "prompt_hash": prompt_hash()}
+        rule.write_text(
+            json.dumps(shell(kind, body) | extra | {"support_tasks": []}, indent=2)
+            + "\n"
+        )
     meta_path = folder / "_metainfo.json"
     meta = (
         json.loads(meta_path.read_text())

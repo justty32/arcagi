@@ -1,0 +1,1 @@
+{"task":"d9fac9be","rules":[{"kind":"transform","in":"grid","out":"grid","body":[["crop_extract",["subgrid",["pred","4same",["eq","has_hole",1]]]],["fill_extract",["color",["unique_color","4same"]]],["resize_crop",["const",1],["const",1]]]}],"idea":"Find the 3x3 ring (object with a hole); output is the color of the single cell at its center.","missing":""}

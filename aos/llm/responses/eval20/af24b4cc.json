@@ -1,0 +1,4 @@
+{"task":"af24b4cc","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["fill_cells","majority"],["rot180"],["resize_crop",["const",12],["const",11]],["rot180"],["resize_crop",["const",16],["const",15]],["downscale",4,3]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["rot180"],["resize_crop",["const",12],["const",11]],["rot180"],["resize_crop",["const",16],["const",15]],["downscale",4,3]]}],
+"idea":"Each 3x2 cell of the 0-separated 2x3 board becomes one pixel of its majority color (counting all colors in the cell); the result keeps a 0 frame (pad with bg so cells land on a regular stride, then downscale).","missing":"a cell-majority mode that counts every color in the cell (fill_cells/cells_to_pixels majority exclude the inside-cell majority color as cell bg, so the true majority is lost)"}

@@ -1,0 +1,5 @@
+{"task":"2037f2c7","rules":[
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_bbox"],["split_overlay","v","xor"],["crop_bbox"],["colormap",[[10,8]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_bbox"],["split_overlay","h","xor"],["crop_bbox"],["colormap",[[10,8]]]]},
+{"kind":"transform","in":"grid","out":"grid","body":[["crop_object","8multi","largest"],["colormap",[[1,8],[2,8],[3,8],[4,8],[6,8],[7,8]]]]}
+],"idea":"Two copies of the same pattern appear at different positions, one with a damaged region; the output marks with 8 the cells where the damaged copy differs from the intact one, cropped to their bbox.","missing":"aligning two objects by their own bboxes and diffing them cell by cell (object-pair overlay), since split_overlay needs exactly aligned halves"}

@@ -17,5 +17,12 @@
         "prop": "dir_to"
       }
     ]
+  ],
+  "source": "llm",
+  "model": "claude-opus-5-5",
+  "prompt_hash": "7874e9570e",
+  "support_tasks": [
+    "2c608aff",
+    "d43fd935"
   ]
 }
