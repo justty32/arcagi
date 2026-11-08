@@ -1,9 +1,9 @@
 {
   "name": "formula_c098336c",
   "kind": "formula",
-  "doc": "Generated integer formula [\"max\", \"h\", \"n_color\"]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"max\", \"h\", \"n_color\"]",
   "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/formula",

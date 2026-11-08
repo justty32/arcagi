@@ -1,0 +1,18 @@
+{
+  "name": "formula_014e6829",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin2\", \"n_shape\", 1, \"extract_a5d352a5\", 1]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 4,
+  "targets": [
+    "w_out"
+  ],
+  "support_tasks": [
+    "234bbc79"
+  ]
+}

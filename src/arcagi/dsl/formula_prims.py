@@ -144,9 +144,13 @@ FORMULA_PRIMS: dict[str, Primitive] = {
 
 
 def install(rules: dict[str, object]) -> None:
-    """Register live formula blocks (name -> ``_rule.json``) as the library."""
+    """Register live formula blocks (name -> ``_rule.json``) as the library.
+
+    Extract features a rule reads (its ``extracts``) join ``features.EXTRA``.
+    """
     bodies, scores = {}, {}
     for name, rule in rules.items():
+        fm.adopt(rule)  # its extract features, before validating the body
         body = rule.get("body") if isinstance(rule, dict) else None
         if fm.validate(body):
             bodies[name] = body

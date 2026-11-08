@@ -4,7 +4,7 @@
   "doc": "Generated integer formula [\"min\", \"w\", \"n_fg\"]",
   "params": [],
   "cost": 1,
-  "status": "covered",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 76,

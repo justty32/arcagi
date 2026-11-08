@@ -1,0 +1,18 @@
+{
+  "name": "formula_421278fe",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"mulc\", \"extract_7b88caae\", -1, \"extract_a1a29247\"]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 5,
+  "targets": [
+    "w_out"
+  ],
+  "support_tasks": [
+    "5daaa586"
+  ]
+}

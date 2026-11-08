@@ -1,0 +1,19 @@
+{
+  "name": "formula_505394c0",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"extract_a5d352a5\", 1, 0]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 2,
+  "length": 1,
+  "targets": [
+    "w_out"
+  ],
+  "support_tasks": [
+    "90c28cc7",
+    "bd4472b8"
+  ]
+}

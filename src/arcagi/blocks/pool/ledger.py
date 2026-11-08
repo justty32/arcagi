@@ -1,6 +1,6 @@
 """node-pool style accounts for blocks: one full eval report = one epoch.
 
-Run: ``uv run python -m arcagi.blocks.pool --report R.json --epoch N --split S``.
+CLI in ``__main__``; budget shares and ``allocate`` in ``budget``.
 
 A solved task pays ``price``: the top keeps ``retain``, blocks share the rest by
 static references in the selected program; a macro passes ``macro_passdown`` on
@@ -10,12 +10,11 @@ a ``pred_*`` parameter) ``generator_cut`` to its generator. Spend = block_calls 
 generator nodes; ``rent`` per epoch. ``retire_after`` zero-dividend epochs in a
 row: suggested retirement unless ``essential``; really retired (status, ledger)
 if generated and ``covered``. ``generator_budget`` (net shares, floor
-``generator_floor``) is only recorded. Near misses become ``_gradients.jsonl``
-letters. Files: ``config.json``, ``wallets.json``, ``ledger.jsonl``
-(append-only), ``epochs/<n>.json``.
+``generator_floor``) feeds ``budget.allocate`` for the next enumeration.
+Near misses become ``_gradients.jsonl`` letters. Files: ``config.json``,
+``wallets.json``, ``ledger.jsonl`` (append-only), ``epochs/<n>.json``.
 """
 
-import argparse
 import hashlib
 import json
 from collections import Counter
@@ -23,8 +22,9 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
-from . import REPO_ROOT, read_json, write_json
-from .catalog import Catalog, load_catalog, load_macro_program
+from .. import read_json, write_json
+from ..catalog import Catalog, load_catalog, load_macro_program
+from .budget import shares
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "price_per_task": 1000,
@@ -39,6 +39,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "macro_passdown": 0.5,
     "generator_rate": 1.0,
     "generator_floor": 0.2,
+    "generator_total": 25000,
 }
 LETTER_KEYS = ("program", "train_correct", "train_total")
 
@@ -106,19 +107,6 @@ def _generator_meta(catalog: Catalog) -> dict[str, dict]:
             meta = read_json(catalog.root / name / "_metainfo.json", {})
             found[name] = meta if isinstance(meta, dict) else {}
     return found
-
-
-def _budget(rows: dict[str, dict], gens: list[str], floor: float) -> dict:
-    """Next-round budget shares by positive net income, each at least ``floor``."""
-    floor = min(floor, 1 / len(gens)) if gens else 0
-    net = {n: rows[n]["dividend"] - rows[n]["spend"] for n in gens}
-    pos = sum(max(v, 0.0) for v in net.values())
-    part = {n: max(v, 0.0) / pos if pos else 1 / len(gens) for n, v in net.items()}
-    rest = 1 - floor * len(gens)
-    return {
-        n: {"net": round(net[n], 6), "share": round(floor + rest * part[n], 6)}
-        for n in gens
-    }
 
 
 def _near_misses(trace: dict, limit: int) -> list[dict]:
@@ -205,7 +193,7 @@ def settle(
     summary["conservation_ok"] &= abs(income - retained - sum(paid.values())) < 1e-3
     summary |= {"essential": ess, "suggest_retire": idle}
     summary["retire"] = [b.name for b in gone if b.status == "covered"]
-    budget = _budget(blocks_out, sorted(gens), config["generator_floor"])
+    budget = shares(blocks_out, sorted(gens), config["generator_floor"])
     summary |= {"generator_budget": budget, "blocks": blocks_out}
     return summary, new_wallets, letters
 
@@ -277,26 +265,3 @@ def run_epoch(
         path = catalog.blocks[name].path / "_metainfo.json"
         write_json(path, {**(read_json(path, {}) or {}), "status": "retired"})
     return summary
-
-
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Settle one node-pool epoch.")
-    parser.add_argument("--report", type=Path, required=True)
-    parser.add_argument("--epoch", type=int, required=True)
-    parser.add_argument("--split", required=True)
-    parser.add_argument("--pool", type=Path, default=REPO_ROOT / "aos" / "pool")
-    parser.add_argument("--blocks", type=Path, default=None)
-    args = parser.parse_args(argv)
-    try:
-        summary = run_epoch(args.report, args.epoch, args.split, args.pool, args.blocks)
-    except EpochError as exc:
-        print(f"arcagi.blocks.pool: {exc}")
-        return 2
-    keys = ("epoch", "income", "retained", "dividends_total", "conservation_ok")
-    keys += ("suggest_retire", "retire", "generator_budget", "gradients_written")
-    print(json.dumps({k: summary.get(k) for k in keys}, ensure_ascii=False))
-    return 0
-
-
-if __name__ == "__main__":
-    raise SystemExit(main())

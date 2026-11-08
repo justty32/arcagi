@@ -1,0 +1,27 @@
+{
+  "name": "formula_4e51b3eb",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"max\", \"cnt_3\", \"extract_5fbdaee4\"]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 7,
+  "length": 3,
+  "targets": [
+    "h_out",
+    "rep_x",
+    "rep_y",
+    "w_out"
+  ],
+  "support_tasks": [
+    "72ca375d",
+    "7447852a",
+    "ac0a08a4",
+    "ba26e723",
+    "d0f5fe59",
+    "d406998b",
+    "feca6190"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "max",
+    "w",
+    "extract_dac30f73"
+  ],
+  "score": 120,
+  "extracts": {
+    "extract_dac30f73": [
+      "count",
+      [
+        "pred",
+        "4multi",
+        "pred_1731e9f2"
+      ]
+    ]
+  }
+}

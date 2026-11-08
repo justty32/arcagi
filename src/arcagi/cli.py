@@ -106,9 +106,14 @@ def _run(args: argparse.Namespace) -> int:
             )
             report = score_predictions(tasks, predictions)
         else:
+            if args.workers > 1 and args.timeout is None and not args.external:
+                raise ValueError("--workers > 1 requires --timeout or --external")
             with redirect_stdout(sys.stderr):
                 report = evaluate_tasks(
-                    tasks, _solver(args), solver_name=_solver_name(args)
+                    tasks,
+                    _solver(args),
+                    solver_name=_solver_name(args),
+                    workers=args.workers,
                 )
             if args.traces:
                 _write_traces(report, args.traces)

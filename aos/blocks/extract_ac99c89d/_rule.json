@@ -1,0 +1,13 @@
+{
+  "kind": "extract",
+  "in": "grid",
+  "out": "json",
+  "body": {
+    "scope": "object",
+    "sel": [
+      "nearest_other_color",
+      "8multi"
+    ],
+    "prop": "dir_to"
+  }
+}

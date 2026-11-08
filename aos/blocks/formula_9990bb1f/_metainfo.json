@@ -1,0 +1,22 @@
+{
+  "name": "formula_9990bb1f",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"extract_6cf118fc\", 1, 0]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 3,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "rep_x",
+    "rep_y"
+  ],
+  "support_tasks": [
+    "780d0b14",
+    "ac0a08a4",
+    "feca6190"
+  ]
+}

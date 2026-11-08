@@ -1,0 +1,20 @@
+{
+  "name": "extract_04a698eb",
+  "kind": "extract",
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned_same_color\", \"4same\"], \"prop\": \"dir_to\"}",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 6,
+  "length": 4,
+  "support_tasks": [
+    "1a07d186",
+    "22eb0ac0",
+    "40853293",
+    "6855a6e4",
+    "d687bc17",
+    "ded97339"
+  ]
+}

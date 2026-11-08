@@ -1,9 +1,9 @@
 {
   "name": "formula_0832d6a3",
   "kind": "formula",
-  "doc": "Generated integer formula [\"lin\", \"n_shape\", 1, 1]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"n_shape\", 1, 1]",
   "status": "live",
   "counter_uses": 1,
   "generator": "_gen/formula",

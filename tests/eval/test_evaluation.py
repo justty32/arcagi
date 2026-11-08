@@ -125,3 +125,22 @@ def test_unknown_external_prediction_ids_rejected() -> None:
         score_predictions([make_task("a", [1])], {"typo": [[[1]]]})
     with pytest.raises(ValueError, match="mapping"):
         score_predictions([make_task("a", [1])], [])
+
+
+def test_parallel_workers_keep_order_and_content() -> None:
+    import time
+
+    def solver(task: SolverTask):
+        time.sleep(0.05 if task.task_id == "a" else 0.0)  # finish out of order
+        return [task.test[0]] * len(task.test)
+
+    tasks = [make_task("a", [1]), make_task("b", [2, 1]), make_task("c", [1])]
+    sequential = evaluate_tasks(tasks, solver)
+    parallel = evaluate_tasks(tasks, solver, workers=3)
+    for report in (sequential, parallel):
+        for record in report["tasks"]:
+            record.pop("elapsed_seconds")
+    assert parallel == sequential
+    assert [t["task_id"] for t in parallel["tasks"]] == ["a", "b", "c"]
+    with pytest.raises(ValueError, match="workers"):
+        evaluate_tasks(tasks, solver, workers=0)

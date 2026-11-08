@@ -1,9 +1,9 @@
 {
   "name": "formula_759b1983",
   "kind": "formula",
-  "doc": "Generated integer formula [\"lin\", \"w\", 2, 0]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"w\", 2, 0]",
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",

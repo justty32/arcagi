@@ -1,0 +1,21 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "min",
+    "max_obj_h",
+    "extract_d19a47ba"
+  ],
+  "score": 10,
+  "extracts": {
+    "extract_d19a47ba": [
+      "size",
+      [
+        "pred",
+        "8same",
+        "pred_58662886"
+      ]
+    ]
+  }
+}

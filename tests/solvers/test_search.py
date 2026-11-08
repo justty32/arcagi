@@ -38,3 +38,19 @@ def test_unsolvable_task_echoes_inputs_without_selection() -> None:
     result = solve(task.to_solver_task())
     assert result.predictions == [((1,),)]
     assert result.trace["selected"] is None
+
+
+def test_shape_hint_defers_last_depth_fits_without_changing_solutions() -> None:
+    task = _task(lambda grid: g.recolor(g.flip_lr(grid), {1: 9})).to_solver_task()
+    plain = search(task, max_depth=1)
+    wrong = search(task, max_depth=1, shape_hint=[(1, 1)])  # nothing fits: refit
+    assert wrong.deferred > 0
+    assert _ranked(wrong) == _ranked(plain)
+    right = search(task, max_depth=1, shape_hint=[(2, 2)])
+    assert right.deferred == 0
+    assert _ranked(right) == _ranked(plain)
+
+
+def _ranked(result) -> list:
+    """Solutions in order of discovery, without the absolute order numbers."""
+    return [(c, p, t) for c, _o, p, t in sorted(result.solutions, key=lambda s: s[1])]

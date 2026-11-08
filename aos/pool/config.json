@@ -24,5 +24,6 @@
   ],
   "macro_passdown": 0.5,
   "generator_rate": 1.0,
-  "generator_floor": 0.2
+  "generator_floor": 0.2,
+  "generator_total": 25000
 }

@@ -1,0 +1,27 @@
+{
+  "name": "formula_d7253bf1",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"extract_96a7b0fb\", 1, 0]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 9,
+  "length": 1,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "3bd67248",
+    "67a423a3",
+    "7447852a",
+    "a416b8f3",
+    "ba26e723",
+    "bd4472b8",
+    "beb8660c",
+    "d406998b",
+    "d631b094"
+  ]
+}

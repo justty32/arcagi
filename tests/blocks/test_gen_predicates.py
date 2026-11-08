@@ -138,3 +138,11 @@ def test_pool_generator_cut_conserves(tmp_path: Path) -> None:
     assert rows[pred]["dividend"] == 320 and rows[GENERATOR]["dividend"] == 80
     ledger = (tmp_path / "pool" / "ledger.jsonl").read_text()
     assert GENERATOR in ledger
+
+
+def test_budget_caps_enumeration() -> None:
+    segs = segments([_task("a")])
+    full = score_candidates(segs, 2)
+    capped = score_candidates(segs, 2, budget=300)
+    assert len(capped) == 300 < len(full)
+    assert [c.body for c in capped] == [c.body for c in full[:300]]

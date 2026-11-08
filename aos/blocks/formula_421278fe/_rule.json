@@ -1,0 +1,30 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "mulc",
+    "extract_7b88caae",
+    -1,
+    "extract_a1a29247"
+  ],
+  "score": 1,
+  "extracts": {
+    "extract_7b88caae": [
+      "count",
+      [
+        "pred",
+        "4same",
+        "pred_8439dd0b"
+      ]
+    ],
+    "extract_a1a29247": [
+      "count",
+      [
+        "pred",
+        "4same",
+        "pred_1731e9f2"
+      ]
+    ]
+  }
+}

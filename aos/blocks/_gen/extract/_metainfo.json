@@ -9,15 +9,16 @@
   "status": "live",
   "counter_uses": 0,
   "produces": "extract",
-  "gen_seconds": 7.98,
+  "gen_seconds": 8.49,
   "last_run": {
     "split": "training",
     "tasks": 400,
-    "scored": 1500,
-    "live": 44,
+    "scored": 1572,
+    "object_scored": 72,
+    "live": 50,
     "covered": 40,
     "over_cap": 0,
-    "dropped": 556,
-    "gen_seconds": 7.98
+    "dropped": 580,
+    "gen_seconds": 8.49
   }
 }

@@ -1,9 +1,9 @@
 {
   "name": "formula_fbe415b1",
   "kind": "formula",
-  "doc": "Generated integer formula [\"lin\", \"w\", 1, 0]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"w\", 1, 0]",
   "status": "live",
   "counter_uses": 2,
   "generator": "_gen/formula",

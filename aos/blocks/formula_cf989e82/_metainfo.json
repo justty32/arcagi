@@ -4,7 +4,7 @@
   "doc": "Generated integer formula [\"lin\", \"n_color\", 1, -1]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 2,

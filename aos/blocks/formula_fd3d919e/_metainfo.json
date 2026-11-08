@@ -1,9 +1,9 @@
 {
   "name": "formula_fd3d919e",
   "kind": "formula",
-  "doc": "Generated integer formula [\"mul\", \"n_obj\", \"max_obj_size\"]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"mul\", \"n_obj\", \"max_obj_size\"]",
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",

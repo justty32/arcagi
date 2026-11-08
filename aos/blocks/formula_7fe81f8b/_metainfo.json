@@ -1,9 +1,9 @@
 {
   "name": "formula_7fe81f8b",
   "kind": "formula",
-  "doc": "Generated integer formula [\"max\", \"w\", \"n_shape\"]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"max\", \"w\", \"n_shape\"]",
   "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/formula",

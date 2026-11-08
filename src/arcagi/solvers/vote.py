@@ -12,8 +12,9 @@ from collections.abc import Collection, Sequence
 from dataclasses import dataclass, field
 
 from arcagi.dsl import grid as g
+from arcagi.dsl.formula import predict_shapes
 from arcagi.dsl.program import Program
-from arcagi.tasks import Grid
+from arcagi.tasks import Grid, SolverTask
 
 LEARNERS = frozenset({"colormap", "object_colormap", "local_rule"})
 LEARNER_WEIGHT = 0.5
@@ -45,6 +46,15 @@ def fits(tests: Sequence[Grid], shape_hint: Sequence[tuple[int, int]]) -> bool:
     if len(tests) != len(shape_hint):
         return False
     return all(g.shape(t) == tuple(s) for t, s in zip(tests, shape_hint, strict=True))
+
+
+def predict_hint(task: SolverTask) -> list[tuple[int, int]] | None:
+    """Test output shapes predicted by the formula blocks (None when unknown)."""
+    pairs = [(e.input, e.output) for e in task.train]
+    try:
+        return predict_shapes(pairs, list(task.test))
+    except (ValueError, KeyError, ZeroDivisionError):
+        return None
 
 
 def choose(

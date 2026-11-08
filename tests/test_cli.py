@@ -293,3 +293,11 @@ def test_eval_external_rejects_bad_params(task_path: Path, capsys) -> None:
     args = ["eval", "--tasks-dir", str(task_path.parent), "--external", "true"]
     assert main([*args, "--params", "[1]"]) == 2
     assert "JSON object" in capsys.readouterr().err
+
+
+def test_eval_workers_need_subprocess_isolation(task_path: Path, capsys) -> None:
+    args = ["eval", "--tasks-dir", str(task_path.parent), "--workers", "2"]
+    assert main(args) == 2
+    assert "--workers" in capsys.readouterr().err
+    assert main([*args, "--timeout", "30"]) == 0
+    assert json.loads(capsys.readouterr().out)["tasks_correct"] == 1

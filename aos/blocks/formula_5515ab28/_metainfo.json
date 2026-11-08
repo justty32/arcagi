@@ -1,9 +1,9 @@
 {
   "name": "formula_5515ab28",
   "kind": "formula",
-  "doc": "Generated integer formula [\"lin\", \"h\", 1, -1]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"h\", 1, -1]",
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",

@@ -1,0 +1,15 @@
+{
+  "name": "extract_87186985",
+  "kind": "extract",
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"largest\", \"4same\"], \"prop\": \"color\"}",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 1,
+  "length": 3,
+  "support_tasks": [
+    "2bcee788"
+  ]
+}

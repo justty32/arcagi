@@ -1,0 +1,13 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "lin2",
+    "n_obj8",
+    -1,
+    "max_obj_h",
+    1
+  ],
+  "score": 1
+}

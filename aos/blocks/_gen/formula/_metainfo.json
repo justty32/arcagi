@@ -1,7 +1,7 @@
 {
   "name": "_gen/formula",
   "kind": "generator",
-  "doc": "Enumerates <=1-op, <=2-feature integer formulas for output size / repeat counts; scored on training.",
+  "doc": "Enumerates <=1-op, <=2-feature integer formulas (features include top extract blocks), then two-layer ones on unfit problems, for output size / repeat counts; scored on training.",
   "params": [
     "live_cap"
   ],
@@ -9,16 +9,21 @@
   "status": "live",
   "counter_uses": 0,
   "produces": "formula",
-  "gen_seconds": 0.62,
+  "gen_seconds": 2.53,
   "last_run": {
     "split": "training",
+    "budget": 11993,
     "tasks": 400,
     "problems": 366,
-    "scored": 1620,
-    "live": 24,
+    "extracts": 20,
+    "scored": 7290,
+    "one_layer": 4290,
+    "two_layer": 3000,
+    "unfit_problems": 30,
+    "live": 35,
     "covered": 60,
     "over_cap": 0,
-    "dropped": 975,
-    "gen_seconds": 0.62
+    "dropped": 5134,
+    "gen_seconds": 2.53
   }
 }

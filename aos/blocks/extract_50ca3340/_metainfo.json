@@ -4,7 +4,7 @@
   "doc": "Generated extraction [\"color\", [\"pred\", \"8multi\", \"pred_328616eb\"]]",
   "params": [],
   "cost": 1,
-  "status": "covered",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/extract",
   "score": 7,

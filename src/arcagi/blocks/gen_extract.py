@@ -1,17 +1,16 @@
 """Generator of extract blocks: enumerate extractions, score on training.
 
 Run: ``uv run python -m arcagi.blocks.gen_extract --split training [--dry-run]``.
-Candidates are ``[prop, [sel, conn, *args]]`` (see ``arcagi.dsl.extract``) with
-sel in largest / smallest / unique_color / unique_shape / all / color c / live
-pred_* blocks and prop in ``SCORED``. A candidate *supports* a task when, on
-every train pair, its value equals one output property, the same one for all
-pairs: the output itself (subgrid / object), the output's only (foreground)
-color, or the output height / width / foreground cell count (size / count).
-Color / number targets need >= 2 distinct values; same-shape tasks score color
-only. Score = supported tasks; evaluation tasks never take part. Score 0 is not
-written; the shortest of a support set (or of a superset, no longer) is live,
-the rest ``covered``; at most ``--live-cap`` live. Writes ``extract_<hash>/``
-and ``_gen/extract/`` (generator node) under the blocks root."""
+Grid scope: ``[prop, [sel, conn, *args]]`` (``arcagi.dsl.extract``), sel in
+largest / smallest / unique_color / unique_shape / all / color c / live pred_*,
+prop in ``SCORED``; it *supports* a task when on every train pair its value is
+one output property (the output grid, its only fg color, height / width / fg
+cell count; colors / numbers need >= 2 values; same-shape tasks: color only).
+Object scope (``arcagi.objrule.gen``): bodies scored on per-object targets of
+same-shape tasks; their count is capped by the pool budget. Score = supported
+tasks (training only). Score 0 is not written; the shortest of a support set
+(or of a superset, no longer) is live, the rest ``covered``; at most
+``--live-cap`` live. Writes ``extract_<hash>/`` and ``_gen/extract/``."""
 
 import argparse
 import hashlib
@@ -26,6 +25,7 @@ from arcagi.dsl import extract as ex
 from arcagi.dsl import grid as g
 from arcagi.dsl import predicates as pr
 from arcagi.dsl.objects_props import CONNS
+from arcagi.objrule import gen as objgen
 from arcagi.tasks import Grid, Task, load_tasks
 
 from . import REPO_ROOT, default_blocks_root, read_json, write_json
@@ -74,16 +74,15 @@ def targets(pairs: Sequence[tuple[Grid, Grid]], prop: str) -> list[list]:
             continue
         h, w = g.shape(out)
         if prop == "color":
-            row = {}
+            row: dict = {}
+            rows.append(row)
             if len(_fg(inp, g.background(inp))) < 2:  # nothing to choose from
-                rows.append(row)
                 continue
             fg = _fg(out, g.background(inp))
             if len(fg) == 1:
                 row["fg_color"] = next(iter(fg))
             if len(set(g.color_counts(out))) == 1:
                 row["uniform"] = out[0][0]
-            rows.append(row)
         else:
             obg = g.background(out)
             fg_cells = sum(v != obg for r in out for v in r)
@@ -101,7 +100,7 @@ def supports(values: Sequence[object], rows: Sequence[dict], prop: str) -> bool:
 
 @dataclass
 class Candidate:
-    body: list
+    body: list | dict  # dict: object-scope body
     tasks: frozenset[str]
     order: int
 
@@ -121,9 +120,7 @@ class Candidate:
 
 def _task_pairs(task: Task) -> list[tuple[Grid, Grid]] | None:
     pairs = [(e.input, e.output) for e in task.train]
-    if any(o is None for _, o in pairs):
-        return None
-    return pairs  # type: ignore[return-value]
+    return None if any(o is None for _, o in pairs) else pairs  # type: ignore[return-value]
 
 
 def score_candidates(tasks: Sequence[Task], sels: Sequence[list]) -> list[Candidate]:
@@ -274,22 +271,25 @@ def main(argv: list[str] | None = None) -> int:
     nested = args.data_root / "data" / args.split
     tasks = load_tasks(nested if nested.is_dir() else args.data_root / args.split)
     tasks = tasks[: args.limit] if args.limit else tasks
-    preds = load_catalog(root).predicates()
-    pr.install(preds)
+    pr.install(preds := load_catalog(root).predicates())
     cands = score_candidates(tasks, selectors(sorted(preds)))
+    n_grid = len(cands)
+    bodies = objgen.all_bodies()[: objgen.budget(GENERATOR, n_grid)]
+    for body, ids in objgen.score(tasks, bodies):
+        cands.append(Candidate(body, ids, len(cands)))
     verdict = judge(cands, args.live_cap)
     stats = {
         "split": args.split,
         "tasks": len(tasks),
         "scored": len(cands),
+        "object_scored": len(cands) - n_grid,
         "live": len(verdict["live"]),
         "covered": len(verdict["covered"]),
         "over_cap": len(verdict["over_cap"]),
         "dropped": len(verdict["dropped"]),
         "gen_seconds": round(time.monotonic() - start, 2),
     }
-    if not args.dry_run:
-        write_blocks(root, verdict, stats)
+    _ = args.dry_run or write_blocks(root, verdict, stats)
     print(json.dumps(stats))
     for c in verdict["live"][:5]:
         print(f"{c.name} {c.score} {json.dumps(c.body)}")

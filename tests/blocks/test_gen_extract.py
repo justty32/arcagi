@@ -69,3 +69,26 @@ def test_judge_and_write(tmp_path) -> None:
     old = json.loads((tmp_path / "extract_old" / "_metainfo.json").read_text())
     assert old["status"] == "retired"
     assert list(load_catalog(tmp_path).rules("extract")) == [short.name]
+
+
+def test_object_scope_scoring_and_write(tmp_path) -> None:
+    from arcagi.objrule import gen as objgen
+
+    pairs = [
+        ("553000 550000 000000 055400", "333000 330000 000000 044400"),
+        ("255000 000000 000550 000556", "222000 000000 000660 000666"),
+    ]
+    train = tuple(Example(grid(a), grid(b)) for a, b in pairs)
+    task = Task("r", train, (Example(grid(pairs[0][0])),))
+    bodies = objgen.all_bodies()
+    scored = dict((json.dumps(b), ids) for b, ids in objgen.score([task], bodies))
+    hit = {"scope": "object", "sel": ["nearest", "4same"], "prop": "color"}
+    assert scored[json.dumps(hit)] == {"r"}
+    assert scored[json.dumps({**hit, "prop": "dir_to"})] == frozenset()
+    assert objgen.budget("_gen/none", 0) >= 0
+    cand = Candidate(hit, frozenset({"r"}), 0)
+    verdict = judge([cand])
+    write_blocks(tmp_path, verdict, {"gen_seconds": 0.1})
+    rule = json.loads((tmp_path / cand.name / "_rule.json").read_text())
+    assert rule["body"]["scope"] == "object"
+    assert list(load_catalog(tmp_path).rules("extract")) == [cand.name]

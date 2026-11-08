@@ -1,0 +1,18 @@
+{
+  "name": "extract_713b1328",
+  "kind": "extract",
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"largest\", \"4same\"], \"prop\": \"dir_to\"}",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 3,
+  "support_tasks": [
+    "2c608aff",
+    "855e0971",
+    "a48eeaf7",
+    "d43fd935"
+  ]
+}

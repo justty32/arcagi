@@ -110,3 +110,40 @@ def test_block_entry_cli(tmp_path: Path) -> None:
     )
     assert verdict["live"][0].body == ["lin", "h", 2, 0]
     assert int(out.stdout) == 4
+
+
+def _sum(tid: str) -> Task:
+    """h_out = h + w (no one-layer body: needs the two-layer ``lin2``)."""
+    pairs = [("11", "1 1 1"), ("11 11", "1 1 1 1"), ("1 1 1", "1 1 1 1")]
+    pairs += [("1111 1111", "1 1 1 1 1 1")]
+    train = tuple(Example(grid(a), grid(b)) for a, b in pairs)
+    return Task(tid, train, (Example(grid("1")),))
+
+
+def test_two_layer_only_on_unfit_problems_and_budget() -> None:
+    verdict, stats = run([_double("a"), _sum("s")], budget=5000)
+    assert stats["two_layer"] > 0 and stats["unfit_problems"] == 1
+    assert stats["one_layer"] + stats["two_layer"] <= 5000
+    live = {json.dumps(c.body): c for c in verdict["live"]}
+    two = [c for c in live.values() if c.body[0] in ("lin2", "mulc")]
+    assert two and all(c.tasks == {"s"} for c in two)
+    assert json.dumps(["lin2", "h", 1, "w", 1]) in live
+    _, small = run([_double("a"), _sum("s")], budget=100)
+    assert small["one_layer"] + small["two_layer"] == 100
+
+
+def test_extract_features_reach_the_rule(tmp_path: Path) -> None:
+    # w_out = size of the largest object (an extract feature), not a base one.
+    pairs = [("100 022 000", "11"), ("333 000 000", "111"), ("100 000 000", "1")]
+    train = tuple(Example(grid(a), grid(b)) for a, b in pairs)
+    task = Task("x", train, (Example(grid("1")),))
+    ext = {"extract_aaaa0001": ["size", ["largest", "4same"]]}
+    verdict, stats = run([task], extracts=ext)
+    assert stats["extracts"] == 1
+    # max_obj_size says the same, so the extract body is covered by it.
+    kept = verdict["live"] + [c for c, _ in verdict["covered"]]
+    hit = [c for c in kept if c.body == ["lin", "extract_aaaa0001", 1, 0]]
+    assert hit and hit[0].extracts == ext
+    write_blocks(tmp_path, verdict, stats)
+    rule = json.loads((tmp_path / hit[0].name / "_rule.json").read_text())
+    assert rule["extracts"] == ext

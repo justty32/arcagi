@@ -87,6 +87,12 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument(
         "--traces", type=Path, help="Write one JSONL line per task with its trace"
     )
+    evaluate.add_argument(
+        "--workers",
+        type=_positive_int,
+        default=1,
+        help="Tasks run at once (needs --timeout or --external); report order kept",
+    )
     score = commands.add_parser(
         "score", help="Score externally produced predictions JSON"
     )

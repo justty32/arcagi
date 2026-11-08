@@ -1,9 +1,9 @@
 {
   "name": "formula_4d8a3257",
   "kind": "formula",
-  "doc": "Generated integer formula [\"lin\", \"cnt_2\", 1, 2]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"cnt_2\", 1, 2]",
   "status": "live",
   "counter_uses": 0,
   "generator": "_gen/formula",

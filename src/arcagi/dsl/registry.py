@@ -34,6 +34,11 @@ for _module, _table, _kind in (
     if hasattr(_mod, "install"):
         _mod.install(CATALOG.rules(_kind))
     ALL.update(getattr(_mod, _table))
+# Round 4: per-object rules take each object's parameter from an object-scope
+# extract block (``arcagi.objrule``); live object blocks arrive via extract_prims.
+from arcagi.objrule import OBJRULE_PRIMS  # noqa: E402
+
+ALL.update(OBJRULE_PRIMS)
 # Object selectors widen the tree a lot; they are only tried as the first step.
 FIRST_STEP_ONLY = frozenset(OBJECTS)
 

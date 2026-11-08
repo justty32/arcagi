@@ -1,8 +1,7 @@
-"""Round-1 DSL search solver: breadth-first program enumeration with tracing.
+"""DSL search solver: breadth-first program enumeration with tracing.
 
-Run: nice -n 19 uv run arcagi eval --split evaluation \\
-         --solver arcagi.solvers.search:solve --name dsl-search-r01 --timeout 10 \\
-         --output artifacts/dsl-eval.json --traces artifacts/dsl-eval.jsonl
+Run: uv run arcagi eval --split evaluation --solver arcagi.solvers.search:solve \\
+         --timeout 40 --workers 8 --output artifacts/dsl-eval.json
 
 Enumerates programs from ``arcagi.dsl.primitives`` up to ``MAX_DEPTH`` steps,
 deduplicates by observational equivalence (identical intermediate train grids),
@@ -18,7 +17,6 @@ from dataclasses import dataclass, field
 
 from arcagi.dsl import background as bgc
 from arcagi.dsl import grid as g
-from arcagi.dsl.formula import predict_shapes
 from arcagi.dsl.learners import (
     apply_colormap,
     apply_local_rule,
@@ -31,16 +29,17 @@ from arcagi.dsl.registry import FIRST_STEP_ONLY, PRIMITIVES
 from arcagi.tasks import Grid, SolverTask
 
 from .trace import SolverResult, TraceRecorder
-from .vote import choose
+from .vote import choose, fits, predict_hint
 
 MAX_DEPTH = 3
-TIME_BUDGET = 5.0
-MAX_NODES = 20000
+TIME_BUDGET = 20.0
+MAX_NODES = 100000
 MAX_SOLUTIONS = 200  # whole first solved depth, capped
 MAX_RECORDED = 30  # program attempts written to the trace
 MAX_NEAR = 20
 PENALIZED = frozenset({"local_rule"})
-SOLVER_NAME = "dsl-search-r03"
+SOLVER_NAME = "dsl-search-r04"
+DEFER_GRACE = 5.0  # extra seconds for deferred learner fits after the deadline
 
 
 @dataclass
@@ -52,6 +51,7 @@ class SearchResult:
     nodes_per_depth: list[int] = field(default_factory=list)
     out_of_budget: bool = False
     block_calls: Counter[str] = field(default_factory=Counter)
+    deferred: int = 0  # last-depth learner fits postponed by the shape hint
 
 
 def _valid_outputs(grids: list[Grid]) -> bool:
@@ -59,7 +59,16 @@ def _valid_outputs(grids: list[Grid]) -> bool:
 
 
 class _Search:
-    def __init__(self, task: SolverTask, budget: float, max_nodes: int) -> None:
+    def __init__(
+        self,
+        task: SolverTask,
+        budget: float,
+        max_nodes: int,
+        shape_hint: list[tuple[int, int]] | None = None,
+    ) -> None:
+        self.shape_hint = shape_hint
+        self.last_depth = False
+        self.deferred: list[tuple[int, Program, list[Grid], list[Grid]]] = []
         self.targets = [example.output for example in task.train]
         self.n = len(self.targets)
         self.deadline = time.perf_counter() + budget
@@ -90,6 +99,20 @@ class _Search:
         )
         if not shapes_match:
             return
+        if (
+            self.last_depth
+            and self.shape_hint is not None
+            and not fits(tests, self.shape_hint)
+        ):
+            # Learners keep shapes: postpone fits that cannot meet the hint.
+            self.deferred.append((self.order, program, train, tests))
+            self.order += 4
+            return
+        self._fit_learners(program, train, tests)
+
+    def _fit_learners(
+        self, program: Program, train: list[Grid], tests: list[Grid]
+    ) -> None:
         self.result.block_calls["colormap"] += 1
         self.result.block_calls["local_rule"] += 1
         table = fit_colormap(train, self.targets, tests)
@@ -159,14 +182,35 @@ class _Search:
         self.evaluate((), grids)
         frontier = [((), grids)]
         seen = {tuple(grids[: self.n])}
-        for _depth in range(max_depth):
+        for depth in range(max_depth):
             if self.result.solutions or not frontier:
                 break
+            self.last_depth = depth == max_depth - 1
             frontier = self.expand(frontier, seen)
             self.result.nodes_per_depth.append(len(frontier))
             if self.result.out_of_budget:
                 break
+        self._run_deferred()
         return self.result
+
+    def _run_deferred(self) -> None:
+        """Fit postponed learners (original orders) unless a solution fits the hint.
+
+        The vote prefers hint-fitting solutions, so top-1 is unchanged either way.
+        """
+        self.result.deferred = len(self.deferred)
+        hint = self.shape_hint
+        if hint is None or any(fits(s[3], hint) for s in self.result.solutions):
+            return
+        limit = self.deadline + DEFER_GRACE
+        resume = self.order
+        for order, program, train, tests in self.deferred:
+            if time.perf_counter() > limit:
+                self.result.out_of_budget = True
+                break
+            self.order = order
+            self._fit_learners(program, train, tests)
+        self.order = resume
 
 
 def search(
@@ -175,15 +219,18 @@ def search(
     max_depth: int = MAX_DEPTH,
     budget: float = TIME_BUDGET,
     max_nodes: int = MAX_NODES,
+    shape_hint: list[tuple[int, int]] | None = None,
 ) -> SearchResult:
     """Enumerate programs; solutions are (cost, order, program, test outputs).
 
     Object primitives see the task background (all train inputs and outputs)
     for the duration of the search; the previous context is restored after.
+    ``shape_hint`` lets the last depth postpone learner fits whose test shapes
+    miss it (see ``_Search._run_deferred``).
     """
     grids = [e.input for e in task.train] + [e.output for e in task.train]
     with bgc.task_context(bgc.task_background(grids)):
-        return _Search(task, budget, max_nodes).run(task, max_depth)
+        return _Search(task, budget, max_nodes, shape_hint).run(task, max_depth)
 
 
 def _features(task: SolverTask) -> dict[str, object]:
@@ -199,15 +246,6 @@ def _features(task: SolverTask) -> dict[str, object]:
     }
 
 
-def _shape_hint(task: SolverTask) -> list[tuple[int, int]] | None:
-    """Test output shapes predicted by the formula blocks (None when unknown)."""
-    pairs = [(e.input, e.output) for e in task.train]
-    try:
-        return predict_shapes(pairs, list(task.test))
-    except (ValueError, KeyError, ZeroDivisionError):
-        return None
-
-
 def solve(
     task: SolverTask, shape_hint: list[tuple[int, int]] | None = None
 ) -> SolverResult:
@@ -217,9 +255,9 @@ def solve(
     outputs have other shapes when some solution fits the hint.
     """
     recorder = TraceRecorder(solver=SOLVER_NAME)
-    result = search(task)
-    if shape_hint is None and result.solutions:
-        shape_hint = _shape_hint(task)
+    if shape_hint is None:
+        shape_hint = predict_hint(task)
+    result = search(task, shape_hint=shape_hint)
     vote = choose(result.solutions, penalized=PENALIZED, shape_hint=shape_hint)
     solutions = vote.ranked
     ids = []
@@ -250,6 +288,7 @@ def solve(
         "outputs": len(vote.votes),
         "shape_hint_applied": vote.hint_applied,
         "block_calls": dict(result.block_calls),
+        "deferred_fits": result.deferred,
         "second": vote.second,
     }
     if not solutions:

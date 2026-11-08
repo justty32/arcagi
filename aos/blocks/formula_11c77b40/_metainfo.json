@@ -1,0 +1,18 @@
+{
+  "name": "formula_11c77b40",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin2\", \"n_obj8\", 3, \"extract_a1a29247\", -2]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 6,
+  "targets": [
+    "h_out"
+  ],
+  "support_tasks": [
+    "8731374e"
+  ]
+}

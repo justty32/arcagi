@@ -3,10 +3,15 @@
 Run: ``uv run python -m arcagi.blocks.gen_formula --split training [--dry-run]``.
 Targets per task: output height / width and, when every pair divides evenly,
 the repeat counts ``rep_y = h_out / h_in`` and ``rep_x = w_out / w_in``; the
-features are those of the train input (``arcagi.dsl.features``). A body
-*supports* a task when it reproduces some target on every train pair and that
-target takes at least two values (constants are not formulas). Score = number
-of supported tasks; evaluation tasks never take part.
+features are those of the train input (``arcagi.dsl.features``) plus those of
+the top 20 extract blocks by ledger (``pool.budget.top_extracts``). Candidates:
+base one-layer bodies, one-layer bodies reading an extract feature, then (only
+on problems no one-layer body fits) two-layer bodies proposed from those
+problems' first pair; ``pool.budget.allocate()`` caps the total (printed),
+two-layer at most ``formula.TWO_CAP``. A body *supports* a task when it
+reproduces some target on every train pair and that target takes at least two
+values (constants are not formulas). Score = number of supported tasks;
+evaluation tasks never take part.
 
 Score 0 is not written. Bodies with the same support set keep the shortest
 (then first enumerated); the others, and those whose support lies inside the
@@ -23,15 +28,17 @@ import os
 import time
 from collections.abc import Sequence
 from dataclasses import dataclass, field
+from itertools import zip_longest
 from pathlib import Path
 
 from arcagi.dsl import background as bgc
+from arcagi.dsl import features as ft
 from arcagi.dsl import formula as fm
 from arcagi.dsl import grid as g
-from arcagi.dsl.features import compute
 from arcagi.tasks import Task, load_tasks
 
 from . import REPO_ROOT, default_blocks_root, read_json, write_json
+from .pool.budget import allocate, announce, top_extracts
 
 GENERATOR = "_gen/formula"
 LIVE_CAP = 40
@@ -61,9 +68,10 @@ class Problem:
     target: str
     xs: list[dict[str, int]]
     ys: list[int]
+    hit: bool = False  # some scored body fits it
 
 
-def problems(tasks: Sequence[Task]) -> list[Problem]:
+def problems(tasks: Sequence[Task], extracts: dict | None = None) -> list[Problem]:
     out = []
     for task in tasks:
         pairs = [(ex.input, ex.output) for ex in task.train]
@@ -71,7 +79,7 @@ def problems(tasks: Sequence[Task]) -> list[Problem]:
             continue
         bg = bgc.task_background([grid for pair in pairs for grid in pair])
         with bgc.task_context(bg):  # same background as the search sees
-            xs = [compute(i) for i, _ in pairs]
+            xs = [ft.compute(i, extracts or {}) for i, _ in pairs]
         shapes = [(g.shape(i), g.shape(o)) for i, o in pairs]  # type: ignore[arg-type]
         values: dict[str, list[int]] = {
             "h_out": [o[0] for _, o in shapes],
@@ -92,6 +100,7 @@ class Candidate:
     order: int
     tasks: set[str] = field(default_factory=set)
     targets: set[str] = field(default_factory=set)
+    extracts: dict = field(default_factory=dict)  # sources of extract features
 
     @property
     def length(self) -> int:
@@ -107,12 +116,13 @@ class Candidate:
         return "formula_" + hashlib.sha1(text.encode()).hexdigest()[:8]
 
 
-def score_candidates(probs: Sequence[Problem]) -> list[Candidate]:
-    """Every enumerated body with the tasks (and targets) it supports."""
-    cands = [Candidate(list(b), i) for i, b in enumerate(fm.ALL_BODIES)]
+def score_candidates(probs: Sequence[Problem], bodies=fm.ALL_BODIES, start: int = 0):
+    """Every body (default: base one-layer) with the tasks / targets it supports."""
+    cands = [Candidate(list(b), start + i) for i, b in enumerate(bodies)]
     for p in probs:
         for c in cands:
             if fm.holds(c.body, p.xs, p.ys):
+                p.hit = True
                 c.tasks.add(p.task)
                 c.targets.add(p.target)
     return cands
@@ -156,33 +166,17 @@ def judge(cands: Sequence[Candidate], live_cap: int = LIVE_CAP) -> dict[str, lis
 def _write_block(root: Path, c: Candidate, status: str, by: str | None) -> None:
     folder = root / c.name
     old = read_json(folder / "_metainfo.json", {}) or {}
-    meta = {
-        "name": c.name,
-        "kind": "formula",
-        "doc": "Generated integer formula " + json.dumps(c.body),
-        "params": [],
-        "cost": 1,
-        "status": status,
-        "counter_uses": old.get("counter_uses", 0),  # type: ignore[union-attr]
-        "generator": GENERATOR,
-        "score": c.score,
-        "length": c.length,
-        "targets": sorted(c.targets),
-        "support_tasks": sorted(c.tasks),
-    }
+    meta = {"name": c.name, "kind": "formula", "params": [], "cost": 1}
+    meta["doc"] = "Generated integer formula " + json.dumps(c.body)
+    meta |= {"status": status, "counter_uses": old.get("counter_uses", 0)}  # type: ignore[union-attr]
+    meta |= {"generator": GENERATOR, "score": c.score, "length": c.length}
+    meta |= {"targets": sorted(c.targets), "support_tasks": sorted(c.tasks)}
     if by:
         meta["covered_by"] = by
     write_json(folder / "_metainfo.json", meta)
-    write_json(
-        folder / "_rule.json",
-        {
-            "kind": "formula",
-            "in": "features",
-            "out": "int",
-            "body": c.body,
-            "score": c.score,
-        },
-    )
+    rule = {"kind": "formula", "in": "features", "out": "int", "body": c.body}
+    rule |= {"score": c.score} | ({"extracts": c.extracts} if c.extracts else {})
+    write_json(folder / "_rule.json", rule)
     entry = folder / "_entry"
     entry.write_text(ENTRY_SCRIPT, encoding="utf-8")
     os.chmod(entry, 0o755)
@@ -208,8 +202,9 @@ def write_blocks(root: Path, verdict: dict[str, list], stats: dict) -> list[str]
         {
             "name": GENERATOR,
             "kind": "generator",
-            "doc": "Enumerates <=1-op, <=2-feature integer formulas for output "
-            "size / repeat counts; scored on training.",
+            "doc": "Enumerates <=1-op, <=2-feature integer formulas (features "
+            "include top extract blocks), then two-layer ones on unfit problems, "
+            "for output size / repeat counts; scored on training.",
             "params": ["live_cap"],
             "cost": 1,
             "status": "live",
@@ -225,22 +220,53 @@ def write_blocks(root: Path, verdict: dict[str, list], stats: dict) -> list[str]
     return written
 
 
-def run(tasks: Sequence[Task], live_cap: int = LIVE_CAP) -> tuple[dict, dict]:
+def _sources(body: Sequence[object]) -> list[str]:
+    return [src for n in body[1:] if isinstance(n, str) and (src := ft.source(n))]
+
+
+def bodies(extracts: dict, budget: int | None) -> tuple[list, int]:
+    """One-layer bodies and the two-layer cap, at most ``budget`` together."""
+    names = (*ft.NAMES, *ft.names_of(extracts))
+    ext = [b for b in fm.enumerate_bodies(names) if _sources(b)]
+    cap = budget if budget is not None else len(fm.ALL_BODIES) + len(ext) + fm.TWO_CAP
+    one = [*fm.ALL_BODIES, *ext][: max(cap - min(fm.TWO_CAP, cap // 4), 0)]
+    return one, min(fm.TWO_CAP, cap - len(one))
+
+
+def two_layer(names: Sequence[str], unfit: Sequence[Problem], cap: int) -> list:
+    """At most ``cap`` two-layer bodies fitting the first pair of an unfit problem,
+    simplest first, taken round-robin over the problems (proposed from data;
+    scoring still needs every pair)."""
+    space = fm.enumerate_two(names, len(names) ** 2 * 32)
+    queues = [[b for b in space if fm.holds(b, [p.xs[0]], [p.ys[0]])] for p in unfit]
+    rr = [b for row in zip_longest(*queues) for b in row if b is not None]
+    out = {json.dumps(b): b for b in rr}  # first occurrence keeps its place
+    return sorted(list(out.values())[: max(cap, 0)], key=fm.length)
+
+
+def run(
+    tasks: Sequence[Task],
+    live_cap: int = LIVE_CAP,
+    budget: int | None = None,
+    extracts: dict | None = None,
+) -> tuple[dict, dict]:
     """Score ``tasks`` and judge; returns (verdict, stats)."""
     start = time.perf_counter()
-    probs = problems(tasks)
-    cands = score_candidates(probs)
+    ext = extracts or {}
+    probs = problems(tasks, ext)
+    one, two_cap = bodies(ext, budget)
+    cands = score_candidates(probs, one)
+    unfit = [p for p in probs if not p.hit]
+    two = two_layer((*ft.NAMES, *ft.names_of(ext)), unfit, two_cap)
+    cands += score_candidates(unfit, two, len(one))
+    for c in cands:
+        c.extracts = {src: ext[src] for src in _sources(c.body)}
     verdict = judge(cands, live_cap)
-    stats = {
-        "tasks": len(tasks),
-        "problems": len(probs),
-        "scored": len(cands),
-        "live": len(verdict["live"]),
-        "covered": len(verdict["covered"]),
-        "over_cap": len(verdict["over_cap"]),
-        "dropped": len(verdict["dropped"]),
-        "gen_seconds": round(time.perf_counter() - start, 2),
-    }
+    sizes = {"tasks": tasks, "problems": probs, "extracts": ext, "scored": cands}
+    sizes |= {"one_layer": one, "two_layer": two, "unfit_problems": unfit}
+    sizes |= {k: verdict[k] for k in ("live", "covered", "over_cap", "dropped")}
+    stats: dict = {"budget": budget, **{k: len(v) for k, v in sizes.items()}}
+    stats["gen_seconds"] = round(time.perf_counter() - start, 2)
     return verdict, stats
 
 
@@ -251,12 +277,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=None)
     parser.add_argument("--live-cap", type=int, default=LIVE_CAP)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--budget", type=int, default=None, help="default: pool")
     args = parser.parse_args(argv)
     if args.split != "training":
         parser.error("formulas are scored on training only")
+    budget = args.budget or allocate()[GENERATOR]
+    announce(GENERATOR, budget)
     nested = args.data_root / "data" / args.split
     tasks = load_tasks(nested if nested.is_dir() else args.data_root / args.split)
-    verdict, stats = run(tasks, args.live_cap)
+    verdict, stats = run(tasks, args.live_cap, budget, top_extracts(args.root))
     stats = {"split": args.split, **stats}
     if not args.dry_run:
         write_blocks(args.root or default_blocks_root(), verdict, stats)

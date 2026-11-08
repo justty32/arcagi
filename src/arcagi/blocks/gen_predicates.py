@@ -1,7 +1,8 @@
 """Generator of predicate blocks: enumerate, score on training, keep the best.
 
 Run: ``uv run python -m arcagi.blocks.gen_predicates --split training
---max-literals 2``. Candidates are single literals (``eq``/``ne``/``gt``/``lt``/
+--max-literals 2``. Candidates (the first ``pool.budget.allocate()`` of them,
+printed) are single literals (``eq``/``ne``/``gt``/``lt``/
 ``rank``) and two-literal ``and``s over the object attributes. A candidate
 *separates* a task when, for some connectivity, its truth equals "the object
 changed" for every object of every train pair (both classes present). Score =
@@ -29,6 +30,7 @@ from arcagi.dsl.objects_props import CONNS, changed, extract, same_shapes
 from arcagi.tasks import Task, load_tasks
 
 from . import REPO_ROOT, default_blocks_root, read_json, write_json
+from .pool.budget import allocate, announce
 
 GENERATOR = "_gen/pred_combiner"
 LIVE_CAP = 60
@@ -122,8 +124,10 @@ class Candidate:
         return "pred_" + hashlib.sha1(text.encode()).hexdigest()[:8]
 
 
-def score_candidates(segs: Sequence[Segment], max_literals: int) -> list[Candidate]:
-    """Every enumerated candidate with the task set it separates."""
+def score_candidates(
+    segs: Sequence[Segment], max_literals: int, budget: int | None = None
+) -> list[Candidate]:
+    """The first ``budget`` (default all) candidates with the tasks they separate."""
     lits = literal_pool()
     masks = [[seg.mask(lit) for seg in segs] for lit in lits]
     # Segments where the literal contains every changed object (AND prefilter).
@@ -135,9 +139,12 @@ def score_candidates(segs: Sequence[Segment], max_literals: int) -> list[Candida
     for i, lit in enumerate(lits):
         tasks = {segs[k].task for k in sup[i] if masks[i][k] == segs[k].label}
         found.append(Candidate(lit, frozenset(tasks), len(found)))
+    cap = len(lits) ** 2 if budget is None else budget
     if max_literals >= 2:
         for i in range(len(lits)):
             for j in range(i + 1, len(lits)):
+                if len(found) >= cap:
+                    return found[:cap]
                 common = sup[i] & sup[j]
                 tasks = {
                     segs[k].task
@@ -147,7 +154,7 @@ def score_candidates(segs: Sequence[Segment], max_literals: int) -> list[Candida
                 found.append(
                     Candidate(["and", lits[i], lits[j]], frozenset(tasks), len(found))
                 )
-    return found
+    return found[:cap]
 
 
 def judge(cands: Sequence[Candidate], live_cap: int = LIVE_CAP) -> dict[str, list]:
@@ -254,17 +261,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--root", type=Path, default=None)
     parser.add_argument("--live-cap", type=int, default=LIVE_CAP)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--budget", type=int, default=None, help="default: pool")
     args = parser.parse_args(argv)
+    budget = args.budget or allocate()[GENERATOR]
+    announce(GENERATOR, budget)
     if args.split != "training":
         parser.error("predicates are scored on training only")
     nested = args.data_root / "data" / args.split
     tasks = load_tasks(nested if nested.is_dir() else args.data_root / args.split)
     segs = segments(tasks)
-    cands = score_candidates(segs, args.max_literals)
+    cands = score_candidates(segs, args.max_literals, budget)
     verdict = judge(cands, args.live_cap)
     stats = {
         "split": args.split,
         "max_literals": args.max_literals,
+        "budget": budget,
         "segments": len(segs),
         "scored": len(cands),
         "live": len(verdict["live"]),

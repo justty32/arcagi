@@ -1,0 +1,28 @@
+{
+  "name": "formula_788786c1",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"min\", \"max_obj_h\", \"extract_d19a47ba\"]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 10,
+  "length": 3,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "06df4c85",
+    "1f85a75f",
+    "39e1d7f9",
+    "3eda0437",
+    "7468f01a",
+    "77fdfe62",
+    "97a05b5b",
+    "be94b721",
+    "e6721834",
+    "fcb5c309"
+  ]
+}

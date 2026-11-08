@@ -14,8 +14,14 @@ Properties of the selected objects: ``bbox`` ``[top, left, h, w]`` (union),
 (``[[y, x], ...]``), ``subgrid`` (grid cropped to the bbox) and ``object`` (the
 crop with unselected cells set to the background). Ambiguity raises ValueError.
 
+Object scope: a body ``{"scope": "object", "sel": [op, conn], "prop": p}`` is
+evaluated relative to one object (``run_on_object``); selectors and properties
+are in ``arcagi.objrule.view``. Live object-scope blocks go to ``LIVE_OBJ``;
+``run`` and ``LIVE`` stay grid-scope only.
+
 CLI: ``python -m arcagi.dsl.extract RULE.json`` reads a grid (or ``{"grid":..}``)
-on stdin and prints the JSON value.
+on stdin and prints the JSON value; an object-scope rule reads
+``{"grid": .., "cells": [[y, x], ..]}`` (any cell of the anchor object).
 """
 
 import json
@@ -23,6 +29,7 @@ import sys
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 
+from arcagi.objrule import view as ov
 from arcagi.tasks import Grid
 
 from . import grid as g
@@ -35,6 +42,7 @@ SELECTORS = (*SINGLE, "all", "color", "pred")
 PROPS = ("bbox", "color", "size", "count", "cells", "subgrid", "object")
 GRID_PROPS = ("subgrid", "object")
 LIVE: dict[str, Body] = {}
+LIVE_OBJ: dict[str, dict] = {}
 
 
 def _only(objs: Sequence[Obj], what: str) -> list[Obj]:
@@ -120,6 +128,43 @@ def run(body: object, grid: Grid) -> object:
     return prop(grid, name, select(grid, sel))  # type: ignore[arg-type]
 
 
+def is_object(body: object) -> bool:
+    return isinstance(body, Mapping) and body.get("scope") == "object"
+
+
+def unwrap_object(body: object) -> dict:
+    """Object-scope body of a block name, a block dict or a body itself."""
+    if isinstance(body, str):
+        if body in LIVE_OBJ:
+            return LIVE_OBJ[body]
+        from arcagi.blocks import default_blocks_root
+
+        found = read_object_rule(default_blocks_root() / body)
+        if found is None:
+            raise ValueError(f"unknown object extract block {body!r}")
+        return found
+    if isinstance(body, Mapping) and not is_object(body):
+        body = body.get("body")
+    if not ov.validate(body):
+        raise ValueError(f"bad object extract body {body!r}")
+    return body  # type: ignore[return-value]
+
+
+def run_on_object(body: object, grid: Grid, obj: Obj) -> object:
+    """Value of an object-scope extraction for anchor object ``obj`` on ``grid``."""
+    grid = tuple(tuple(row) for row in grid)
+    return ov.run(unwrap_object(body), grid, obj)
+
+
+def anchor_at(grid: Grid, conn: str, cell: Sequence[int]) -> Obj:
+    """The object under ``conn`` that contains ``cell``."""
+    grid = tuple(tuple(row) for row in grid)
+    for o in extract(grid, conn):  # type: ignore[arg-type]
+        if tuple(cell) in o.cells:
+            return o
+    raise ValueError(f"no object at {cell!r}")
+
+
 def as_grid(value: object) -> Grid:
     if not isinstance(value, list) or not value:
         raise ValueError("extracted value is not a grid")
@@ -139,9 +184,11 @@ def validate(body: object) -> bool:
     return len(sel) == 2
 
 
-def length(body: Sequence[object]) -> int:
+def length(body: object) -> int:
     """Description length: selector op + args + property (pred names count 2)."""
-    sel = body[1]
+    if is_object(body):
+        return ov.length(body)  # type: ignore[arg-type]
+    sel = body[1]  # type: ignore[index]
     extra = len(sel) - 2  # type: ignore[arg-type]
     if sel[0] == "pred":  # type: ignore[index]
         extra += 1 if isinstance(sel[2], str) else len(json.dumps(sel[2])) // 10  # type: ignore[index]
@@ -157,13 +204,27 @@ def read_rule(folder: Path) -> Body | None:
     return body if validate(body) else None
 
 
+def read_object_rule(folder: Path) -> dict | None:
+    try:
+        rule = json.loads((folder / "_rule.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    body = rule.get("body") if isinstance(rule, dict) else None
+    return body if ov.validate(body) else None
+
+
 def install(rules: Mapping[str, object]) -> None:
     """Live extract blocks: name -> ``_rule.json`` dict (or bare body)."""
     LIVE.clear()
+    LIVE_OBJ.clear()
     for name, rule in rules.items():
-        body = rule.get("body") if isinstance(rule, Mapping) else rule
+        body = rule
+        if isinstance(rule, Mapping) and not is_object(rule):
+            body = rule.get("body")
         if validate(body):
             LIVE[name] = body  # type: ignore[assignment]
+        elif ov.validate(body):
+            LIVE_OBJ[name] = dict(body)  # type: ignore[arg-type]
 
 
 def resolve(name: str) -> Body:
@@ -185,12 +246,17 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
     try:
-        body = read_rule(Path(argv[0]).parent)
-        if body is None:
-            raise ValueError(f"bad rule file {argv[0]}")
+        folder = Path(argv[0]).parent
+        body, obody = read_rule(folder), read_object_rule(folder)
         data = json.loads(sys.stdin.read())
         grid = data["grid"] if isinstance(data, dict) else data
-        print(json.dumps(run(body, grid)))
+        if obody is not None:
+            anchor = anchor_at(grid, obody["sel"][1], data["cells"][0])
+            print(json.dumps(run_on_object(obody, grid, anchor)))
+        elif body is None:
+            raise ValueError(f"bad rule file {argv[0]}")
+        else:
+            print(json.dumps(run(body, grid)))
     except (ValueError, TypeError, KeyError, IndexError) as exc:
         print(f"arcagi.dsl.extract: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 2

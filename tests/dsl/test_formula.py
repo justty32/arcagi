@@ -12,7 +12,7 @@ def grid(text: str) -> tuple[tuple[int, ...], ...]:
 
 
 def test_features_compute() -> None:
-    f = features.compute(grid("100 022 000"))
+    f = features.compute(grid("100 022 000"), {})
     assert set(f) == set(features.NAMES)
     assert (f["h"], f["w"], f["n_color"], f["n_fg"], f["n_bg"]) == (3, 3, 2, 3, 6)
     assert (f["n_obj"], f["n_obj8"], f["max_obj_size"], f["min_obj_size"]) == (
@@ -126,3 +126,56 @@ def test_canvas_and_resize_and_library_names() -> None:
         fp.install({})
     assert fp.resize_crop(grid("10 34"), ["const", 1], ["const", 3]) == grid("100")
     assert fp.FORMULA_PRIMS["tile_n"].candidates([grid("1")], [grid("11")]) == []
+
+
+LARGEST = ["largest", "4same"]
+
+
+def test_extract_features_and_two_layer_bodies() -> None:
+    ext = {"extract_aaaa0001": ["size", LARGEST], "extract_bbbb0002": ["bbox", LARGEST]}
+    f = features.compute(grid("100 022 000"), ext)
+    assert f["extract_aaaa0001"] == 2
+    assert (f["extract_bbbb0002.h"], f["extract_bbbb0002.w"]) == (1, 2)
+    assert features.compute(grid("00 00"), ext).keys() == set(features.NAMES)
+    assert features.names_of(ext) == [
+        "extract_aaaa0001",
+        *(f"extract_bbbb0002.{k}" for k in features.BBOX),
+    ]
+    feats = {"h": 3, "w": 5}
+    assert fm.evaluate(["lin2", "h", -1, "w", 2], feats) == 7
+    assert fm.evaluate(["mulc", "h", -2, "w"], feats) == 5
+    assert fm.validate(["lin2", "h", 3, "w", -2])
+    assert not fm.validate(["lin2", "h", 4, "w", 1])
+    assert not fm.validate(["mulc", "h", 0, "w"])
+    assert fm.length(["mul", "h", "w"]) < fm.length(["lin2", "h", 1, "w", 1])
+    two = fm.enumerate_two()
+    assert len(two) == fm.TWO_CAP and two[0][0] == "lin2"
+    assert all(fm.validate(b) for b in two)
+    assert len(fm.enumerate_two(cap=5)) == 5
+
+
+def test_rule_extracts_are_adopted(tmp_path, monkeypatch) -> None:
+    monkeypatch.setattr(features, "EXTRA", {})
+    monkeypatch.setattr(fm, "EXTRA", features.EXTRA)
+    body = ["lin", "extract_aaaa0001", 2, 0]
+    assert not fm.validate(body)
+    rule = {
+        "kind": "formula",
+        "body": body,
+        "extracts": {"extract_aaaa0001": ["size", LARGEST]},
+    }
+    fm.adopt(rule)
+    assert fm.validate(body)
+    xs = [
+        features.compute(grid(t)) for t in ("100 022 000", "333 000 000", "100 000 000")
+    ]
+    assert [x["extract_aaaa0001"] for x in xs] == [2, 3, 1]
+    assert fm.fit(xs, [4, 6, 2], [body]) == body
+
+
+def test_two_layer_library_only_after_one_layer() -> None:
+    xs = _xs(h=[1, 2, 3], w=[0, 0, 0])
+    two = ["lin2", "h", 2, "w", 1]  # also 2*h on these pairs
+    assert fm.fit(xs, [2, 4, 6], [two]) == ["lin", "h", 2, 0]
+    xs = _xs(h=[1, 2, 4], w=[3, 1, 2])
+    assert fm.fit(xs, [5, 5, 10], [two]) == two

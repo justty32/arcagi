@@ -1,0 +1,26 @@
+{
+  "name": "extract_7b3e94ec",
+  "kind": "extract",
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_aligned_other_color\", \"8same\"], \"prop\": \"dir_to\"}",
+  "params": [],
+  "cost": 1,
+  "status": "covered",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 11,
+  "length": 4,
+  "support_tasks": [
+    "05f2a901",
+    "29c11459",
+    "2c608aff",
+    "56dc2b01",
+    "673ef223",
+    "6855a6e4",
+    "a48eeaf7",
+    "b548a754",
+    "b7249182",
+    "dc433765",
+    "f8a8fe49"
+  ],
+  "covered_by": "extract_22e9a1c3"
+}

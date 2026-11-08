@@ -116,3 +116,40 @@ def test_paint_count_with_extracted_color() -> None:
     found = count.candidates([a, b], [grid("11"), grid("222")])
     assert found and count.apply(b, *found[0]) == grid("222")
     assert count.apply(a, *found[0]) == grid("11")
+
+
+OBJ = {"scope": "object", "sel": ["nearest", "4same"], "prop": "color"}
+
+
+def test_object_scope_run_and_install() -> None:
+    g3 = grid("10002 00000 00000 30000")
+    anchor = ex.anchor_at(g3, "4same", (0, 0))
+    assert ex.run_on_object(OBJ, g3, anchor) == 3  # gap 2 beats gap 3
+    assert ex.run_on_object({"body": OBJ}, g3, anchor) == 3
+    with pytest.raises(ValueError):
+        ex.run(OBJ, g3)  # grid scope rejects object bodies
+    assert not ex.validate(OBJ)
+    install({"extract_o": {"kind": "extract", "body": OBJ}, "extract_g": G_RULE})
+    try:
+        assert list(ex.LIVE) == ["extract_g"] and list(ex.LIVE_OBJ) == ["extract_o"]
+        assert ex.run_on_object("extract_o", g3, anchor) == 3
+        with pytest.raises(ValueError):
+            ex.run("extract_o", g3)
+    finally:
+        install({})
+    assert ex.length(OBJ) == 4 and ex.length(["color", ["largest", "4same"]]) == 2
+
+
+G_RULE = {"kind": "extract", "body": ["color", ["largest", "4same"]]}
+
+
+def test_object_scope_cli(tmp_path) -> None:
+    (tmp_path / "_rule.json").write_text(json.dumps({"body": OBJ}))
+    out = subprocess.run(
+        [sys.executable, "-m", "arcagi.dsl.extract", str(tmp_path / "_rule.json")],
+        input=json.dumps({"grid": [[1, 0, 0, 2]], "cells": [[0, 0]]}),
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert out.stdout.strip() == "2"

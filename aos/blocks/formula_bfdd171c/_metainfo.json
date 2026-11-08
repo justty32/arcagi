@@ -4,7 +4,7 @@
   "doc": "Generated integer formula [\"div\", \"max_obj_w\", 4]",
   "params": [],
   "cost": 1,
-  "status": "live",
+  "status": "retired",
   "counter_uses": 0,
   "generator": "_gen/formula",
   "score": 1,

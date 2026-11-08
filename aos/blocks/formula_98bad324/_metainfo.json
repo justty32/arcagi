@@ -1,9 +1,9 @@
 {
   "name": "formula_98bad324",
   "kind": "formula",
-  "doc": "Generated integer formula [\"max\", \"w\", \"max_obj_h\"]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"max\", \"w\", \"max_obj_h\"]",
   "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/formula",

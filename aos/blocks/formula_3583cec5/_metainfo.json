@@ -1,0 +1,20 @@
+{
+  "name": "formula_3583cec5",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin\", \"extract_a07c0a37\", 1, 1]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 2,
+  "length": 2,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "4be741c5",
+    "f9012d9b"
+  ]
+}

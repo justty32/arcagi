@@ -1,9 +1,9 @@
 {
   "name": "formula_b8dd5603",
   "kind": "formula",
-  "doc": "Generated integer formula [\"max\", \"h\", \"min_obj_w\"]",
   "params": [],
   "cost": 1,
+  "doc": "Generated integer formula [\"max\", \"h\", \"min_obj_w\"]",
   "status": "covered",
   "counter_uses": 0,
   "generator": "_gen/formula",

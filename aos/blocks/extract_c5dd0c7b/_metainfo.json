@@ -1,0 +1,18 @@
+{
+  "name": "extract_c5dd0c7b",
+  "kind": "extract",
+  "doc": "Generated extraction {\"scope\": \"object\", \"sel\": [\"nearest_other_color\", \"8same\"], \"prop\": \"color\"}",
+  "params": [],
+  "cost": 1,
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/extract",
+  "score": 4,
+  "length": 4,
+  "support_tasks": [
+    "1f0c79e5",
+    "2204b7a8",
+    "2bcee788",
+    "3befdf3e"
+  ]
+}
