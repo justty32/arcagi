@@ -34,6 +34,8 @@ def judge(ops: list[dict], env: str, crowd_ok: bool,
         if o["status"] == "dormant" and env not in o["tried_env_hashes"] \
                 and o["blamed_by"] is None:
             o["status"], o["ttl"] = "incubating", fm.TTL
+            o["evidence"]["new_solves"] = []  # a new environment needs new evidence
+            continue  # judged from the next epoch's shadow trial on
         if o["status"] != "incubating":
             continue
         ev = o["evidence"]
@@ -56,10 +58,10 @@ def judge(ops: list[dict], env: str, crowd_ok: bool,
 
 
 def rollback(ops: list[dict], ids: list[str], epoch: int) -> None:
+    """H24 fuse: rows back to dormant; the env they failed in is recorded."""
+    env = fm.env_hash(ops)
     for o in ops:
         if o["id"] in ids:
             o["status"] = "dormant"
             o["blamed_by"] = f"h24@{epoch}"
-            if o["env_hash"]:
-                o["tried_env_hashes"] = sorted(set(o["tried_env_hashes"])
-                                               | {o["env_hash"]})
+            o["tried_env_hashes"] = sorted(set(o["tried_env_hashes"]) | {env})

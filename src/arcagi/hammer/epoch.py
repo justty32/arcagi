@@ -294,6 +294,24 @@ def run_epoch(root: Path, n: int, *, holdout: bool = True, stall_fn=None,
         evals["body"] += sum(s["nodes"] + s.get("gate_nodes", 0)
                              for s in main.values())
         rolled = True
+        batch = state["batch"]
+        if len(batch) > 1:  # ablate the batch row by row (<= ablate_max reruns)
+            snap = json.loads(json.dumps(ops))
+            for oid in batch[:frozen["judge"].get("ablate_max", 3)]:
+                for o in ops:
+                    if o["id"] in batch and o["id"] != oid:
+                        o["status"], o["blamed_by"] = "live", None
+                trial, _, _ = _main_run(root, ops, tasks, ids, budgets, threads,
+                                        backend, n, state)
+                evals["body"] += sum(s["nodes"] + s.get("gate_nodes", 0)
+                                     for s in trial.values())
+                if sum(trial[t]["test_ok"] for t in ids["H24"]) >= prev["solved_H24"]:
+                    fm.append_ledger(root, {"kind": "ablate", "epoch": n,
+                                            "layer": 1, "by": "judge",
+                                            "op_ids": [oid], "blamed": oid})
+                    main, lib = trial, gw.lib_from_ops(ops)
+                    break
+                ops[:] = json.loads(json.dumps(snap))
     state["batch"] = []
     # ② gate feed (train-only LOO + MDL, D-r8-6)
     feed = {t: pg.from_json(s["program"]) for t, s in main.items()
