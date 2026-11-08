@@ -49,9 +49,6 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
-| r07-A 起點樹 | opus | `src/arcagi/seed/`、`tests/seed/`、`scripts/r07_purity.sh` | 其他全部；seed 不得 import dsl/objrule/blocks/solvers | 2026-11-08 15:23 |
-| r07-B 學習循環 | opus | `src/arcagi/grow/`、`tests/grow/`、`scripts/r07_{taskset,curve}.py`、`data/r07/`、`reports/curve-r07/`、`aos/seedlib/`、`aos/meta/ledger.jsonl`（追加） | `seed/` 唯讀、`aos/blocks/`、`aos/pool/` | 2026-11-08 15:23 |
-| r07-C 守門 | opus | `solvers/{guard,gated}.py`、`tests/solvers/test_guard.py`、`scripts/r07_gate_eval.py`、`reports/gate-r07/` | `native/`、`dsl/ext/`、`objrule/families/`、`search.py`、`vote.py` | 2026-11-08 15:23 |
 
 ### 保留給主 agent，任何線都不得寫
 
@@ -65,6 +62,9 @@
 
 | 線 | 完成證據 | 收線時間 |
 |----|---------|---------|
+| r07-A 起點樹 seed | purity ok（32 原語）、pytest 523 綠；L16 pass 0 2→4（fe9b759→35049ef→0349a1d→efdee5d） | 2026-11-08 16:15 |
+| r07-B 學習循環 | 曲線 e181649：empty 16、empty-g1 24（Δ+1）、dec-g1 32（節點 120160→7053）、old 72；pytest 524 綠 | 2026-11-08 16:20 |
+| r07-C 守門 | 3129cc4；training 離線擋錯 35／誤擋 0／淨 138；gated evaluation 全量 57/400、答錯 29→10 | 2026-11-08 15:35 |
 | r04-A 每物件規則 | pytest 333 綠；training 同大小未解 73 題子集 0→5、已解 39 題退步 0；物件視角抽取 6 live／14 covered | 2026-11-08 13:10 |
 | r04-B 公式＋預算＋拆 pool＋_gen/_meta | pytest 337 綠；`blocks/pool/` 每檔 ≤300 行；預算 extract 5000／formula 11993／pred 8007；公式 35 live；meta 試 6 設定、最佳去 sq/div | 2026-11-08 13:25 |
 | r04-C 搜尋預算＋並行 | pytest 320 綠；`--workers`；evaluation baseline 32/400＝r03、退步 0、牆鐘 30 秒；out_of_budget 0/400（預算從未是瓶頸） | 2026-11-08 12:58 |
