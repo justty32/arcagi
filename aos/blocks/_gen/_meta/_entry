@@ -1,0 +1,6 @@
+#!/bin/sh
+# aos meta node: tune the formula generator's config on training (--dry-run:
+# print the trials, write nothing).
+here=$(cd "$(dirname "$0")" && pwd)
+root=$(cd "$here/../../../.." && pwd)
+cd "$root" && exec "$root/.venv/bin/python" -m arcagi.blocks.gen_meta "$@"

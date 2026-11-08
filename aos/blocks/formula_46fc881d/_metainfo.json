@@ -1,0 +1,19 @@
+{
+  "name": "formula_46fc881d",
+  "kind": "formula",
+  "params": [],
+  "cost": 1,
+  "doc": "Generated integer formula [\"lin2\", \"n_fg\", 1, \"extract_a1a29247\", 1]",
+  "status": "live",
+  "counter_uses": 0,
+  "generator": "_gen/formula",
+  "score": 1,
+  "length": 4,
+  "targets": [
+    "h_out",
+    "w_out"
+  ],
+  "support_tasks": [
+    "b190f7f5"
+  ]
+}

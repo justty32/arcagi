@@ -1,0 +1,175 @@
+{
+  "name": "_gen/_meta",
+  "kind": "generator",
+  "cost": 1,
+  "status": "live",
+  "doc": "Tunes the formula generator's config (one meta level, cap 2).",
+  "params": [
+    "--dry-run"
+  ],
+  "produces": "config",
+  "levels": 2,
+  "counter_uses": 0,
+  "targets": [
+    "_gen/formula"
+  ],
+  "trials": [
+    {
+      "config": {
+        "n_extracts": 20,
+        "two_layer": true,
+        "min_support": 1,
+        "forms": [
+          "lin",
+          "mul",
+          "sq",
+          "max",
+          "min",
+          "div",
+          "const",
+          "lin2",
+          "mulc"
+        ]
+      },
+      "score": 175.712,
+      "explained": 183,
+      "scored": 7288,
+      "live": 35,
+      "covered": 60
+    },
+    {
+      "config": {
+        "n_extracts": 0,
+        "two_layer": true,
+        "min_support": 1,
+        "forms": [
+          "lin",
+          "mul",
+          "sq",
+          "max",
+          "min",
+          "div",
+          "const",
+          "lin2",
+          "mulc"
+        ]
+      },
+      "score": 169.84,
+      "explained": 174,
+      "scored": 4160,
+      "live": 25,
+      "covered": 60
+    },
+    {
+      "config": {
+        "n_extracts": 10,
+        "two_layer": true,
+        "min_support": 1,
+        "forms": [
+          "lin",
+          "mul",
+          "sq",
+          "max",
+          "min",
+          "div",
+          "const",
+          "lin2",
+          "mulc"
+        ]
+      },
+      "score": 175.197,
+      "explained": 181,
+      "scored": 5803,
+      "live": 32,
+      "covered": 60
+    },
+    {
+      "config": {
+        "n_extracts": 20,
+        "two_layer": false,
+        "min_support": 1,
+        "forms": [
+          "lin",
+          "mul",
+          "sq",
+          "max",
+          "min",
+          "div",
+          "const",
+          "lin2",
+          "mulc"
+        ]
+      },
+      "score": 172.71,
+      "explained": 177,
+      "scored": 4290,
+      "live": 29,
+      "covered": 60
+    },
+    {
+      "config": {
+        "n_extracts": 20,
+        "two_layer": true,
+        "min_support": 2,
+        "forms": [
+          "lin",
+          "mul",
+          "sq",
+          "max",
+          "min",
+          "div",
+          "const",
+          "lin2",
+          "mulc"
+        ]
+      },
+      "score": 164.712,
+      "explained": 172,
+      "scored": 7288,
+      "live": 23,
+      "covered": 60
+    },
+    {
+      "config": {
+        "n_extracts": 20,
+        "two_layer": true,
+        "min_support": 1,
+        "forms": [
+          "lin",
+          "mul",
+          "max",
+          "min",
+          "const",
+          "lin2",
+          "mulc"
+        ]
+      },
+      "score": 175.932,
+      "explained": 183,
+      "scored": 7068,
+      "live": 35,
+      "covered": 60
+    }
+  ],
+  "best": {
+    "config": {
+      "n_extracts": 20,
+      "two_layer": true,
+      "min_support": 1,
+      "forms": [
+        "lin",
+        "mul",
+        "max",
+        "min",
+        "const",
+        "lin2",
+        "mulc"
+      ]
+    },
+    "score": 175.932,
+    "explained": 183,
+    "scored": 7068,
+    "live": 35,
+    "covered": 60
+  }
+}

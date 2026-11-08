@@ -1,0 +1,23 @@
+{
+  "kind": "formula",
+  "in": "features",
+  "out": "int",
+  "body": [
+    "lin2",
+    "n_fg",
+    1,
+    "extract_a1a29247",
+    1
+  ],
+  "score": 1,
+  "extracts": {
+    "extract_a1a29247": [
+      "count",
+      [
+        "pred",
+        "4same",
+        "pred_1731e9f2"
+      ]
+    ]
+  }
+}

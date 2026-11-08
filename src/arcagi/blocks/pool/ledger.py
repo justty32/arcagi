@@ -101,7 +101,9 @@ def _generator_meta(catalog: Catalog) -> dict[str, dict]:
     found = {n: {} for n in names if isinstance(n, str) and n}
     if catalog.root is not None:
         found |= {
-            f"_gen/{p.parent.name}": {} for p in catalog.root.glob("_gen/*/_*.json")
+            f"_gen/{p.parent.name}": {}
+            for p in catalog.root.glob("_gen/*/_*.json")
+            if not p.parent.name.startswith("_")  # _gen/_meta tunes generators
         }
         for name in found:
             meta = read_json(catalog.root / name / "_metainfo.json", {})

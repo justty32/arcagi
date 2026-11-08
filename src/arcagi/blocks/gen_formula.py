@@ -44,6 +44,8 @@ GENERATOR = "_gen/formula"
 LIVE_CAP = 40
 COVERED_CAP = 60
 TARGETS = ("h_out", "w_out", "rep_y", "rep_x")
+# Tunable settings (``config`` in the node metainfo, chosen by ``gen_meta``).
+CONFIG = {"n_extracts": 20, "two_layer": True, "min_support": 1, "forms": fm.OPS}
 ENTRY_SCRIPT = """#!/bin/sh
 # aos formula block: stdin grid JSON (or {"grid":..} or a feature dict) -> int
 here=$(cd "$(dirname "$0")" && pwd)
@@ -128,9 +130,9 @@ def score_candidates(probs: Sequence[Problem], bodies=fm.ALL_BODIES, start: int 
     return cands
 
 
-def judge(cands: Sequence[Candidate], live_cap: int = LIVE_CAP) -> dict[str, list]:
-    """Split scored candidates into live / covered / dropped (score 0)."""
-    scored = [c for c in cands if c.score > 0]
+def judge(cands: Sequence[Candidate], live_cap: int = LIVE_CAP, least: int = 1):
+    """Split candidates into live / covered / dropped (score below ``least``)."""
+    scored = [c for c in cands if c.score >= max(least, 1)]
     best: dict[frozenset[str], Candidate] = {}
     for c in sorted(scored, key=lambda c: (c.length, c.order)):
         best.setdefault(frozenset(c.tasks), c)
@@ -159,7 +161,7 @@ def judge(cands: Sequence[Candidate], live_cap: int = LIVE_CAP) -> dict[str, lis
         "live": kept[:live_cap],
         "covered": covered[:COVERED_CAP],
         "over_cap": kept[live_cap:],
-        "dropped": [c for c in cands if c.score == 0],
+        "dropped": [c for c in cands if c.score < max(least, 1)],
     }
 
 
@@ -197,23 +199,12 @@ def write_blocks(root: Path, verdict: dict[str, list], stats: dict) -> list[str]
             write_json(folder / "_metainfo.json", {**meta, "status": "retired"})
     node = root / GENERATOR
     old = read_json(node / "_metainfo.json", {}) or {}
-    write_json(
-        node / "_metainfo.json",
-        {
-            "name": GENERATOR,
-            "kind": "generator",
-            "doc": "Enumerates <=1-op, <=2-feature integer formulas (features "
-            "include top extract blocks), then two-layer ones on unfit problems, "
-            "for output size / repeat counts; scored on training.",
-            "params": ["live_cap"],
-            "cost": 1,
-            "status": "live",
-            "counter_uses": old.get("counter_uses", 0),  # type: ignore[union-attr]
-            "produces": "formula",
-            "gen_seconds": stats["gen_seconds"],
-            "last_run": stats,
-        },
-    )
+    doc = "Enumerates <=1-op, <=2-feature integer formulas (features include top "
+    doc += "extracts), then two-layer ones on unfit problems; scored on training."
+    meta = {**old, "name": GENERATOR, "kind": "generator", "doc": doc, "cost": 1}  # type: ignore[dict-item]
+    meta |= {"params": ["live_cap", "config"], "status": "live", "produces": "formula"}
+    meta |= {"counter_uses": old.get("counter_uses", 0), "last_run": stats}  # type: ignore[union-attr]
+    write_json(node / "_metainfo.json", meta | {"gen_seconds": stats["gen_seconds"]})
     entry = node / "_entry"
     entry.write_text(GEN_ENTRY, encoding="utf-8")
     os.chmod(entry, 0o755)
@@ -224,13 +215,15 @@ def _sources(body: Sequence[object]) -> list[str]:
     return [src for n in body[1:] if isinstance(n, str) and (src := ft.source(n))]
 
 
-def bodies(extracts: dict, budget: int | None) -> tuple[list, int]:
-    """One-layer bodies and the two-layer cap, at most ``budget`` together."""
+def bodies(extracts: dict, budget: int | None, cfg: dict = CONFIG) -> tuple:
+    """One-layer bodies (``cfg`` forms) and the two-layer cap, <= ``budget``."""
     names = (*ft.NAMES, *ft.names_of(extracts))
     ext = [b for b in fm.enumerate_bodies(names) if _sources(b)]
-    cap = budget if budget is not None else len(fm.ALL_BODIES) + len(ext) + fm.TWO_CAP
-    one = [*fm.ALL_BODIES, *ext][: max(cap - min(fm.TWO_CAP, cap // 4), 0)]
-    return one, min(fm.TWO_CAP, cap - len(one))
+    one = [b for b in (*fm.ALL_BODIES, *ext) if b[0] in cfg["forms"]]
+    cap = budget if budget is not None else len(one) + fm.TWO_CAP
+    two_cap = min(fm.TWO_CAP, cap // 4) if cfg["two_layer"] else 0
+    one = one[: max(cap - two_cap, 0)]
+    return one, min(two_cap, cap - len(one))
 
 
 def two_layer(names: Sequence[str], unfit: Sequence[Problem], cap: int) -> list:
@@ -249,19 +242,20 @@ def run(
     live_cap: int = LIVE_CAP,
     budget: int | None = None,
     extracts: dict | None = None,
+    config: dict | None = None,
 ) -> tuple[dict, dict]:
-    """Score ``tasks`` and judge; returns (verdict, stats)."""
-    start = time.perf_counter()
-    ext = extracts or {}
+    """Score ``tasks`` and judge under ``config`` (see ``CONFIG``)."""
+    start, cfg = time.perf_counter(), {**CONFIG, **(config or {})}
+    ext = dict(list((extracts or {}).items())[: cfg["n_extracts"]])
     probs = problems(tasks, ext)
-    one, two_cap = bodies(ext, budget)
+    one, two_cap = bodies(ext, budget, cfg)
     cands = score_candidates(probs, one)
     unfit = [p for p in probs if not p.hit]
     two = two_layer((*ft.NAMES, *ft.names_of(ext)), unfit, two_cap)
     cands += score_candidates(unfit, two, len(one))
     for c in cands:
         c.extracts = {src: ext[src] for src in _sources(c.body)}
-    verdict = judge(cands, live_cap)
+    verdict = judge(cands, live_cap, cfg["min_support"])
     sizes = {"tasks": tasks, "problems": probs, "extracts": ext, "scored": cands}
     sizes |= {"one_layer": one, "two_layer": two, "unfit_problems": unfit}
     sizes |= {k: verdict[k] for k in ("live", "covered", "over_cap", "dropped")}
@@ -285,7 +279,9 @@ def main(argv: list[str] | None = None) -> int:
     announce(GENERATOR, budget)
     nested = args.data_root / "data" / args.split
     tasks = load_tasks(nested if nested.is_dir() else args.data_root / args.split)
-    verdict, stats = run(tasks, args.live_cap, budget, top_extracts(args.root))
+    node = (args.root or default_blocks_root()) / GENERATOR / "_metainfo.json"
+    cfg = (read_json(node, {}) or {}).get("config")  # type: ignore[union-attr]
+    verdict, stats = run(tasks, args.live_cap, budget, top_extracts(args.root), cfg)
     stats = {"split": args.split, **stats}
     if not args.dry_run:
         write_blocks(args.root or default_blocks_root(), verdict, stats)
