@@ -50,7 +50,6 @@
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
 | N1 蠟模夜跑（gpu-night-1109）| opus | `src/arcagi/llm/wax/`、`tests/llm/wax/`、`reports/wax-night-1109/`、`notes/rounds/gpu-night-1109/wax*.md` | `~/code/playground-arc1/ws/hammer/` 唯讀；LM Studio 不 load/unload；`aos/blocks/`、`data/` 禁寫 | 2026-11-09 22:40 |
-| N2 CUDA 暴力搜尋雛形（gpu-night-1109）| opus | `native/`（含 S1 `forbid`）、`tests/native/`、`reports/native-cuda-1109/`、`notes/rounds/gpu-night-1109/cuda*.md` | 求解入口契約與 `arcagi-trace/1` 不改；`aos/blocks/`、`data/` 禁寫 | 2026-11-09 22:40 |
 
 ### 保留給主 agent，任何線都不得寫
 
@@ -64,6 +63,7 @@
 
 | 線 | 完成證據 | 收線時間 |
 |----|---------|---------|
+| N2 CUDA 暴力搜尋雛形 | 1ca9a6f／78c7890；GPU 對 CPU 44.5×（≤3，200 題）、105×（≤4，12 題）；212 題解集合一致、Python 驗 399/399；tests/native 17 綠；長跑 arcagi-n2-overnight 到 06:00（輸出未 commit，晨報收）；forbid 未做（不相依） | 2026-11-09 23:20 |
 | r08-A 表達力 | b67dc2a；purity ok、tests/seed 85 綠；+halves L16 pass 0 4→6、nest 無效；golden_prims 747 組＋05 規格 | 2026-11-08 17:05 |
 | r08-B 練習池曲線＋meta | fcf3f1c／51fe268／424d0d0；pytest 564 綠；pool AUC_L 32（=noG1）、foot32 26（clean_P 10→15）、meta 5 回合＋2 動作全不採用 | 2026-11-08 18:10 |
 | r07-A 起點樹 seed | purity ok（32 原語）、pytest 523 綠；L16 pass 0 2→4（fe9b759→35049ef→0349a1d→efdee5d） | 2026-11-08 16:15 |
