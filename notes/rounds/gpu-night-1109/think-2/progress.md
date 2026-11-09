@@ -2,7 +2,7 @@
 
 ← [代定清單](代定清單.md)｜[夜跑看板](../README.md)
 
-狀態：**DONE（塊 1）**。第二棒（t2b）做完 D11～D20、03 設計、塊 1 施工（accept 三條全過）、04 總結。
+狀態：**塊 2 PARTIAL（t2c）**：03b 寫好、sol 施工完、隊長審過＋造假測試全過；§9 長跑在背景。塊 1 DONE。第二棒（t2b）做完 D11～D20、03 設計、塊 1 施工（accept 三條全過）、04 總結。
 
 ## 已完成
 
@@ -30,13 +30,27 @@
 | 施工 | `src/arcagi/treegen/`（codex sol，隊長審 diff＋複跑），驗收 `reports/think2-1109/rt/accept.json` pass=true |
 | 04 收輪 | [04-總結簡報.md](04-總結簡報.md) |
 
+## 第三棒（t2c）做完
+
+| 段 | 結果 |
+|---|---|
+| 03b | [03b-設計-塊2.md](03b-設計-塊2.md)：快撥（副本清 P＝D17、外框預算鎖死回應 Argon 9）、雜訊尺（成對 bootstrap＝D16）、守門一（config＋ops，分 inherited／new）、守門二（行級 sha 登錄，堵 Argon 6.1）、驗收 B1～B6 |
+| 施工 | sol：`treegen/quick.py`、`noise.py`、`guards.py`、cli 加 5 子指令、`tests/treegen/test_block2.py`（14 passed）、`reports/think2-1109/guards/thresholds.json`（25 列，rank／diag／route，無收升退）；隊長審過登錄表與 quick 的 dest 限制、threads≤4、P 清空 |
+| 守門實數 | 守門二 repo PASS（25 命中、未登錄 0）；造假 `if pixel_acc>0.9: promote` → FAIL（未登錄 2）。守門一 活樹 FAIL（config FAIL、16 violations／12 tainted ops）；快撥副本 config PASS、leak_new PASS（繼承 12 列 tainted，總 status FAIL＝預期）；造假加一列 src_tasks∋P → leak_new FAIL |
+| 雜訊尺造假 | 同份 quick 兩次 → deterministic、σ=0（degenerate）；翻一題 → deterministic=false、exit 1、mismatch 1；compare Δ=1、σ=1.02、z=0.98 |
+| 煙霧 | L=2000/1 epoch：auc_L 3＝Σper_task，check_root 0 錯 |
+
+造假產物：scratchpad `t2c/fake/`。
+
 ## 下一步
 
-塊 2 的 03 細化（帶入 D11、D15～D17、D20），再交 sol 施工。
+1. 收 §9 長跑結果（下節單元）：讀 `ws/evo/quick/b2runs.out`、`noise-c25.json`、`noise-c50.json`、`cmp-l2.json`（B5 要 Δ=0）、`cmp-d20-v{1,2,3}.json`（B6）、`cmp-clean-vs-state.json`、各 `quick.json` 的 wall／guards，寫 `reports/think2-1109/b2/accept.json`（B1～B6）並 commit，代定清單 D20 依 B6 結果改「驗過可用／不用」。
+2. 若 C25/C50 全決定論，`sigma_auc_L` 對同樹會是 0（degenerate），塊 4 判顯著要用 `compare` 的成對 σ（不同樹）。
+3. 之後：塊 3 credit 帳的 03 細化（先回應 D15 的 Argon 7、8）。
 
 ## 在跑的背景單元
 
-無（`arcagi-t2-gather`、`arcagi-t2-argon` 都已結束）。
+- `arcagi-t2c-b2runs.service`（systemd 服務，非 scope）：腳本 scratchpad `t2c/b2runs.sh`，C25×3→noise→L2 兩跑→D20 三變體→C50×3→noise；輸出 `/home/lorkhan/code/playground-arc1/ws/evo/quick/`，跑完印 `ALLDONE`。C25 一跑約 15 s。
 
 ## commit
 

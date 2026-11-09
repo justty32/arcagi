@@ -1,0 +1,205 @@
+{
+ "entries": [
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "6613ebfbc939",
+   "metric": "near_miss",
+   "purpose": "diag",
+   "text": "ms = [a for a in tr.get(\"attempts\", []) if a.get(\"kind\") == \"near_miss\"]",
+   "why": "\u50c5\u7be9\u51fa trace \u4e2d\u7684\u8fd1\u4f3c\u5931\u6557\uff0c\u4f9b\u8a13\u7df4\u984c\u5931\u6557\u5206\u6790\u5831\u544a\u62bd\u6a23\uff1b\u4e0d\u6536\u89e3\u3001\u4e0d\u6539 op \u72c0\u614b\u3002"
+  },
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "211dd1714b24",
+   "metric": "pixel_acc",
+   "purpose": "rank",
+   "text": "ms.sort(key=lambda a: -a.get(\"data\", {}).get(\"pixel_acc\", 0.0))",
+   "why": "\u4f9d pixel accuracy \u6392\u5e8f\u5931\u6557\u5831\u544a\u7684\u8fd1\u4f3c\u5617\u8a66\uff0c\u50c5\u53d6\u524d\u4e09\u500b\u5c55\u793a\uff0c\u4e0d\u4f5c promote \u5224\u5b9a\u3002"
+  },
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "0fc82acc3ea4",
+   "metric": "pixel_acc",
+   "purpose": "diag",
+   "text": "\"pixel_acc\": a.get(\"data\", {}).get(\"pixel_acc\"),",
+   "why": "\u628a trace \u7684 pixel accuracy \u539f\u6a23\u5beb\u5165\u5931\u6557\u5206\u6790\u5831\u544a\u3002"
+  },
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "42a6f2cfd359",
+   "metric": "near_miss",
+   "purpose": "diag",
+   "text": "\"near_misses\": near.get(tid, []),",
+   "why": "\u5728\u5931\u6557\u6a23\u672c JSON \u9644\u5e36\u8fd1\u4f3c\u5617\u8a66\u6e05\u55ae\uff0c\u50c5\u4f9b\u8a3a\u65b7\u3002"
+  },
+  {
+   "file": "scripts/taxonomy_rates.py",
+   "key": "4ae64e530b05",
+   "metric": "pixel_acc",
+   "purpose": "diag",
+   "text": "a.get(\"data\", {}).get(\"pixel_acc\", 0.0)",
+   "why": "\u8b80\u53d6\u8fd1\u4f3c\u5617\u8a66\u7684 pixel accuracy \u8a08\u7b97 taxonomy \u7684 near90\u3001near_mean\u3001half_fixed \u5831\u8868\uff1b\u984c\u76ee\u89e3\u51fa\u6578\u4ecd\u53d6 correct\u3002"
+  },
+  {
+   "file": "scripts/taxonomy_rates.py",
+   "key": "65246309a43b",
+   "metric": "near_miss",
+   "purpose": "diag",
+   "text": "if a.get(\"kind\") == \"near_miss\"",
+   "why": "\u50c5\u9078 trace \u7684 near_miss \u4e8b\u4ef6\u8a08\u7b97\u8a3a\u65b7\u7d71\u8a08\uff0c\u4e0d\u53c3\u8207\u6b63\u78ba\u7387\u6216 op \u72c0\u614b\u5224\u5b9a\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "4e893d61d964",
+   "metric": "_gradients",
+   "purpose": "diag",
+   "text": "Near misses become ``_gradients.jsonl`` letters. Files: ``config.json``,",
+   "why": "\u6a94\u982d\u8aaa\u660e\u8fd1\u4f3c\u5931\u6557\u8f49\u6210 gradient \u8a3a\u65b7\u4fe1\u4ef6\uff1b\u5be6\u969b\u9000\u4f11\u4f9d\u96f6\u6536\u5165\u8207 covered \u72c0\u614b\uff0c\u4e26\u975e\u8fd1\u4f3c\u5206\u6578\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "223c18c6211f",
+   "metric": "near_miss",
+   "purpose": "rank",
+   "text": "\"near_misses_per_task\": 1,",
+   "why": "\u8a2d\u5b9a\u6bcf\u984c\u6700\u591a\u4fdd\u7559\u5e7e\u5c01\u8fd1\u4f3c\u5931\u6557\u4fe1\u4ef6\uff0c\u9650\u5236 _near_misses \u7684\u6392\u5e8f\u622a\u53d6\u6578\u91cf\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "61c3dd82ed60",
+   "metric": "near_miss",
+   "purpose": "rank",
+   "text": "def _near_misses(trace: dict, limit: int) -> list[dict]:",
+   "why": "\u8f14\u52a9\u51fd\u5f0f\u53ea\u6311\u9078\u5206\u6578\u6700\u9ad8\u7684\u8fd1\u4f3c\u5931\u6557\uff0c\u56de\u50b3\u7528\u4f86\u7522\u751f\u8a3a\u65b7\u4fe1\u4ef6\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "a5d9f23f1fad",
+   "metric": "near_miss",
+   "purpose": "rank",
+   "text": "near = [a for a in trace.get(\"attempts\", []) if a.get(\"kind\") == \"near_miss\"]",
+   "why": "\u9078\u53d6\u53ef\u6392\u5e8f\u7684 near_miss \u5617\u8a66\uff1b\u8fd1\u4f3c\u5617\u8a66\u4e0d\u9032\u652f\u4ed8\u6216\u9000\u4f11\u8a08\u7b97\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "5e2cbce950cb",
+   "metric": "pixel_acc",
+   "purpose": "rank",
+   "text": "return sorted(near, key=lambda a: -a.get(\"data\", {}).get(\"pixel_acc\", 0))[:limit]",
+   "why": "\u4f9d pixel accuracy \u6392\u5e8f\u4e26\u622a\u53d6 gradient \u4fe1\u4ef6\u6a23\u672c\uff0c\u4e0d\u6c7a\u5b9a\u6536\u89e3\u3001\u5347\u7d1a\u6216\u9000\u4f11\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "0509138f70cc",
+   "metric": "near_miss",
+   "purpose": "rank",
+   "text": "for attempt in _near_misses(trace, config[\"near_misses_per_task\"]):",
+   "why": "\u904d\u6b77\u5df2\u6392\u5e8f\u622a\u53d6\u7684\u8fd1\u4f3c\u5931\u6557\uff0c\u628a\u7d50\u679c\u8b8a\u6210\u4fe1\u4ef6\uff1b\u6536\u8cbb\u8207 dividend \u50c5\u4f86\u81ea task.correct\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "d1fb1cd4c57f",
+   "metric": "pixel_acc",
+   "purpose": "diag",
+   "text": "letter[\"score\"] = attempt.get(\"data\", {}).get(\"pixel_acc\")",
+   "why": "\u5c07 pixel accuracy \u9644\u5728\u4fe1\u4ef6 score \u4f5c\u70ba\u8a3a\u65b7\u8cc7\u6599\uff1b\u672a\u7528\u65bc\u6536\u76ca\u6216\u9000\u4f11\u9580\u6abb\u3002"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "c8ddcc6c7ae5",
+   "metric": "_gradients",
+   "purpose": "diag",
+   "text": "path = block.path / \"_gradients.jsonl\" if block else None",
+   "why": "\u6307\u5b9a _gradients.jsonl \u4fe1\u4ef6\u8f38\u51fa\u8def\u5f91\uff1b\u5beb\u5165\u53ea\u6709\u6578\u91cf\u4e0a\u9650\uff0c\u4e0d\u4f7f\u7528 score \u5224\u5b9a op \u72c0\u614b\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/body.py",
+   "key": "4fd254afc6b4",
+   "metric": "near_score",
+   "purpose": "route",
+   "text": "\"near_score\": near[0][1] if near else None,",
+   "why": "\u8f38\u51fa\u6700\u4f73\u8fd1\u4f3c\u5206\u6578\uff0c\u7d93 epoch \u7684 near_best_L \u63d0\u4f9b stall \u5224\u505c\u8207\u8def\u7531\uff1bgate_ok/test_ok \u53e6\u884c\u8a08\u7b97\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "a9bb438c1481",
+   "metric": "near_best",
+   "purpose": "route",
+   "text": "\"llm_calls\", \"false_pos\", \"env_hash\", \"near_best_L\", \"wall_s\"]",
+   "why": "curve \u6b04\u540d\u5305\u542b near_best_L\uff0c\u5176\u6578\u503c\u4f9b stall \u5224 stop \u8207\u5f8c\u7e8c\u8def\u7531\uff0c\u4e0d\u6c7a\u5b9a promote/retire\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "96c6504ec48c",
+   "metric": "near_score",
+   "purpose": "route",
+   "text": "near = [main[t].get(\"near_score\") or 0.0 for t in ids[\"L16\"]",
+   "why": "\u805a\u5408\u5c1a\u672a\u89e3\u51fa L16 \u7684\u8fd1\u4f3c\u5206\u6578\uff0c\u7528\u65bc stall \u8def\u7531\u662f\u5426\u505c\u6eef\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "c4e16cf7c977",
+   "metric": "near_best",
+   "purpose": "route",
+   "text": "\"near_best_L\": round(max(near), 6) if near else None,",
+   "why": "\u8a18\u9304\u6700\u4f73\u8fd1\u4f3c\u5206\u6578\uff1bstall \u7528\u5176\u662f\u5426\u6301\u5e73\u5224 stop\uff0c\u9032\u800c\u767c foundry \u8acb\u6c42\uff0c\u4e0d\u4ee5\u6b64\u6536\u89e3\u6216\u5347\u9000 op\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "d35c73bd8a8f",
+   "metric": "near_best",
+   "purpose": "route",
+   "text": "\"near_best_L\")}})",
+   "why": "\u5c07 near_best_L \u5beb\u5165 epoch ledger\uff0c\u4f9b judge_stall \u5224\u505c\u8207\u8def\u7531\u8b80\u53d6\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/stall.py",
+   "key": "4fce2dc91272",
+   "metric": "near_best",
+   "purpose": "route",
+   "text": "near_best_L                      best near score over unsolved L16",
+   "why": "\u6587\u4ef6\u5217\u51fa stall \u8b80\u53d6\u7684 near_best_L\uff0c\u63cf\u8ff0\u5224\u505c\u8f38\u5165\u800c\u975e\u6536\u89e3\u6216\u5347\u9000\u9580\u6abb\u3002"
+  },
+  {
+   "file": "src/arcagi/hammer/stall.py",
+   "key": "5d2abd43ab43",
+   "metric": "near_best",
+   "purpose": "route",
+   "text": "near = [_get(r, \"near_best_L\") for r in rows]",
+   "why": "near_best_L \u9023\u7e8c\u6301\u5e73\u624d\u628a\u5df2\u98fd\u548c\u6a39\u5224 stop\uff0c\u89f8\u767c\u8def\u7531/foundry \u8acb\u6c42\uff1b\u4e0d\u547c\u53eb promote/retire\u3002"
+  },
+  {
+   "file": "src/arcagi/solvers/search.py",
+   "key": "40f1a97cbd38",
+   "metric": "near_miss",
+   "purpose": "diag",
+   "text": "kind=\"near_miss\",",
+   "why": "\u53ea\u628a\u5931\u6557\u7684\u8fd1\u4f3c\u7a0b\u5f0f\u8a18\u70ba trace \u4e8b\u4ef6\uff1b\u6700\u7d42\u9078\u89e3\u4f86\u81ea\u5b8c\u5168\u7b26\u5408\u8a13\u7df4\u5c0d\u7684 solutions\u3002"
+  },
+  {
+   "file": "src/arcagi/solvers/search.py",
+   "key": "c11a11e97e51",
+   "metric": "pixel_acc",
+   "purpose": "diag",
+   "text": "data={\"pixel_acc\": round(acc, 4)},",
+   "why": "\u5728 trace \u4e8b\u4ef6\u8a18\u9304 pixel accuracy\uff0c\u6c92\u6709\u4ee5\u6b64\u63a5\u53d7\u7a0b\u5f0f\u6216\u6539 op \u72c0\u614b\u3002"
+  },
+  {
+   "file": "src/arcagi/treegen/guards.py",
+   "key": "75bffc3e73ee",
+   "metric": "cell_acc|match_after|match_ratio|near_best|near_miss|near_score|pixel_acc",
+   "purpose": "diag",
+   "text": "r\"pixel_acc|cell_acc|match_ratio|match_after|near_score|near_best|near_miss|\"",
+   "why": "\u5b88\u9580\u6383\u63cf\u5668\u7684\u6b63\u5247\u6a21\u5f0f\u5b57\u9762\u503c\uff0c\u50c5\u8b58\u5225\u5f85\u4eba\u5de5\u767b\u9304\u7684\u4f86\u6e90\u884c\u3002"
+  },
+  {
+   "file": "src/arcagi/treegen/guards.py",
+   "key": "c510963e5495",
+   "metric": "_gradients",
+   "purpose": "diag",
+   "text": "r\"_gradients\"",
+   "why": "\u5b88\u9580\u6383\u63cf\u5668\u7684\u6b63\u5247\u6a21\u5f0f\u5b57\u9762\u503c\uff0c\u5305\u542b gradient \u4fe1\u4ef6\u540d\u7a31\uff0c\u4e0d\u4f5c\u6578\u503c\u5224\u5b9a\u3002"
+  }
+ ],
+ "schema": "think2-thresholds/1"
+}

@@ -180,9 +180,38 @@ def main(argv: list[str] | None = None) -> int:
     rt.add_argument("tree_root", type=Path)
     rt.add_argument("--out", type=Path, required=True)
     rt.add_argument("--accept", type=Path, required=True)
+    quick = commands.add_parser("quick")
+    quick.add_argument("tree_json", type=Path, nargs="?")
+    quick.add_argument("--from-root", type=Path)
+    quick.add_argument("--state", type=Path)
+    quick.add_argument("--dest", type=Path, required=True)
+    quick.add_argument("--L", type=int, required=True)
+    quick.add_argument("--epochs", type=int, required=True)
+    quick.add_argument("--threads", type=int, default=4)
+    quick.add_argument("--no-clear-p", action="store_true")
+    noise = commands.add_parser("noise")
+    noise.add_argument("dirs", nargs="+", type=Path)
+    noise.add_argument("--out", type=Path, required=True)
+    compare = commands.add_parser("compare")
+    compare.add_argument("a", type=Path)
+    compare.add_argument("b", type=Path)
+    compare.add_argument("--out", type=Path, required=True)
+    leak = commands.add_parser("guard-leak")
+    leak.add_argument("target", type=Path)
+    leak.add_argument("--state", type=Path)
+    leak.add_argument("--forbid-root", type=Path)
+    leak.add_argument("--base-ops", type=Path)
+    leak.add_argument("--out", type=Path)
+    thresholds = commands.add_parser("guard-thr")
+    thresholds.add_argument("--scan", type=Path, nargs="+")
+    thresholds.add_argument("--registry", type=Path)
+    thresholds.add_argument("--init", action="store_true")
+    thresholds.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
     try:
         boundary.check_stop()
+        if args.command in ("quick", "noise", "compare", "guard-leak", "guard-thr"):
+            return _block2(args)
         if args.command == "export":
             _export_tree(
                 args.tree_root, args.out, args.dedup == "on", tree_name=args.tree_name
@@ -214,6 +243,47 @@ def main(argv: list[str] | None = None) -> int:
         print(f"treegen: {exc}", file=sys.stderr)
         return 1
     return 0
+
+
+def _block2(args: argparse.Namespace) -> int:
+    """Dispatch additive block-2 commands without changing legacy paths."""
+    from . import guards, noise, quick
+
+    code = 0
+    if args.command == "quick":
+        if (args.tree_json is None) == (args.from_root is None):
+            raise ValueError("quick requires either tree.json or --from-root")
+        if not 1 <= args.threads <= 4:
+            raise ValueError("quick threads must be between 1 and 4")
+        quick.prepare(
+            args.tree_json or args.from_root,
+            args.dest,
+            state=args.state,
+            L=args.L,
+            epochs=args.epochs,
+            clear_p=not args.no_clear_p,
+        )
+        result = quick.run(args.dest, epochs=args.epochs, threads=args.threads)
+    elif args.command == "noise":
+        result = noise.noise(args.dirs)
+        code = int(not result["deterministic"])
+    elif args.command == "compare":
+        result = noise.compare(args.a, args.b)
+    elif args.command == "guard-leak":
+        kwargs = {"forbid_root": args.forbid_root} if args.forbid_root else {}
+        result = guards.leak(
+            args.target, state=args.state, base_ops=args.base_ops, **kwargs
+        )
+        code = int(result["status"] != "PASS")
+    else:
+        kwargs = {"registry": args.registry} if args.registry else {}
+        result = guards.thresholds(args.scan, init=args.init, **kwargs)
+        code = int(result["status"] != "PASS")
+    boundary.check_stop()
+    if getattr(args, "out", None):
+        write_json(args.out, result)
+    print(json.dumps(result, ensure_ascii=False, indent=1))
+    return code
 
 
 if __name__ == "__main__":
