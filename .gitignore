@@ -14,3 +14,6 @@ examples/c_identity/solver
 data_synth/
 .aos-run/
 native/synth.jsonl
+
+# native/hot build objects
+native/hot/obj-*/

@@ -321,3 +321,16 @@ HOT_E_OBJECTS := $(filter-out hot/obj-ab/seed_enum.o hot/obj-ab/seed_value.o,$(H
                  hot/obj-e/seed_enum.o hot/obj-e/seed_value.o
 bin/arcbatch-hot-e: $(HOT_E_OBJECTS) | bin
 	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# N8d F: A+B+E plus inline lambda-body leaves, with identical step accounting.
+.PHONY: hot-f
+hot-f: bin/arcbatch-hot-f
+
+hot/obj-f/seed_enum.o hot/obj-f/seed_value.o: hot/obj-f/%.o: hot/%.cpp hot/scalar_prims.hpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -DHOT_B -DHOT_E -DHOT_F -c $< -o $@
+
+HOT_F_OBJECTS := $(filter-out hot/obj-ab/seed_enum.o hot/obj-ab/seed_value.o,$(HOT_AB_OBJECTS)) \
+                 hot/obj-f/seed_enum.o hot/obj-f/seed_value.o
+bin/arcbatch-hot-f: $(HOT_F_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@

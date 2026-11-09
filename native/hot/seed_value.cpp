@@ -730,7 +730,20 @@ V eval(int ni, const V* env, int envn, Ctx& c) {
     if (--c.steps < 0) return ERR;
     V a[3];
     for (int k = 0; k < n.nk; ++k) {
+#ifdef HOT_F
+        const int kid_index = A.kids[size_t(n.k0 + k)];
+        const CNode& kid = A.nodes[size_t(kid_index)];
+        // Leaf eval returns before charging steps; only recurse for applications.
+        switch (kid.kind) {
+        case C_CONST: a[k] = mk_int(kid.c); break;
+        case C_INPUT: a[k] = c.input; break;
+        case C_VAR: a[k] = int(kid.c) < envn ? env[kid.c] : ERR; break;
+        case C_LAM: a[k] = mk_fn(uint32_t(kid_index)); break;
+        default: a[k] = eval(kid_index, env, envn, c); break;
+        }
+#else
         a[k] = eval(A.kids[size_t(n.k0 + k)], env, envn, c);
+#endif
         if (a[k] == ERR) return ERR;
     }
     return apply_prim(n.prim, a, c);

@@ -58,12 +58,16 @@ def test_hot_rows_match_reference(tmp_path, decomp):
 
 
 @pytest.mark.parametrize(
-    "candidate", ["arcbatch-hot-c", "arcbatch-hot-d", "arcbatch-hot-e"]
+    "candidate",
+    ["arcbatch-hot-c", "arcbatch-hot-d", "arcbatch-hot-e", "arcbatch-hot-f"],
 )
 @pytest.mark.parametrize("decomp", [False, True])
 def test_new_hot_rows_match_reference(tmp_path, decomp, candidate):
     if not os.access(BIN / candidate, os.X_OK):
-        target = "hot-e" if candidate == "arcbatch-hot-e" else "hot2"
+        target = {
+            "arcbatch-hot-e": "hot-e",
+            "arcbatch-hot-f": "hot-f",
+        }.get(candidate, "hot2")
         pytest.skip(f"run make -C native {target}")
     tasks = tmp_path / "tasks.txt"
     tasks.write_text("007bbfb7\n025d127b\n1e0a9b12\n68b16354\n")
@@ -196,3 +200,43 @@ def test_hot_e_scalar_batches_and_store(tmp_path):
         results.append(result.stdout)
     assert results[1] == results[0]
     assert results[0].endswith("scalar batch invariants: PASS\n")
+
+
+@pytest.mark.skipif(
+    not all(
+        (ROOT / f"native/hot/{obj}/seed_value.o").exists() for obj in ("obj-e", "obj-f")
+    ),
+    reason="run make -C native hot-e hot-f",
+)
+def test_hot_f_leaf_budgets_and_store(tmp_path):
+    results = []
+    for obj in ("obj-e", "obj-f"):
+        executable = tmp_path / obj
+        subprocess.run(
+            [
+                "g++",
+                "-std=c++20",
+                "-O2",
+                "-pthread",
+                "-Inative/src",
+                "tests/native/hot_f_check.cpp",
+                f"native/hot/{obj}/seed_value.o",
+                "-o",
+                str(executable),
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=30,
+        )
+        result = subprocess.run(
+            [str(executable)],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
+        )
+        results.append(result.stdout)
+    assert results[1] == results[0]
+    assert results[0].endswith("leaf budget and store invariants: PASS\n")
