@@ -15,6 +15,8 @@
 5. CronList 看 06:04 晨報排程在不在；不在就 CronCreate `4 6 10 11 *` one-shot（內容：核各線 overnight-summary、寫 晨報.md、寄 aos DONE）。
 6. 下表「現役線」逐條確認狀態；子 agent 完成通知來了就照 dispatch 收線（對證據）並更新本表。
 7. 每次 commit 後更新本表與 SESSION-LOG 再 push。
+8. **GPU 不准閒**（使用者：「不要讓gpu閒下來，一整個晚上我都要靠它取暖」）：`nvidia-smi --query-gpu=utilization.gpu,power.draw,temperature.gpu --format=csv`；功耗長時間 <100W 或 util 掉下來就加 GPU 負載（開新的 GPU 搜尋長跑或加大 batch），溫度 ≤85°C。
+9. aos 頂層熟使用者過去習慣：拿不準的流程、偏好、過去 thinking 就寄 REQUEST 問它（`wf/tools/inbox_send.sh --reply-to ... aos inbox ... REQUEST`），不自己猜。
 
 ## 子 agent context 管理（使用者 22:5x「子agent的context也要做管理」）
 
