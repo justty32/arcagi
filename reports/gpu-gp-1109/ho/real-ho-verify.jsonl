@@ -1,0 +1,2 @@
+{"task": "1fad071e", "train_ok": true, "test_ok": false, "cpp_test_ok": false, "program": [["downscale", 3, 1], ["tile", 1, 2], ["colormap", [[2, 0]]], ["downscale", 3, 1], ["crop_bbox"], ["gravity", "right"], ["split_overlay", "v", "nor"], ["colormap", [[0, 1], [10, 0]]]], "samples": 0, "samples_train_ok": 0}
+{"summary": {"checked": 1, "train_ok": 1, "test_ok": 0, "test_agrees_with_cpp": 1, "samples": 0, "samples_train_ok": 0}}
