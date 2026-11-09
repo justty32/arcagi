@@ -1,13 +1,20 @@
-# N3 GPU 遺傳式程式搜尋——進度（第 2 棒 N3b，11-09 23:10 更新）
+# N3 GPU 遺傳式程式搜尋——進度（第 2 棒 N3b，11-09 23:22 交棒，PARTIAL：30% context）
 
-## 第 2 棒現況（先看這段）
-- codex 已完工（沙箱無 GPU）；隊長實跑：smoke 3c9b0459 `solved:true`、rot180 深度 1、0.003 秒。
-- 族群調校（與 N2 同時跑、實測功耗）：pop 65536 → 93 W、1.0e7 eval/s；**pop 524288 → 125 W、1.9e7 eval/s（採用）**；pop 2097152 → 114 W、1.45e7 eval/s。顯存約 0.5 GB。
-- `overnight.sh` 加 `GP_ARGS`（預設 `--pop 524288`）。
-- **整夜長跑已開**：`arcagi-n3-gp`（23:05 起，597 題，預算 20→60→120→240 秒），日誌 `reports/gpu-gp-1109/overnight/run.log`、`gp-stderr.log`，結束／中斷寫 `reports/gpu-gp-1109/overnight-summary.md`。
-- 合成題已造：`reports/gpu-gp-1109/synth/L{5,6,7}/`（16／19／16 題，min-depth 4 已確認淺層無解），題單 `synth/L*-paths.txt`。
-- 比較在跑：`arcagi-n3-bench-real`（real-40，每題 20 秒）→ 之後 `arcagi-n3-bench-synth`（L5/6/7，每題 15 秒）。結果 `reports/gpu-gp-1109/bench/*/`，製表 `python3 native/gpu/gp/bench_table.py reports/gpu-gp-1109/bench/*`。
-- 剩：兩組 bench 跑完→寫 report.md、gp-白話.md→commit/push。
+## 現況
+- smoke：3c9b0459 `solved:true`（rot180、深度 1、0.003 秒）。codex 沙箱無 GPU，實跑由隊長做。
+- 族群調校（與 N2 共用 GPU）：pop 65536 → 93 W；**524288 → 125 W、1.9e7 eval/s（整夜採用）**；2097152 → 114 W。顯存約 0.5 GB。數字已寫進 report.md。
+- **整夜長跑在跑**：`arcagi-n3-gp`（23:05 起，597 題主線未解，預算 20→60→120→240 秒，至 06:00），日誌 `reports/gpu-gp-1109/overnight/run.log`、`gp-stderr.log`，結束／中斷寫 `reports/gpu-gp-1109/overnight-summary.md`。
+- 早期觀察：pass-1 前 33 題 C++ 判 4 題「解」（1fad071e、2013d3e2、239be575、25d8a9c8），Python 驗 **train 全過但 test 全錯**＝過擬合；化簡後仍長 3～8 步。GP 的「solved」只代表 train 一致。
+- 合成題：`reports/gpu-gp-1109/synth/L{5,6,7}/` 16／19／16 題（深度<4 已確認無解），題單 `synth/L*-paths.txt`。
+- 比較在跑（依序）：`arcagi-n3-bench-real`（real-40，20 秒/題，約 23:50 完）→ `arcagi-n3-bench-synth`（L5/6/7，15 秒/題，約 00:30 完）。
+- `arcagi-n3-fill`（`native/gpu/gp/bench_fill.sh`）等兩組 bench 完就把表與指令自動填入 report.md 的 `<!-- RESULTS -->`，完成時寫 `reports/gpu-gp-1109/bench/FILLED`。
+- git 衛生（使用者新規）：`overnight/`、`bench/`、`synth/` 原始輸出由 `reports/gpu-gp-1109/.gitignore` 排除，不 commit；只 commit 程式、報告、彙總、驗過的少量解。
+
+## 下一步（接手者）
+1. 等 `reports/gpu-gp-1109/bench/FILLED` 出現（`until [ -f ... ]` 背景等），讀 report.md 結果段，補一段「結論」：GP vs random vs 窮舉的解題數、解深度、Python test 件數；特別寫 synth-L6/L7 是否有 GP 解出而窮舉沒解出（"只有它解出" 欄）。
+2. 寫 `notes/rounds/gpu-night-1109/gp-白話.md`（一段白話，連到 report）。
+3. commit report.md、gp-白話.md、progress.md（只 add 這些）＋push。
+4. 確認 `arcagi-n3-gp` 仍 active；06:00 後核 overnight-summary.md。
 
 ## 第 1 棒交接（歷史）
 

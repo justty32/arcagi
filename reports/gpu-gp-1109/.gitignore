@@ -1,0 +1,5 @@
+# Raw GP outputs stay local: regenerable, not committed (11-09 git hygiene rule).
+overnight/
+bench/
+synth/
+*.results
