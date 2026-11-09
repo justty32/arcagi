@@ -1,4 +1,15 @@
-# N3 GPU 遺傳式程式搜尋——交棒進度（11-09 23:03，PARTIAL，因 30% context 規則換手）
+# N3 GPU 遺傳式程式搜尋——進度（第 2 棒 N3b，11-09 23:10 更新）
+
+## 第 2 棒現況（先看這段）
+- codex 已完工（沙箱無 GPU）；隊長實跑：smoke 3c9b0459 `solved:true`、rot180 深度 1、0.003 秒。
+- 族群調校（與 N2 同時跑、實測功耗）：pop 65536 → 93 W、1.0e7 eval/s；**pop 524288 → 125 W、1.9e7 eval/s（採用）**；pop 2097152 → 114 W、1.45e7 eval/s。顯存約 0.5 GB。
+- `overnight.sh` 加 `GP_ARGS`（預設 `--pop 524288`）。
+- **整夜長跑已開**：`arcagi-n3-gp`（23:05 起，597 題，預算 20→60→120→240 秒），日誌 `reports/gpu-gp-1109/overnight/run.log`、`gp-stderr.log`，結束／中斷寫 `reports/gpu-gp-1109/overnight-summary.md`。
+- 合成題已造：`reports/gpu-gp-1109/synth/L{5,6,7}/`（16／19／16 題，min-depth 4 已確認淺層無解），題單 `synth/L*-paths.txt`。
+- 比較在跑：`arcagi-n3-bench-real`（real-40，每題 20 秒）→ 之後 `arcagi-n3-bench-synth`（L5/6/7，每題 15 秒）。結果 `reports/gpu-gp-1109/bench/*/`，製表 `python3 native/gpu/gp/bench_table.py reports/gpu-gp-1109/bench/*`。
+- 剩：兩組 bench 跑完→寫 report.md、gp-白話.md→commit/push。
+
+## 第 1 棒交接（歷史）
 
 ## 做到哪
 1. 已讀規矩、N2 報告與 `native/gpu/`（kernel.cu／driver.cpp／space.hpp／gpu.hpp）。
