@@ -14,7 +14,7 @@
 ## 跑完後的手動步驟（下一棒）
 
 1. 確認 `profile/FINALIZED` 存在、`finalize.log` 印 `{"rows": 800, "profiled": ~800, ...}`；看兩個 `*-d5.log` 是否有錯誤（應為空）。
-2. 驗收抽查：`grep -E '^(3c9b0459|00d62c1b),' features.csv | cut -d, -f1,33-38`，`top1_score` 應為 1.0（3c9b0459 top-1 `rot180`；00d62c1b top-1 `fill_enclosed`＋colormap）。或直接 `native/bin/gpuprofile --task data/ARC-AGI/data/training/3c9b0459.json --depth 2`。
+2. 驗收抽查：`grep -E '^(3c9b0459|00d62c1b),' features.csv | cut -d, -f1,31-38`，`top1_score` 應為 1.0（3c9b0459 top-1 `rot180`；00d62c1b top-1 `fill_enclosed`＋colormap）。或直接 `native/bin/gpuprofile --task data/ARC-AGI/data/training/3c9b0459.json --depth 2`。
 3. 寫本夾 `README.md`：目的一句、`已抽到 [features.csv](features.csv)（800 列）`、欄位說明（每欄一行；`prim_*`＝各深度 top-K 程式中含該原語的比例，`best`＝套最佳單一 colormap 後與 train 輸出相符格比例）、統計（best=1.0 幾題、≥0.9 幾題、主線已解／未解分佈）。
 4. 寫 `notes/rounds/gpu-night-1109/features-白話.md` 一段白話。
 5. 本機 commit `features.csv`＋README＋白話（不 push）；更新看板 N4 列。
