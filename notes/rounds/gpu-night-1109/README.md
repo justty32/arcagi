@@ -64,7 +64,6 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
 | N5c seed GPU 端到端 | （無 agent，等基準） | PARTIAL d6b738d：`arcbatch-gpuseed --gpu-seed` 解集合與 CPU 完全一致，但 1e6 單跑 18.8 s vs CPU 8.0 s（更慢）。剖析：GPU 支援的一階原語佔節點 66% 卻只佔 CPU 時間 26%，其餘 74% 是 lambda／if／library → 就算 GPU 免費整體上限 ~1.35×；每層上傳 27 ms＋launch 14 ms、分解子題重傳 bank。基準 `arcagi-n5c-bench` 跑 3×(1e6,1e7) 中；收尾：跑 scratchpad/n5c/analyze.py → report.md | 長跑中 | reports/seed-gpu-e2e-1110/ |
 | N3d GP holdout＋MDL | opus | gpgp-ho：留一 train 例 holdout、長度懲罰、簡化；量假 solved 比例是否下降 | 跑中（00:2x） | reports/gpu-gp-1109/holdout.md |
-| N6 M0 量基線 | opus | 思考輪 3 路線第 0 步：seed 時間六桶表＋到解節點基線（1e6／1e7），判 E1／E5 門檻；GPU 同期試做隨機程式造訓練料雛形 | 跑中（00:5x） | reports/m0-baseline-1110/ |
 
 ## 待辦（有空位就派）
 
@@ -84,6 +83,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 已收線
 
+- N6 M0 量基線（00:4x）：1e7 時 seed CPU 時間評估佔 83%（lambda 46%、一階 37%）、簿記 17%、if 0.1%、library 0 → E1 維持 B（排序器優先）、E5 lambda 門檻未達（46% <50%）；到解節點中位 1e6 140k（7 題解）、1e7 511k（10 題）；56% 片段 <256 節點 → 逐片段 GPU kernel 多是小批。gpusynth 雛形 1.4M 嘗試/s、留 111k/s 但只 4% 相異（多是 reverse/transpose/take/drop 變體）→ 瓶頸是多樣性不是速度；原語語意未對 seed_value.cpp 核。595dca5。
 - T3 思考設計輪 3（00:5x）：2446264、d5a2b8f；只到設計。Argon 修了 fable 三個高嚴重：①排序器訓練料只有 7/100 → 改 GPU 隨機造程式產大量訓練料 ②「延後不丟」違反 seed 由下而上建 bank → 改代價分桶列舉 ③ lambda 本體不能查表 → map/zipwith 攤平成批次重用 20 個一階 kernel；`--gpu-min 200000` 等於全 CPU，改用 0 比。量基線＋學排序期間 GPU 造訓練料 → 與「能用 GPU 就用」衝突大致化解。03／施工待使用者早上核代定（預設：先做無風險的量基線 N6）。
 - N3c GP 結論（00:3x）：合成題 GP 與窮舉 test 對題數相同（L5 16、L6 17、L7 12），GP 勝無選擇隨機基線（4.7× 快）但輸窮舉（6e7 vs 9e5 候選/s）；GP 沒挖到窮舉到不了的深度；真題過擬合：整夜前 232 題標 solved 7 題只 1 題 test 對。下一步：適應度加留一 train 例 holdout＋MDL 懲罰＋簡化；窮舉做淺層、GP 從前綴延伸。aab29f6、2dd4a12（N5c 交棒註；草稿在 scratchpad/n3c/n5c-draft.md，1e6 中位：cpu 9.1 s、gpu 21.1 s、gpuhi 9.1 s，解集合 0 不一致）。
 - W1 工作流改進（00:3x）：TEMPLATE.handoff.md「先讀」改成先 read kb/worker 或 kb/lead；dispatch/README 加指標；新 kb/lead/handoff_lessons（開完長跑就交棒、用工具呼叫數 ≤40 估）；lint 無新壞連結（舊 30 條多在 think-1/01a）；7487779。
