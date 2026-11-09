@@ -2,9 +2,9 @@
 
 ← [代定清單](代定清單.md)｜[夜跑看板](../README.md)
 
-狀態：**塊 4 進行中（t2e，PARTIAL）**：[03d](03d-設計-塊4.md) 寫完（§0 回應 Argon 3/9/10、D18、D20；§7 G1～G7 含造假必 FAIL），代定 D25～D28；codex sol 施工已結束（00:52，回報稱 pytest 過、ga-fake 全 FAIL；**未審 diff、未實跑 ga**）。塊 1～3 完成。
+狀態：**塊 1～4 完成**（塊 4 由 t2f 收：審 diff、實跑 1 代 8 個體，[b4/accept.json](../../../../reports/think2-1109/b4/accept.json) G1～G7 全 PASS）。塊 5 留下一輪。
 
-**下一棒**：(1) 等 `arcagi-t2e-sol` 結束、讀 `-o` 回報 scratchpad `t2e/sol-report.md`（log `t2e/sol.log`）；(2) 審 diff（`git status src/arcagi/treegen tests/treegen reports/think2-1109`；關鍵：check 的不可動欄位／born/by、$ref 懸空、genome_sha 重算、mutate 不碰 budgets.L/epochs、quick 參數 L=25000/epochs=4/threads≤4、越界改既有模組要還原）；(3) 實跑 1 代 8 個體（見下方單元說明，systemd 背景）→ `reports/think2-1109/b4/accept.json`、`fake.json`；(4) commit 程式＋accept（族群 `ws/evo/pop/` 不 commit）；(5) 下一步＝塊 5 或收輪 04b。
+**下一棒**：收輪 04b——寫塊 1～4 總結簡報（參考 [04-總結簡報.md](04-總結簡報.md) 格式），塊 5（Janet）留下一輪。
 
 ## 已完成
 
@@ -59,6 +59,17 @@
 產物（不進 git）：`ws/evo/ledger/hammer/`；造假：scratchpad `t2d/fake/`、`t2d/myfake/`。
 
 已知限制：by_subtree 七節點等分（weight 全 1.0），第一層沒有區分力；gate／route 無 blk 歸屬，star 份額平分；花費只有 hammer 級；20/70/10 未證有效。
+
+## 第五棒（t2f）做完：塊 4 收
+
+| 段 | 結果 |
+|---|---|
+| 審 diff | sol 交付 `treegen/{bounds,check,crossover,fitness,ga,ga_fake,genome,mutate,select}.py`＋cli `ga`／`ga-check`／`ga-fake`、`tests/treegen/test_block4.py`。逐行看 check（op 的 id/kind/born/by/sig/parent_route 不可動、gate 只許數值參數、route 只許 priority、骨架除 judge 數值與 node weight 外不可動、懸空 $ref 先擋、genome_sha 重算比對、check_root＋leak）、genome.write 每次重算 sha、pack 由 deduplicate 重建 defs、select 只 copytree 到 hall/ 不刪、destination 限 ws/evo 或 scratch。唯一修改：`genome.SCRATCH` 由 t2e 改 t2f（暫存只落本棒 scratch） |
+| pytest | `tests/treegen` 95 passed |
+| 實跑 | `ga --pop 8 --gens 1 --seed 0`，總 ~25 s 快撥 wall 71 s（5 次實跑＋3 次快取命中）；G1～G7 全 PASS（重抽皆 0；G4 8/8 封印同 sha；G6 繼承 taint 96 列只診斷；G7 活樹 97 檔不變、95 passed） |
+| 子代 | 0 M5 grow.weight 1→0.855（eff 2.7417）；1 M2 comb_g1_cd450dff4b live→dormant（eff 2.7245，cost↑）；2 M2 comb_g1_e6ba9d8a6f dormant→live（2.7406）；3 M3 刪 route_starve_rt_sleep（2.7417）；4 M2 同 route→dormant（2.7417）；5 X1(4,1)＝4 同 sha（快取）；6 X3(2,3)＝2 同 sha（快取）；7 clone（快取）。auc_L 全 20，Δ=0、σ=0 degenerate |
+
+發現（未修，記給下一輪）：(a) 交配兩支都塌成親代之一的 genome（X1/X3 沒拒絕重複 sha，mutate 有）；(b) auc_L 對所有單刀突變都不動，C25 快撥的鑑別力不足，選擇只靠 eff 小數與 sha 字典序破平手——G 驗收證管線，不證演化有效；(c) 第一層分法仍 weight 等分。族群在 `ws/evo/pop/`（不進 git）。
 
 ## 下一步
 

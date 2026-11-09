@@ -1,0 +1,150 @@
+{
+ "checks": {
+  "G1": {
+   "children": 8,
+   "legal": 8,
+   "max_redraws": 0,
+   "pass": true,
+   "redraws": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "G2": {
+   "errors": [],
+   "pass": true,
+   "quick_wall_s": 71.21834752700306,
+   "scored": 8
+  },
+  "G3": {
+   "cache_hits": 3,
+   "pass": true,
+   "quick_calls_on_hits": 0
+  },
+  "G4": {
+   "children": [
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    },
+    {
+     "L": "409e9519c662",
+     "epochs": "fe5dbbcea5ce",
+     "holdout": "83ee8d781718",
+     "taskset": "c9da99f19e65",
+     "truth": "ddd67cb60935"
+    }
+   ],
+   "matching": 8,
+   "parent": {
+    "L": "409e9519c662",
+    "epochs": "fe5dbbcea5ce",
+    "holdout": "83ee8d781718",
+    "taskset": "c9da99f19e65",
+    "truth": "ddd67cb60935"
+   },
+   "pass": true
+  },
+  "G5": {
+   "details": [],
+   "errors": 0,
+   "pass": true
+  },
+  "G6": {
+   "bounds_or_leak_errors": 0,
+   "inherited_taint": 96,
+   "pass": true
+  },
+  "G7": {
+   "errors": [],
+   "evo_status": [],
+   "evo_status_rows": 0,
+   "guard_missing": 0,
+   "guard_status": "PASS",
+   "live_files": 97,
+   "live_files_differ": 0,
+   "pass": true,
+   "pytest_exit": 0,
+   "tests_passed": 95,
+   "wall_s": 1.6617866300002788
+  }
+ },
+ "limitations": [
+  "M4 and X2 are disabled; no external op bank.",
+  "Selection demonstrates plumbing, not efficacy.",
+  "Activity event ownership is provisional; non-comb history uses the block-3 proxy."
+ ],
+ "out": "/home/lorkhan/code/playground-arc1/ws/evo/pop",
+ "pass": true,
+ "schema": "think2-ga-accept/1",
+ "seed": 0,
+ "selected": [
+  {
+   "directory": "/home/lorkhan/code/playground-arc1/ws/evo/pop/g1/3_1bbac0a529eb",
+   "genome_sha": "1bbac0a529eb"
+  },
+  {
+   "directory": "/home/lorkhan/code/playground-arc1/ws/evo/pop/g1/4_4575d1c8c153",
+   "genome_sha": "4575d1c8c153"
+  },
+  {
+   "directory": "/home/lorkhan/code/playground-arc1/ws/evo/pop/g1/0_daf8bfac3fcb",
+   "genome_sha": "daf8bfac3fcb"
+  },
+  {
+   "directory": "/home/lorkhan/code/playground-arc1/ws/evo/pop/g1/5_4575d1c8c153",
+   "genome_sha": "4575d1c8c153"
+  }
+ ]
+}

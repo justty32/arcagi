@@ -215,9 +215,26 @@ def main(argv: list[str] | None = None) -> int:
     thresholds.add_argument("--registry", type=Path)
     thresholds.add_argument("--init", action="store_true")
     thresholds.add_argument("--out", type=Path)
+    ga = commands.add_parser("ga")
+    ga.add_argument("--parent", type=Path, required=True)
+    ga.add_argument("--pop", type=int, default=8)
+    ga.add_argument("--gens", type=int, default=1)
+    ga.add_argument("--out", type=Path, required=True)
+    ga.add_argument("--seed", type=int, default=0)
+    ga.add_argument("--ledger", type=Path, required=True)
+    ga.add_argument("--threads", type=int, default=4)
+    ga_check = commands.add_parser("ga-check")
+    ga_check.add_argument("tree_json", type=Path)
+    ga_check.add_argument("--parent", type=Path, action="append", required=True)
+    ga_check.add_argument("--fit", type=Path)
+    ga_check.add_argument("--quick", type=Path)
+    ga_fake = commands.add_parser("ga-fake")
+    ga_fake.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
         boundary.check_stop()
+        if args.command in ("ga", "ga-check", "ga-fake"):
+            return _block4(args)
         if args.command in ("ledger", "ledger-check"):
             return _block3(args)
         if args.command in ("quick", "noise", "compare", "guard-leak", "guard-thr"):
@@ -309,6 +326,35 @@ def _block3(args: argparse.Namespace) -> int:
         for name, item in result["checks"].items():
             if not item["pass"]:
                 print(f"{name} FAIL: {'; '.join(item['errors'])}", file=sys.stderr)
+    print(json.dumps(result, ensure_ascii=False, indent=1))
+    return code
+
+
+def _block4(args: argparse.Namespace) -> int:
+    """Dispatch additive block-4 generation and adversarial checks."""
+    from . import check, ga, ga_fake
+
+    if args.command == "ga":
+        result = ga.run(
+            args.parent,
+            args.out,
+            args.ledger,
+            pop=args.pop,
+            gens=args.gens,
+            seed=args.seed,
+            threads=args.threads,
+        )
+        code = int(not result["pass"])
+    elif args.command == "ga-check":
+        result = check.ga_check(
+            args.tree_json, args.parent, fit=args.fit, quick_dir=args.quick
+        )
+        code = int(not result["ok"])
+        for error in result["errors"]:
+            print(f"ga-check FAIL: {error}", file=sys.stderr)
+    else:
+        result = ga_fake.run(args.out)
+        code = int(not result["pass"])
     print(json.dumps(result, ensure_ascii=False, indent=1))
     return code
 

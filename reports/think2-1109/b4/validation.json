@@ -1,0 +1,26 @@
+{
+ "accept_pending": "Real C25 ga run is reserved for the captain.",
+ "deviations": [],
+ "evo_status": [],
+ "ga_executed": false,
+ "ga_fake": {
+  "cases": 8,
+  "exit": 0,
+  "rejected": 8
+ },
+ "lint": {
+  "exit": 0
+ },
+ "live": {
+  "files": 97,
+  "files_differ": 0
+ },
+ "parent_sha": "59aec713c3e8",
+ "pytest": {
+  "command": ".venv/bin/python -m pytest tests/treegen -x -q -p no:cacheprovider",
+  "exit": 0,
+  "passed": 95,
+  "wall_s": 2.13
+ },
+ "schema": "think2-b4-validation/1"
+}

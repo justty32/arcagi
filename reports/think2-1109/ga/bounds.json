@@ -1,0 +1,21 @@
+{
+ "schema": "think2-ga-bounds/1",
+ "limits": {
+  "judge.ablate_max": {"min": 0, "max": 8, "type": "int"},
+  "judge.stage1.new_solves_min": {"min": 0, "max": 16, "type": "int"},
+  "judge.stage2.not_worse_frac": {"min": 0.0, "max": 1.0, "type": "float"},
+  "judge.stage2.drop_min": {"min": 0.0, "max": 8.0, "type": "float"},
+  "judge.stage2.se_mult": {"min": 0, "max": 6, "type": "int"},
+  "judge.no_crowd.ntf_ratio_max": {"min": 0.25, "max": 8.0, "type": "float"},
+  "gate.k": {"min": 0.25, "max": 8.0, "type": "float"},
+  "gate.lib_cap": {"min": 1, "max": 64, "type": "int"},
+  "gate.loo_frac": {"min": 0.05, "max": 1.0, "type": "float"},
+  "gate.loo_min_pairs": {"min": 1, "max": 8, "type": "int"},
+  "gate.m": {"min": 1, "max": 8, "type": "int"},
+  "gate.max_holes": {"min": 0, "max": 4, "type": "int"},
+  "gate.mdl_div": {"min": 0.25, "max": 4.0, "type": "float"},
+  "gate.retire_after": {"min": 1, "max": 8, "type": "int"},
+  "route.priority": {"min": 0, "max": 8, "type": "int"},
+  "weight": {"min": 0.25, "max": 4.0, "type": "float"}
+ }
+}

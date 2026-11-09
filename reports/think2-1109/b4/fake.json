@@ -1,0 +1,82 @@
+{
+ "baseline_ok": true,
+ "cases": {
+  "born": {
+   "errors": [
+    "immutable:gate_g1.born"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/born/tree.json"
+  },
+  "budget": {
+   "errors": [
+    "immutable:tree/frozen.json/budgets/L"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/budget/tree.json"
+  },
+  "dangling_ref": {
+   "errors": [
+    "dangling_ref:missing definition: #/defs/deadbeef0000"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/dangling_ref/tree.json"
+  },
+  "eff": {
+   "errors": [
+    "fitness:eff differs from quick.json",
+    "fitness:eff recomputation mismatch"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/eff/tree.json"
+  },
+  "genome_sha": {
+   "errors": [
+    "genome_sha:mismatch"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/genome_sha/tree.json"
+  },
+  "leak": {
+   "errors": [
+    "alien_op:comb_fake_leak",
+    "leak:comb_fake_leak:P"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/leak/tree.json"
+  },
+  "priority": {
+   "errors": [
+    "bounds:ops/route_ok_rt_sleep/payload/priority=999"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/priority/tree.json"
+  },
+  "truth": {
+   "errors": [
+    "immutable:tree/truth/train/taskset.json/L16"
+   ],
+   "exit": 1,
+   "rejected": true,
+   "status": "FAIL",
+   "tree": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2e/fake/truth/tree.json"
+  }
+ },
+ "n_rejected": 8,
+ "pass": true,
+ "schema": "think2-ga-fake/1"
+}
