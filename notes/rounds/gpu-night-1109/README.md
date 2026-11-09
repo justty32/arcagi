@@ -64,6 +64,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | T4 思考設計輪 4 | opus（第 2 棒 T4b） | 第 1 棒 PARTIAL（d2a933d、41ffdc6）：診斷 auc_L 恆 20＝量的是「已知」非「學習速度」（16 題中 5 題 epoch0 就被既有積木解、11 題 25k 內永遠解不出）→ 加預算沒用，要換量法；fable 提 learn_bits＋6 棵笨樹；Argon 6 條 P0（未減 epoch0、題集太易/太難、test 洩漏、16 題 z 達不到、笨樹判準可繞過、run 目錄碰撞）。T4b：重議代定＋03＋施工量尺 | 跑中（01:3x） | notes/rounds/gpu-night-1109/think-4/ |
 | N3e MDL λ 掃描 | （無 agent，長跑） | `arcagi-n3e-sweep` real-40／on40 × λ{0,.003,.006,.01} × seed 1–3，最晚 05:45 停，自動寫 `reports/gpu-gp-1109/ho/sweep-summary.md`（尾 SWEEPDONE）；收尾＝結論寫進 holdout.md（晨報前做）。9ed21de | 長跑中 | reports/gpu-gp-1109/ho/ |
 | N5d B1 bank 常駐 | opus | **E8 不過→凍結 `--gpu-min 200000`**（9822723、19c9c59）。0 錯／0 差異、29 tests 過；上傳 sync 49.7→10.1s，但牆鐘 1e6 b1 56.4s vs gpu 54.2s vs cpu 10.2s：瓶頸換成每層同步一次（6230 層×~27ms，GPU 被夜跑佔滿在排隊）。要贏得「一次同步涵蓋多層／多題」。違規備註：實作 opus 自寫未交 codex；bench 開成 service 非 scope（arcagi-n5d-bench，1e7 補表中，跑完寫 DONE，補表 `python3 -I reports/seed-gpu-b1-1110/analyze.py <scratchpad>/n5d`） | 收線（1e7 補表待） | reports/seed-gpu-b1-1110/ |
+| T5 思考輪 5：跨題合批／多層融合 GPU | opus | N5d 顯示瓶頸是每層同步延遲 → 評估「一次同步涵蓋多題/多層」上限；只到 02b，不寫 03、不施工（GPU 架構大改等使用者裁） | 跑中（01:27） | notes/rounds/gpu-night-1109/think-5/ |
 
 ## 待辦（有空位就派）
 
