@@ -8,6 +8,12 @@
 #include <map>
 #include <set>
 #include <stdexcept>
+#ifdef HOT_E
+#if !defined(HOT_A) || !defined(HOT_B)
+#error "HOT_E requires HOT_A and HOT_B"
+#endif
+#include "scalar_prims.hpp"
+#endif
 
 namespace seed {
 namespace {
@@ -852,6 +858,24 @@ struct Enumerator {
             lam_nodes[k] = pick.lam ? pick.lam->node : -1;
             if (!pick.lam) offsets[k] = entries[pick.entry].voff;
         }
+#ifdef HOT_E
+        bool no_lambda = true;
+        for (int k = 0; k < op.arity(); ++k) no_lambda = no_lambda && lam_nodes[k] < 0;
+        if (no_lambda) {
+            // These cases neither allocate lists nor consume evaluation steps.
+            // Failure writes ERR at the same example and leaves the suffix alone.
+            switch (op.prim) {
+#define HOT_E_BATCH(P) case P: return hot_e::scalar_batch<P>(flat.data(), offsets, n, vals.data())
+            HOT_E_BATCH(ADD); HOT_E_BATCH(SUB); HOT_E_BATCH(MUL); HOT_E_BATCH(NEG);
+            HOT_E_BATCH(MOD); HOT_E_BATCH(EQ); HOT_E_BATCH(LT); HOT_E_BATCH(MAX);
+            HOT_E_BATCH(MIN); HOT_E_BATCH(AND); HOT_E_BATCH(OR); HOT_E_BATCH(NOT);
+            HOT_E_BATCH(IF); HOT_E_BATCH(LEN); HOT_E_BATCH(NTH); HOT_E_BATCH(HEAD);
+            HOT_E_BATCH(LAST); HOT_E_BATCH(COUNT);
+#undef HOT_E_BATCH
+            default: break;
+            }
+        }
+#endif
 #endif
         for (size_t j = 0; j < n; ++j) {
             Ctx cx{sp.xs[j], MAX_STEPS};

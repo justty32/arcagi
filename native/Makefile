@@ -308,3 +308,16 @@ hot/obj-d/seed_value.o: hot/seed_value.cpp hot/result_buffer.hpp $(HEADERS)
 HOT_D_OBJECTS := $(filter-out hot/obj-ab/seed_value.o,$(HOT_AB_OBJECTS)) hot/obj-d/seed_value.o
 bin/arcbatch-hot-d: $(HOT_D_OBJECTS) | bin
 	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# N8c E: A+B plus read-only first-order batches over training examples.
+.PHONY: hot-e
+hot-e: bin/arcbatch-hot-e
+
+hot/obj-e/seed_enum.o hot/obj-e/seed_value.o: hot/obj-e/%.o: hot/%.cpp hot/scalar_prims.hpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -DHOT_B -DHOT_E -c $< -o $@
+
+HOT_E_OBJECTS := $(filter-out hot/obj-ab/seed_enum.o hot/obj-ab/seed_value.o,$(HOT_AB_OBJECTS)) \
+                 hot/obj-e/seed_enum.o hot/obj-e/seed_value.o
+bin/arcbatch-hot-e: $(HOT_E_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@

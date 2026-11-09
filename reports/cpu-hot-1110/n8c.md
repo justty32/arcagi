@@ -37,3 +37,18 @@
 ## 結果
 
 （跑中，見 [n8c-progress.md](n8c-progress.md)；收結果後補表與判讀。）
+
+## 結果（主 session 03:4x 收）
+
+管線 bench 第一次因 `run_one.py` 未列 `arcbatch-hot-e` 而 rc=2；主 session 補上 choice（129e13d）後重跑。tests/native 40 passed（pipeline pytest rc=0）。
+
+| budget | bin | wall 中位 (min..max) s | 對 arcbatch | 差異 |
+|---:|---|---:|---:|---:|
+| 1e6 | arcbatch | 9.966 (9.775..10.506) | 1.000× | ref |
+| 1e6 | hot | 9.416 (9.168..9.535) | 1.058× | 0 |
+| 1e6 | hot-e | 8.867 (8.668..8.988) | 1.124× | 0 |
+| 1e7 | arcbatch | 143.411 (138.811..143.853) | 1.000× | ref |
+| 1e7 | hot | 126.546 (123.451..127.253) | 1.133× | 0 |
+| 1e7 | hot-e | 121.947 (120.732..122.905) | **1.176×** | 0 |
+
+負載 11.1–15.6；cmp 12 筆全 0 差異。hot-e 對 hot：1e7 +3.8%、1e6 +6.2%，過收件門（1e7 >2%、1e6 不慢）→ **收**。審 diff：`-DHOT_E` 獨立物件檔，`arcbatch-hot` 不受影響；scalar_prims.hpp 的原語本體與 apply_prim 非 HOT_E 版逐字相同；無 lambda 參數時才走批次路徑。

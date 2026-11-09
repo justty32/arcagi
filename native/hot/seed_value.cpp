@@ -8,6 +8,9 @@
 #endif
 #include <mutex>
 #include <stdexcept>
+#ifdef HOT_E
+#include "scalar_prims.hpp"
+#endif
 
 namespace seed {
 
@@ -456,6 +459,15 @@ struct Tmp {  // reentrant scratch vectors for building lists
 V apply_prim(int p, const V* a, Ctx& c) {
     Store& S = store();
     switch (p) {
+#ifdef HOT_E
+#define HOT_E_SCALAR(P) case P: return hot_e::scalar_prim<P>(a, S)
+    HOT_E_SCALAR(ADD); HOT_E_SCALAR(SUB); HOT_E_SCALAR(MUL); HOT_E_SCALAR(NEG);
+    HOT_E_SCALAR(MOD); HOT_E_SCALAR(EQ); HOT_E_SCALAR(LT); HOT_E_SCALAR(MAX);
+    HOT_E_SCALAR(MIN); HOT_E_SCALAR(AND); HOT_E_SCALAR(OR); HOT_E_SCALAR(NOT);
+    HOT_E_SCALAR(IF); HOT_E_SCALAR(LEN); HOT_E_SCALAR(NTH); HOT_E_SCALAR(HEAD);
+    HOT_E_SCALAR(LAST); HOT_E_SCALAR(COUNT);
+#undef HOT_E_SCALAR
+#else
     case ADD: if (!is_num(a[0]) || !is_num(a[1])) return ERR; return chk_int(ival(a[0]) + ival(a[1]));
     case SUB: if (!is_num(a[0]) || !is_num(a[1])) return ERR; return chk_int(ival(a[0]) - ival(a[1]));
     case MUL: {
@@ -493,6 +505,7 @@ V apply_prim(int p, const V* a, Ctx& c) {
     }
     case HEAD: if (!is_list(a[0]) || S.size(a[0]) == 0) return ERR; return S.data(a[0])[0];
     case LAST: if (!is_list(a[0]) || S.size(a[0]) == 0) return ERR; return S.data(a[0])[S.size(a[0]) - 1];
+#endif
     case TAKE: case DROP: {
         if (!is_num(a[0])) return ERR;  // max(n, 0) with a list n raises
         if (!is_list(a[1])) return ERR;
@@ -546,12 +559,14 @@ V apply_prim(int p, const V* a, Ctx& c) {
         Tmp t; for (int64_t i = 0; i < n; ++i) t.v->push_back(a[1]);
         return S.make(t.v->data(), t.v->size());
     }
+#ifndef HOT_E
     case COUNT: {
         if (!is_list(a[1])) return ERR;
         int64_t k = 0; size_t n = S.size(a[1]);
         for (size_t i = 0; i < n; ++i) k += py_eq(S.data(a[1])[i], a[0]);
         return mk_int(k);
     }
+#endif
     case SORT: {
         if (!is_list(a[0])) return ERR;
         Tmp t; size_t n = S.size(a[0]); t.v->assign(S.data(a[0]), S.data(a[0]) + n);
