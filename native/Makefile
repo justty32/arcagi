@@ -186,3 +186,15 @@ gpusynth: bin/gpusynth
 
 bin/gpusynth: gpu/synth/gpusynth.cu | bin
 	$(NVCC) $(NVFLAGS) $< -o $@
+
+# E11 gpusynth v2 semantic check (reports/gpusynth-1110/): CPU re-evaluation of gpusynth samples
+# with seed::eval. Own object dir. Separate target: `make gpusynth-verify`.
+.PHONY: gpusynth-verify
+gpusynth-verify: bin/gpusynth_verify
+SYNTH_V_SOURCES := $(filter-out src/main.cpp,$(SOURCES))
+SYNTH_V_OBJECTS := $(patsubst src/%.cpp,gpu/synth/obj/%.o,$(SYNTH_V_SOURCES))
+gpu/synth/obj/%.o: src/%.cpp $(HEADERS)
+	mkdir -p gpu/synth/obj
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+bin/gpusynth_verify: gpu/synth/verify.cpp $(SYNTH_V_OBJECTS) $(HEADERS) | bin
+	$(CXX) $(CXXFLAGS) gpu/synth/verify.cpp $(SYNTH_V_OBJECTS) -o $@

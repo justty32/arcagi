@@ -1,0 +1,1 @@
+{"gpusynth": true, "grids": 1718, "launches": 182, "batch": 262144, "attempts": 47710208, "accepted": 3627383, "accept_rate": 0.0760, "unique_io": 134657, "written": 0, "wall_s": 30.034, "gpu_s": 29.295, "host_s": 0.739, "accepted_per_s_gpu": 123822, "accepted_per_s_wall": 120776, "sample_bytes": 932}
