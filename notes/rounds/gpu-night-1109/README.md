@@ -36,7 +36,7 @@
 |---|---|---|---|---|
 | N1 蠟模 | opus | 本地模型（e4b＋litellm GPT）比較提示法 → 長跑到 06:10 | 跑中（22:40 派） | reports/wax-night-1109/、notes/rounds/gpu-night-1109/wax-白話.md |
 | N2 長跑 | （無 agent）| systemd `arcagi-n2-overnight`：gpusearch 800 題深度 5→6→7，06:00 寫彙總 | 跑中 | reports/native-cuda-1109/overnight/（未 commit，晨報收） |
-| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP | 跑中（22:5x 派） | reports/gpu-gp-1109/ |
+| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP；第 1 棒 23:05 PARTIAL（06788bc，codex 寫碼中），第 2 棒 N3b 從 progress.md 接手 | 跑中 | reports/gpu-gp-1109/ |
 | T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（22:5x 派） | notes/rounds/gpu-night-1109/think-1/ |
 
 ## 等待中
