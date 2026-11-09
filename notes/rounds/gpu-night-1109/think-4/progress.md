@@ -51,3 +51,9 @@
 - [進行] g1 量測：單元 `arcagi-t4d-g1`（scope），腳本 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/run.sh`（7 棵 meter，xargs -P 4，每棵約 3.5 分鐘，總計約 8–10 分鐘）；逐棵 log `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/logs/`、回傳碼 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/rc.txt`；run 目錄 `ws/evo/meter/t4d-*`。跑完判斷＝`/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/DONE` 存在。
   - 判讀：DONE 後 run.sh 已自動跑 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/g1_judge.py` → `reports/think4-1110/d/g1.json`，摘要在 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/judge.log`（首行 PASS/FAIL＋健全門，之後每行：族 子代 n k_neg k_pos p Δ 兩半 holm_reject verdict）。judge 掛了就手動重跑：`.venv/bin/python -I /tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/g1_judge.py`。
   - 下一步：g1.json commit；結果寫進 04-總結簡報「下一步」與 progress；預期 c1、c2（只改 comb 狀態）Δ=0（strip=all 盲區）。健全門不過＝量測無效，不解讀。
+
+## 第五棒（t4e，11-10）
+
+- [完] g1 結果：有效、c0..c4 每題 Δ=0（`reports/think4-1110/d/g1.json`）。
+- [完] 查因 → `06-g1全零.md`：c0 節點 weight hammer 不讀（死欄位）；c1/c2 comb 狀態被 strip=all 剝（量尺盲點，同 T8）；c3/c4 刪/休眠 `route_starve_rt_sleep` 被 rt_pool(priority 2) 遮蔽且 starve 從未出現（gate_in 14–20）。quick cost 旁證：c0/c3/c4 與親代同為 7294813。elites c3/c4 是中性漂移。
+- 待裁 T9–T12 已列代定清單（附預設）。未修 GA、未改 hammer。
