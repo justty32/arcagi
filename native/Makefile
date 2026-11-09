@@ -269,3 +269,42 @@ bin/arcbatch-hot-a: $(HOT_A_OBJECTS) | bin
 
 bin/arcbatch-hot: $(HOT_AB_OBJECTS) | bin
 	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# N8b: instrumentation-only A+B binary; normal hot targets are unchanged.
+.PHONY: hot-prof
+hot-prof: bin/arcbatch-hot-prof
+
+hot/prof/seed_enum.cpp hot/prof/seed_value.cpp &: hot/prof/generate.py hot/seed_enum.cpp hot/seed_value.cpp
+	python3 -I hot/prof/generate.py
+
+hot/obj-prof/%.o: hot/prof/%.cpp hot/prof/prof.hpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -DHOT_B -c $< -o $@
+
+HOT_PROF_OBJECTS := $(filter-out hot/obj-ab/seed_enum.o hot/obj-ab/seed_value.o hot/obj-ab/batch_main.o,$(HOT_AB_OBJECTS)) \
+                    hot/obj-prof/seed_enum.o hot/obj-prof/seed_value.o hot/obj-prof/main.o
+bin/arcbatch-hot-prof: $(HOT_PROF_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# N8b C: A+B plus whole higher-order result memoization. Reuse identical A+B
+# objects except the evaluator; neither existing hot target enables HOT_C.
+.PHONY: hot2
+hot2: bin/arcbatch-hot-c
+
+hot/obj-c/seed_value.o: hot/seed_value.cpp hot/higher_cache.hpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -DHOT_B -DHOT_C -c $< -o $@
+
+HOT_C_OBJECTS := $(filter-out hot/obj-ab/seed_value.o,$(HOT_AB_OBJECTS)) hot/obj-c/seed_value.o
+bin/arcbatch-hot-c: $(HOT_C_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# N8b D is measured independently of C: A+B plus a reentrant result buffer.
+hot2: bin/arcbatch-hot-d
+hot/obj-d/seed_value.o: hot/seed_value.cpp hot/result_buffer.hpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -DHOT_B -DHOT_D -c $< -o $@
+
+HOT_D_OBJECTS := $(filter-out hot/obj-ab/seed_value.o,$(HOT_AB_OBJECTS)) hot/obj-d/seed_value.o
+bin/arcbatch-hot-d: $(HOT_D_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@

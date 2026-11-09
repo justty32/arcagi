@@ -1,0 +1,14 @@
+# arcbatch-hot-prof: exclusive rdtsc; wall 12.804800 s; TSC 4.691240 GHz
+# TSC elapsed worker time, includes scheduling delays and instrumentation; not hardware CPU cycles.
+bucket	seconds	percent	calls
+first_order_eval	15.148714	29.852	689835290
+ho_lambda_body	9.532957	18.786	892511137
+ho_result_build	5.083620	10.018	646024227
+ho_loop_rest	12.104995	23.854	74010803
+lambda_body_pool	1.172990	2.312	1559859
+choose_unify	1.873522	3.692	1253
+offer	2.766396	5.452	87099732
+dedup_seen_insert	1.916479	3.777	89528102
+cond_witness	0.178485	0.352	1072
+other	0.967320	1.906	1253
+total	50.745477	100.000	-

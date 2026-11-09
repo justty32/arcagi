@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Run one seed batch inside the caller's systemd scope and record wall/load."""
+
 import argparse
 import os
-from pathlib import Path
 import signal
 import subprocess
 import time
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_DATA = Path("/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8")
+DEFAULT_DATA = Path(
+    "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8"
+)
 
 
 def main():
@@ -19,7 +22,17 @@ def main():
     signal.signal(signal.SIGHUP, interrupted)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("budget", type=int, choices=(1000000, 10000000))
-    parser.add_argument("binary", choices=("arcbatch", "arcbatch-hot-a", "arcbatch-hot"))
+    parser.add_argument(
+        "binary",
+        choices=(
+            "arcbatch",
+            "arcbatch-hot-a",
+            "arcbatch-hot",
+            "arcbatch-hot-prof",
+            "arcbatch-hot-c",
+            "arcbatch-hot-d",
+        ),
+    )
     parser.add_argument("rep", type=int)
     parser.add_argument("outdir", type=Path)
     args = parser.parse_args()
@@ -33,13 +46,25 @@ def main():
     if output.exists():
         raise SystemExit(f"Refusing to overwrite {output}")
     data = Path(os.environ.get("ARC_HOT_DATA", str(DEFAULT_DATA)))
-    command = [str(ROOT / "native/bin" / args.binary), "--mode", "seed",
-               "--tasks", str(data / "train100.txt"), "--configs",
-               str(data / f"cfg-{args.budget}.jsonl"), "--threads", "4", "--out", str(output)]
+    command = [
+        str(ROOT / "native/bin" / args.binary),
+        "--mode",
+        "seed",
+        "--tasks",
+        str(data / "train100.txt"),
+        "--configs",
+        str(data / f"cfg-{args.budget}.jsonl"),
+        "--threads",
+        "4",
+        "--out",
+        str(output),
+    ]
     load = os.getloadavg()[0]
     start = time.perf_counter()
     with (outdir / f"{stem}.stderr").open("w") as err:
-        proc = subprocess.Popen(command, cwd=ROOT, stderr=err, stdout=err, start_new_session=True)
+        proc = subprocess.Popen(
+            command, cwd=ROOT, stderr=err, stdout=err, start_new_session=True
+        )
         try:
             while proc.poll() is None:
                 if stop.exists():
@@ -49,7 +74,9 @@ def main():
                 except subprocess.TimeoutExpired:
                     pass
             if proc.returncode:
-                raise RuntimeError(f"{args.binary} exited {proc.returncode}; see {err.name}")
+                raise RuntimeError(
+                    f"{args.binary} exited {proc.returncode}; see {err.name}"
+                )
         finally:
             if proc.poll() is None:
                 os.killpg(proc.pid, signal.SIGTERM)

@@ -443,6 +443,16 @@ struct Tmp {  // reentrant scratch vectors for building lists
     ~Tmp() { --tmpdepth; if (tmpdepth >= 7) delete v; }
 };
 
+#ifdef HOT_C
+#ifndef HOT_A
+#error "HOT_C requires HOT_A generation invalidation"
+#endif
+#include "higher_cache.hpp"
+#endif
+#ifdef HOT_D
+#include "result_buffer.hpp"
+#endif
+
 V apply_prim(int p, const V* a, Ctx& c) {
     Store& S = store();
     switch (p) {
@@ -558,31 +568,71 @@ V apply_prim(int p, const V* a, Ctx& c) {
         return S.make(t.v->data(), n);
     }
     case MAP: case FILTER: {
+#ifdef HOT_C
+        return higher_cached(p, a, c, [&]() -> V {
+#endif
         if (!is_list(a[1])) return ERR;
         size_t n = S.size(a[1]);
+#ifdef HOT_D
+        ResultBuffer t(n);
+#else
         Tmp t;
+#endif
         for (size_t i = 0; i < n; ++i) {
             V x = S.data(a[1])[i];  // stable: store elems may grow, re-read via index
             V r = call(a[0], &x, 1, c);
             if (r == ERR) return ERR;
+#ifdef HOT_D
+            if (p == MAP) t.push(r);
+            else if (truthy(r)) t.push(S.data(a[1])[i]);
+#else
             if (p == MAP) t.v->push_back(r);
             else if (truthy(r)) t.v->push_back(S.data(a[1])[i]);
+#endif
         }
+#ifdef HOT_D
+        return S.make(t.data(), t.size());
+#else
         return S.make(t.v->data(), t.v->size());
+#endif
+#ifdef HOT_C
+        });
+#endif
     }
     case ZIPWITH: {
+#ifdef HOT_C
+        return higher_cached(p, a, c, [&]() -> V {
+#endif
         if (!is_list(a[1]) || !is_list(a[2])) return ERR;
         size_t n = std::min(S.size(a[1]), S.size(a[2]));
+#ifdef HOT_D
+        ResultBuffer t(n);
+#else
         Tmp t;
+#endif
         for (size_t i = 0; i < n; ++i) {
             V xy[2] = {S.data(a[1])[i], S.data(a[2])[i]};
             V r = call(a[0], xy, 2, c);
             if (r == ERR) return ERR;
+#ifdef HOT_D
+            t.push(r);
+#else
             t.v->push_back(r);
+#endif
         }
+#ifdef HOT_D
+        return S.make(t.data(), n);
+#else
         return S.make(t.v->data(), n);
+#endif
+#ifdef HOT_C
+        });
+#endif
     }
     case FOLD: {
+#ifdef HOT_C
+        return higher_cached(p, a, c, [&]() -> V {
+#endif
         if (!is_list(a[2])) return ERR;
         V acc = a[1];
         size_t n = S.size(a[2]);
@@ -592,6 +642,9 @@ V apply_prim(int p, const V* a, Ctx& c) {
             if (acc == ERR) return ERR;
         }
         return acc;
+#ifdef HOT_C
+        });
+#endif
     }
     case TRANSPOSE: {
         if (!is_list(a[0])) return ERR;

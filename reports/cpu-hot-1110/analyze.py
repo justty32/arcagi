@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Print median wall times, ranges, speedups and exactness for bench.sh output."""
+
 import argparse
-from collections import defaultdict
 import json
+from collections import defaultdict
 from pathlib import Path
 from statistics import median
 
@@ -29,16 +30,26 @@ def main():
     print("|---:|---|---:|---:|---:|")
     for budget in sorted({b for b, _ in groups}):
         baseline = groups.get((budget, "arcbatch"))
-        for binary in ("arcbatch", "arcbatch-hot-a", "arcbatch-hot"):
+        known = ("arcbatch", "arcbatch-hot-a", "arcbatch-hot")
+        extra = sorted(
+            binary for b, binary in groups if b == budget and binary not in known
+        )
+        for binary in (*known, *extra):
             walls = groups.get((budget, binary))
             if not walls:
                 continue
             middle = median(walls)
             speedup = f"{median(baseline) / middle:.3f}x" if baseline else "pending"
             counts = mismatches[budget, binary]
-            count = "reference" if binary == "arcbatch" else (
-                str(sum(counts)) if len(counts) == len(walls) else "incomplete")
-            print(f"| {budget} | {binary} | {middle:.3f} ({min(walls):.3f}..{max(walls):.3f}) | {speedup} | {count} |")
+            count = (
+                "reference"
+                if binary == "arcbatch"
+                else (str(sum(counts)) if len(counts) == len(walls) else "incomplete")
+            )
+            print(
+                f"| {budget} | {binary} | {middle:.3f} "
+                f"({min(walls):.3f}..{max(walls):.3f}) | {speedup} | {count} |"
+            )
     if loads:
         print(f"\nObserved loadavg1 at run start: {min(loads):.2f}..{max(loads):.2f}.")
     if not (args.outdir / "DONE").exists():
