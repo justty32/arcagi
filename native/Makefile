@@ -230,3 +230,42 @@ $(E2E_DIR)/b1_kernel.o: gpu/seed/b1_kernel.cu gpu/seed/kernel.cu $(E2E_HEADERS)
 
 bin/arcbatch-gpuseed-b1: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(E2E_DIR)/seed_enum_gpu.o $(E2E_DIR)/e2e_main.o $(E2E_DIR)/b1_kernel.o | bin
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# Isolated CPU seed hot paths (N8, reports/cpu-hot-1110/).
+# A = allocation-safe lambda memo; B = enumerator bookkeeping.
+.PHONY: hot
+hot: bin/arcbatch-hot-a bin/arcbatch-hot
+
+HOT_NAMES := $(notdir $(SOURCES:.cpp=.o))
+HOT_A_OBJECTS := $(addprefix hot/obj-a/,$(HOT_NAMES)) hot/obj-a/batch_main.o
+HOT_AB_OBJECTS := $(addprefix hot/obj-ab/,$(HOT_NAMES)) hot/obj-ab/batch_main.o
+
+hot/obj-a/main.o hot/obj-ab/main.o: src/main.cpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Dmain=arcsearch_main -c $< -o $@
+
+hot/obj-a/batch_main.o hot/obj-ab/batch_main.o: hot/main.cpp
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+hot/obj-a/%.o: hot/%.cpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -c $< -o $@
+
+hot/obj-ab/%.o: hot/%.cpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -Isrc -DHOT_A -DHOT_B -c $< -o $@
+
+hot/obj-a/%.o: src/%.cpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+hot/obj-ab/%.o: src/%.cpp $(HEADERS)
+	mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+bin/arcbatch-hot-a: $(HOT_A_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+bin/arcbatch-hot: $(HOT_AB_OBJECTS) | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@

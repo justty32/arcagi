@@ -1,0 +1,2 @@
+{"hot_cache":true,"calls":16,"hits":3,"inserts":10,"budget_fallbacks":2}
+cache invariants: PASS

@@ -1,0 +1,230 @@
+...........FFFFF..FF...........                                          [100%]
+=================================== FAILURES ===================================
+___________________ test_gpu_matches_cpu_and_python[shared] ____________________
+
+kernel = 'shared'
+tmp_path = PosixPath('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/pytest/test_gpu_matches_cpu_and_pytho0')
+
+    @pytest.mark.parametrize("kernel", ["shared", "flat"])
+    def test_gpu_matches_cpu_and_python(kernel: str, tmp_path: Path) -> None:
+        out = tmp_path / "out.jsonl"
+        args = [
+            str(BIN),
+            "--mode",
+            "both",
+            "--depth",
+            "2",
+            "--kernel",
+            kernel,
+            "--threads",
+            "2",
+            "--samples",
+            "10",
+            "--out",
+            str(out),
+        ]
+        for task_id in TASKS:
+            args += ["--task", str(TRAINING / f"{task_id}.json")]
+        proc = subprocess.run(
+            args, capture_output=True, text=True, timeout=300, cwd=ROOT, check=False
+        )
+>       assert proc.returncode == 0, proc.stderr[-2000:]
+E       AssertionError: cuda no CUDA-capable device is detected at gpu/kernel.cu:326
+E         
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['/home/lorkhan/repo/arcagi/native/bin/gpusearch', '--mode', 'both', '--depth', '2', '--kernel',...ning/68b16354.json'], returncode=3, stdout='', stderr='cuda no CUDA-capable device is detected at gpu/kernel.cu:326\n').returncode
+
+tests/native/test_gpusearch.py:53: AssertionError
+____________________ test_gpu_matches_cpu_and_python[flat] _____________________
+
+kernel = 'flat'
+tmp_path = PosixPath('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/pytest/test_gpu_matches_cpu_and_pytho1')
+
+    @pytest.mark.parametrize("kernel", ["shared", "flat"])
+    def test_gpu_matches_cpu_and_python(kernel: str, tmp_path: Path) -> None:
+        out = tmp_path / "out.jsonl"
+        args = [
+            str(BIN),
+            "--mode",
+            "both",
+            "--depth",
+            "2",
+            "--kernel",
+            kernel,
+            "--threads",
+            "2",
+            "--samples",
+            "10",
+            "--out",
+            str(out),
+        ]
+        for task_id in TASKS:
+            args += ["--task", str(TRAINING / f"{task_id}.json")]
+        proc = subprocess.run(
+            args, capture_output=True, text=True, timeout=300, cwd=ROOT, check=False
+        )
+>       assert proc.returncode == 0, proc.stderr[-2000:]
+E       AssertionError: cuda no CUDA-capable device is detected at gpu/kernel.cu:326
+E         
+E       assert 3 == 0
+E        +  where 3 = CompletedProcess(args=['/home/lorkhan/repo/arcagi/native/bin/gpusearch', '--mode', 'both', '--depth', '2', '--kernel',...ning/68b16354.json'], returncode=3, stdout='', stderr='cuda no CUDA-capable device is detected at gpu/kernel.cu:326\n').returncode
+
+tests/native/test_gpusearch.py:53: AssertionError
+_____________________ test_gpu_layers_match_cpu_enumerator _____________________
+
+    def test_gpu_layers_match_cpu_enumerator() -> None:
+>       out = subprocess.run(
+            [str(BIN), "--data", str(ROOT / "data/ARC-AGI/data/training"), "--limit", "20",
+             "--max-layer", "4", "--reps-cpu", "1", "--reps-gpu", "1", "--threads", "2"],
+            capture_output=True, text=True, timeout=300, check=True,
+        ).stdout
+
+tests/native/test_gpuseed.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+input = None, capture_output = True, timeout = 300, check = True
+popenargs = (['/home/lorkhan/repo/arcagi/native/bin/gpuseed', '--data', '/home/lorkhan/repo/arcagi/data/ARC-AGI/data/training', '--limit', '20', '--max-layer', ...],)
+kwargs = {'stderr': -1, 'stdout': -1, 'text': True}
+process = <Popen: returncode: 1 args: ['/home/lorkhan/repo/arcagi/native/bin/gpuseed',...>
+stdout = '{"tasks": 20, "items": 3950, "cells": 125713, "unsupported_prims": "if cons append concat range repeat count sort map filter zipwith fold"}\n'
+stderr = 'cuda cudaMalloc((void**)d, (n ? n : 1) * sizeof(T)): no CUDA-capable device is detected\nrun_layer failed\n'
+retcode = 1
+
+    def run(*popenargs,
+            input=None, capture_output=False, timeout=None, check=False, **kwargs):
+        """Run command with arguments and return a CompletedProcess instance.
+    
+        The returned instance will have attributes args, returncode, stdout and
+        stderr. By default, stdout and stderr are not captured, and those attributes
+        will be None. Pass stdout=PIPE and/or stderr=PIPE in order to capture them,
+        or pass capture_output=True to capture both.
+    
+        If check is True and the exit code was non-zero, it raises a
+        CalledProcessError. The CalledProcessError object will have the return code
+        in the returncode attribute, and output & stderr attributes if those streams
+        were captured.
+    
+        If timeout (seconds) is given and the process takes too long,
+         a TimeoutExpired exception will be raised.
+    
+        There is an optional argument "input", allowing you to
+        pass bytes or a string to the subprocess's stdin.  If you use this argument
+        you may not also use the Popen constructor's "stdin" argument, as
+        it will be used internally.
+    
+        By default, all communication is in bytes, and therefore any "input" should
+        be bytes, and the stdout and stderr will be bytes. If in text mode, any
+        "input" should be a string, and stdout and stderr will be strings decoded
+        according to locale encoding, or by "encoding" if set. Text mode is
+        triggered by setting any of text, encoding, errors or universal_newlines.
+    
+        The other arguments are the same as for the Popen constructor.
+        """
+        if input is not None:
+            if kwargs.get('stdin') is not None:
+                raise ValueError('stdin and input arguments may not both be used.')
+            kwargs['stdin'] = PIPE
+    
+        if capture_output:
+            if kwargs.get('stdout') is not None or kwargs.get('stderr') is not None:
+                raise ValueError('stdout and stderr arguments may not be used '
+                                 'with capture_output.')
+            kwargs['stdout'] = PIPE
+            kwargs['stderr'] = PIPE
+    
+        with Popen(*popenargs, **kwargs) as process:
+            try:
+                stdout, stderr = process.communicate(input, timeout=timeout)
+            except TimeoutExpired as exc:
+                process.kill()
+                if _mswindows:
+                    # Windows accumulates the output in a single blocking
+                    # read() call run on child threads, with the timeout
+                    # being done in a join() on those threads.  communicate()
+                    # _after_ kill() is required to collect that and add it
+                    # to the exception.
+                    exc.stdout, exc.stderr = process.communicate()
+                else:
+                    # POSIX _communicate already populated the output so
+                    # far into the TimeoutExpired exception.
+                    process.wait()
+                raise
+            except:  # Including KeyboardInterrupt, communicate handled that.
+                process.kill()
+                # We don't call process.wait() as .__exit__ does that for us.
+                raise
+            retcode = process.poll()
+            if check and retcode:
+>               raise CalledProcessError(retcode, process.args,
+                                         output=stdout, stderr=stderr)
+E               subprocess.CalledProcessError: Command '['/home/lorkhan/repo/arcagi/native/bin/gpuseed', '--data', '/home/lorkhan/repo/arcagi/data/ARC-AGI/data/training', '--limit', '20', '--max-layer', '4', '--reps-cpu', '1', '--reps-gpu', '1', '--threads', '2']' returned non-zero exit status 1.
+
+../../.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py:571: CalledProcessError
+_______________________ test_b1_forced_matches_arcbatch ________________________
+
+tmp_path = PosixPath('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/pytest/test_b1_forced_matches_arcbatc0')
+
+    def test_b1_forced_matches_arcbatch(tmp_path: Path) -> None:
+        ids = SOLVED + FIRST[:6]
+        ref, _ = _run(REF, ids, 200000, tmp_path)
+        got, err = _run(BIN, ids, 200000, tmp_path, ["--gpu-seed", "--gpu-min", "0", "--seed-prof"])
+        assert got == ref
+        p = _profs(err)
+>       assert p["seed"]["layers_gpu"] > 0 and p["seed"]["fallbacks"] == 0
+E       assert (0 > 0)
+
+tests/native/test_gpuseed_b1.py:70: AssertionError
+________________________________ test_b1_verify ________________________________
+
+tmp_path = PosixPath('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/pytest/test_b1_verify0')
+
+    def test_b1_verify(tmp_path: Path) -> None:
+        ids = SOLVED[:3] + FIRST[:3]
+        ref, _ = _run(REF, ids, 200000, tmp_path)
+        got, err = _run(BIN, ids, 200000, tmp_path, ["--gpu-seed", "--gpu-min", "0", "--seed-prof"],
+                        env={"ARC_GPUSEED_VERIFY": "1"})
+        assert got == ref
+>       assert _profs(err)["seed"]["verified"] > 0
+E       assert 0 > 0
+
+tests/native/test_gpuseed_b1.py:83: AssertionError
+_______________________ test_gpu_forced_matches_arcbatch _______________________
+
+tmp_path = PosixPath('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/pytest/test_gpu_forced_matches_arcbat0')
+
+    def test_gpu_forced_matches_arcbatch(tmp_path: Path) -> None:
+        ids = SOLVED + FIRST[:6]
+        ref, _ = _run(REF, ids, 200000, tmp_path)
+        got, err = _run(BIN, ids, 200000, tmp_path, ["--gpu-seed", "--gpu-min", "1", "--seed-prof"])
+        assert got == ref
+        assert sum(r["test_ok"] for r in ref.values()) >= 3
+        prof = [json.loads(x) for x in err.splitlines() if x.startswith("{")]
+        assert len(prof) == 1 and prof[0]["gpu"] is True
+>       assert prof[0]["layers_gpu"] > 0 and prof[0]["gpu_cands"] > 0 and prof[0]["fallbacks"] == 0
+E       assert (0 > 0)
+
+tests/native/test_gpuseed_e2e.py:68: AssertionError
+_______________________________ test_gpu_verify ________________________________
+
+tmp_path = PosixPath('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/pytest/test_gpu_verify0')
+
+    def test_gpu_verify(tmp_path: Path) -> None:
+        ids = SOLVED[:3]
+        ref, _ = _run(REF, ids, 200000, tmp_path)
+        got, err = _run(BIN, ids, 200000, tmp_path, ["--gpu-seed", "--gpu-min", "1", "--seed-prof"],
+                        env={"ARC_GPUSEED_VERIFY": "1"})
+        assert got == ref
+        prof = json.loads([x for x in err.splitlines() if x.startswith("{")][0])
+>       assert prof["verified"] > 0
+E       assert 0 > 0
+
+tests/native/test_gpuseed_e2e.py:78: AssertionError
+=========================== short test summary info ============================
+FAILED tests/native/test_gpusearch.py::test_gpu_matches_cpu_and_python[shared]
+FAILED tests/native/test_gpusearch.py::test_gpu_matches_cpu_and_python[flat]
+FAILED tests/native/test_gpuseed.py::test_gpu_layers_match_cpu_enumerator - s...
+FAILED tests/native/test_gpuseed_b1.py::test_b1_forced_matches_arcbatch - ass...
+FAILED tests/native/test_gpuseed_b1.py::test_b1_verify - assert 0 > 0
+FAILED tests/native/test_gpuseed_e2e.py::test_gpu_forced_matches_arcbatch - a...
+FAILED tests/native/test_gpuseed_e2e.py::test_gpu_verify - assert 0 > 0
+7 failed, 24 passed in 23.09s
