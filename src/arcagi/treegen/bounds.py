@@ -64,16 +64,6 @@ def targets(tree: dict) -> list[tuple[str, dict, str, str | None, str]]:
                     "route.priority",
                 )
             )
-    for name, node in tree["nodes"].items():
-        result.append(
-            (
-                f"nodes/{name}/_metainfo.json/weight",
-                node["_metainfo.json"],
-                "weight",
-                None,
-                "weight",
-            )
-        )
     return result
 
 

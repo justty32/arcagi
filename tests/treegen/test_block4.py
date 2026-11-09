@@ -12,6 +12,7 @@ from arcagi.treegen import (
     bounds,
     check,
     crossover,
+    effect,
     fitness,
     ga,
     ga_fake,
@@ -122,9 +123,10 @@ def test_mutations_preserve_seals_bounds_and_original(sample):
         if seed < 8:
             assert validate(child, sample)["ok"]
     assert parent == original
-    assert observed == {"M1", "M2", "M3", "M5"} and arms == {"guided", "uniform"}
+    assert observed == {"M1", "M2", "M3"} and arms == {"guided", "uniform"}
     tree = genome.expanded(parent)
     choices = mutate.candidates(tree)
+    assert choices["M5"] == []
     assert all(o["kind"] != "gate" for o in choices["M2"] + choices["M3"])
     assert not any(o["id"] == "comb_alpha" for o in choices["M2"] + choices["M3"])
     tree["ops.jsonl"] = [o for o in tree["ops.jsonl"] if o["id"] != "decomp_nest"]
@@ -170,7 +172,6 @@ def test_op_immutable_fields(sample, field):
         ("holdout", "immutable:"),
         ("taskset", "immutable:"),
         ("ctl", "immutable:"),
-        ("weight", "bounds:"),
         ("priority", "bounds:"),
         ("judge", "bounds:"),
         ("gate", "bounds:"),
@@ -199,8 +200,6 @@ def test_structural_forgeries(sample, case, prefix):
         frozen[case]["forged"] = True
     elif case == "ctl":
         tree["ctl"]["sha1"] = "0" * 40
-    elif case == "weight":
-        tree["nodes"]["grow"]["_metainfo.json"]["weight"] = 4.01
     elif case == "priority":
         next(o for o in tree["ops.jsonl"] if o["kind"] == "route")["payload"][
             "priority"
@@ -455,7 +454,10 @@ def test_quick_evidence_tampering_is_not_a_cache_hit(sample, evaluated, field):
         )
 
 
-def test_generation_cli_and_acceptance_without_search(sample, monkeypatch):
+@pytest.mark.parametrize("custom_accept", [False, True])
+def test_generation_cli_and_acceptance_without_search(
+    sample, monkeypatch, custom_accept
+):
     path, _, root, guide = sample
     monkeypatch.setattr(quick, "run", fake_quick)
     monkeypatch.setattr(
@@ -464,8 +466,17 @@ def test_generation_cli_and_acceptance_without_search(sample, monkeypatch):
         lambda: {"pass": True, "pytest_exit": 0, "tests_passed": 1, "errors": []},
     )
     monkeypatch.setattr(ga, "_evo_status", lambda: [])
+    probes = []
+
+    def probe(parent, child, **kwargs):
+        probes.append((parent, child))
+        # Exercise a legal but ineffective draw before accepting seven gates.
+        return {"changed": ["cfg"] if len(probes) > 1 else [], "detail": {}}
+
+    monkeypatch.setattr(effect, "probe", probe)
     before = ledger.snapshot(root)
     out = genome.EVO / "generation"
+    accept = out / "ga-accept.json" if custom_accept else ga.ACCEPT
     assert (
         main(
             [
@@ -482,11 +493,14 @@ def test_generation_cli_and_acceptance_without_search(sample, monkeypatch):
                 "0",
                 "--ledger",
                 str(guide),
+                *(["--accept", str(accept)] if custom_accept else []),
             ]
         )
         == 0
     )
-    report = fm.read_json(ga.ACCEPT)
+    report = fm.read_json(accept)
+    if custom_accept:
+        assert not ga.ACCEPT.exists()
     assert report["pass"] and set(report["checks"]) == {f"G{i}" for i in range(1, 8)}
     assert report["checks"]["G3"]["cache_hits"] >= 1
     assert report["checks"]["G7"]["live_files_differ"] == 0
@@ -494,6 +508,18 @@ def test_generation_cli_and_acceptance_without_search(sample, monkeypatch):
     children = sorted((out / "g1").glob("*/parents.json"))
     records = [fm.read_json(p) for p in children]
     assert len(records) == 8
+    assert report["checks"]["G1"]["effective_children"] == 7
+    assert len(probes) == 8
+    assert any(
+        reason.startswith("no_effect:")
+        for record in records
+        for errors in record["rejected"]
+        for reason in errors
+    )
+    assert all("meter_track" in r for r in records)
+    effects = [fm.read_json(p.parent / "effect.json") for p in children]
+    assert all(e["changed"] for e in effects[:7])
+    assert effects[7]["skipped"] == "clone"
     assert sum(r["arm"] == "cross" for r in records) == 2
     assert sum(r["arm"] == "clone" for r in records) == 1
     assert {r["ops"][0]["op"] for r in records if r["arm"] == "cross"} == {"X1", "X3"}
@@ -543,6 +569,23 @@ def test_safety_stop_destination_threads_and_retry_limit(sample, monkeypatch, tm
         ga.run(path, genome.EVO / "retry", guide)
     failures = fm.read_json(genome.EVO / "retry/generation_failure.json")
     assert len(failures["attempts"]) == 20
+
+    tree = genome.expanded(doc)
+    tree["frozen.json"]["judge"]["ablate_max"] += 1
+    child = genome.pack(doc, tree)
+    monkeypatch.setattr(
+        mutate,
+        "mutate",
+        lambda *args: (
+            child,
+            {"ops": [{"path": "frozen.json/judge/ablate_max"}]},
+        ),
+    )
+    monkeypatch.setattr(effect, "probe", lambda *args, **kwargs: {"changed": []})
+    with pytest.raises(ValueError, match="exceeded 20 draws"):
+        ga.run(path, genome.EVO / "no-effect", guide)
+    failures = fm.read_json(genome.EVO / "no-effect/generation_failure.json")
+    assert failures["attempts"] == [["no_effect:frozen.json/judge/ablate_max"]] * 20
 
     def stopped():
         raise RuntimeError("STOP")

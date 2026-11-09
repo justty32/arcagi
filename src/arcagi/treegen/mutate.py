@@ -7,6 +7,7 @@ from pathlib import Path
 from arcagi.hammer.formats import read_json, read_jsonl
 
 from . import boundary, bounds, genome
+from .effect import effective_arms
 
 OPERATORS = ("M1", "M2", "M3", "M5")
 PROBABILITIES = (0.4, 0.25, 0.25, 0.1)
@@ -51,9 +52,20 @@ def _safe_removal(op: dict, ops: list[dict]) -> bool:
 
 
 def candidates(tree: dict) -> dict[str, list]:
-    """Exclude mutations which necessarily violate structural constraints."""
+    """Exclude structurally invalid mutations and ineffective route edits."""
     targets = bounds.targets(tree)
     ops = tree["ops.jsonl"]
+    arms = effective_arms(ops)
+
+    def changes_route(op: dict, operator: str) -> bool:
+        if op["kind"] != "route":
+            return True
+        changed = [o for o in ops if o["id"] != op["id"]]
+        if operator == "M2":
+            status = "dormant" if op["status"] == "live" else "live"
+            changed.append({**op, "status": status})
+        return effective_arms(changed) != arms
+
     return {
         "M1": [t for t in targets if t[4] != "weight"],
         "M2": [
@@ -66,8 +78,9 @@ def candidates(tree: dict) -> dict[str, list]:
                 or _safe_removal(o, ops)
                 or o["kind"] == "decomp"
             )
+            and changes_route(o, "M2")
         ],
-        "M3": [o for o in ops if _safe_removal(o, ops)],
+        "M3": [o for o in ops if _safe_removal(o, ops) and changes_route(o, "M3")],
         "M5": [t for t in targets if t[4] == "weight"],
     }
 

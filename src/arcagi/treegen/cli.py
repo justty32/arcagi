@@ -223,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
     ga.add_argument("--seed", type=int, default=0)
     ga.add_argument("--ledger", type=Path, required=True)
     ga.add_argument("--threads", type=int, default=4)
+    ga.add_argument("--accept", type=Path)
     ga_check = commands.add_parser("ga-check")
     ga_check.add_argument("tree_json", type=Path)
     ga_check.add_argument("--parent", type=Path, action="append", required=True)
@@ -348,6 +349,7 @@ def _block4(args: argparse.Namespace) -> int:
             gens=args.gens,
             seed=args.seed,
             threads=args.threads,
+            accept=args.accept,
         )
         code = int(not result["pass"])
     elif args.command == "ga-check":

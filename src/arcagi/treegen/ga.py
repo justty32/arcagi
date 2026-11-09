@@ -7,7 +7,17 @@ from pathlib import Path
 
 from arcagi.hammer.formats import read_json, write_json
 
-from . import boundary, check, crossover, fitness, genome, guards, ledger, mutate
+from . import (
+    boundary,
+    check,
+    crossover,
+    effect,
+    fitness,
+    genome,
+    guards,
+    ledger,
+    mutate,
+)
 from . import select as selection
 from .refs import sha12
 
@@ -62,6 +72,8 @@ def _accept(
     redraws = [
         read_json(Path(c["directory"]) / "parents.json")["redraws"] for c in children
     ]
+    effects = [read_json(Path(c["directory"]) / "effect.json") for c in children]
+    effective = len(effects) == 8 and all(e["changed"] for e in effects[:7])
     errors = [
         error
         for c in children
@@ -87,11 +99,13 @@ def _accept(
         "G1": {
             "pass": len(checks) == 8
             and all(c["ok"] for c in checks)
+            and effective
             and all(n <= MAX_DRAWS for n in redraws),
             "children": len(checks),
             "legal": sum(c["ok"] for c in checks),
             "redraws": redraws,
             "max_redraws": max(redraws, default=0),
+            "effective_children": sum(bool(e["changed"]) for e in effects[:7]),
         },
         "G2": {
             "pass": not errors
@@ -152,6 +166,7 @@ def run(
     gens: int = 1,
     seed: int = 0,
     threads: int = 4,
+    accept: Path | None = None,
 ) -> dict:
     """Evaluate parent plus 5 mutations, X1, X3 and one deliberate cache clone."""
     boundary.check_stop()
@@ -217,19 +232,30 @@ def run(
                     "redraws": 0,
                 }
             checked = check.check(child, parents, files_dir=parent.parent / "files")
-            if checked["ok"]:
+            if not checked["ok"]:
+                failed.append(checked["errors"])
+                continue
+            if index == 7:
+                probed = {"changed": [], "detail": {}, "skipped": "clone"}
                 break
-            failed.append(checked["errors"])
+            probed = effect.probe(doc, child, files_dir=parent.parent / "files")
+            if probed["changed"]:
+                break
+            paths = ",".join(op["path"] for op in record["ops"])
+            failed.append([f"no_effect:{paths}"])
         else:
             write_json(
                 out / "generation_failure.json", {"child": index, "attempts": failed}
             )
             raise ValueError(f"child {index}: exceeded {MAX_DRAWS} draws")
-        record.update(redraws=redraw, rejected=failed)
+        record.update(
+            redraws=redraw, rejected=failed, meter_track=effect.meter_track(doc, child)
+        )
         directory = out / "g1" / f"{index}_{child['genome_sha']}"
         child = genome.write(directory / "tree.json", child, parent.parent / "files")
         write_json(directory / "parents.json", record)
         write_json(directory / "check.json", checked)
+        write_json(directory / "effect.json", probed)
         if index < 5:
             mutants.append(child)
             seen.add(child["genome_sha"])
@@ -261,11 +287,13 @@ def run(
         selected=selected["selected"],
         limitations=[
             "M4 and X2 are disabled; no external op bank.",
+            "M5 has no targets: hammer does not read node weight.",
+            "Effect probes use two tasks at budget 64, not a full equivalence test.",
             "Selection demonstrates plumbing, not efficacy.",
             "Activity event ownership is provisional; non-comb history uses "
             "the block-3 proxy.",
         ],
     )
     boundary.check_stop()
-    write_json(ACCEPT, report)
+    write_json(ACCEPT if accept is None else accept, report)
     return report
