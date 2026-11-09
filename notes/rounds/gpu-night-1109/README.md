@@ -59,6 +59,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | T2 思考設計輪 2 | opus 隊長 | 主題：樹⇄JSON 往返（整棵樹當個體）＋分層改進成本帳＋塊 B 雜訊尺與 Argon 守門；跑 01a→03＋施工第一塊 | 跑中（00:3x 派） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | opus | 照 progress 5 步寫 gpuprofile、跑 800 題、features.csv | 跑中 | reports/task-features-1109/ |
+| N5 S1 forbid | opus | seed 空樹語言 AST 剪枝（旗標開啟、另建 arcbatch-forbid），量開關前後搜樹速度與解集合；評估 seed 列舉搬 GPU | 跑中（23:4x 派） | reports/seed-forbid-1110/ |
 
 ## 待辦（有空位就派）
 
