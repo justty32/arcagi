@@ -23,6 +23,10 @@ agent 不用重猜的事。always-on 鐵律在 AGENTS.md，這裡是**這位使�
 | 子 agent 分工補充 | 2026-11-09：實作、寫檔等普通文字處理優先交 codex gpt sol（`-m gpt-6.1-sol`，必帶 `-s`；除 astra 外型號皆可）或 litellm sol；Claude 子 agent 留給設計、審查、驗收；設計用 fable、審稿 agy Argon。子孫 agent 要做權限管理（交接書帶安全邊界段、原樣下傳）與 context 管理（一線一里程碑；context 約 30% 就寫 progress 交接換手）|
 | 長時間無人值守 | 2026-11-09：使用者會設 goal＋auto compact（30% 觸發）；主 agent 把續行點寫進 SESSION-LOG 與當夜看板，compact 後照看板檢查表恢復（看門狗、停止開關 `~/arcagi-STOP`、inbox 監看、排程）|
 
+## aos 累積的習慣速查
+
+aos 頂層 11-09 整理、跟本表不重複的使用者習慣（睡時不問改放看板、起床報告格式、講人話、「不如…」是討論不是派工、sol 碼要 opus 審、每段派人試玩…）→ [user-aos習慣速查](user-aos習慣速查.md)。衝突以本表為準。
+
 ## 外出時
 
 使用者常長時間外出、由多個 agent 分工。大小決策由主 agent 先代定、不停線等他；**代定清單**記在 [SESSION-LOG](../../SESSION-LOG.md)（或該輪紀錄），他回來時用白話報告做了哪些決定、在哪翻案；非他拍板不可的進 [WAIT_USER](../../WAIT_USER.md)。沿用他在 aos 定的做法（2026-10-09）。
