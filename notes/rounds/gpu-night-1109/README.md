@@ -60,13 +60,13 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | GPU 補負載 | （主 session 開，無 agent）| systemd `arcagi-main-gpufill`：`native/bin/gpusearch-filler`（gpusearch 複本）跑 evaluation 主線未解 344 題深度 6 dedup 4，timeout 7h；功耗 60W→118W | 跑中（23:10） | reports/native-cuda-1109/filler/（未 commit） |
 | N3 GPU 遺傳符號搜尋 | opus | 第 2 棒 N3b 23:3x PARTIAL（ce51644）：smoke 過、pop 524288 約 125W；長跑 `arcagi-n3-gp` 597 題到 06:00；比較 bench real 約 23:50、synth 約 00:30 結束，`arcagi-n3-fill` 自動填 report 表並留 bench/FILLED；**早期警訊**：GP 前 33 題標 solved 的 4 題 test 全錯（過擬合）。第 3 棒：00:37 排程派 opus 寫結論＋白話 | 長跑中 | reports/gpu-gp-1109/ |
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
-| T2 思考設計輪 2 | opus 隊長（第 2 棒 T2b） | 第 1 棒 PARTIAL（f160691、1737472）：01a～02b、代定 D1–D10 齊；fable 5 塊；D3 發現「驗證池不准造積木」程式裡已破（epoch gate_ids 取 L16∪P、P 結果餵 sleep_ops）→ 本輪只加外部守門印 FAIL；D6 本輪 GPU 不做整樹評估 kernel。T2b 接 D11～、03-設計、施工樹⇄JSON 往返、04 | 跑中（00:1x） | notes/rounds/gpu-night-1109/think-2/ |
+| T2 思考設計輪 2 | opus 隊長（第 2 棒 T2b） | 第 1 棒 PARTIAL（f160691、1737472）：01a～02b、代定 D1–D10 齊；fable 5 塊；D3 發現「驗證池不准造積木」程式裡已破（epoch gate_ids 取 L16∪P、P 結果餵 sleep_ops）→ 本輪只加外部守門印 FAIL；D6 本輪 GPU 不做整樹評估 kernel。T2b 接 D11～、03-設計、施工樹⇄JSON 往返、04 | 跑中（23:5x） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | opus | 照 progress 5 步寫 gpuprofile、跑 800 題、features.csv | 跑中 | reports/task-features-1109/ |
-| N5c seed GPU 端到端 | opus | GPU 層接進真 seed 搜尋（arcbatch-gpuseed --gpu-seed），量整體搜樹速度＋解集合，修小層長尾 | 跑中（00:4x） | reports/seed-gpu-e2e-1110/ |
+| N5c seed GPU 端到端 | opus | GPU 層接進真 seed 搜尋（arcbatch-gpuseed --gpu-seed），量整體搜樹速度＋解集合，修小層長尾 | 跑中（23:5x） | reports/seed-gpu-e2e-1110/ |
 
 ## 待辦（有空位就派）
 
-- **A1 自起 aos daemon＋aos agent**（使用者睡前授權「自己起aos daemon，自己開aos agent，自己改進自己的工作流」「權限自行設置」）：步驟照 aos 回信 `wf/inbox/done/20261109T2337-aos-DONE.md`（`.aos-run/` gitignore、unit `arcagi-aos-daemon`、先 curl litellm /v1/models 對模型名、agent 只給 read/ls、ws 指 arcagi）。先接用法 1：思考輪「讀檔挑毛病」段交 luna agent；看門狗只盯根 pid。已派（00:0x）。
+- **A1 自起 aos daemon＋aos agent**（使用者睡前授權「自己起aos daemon，自己開aos agent，自己改進自己的工作流」「權限自行設置」）：步驟照 aos 回信 `wf/inbox/done/20261109T2337-aos-DONE.md`（`.aos-run/` gitignore、unit `arcagi-aos-daemon`、先 curl litellm /v1/models 對模型名、agent 只給 read/ls、ws 指 arcagi）。先接用法 1：思考輪「讀檔挑毛病」段交 luna agent；看門狗只盯根 pid。已派（23:4x）。
 
 - ~~題目特性採集~~（已派 N4）：把 N2／補負載的 gpusearch 輸出（及 N3 GP 的近似分數）整理成每題搜尋剖面資料檔（`wf-table/1`），給後續排序器／剪枝器／演化適應度用；若 gpusearch 目前不輸出近似資訊，改它多輸出（使用者 23:1x 建議 2）。
 - **aos 樹上的分層改進／遺傳搜尋**（使用者建議 1～5，見 [總表/使用者方向](../總表/使用者方向.md)「11-09 夜建議」；aos 回信整理在 [aos-回信-樹演化](aos-回信-樹演化.md)，建議第一步＝樹⇄JSON 往返、共用子樹記引用）：T1 收輪後開思考輪 2 以此為主題。
@@ -82,12 +82,12 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 已收線
 
-- N5b seed 列舉 GPU 第一步（00:3x）：20 個一階原語搬上 GPU，100 題第 2–6 層指紋集合與節點數 GPU==CPU 0 不一致；吞吐比 0.13×（L2）→2.6×（L3）→30×（L6）（只算生成＋求值＋雜湊段，上限值）；lambda 類仍在 CPU；pytest 22 過（主 session 核過）；3f73ec6。
+- N5b seed 列舉 GPU 第一步（23:5x）：20 個一階原語搬上 GPU，100 題第 2–6 層指紋集合與節點數 GPU==CPU 0 不一致；吞吐比 0.13×（L2）→2.6×（L3）→30×（L6）（只算生成＋求值＋雜湊段，上限值）；lambda 類仍在 CPU；pytest 22 過（主 session 核過）；3f73ec6。
 - A1 自起 aos 樹（23:5x）：`arcagi-aos-daemon.scope` 根 pid 177262（收：`kill -TERM 177262`）；t1＝luna 只讀（read/ls，拿掉範本的 4 個工具）問答 14 秒、2 呼叫、品質中等；寫入只落 `.aos-run/`；食譜 `aos-daemon/食譜.md`、kb `lead/aos_agent`；c209f0f。風險：scope 從子 agent 背景殼起，主 session 結束可能連帶倒——看門狗檢查表加一條。
 - GPU 補負載 2（23:47）：功耗掉到 ~89W，主 session 加開 `arcagi-main-gpufill2`（gpusearch-filler2 跑 training 主線未解 253 題深度 6，到 06:00）→ 95W。
-- N5 S1 forbid（00:0x）：加好、解集合完全一致（100 題三種預算），但只跳過 0.5～3% 候選、速度差在雜訊內——多數樣式產的值本來就被去重丟掉；真要省得靠大量挖掘樣式或 seed 列舉搬 GPU（可行性稿估 2～4×）。pytest 21 過（主 session 重跑核過）；d7c2ed6。
+- N5 S1 forbid（23:4x）：加好、解集合完全一致（100 題三種預算），但只跳過 0.5～3% 候選、速度差在雜訊內——多數樣式產的值本來就被去重丟掉；真要省得靠大量挖掘樣式或 seed 列舉搬 GPU（可行性稿估 2～4×）。pytest 21 過（主 session 重跑核過）；d7c2ed6。
 - K1 分層知識庫（23:3x）：`kb/` 23 節點（resume／lead／worker／project），memory 工具實測可讀、find 可搜，節點 ≤1.3KB；7f2ce39。交接書「先讀規矩」可改成「先 read kb `worker`／`lead`」。wf_kb 改指 kb/ 要改 ~/.cache/aos-mcp-arcagi/tools.json（夜跑寫入範圍外）→ 待使用者。
-- T1 思考設計輪 1（00:2x）：04-總結簡報 寫好（7d16438）；計分卡 21 積木（幹活 4／休眠 5／休眠有動靜 5／未量 7）、曲線尺速度分數 43.5；待使用者看 Q1／Q5／Q4／A4；輪 2 主題＝樹⇄JSON 往返＋分層改進成本帳＋塊 B 雜訊尺與 Argon 兩警告守門。
+- T1 思考設計輪 1（23:2x）：04-總結簡報 寫好（7d16438）；計分卡 21 積木（幹活 4／休眠 5／休眠有動靜 5／未量 7）、曲線尺速度分數 43.5；待使用者看 Q1／Q5／Q4／A4；輪 2 主題＝樹⇄JSON 往返＋分層改進成本帳＋塊 B 雜訊尺與 Argon 兩警告守門。
 - N1／N1b 蠟模比較（23:30）：選 sol-low·prims_py（全步 20.8%、每步 51.4%）；發現空樹 ≤4 節點連換色都擬合不到→先改語言；43d2764。
 
 - N2 CUDA 雛形（22:55）：GPU 對 CPU 44.5×～105×、解集合一致、Python 399/399；1ca9a6f／78c7890。
