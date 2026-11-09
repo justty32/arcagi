@@ -64,3 +64,20 @@ bin/gp-obj/gp_main.o: gpu/gp/gp_main.cpp gpu/gp/gp.hpp gpu/space.hpp gpu/gpu.hpp
 
 bin/gpgp: $(LIB_OBJECTS) bin/gp-obj/gp_kernel.o bin/gp-obj/gp_main.o
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# GPU near-miss profiler over the gpusearch space (native/gpu/profile/,
+# reports/task-features-1109/). Separate target: `make gpuprofile`.
+# profile_kernel.cu includes gpu/kernel.cu to share primitives.
+.PHONY: gpuprofile
+gpuprofile: bin/gpuprofile
+
+bin/profile-obj/profile_kernel.o: gpu/profile/profile_kernel.cu gpu/profile/profile.hpp gpu/kernel.cu gpu/space.hpp gpu/gpu.hpp | bin
+	mkdir -p bin/profile-obj
+	$(NVCC) $(NVFLAGS) -c $< -o $@
+
+bin/profile-obj/profile_main.o: gpu/profile/profile_main.cpp gpu/profile/profile.hpp gpu/space.hpp gpu/gpu.hpp $(HEADERS) | bin
+	mkdir -p bin/profile-obj
+	$(CXX) $(CXXFLAGS) -I/opt/cuda/include -c $< -o $@
+
+bin/gpuprofile: $(LIB_OBJECTS) bin/profile-obj/profile_kernel.o bin/profile-obj/profile_main.o
+	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@

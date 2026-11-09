@@ -14,7 +14,7 @@
 4. inbox 監看 Monitor（每 15 秒 `find wf/inbox -maxdepth 1 -name '*.md'`，30 分鐘到期要續）——compact 後若沒在跑就重開。
 5. CronList 看 06:04 晨報排程在不在；不在就 CronCreate `4 6 10 11 *` one-shot（內容：核各線 overnight-summary、寫 晨報.md、寄 aos DONE）。
 6. 下表「現役線」逐條確認狀態；子 agent 完成通知來了就照 dispatch 收線（對證據）並更新本表。
-7. 每次 commit 後更新本表與 SESSION-LOG 再 push。
+7. 每次 commit 後更新本表與 SESSION-LOG（**今晚只 commit、不 push**）。
 8. **GPU 不准閒**（使用者：「不要讓gpu閒下來，一整個晚上我都要靠它取暖」）：`nvidia-smi --query-gpu=utilization.gpu,power.draw,temperature.gpu --format=csv`；功耗長時間 <100W 或 util 掉下來就加 GPU 負載（開新的 GPU 搜尋長跑或加大 batch），溫度 ≤85°C。
 9. aos 頂層熟使用者過去習慣：拿不準的流程、偏好、過去 thinking 就寄 REQUEST 問它（`wf/tools/inbox_send.sh --reply-to ... aos inbox ... REQUEST`），不自己猜。
 
@@ -26,6 +26,8 @@
 - 孫 agent 同樣適用；回報只給結論＋路徑，不貼原始輸出。
 
 ## 分工
+
+- **今晚不 push**（使用者 23:4x）：「今晚都不要push吧，就在我醒來前十分鐘準備好要push的東西(注意不要太大太多)，我醒來後再push。」→ 只本機 commit、不 push 不 pull；06:10 前整理好待 push 清單（commit 數、總大小、有無大檔），晨報附上，等使用者醒來 push。覆蓋上方「可隨意 push」。
 
 - **git 衛生**（使用者 23:3x）：「節點池會膨脹很快……只有最終確定有用，真的沉澱下來，才推上去」→ 族群、各代候選、原始大輸出放 gitignore 的目錄或 scratchpad，只 commit 彙總與沉澱下來的節點。
 
@@ -50,6 +52,11 @@
 
 - ~~題目特性採集~~（已派 N4）：把 N2／補負載的 gpusearch 輸出（及 N3 GP 的近似分數）整理成每題搜尋剖面資料檔（`wf-table/1`），給後續排序器／剪枝器／演化適應度用；若 gpusearch 目前不輸出近似資訊，改它多輸出（使用者 23:1x 建議 2）。
 - **aos 樹上的分層改進／遺傳搜尋**（使用者建議 1～5，見 [總表/使用者方向](../總表/使用者方向.md)「11-09 夜建議」；aos 回信整理在 [aos-回信-樹演化](aos-回信-樹演化.md)，建議第一步＝樹⇄JSON 往返、共用子樹記引用）：T1 收輪後開思考輪 2 以此為主題。
+
+## 早上待辦（使用者醒來後）
+
+- 使用者 push（06:10 前備好清單）。
+- aos mcp 接上＋wf 轉 aos 知識庫：等 aos 回信（23:21 REQUEST）準備設定；**今晚不重開 session**（使用者睡覺幫不了），早上由使用者重開。
 
 ## 等待中
 
