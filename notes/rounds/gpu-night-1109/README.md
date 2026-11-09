@@ -6,6 +6,14 @@
 
 到 11-10 06:20 使用者起床前不停。順序：① 系統安全 ② 推進 aos 體系改進（非解題率）③ 多用 CUDA/GPU 做符號運算（GPU 擬合、遺傳符號回歸、符號＋神經混合）④ 每完成一輪大的改進就跑一輪思考設計輪（不按鐘點）（gpt sol 蒐集 → opus 匯總 → fable 設計＋agy Argon 審 → opus 細化 → gpt sol 實作）。
 
+## 重開（resume）後先做（23:5x 為接 aos mcp 重開）
+
+aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀；設定說明 [aos-回信-mcp](aos-回信-mcp.md)；wf 轉知識庫走 (A) 直接指，B/C 待使用者定）。重開前所有 Claude 子 agent 已停，session 內排程與監看全失效，重開後：
+1. 試一次 `mcp__aos__wf_kb` `{"op":"read"}` 確認可用。
+2. 重開 inbox 監看、GPU 閒置警報 Monitor。
+3. CronCreate 重排：`37 0 10 11 *` N3 第 3 棒（等 bench/FILLED，寫結論＋白話）；`4 6 10 11 *` 晨報＋待 push 清單＋寄 aos DONE。若已過 00:37 就直接做 N3 第 3 棒。
+4. 派接手：T1 補 04 總結（think-1/progress.md）；N4b 照 reports/task-features-1109/progress.md 5 步做 gpuprofile；之後開思考輪 2（主題：使用者 11-09 夜建議 1～8＋T1 的下一輪反省點）。頂層 ≤3。
+
 ## compact 後檢查表（每次都做）
 
 1. `systemctl --user list-units 'arcagi-*' --plain --no-legend`：`arcagi-watchdog` 必須 active；掉了就照 scripts/watchdog_night.sh 開頭註解重開（`systemd-run --user --unit=arcagi-watchdog --nice=10 /home/lorkhan/repo/arcagi/scripts/watchdog_night.sh`）。
