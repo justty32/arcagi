@@ -4,7 +4,7 @@
 
 ## 目標（使用者 11-09 22:5x）
 
-到 11-10 06:20 使用者起床前不停。順序：① 系統安全 ② 推進 aos 體系改進（非解題率）③ 多用 CUDA/GPU 做符號運算（GPU 擬合、遺傳符號回歸、符號＋神經混合）④ 約每 1～2 小時一輪思考設計輪（gpt sol 蒐集 → opus 匯總 → fable 設計＋agy Argon 審 → opus 細化 → gpt sol 實作）。
+到 11-10 06:20 使用者起床前不停。順序：① 系統安全 ② 推進 aos 體系改進（非解題率）③ 多用 CUDA/GPU 做符號運算（GPU 擬合、遺傳符號回歸、符號＋神經混合）④ 每完成一輪大的改進就跑一輪思考設計輪（不按鐘點）（gpt sol 蒐集 → opus 匯總 → fable 設計＋agy Argon 審 → opus 細化 → gpt sol 實作）。
 
 ## compact 後檢查表（每次都做）
 
@@ -23,6 +23,9 @@
 - 孫 agent 同樣適用；回報只給結論＋路徑，不貼原始輸出。
 
 ## 分工
+
+- 思考設計輪時機（使用者 11-09 22:5x）：「思考設計輪不用限制說隔多久才跑，應該要用每完成一輪大的改進後就來看看。」→ 不按鐘點；每收完一條大改進線（或一輪施工）就開下一輪。
+- LM Studio（使用者 22:5x）：「lm studio我就先關掉了，有需要的話litellm proxy的gpt低階模型如luna/terra就很好用了，也不會搶占到gpu。」→ 本地 LLM 需求改走 litellm luna／terra。
 
 - 分工補充（使用者 22:5x）：「可以的話，實作，寫檔案等各種普通的，不太需要高階智能的文字處理，都交給codex gpt sol，或是litellm的sol」→ 實作與普通文字處理優先派 codex `-m gpt-6.1-sol -s workspace-write`（必帶 -m／-s）或 litellm sol；Claude 子 agent 留給設計、審查、驗收。
 

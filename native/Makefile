@@ -47,3 +47,20 @@ bin/gpu-obj/driver.o: gpu/driver.cpp gpu/space.hpp gpu/gpu.hpp $(HEADERS) | bin
 
 bin/gpusearch: $(LIB_OBJECTS) bin/gpu-obj/kernel.o bin/gpu-obj/driver.o
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# GPU genetic program search over the gpusearch space (native/gpu/gp/,
+# reports/gpu-gp-1109/). Separate target: `make gpugp`. gp_kernel.cu includes
+# gpu/kernel.cu so both share the same primitives and verdict.
+.PHONY: gpugp
+gpugp: bin/gpgp
+
+bin/gp-obj/gp_kernel.o: gpu/gp/gp_kernel.cu gpu/gp/gp.hpp gpu/kernel.cu gpu/space.hpp gpu/gpu.hpp | bin
+	mkdir -p bin/gp-obj
+	$(NVCC) $(NVFLAGS) -c $< -o $@
+
+bin/gp-obj/gp_main.o: gpu/gp/gp_main.cpp gpu/gp/gp.hpp gpu/space.hpp gpu/gpu.hpp $(HEADERS) | bin
+	mkdir -p bin/gp-obj
+	$(CXX) $(CXXFLAGS) -I/opt/cuda/include -c $< -o $@
+
+bin/gpgp: $(LIB_OBJECTS) bin/gp-obj/gp_kernel.o bin/gp-obj/gp_main.o
+	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
