@@ -64,7 +64,6 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
 | N5c seed GPU 端到端 | （無 agent，等基準） | PARTIAL d6b738d：`arcbatch-gpuseed --gpu-seed` 解集合與 CPU 完全一致，但 1e6 單跑 18.8 s vs CPU 8.0 s（更慢）。剖析：GPU 支援的一階原語佔節點 66% 卻只佔 CPU 時間 26%，其餘 74% 是 lambda／if／library → 就算 GPU 免費整體上限 ~1.35×；每層上傳 27 ms＋launch 14 ms、分解子題重傳 bank。基準 `arcagi-n5c-bench` 跑 3×(1e6,1e7) 中；收尾：跑 scratchpad/n5c/analyze.py → report.md | 長跑中 | reports/seed-gpu-e2e-1110/ |
 | N3c GP 結論＋N5c 收尾 | opus | bench/FILLED 已在 → 寫 N3 結論與 gp-白話（過擬合警訊）；N5c 基準完後產對照表 report.md | 跑中（00:2x） | reports/gpu-gp-1109/、reports/seed-gpu-e2e-1110/ |
-| W1 工作流改進 | opus | 交接書模板改「先 read kb 層」；kb 加換手教訓（開完長跑就交棒、用工具呼叫數估） | 跑中（00:2x） | wf/workflows/、kb/lead/ |
 
 ## 待辦（有空位就派）
 
@@ -84,6 +83,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 已收線
 
+- W1 工作流改進（00:3x）：TEMPLATE.handoff.md「先讀」改成先 read kb/worker 或 kb/lead；dispatch/README 加指標；新 kb/lead/handoff_lessons（開完長跑就交棒、用工具呼叫數 ≤40 估）；lint 無新壞連結（舊 30 條多在 think-1/01a）；7487779。
 - N5b seed 列舉 GPU 第一步（23:5x）：20 個一階原語搬上 GPU，100 題第 2–6 層指紋集合與節點數 GPU==CPU 0 不一致；吞吐比 0.13×（L2）→2.6×（L3）→30×（L6）（只算生成＋求值＋雜湊段，上限值）；lambda 類仍在 CPU；pytest 22 過（主 session 核過）；3f73ec6。
 - A1 自起 aos 樹（23:5x）：`arcagi-aos-daemon.scope` 根 pid 177262（收：`kill -TERM 177262`）；t1＝luna 只讀（read/ls，拿掉範本的 4 個工具）問答 14 秒、2 呼叫、品質中等；寫入只落 `.aos-run/`；食譜 `aos-daemon/食譜.md`、kb `lead/aos_agent`；c209f0f。風險：scope 從子 agent 背景殼起，主 session 結束可能連帶倒——看門狗檢查表加一條。
 - GPU 補負載 2（23:47）：功耗掉到 ~89W，主 session 加開 `arcagi-main-gpufill2`（gpusearch-filler2 跑 training 主線未解 253 題深度 6，到 06:00）→ 95W。
