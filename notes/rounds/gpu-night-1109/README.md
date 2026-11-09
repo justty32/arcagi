@@ -77,6 +77,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N8 CPU 熱點 | opus→codex sol | **收線 d657662、90901b4**：`native/bin/arcbatch-hot`（make -C native hot；native/src 未動）1e6/1e7 各 3 次 0/100 差異、31 tests。中位牆鐘 1e6 1.11×、1e7 **1.15×**（負載 9–15）。A lambda 呼叫快取命中 86% 但只 3–7%（雜訊內）；B 型別綁定/候選不逐個拷貝 +4～12%。下一步候選：整段 map/filter/fold 結果快取。**待裁：arcbatch-hot 換成預設** | 收線 | reports/cpu-hot-1110/ |
 | N8b 下一個 CPU 熱點 | opus→codex sol | **收線** 64201ff、fdcb041＋補表：1e7 剖面高階函式 58%（迴圈 24.7、lambda 23.4、建清單 10.1）、一階評估 28.3。正式 bench（負載 14–19）：hot 1.137×、hot-c 1.111×、hot-d 1.149×（只比 hot +1.0%，<2% 不收），全 0 差異。快取／緩衝路線撈不到，下一步要動一階評估或迴圈結構 | 收線 | reports/cpu-hot-1110/n8b.md |
 | N8c 一階評估熱點 | opus→codex sol | d1cfe67：選 H1（一階原語跨 train 範例逐原語緊迴圈，免每例重新 switch/store；seed_enum.cpp:856、seed_value.cpp:456），預估 4–8%。管線 arcagi-n8c-pipe（codex→build→tests→交錯 bench→analyze，05:35 截止）。違規備註：開成 .service 非 scope ；**收**：bench 首跑因 run_one 漏列 hot-e 失敗，主 session 補後重跑：1e7 hot-e 1.176×（對 hot +3.8%）、1e6 1.124×，0 差異、40 tests | 收線 | reports/cpu-hot-1110/n8c.md |
+| N8d lambda 葉節點內聯 | opus→codex sol | H2 疊在 hot-e 上（-DHOT_F）：葉節點免遞迴、步數記帳逐位元一致；>2% 才收；05:35 前停 | 跑中（03:41） | reports/cpu-hot-1110/n8d.md |
 
 ## 待辦（有空位就派）
 
