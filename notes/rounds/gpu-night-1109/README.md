@@ -38,7 +38,8 @@
 |---|---|---|---|---|
 | N1 蠟模 | opus | 提示法比較（litellm sol/luna/terra；gemma 中途關閉）→ 長跑到 06:10；第 1 棒 23:1x PARTIAL（c835198；sol-low prims_py 中途每步 50%、全步 23.8%），第 2 棒 N1b 接手 | 跑中 | reports/wax-night-1109/、notes/rounds/gpu-night-1109/wax-白話.md |
 | N2 長跑 | （無 agent）| systemd `arcagi-n2-overnight`：gpusearch 800 題深度 5→6→7，06:00 寫彙總 | 跑中 | reports/native-cuda-1109/overnight/（未 commit，晨報收） |
-| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP；第 1 棒 23:05 PARTIAL（06788bc，codex 寫碼中），第 2 棒 N3b 從 progress.md 接手 | 跑中 | reports/gpu-gp-1109/ |
+| GPU 補負載 | （主 session 開，無 agent）| systemd `arcagi-main-gpufill`：`native/bin/gpusearch-filler`（gpusearch 複本）跑 evaluation 主線未解 344 題深度 6 dedup 4，timeout 7h；功耗 60W→118W | 跑中（23:10） | reports/native-cuda-1109/filler/（未 commit） |
+| N3 GPU 遺傳符號搜尋 | opus | 第 1 棒 PARTIAL（ab66b40：gp 三檔 codex 寫、編過 `native/bin/gpgp`，未實跑未審）；第 2 棒 N3b 接手中，指示先開長跑吃滿 GPU | 跑中 | reports/gpu-gp-1109/ |
 | T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（22:5x 派） | notes/rounds/gpu-night-1109/think-1/ |
 
 ## 等待中

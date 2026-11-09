@@ -12,6 +12,8 @@ OUT=${1:-$ROOT/reports/gpu-gp-1109/overnight}
 DEADLINE=${2:-"2026-11-10 06:00"}
 REPORT=${REPORT:-$ROOT/reports/gpu-gp-1109/overnight-summary.md}
 BIN=${BIN:-$ROOT/native/bin/gpgp-overnight}
+# Extra gpgp flags; default population 524288 measured to keep the GPU near 125 W.
+read -r -a GP_EXTRA <<<"${GP_ARGS:---pop 524288}"
 DATA=$ROOT/data/ARC-AGI/data
 SOLVED=("$ROOT/reports/native-cuda-1109/mainline-solved-training-gated-r07.txt"
         "$ROOT/reports/native-cuda-1109/mainline-solved-evaluation-gated-r08.txt")
@@ -64,7 +66,7 @@ for budget in 20 60 120 240 240 240 240 240 240 240; do
     list=$OUT/open-pass-$k.txt
     open_tasks >"$list"
     echo "$(date -Is) start pass-$k ($(wc -l <"$list") tasks, budget ${budget}s, seed $k, ${rem}s left)" >>"$LOG"
-    timeout --signal=TERM "$rem" "$BIN" --tasks "$list" --budget "$budget" --seed "$k" \
+    timeout --signal=TERM "$rem" "$BIN" --tasks "$list" --budget "$budget" --seed "$k" "${GP_EXTRA[@]}" \
         --out "$OUT/pass-$k.jsonl" >>"$OUT/gp-stderr.log" 2>&1 &
     CHILD=$!
     wait "$CHILD"

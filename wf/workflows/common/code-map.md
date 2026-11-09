@@ -15,6 +15,7 @@
 - [dsl](../../../src/arcagi/dsl/__init__.py)：網格 DSL——[grid](../../../src/arcagi/dsl/grid.py) 純函式、[primitives](../../../src/arcagi/dsl/primitives.py)／[primitives_more](../../../src/arcagi/dsl/primitives_more.py) 原語與參數推斷、[registry](../../../src/arcagi/dsl/registry.py) 總表、[learners](../../../src/arcagi/dsl/learners.py) 終端換色表／鄰域規則、[program](../../../src/arcagi/dsl/program.py) JSON 程式執行與成本；[測試](../../../tests/dsl/)。
 - 第二～九輪加入的模組（objects、formula／extract、objrule、srcspace、shadow、seed／grow、guard／gated、hammer）→ [code-map/輪次模組.md](code-map/輪次模組.md)。
 - [blocks](../../../src/arcagi/blocks/__init__.py)：aos 接入——`aos/blocks/` 積木資料夾的 catalog／sync／run、node-pool 式記帳 pool、片段抽巨集 library、`aos/solver/_entry` 用的 solver；用法見 [aos/README](../../../aos/README.md)；[測試](../../../tests/blocks/)。
+- [llm/wax](../../../src/arcagi/llm/wax/__init__.py)：LLM 鑄蠟模——模型回 `solve(grid)`＋`step(tag,g)` 程式、沙箱跑軌跡、每步交 arcbatch 空樹擬合並複驗；4 種提示法比較與整夜長跑（`python -m arcagi.llm.wax compare|summary|overnight`）；[測試](../../../tests/llm/wax/)；紀錄 [wax-night-1109](../../../reports/wax-night-1109/compare.md)。
 - [score_top2](../../../scripts/score_top2.py)：從 eval 報告的 `trace.metadata.second` 離線算 top-2。
 - [search](../../../src/arcagi/solvers/search.py)：第一輪 DSL 枚舉求解器（`arcagi.solvers.search:solve`，觀察等價去重、最短程式勝出、軌跡記過 train 程式與近失敗）；[測試](../../../tests/solvers/test_search.py)；輪次紀錄 [r01](../../../notes/rounds/r01/03-設計.md)。
 - [experiments](../../../src/arcagi/experiments/__init__.py)：設定驗證、task／method／seed／repeat 矩陣、JSON／CSV／HTML 報告；[測試](../../../tests/experiments/)。
