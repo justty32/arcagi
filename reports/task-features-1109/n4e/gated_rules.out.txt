@@ -1,0 +1,13 @@
+Running as unit: arcagi-n4e-rules.scope; invocation ID: 718090019fe04e9dbca5621f01c97099
+
+== training
+tasks with GPU programs=57  with >=1 Python-verified train-pass=57
+R0: answered=57 | mainline-unsolved: +tests_right=2 (+tasks=2 ['46f33fce', 'a79310a0']) false(train ok,test wrong) tasks=5 tests=5 ['2013d3e2', '239be575', '25d8a9c8', '27a28665', 'aabf363d'] | mainline-solved conflicts tasks=3 tests=3 ['1f85a75f', '44f52bb0', '72ca375d']
+R1: answered=57 | mainline-unsolved: +tests_right=2 (+tasks=2 ['46f33fce', 'a79310a0']) false(train ok,test wrong) tasks=5 tests=5 ['2013d3e2', '239be575', '25d8a9c8', '27a28665', 'aabf363d'] | mainline-solved conflicts tasks=3 tests=3 ['1f85a75f', '44f52bb0', '72ca375d']
+R2: answered=23 | mainline-unsolved: +tests_right=1 (+tasks=1 ['46f33fce']) false(train ok,test wrong) tasks=4 tests=4 ['239be575', '25d8a9c8', '27a28665', 'aabf363d'] | mainline-solved conflicts tasks=2 tests=2 ['44f52bb0', '72ca375d']
+
+== evaluation
+tasks with GPU programs=17  with >=1 Python-verified train-pass=17
+R0: answered=17 | mainline-unsolved: +tests_right=2 (+tasks=2 ['66e6c45b', 'be03b35f']) false(train ok,test wrong) tasks=0 tests=0 [] | mainline-solved conflicts tasks=0 tests=0 []
+R1: answered=17 | mainline-unsolved: +tests_right=2 (+tasks=2 ['66e6c45b', 'be03b35f']) false(train ok,test wrong) tasks=0 tests=0 [] | mainline-solved conflicts tasks=0 tests=0 []
+R2: answered=11 | mainline-unsolved: +tests_right=2 (+tasks=2 ['66e6c45b', 'be03b35f']) false(train ok,test wrong) tasks=0 tests=0 [] | mainline-solved conflicts tasks=0 tests=0 []
