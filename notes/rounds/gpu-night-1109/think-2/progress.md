@@ -2,7 +2,7 @@
 
 ← [代定清單](代定清單.md)｜[夜跑看板](../README.md)
 
-狀態：**塊 3 DONE、塊 2 收（B1～B5 PASS、B6 FAIL→D20 不用）（t2d）**。塊 1、2 施工完。下一棒做塊 4。
+狀態：**塊 4 進行中（t2e）**：03d 寫完，codex sol 施工中。塊 1～3 完成。
 
 ## 已完成
 
@@ -66,4 +66,4 @@
 
 ## 在跑的背景單元
 
-- 無（`arcagi-t2c-b2runs`、`arcagi-t2d-sol`、`arcagi-t2d-d20` 皆已結束）。
+- `arcagi-t2e-sol`（codex sol 施工塊 4）：任務書／log／回報在 scratchpad `t2e/{task.md,sol.log,sol-report.md}`；`systemctl --user is-active arcagi-t2e-sol.scope` 非 active＝跑完。跑完：審 diff → `systemd-run ... arcagi-t2e-ga` 跑 `python -m arcagi.treegen.cli ga --parent ws/evo/rt/hammer/tree.json --pop 8 --gens 1 --out ws/evo/pop --seed 0 --ledger ws/evo/ledger/hammer` → 看 `reports/think2-1109/b4/accept.json`。
