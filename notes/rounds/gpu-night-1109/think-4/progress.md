@@ -43,3 +43,11 @@
   - 判讀：`python3 -c "import json;a=json.load(open('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4c/accept.json'));print(a['status'],a['checks']);[print(k,v['n'],v['k'],v['n_pos'],v['p_neg'],v['delta'],v['halves']) for k,v in a['sign_tests'].items()];print(json.dumps(a['report_only'])[:800])"`
   - 過 → accept.json 複製進 `reports/think4-1110/a/t4c/`、更新代定清單 T2/T5、寫 04-總結簡報。
   - 不過 → **不再翻案**：代定清單加「待使用者裁」條目（附預設：維持 t4c 判準記 FAIL，量尺僅作回報用、不當 GA 適應度；或改用 comb 管道與順序管道分列回報），附 accept.json 數字。
+
+## 第四棒（t4d，11-10）
+
+- [完] t4c 收尾（commit 58e27ce）：accept/batch/taskset 複本 `reports/think4-1110/c/`；05、代定清單（T2/T4/T5 定案、T8 新）標結論；`04-總結簡報.md`。
+- [完] 03 §9 g1 子代量測預先登記（commit **7d987f9**，早於跑）：5 棵相異子代（c0..c4）、雙尾成對符號檢定、Holm m=5、|Δ|≥2、兩半同號；親代重跑 parent-g＋clone（c7）陰性對照；健全門三條。
+- [進行] g1 量測：單元 `arcagi-t4d-g1`（scope），腳本 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/run.sh`（7 棵 meter，xargs -P 4，每棵約 3.5 分鐘，總計約 8–10 分鐘）；逐棵 log `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/logs/`、回傳碼 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/rc.txt`；run 目錄 `ws/evo/meter/t4d-*`。跑完判斷＝`/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/DONE` 存在。
+  - 判讀：DONE 後 run.sh 已自動跑 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/g1_judge.py` → `reports/think4-1110/d/g1.json`，摘要在 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/judge.log`（首行 PASS/FAIL＋健全門，之後每行：族 子代 n k_neg k_pos p Δ 兩半 holm_reject verdict）。judge 掛了就手動重跑：`.venv/bin/python -I /tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4d/g1_judge.py`。
+  - 下一步：g1.json commit；結果寫進 04-總結簡報「下一步」與 progress；預期 c1、c2（只改 comb 狀態）Δ=0（strip=all 盲區）。健全門不過＝量測無效，不解讀。
