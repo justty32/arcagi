@@ -13,3 +13,4 @@ htmlcov/
 examples/c_identity/solver
 data_synth/
 .aos-run/
+native/synth.jsonl
