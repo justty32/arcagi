@@ -133,3 +133,26 @@ n8b_prof.sh、n8b_bench.sh、run_one.py 與 analyze.py。object／binary 為建�
 
 HO (map/filter/zipwith/fold) total 58.2% at 1e7 (52.7% at 1e6) — still the largest hotspot; first-order eval 28.3%.
 Interleaved bench (arcbatch / hot / hot-c / hot-d x3) still running; see n8b-progress.md.
+
+## Interleaved bench (lead, 11-10 02:40–03:20, training first 100, seed, decomp, 4 threads, x3 interleaved, nice 19; raw n8b-bench-wall.txt / n8b-bench-cmp.txt)
+
+| budget | bin | wall median (min..max), s | speedup | mismatches |
+|---:|---|---:|---:|---:|
+| 1000000 | arcbatch | 13.170 (12.320..14.005) | 1.000x | reference |
+| 1000000 | arcbatch-hot | 12.008 (11.719..12.571) | 1.097x | 0 |
+| 1000000 | arcbatch-hot-c | 12.670 (12.567..12.972) | 1.039x | 0 |
+| 1000000 | arcbatch-hot-d | 12.037 (11.505..12.724) | 1.094x | 0 |
+| 10000000 | arcbatch | 144.410 (140.763..146.258) | 1.000x | reference |
+| 10000000 | arcbatch-hot | 127.004 (122.607..133.911) | 1.137x | 0 |
+| 10000000 | arcbatch-hot-c | 129.956 (126.018..134.402) | 1.111x | 0 |
+| 10000000 | arcbatch-hot-d | 125.701 (123.752..127.507) | 1.149x | 0 |
+
+Observed loadavg1 at run start: 14.25..19.33.
+
+Heavy load (loadavg1 14.3..19.3 from other night jobs), so absolute seconds are higher than N8's bench.
+All 18 hot/C/D runs: 0/100 mismatches vs arcbatch r1 (all keys incl. eval_steps, near).
+
+Verdict vs arcbatch-hot (median): C 1e6 −5.2% / 1e7 −2.3% (slower: key lookup costs more than the ~20% hit rate saves) → rejected.
+D 1e6 −0.2% / 1e7 +1.0% (below the 2% bar, ranges overlap) → not adopted; arcbatch-hot stays the best binary (1.14x at 1e7 here).
+Reading: list-function time is mostly the per-element loop and lambda calls themselves, not list allocation or repeated whole calls;
+further CPU gains need fewer evals (search side) or a different eval layout (e.g. batched/vectorised lambda bodies), not caching.

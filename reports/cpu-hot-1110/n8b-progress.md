@@ -1,4 +1,4 @@
-# N8b progress (arcbatch-hot next hotspot) — PARTIAL
+# N8b progress (arcbatch-hot next hotspot) — DONE (see n8b.md: C rejected, D +1.0% not adopted)
 
 ## Done (11-10 02:35)
 - codex built (`make -C native hot hot-prof hot2 -j4`): `bin/arcbatch-hot-prof` (A+B + rdtsc buckets, `ARC_HOT_PROF=path|-`),
