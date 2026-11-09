@@ -14,7 +14,7 @@
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
 - [rounds] r09 停手、主 session 11-08 19:5x 關閉；v4 方向題五題全 A（19:44）→ 使用者說開工才動：先插 v4 M1～M7 收 r09，再開 r10；接手照 [交棒總表](../notes/rounds/README.md)「主 session 交接」
 
-- [rounds/gpu-night-1109] 夜跑到 11-10 06:20（使用者起床前不停）；授權與安全邊界見 [總表/規矩](../notes/rounds/總表/規矩.md)「11-09 夜跑授權」。在跑：N1 蠟模（opus）、N2 CUDA（opus），長跑到 06:10；看門狗 `arcagi-watchdog`（sonnet 寫，log 在 notes/rounds/gpu-night-1109/watchdog.log）；已寄 aos REQUEST 問思考輪派隊流程（等 DONE 回信）→ 收信後開第一輪思考設計輪（gpt sol 蒐集 → opus 匯總 → fable 設計＋agy Argon 審 → opus 細化 → gpt sol 實作），之後每 1～2 小時一輪；06:04 排程寫晨報＋寄 aos DONE。compact 後：重開 inbox 監看、CronCreate 06:04 若已失效要重排。
+- [rounds/gpu-night-1109] 夜跑到 11-10 06:20（使用者 goal 已設）。**compact 後先讀夜跑看板** [notes/rounds/gpu-night-1109/README.md](../notes/rounds/gpu-night-1109/README.md)：檢查表、現役線（N1 蠟模、N3 GPU GP、T1 思考輪 1；N2 長跑在 systemd）、等待中、代定清單；授權與安全邊界見 [總表/規矩](../notes/rounds/總表/規矩.md)「11-09 夜跑授權」。
 
 ## 各工作流 session-log
 
