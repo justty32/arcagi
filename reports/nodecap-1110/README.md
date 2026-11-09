@@ -1,0 +1,56 @@
+# N9：提高 max_nodes 能多解幾題？→ BLOCKED（前提不成立）
+
+結論：主線 training 的「預算型放棄」撞到的是**時間上限**，不是 max_nodes 2e6。
+主線路徑裡 max_nodes 其實是 2e7，而且從來沒有被撞到。所以調 max_nodes 不會多解任何題；
+真正綁住的是 `native/hybrid.py` 裡寫死的 19 秒期限，沒有命令列參數或環境變數能改。
+依任務規則**沒有改原始碼，也沒有跑批**（沒有任何 n9 systemd 單元）。
+
+## 1. 主線實際呼叫鏈與參數（全部唯讀查證）
+
+| 層 | 檔案:行 | 傳的參數 |
+|---|---|---|
+| gated | `src/arcagi/solvers/gated.py` `_run_hybrid`（約 345–355 行） | 只呼叫 `native/bin/solve req out trace`，`timeout=60`；沒有搜尋參數 |
+| solve | `native/bin/solve` | `exec .venv/bin/python native/hybrid.py "$@"` |
+| hybrid | `native/hybrid.py:9` `DEADLINE = T0 + 19.0` | 整題 19 秒期限，寫死 |
+| hybrid | `native/hybrid.py:195` `budget = DEADLINE - time.perf_counter() - 4.0` | 呼叫 arcsearch 時給 `--budget`（扣掉 seeds 階段後約 13–15 秒），**不傳 `--max-nodes`／`--max-depth`** |
+| arcsearch | `native/src/search.hpp:6-8` | 預設 `budget=19.0`、`max_depth=5`、**`max_nodes=20000000`（2e7）** |
+| arcsearch CLI | `native/src/main.cpp:81-83` | 支援 `--budget`、`--max-depth`、`--max-nodes`，但 hybrid 不傳 |
+
+`batch.cpp:124-126` 的 `budget 60 / max_depth 4 / max_nodes 2e6` 只是 **arcbatch**（`--batch`）的預設值，
+不在 gated 主線上。01-簡報 §3 把它當成主線參數，這點有誤。
+
+## 2. trace 證據（`artifacts/gated-r07/training-traces.jsonl`，out_of_budget=True 共 195 筆）
+
+- nodes：最小 46,817，中位數 1,527,149，**最大 4,644,388**。有 58 筆超過 2e6，**0 筆達到 2e7**。
+  如果真有 2e6 的節點上限，就不可能出現超過 2e6 的值。
+- elapsed：最小 1.8 s，中位數 13.2 s，最大 14.9 s。這正好是 19 秒減 4 秒，再減 seeds 階段的時間。
+- 吞吐中位數約 12 萬節點/秒（停在 d3 的 148 筆）。
+
+## 3. 若要量「給更多搜尋」，需要改哪裡（未改）
+
+- **時間（真正的瓶頸）**：`native/hybrid.py:9` 的 `19.0`，連帶 `:195` 扣的 `4.0`。
+  另外 `gated.py` 的 `timeout=60` 是外層上限：期限超過約 55 秒就會被它截斷。
+- **節點**：要在 `native/hybrid.py:207-219` 的 arcsearch argv 加 `--max-nodes N`。
+  現在只有時間在綁，這一項沒有意義。
+- 合規的替代做法（不碰主線）：建議加一個環境變數，例如 `ARCAGI_HYBRID_DEADLINE`（預設 19.0），
+  在 hybrid.py 讀取。這需要 lead 決定是否改原始碼。
+- 粗估（下界，用 d3 部分節點推分支因子，很粗）：停在 d3 的 148 題中，
+  要把 d4 走完所需秒數的中位數約 90 s（p10 約 10 s，p90 約 260 s）。
+  期限 60 s 可走完約 58 題，180 s 約 112 題。這只代表「d4 走得完」，不代表會解出來。
+  假解率要實際跑過才知道。
+
+## 4. arcbatch-hot
+
+`arcbatch-hot`（N8）的改動只在 seed 語言（`native/hot/seed_value.cpp`、`seed_enum.cpp`，
+走 `--batch --mode seed`），不涉及主線 `search.cpp`／arcsearch 的列舉。
+它不能當 arcsearch 的同介面加速替身，所以沒有 1e7+hot 這一組。
+
+## 5. evaluation
+
+沒有跑，因為沒有可測的設定。
+
+## 下一步（給 lead）
+
+若同意改 hybrid.py 加上期限的環境變數（只加開關，預設不變），就能在 188 題母體上跑
+deadline ∈ {19, 40, 55}，量新增 test 對、假解與衝突。55 是受 gated `timeout=60` 限制的上限；
+想跑更長，gated 的 timeout 也要一起開放成可調。
