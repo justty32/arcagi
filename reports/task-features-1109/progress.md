@@ -5,8 +5,19 @@
 - Makefile 目標已在 3cdbb11 內（snippet 檔為空屬正常）。
 - gpuprofile 自寫完成（55e907f）：`native/gpu/profile/{profile.hpp,profile_kernel.cu,profile_main.cpp}`，`make -C native gpuprofile`。
 - 抽查：3c9b0459 d1 top-1 `rot180` 1.0；00d62c1b d1 top-1 `fill_enclosed`（cm 1.0、raw 0.933）；perfect 數在 3c9b0459／00d62c1b／007bbfb7 深度 1～3 與 gpusearch `solutions_per_depth` 完全一致。
-- 800 題長跑：`arcagi-n4-prof-training`、`arcagi-n4-prof-evaluation`（約 20 s／題，各約 2.3 h），輸出 `profile/<split>-d5.jsonl`（gitignore），日誌 `profile/<split>-d5.log`。
-- 剩：跑完 → `profile_features.py` 產 features.csv → README 欄位說明 → features-白話.md → commit。
+- 800 題長跑（00:02 時 208/800，約 6 題／分，預估 01:35 跑完）：
+  - `arcagi-n4-prof-training`、`arcagi-n4-prof-evaluation`：`native/bin/gpuprofile --tasks profile/<split>.txt --data-dir data/ARC-AGI/data/<split> --depth 5 --dedup 3 --budget 20 --out profile/<split>-d5.jsonl`，日誌 `profile/<split>-d5.log`。jsonl／log 在 `profile/.gitignore` 內，不 commit。
+  - `arcagi-n4-finalize`（`profile/finalize.sh`，日誌 `profile/finalize.log`）：等兩單元結束後自動跑 `native/tools/profile_features.py profile/training-d5.jsonl profile/evaluation-d5.jsonl --out features.csv --solved reports/native-cuda-1109/mainline-solved-*.txt`，再 `touch profile/FINALIZED`。**不會 commit。**
+  - 重生指令：同上兩行（各約 2.3 h，GPU 各約 0.5 GB）。
+- 管線已用前 5 題驗過：800 列、62 欄（profiled 欄標示有無剖面）。
+
+## 跑完後的手動步驟（下一棒）
+
+1. 確認 `profile/FINALIZED` 存在、`finalize.log` 印 `{"rows": 800, "profiled": ~800, ...}`；看兩個 `*-d5.log` 是否有錯誤（應為空）。
+2. 驗收抽查：`grep -E '^(3c9b0459|00d62c1b),' features.csv | cut -d, -f1,33-38`，`top1_score` 應為 1.0（3c9b0459 top-1 `rot180`；00d62c1b top-1 `fill_enclosed`＋colormap）。或直接 `native/bin/gpuprofile --task data/ARC-AGI/data/training/3c9b0459.json --depth 2`。
+3. 寫本夾 `README.md`：目的一句、`已抽到 [features.csv](features.csv)（800 列）`、欄位說明（每欄一行；`prim_*`＝各深度 top-K 程式中含該原語的比例，`best`＝套最佳單一 colormap 後與 train 輸出相符格比例）、統計（best=1.0 幾題、≥0.9 幾題、主線已解／未解分佈）。
+4. 寫 `notes/rounds/gpu-night-1109/features-白話.md` 一段白話。
+5. 本機 commit `features.csv`＋README＋白話（不 push）；更新看板 N4 列。
 
 # 第 1 棒（PARTIAL，23:4x 使用者喊停）
 
