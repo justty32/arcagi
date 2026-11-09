@@ -3,6 +3,11 @@
 //        [--data-dir DIR ...] [--pop N] [--island N] [--lmax N] [--linit N]
 //        [--tourn N] [--immigrants N] [--migrate N] [--pcx F] [--pmut F]
 //        [--seed S] [--random] [--spec native/spec.json]
+//        [--holdout loo] [--mdl LAMBDA] [--simplify greedy|min]   (gpgp-ho; defaults = original)
+//          --holdout loo: last train pair is hidden from GPU fitness/verdict; a hit
+//            counts as solved only if the host re-check also gets that pair right.
+//          --mdl L: length penalty L * log2(alphabet) per step (bits) instead of 0.002.
+//          --simplify min: shortest sub-program (any steps removed) still fitting train.
 //        gpgp --synth OUTDIR --tasks LIST --synth-len L [--synth-per-task N]
 //        [--min-depth D] [--attempts N] [--seed S]
 #include "gp.hpp"
@@ -116,6 +121,8 @@ struct Args {
     std::string out, synth, spec = "native/spec.json";
     double budget = 60;
     int synth_len = 0, synth_per_task = 1, min_depth = 4, attempts = 300;
+    bool holdout = false, min_simplify = false;
+    double mdl = -1;
 };
 
 void check_stop() {
@@ -194,6 +201,20 @@ Best simplify(Program raw, const Task& t, const Spec& spec) {
     }
 }
 
+// Shortest sub-sequence of raw (steps removed anywhere) that still fits all train pairs.
+Best simplify_min(const Program& raw, const Task& t, const Spec& spec) {
+    int n = int(raw.size());
+    for (int keep = 0; keep < n; ++keep)
+        for (uint32_t mask = 0; mask < (1u << n); ++mask) {
+            if (__builtin_popcount(mask) != keep) continue;
+            check_stop();
+            Program candidate;
+            for (int k = 0; k < n; ++k) if (mask >> k & 1) candidate.push_back(raw[k]);
+            if (auto b = materialise(candidate, t, spec)) return *b;
+        }
+    return *materialise(raw, t, spec);
+}
+
 std::string skip_reason(const Task& t, size_t A) {
     if (t.train_in.size() + t.test_in.size() > size_t(gs::MAX_PAIRS)) return "too many pairs";
     if (A > 256) return "alphabet > 256";
@@ -209,6 +230,10 @@ void search(gs::GpCtx* ctx, const Task& t, const Spec& spec, const Args& a, std:
         return;
     }
     load_gpu(ctx, t, alpha);
+    int holdout = a.holdout && t.train_in.size() >= 2 ? int(t.train_in.size()) - 1 : -1;
+    float len_pen = a.mdl >= 0 ? float(a.mdl * std::log2(double(alpha.size()))) : a.cfg.len_pen;
+    if (a.holdout || a.mdl >= 0) gs::gp_tune(ctx, holdout, len_pen);
+    int host_rejects = 0;
     auto start = Clock::now();
     uint32_t gen = 0;
     float best_fitness = -std::numeric_limits<float>::infinity();
@@ -225,10 +250,10 @@ void search(gs::GpCtx* ctx, const Task& t, const Spec& spec, const Args& a, std:
         if (f > best_fitness) { best_fitness = f; partial = genome(ctx, best_idx, alpha); }
         for (size_t k = 0; k < std::min<size_t>(64, hits.size()); ++k) {
             Program raw = genome(ctx, hits[k].first, alpha);
-            if (!materialise(raw, t, spec)) continue;
+            if (!materialise(raw, t, spec)) { ++host_rejects; continue; }
             solve_seconds = secs(start);
             raw_length = int(raw.size());
-            solved = simplify(std::move(raw), t, spec);
+            solved = a.min_simplify ? simplify_min(raw, t, spec) : simplify(std::move(raw), t, spec);
             break;
         }
         if (gen % 200 == 0)
@@ -243,6 +268,12 @@ void search(gs::GpCtx* ctx, const Task& t, const Spec& spec, const Args& a, std:
         {"solved", bool(solved)}, {"solve_seconds", solved ? Json(solve_seconds) : Json()},
         {"solve_generation", solved ? Json(double(gen)) : Json()},
         {"raw_length", solved ? Json(raw_length) : Json()}};
+    if (a.holdout || a.mdl >= 0 || a.min_simplify) {
+        rec["holdout"] = holdout;
+        rec["len_pen"] = double(len_pen);
+        rec["host_rejects"] = host_rejects;
+        rec["simplify"] = a.min_simplify ? "min" : "greedy";
+    }
     if (solved) rec["best"] = Json::Object{{"program", solved->program},
         {"kind", solved->kind == gs::EXACT ? "exact" : "colormap"}, {"depth", solved->depth},
         {"test_ok", solved->test_ok}, {"cost", solved->cost}};
@@ -363,6 +394,16 @@ Args parse(int argc, char** argv) {
         else if (key == "--pcx") a.cfg.pcx = std::stof(v);
         else if (key == "--pmut") a.cfg.pmut = std::stof(v);
         else if (key == "--seed") a.cfg.seed = std::stoull(v);
+        else if (key == "--holdout") {
+            if (v != "loo") throw std::runtime_error("--holdout supports only loo");
+            a.holdout = true;
+        } else if (key == "--mdl") {
+            a.mdl = std::stod(v);
+            if (!std::isfinite(a.mdl) || a.mdl < 0) throw std::runtime_error("--mdl must be >= 0");
+        } else if (key == "--simplify") {
+            if (v != "greedy" && v != "min") throw std::runtime_error("--simplify greedy|min");
+            a.min_simplify = v == "min";
+        }
         else if (key == "--synth-len") a.synth_len = std::stoi(v);
         else if (key == "--synth-per-task") a.synth_per_task = std::stoi(v);
         else if (key == "--min-depth") a.min_depth = std::stoi(v);

@@ -10,10 +10,13 @@ struct GpCfg {
     float pcx=0.5f, pmut=0.9f, len_pen=0.002f;
     uint64_t seed=1;
     bool random=false;
+    int holdout=-1;  // train pair hidden from fitness/verdict (gpgp-ho --holdout); -1 = none
 };
 struct GpCtx;
 GpCtx* gp_open(const GpCfg& cfg);
 void gp_close(GpCtx*);
+// Per-task overrides used by gpgp-ho (call after gp_load): holdout pair, length penalty.
+void gp_tune(GpCtx*, int holdout, float len_pen);
 void gp_load(GpCtx*, const DTask&, const std::vector<uint8_t>& inputs,
              const std::vector<uint8_t>& targets, const std::vector<DStep>& alpha);
 float gp_eval(GpCtx*, std::vector<std::pair<uint32_t,uint8_t>>& hits, uint32_t& best_idx);

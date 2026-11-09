@@ -53,7 +53,10 @@ __global__ void k_eval(const uint8_t* lens, const uint8_t* genes, float* fit, Gp
     int total = 0;
     bool ok = true;
     Verdict v;
+    int nfit = 0;
     for (int p = 0; p < c_task.ntrain; ++p) {
+        if (p == cfg.holdout) continue;  // hidden pair: checked on host only
+        ++nfit;
         int th = c_task.th[p], tw = c_task.tw[p], h, w;
         total += th * tw;
         const uint8_t* cur = run_steps(prog, len, inputs, p, ba, bb, bt, st, h, w);
@@ -74,8 +77,8 @@ __global__ void k_eval(const uint8_t* lens, const uint8_t* genes, float* fit, Gp
         for (int g = 0; g < 10; ++g) best = max(best, int(cnt[s][g]));
         mapped += best;
     }
-    fit[i] = 0.5f * cell / c_task.ntrain + 0.35f * mapped / total
-           + 0.15f * shape / c_task.ntrain - cfg.len_pen * len;
+    fit[i] = 0.5f * cell / nfit + 0.35f * mapped / total
+           + 0.15f * shape / nfit - cfg.len_pen * len;
     if (!ok) return;
     for (int p = c_task.ntrain; p < c_task.nall; ++p) {
         int h, w;
@@ -186,6 +189,7 @@ struct GpCtx {
     unsigned long long* sols = nullptr;
     unsigned int* nsol = nullptr;
     int current = 0;
+    int ntrain = 0;
 };
 
 GpCtx* gp_open(const GpCfg& cfg) {
@@ -212,6 +216,12 @@ GpCtx* gp_open(const GpCfg& cfg) {
     CK(cudaMalloc(&c->nsol, sizeof(unsigned int)));
     return c;
 }
+void gp_tune(GpCtx* c, int holdout, float len_pen) {
+    if (holdout >= c->ntrain || c->ntrain < 2) holdout = -1;
+    if (!std::isfinite(len_pen) || len_pen < 0) throw std::runtime_error("invalid length penalty");
+    c->cfg.holdout = holdout;
+    c->cfg.len_pen = len_pen;
+}
 void gp_close(GpCtx* c) {
     if (!c) return;
     for (int k = 0; k < 2; ++k) { cudaFree(c->lens[k]); cudaFree(c->genes[k]); }
@@ -226,6 +236,8 @@ void gp_load(GpCtx* c, const DTask& task, const std::vector<uint8_t>& inputs,
         throw std::runtime_error("invalid GP task");
     gpu_load(c->gpu, task, inputs, targets, alpha);
     c->current = 0;
+    c->ntrain = task.ntrain;
+    c->cfg.holdout = -1;  // gp_tune re-enables per task
     k_init<<<(c->cfg.pop + BLOCK - 1) / BLOCK, BLOCK>>>(c->lens[0], c->genes[0], c->cfg, c->gpu->A);
     CK(cudaGetLastError());
     CK(cudaDeviceSynchronize());

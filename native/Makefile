@@ -144,3 +144,19 @@ $(E2E_DIR)/e2e_kernel.o: gpu/seed/e2e_kernel.cu gpu/seed/kernel.cu $(E2E_HEADERS
 
 bin/arcbatch-gpuseed: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(E2E_DIR)/seed_enum_gpu.o $(E2E_DIR)/e2e_main.o $(E2E_DIR)/e2e_kernel.o | bin
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# gpgp-ho: gpgp built with holdout / MDL / min-simplify flags (reports/gpu-gp-1109/holdout.md).
+# Same sources as gpgp but separate objects, so bin/gpgp is never relinked by this target.
+.PHONY: gpugp-ho
+gpugp-ho: bin/gpgp-ho
+
+bin/gpho-obj/gp_kernel.o: gpu/gp/gp_kernel.cu gpu/gp/gp.hpp gpu/kernel.cu gpu/space.hpp gpu/gpu.hpp | bin
+	mkdir -p bin/gpho-obj
+	$(NVCC) $(NVFLAGS) -c $< -o $@
+
+bin/gpho-obj/gp_main.o: gpu/gp/gp_main.cpp gpu/gp/gp.hpp gpu/space.hpp gpu/gpu.hpp $(HEADERS) | bin
+	mkdir -p bin/gpho-obj
+	$(CXX) $(CXXFLAGS) -I/opt/cuda/include -c $< -o $@
+
+bin/gpgp-ho: $(LIB_OBJECTS) bin/gpho-obj/gp_kernel.o bin/gpho-obj/gp_main.o
+	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
