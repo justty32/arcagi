@@ -43,6 +43,11 @@
 | N3 GPU 遺傳符號搜尋 | opus | 第 1 棒 PARTIAL（ab66b40：gp 三檔 codex 寫、編過 `native/bin/gpgp`，未實跑未審）；第 2 棒 N3b 接手中，指示先開長跑吃滿 GPU | 跑中 | reports/gpu-gp-1109/ |
 | T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（22:5x 派） | notes/rounds/gpu-night-1109/think-1/ |
 
+## 待辦（有空位就派）
+
+- **題目特性採集**：把 N2／補負載的 gpusearch 輸出（及 N3 GP 的近似分數）整理成每題搜尋剖面資料檔（`wf-table/1`），給後續排序器／剪枝器／演化適應度用；若 gpusearch 目前不輸出近似資訊，改它多輸出（使用者 23:1x 建議 2）。
+- **aos 樹上的遺傳搜尋**（使用者建議 1）：等 aos 回信，進下一輪思考設計輪。
+
 ## 等待中
 
 - 使用者睡前會再給 ARC-AGI 建議 → 照錄進 [總表/使用者方向](../總表/使用者方向.md)，排進思考輪。
