@@ -114,3 +114,33 @@ gpu/seed/obj/host.o: gpu/seed/host.cpp gpu/seed/gpuseed.hpp $(HEADERS) src/seed_
 
 bin/gpuseed: $(SEED_GPU_OBJECTS) gpu/seed/obj/host.o gpu/seed/obj/kernel.o | bin
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# GPU seed layer inside the real seed search (N5c, reports/seed-gpu-e2e-1110/):
+# bin/arcbatch-gpuseed = bin/arcbatch plus --gpu-seed / --gpu-min N / --seed-prof.
+# src/ stays untouched: main.cpp is compiled with -Dmain=arcsearch_main and
+# wrapped by gpu/seed/e2e_main.cpp; gpu/seed/seed_enum_gpu.cpp is a modified
+# copy of src/seed_enum.cpp (so that file is left out). Separate target: `make gpuseed-e2e`.
+.PHONY: gpuseed-e2e
+gpuseed-e2e: bin/arcbatch-gpuseed
+
+E2E_DIR := gpu/seed/obj-e2e
+E2E_HEADERS := gpu/seed/e2e.hpp gpu/seed/gpuseed.hpp
+
+$(E2E_DIR)/main.o: src/main.cpp $(HEADERS)
+	mkdir -p $(E2E_DIR)
+	$(CXX) $(CXXFLAGS) -Dmain=arcsearch_main -c $< -o $@
+
+$(E2E_DIR)/seed_enum_gpu.o: gpu/seed/seed_enum_gpu.cpp $(E2E_HEADERS) $(HEADERS)
+	mkdir -p $(E2E_DIR)
+	$(CXX) $(CXXFLAGS) -Isrc -c $< -o $@
+
+$(E2E_DIR)/e2e_main.o: gpu/seed/e2e_main.cpp $(E2E_HEADERS)
+	mkdir -p $(E2E_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(E2E_DIR)/e2e_kernel.o: gpu/seed/e2e_kernel.cu gpu/seed/kernel.cu $(E2E_HEADERS)
+	mkdir -p $(E2E_DIR)
+	$(NVCC) $(NVFLAGS) -c $< -o $@
+
+bin/arcbatch-gpuseed: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(E2E_DIR)/seed_enum_gpu.o $(E2E_DIR)/e2e_main.o $(E2E_DIR)/e2e_kernel.o | bin
+	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
