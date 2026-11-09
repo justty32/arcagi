@@ -32,6 +32,7 @@ def main():
             "arcbatch-hot-c",
             "arcbatch-hot-d",
             "arcbatch-hot-e",
+            "arcbatch-hot-f",
         ),
     )
     parser.add_argument("rep", type=int)
