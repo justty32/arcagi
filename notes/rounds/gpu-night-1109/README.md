@@ -62,6 +62,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | T2 思考設計輪 2 | opus 隊長（第 2 棒 T2b） | 第 1 棒 PARTIAL（f160691、1737472）：01a～02b、代定 D1–D10 齊；fable 5 塊；D3 發現「驗證池不准造積木」程式裡已破（epoch gate_ids 取 L16∪P、P 結果餵 sleep_ops）→ 本輪只加外部守門印 FAIL；D6 本輪 GPU 不做整樹評估 kernel。T2b 接 D11～、03-設計、施工樹⇄JSON 往返、04 | 跑中（00:1x） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | opus | 照 progress 5 步寫 gpuprofile、跑 800 題、features.csv | 跑中 | reports/task-features-1109/ |
+| N5c seed GPU 端到端 | opus | GPU 層接進真 seed 搜尋（arcbatch-gpuseed --gpu-seed），量整體搜樹速度＋解集合，修小層長尾 | 跑中（00:4x） | reports/seed-gpu-e2e-1110/ |
 
 ## 待辦（有空位就派）
 
