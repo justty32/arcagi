@@ -42,7 +42,7 @@
 | N1 長跑 | （無 agent）| systemd `arcagi-n1-overnight`：sol-low·prims_py 鑄 296 題到 06:00，06:10 寫 overnight-summary；terra 比較 `arcagi-n1-cmp-terra` 跑完要補 compare.md terra 列 | 跑中 | reports/wax-night-1109/ |
 | N2 長跑 | （無 agent）| systemd `arcagi-n2-overnight`：gpusearch 800 題深度 5→6→7，06:00 寫彙總 | 跑中 | reports/native-cuda-1109/overnight/（未 commit，晨報收） |
 | GPU 補負載 | （主 session 開，無 agent）| systemd `arcagi-main-gpufill`：`native/bin/gpusearch-filler`（gpusearch 複本）跑 evaluation 主線未解 344 題深度 6 dedup 4，timeout 7h；功耗 60W→118W | 跑中（23:10） | reports/native-cuda-1109/filler/（未 commit） |
-| N3 GPU 遺傳符號搜尋 | opus | 第 1 棒 PARTIAL（ab66b40：gp 三檔 codex 寫、編過 `native/bin/gpgp`，未實跑未審）；第 2 棒 N3b 接手中，指示先開長跑吃滿 GPU | 跑中 | reports/gpu-gp-1109/ |
+| N3 GPU 遺傳符號搜尋 | opus | 第 2 棒 N3b 23:3x PARTIAL（ce51644）：smoke 過、pop 524288 約 125W；長跑 `arcagi-n3-gp` 597 題到 06:00；比較 bench real 約 23:50、synth 約 00:30 結束，`arcagi-n3-fill` 自動填 report 表並留 bench/FILLED；**早期警訊**：GP 前 33 題標 solved 的 4 題 test 全錯（過擬合）。第 3 棒：00:37 排程派 opus 寫結論＋白話 | 長跑中 | reports/gpu-gp-1109/ |
 | T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（22:5x 派） | notes/rounds/gpu-night-1109/think-1/ |
 | N4 題目特性採集 | opus | gpusearch 加輸出近似剖面（每題最接近的程式、逐格相符分數、搜尋量），跑 800 題產 wf-table/1 資料檔 | 跑中（23:3x 派） | reports/task-features-1109/ |
 
