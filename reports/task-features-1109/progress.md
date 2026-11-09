@@ -1,4 +1,14 @@
-# N4 題目特性採集 — 進度交接（第 1 棒 PARTIAL，23:4x 使用者喊停）
+# N4 題目特性採集 — 進度交接
+
+## 第 2 棒（N4b，11-09 23:2x 起）
+
+- Makefile 目標已在 3cdbb11 內（snippet 檔為空屬正常）。
+- gpuprofile 自寫完成（55e907f）：`native/gpu/profile/{profile.hpp,profile_kernel.cu,profile_main.cpp}`，`make -C native gpuprofile`。
+- 抽查：3c9b0459 d1 top-1 `rot180` 1.0；00d62c1b d1 top-1 `fill_enclosed`（cm 1.0、raw 0.933）；perfect 數在 3c9b0459／00d62c1b／007bbfb7 深度 1～3 與 gpusearch `solutions_per_depth` 完全一致。
+- 800 題長跑：`arcagi-n4-prof-training`、`arcagi-n4-prof-evaluation`（約 20 s／題，各約 2.3 h），輸出 `profile/<split>-d5.jsonl`（gitignore），日誌 `profile/<split>-d5.log`。
+- 剩：跑完 → `profile_features.py` 產 features.csv → README 欄位說明 → features-白話.md → commit。
+
+# 第 1 棒（PARTIAL，23:4x 使用者喊停）
 
 ## 做到哪
 
