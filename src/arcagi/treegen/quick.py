@@ -19,6 +19,7 @@ SCRATCH = Path(
     "/tmp/claude-1000/-home-lorkhan-repo-arcagi/"
     "b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2c"
 )
+METER_SCRATCH = SCRATCH.with_name("t4b")
 PREPARED = "quick.prepare.json"
 
 
@@ -26,9 +27,11 @@ def _destination(dest: str | Path) -> Path:
     root = Path(dest).resolve()
     if not any(
         root != allowed.resolve() and root.is_relative_to(allowed.resolve())
-        for allowed in (EVO, SCRATCH)
+        for allowed in (EVO, SCRATCH, METER_SCRATCH)
     ):
-        raise ValueError(f"quick destination must be below {EVO} or {SCRATCH}")
+        raise ValueError(
+            f"quick destination must be below {EVO}, {SCRATCH} or {METER_SCRATCH}"
+        )
     for name in ("quick.json", "quarantine_P.json"):
         boundary.safe_path(root.parent, name)
     return root

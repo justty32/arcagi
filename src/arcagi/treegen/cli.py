@@ -230,9 +230,14 @@ def main(argv: list[str] | None = None) -> int:
     ga_check.add_argument("--quick", type=Path)
     ga_fake = commands.add_parser("ga-fake")
     ga_fake.add_argument("--out", type=Path, required=True)
+    from . import meter_cli
+
+    meter_cli.add_commands(commands)
     args = parser.parse_args(argv)
     try:
         boundary.check_stop()
+        if args.command in meter_cli.COMMANDS:
+            return meter_cli.dispatch(args)
         if args.command in ("ga", "ga-check", "ga-fake"):
             return _block4(args)
         if args.command in ("ledger", "ledger-check"):
