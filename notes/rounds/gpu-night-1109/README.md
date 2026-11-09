@@ -71,7 +71,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N3e MDL λ 掃描 | （無 agent，長跑） | `arcagi-n3e-sweep` real-40／on40 × λ{0,.003,.006,.01} × seed 1–3，最晚 05:45 停，自動寫 `reports/gpu-gp-1109/ho/sweep-summary.md`（尾 SWEEPDONE）；收尾＝結論寫進 holdout.md（晨報前做）。9ed21de | 長跑中 | reports/gpu-gp-1109/ho/ |
 | N5d B1 bank 常駐 | opus | **E8 不過→凍結 `--gpu-min 200000`**（9822723、19c9c59）。0 錯／0 差異、29 tests 過；上傳 sync 49.7→10.1s，但牆鐘 1e6 b1 56.4s vs gpu 54.2s vs cpu 10.2s：瓶頸換成每層同步一次（6230 層×~27ms，GPU 被夜跑佔滿在排隊）。要贏得「一次同步涵蓋多層／多題」。違規備註：實作 opus 自寫未交 codex；bench 開成 service 非 scope（arcagi-n5d-bench，1e7 補表中，跑完寫 DONE，補表 `python3 -I reports/seed-gpu-b1-1110/analyze.py <scratchpad>/n5d`） | 收線（1e7 補表待） | reports/seed-gpu-b1-1110/ |
 | T5 思考輪 5：跨題合批／多層融合 GPU | opus | **收線 cf4c927**：合批上限 1.35×（補一階原語 1.6×）不值得；多層融合理論 5.7× 但須 lambda 上 GPU（1–3 月、受 E1/E5）。Argon 3 P0 已收。代定 G1–G15。待你裁：乾淨 GPU 窗口量 λ、MPS、E1/E5 鬆綁、准開 03；Argon 提 CPU 熱點（lambda 多範例一次評估、flat hash 去重）→ 開 N8 | 收線 | notes/rounds/gpu-night-1109/think-5/ |
-| N8 CPU 熱點 | opus→codex sol | d657662：arcbatch-hot（A lambda 呼叫快取、B 型別綁定 rollback 免拷貝）1e6 0/100 差異、31 tests；初步 A 無益（快取命中 86% 但 lambda 本體便宜）、B 約 −12%。1e6/1e7 交錯 bench 跑中（arcagi-n8-bench-*，DONE 後 analyze.py 補表） | bench 中（02:0x） | reports/cpu-hot-1110/ |
+| N8 CPU 熱點 | opus→codex sol | **收線 d657662、90901b4**：`native/bin/arcbatch-hot`（make -C native hot；native/src 未動）1e6/1e7 各 3 次 0/100 差異、31 tests。中位牆鐘 1e6 1.11×、1e7 **1.15×**（負載 9–15）。A lambda 呼叫快取命中 86% 但只 3–7%（雜訊內）；B 型別綁定/候選不逐個拷貝 +4～12%。下一步候選：整段 map/filter/fold 結果快取。**待裁：arcbatch-hot 換成預設** | 收線 | reports/cpu-hot-1110/ |
 
 ## 待辦（有空位就派）
 
