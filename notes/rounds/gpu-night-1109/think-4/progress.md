@@ -21,3 +21,14 @@
 - [完] 代定重議：`代定清單.md` 末「第二棒重議」表（T2 gain_bits 扣 e0、train-only、B_ref 固定；T4 校準分層選題；T5 閉式 σ＋|Δ|≥2；T7 run 目錄唯一後綴）。
 - [完] `03-設計.md`（計分、選題、顯著門、5 笨樹、檔案、驗收 5 條）。
 - [進行] codex sol 施工：單元 `arcagi-t4b-codex`，任務書／log／回報在 scratchpad `t4b/`（brief.md、codex.log、codex-last.md）。完成判斷：codex-last.md 存在。之後隊長審 diff → 跑 `t4b/pipeline.sh`（包 `arcagi-t4b-pipe`）→ `reports/think4-1110/a/accept.json`。
+- [完] codex 施工（commit 20d95f6）：meter.py／meter_{stats,cli,suite,fake}.py／dumb.py／test_meter.py；123 tests 綠。原三笨樹配方查證無效（lib_cap、gate dormant、judge 門檻都沒被讀），改為副本內 pause grow/foundry/judge（見 dumb.py docstring、`04-施工紀錄.md`）。
+- [完] 實跑 pipeline（20 題 L′、C50/4、jobs 4）→ `reports/think4-1110/a/accept.json`：**FAIL（只差 (a)）**。
+  - (a) no-learn／gate-dormant／judge-block 對親代 gain_bits：Δ=−90.0 bits、兩半同號負，但 σ=55.3、**z=−1.63 <2** → 不顯著。base_bits Δ=0（剝學習不動 e0，對）。
+  - 逐題：只 4 題大掉（62c24649、67e8384a 從解變不解；6d0aefbc、c9e6f938 12.6→4.3），其餘多題 no-learn 反小升 0.2–3.6 bit → σ 被拉大。gain 只在 e0→e1 發生、e1..e4 全平（E=4 等於把一步乘 4）；no-learn 仍有 gain 73 bits（e0→e1 有非 comb 的改善）。
+  - (b) 親代兩次 Δ=0、σ=0、不顯著；null 不顯著 ✔。(c) 三種假件全被拒 ✔（per_task 竄改、same_sha、test_as_train）。門：raw verify 全 PASS、identity 全對。
+  - no-decomp 對 base／gain 都 Δ=0（decomp 第 2 個在此題集無作用）。
+  - 校準：64 題中 learned+sped=12，但 20 題子集只剩 4 題轉移（踏腳石被切掉，Argon P0-2 應驗）。
+- [進行] 翻案跑 full-64（全 64 題當 L′，親代×2＋5 笨樹）：單元 `arcagi-t4b-full64`（scope），腳本 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/full64/run.sh`，輸出 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/full64/{batch.json,accept.json,batch.log,accept.log}`；跑完判斷＝`/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/full64/DONE` 存在。
+  - 判讀：`python3 -c "import json;a=json.load(open('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/full64/accept.json'));print(a['status']);[print(k,v['gain_bits']['delta'],v['gain_bits']['z'],v['gain_bits']['halves_same_sign']) for k,v in a['comparisons'].items()]"`
+  - 若 no-learn 類 z≤−2 → 題集改 full-64（T4 再改），accept.json 複製進 reports/think4-1110/a/full64/；若仍 <2 → 翻案點：主分改「相對 no-learn 對照的 gain」或成對符號檢定（需先寫進 03 再跑，避免事後調門）；並查 e0→e1 非 comb 改善來源。
+- 未做：04-總結簡報、g1 子代量測。reports 下 pytest-* 暫存夾不 commit。

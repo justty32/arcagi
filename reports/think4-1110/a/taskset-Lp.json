@@ -1,0 +1,1654 @@
+{
+ "calibration_genome_sha": "59aec713c3e8",
+ "cfg": {
+  "B_ref": 50000,
+  "E": 4,
+  "L": 50000,
+  "holdout": false,
+  "strip": "all",
+  "taskset_sha": "bf80f7064d57",
+  "threads": 1
+ },
+ "classes": {
+  "00d62c1b": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "06df4c85": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "0d3d703e": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "1b60fb0c": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "1e0a9b12": {
+   "b": [
+    2.573638621516947,
+    2.5779392716965095,
+    2.5779392716965095,
+    2.5779392716965095,
+    2.5779392716965095
+   ],
+   "class": "edge",
+   "ntf": [
+    8399,
+    8374,
+    8374,
+    8374,
+    8374
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "1f876c06": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "2204b7a8": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "22233c11": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "2281f1f4": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "28e73c20": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "3aa6fb7a": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "3c9b0459": {
+   "b": [
+    0.42352623489516894,
+    0.6419188696591664,
+    0.6466089517570595,
+    0.6466089517570595,
+    0.6466089517570595
+   ],
+   "class": "edge",
+   "ntf": [
+    37280,
+    32043,
+    31939,
+    31939,
+    31939
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "40853293": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "41e4d17e": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "46442a0e": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "47c1f68c": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "496994bd": {
+   "b": [
+    1.5269924320838264,
+    1.5284067167569653,
+    1.5284067167569653,
+    1.5284067167569653,
+    1.5284067167569653
+   ],
+   "class": "edge",
+   "ntf": [
+    17350,
+    17333,
+    17333,
+    17333,
+    17333
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "4c4377d9": {
+   "b": [
+    4.78468173390829,
+    5.960384296919498,
+    5.5914402956235865,
+    5.5914402956235865,
+    5.5914402956235865
+   ],
+   "class": "sped",
+   "ntf": [
+    1814,
+    803,
+    1037,
+    1037,
+    1037
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "508bd3b6": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "54d9e175": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "6150a2bd": {
+   "b": [
+    0.4983010020515888,
+    0.6533096970855752,
+    0.6580370173697787,
+    0.6580370173697787,
+    0.6580370173697787
+   ],
+   "class": "edge",
+   "ntf": [
+    35397,
+    31791,
+    31687,
+    31687,
+    31687
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "62c24649": {
+   "b": [
+    0.0,
+    6.527491433082941,
+    6.125824697172556,
+    6.125824697172556,
+    6.125824697172556
+   ],
+   "class": "learned",
+   "ntf": [
+    null,
+    542,
+    716,
+    716,
+    716
+   ],
+   "train_ok": [
+    false,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "67a3c6ac": {
+   "b": [
+    4.608936205425566,
+    5.8365012677171215,
+    5.876625152750849,
+    5.876625152750849,
+    5.876625152750849
+   ],
+   "class": "sped",
+   "ntf": [
+    2049,
+    875,
+    851,
+    851,
+    851
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "67e8384a": {
+   "b": [
+    0.0,
+    5.481646153460419,
+    5.13492052791033,
+    5.13492052791033,
+    5.13492052791033
+   ],
+   "class": "learned",
+   "ntf": [
+    null,
+    1119,
+    1423,
+    1423,
+    1423
+   ],
+   "train_ok": [
+    false,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "68b16354": {
+   "b": [
+    11.0860785183798,
+    12.024677973715656,
+    12.024677973715656,
+    12.024677973715656,
+    12.024677973715656
+   ],
+   "class": "trivial",
+   "ntf": [
+    23,
+    12,
+    12,
+    12,
+    12
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "6d0aefbc": {
+   "b": [
+    4.249342047818766,
+    12.609640474436812,
+    12.609640474436812,
+    12.609640474436812,
+    12.609640474436812
+   ],
+   "class": "sped",
+   "ntf": [
+    2629,
+    8,
+    8,
+    8,
+    8
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "6d75e8bb": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "6f8cd79b": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "6fa7a44f": {
+   "b": [
+    4.3796200387311774,
+    5.273133914626557,
+    4.9345655540513675,
+    4.9345655540513675,
+    4.9345655540513675
+   ],
+   "class": "edge",
+   "ntf": [
+    2402,
+    1293,
+    1635,
+    1635,
+    1635
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "74dd1130": {
+   "b": [
+    10.480357457491845,
+    11.802285552379209,
+    11.802285552379209,
+    11.802285552379209,
+    11.802285552379209
+   ],
+   "class": "sped",
+   "ntf": [
+    35,
+    14,
+    14,
+    14,
+    14
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "7fe24cdd": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "8be77c9e": {
+   "b": [
+    6.002310160687202,
+    6.878321443411748,
+    6.452293539073969,
+    6.452293539073969,
+    6.452293539073969
+   ],
+   "class": "trivial",
+   "ntf": [
+    780,
+    425,
+    571,
+    571,
+    571
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "8d5021e8": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "90f3ed37": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "95990924": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "995c5fa3": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "9dfd6313": {
+   "b": [
+    10.480357457491845,
+    11.802285552379209,
+    11.802285552379209,
+    11.802285552379209,
+    11.802285552379209
+   ],
+   "class": "sped",
+   "ntf": [
+    35,
+    14,
+    14,
+    14,
+    14
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "a2fd1cf0": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "a5313dff": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "a740d043": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "af902bf9": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "b1948b0a": {
+   "b": [
+    3.7243254133874366,
+    3.7243254133874366,
+    3.7243254133874366,
+    3.7243254133874366,
+    3.7243254133874366
+   ],
+   "class": "edge",
+   "ntf": [
+    3783,
+    3783,
+    3783,
+    3783,
+    3783
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "b27ca6d3": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "b7249182": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "ba97ae07": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "beb8660c": {
+   "b": [
+    0.0,
+    0.1770333306323355,
+    0.1778164464289489,
+    0.1778164464289489,
+    0.1778164464289489
+   ],
+   "class": "learned",
+   "ntf": [
+    null,
+    44226,
+    44202,
+    44202,
+    44202
+   ],
+   "train_ok": [
+    false,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "c0f76784": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "c8f0f002": {
+   "b": [
+    3.9734690328008906,
+    3.9734690328008906,
+    3.9734690328008906,
+    3.9734690328008906,
+    3.9734690328008906
+   ],
+   "class": "edge",
+   "ntf": [
+    3183,
+    3183,
+    3183,
+    3183,
+    3183
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "c9e6f938": {
+   "b": [
+    4.249342047818766,
+    12.609640474436812,
+    12.609640474436812,
+    12.609640474436812,
+    12.609640474436812
+   ],
+   "class": "sped",
+   "ntf": [
+    2629,
+    8,
+    8,
+    8,
+    8
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "cbded52d": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "ce4f8723": {
+   "b": [
+    1.1002365813764587,
+    2.2631267412711775,
+    2.2631267412711775,
+    2.2631267412711775,
+    2.2631267412711775
+   ],
+   "class": "sped",
+   "ntf": [
+    23322,
+    10416,
+    10416,
+    10416,
+    10416
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "d10ecb37": {
+   "b": [
+    1.0007503965412763,
+    4.2210849704542515,
+    4.2210849704542515,
+    4.2210849704542515,
+    4.2210849704542515
+   ],
+   "class": "sped",
+   "ntf": [
+    24987,
+    2681,
+    2681,
+    2681,
+    2681
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "d4a91cb9": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "d511f180": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "d6ad076f": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "dbc1a6ce": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "ddf7fa4f": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "ded97339": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "e73095fd": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "e76a88a6": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "ec883f72": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "ed36ccf7": {
+   "b": [
+    7.002310160687202,
+    10.28771237954945,
+    10.28771237954945,
+    10.28771237954945,
+    10.28771237954945
+   ],
+   "class": "sped",
+   "ntf": [
+    390,
+    40,
+    40,
+    40,
+    40
+   ],
+   "train_ok": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ]
+  },
+  "ef135b50": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  },
+  "f76d97a5": {
+   "b": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "class": "never",
+   "ntf": [
+    null,
+    null,
+    null,
+    null,
+    null
+   ],
+   "train_ok": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "diagnosis": "",
+ "groups": {
+  "edge": [
+   "1e0a9b12",
+   "3c9b0459",
+   "496994bd",
+   "6150a2bd",
+   "6fa7a44f",
+   "b1948b0a",
+   "c8f0f002"
+  ],
+  "learned": [
+   "62c24649",
+   "67e8384a",
+   "beb8660c"
+  ],
+  "never": [
+   "00d62c1b",
+   "06df4c85",
+   "0d3d703e",
+   "1b60fb0c",
+   "1f876c06",
+   "2204b7a8",
+   "22233c11",
+   "2281f1f4",
+   "28e73c20",
+   "3aa6fb7a",
+   "40853293",
+   "41e4d17e",
+   "46442a0e",
+   "47c1f68c",
+   "508bd3b6",
+   "54d9e175",
+   "6d75e8bb",
+   "6f8cd79b",
+   "7fe24cdd",
+   "8d5021e8",
+   "90f3ed37",
+   "95990924",
+   "995c5fa3",
+   "a2fd1cf0",
+   "a5313dff",
+   "a740d043",
+   "af902bf9",
+   "b27ca6d3",
+   "b7249182",
+   "ba97ae07",
+   "c0f76784",
+   "cbded52d",
+   "d4a91cb9",
+   "d511f180",
+   "d6ad076f",
+   "dbc1a6ce",
+   "ddf7fa4f",
+   "ded97339",
+   "e73095fd",
+   "e76a88a6",
+   "ec883f72",
+   "ef135b50",
+   "f76d97a5"
+  ],
+  "sped": [
+   "4c4377d9",
+   "67a3c6ac",
+   "6d0aefbc",
+   "74dd1130",
+   "9dfd6313",
+   "c9e6f938",
+   "ce4f8723",
+   "d10ecb37",
+   "ed36ccf7"
+  ],
+  "trivial": [
+   "68b16354",
+   "8be77c9e"
+  ]
+ },
+ "learning_tasks": 12,
+ "needs_targeted": false,
+ "schema": "think4-taskset/1",
+ "task_ids": [
+  "62c24649",
+  "67e8384a",
+  "beb8660c",
+  "4c4377d9",
+  "67a3c6ac",
+  "6d0aefbc",
+  "74dd1130",
+  "9dfd6313",
+  "c9e6f938",
+  "ce4f8723",
+  "d10ecb37",
+  "ed36ccf7",
+  "1e0a9b12",
+  "3c9b0459",
+  "496994bd",
+  "6150a2bd",
+  "00d62c1b",
+  "06df4c85",
+  "0d3d703e",
+  "1b60fb0c"
+ ],
+ "taskset_sha": "4180060bb9e0",
+ "within_target": true
+}

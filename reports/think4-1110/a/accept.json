@@ -1,0 +1,561 @@
+{
+ "checks": {
+  "fake": {
+   "checks": {
+    "per_task": {
+     "identity_ok": true,
+     "rejected": true,
+     "run_dir": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/pipeline-20261109T173727-363305/fakes/per_task",
+     "verify": {
+      "errors": [
+       "meter.json differs from raw recomputation"
+      ],
+      "pass": false,
+      "status": "FAIL"
+     }
+    },
+    "same_sha": {
+     "identity_ok": false,
+     "rejected": true,
+     "run_dir": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/pipeline-20261109T173727-363305/fakes/same_sha",
+     "verify": {
+      "errors": [],
+      "pass": true,
+      "status": "PASS"
+     }
+    },
+    "test_as_train": {
+     "identity_ok": true,
+     "rejected": true,
+     "run_dir": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/pipeline-20261109T173727-363305/fakes/test_as_train",
+     "verify": {
+      "errors": [
+       "meter.json differs from raw recomputation"
+      ],
+      "pass": false,
+      "status": "FAIL"
+     }
+    }
+   },
+   "pass": true
+  },
+  "identity": {
+   "gate-dormant": true,
+   "judge-block": true,
+   "no-decomp": true,
+   "no-learn": true,
+   "null": true
+  },
+  "learning_drop": false,
+  "null": true,
+  "raw_verify": {
+   "gate-dormant": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   },
+   "judge-block": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   },
+   "no-decomp": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   },
+   "no-learn": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   },
+   "null": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   },
+   "parent-1": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   },
+   "parent-2": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   }
+  },
+  "recipes": {
+   "gate-dormant": {
+    "inert": false,
+    "new_ops": 0,
+    "promotes": 0
+   },
+   "judge-block": {
+    "inert": false,
+    "new_ops": 8,
+    "promotes": 0
+   },
+   "no-learn": {
+    "inert": false,
+    "new_ops": 0,
+    "promotes": 0
+   }
+  },
+  "repeat": true,
+  "taskset_size": true
+ },
+ "comparisons": {
+  "gate-dormant": {
+   "base_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "base_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   },
+   "gain_bits": {
+    "all_equal": false,
+    "delta": -90.03973146059677,
+    "halves": [
+     -54.818257419477604,
+     -35.221474041119166
+    ],
+    "halves_same_sign": true,
+    "metric": "gain_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.19720244169022294,
+     "496994bd": 0.0,
+     "4c4377d9": 1.337911089421425,
+     "6150a2bd": 14.687971504058197,
+     "62c24649": -24.2587041665903,
+     "67a3c6ac": 1.2860173346955648,
+     "67e8384a": -20.3836515139375,
+     "6d0aefbc": -33.42140438569925,
+     "74dd1130": 0.8895696853457906,
+     "9dfd6313": 0.8895696853457906,
+     "beb8660c": 0.6862641127705871,
+     "c9e6f938": -33.42140438569925,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 1.4709271380019473
+    },
+    "sigma": 55.281437688768335,
+    "significant": false,
+    "z": -1.6287516248675704
+   }
+  },
+  "judge-block": {
+   "base_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "base_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   },
+   "gain_bits": {
+    "all_equal": false,
+    "delta": -90.03973146059677,
+    "halves": [
+     -54.818257419477604,
+     -35.221474041119166
+    ],
+    "halves_same_sign": true,
+    "metric": "gain_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.19720244169022294,
+     "496994bd": 0.0,
+     "4c4377d9": 1.337911089421425,
+     "6150a2bd": 14.687971504058197,
+     "62c24649": -24.2587041665903,
+     "67a3c6ac": 1.2860173346955648,
+     "67e8384a": -20.3836515139375,
+     "6d0aefbc": -33.42140438569925,
+     "74dd1130": 0.8895696853457906,
+     "9dfd6313": 0.8895696853457906,
+     "beb8660c": 0.6862641127705871,
+     "c9e6f938": -33.42140438569925,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 1.4709271380019473
+    },
+    "sigma": 55.281437688768335,
+    "significant": false,
+    "z": -1.6287516248675704
+   }
+  },
+  "no-decomp": {
+   "base_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "base_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   },
+   "gain_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "gain_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   }
+  },
+  "no-learn": {
+   "base_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "base_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   },
+   "gain_bits": {
+    "all_equal": false,
+    "delta": -90.03973146059677,
+    "halves": [
+     -54.818257419477604,
+     -35.221474041119166
+    ],
+    "halves_same_sign": true,
+    "metric": "gain_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.19720244169022294,
+     "496994bd": 0.0,
+     "4c4377d9": 1.337911089421425,
+     "6150a2bd": 14.687971504058197,
+     "62c24649": -24.2587041665903,
+     "67a3c6ac": 1.2860173346955648,
+     "67e8384a": -20.3836515139375,
+     "6d0aefbc": -33.42140438569925,
+     "74dd1130": 0.8895696853457906,
+     "9dfd6313": 0.8895696853457906,
+     "beb8660c": 0.6862641127705871,
+     "c9e6f938": -33.42140438569925,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 1.4709271380019473
+    },
+    "sigma": 55.281437688768335,
+    "significant": false,
+    "z": -1.6287516248675704
+   }
+  },
+  "null": {
+   "base_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "base_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   },
+   "gain_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "gain_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   }
+  },
+  "parent-2": {
+   "base_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "base_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   },
+   "gain_bits": {
+    "all_equal": false,
+    "delta": 0.0,
+    "halves": [
+     0.0,
+     0.0
+    ],
+    "halves_same_sign": false,
+    "metric": "gain_bits",
+    "n_tasks": 20,
+    "per_task_delta": {
+     "00d62c1b": 0.0,
+     "06df4c85": 0.0,
+     "0d3d703e": 0.0,
+     "1b60fb0c": 0.0,
+     "1e0a9b12": 0.0,
+     "3c9b0459": 0.0,
+     "496994bd": 0.0,
+     "4c4377d9": 0.0,
+     "6150a2bd": 0.0,
+     "62c24649": 0.0,
+     "67a3c6ac": 0.0,
+     "67e8384a": 0.0,
+     "6d0aefbc": 0.0,
+     "74dd1130": 0.0,
+     "9dfd6313": 0.0,
+     "beb8660c": 0.0,
+     "c9e6f938": 0.0,
+     "ce4f8723": 0.0,
+     "d10ecb37": 0.0,
+     "ed36ccf7": 0.0
+    },
+    "sigma": 0.0,
+    "significant": false,
+    "z": null
+   }
+  }
+ },
+ "errors": [
+  "learning_drop failed"
+ ],
+ "manifest": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4b/pipeline-20261109T173727-363305/batch.json",
+ "pass": false,
+ "schema": "think4-accept/1",
+ "status": "FAIL"
+}
