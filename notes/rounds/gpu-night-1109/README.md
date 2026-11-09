@@ -22,6 +22,10 @@
 - 子 agent 讀大檔、掃大量報告、跑長輸出一律派孫 agent 或用 grep／head，只把結論帶回；長跑交 systemd 背景，不在 context 裡等。
 - 孫 agent 同樣適用；回報只給結論＋路徑，不貼原始輸出。
 
+## 分工
+
+- 分工補充（使用者 23:3x）：「可以的話，實作，寫檔案等各種普通的，不太需要高階智能的文字處理，都交給codex gpt sol，或是litellm的sol」→ 實作與普通文字處理優先派 codex `-m gpt-6.1-sol -s workspace-write`（必帶 -m／-s）或 litellm sol；Claude 子 agent 留給設計、審查、驗收。
+
 ## 現役線（頂層 ≤3）
 
 | 線 | 模型 | 內容 | 狀態 | 產物 |
