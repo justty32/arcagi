@@ -2,7 +2,9 @@
 
 ← [代定清單](代定清單.md)｜[夜跑看板](../README.md)
 
-狀態：**塊 4 進行中（t2e）**：03d 寫完，codex sol 施工中。塊 1～3 完成。
+狀態：**塊 4 進行中（t2e，PARTIAL）**：[03d](03d-設計-塊4.md) 寫完（§0 回應 Argon 3/9/10、D18、D20；§7 G1～G7 含造假必 FAIL），代定 D25～D28；codex sol 施工中（未審、未實跑）。塊 1～3 完成。
+
+**下一棒**：(1) 等 `arcagi-t2e-sol` 結束、讀 `-o` 回報 scratchpad `t2e/sol-report.md`（log `t2e/sol.log`）；(2) 審 diff（`git status src/arcagi/treegen tests/treegen reports/think2-1109`；關鍵：check 的不可動欄位／born/by、$ref 懸空、genome_sha 重算、mutate 不碰 budgets.L/epochs、quick 參數 L=25000/epochs=4/threads≤4、越界改既有模組要還原）；(3) 實跑 1 代 8 個體（見下方單元說明，systemd 背景）→ `reports/think2-1109/b4/accept.json`、`fake.json`；(4) commit 程式＋accept（族群 `ws/evo/pop/` 不 commit）；(5) 下一步＝塊 5 或收輪 04b。
 
 ## 已完成
 
