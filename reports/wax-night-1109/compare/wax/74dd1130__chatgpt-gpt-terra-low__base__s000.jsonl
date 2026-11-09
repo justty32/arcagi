@@ -1,0 +1,9 @@
+{"task": "74dd1130", "pairs": 4, "steps": ["rotate_cw", "flip_horizontal"], "by": "chatgpt-gpt-terra-low:base", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "rotate_cw", "grid": [[5, 1, 2], [2, 5, 2], [2, 1, 1]]}
+{"pair": 0, "step": 2, "tag": "flip_horizontal", "grid": [[2, 1, 5], [2, 5, 2], [1, 1, 2]]}
+{"pair": 1, "step": 1, "tag": "rotate_cw", "grid": [[5, 6, 2], [5, 2, 2], [5, 2, 5]]}
+{"pair": 1, "step": 2, "tag": "flip_horizontal", "grid": [[2, 6, 5], [2, 2, 5], [5, 2, 5]]}
+{"pair": 2, "step": 1, "tag": "rotate_cw", "grid": [[5, 5, 9], [8, 5, 9], [9, 8, 5]]}
+{"pair": 2, "step": 2, "tag": "flip_horizontal", "grid": [[9, 5, 5], [9, 5, 8], [5, 8, 9]]}
+{"pair": 3, "step": 1, "tag": "rotate_cw", "grid": [[2, 2, 2], [6, 1, 6], [2, 1, 6]]}
+{"pair": 3, "step": 2, "tag": "flip_horizontal", "grid": [[2, 2, 2], [6, 1, 6], [6, 1, 2]]}

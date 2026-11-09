@@ -1,0 +1,5 @@
+{"task": "6f8cd79b", "pairs": 4, "steps": ["border"], "by": "chatgpt-gpt-6-luna-low:base", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "border", "grid": [[8, 8, 8], [8, 0, 8], [8, 8, 8]]}
+{"pair": 1, "step": 1, "tag": "border", "grid": [[8, 8, 8], [8, 0, 8], [8, 0, 8], [8, 8, 8]]}
+{"pair": 2, "step": 1, "tag": "border", "grid": [[8, 8, 8, 8], [8, 0, 0, 8], [8, 0, 0, 8], [8, 0, 0, 8], [8, 8, 8, 8]]}
+{"pair": 3, "step": 1, "tag": "border", "grid": [[8, 8, 8, 8, 8, 8], [8, 0, 0, 0, 0, 8], [8, 0, 0, 0, 0, 8], [8, 0, 0, 0, 0, 8], [8, 8, 8, 8, 8, 8]]}

@@ -1,0 +1,7 @@
+{"task": "8d5021e8", "pairs": 3, "steps": ["mirror_horizontal", "mirror_vertical_repeat"], "by": "chatgpt-gpt-6-sol-low:base", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "mirror_horizontal", "grid": [[8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8]]}
+{"pair": 0, "step": 2, "tag": "mirror_vertical_repeat", "grid": [[8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8], [8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8], [8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8]]}
+{"pair": 1, "step": 1, "tag": "mirror_horizontal", "grid": [[0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0]]}
+{"pair": 1, "step": 2, "tag": "mirror_vertical_repeat", "grid": [[0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0], [0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0], [0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0]]}
+{"pair": 2, "step": 1, "tag": "mirror_horizontal", "grid": [[0, 0, 0, 0], [5, 0, 0, 5], [0, 5, 5, 0]]}
+{"pair": 2, "step": 2, "tag": "mirror_vertical_repeat", "grid": [[0, 5, 5, 0], [5, 0, 0, 5], [0, 0, 0, 0], [0, 0, 0, 0], [5, 0, 0, 5], [0, 5, 5, 0], [0, 5, 5, 0], [5, 0, 0, 5], [0, 0, 0, 0]]}

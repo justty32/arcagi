@@ -1,4 +1,18 @@
-# wax-night-1109 交棒（23:03，context 到 30% 換手）
+# wax-night-1109 交棒（第 2 棒 N1b 23:2x 收尾；第 1 棒 23:03）
+
+## 第 2 棒（N1b）結果
+
+- gpt 比較完成（384 筆）；terra 仍在跑（部分）。比較寫進 [compare.md](compare.md)，完整表 [compare-tables.md](compare-tables.md)。
+- **選定 sol-low · prims_py**（全步可擬合且驗過／呼叫 20.8%，與 base 並列；每步可擬合（驗過）51.4% > 41.5%）。
+- 整夜長跑在跑：`arcagi-n1-overnight`（內層 `arcagi-n1-on-sol-prims_py`），日誌 `$S/on-sol-prims_py.log`，輸出 `overnight/sol-prims_py/`，06:10 前寫 `overnight-summary.md`。
+- `overnight` 加 `--offset`（`run-overnight.sh` 第 5 參數），讓並行跑從不同題段開始。
+- e4b 批次沒開：LM Studio 重開但 e4b `not-loaded`，請求會觸發載入，違反不 load 規矩。
+- code-map 已登記 `llm/wax`；白話 [wax-白話](../../notes/rounds/gpu-night-1109/wax-白話.md)。
+- 待辦：terra 跑完（約 00:30）重跑 summary 那行更新 compare-tables.md 與 compare.md 的 terra 列。
+
+---
+
+# 第 1 棒交接（23:03）
 
 ← 任務信 [00-REQUEST](../../notes/rounds/gpu-night-1109/00-REQUEST.md)
 

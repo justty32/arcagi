@@ -1,0 +1,10 @@
+{"task": "d511f180", "pairs": 3, "steps": ["park_5", "replace_8", "restore_5_as_8"], "by": "chatgpt-gpt-6-sol-low:prims_py", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "park_5", "grid": [[2, 7, 8, 8, 8], [0, 0, 6, 0, 4], [8, 0, 0, 0, 2], [8, 8, 4, 3, 6], [6, 0, 1, 9, 3]]}
+{"pair": 0, "step": 2, "tag": "replace_8", "grid": [[2, 7, 5, 5, 5], [0, 0, 6, 0, 4], [5, 0, 0, 0, 2], [5, 5, 4, 3, 6], [6, 0, 1, 9, 3]]}
+{"pair": 0, "step": 3, "tag": "restore_5_as_8", "grid": [[2, 7, 5, 5, 5], [8, 8, 6, 8, 4], [5, 8, 8, 8, 2], [5, 5, 4, 3, 6], [6, 8, 1, 9, 3]]}
+{"pair": 1, "step": 1, "tag": "park_5", "grid": [[3, 0, 1], [4, 0, 8], [2, 4, 9]]}
+{"pair": 1, "step": 2, "tag": "replace_8", "grid": [[3, 0, 1], [4, 0, 5], [2, 4, 9]]}
+{"pair": 1, "step": 3, "tag": "restore_5_as_8", "grid": [[3, 8, 1], [4, 8, 5], [2, 4, 9]]}
+{"pair": 2, "step": 1, "tag": "park_5", "grid": [[6, 0, 3], [0, 7, 0], [8, 8, 2]]}
+{"pair": 2, "step": 2, "tag": "replace_8", "grid": [[6, 0, 3], [0, 7, 0], [5, 5, 2]]}
+{"pair": 2, "step": 3, "tag": "restore_5_as_8", "grid": [[6, 8, 3], [8, 7, 8], [5, 5, 2]]}

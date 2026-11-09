@@ -1,0 +1,4 @@
+{"task": "f76d97a5", "pairs": 3, "steps": ["recolor"], "by": "chatgpt-gpt-6-luna-low:base", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "recolor", "grid": [[0, 4, 0], [4, 4, 4], [0, 4, 0]]}
+{"pair": 1, "step": 1, "tag": "recolor", "grid": [[6, 6, 0, 0, 0], [0, 6, 6, 0, 0], [0, 0, 6, 6, 0], [0, 0, 0, 6, 6], [6, 0, 0, 0, 6]]}
+{"pair": 2, "step": 1, "tag": "recolor", "grid": [[0, 9, 0, 0, 0], [0, 0, 9, 9, 0], [0, 9, 0, 0, 0], [0, 0, 9, 0, 0], [0, 0, 0, 9, 9]]}

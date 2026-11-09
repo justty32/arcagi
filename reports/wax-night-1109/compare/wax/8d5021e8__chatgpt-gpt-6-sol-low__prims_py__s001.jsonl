@@ -1,0 +1,13 @@
+{"task": "8d5021e8", "pairs": 3, "steps": ["reverse_rows", "stack_with_mirror", "repeat_first_block", "mirror_left"], "by": "chatgpt-gpt-6-sol-low:prims_py", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "reverse_rows", "grid": [[0, 8], [0, 0], [0, 8]]}
+{"pair": 0, "step": 2, "tag": "stack_with_mirror", "grid": [[0, 8], [0, 0], [0, 8], [0, 8], [0, 0], [0, 8]]}
+{"pair": 0, "step": 3, "tag": "repeat_first_block", "grid": [[0, 8], [0, 0], [0, 8], [0, 8], [0, 0], [0, 8], [0, 8], [0, 0], [0, 8]]}
+{"pair": 0, "step": 4, "tag": "mirror_left", "grid": [[8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8], [8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8], [8, 0, 0, 8], [0, 0, 0, 0], [8, 0, 0, 8]]}
+{"pair": 1, "step": 1, "tag": "reverse_rows", "grid": [[2, 0], [2, 2], [2, 0]]}
+{"pair": 1, "step": 2, "tag": "stack_with_mirror", "grid": [[2, 0], [2, 2], [2, 0], [2, 0], [2, 2], [2, 0]]}
+{"pair": 1, "step": 3, "tag": "repeat_first_block", "grid": [[2, 0], [2, 2], [2, 0], [2, 0], [2, 2], [2, 0], [2, 0], [2, 2], [2, 0]]}
+{"pair": 1, "step": 4, "tag": "mirror_left", "grid": [[0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0], [0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0], [0, 2, 2, 0], [2, 2, 2, 2], [0, 2, 2, 0]]}
+{"pair": 2, "step": 1, "tag": "reverse_rows", "grid": [[5, 0], [0, 5], [0, 0]]}
+{"pair": 2, "step": 2, "tag": "stack_with_mirror", "grid": [[5, 0], [0, 5], [0, 0], [0, 0], [0, 5], [5, 0]]}
+{"pair": 2, "step": 3, "tag": "repeat_first_block", "grid": [[5, 0], [0, 5], [0, 0], [0, 0], [0, 5], [5, 0], [5, 0], [0, 5], [0, 0]]}
+{"pair": 2, "step": 4, "tag": "mirror_left", "grid": [[0, 5, 5, 0], [5, 0, 0, 5], [0, 0, 0, 0], [0, 0, 0, 0], [5, 0, 0, 5], [0, 5, 5, 0], [0, 5, 5, 0], [5, 0, 0, 5], [0, 0, 0, 0]]}

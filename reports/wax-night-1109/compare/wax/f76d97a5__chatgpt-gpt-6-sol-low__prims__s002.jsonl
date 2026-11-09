@@ -1,0 +1,7 @@
+{"task": "f76d97a5", "pairs": 3, "steps": ["mark_fives", "apply_color"], "by": "chatgpt-gpt-6-sol-low:prims", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "mark_fives", "grid": [[0, 1, 0], [1, 1, 1], [0, 1, 0]]}
+{"pair": 0, "step": 2, "tag": "apply_color", "grid": [[0, 4, 0], [4, 4, 4], [0, 4, 0]]}
+{"pair": 1, "step": 1, "tag": "mark_fives", "grid": [[1, 1, 0, 0, 0], [0, 1, 1, 0, 0], [0, 0, 1, 1, 0], [0, 0, 0, 1, 1], [1, 0, 0, 0, 1]]}
+{"pair": 1, "step": 2, "tag": "apply_color", "grid": [[6, 6, 0, 0, 0], [0, 6, 6, 0, 0], [0, 0, 6, 6, 0], [0, 0, 0, 6, 6], [6, 0, 0, 0, 6]]}
+{"pair": 2, "step": 1, "tag": "mark_fives", "grid": [[0, 1, 0, 0, 0], [0, 0, 1, 1, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 1]]}
+{"pair": 2, "step": 2, "tag": "apply_color", "grid": [[0, 9, 0, 0, 0], [0, 0, 9, 9, 0], [0, 9, 0, 0, 0], [0, 0, 9, 0, 0], [0, 0, 0, 9, 9]]}

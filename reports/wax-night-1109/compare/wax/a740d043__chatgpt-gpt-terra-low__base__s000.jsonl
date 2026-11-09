@@ -1,0 +1,7 @@
+{"task": "a740d043", "pairs": 3, "steps": ["crop", "clear_1"], "by": "chatgpt-gpt-terra-low:base", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "crop", "grid": [[2, 2, 1], [2, 2, 3], [1, 1, 2]]}
+{"pair": 0, "step": 2, "tag": "clear_1", "grid": [[2, 2, 0], [2, 2, 3], [0, 0, 2]]}
+{"pair": 1, "step": 1, "tag": "crop", "grid": [[3, 1, 2], [3, 1, 2]]}
+{"pair": 1, "step": 2, "tag": "clear_1", "grid": [[3, 0, 2], [3, 0, 2]]}
+{"pair": 2, "step": 1, "tag": "crop", "grid": [[5, 5], [5, 5], [6, 6]]}
+{"pair": 2, "step": 2, "tag": "clear_1", "grid": [[5, 5], [5, 5], [6, 6]]}
