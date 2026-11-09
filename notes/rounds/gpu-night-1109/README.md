@@ -46,7 +46,7 @@
 | GPU 補負載 | （主 session 開，無 agent）| systemd `arcagi-main-gpufill`：`native/bin/gpusearch-filler`（gpusearch 複本）跑 evaluation 主線未解 344 題深度 6 dedup 4，timeout 7h；功耗 60W→118W | 跑中（23:10） | reports/native-cuda-1109/filler/（未 commit） |
 | N3 GPU 遺傳符號搜尋 | opus | 第 2 棒 N3b 23:3x PARTIAL（ce51644）：smoke 過、pop 524288 約 125W；長跑 `arcagi-n3-gp` 597 題到 06:00；比較 bench real 約 23:50、synth 約 00:30 結束，`arcagi-n3-fill` 自動填 report 表並留 bench/FILLED；**早期警訊**：GP 前 33 題標 solved 的 4 題 test 全錯（過擬合）。第 3 棒：00:37 排程派 opus 寫結論＋白話 | 長跑中 | reports/gpu-gp-1109/ |
 | T1 思考設計輪 1 | opus 隊長 | 23:5x 停線 PARTIAL（a27cf56 本機）：01a～03、代定清單 12 列、施工塊 A（scripts/think1_audit.py、think1_meter.py：算子計分卡＋曲線尺，實跑等於期望值、越界 0）；**缺 04 總結**；下一輪反省：塊 B 快撥樹＋雜訊尺、Argon 兩條高嚴重警告（P 池造積木洩漏、格子相符率被塗背景假解騙）、Q1 語言橋 vs 使用者「整棵樹序列化」衝突 | 停（待接手寫 04） | notes/rounds/gpu-night-1109/think-1/ |
-| N4 題目特性採集 | opus | gpusearch 加輸出近似剖面（每題最接近的程式、逐格相符分數、搜尋量），跑 800 題產 wf-table/1 資料檔 | 跑中（23:3x 派） | reports/task-features-1109/ |
+| N4 題目特性採集 | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 
 ## 待辦（有空位就派）
 
