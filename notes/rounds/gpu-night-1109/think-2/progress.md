@@ -42,6 +42,8 @@
 
 造假產物：scratchpad `t2c/fake/`。
 
+已出的 §9 數字：C25（L=25k、epochs 0..4）淨態 ×3：wall 15.5／15.2／14.2 s（load≈8～10），auc_L 20、cost 7294813、eff 2.7417 三次全同 → deterministic，`sigma_auc_L`=0（degenerate）；guards leak_config／leak_new 皆 PASS。C50、B5、B6 待收。
+
 ## 下一步
 
 1. 收 §9 長跑結果（下節單元）：讀 `ws/evo/quick/b2runs.out`、`noise-c25.json`、`noise-c50.json`、`cmp-l2.json`（B5 要 Δ=0）、`cmp-d20-v{1,2,3}.json`（B6）、`cmp-clean-vs-state.json`、各 `quick.json` 的 wall／guards，寫 `reports/think2-1109/b2/accept.json`（B1～B6）並 commit，代定清單 D20 依 B6 結果改「驗過可用／不用」。
