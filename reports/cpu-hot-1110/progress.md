@@ -1,4 +1,4 @@
-# N8 progress (cpu-hot-1110) — PARTIAL, bench running
+# N8 progress (cpu-hot-1110) — DONE (bench finished, see README)
 
 ## State (01:55, 11-10)
 - Built: `make -C native hot` -> native/bin/arcbatch-hot-a (A = lambda call memo, native/hot/seed_value.cpp) and

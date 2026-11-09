@@ -75,3 +75,18 @@ arcbatch → hot-a → hot，重複三輪，固定 4 threads。它會關閉 cach
 本次原始 JSONL 位於
 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8/verify/`。
 未 commit、未 push；報告只保存小型紀錄與腳本。
+
+## Interleaved bench (lead, 11-10 ~02:00, training first 100, --mode seed, decomp, 4 threads, x3 interleaved, nice 19)
+
+| budget | bin | wall median (min..max), s | speedup | mismatches |
+|---:|---|---:|---:|---:|
+| 1000000 | arcbatch | 10.367 (9.366..10.418) | 1.000x | reference |
+| 1000000 | arcbatch-hot-a | 9.722 (8.616..9.817) | 1.066x | 0 |
+| 1000000 | arcbatch-hot | 9.317 (9.066..9.667) | 1.113x | 0 |
+| 10000000 | arcbatch | 136.086 (117.042..141.460) | 1.000x | reference |
+| 10000000 | arcbatch-hot-a | 132.607 (113.594..143.312) | 1.026x | 0 |
+| 10000000 | arcbatch-hot | 118.498 (105.139..124.502) | 1.148x | 0 |
+
+Observed loadavg1 at run start: 9.39..15.52.
+
+Per-change gain (median): A alone 1e6 +6.6% / 1e7 +2.6% (within noise; range overlaps); B on top of A: 1e6 +4.4%, 1e7 +11.9%. A+B total 1.11x (1e6), 1.15x (1e7). Load avg 9.4..15.5 from other night runs, so spreads are wide (1e7 arcbatch 117..141 s). All 12 hot runs: 0/100 mismatched rows vs arcbatch r1 (keys incl. eval_steps, near); raw: bench-wall.txt, bench-cmp.txt.

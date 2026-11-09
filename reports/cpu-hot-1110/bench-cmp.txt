@@ -1,0 +1,12 @@
+1000000-arcbatch-hot-a-r1.jsonl 0
+1000000-arcbatch-hot-r1.jsonl 0
+1000000-arcbatch-hot-a-r2.jsonl 0
+1000000-arcbatch-hot-r2.jsonl 0
+1000000-arcbatch-hot-a-r3.jsonl 0
+1000000-arcbatch-hot-r3.jsonl 0
+10000000-arcbatch-hot-a-r1.jsonl 0
+10000000-arcbatch-hot-r1.jsonl 0
+10000000-arcbatch-hot-a-r2.jsonl 0
+10000000-arcbatch-hot-r2.jsonl 0
+10000000-arcbatch-hot-a-r3.jsonl 0
+10000000-arcbatch-hot-r3.jsonl 0
