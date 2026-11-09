@@ -28,11 +28,11 @@
 |---|---|---|---|---|
 | N1 蠟模 | opus | 本地模型（e4b＋litellm GPT）比較提示法 → 長跑到 06:10 | 跑中（22:40 派） | reports/wax-night-1109/、notes/rounds/gpu-night-1109/wax-白話.md |
 | N2 長跑 | （無 agent）| systemd `arcagi-n2-overnight`：gpusearch 800 題深度 5→6→7，06:00 寫彙總 | 跑中 | reports/native-cuda-1109/overnight/（未 commit，晨報收） |
-| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP | 待派／見下 | reports/gpu-gp-1109/ |
+| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP | 跑中（23:3x 派） | reports/gpu-gp-1109/ |
+| T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（23:3x 派） | notes/rounds/gpu-night-1109/think-1/ |
 
 ## 等待中
 
-- aos 回信：思考設計輪派隊流程、codex／fable／agy 用法（REQUEST 22:52 寄出）→ 回信後開第一輪思考設計輪。
 - 使用者睡前會再給 ARC-AGI 建議 → 照錄進 [總表/使用者方向](../總表/使用者方向.md)，排進思考輪。
 
 ## 已收線
