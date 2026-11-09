@@ -1,0 +1,73 @@
+{
+ "cfg": {
+  "E": 4,
+  "L": 40000,
+  "strip": "all"
+ },
+ "jobs": 4,
+ "pass": true,
+ "runs": [
+  {
+   "label": "parent-1",
+   "log": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/parent-1.log",
+   "returncode": 0,
+   "run_dir": "/home/lorkhan/code/playground-arc1/ws/evo/meter/parent-1_59aec713_20261109T180100675114Z_400907",
+   "tree_json": "/home/lorkhan/code/playground-arc1/ws/evo/quick/genome/tree.json",
+   "verify": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   }
+  },
+  {
+   "label": "parent-2",
+   "log": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/parent-2.log",
+   "returncode": 0,
+   "run_dir": "/home/lorkhan/code/playground-arc1/ws/evo/meter/parent-2_59aec713_20261109T180100675307Z_400907",
+   "tree_json": "/home/lorkhan/code/playground-arc1/ws/evo/quick/genome/tree.json",
+   "verify": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   }
+  },
+  {
+   "label": "no-learn-all",
+   "log": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/no-learn-all.log",
+   "returncode": 0,
+   "run_dir": "/home/lorkhan/code/playground-arc1/ws/evo/meter/no-learn-all_2eeaf643_20261109T180100675480Z_400907",
+   "tree_json": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/genomes/no-learn-all/tree.json",
+   "verify": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   }
+  },
+  {
+   "label": "no-learn",
+   "log": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/no-learn.log",
+   "returncode": 0,
+   "run_dir": "/home/lorkhan/code/playground-arc1/ws/evo/meter/no-learn_4a3054c6_20261109T180100675645Z_400907",
+   "tree_json": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/genomes/no-learn/tree.json",
+   "verify": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   }
+  },
+  {
+   "label": "null",
+   "log": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/null.log",
+   "returncode": 0,
+   "run_dir": "/home/lorkhan/code/playground-arc1/ws/evo/meter/null_ac77ff1a_20261109T180100675808Z_400907",
+   "tree_json": "/home/lorkhan/code/playground-arc1/ws/evo/meter/suite_59aec713_20261109T180100663447Z_400907/genomes/null/tree.json",
+   "verify": {
+    "errors": [],
+    "pass": true,
+    "status": "PASS"
+   }
+  }
+ ],
+ "schema": "think4-batch/1",
+ "threads": 1
+}
