@@ -65,6 +65,8 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 待辦（有空位就派）
 
+- **A1 自起 aos daemon＋aos agent**（使用者睡前授權「自己起aos daemon，自己開aos agent，自己改進自己的工作流」「權限自行設置」）：步驟照 aos 回信 `wf/inbox/done/20261109T2337-aos-DONE.md`（`.aos-run/` gitignore、unit `arcagi-aos-daemon`、先 curl litellm /v1/models 對模型名、agent 只給 read/ls、ws 指 arcagi）。先接用法 1：思考輪「讀檔挑毛病」段交 luna agent；看門狗只盯根 pid。下一個空位第一順位派 opus 做。
+
 - ~~題目特性採集~~（已派 N4）：把 N2／補負載的 gpusearch 輸出（及 N3 GP 的近似分數）整理成每題搜尋剖面資料檔（`wf-table/1`），給後續排序器／剪枝器／演化適應度用；若 gpusearch 目前不輸出近似資訊，改它多輸出（使用者 23:1x 建議 2）。
 - **aos 樹上的分層改進／遺傳搜尋**（使用者建議 1～5，見 [總表/使用者方向](../總表/使用者方向.md)「11-09 夜建議」；aos 回信整理在 [aos-回信-樹演化](aos-回信-樹演化.md)，建議第一步＝樹⇄JSON 往返、共用子樹記引用）：T1 收輪後開思考輪 2 以此為主題。
 
