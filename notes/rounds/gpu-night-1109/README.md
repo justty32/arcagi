@@ -64,6 +64,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
 | N5c seed GPU 端到端 | （無 agent，等基準） | PARTIAL d6b738d：`arcbatch-gpuseed --gpu-seed` 解集合與 CPU 完全一致，但 1e6 單跑 18.8 s vs CPU 8.0 s（更慢）。剖析：GPU 支援的一階原語佔節點 66% 卻只佔 CPU 時間 26%，其餘 74% 是 lambda／if／library → 就算 GPU 免費整體上限 ~1.35×；每層上傳 27 ms＋launch 14 ms、分解子題重傳 bank。基準 `arcagi-n5c-bench` 跑 3×(1e6,1e7) 中；收尾：跑 scratchpad/n5c/analyze.py → report.md | 長跑中 | reports/seed-gpu-e2e-1110/ |
 | T3 思考設計輪 3 | opus 隊長 | 主題：今晚 GPU 各線教訓（N2 快、N3 過擬合、N5 forbid 無效、N5c 端到端更慢 Amdahl 1.35×）→ GPU 下一步押哪；只到 02b＋代定＋04 白話，不施工 | 跑中（00:2x） | notes/rounds/gpu-night-1109/think-3/ |
+| N3d GP holdout＋MDL | opus | gpgp-ho：留一 train 例 holdout、長度懲罰、簡化；量假 solved 比例是否下降 | 跑中（00:2x） | reports/gpu-gp-1109/holdout.md |
 
 ## 待辦（有空位就派）
 
