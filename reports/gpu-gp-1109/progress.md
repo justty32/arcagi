@@ -1,3 +1,8 @@
+# 第 3 棒（11-10 00:3x，DONE）
+- report.md 已補「結論」段（GP vs random vs 窮舉：題數打平、GP 解更長＝bloat、窮舉快；過擬合：overnight pass-1 前 232 題 C++ solved 7、Python test 對 1＝a79310a0）。統計腳本 scratchpad/n3c/stats.py。
+- 白話 `notes/rounds/gpu-night-1109/gp-白話.md` 已寫。
+- 剩：`arcagi-n3-gp` 06:00 自寫 overnight-summary.md，晨報時核對（只本機 commit，不 push）。
+
 # N3 GPU 遺傳式程式搜尋——進度（第 2 棒 N3b，11-09 23:22 交棒，PARTIAL：30% context）
 
 ## 現況
@@ -13,7 +18,7 @@
 ## 下一步（接手者）
 1. 等 `reports/gpu-gp-1109/bench/FILLED` 出現（`until [ -f ... ]` 背景等），讀 report.md 結果段，補一段「結論」：GP vs random vs 窮舉的解題數、解深度、Python test 件數；特別寫 synth-L6/L7 是否有 GP 解出而窮舉沒解出（"只有它解出" 欄）。
 2. 寫 `notes/rounds/gpu-night-1109/gp-白話.md`（一段白話，連到 report）。
-3. commit report.md、gp-白話.md、progress.md（只 add 這些）＋push。
+3. commit report.md、gp-白話.md、progress.md（只 add 這些；只本機，不 push）。
 4. 確認 `arcagi-n3-gp` 仍 active；06:00 後核 overnight-summary.md。
 
 ## 第 1 棒交接（歷史）
