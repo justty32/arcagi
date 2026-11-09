@@ -44,3 +44,12 @@ make -C native gpugp-ho
 reports/gpu-gp-1109/ho/run.sh ho     # 或 mdl；輸出 ho/{real,on40}-<cfg>.jsonl ＋ -verify.jsonl
 python3 reports/gpu-gp-1109/ho/summarize.py -v
 ```
+
+## N3e MDL λ sweep 結論（主 session 05:46，依 `ho/sweep-summary.md`）
+
+λ∈{0, .003, .006, .01} × seeds 1–3，`--simplify min`、無 holdout、每題 20 s；real-40 的 λ=.01 只完成 2/3 seed（05:45 截止 TERM）。
+
+- **on40**：λ 越大，train solved 越少（6.3→3.5），程式越短（中位 4.5→2.5），但 test 對始終只有 a79310a0 一題（0.5–1），**假 solved 比例不降**（82–88%）。
+- **real-40**：λ=0 只解 1fad071e（test 錯）；λ>0 幾乎全空。假解 100%。
+- **判讀**：MDL 懲罰只是把程式變短、少解幾題，並沒有把假解篩掉——GP 在真題上湊的是 train 的巧合，不是長度造成的過擬合。和 N3d「MDL 假解減半」相比，加大 λ 沒有額外收益；λ=0.003 與 0 幾乎無差。
+- **建議**：GP 線不再調 λ；若要續，該加的是 N4g 提的「寫死顏色」「不冗餘」門或 holdout 以外的驗證，而不是長度懲罰。GP 結果不接進補位（N4g 已證只增假解）。
