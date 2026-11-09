@@ -216,3 +216,17 @@ $(R1_DIR)/%.o: gpu/seed/%.cpp $(HEADERS)
 
 bin/arcbatch-r1: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(R1_DIR)/r1_enum.o $(R1_DIR)/r1_main.o | bin
 	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# bin/arcbatch-gpuseed-b1 (N5d / B1, reports/seed-gpu-b1-1110/): arcbatch-gpuseed with a
+# resident per-thread device context (gpu/seed/b1_kernel.cu): decomposition sub-problems reuse
+# stream, buffers, table and pinned staging; fewer stream ops per layer. Same host objects as
+# arcbatch-gpuseed (interface e2e.hpp unchanged). Separate target: `make gpuseed-b1`.
+.PHONY: gpuseed-b1
+gpuseed-b1: bin/arcbatch-gpuseed-b1
+
+$(E2E_DIR)/b1_kernel.o: gpu/seed/b1_kernel.cu gpu/seed/kernel.cu $(E2E_HEADERS)
+	mkdir -p $(E2E_DIR)
+	$(NVCC) $(NVFLAGS) -c $< -o $@
+
+bin/arcbatch-gpuseed-b1: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(E2E_DIR)/seed_enum_gpu.o $(E2E_DIR)/e2e_main.o $(E2E_DIR)/b1_kernel.o | bin
+	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
