@@ -57,3 +57,14 @@ make -C native gpuseed-b1
 bash /tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n5d/bench.sh   # 交錯 1e6→1e7，結果在同一資料夾
 python3 -I reports/seed-gpu-b1-1110/analyze.py /tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n5d
 ```
+
+## 1e7 補表（主 session 02:46，analyze.py 原樣輸出摘要）
+
+| mode | wall s 中位 (min..max) | 對 cpu 列差異 |
+|---|---|---|
+| cpu | 125.9 (115.4..130.5) | 0 |
+| gpu | 184.4 (177.3..204.5) | 0 |
+| b1 | 172.9 (170.6..182.7) | 0 |
+| b1hi (`--gpu-min 200000`) | 146.4 (137.3..171.9) | 0 |
+
+1e7 b1 比原 gpu 快 6%，仍比 cpu 慢 37%；E8（1e7 ≥1.2× 快於 cpu）不過，維持凍結 `--gpu-min 200000`。b1 1e7 有 16 次 fallback（原 gpu 0），原因未查。
