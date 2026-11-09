@@ -342,6 +342,10 @@ def main(argv: Sequence[str] | None = None, runner: Callable | None = None) -> i
     return 0
 
 
+def _hybrid_timeout() -> float:
+    return float(os.environ.get("ARCAGI_GATED_TIMEOUT") or 60)
+
+
 def _run_hybrid(request_path, out_path, trace_path) -> None:
     subprocess.run(
         [
@@ -351,7 +355,7 @@ def _run_hybrid(request_path, out_path, trace_path) -> None:
             str(trace_path),
         ],
         check=False,
-        timeout=60,
+        timeout=_hybrid_timeout(),
     )
 
 

@@ -6,10 +6,11 @@
 import time
 
 T0 = time.perf_counter()
-DEADLINE = T0 + 19.0
+import os
+
+DEADLINE = T0 + float(os.environ.get("ARCAGI_HYBRID_DEADLINE") or 19.0)
 
 import json
-import os
 import signal
 import subprocess
 import sys
