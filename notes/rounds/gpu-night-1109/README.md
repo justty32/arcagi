@@ -16,7 +16,7 @@
 6. 下表「現役線」逐條確認狀態；子 agent 完成通知來了就照 dispatch 收線（對證據）並更新本表。
 7. 每次 commit 後更新本表與 SESSION-LOG 再 push。
 
-## 子 agent context 管理（使用者 23:2x「子agent的context也要做管理」）
+## 子 agent context 管理（使用者 22:5x「子agent的context也要做管理」）
 
 - 一條線＝一個里程碑；交接書寫死**交棒點**，到點就寫進度檔（`<產物夾>/progress.md`：做到哪、數字、下一步、關鍵路徑）並回報 `DONE`／`PARTIAL`，由主 agent 開新線接力，交接書只帶上一段產物路徑、不帶對話。
 - 子 agent 讀大檔、掃大量報告、跑長輸出一律派孫 agent 或用 grep／head，只把結論帶回；長跑交 systemd 背景，不在 context 裡等。
@@ -24,7 +24,7 @@
 
 ## 分工
 
-- 分工補充（使用者 23:3x）：「可以的話，實作，寫檔案等各種普通的，不太需要高階智能的文字處理，都交給codex gpt sol，或是litellm的sol」→ 實作與普通文字處理優先派 codex `-m gpt-6.1-sol -s workspace-write`（必帶 -m／-s）或 litellm sol；Claude 子 agent 留給設計、審查、驗收。
+- 分工補充（使用者 22:5x）：「可以的話，實作，寫檔案等各種普通的，不太需要高階智能的文字處理，都交給codex gpt sol，或是litellm的sol」→ 實作與普通文字處理優先派 codex `-m gpt-6.1-sol -s workspace-write`（必帶 -m／-s）或 litellm sol；Claude 子 agent 留給設計、審查、驗收。
 
 ## 現役線（頂層 ≤3）
 
@@ -32,8 +32,8 @@
 |---|---|---|---|---|
 | N1 蠟模 | opus | 本地模型（e4b＋litellm GPT）比較提示法 → 長跑到 06:10 | 跑中（22:40 派） | reports/wax-night-1109/、notes/rounds/gpu-night-1109/wax-白話.md |
 | N2 長跑 | （無 agent）| systemd `arcagi-n2-overnight`：gpusearch 800 題深度 5→6→7，06:00 寫彙總 | 跑中 | reports/native-cuda-1109/overnight/（未 commit，晨報收） |
-| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP | 跑中（23:3x 派） | reports/gpu-gp-1109/ |
-| T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（23:3x 派） | notes/rounds/gpu-night-1109/think-1/ |
+| N3 GPU 遺傳符號搜尋 | opus | 以 N2 評估器為底做 GPU GP | 跑中（22:5x 派） | reports/gpu-gp-1109/ |
+| T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（22:5x 派） | notes/rounds/gpu-night-1109/think-1/ |
 
 ## 等待中
 
@@ -41,7 +41,7 @@
 
 ## 已收線
 
-- N2 CUDA 雛形（23:20）：GPU 對 CPU 44.5×～105×、解集合一致、Python 399/399；1ca9a6f／78c7890。
+- N2 CUDA 雛形（22:55）：GPU 對 CPU 44.5×～105×、解集合一致、Python 399/399；1ca9a6f／78c7890。
 - 看門狗（22:52）：c85bc42；`touch ~/arcagi-STOP` 全停、`scripts/arcagi_stop_all.sh` 連看門狗一起停。
 
 ## 代定清單
