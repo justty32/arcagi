@@ -54,3 +54,26 @@
 若同意改 hybrid.py 加上期限的環境變數（只加開關，預設不變），就能在 188 題母體上跑
 deadline ∈ {19, 40, 55}，量新增 test 對、假解與衝突。55 是受 gated `timeout=60` 限制的上限；
 想跑更長，gated 的 timeout 也要一起開放成可調。
+
+---
+
+# N9b：主線 hybrid 期限改成可調，在 188 題預算型放棄母體上掃期限（跑中）
+
+## 開關（commit 0eaf09d）
+
+- `native/hybrid.py:11`：`DEADLINE = T0 + float(os.environ.get("ARCAGI_HYBRID_DEADLINE") or 19.0)`。`:195` 扣的 `4.0` 不動。`import os` 移到這一行前面，T0 仍然在其他 import 之前量。
+- `src/arcagi/solvers/gated.py`：新增 `_hybrid_timeout()`，讀 `ARCAGI_GATED_TIMEOUT`，預設 60。`_run_hybrid` 的 argv 不變。
+- 未設時行為不變的證據：
+  - 單元測試 `tests/solvers/test_hybrid_deadline_env.py` 驗證：未設時 DEADLINE−T0 = 19.0、gated timeout = 60、`_run_hybrid` argv 與改前相同；設值時兩者都會生效。`tests/solvers` 共 153 passed。
+  - 小樣本 3 題（007bbfb7、0a938d79、1e0a9b12），未設和明設 `=19` 各跑一次：selected 相同、correct 相同、abstained 相同，arcsearch 耗時都約 13.3 s（和 r07 trace 一致）。
+- 實作：codex（gpt-6.1-sol）。
+
+## 掃描設定
+
+- 母體：`n9b-tasks.txt`，共 188 題，是 r07 training 裡 out_of_budget＝True 且 abstained 的題目。
+- 腳本：`n9b_sweep.sh`。d19 不設環境變數，作為基準；d40、d55 用預設的 gated timeout 60；d120 另外設 `ARCAGI_GATED_TIMEOUT=130`。harness `--timeout` 設成期限加 25 s 到 30 s，workers 6。
+- 判讀：`n9b_analyze.py`。進度和接手方式見 `n9b-progress.md`。
+
+## 結果
+
+（跑中，見 n9b-progress.md）
