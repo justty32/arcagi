@@ -81,4 +81,5 @@
 ## 交接
 
 - 交接書骨架 → [TEMPLATE.handoff](../TEMPLATE.handoff.md)；踩過的坑 → [lessons](lessons.md)。
+- 濃縮版先讀知識庫 `kb/lead`（派工）／`kb/worker`（施工）；換手教訓見 `kb/lead/handoff_lessons.md`。
 - 線回報與催件 → [inbox](../inbox/README.md)；卡在使用者 → [WAIT_USER](../../WAIT_USER.md)。

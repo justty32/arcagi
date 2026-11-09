@@ -5,7 +5,8 @@
 
 ## 先讀規矩
 
-開工前讀：`AGENTS.md` → `wf/WORKFLOWS.md` → `wf/workflows/common/user.md` → 本任務對應的工作流入口檔（碰原始碼另讀 `wf/workflows/common/conventions.md`、`code-map.md`）。**雜活**（單純搬資料、跑一支指令回報輸出）可刪掉本段。
+開工前先 read 知識庫 `kb/worker`（施工線）或 `kb/lead`（會再派線的隊長）→ 本任務對應的工作流入口檔；細節或衝突才去讀 wf 原檔（`AGENTS.md` → `wf/WORKFLOWS.md` → `wf/workflows/common/user.md`；碰原始碼另讀 `wf/workflows/common/conventions.md`、`code-map.md`）。**雜活**（單純搬資料、跑一支指令回報輸出）可刪掉本段。
+讀法：`echo '{"op":"read","path":"worker"}' | AOS_MEMORY=/home/lorkhan/repo/arcagi/kb python3 /home/lorkhan/repo/simple_tools/aos/proto8/lib/agent/memory/_entry`（或直接看 `kb/worker/README.md`）。
 
 ## 背景與唯一目標
 

@@ -6,6 +6,7 @@
 
 - `roles`：分工與模型選擇。
 - `handoff`：交接書必備段（安全邊界、30% 換手、git 衛生、不 push）。
+- `handoff_lessons`：換手教訓（開完長跑就交棒、用工具呼叫數估）。
 - `think_round`：思考設計輪流程與檔名。
 - `ask_aos`：怎麼請教 aos、寄信。
 - `closing`：收線驗收。
