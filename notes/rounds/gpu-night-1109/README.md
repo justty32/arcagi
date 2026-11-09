@@ -63,6 +63,8 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | T2 思考設計輪 2 | opus（第 4 棒 T2d） | 塊 1 完成（e910b2d）。塊 2 第 3 棒 PARTIAL（475b13d、90edf26）：quick／noise／guards＋5 子指令，14 測試過；C25 三跑 wall ~15 s、auc_L 皆 20 → 同樹 σ=0（決定論），比較要用成對 σ；造假測試都如期 FAIL；守門一：活樹 FAIL（16 違規、12 tainted ops，證實洩漏）、快撥新算子 PASS。背景 `arcagi-t2c-b2runs` 跑 C50／L2／D20。T2d：收 accept.json＋塊 3 credit 帳 | 跑中（00:1x） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
 | N5c seed GPU 端到端 | （無 agent，等基準） | PARTIAL d6b738d：`arcbatch-gpuseed --gpu-seed` 解集合與 CPU 完全一致，但 1e6 單跑 18.8 s vs CPU 8.0 s（更慢）。剖析：GPU 支援的一階原語佔節點 66% 卻只佔 CPU 時間 26%，其餘 74% 是 lambda／if／library → 就算 GPU 免費整體上限 ~1.35×；每層上傳 27 ms＋launch 14 ms、分解子題重傳 bank。基準 `arcagi-n5c-bench` 跑 3×(1e6,1e7) 中；收尾：跑 scratchpad/n5c/analyze.py → report.md | 長跑中 | reports/seed-gpu-e2e-1110/ |
+| N3c GP 結論＋N5c 收尾 | opus | bench/FILLED 已在 → 寫 N3 結論與 gp-白話（過擬合警訊）；N5c 基準完後產對照表 report.md | 跑中（00:2x） | reports/gpu-gp-1109/、reports/seed-gpu-e2e-1110/ |
+| W1 工作流改進 | opus | 交接書模板改「先 read kb 層」；kb 加換手教訓（開完長跑就交棒、用工具呼叫數估） | 跑中（00:2x） | wf/workflows/、kb/lead/ |
 
 ## 待辦（有空位就派）
 
