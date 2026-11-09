@@ -33,3 +33,13 @@
   - 若 no-learn 類 z≤−2 → 題集改 full-64（T4 再改），accept.json 複製進 reports/think4-1110/a/full64/；若仍 <2 → 翻案點：主分改「相對 no-learn 對照的 gain」或成對符號檢定（需先寫進 03 再跑，避免事後調門）；並查 e0→e1 非 comb 改善來源。
 - 未做：04-總結簡報、g1 子代量測。reports 下 pytest-* 暫存夾不 commit。
 - [完] full-64 翻案跑結果（`t4b/full64/summary.txt`）：**仍 FAIL**。no-learn／gate-dormant／judge-block Δgain=−88.2、兩半同號負、z=−1.51（比 20 題更差，加題只加 σ）；親代自比、null Δ=0；raw verify 全 PASS。結論：擴題集救不了，下一棒走翻案點二（主分改「相對 no-learn 的 gain」或成對符號檢定，先寫進 03 再跑），並查 e0→e1 非 comb 改善來源。
+
+## 第三棒（t4c，11-10）
+
+- [完] 73 bits 來源 → `05-增益來源.md`：**非量尺 bug**；no-learn 漏關 hammer 的「uses→列舉順序」管道（epoch.py:317-321 累加 uses 不受 pause 控制、:250 order_from_uses）。逐題：e0/e1 程式相同、只 ntf 變小（transpose 35→12 等 17 題）。舊 Δ≈−88 只是 comb 管道貢獻；親代 173 ≈ 順序 85＋comb 88。
+- [完] 預先登記 03 §8（commit **f1991f8**，早於重跑）：對照改 `no-learn-all`（清 uses）、主判準＝單尾成對符號檢定 p≤0.05＋Δ≤−2＋兩半負；健全門 no-learn-all |gain|<1；新種子＝預算擾動 L=40000（hammer 決定論無種子）。
+- [完] codex 施工 commit **1629ce3**（dumb no-learn-all、meter 清 uses、sign_test、--labels、--criterion t4c；158 tests 綠）。src/arcagi/solvers/gated.py 與 tests/solvers/test_gated_gpu_fallback.py 的改動**非本線**，未 commit。
+- [進行] 重跑：單元 `arcagi-t4c-run`（scope），腳本 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4c/run.sh`；輸出 `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4c/{batch.json,batch.log,accept.json,accept.log}`；跑完判斷＝`/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4c/DONE` 存在。
+  - 判讀：`python3 -c "import json;a=json.load(open('/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t4c/accept.json'));print(a['status'],a['checks']);[print(k,v['n'],v['k'],v['n_pos'],v['p_neg'],v['delta'],v['halves']) for k,v in a['sign_tests'].items()];print(json.dumps(a['report_only'])[:800])"`
+  - 過 → accept.json 複製進 `reports/think4-1110/a/t4c/`、更新代定清單 T2/T5、寫 04-總結簡報。
+  - 不過 → **不再翻案**：代定清單加「待使用者裁」條目（附預設：維持 t4c 判準記 FAIL，量尺僅作回報用、不當 GA 適應度；或改用 comb 管道與順序管道分列回報），附 accept.json 數字。
