@@ -37,15 +37,16 @@
 
 | 線 | 模型 | 內容 | 狀態 | 產物 |
 |---|---|---|---|---|
-| N1 蠟模 | opus | 提示法比較（litellm sol/luna/terra；gemma 中途關閉）→ 長跑到 06:10；第 1 棒 23:1x PARTIAL（c835198；sol-low prims_py 中途每步 50%、全步 23.8%），第 2 棒 N1b 接手 | 跑中 | reports/wax-night-1109/、notes/rounds/gpu-night-1109/wax-白話.md |
+| N1 長跑 | （無 agent）| systemd `arcagi-n1-overnight`：sol-low·prims_py 鑄 296 題到 06:00，06:10 寫 overnight-summary；terra 比較 `arcagi-n1-cmp-terra` 跑完要補 compare.md terra 列 | 跑中 | reports/wax-night-1109/ |
 | N2 長跑 | （無 agent）| systemd `arcagi-n2-overnight`：gpusearch 800 題深度 5→6→7，06:00 寫彙總 | 跑中 | reports/native-cuda-1109/overnight/（未 commit，晨報收） |
 | GPU 補負載 | （主 session 開，無 agent）| systemd `arcagi-main-gpufill`：`native/bin/gpusearch-filler`（gpusearch 複本）跑 evaluation 主線未解 344 題深度 6 dedup 4，timeout 7h；功耗 60W→118W | 跑中（23:10） | reports/native-cuda-1109/filler/（未 commit） |
 | N3 GPU 遺傳符號搜尋 | opus | 第 1 棒 PARTIAL（ab66b40：gp 三檔 codex 寫、編過 `native/bin/gpgp`，未實跑未審）；第 2 棒 N3b 接手中，指示先開長跑吃滿 GPU | 跑中 | reports/gpu-gp-1109/ |
 | T1 思考設計輪 1 | opus 隊長 | sol 蒐集→opus 簡報→fable→Argon→opus 設計→sol 施工→收輪；流程與指令見 [思考輪-流程](思考輪-流程.md) | 跑中（22:5x 派） | notes/rounds/gpu-night-1109/think-1/ |
+| N4 題目特性採集 | opus | gpusearch 加輸出近似剖面（每題最接近的程式、逐格相符分數、搜尋量），跑 800 題產 wf-table/1 資料檔 | 跑中（23:3x 派） | reports/task-features-1109/ |
 
 ## 待辦（有空位就派）
 
-- **題目特性採集**：把 N2／補負載的 gpusearch 輸出（及 N3 GP 的近似分數）整理成每題搜尋剖面資料檔（`wf-table/1`），給後續排序器／剪枝器／演化適應度用；若 gpusearch 目前不輸出近似資訊，改它多輸出（使用者 23:1x 建議 2）。
+- ~~題目特性採集~~（已派 N4）：把 N2／補負載的 gpusearch 輸出（及 N3 GP 的近似分數）整理成每題搜尋剖面資料檔（`wf-table/1`），給後續排序器／剪枝器／演化適應度用；若 gpusearch 目前不輸出近似資訊，改它多輸出（使用者 23:1x 建議 2）。
 - **aos 樹上的分層改進／遺傳搜尋**（使用者建議 1～5，見 [總表/使用者方向](../總表/使用者方向.md)「11-09 夜建議」；aos 回信整理在 [aos-回信-樹演化](aos-回信-樹演化.md)，建議第一步＝樹⇄JSON 往返、共用子樹記引用）：T1 收輪後開思考輪 2 以此為主題。
 
 ## 等待中
@@ -53,6 +54,8 @@
 - 使用者睡前會再給 ARC-AGI 建議 → 照錄進 [總表/使用者方向](../總表/使用者方向.md)，排進思考輪。
 
 ## 已收線
+
+- N1／N1b 蠟模比較（23:30）：選 sol-low·prims_py（全步 20.8%、每步 51.4%）；發現空樹 ≤4 節點連換色都擬合不到→先改語言；43d2764。
 
 - N2 CUDA 雛形（22:55）：GPU 對 CPU 44.5×～105×、解集合一致、Python 399/399；1ca9a6f／78c7890。
 - 看門狗（22:52）：c85bc42；`touch ~/arcagi-STOP` 全停、`scripts/arcagi_stop_all.sh` 連看門狗一起停。
