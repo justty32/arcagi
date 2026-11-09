@@ -21,6 +21,7 @@ agent 不用重猜的事。always-on 鐵律在 AGENTS.md，這裡是**這位使�
 | 時區 | Asia/Taipei |
 | 子 agent 分工 | 2026-11-08：普通工作 opus、簡單與雜活 sonnet；先讀 `wf/` 規矩（雜活除外）；可再派、模型隨意 → [team-model](../team-model.md) |
 | 子 agent 分工補充 | 2026-11-09：實作、寫檔等普通文字處理優先交 codex gpt sol（`-m gpt-6.1-sol`，必帶 `-s`；除 astra 外型號皆可）或 litellm sol；Claude 子 agent 留給設計、審查、驗收；設計用 fable、審稿 agy Argon。子孫 agent 要做權限管理（交接書帶安全邊界段、原樣下傳）與 context 管理（一線一里程碑；context 約 30% 就寫 progress 交接換手）|
+| aos mcp 知識庫 | 2026-11-09：「mcp這塊，最主要就是你可以自行分層知識，這樣compact後可以快速接入，然後可以跑一大堆層級式的agent或agent團隊。」→ 用 aos 知識庫（`mcp__aos__wf_kb`）把知識分層：主 agent compact 後讀根層就能接回；各層 agent／隊伍只讀自己那層的子樹 |
 | 長時間無人值守 | 2026-11-09：使用者會設 goal＋auto compact（30% 觸發）；主 agent 把續行點寫進 SESSION-LOG 與當夜看板，compact 後照看板檢查表恢復（看門狗、停止開關 `~/arcagi-STOP`、inbox 監看、排程）|
 
 ## aos 累積的習慣速查

@@ -12,7 +12,8 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 1. 試一次 `mcp__aos__wf_kb` `{"op":"read"}` 確認可用。
 2. 重開 inbox 監看、GPU 閒置警報 Monitor。
 3. CronCreate 重排：`37 0 10 11 *` N3 第 3 棒（等 bench/FILLED，寫結論＋白話）；`4 6 10 11 *` 晨報＋待 push 清單＋寄 aos DONE。若已過 00:37 就直接做 N3 第 3 棒。
-4. 派接手：T1 補 04 總結（think-1/progress.md）；N4b 照 reports/task-features-1109/progress.md 5 步做 gpuprofile；之後開思考輪 2（主題：使用者 11-09 夜建議 1～8＋T1 的下一輪反省點）。頂層 ≤3。
+4. 派一條 opus 線把 wf 做成分層知識庫（走 B：`kb/` 根 README＋捷徑＋各層摘要，讓「主 session 恢復」「派工隊長」「施工隊員」各有一層入口；wf 原檔不動），之後交接書改成「先 read 知識庫某層」。使用者原話見 wf/workflows/common/user.md「aos mcp 知識庫」。
+5. 派接手：T1 補 04 總結（think-1/progress.md）；N4b 照 reports/task-features-1109/progress.md 5 步做 gpuprofile；之後開思考輪 2（主題：使用者 11-09 夜建議 1～8＋T1 的下一輪反省點）。頂層 ≤3。
 
 ## compact 後檢查表（每次都做）
 
