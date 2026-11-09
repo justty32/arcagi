@@ -63,6 +63,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
 | N7 R1 排序器探針 | opus | gpusynth 料學 P(原語|型別,深度)，代價分桶列舉（不丟候選）探針 arcbatch-r1，量到解節點中位對基線（E7 門檻 ≤0.5×）；只量測不進主線（E10 的 03／施工仍待使用者） | 跑中（01:0x） | reports/r1-probe-1110/ |
 | T4 思考設計輪 4 | opus 隊長 | 主題：先修量尺再演化（快撥解析度、故意改笨的樹驗尺）、補演化缺口（交配擋同 sha、D27 活動量分功勞、D18 引導突變）、塊 5 Janet 表示＋嵌套／節點池 | 跑中（01:0x） | notes/rounds/gpu-night-1109/think-4/ |
+| N3e MDL λ 掃描 | （無 agent，長跑） | `arcagi-n3e-sweep` real-40／on40 × λ{0,.003,.006,.01} × seed 1–3，最晚 05:45 停，自動寫 `reports/gpu-gp-1109/ho/sweep-summary.md`（尾 SWEEPDONE）；收尾＝結論寫進 holdout.md（晨報前做）。9ed21de | 長跑中 | reports/gpu-gp-1109/ho/ |
 
 ## 待辦（有空位就派）
 
