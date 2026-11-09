@@ -9,3 +9,4 @@
 - `think_round`：思考設計輪流程與檔名。
 - `ask_aos`：怎麼請教 aos、寄信。
 - `closing`：收線驗收。
+- `aos_agent`：自起 aos 樹、開只讀 luna agent 做小事。
