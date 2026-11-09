@@ -1,6 +1,6 @@
 # N5c progress notes (implementer; report.md is written by the caller)
 
-Status: DONE. Binary `native/bin/arcbatch-gpuseed` (`make -C native gpuseed-e2e`), tests `tests/native/test_gpuseed_e2e.py`.
+Status: DONE (bench + report.md finished; see report.md). Binary `native/bin/arcbatch-gpuseed` (`make -C native gpuseed-e2e`), tests `tests/native/test_gpuseed_e2e.py`.
 
 - Exactness: training first 100, budget 1e6, decomp, 4 threads: rows equal (ignoring seconds/eval_steps) to bin/arcbatch
   and to a fresh build of current native/src, in CPU mode, --gpu-seed (gpu-min 20000 / 200000 / 1e6). Budget 1e5 with
