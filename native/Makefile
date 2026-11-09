@@ -160,3 +160,29 @@ bin/gpho-obj/gp_main.o: gpu/gp/gp_main.cpp gpu/gp/gp.hpp gpu/space.hpp gpu/gpu.h
 
 bin/gpgp-ho: $(LIB_OBJECTS) bin/gpho-obj/gp_kernel.o bin/gpho-obj/gp_main.o
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# M0 baseline profiler (reports/m0-baseline-1110/): bin/m0prof = bin/arcbatch with
+# exclusive time buckets. gpu/seed/m0prof_enum.cpp is generated from src/seed_enum.cpp
+# by gpu/seed/m0prof_mk.py (src/ untouched). CPU only. Separate target: `make m0prof`.
+.PHONY: m0prof
+m0prof: bin/m0prof
+
+M0_DIR := gpu/seed/obj-m0
+
+gpu/seed/m0prof_enum.cpp: src/seed_enum.cpp gpu/seed/m0prof_mk.py
+	python3 -I gpu/seed/m0prof_mk.py src/seed_enum.cpp $@
+
+$(M0_DIR)/%.o: gpu/seed/%.cpp gpu/seed/m0prof.hpp $(HEADERS)
+	mkdir -p $(M0_DIR)
+	$(CXX) $(CXXFLAGS) -Isrc -c $< -o $@
+
+bin/m0prof: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(M0_DIR)/m0prof_enum.o $(M0_DIR)/m0prof_main.o | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# E11/E17 prototype (reports/m0-baseline-1110/): GPU reverse synthesis of (input, program, output)
+# samples from random first-order programs. Separate target: `make gpusynth`.
+.PHONY: gpusynth
+gpusynth: bin/gpusynth
+
+bin/gpusynth: gpu/synth/gpusynth.cu | bin
+	$(NVCC) $(NVFLAGS) $< -o $@

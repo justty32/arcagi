@@ -1,0 +1,24 @@
+## budget 1000000: wall 11.3s, enum cpu 44.8s, nodes 9.26e+07, segs 248829
+  1 first-order eval                                17.93s  40.0%
+  2 lambda eval (map/zipwith/filter/fold)           17.09s  38.1%
+  3 if eval                                          0.06s   0.1%
+  4 library block                                    0.00s   0.0%
+  5 unify/combinatorics bookkeeping                  6.98s  15.6%
+  6 dedup hash                                       2.51s   5.6%
+  other (cond_witness)                               0.25s   0.6%
+  solved(train_ok) 7, test_ok 5, nodes_to_first n=7 median 140126
+  segment-size hist (bit length of nodes per (op,split) segment): {0: 36665, 1: 9982, 2: 7250, 3: 6391, 4: 22579, 5: 16510, 6: 22293, 7: 35852, 8: 30989, 9: 22477, 10: 17159, 11: 11231, 12: 6135, 13: 2294, 14: 752, 15: 238, 16: 32}
+  nodes per program size: {2: 31943, 3: 984172, 4: 3539868, 5: 22719272, 6: 39655233, 7: 23271394, 8: 2251278, 9: 105067}
+  row mismatch vs plain arcbatch (/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n5c/res-1000000-cpu-1.jsonl): 0
+## budget 10000000: wall 162.4s, enum cpu 638.2s, nodes 8.95e+08, segs 412148
+  1 first-order eval                               233.78s  36.6%
+  2 lambda eval (map/zipwith/filter/fold)          292.69s  45.9%
+  3 if eval                                          0.51s   0.1%
+  4 library block                                    0.00s   0.0%
+  5 unify/combinatorics bookkeeping                 77.39s  12.1%
+  6 dedup hash                                      31.54s   4.9%
+  other (cond_witness)                               2.29s   0.4%
+  solved(train_ok) 10, test_ok 7, nodes_to_first n=10 median 510626.0
+  segment-size hist (bit length of nodes per (op,split) segment): {0: 58703, 1: 9817, 2: 8839, 3: 6679, 4: 22772, 5: 17288, 6: 22995, 7: 40601, 8: 42390, 9: 38383, 10: 39005, 11: 35478, 12: 28661, 13: 18152, 14: 11394, 15: 6250, 16: 3208, 17: 1087, 18: 399, 19: 47}
+  nodes per program size: {2: 30895, 3: 957535, 4: 3449652, 5: 27953702, 6: 139263763, 7: 382728763, 8: 275831371, 9: 60017272, 10: 5047055}
+  row mismatch vs plain arcbatch (/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n5c/res-10000000-cpu-1.jsonl): 0

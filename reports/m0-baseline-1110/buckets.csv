@@ -1,0 +1,19 @@
+budget,bucket,six_bucket,cpu_seconds,share,eval_calls
+1000000,choose_unify,5 unify/combinatorics bookkeeping,3.586,0.08,0
+1000000,eval_fo,1 first-order eval,17.93,0.4001,78519107
+1000000,eval_lambda,2 lambda eval (map/zipwith/filter/fold),15.261,0.3405,13753871
+1000000,eval_if,3 if eval,0.06,0.0013,285249
+1000000,eval_lib,4 library block,0.0,0.0,0
+1000000,dedup_hash,6 dedup hash,2.506,0.0559,0
+1000000,bank_offer,5 unify/combinatorics bookkeeping,3.393,0.0757,0
+1000000,lam_pool,2 lambda eval (map/zipwith/filter/fold),1.833,0.0409,0
+1000000,cond,other (cond_witness),0.248,0.0055,0
+10000000,choose_unify,5 unify/combinatorics bookkeeping,37.685,0.059,0
+10000000,eval_fo,1 first-order eval,233.78,0.3663,699952747
+10000000,eval_lambda,2 lambda eval (map/zipwith/filter/fold),283.998,0.445,193018252
+10000000,eval_if,3 if eval,0.509,0.0008,2309009
+10000000,eval_lib,4 library block,0.0,0.0,0
+10000000,dedup_hash,6 dedup hash,31.537,0.0494,0
+10000000,bank_offer,5 unify/combinatorics bookkeeping,39.702,0.0622,0
+10000000,lam_pool,2 lambda eval (map/zipwith/filter/fold),8.696,0.0136,0
+10000000,cond,other (cond_witness),2.292,0.0036,0
