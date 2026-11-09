@@ -1,0 +1,8 @@
+sources=4 ['nc-filler-eval-d6.jsonl', 'nc-filler-train-d6.jsonl', 'nc-phase-A.jsonl', 'nc-phase-B.jsonl']
+split=evaluation tasks=400 limited=False
+off tasks_correct=56 (stored=56; full-split expected=56)
+off/stored differences=0 []
+on tasks_correct=59
+new correct=3 ["66e6c45b", "73182012", "be03b35f"]
+new false=1 ["8597cfd7"]
+conflicts=0 []

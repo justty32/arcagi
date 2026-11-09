@@ -62,8 +62,8 @@
 
 | 線 | 完成證據 | 收線時間 |
 |----|---------|---------|
-| N1／N1b 蠟模夜跑 | c835198／43d2764；選 sol-low·prims_py：全步可擬合且驗過 10/48=20.8%、每步可擬合 51.4%（base 41.5%）；結構發現：空樹 lambda ≤4 節點連換色都擬合不到→建議先改語言（放寬上限或加 recolor）；長跑 arcagi-n1-overnight 到 06:00；terra 待補 | 2026-11-09 23:30 |
-| N2 CUDA 暴力搜尋雛形 | 1ca9a6f／78c7890；GPU 對 CPU 44.5×（≤3，200 題）、105×（≤4，12 題）；212 題解集合一致、Python 驗 399/399；tests/native 17 綠；長跑 arcagi-n2-overnight 到 06:00（輸出未 commit，晨報收）；forbid 未做（不相依） | 2026-11-09 22:55 |
+| N1／N1b 蠟模夜跑 | c835198／43d2764；選 sol-low·prims_py：全步可擬合且驗過 10/48=20.8%、每步可擬合 51.4%（base 41.5%）；結構發現：空樹 lambda ≤4 節點連換色都擬合不到→建議先改語言（放寬上限或加 recolor）；長跑 arcagi-n1-overnight 到 06:00；terra 待補；overnight（06:00）：sol-low·prims_py 2680 呼叫、851 驗過 train、215 全步可擬合（8.0%/呼叫）、28 題有全步可擬合蠟模，gemma 中途斷（見晨報） | 2026-11-09 23:30 |
+| N2 CUDA 暴力搜尋雛形 | 1ca9a6f／78c7890；GPU 對 CPU 44.5×（≤3，200 題）、105×（≤4，12 題）；212 題解集合一致、Python 驗 399/399；tests/native 17 綠；長跑 arcagi-n2-overnight 到 06:00（輸出未 commit）；overnight（06:00）：74 題 train 解、test 對 66、主線未解新題 4，phase-B 深挖只多 1 題（見 notes/rounds/gpu-night-1109/晨報.md）；forbid 未做（不相依） | 2026-11-09 22:55 |
 | r08-A 表達力 | b67dc2a；purity ok、tests/seed 85 綠；+halves L16 pass 0 4→6、nest 無效；golden_prims 747 組＋05 規格 | 2026-11-08 17:05 |
 | r08-B 練習池曲線＋meta | fcf3f1c／51fe268／424d0d0；pytest 564 綠；pool AUC_L 32（=noG1）、foot32 26（clean_P 10→15）、meta 5 回合＋2 動作全不採用 | 2026-11-08 18:10 |
 | r07-A 起點樹 seed | purity ok（32 原語）、pytest 523 綠；L16 pass 0 2→4（fe9b759→35049ef→0349a1d→efdee5d） | 2026-11-08 16:15 |

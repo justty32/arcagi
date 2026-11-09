@@ -1,0 +1,8 @@
+sources=36 ['gp-bench-real-exhaustive.jsonl', 'gp-bench-real-gp.jsonl', 'gp-bench-real-random.jsonl', 'gp-ho-on40-ho.jsonl', 'gp-ho-on40-mdl.jsonl', 'gp-ho-on40-orig.jsonl', 'gp-ho-real-ho.jsonl', 'gp-ho-real-mdl.jsonl', 'gp-pass-1.jsonl', 'gp-sweep-on40-l0.003-s1.jsonl', 'gp-sweep-on40-l0.003-s2.jsonl', 'gp-sweep-on40-l0.003-s3.jsonl', 'gp-sweep-on40-l0.006-s1.jsonl', 'gp-sweep-on40-l0.006-s2.jsonl', 'gp-sweep-on40-l0.006-s3.jsonl', 'gp-sweep-on40-l0.01-s1.jsonl', 'gp-sweep-on40-l0.01-s2.jsonl', 'gp-sweep-on40-l0-s1.jsonl', 'gp-sweep-on40-l0-s2.jsonl', 'gp-sweep-on40-l0-s3.jsonl', 'gp-sweep-real-l0.003-s1.jsonl', 'gp-sweep-real-l0.003-s2.jsonl', 'gp-sweep-real-l0.003-s3.jsonl', 'gp-sweep-real-l0.006-s1.jsonl', 'gp-sweep-real-l0.006-s2.jsonl', 'gp-sweep-real-l0.006-s3.jsonl', 'gp-sweep-real-l0.01-s1.jsonl', 'gp-sweep-real-l0.01-s2.jsonl', 'gp-sweep-real-l0.01-s3.jsonl', 'gp-sweep-real-l0-s1.jsonl', 'gp-sweep-real-l0-s2.jsonl', 'gp-sweep-real-l0-s3.jsonl', 'nc-filler-eval-d6.jsonl', 'nc-filler-train-d6.jsonl', 'nc-phase-A.jsonl', 'nc-phase-B.jsonl']
+split=training tasks=400 limited=False
+off tasks_correct=147 (stored=147; full-split expected=147)
+off/stored differences=0 []
+on tasks_correct=149
+new correct=2 ["46f33fce", "a79310a0"]
+new false=3 ["1fad071e", "25d8a9c8", "f8ff0b80"]
+conflicts=0 []

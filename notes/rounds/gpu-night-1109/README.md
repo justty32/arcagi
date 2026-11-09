@@ -128,3 +128,5 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 - kb 的 mcp 入口：沒改 tools.json（在寫入範圍外），`mcp__aos__wf_kb` 仍指 wf/。翻案：使用者把 AOS_MEMORY 改指 kb/（或加一個 kb 工具）後重開。
 
 > 04:2x 晨報草稿已預寫：`晨報-草稿.md`（5499e30）；06:04 cron 補 overnight-summary、N4g 06:00 重放、待 push 清單後定稿為 `晨報.md`。
+>
+> **06:1x 已定稿**：[晨報.md](晨報.md)（overnight 數字、N4g 06:00 重放、待 push 清單已補）。
