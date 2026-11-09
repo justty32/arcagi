@@ -9,7 +9,7 @@ from arcagi.hammer import formats as fm
 from arcagi.treegen import dumb, meter, meter_suite, quick
 from arcagi.treegen.cli import main
 from arcagi.treegen.export import export_tree
-from arcagi.treegen.meter_stats import B_REF
+from arcagi.treegen.meter_stats import B_REF, sign_test
 from arcagi.treegen.refs import expand, genome_sha, sha12
 
 
@@ -275,16 +275,20 @@ def test_dumb_recipes_change_hash_and_use_effective_controls(setup):
     assert parent.read_bytes() == before
 
 
-def make_suite(setup):
+def make_suite(setup, labels=meter_suite.T4B_LABELS):
     parent, _, allowed, make_run = setup
     dirs = {name: make_run(name) for name in ("parent-1", "parent-2")}
     for recipe in dumb.RECIPES:
+        if recipe not in labels:
+            continue
         source = allowed / "genomes" / recipe / "tree.json"
         dumb.make(parent, recipe, source)
         dirs[recipe] = make_run(
             recipe,
             src=source,
-            ntfs=(100, 100, 100) if recipe in dumb.RECIPES[:3] else (100, 50, 25),
+            ntfs=(100, 100, 100)
+            if recipe in (*dumb.RECIPES[:3], "no-learn-all")
+            else (100, 50, 25),
         )
     manifest = allowed / "batch.json"
     fm.write_json(
@@ -424,9 +428,7 @@ def test_batch_runs_all_seven_jobs_with_at_most_four_workers(setup, monkeypatch)
     assert report["pass"] and 1 <= peak <= 4
     assert report["jobs"] == 4 and report["threads"] == 1
     assert {r["label"] for r in report["runs"]} == {
-        "parent-1",
-        "parent-2",
-        *dumb.RECIPES,
+        *meter_suite.T4B_LABELS,
     }
     assert len({r["run_dir"] for r in report["runs"]}) == 7
 
@@ -462,7 +464,7 @@ def test_subprocess_worker_forces_one_thread(setup, monkeypatch):
     )
 
 
-@pytest.mark.parametrize("target", ["frozen", "node"])
+@pytest.mark.parametrize("target", ["frozen", "node", "root"])
 def test_verify_catches_changed_replica_controls(setup, target):
     _, _, _, make_run = setup
     run = make_run(target)
@@ -470,10 +472,14 @@ def test_verify_catches_changed_replica_controls(setup, target):
         path = run / "root/frozen.json"
         doc = fm.read_json(path)
         doc["budgets"]["shadow_slow"] += 1
-    else:
+    elif target == "node":
         path = run / "root/nodes/judge/_metainfo.json"
         doc = fm.read_json(path)
         doc["status"] = "paused"
+    else:
+        path = run / "root/_metainfo.json"
+        doc = fm.read_json(path)
+        doc["meter_freeze_uses"] = True
     fm.write_json(path, doc)
     assert not meter.verify(run)["pass"]
 
@@ -488,3 +494,360 @@ def test_dumb_rejects_noop_even_with_different_storage_representation(setup):
     fm.write_json(source, raw)
     with pytest.raises(ValueError, match="changed nothing"):
         dumb.make(source, "no-decomp", allowed / "noop/tree.json")
+
+
+def test_no_learn_all_is_no_learn_plus_hashed_freeze_flag(setup):
+    parent, _, allowed, _ = setup
+    no_learn = dumb.make(parent, "no-learn", allowed / "nl/tree.json")
+    all_off = dumb.make(parent, "no-learn-all", allowed / "nla/tree.json")
+    tree = expand(all_off["tree"], all_off["defs"])
+    assert tree["_metainfo.json"].pop("meter_freeze_uses") is True
+    assert tree == expand(no_learn["tree"], no_learn["defs"])
+    assert (
+        len(
+            {
+                fm.read_json(parent)["genome_sha"],
+                no_learn["genome_sha"],
+                all_off["genome_sha"],
+            }
+        )
+        == 3
+    )
+
+
+@pytest.mark.parametrize("recipe", [None, "no-learn", "no-learn-all"])
+def test_run_callback_freezes_only_uses_when_marked(setup, monkeypatch, recipe):
+    parent, ids, allowed, _ = setup
+    if recipe:
+        source = allowed / "control/tree.json"
+        dumb.make(parent, recipe, source)
+    else:
+        source = parent
+    directory = allowed / "callback"
+    meter.prepare_meter(source, directory, ids, epochs=2)
+    frozen = recipe == "no-learn-all"
+    seen = []
+
+    def synthetic_epochs(root, tree, *, epochs, threads, holdout, log):
+        assert tree == "hammer" and threads == 1 and holdout is False
+        state_path = root / "live/state.json"
+        for e in range(epochs + 1):
+            if e:
+                assert fm.read_json(state_path)["uses"] == (
+                    {} if frozen else {"reverse": e}
+                )
+            state = {"uses": {"reverse": e + 1}, "prev": {"epoch": e}, "batch": [e]}
+            fm.write_json(state_path, state)
+            fm.write_jsonl(
+                root / f"epochs/{e}/solutions.jsonl",
+                [
+                    {
+                        "task_id": t,
+                        "set": "L16",
+                        "train_ok": True,
+                        "test_ok": False,
+                        "nodes_to_first": 100,
+                    }
+                    for t in ids
+                ],
+            )
+            log(f"epoch {e}")
+            expected = {**state, "uses": {} if frozen else state["uses"]}
+            assert fm.read_json(state_path) == expected
+            seen.append(e)
+
+    monkeypatch.setattr(meter.epoch, "run_tree", synthetic_epochs)
+    result = meter.run(directory)
+    assert seen == [0, 1, 2]
+    assert result["gates"].get("freeze_uses", False) is frozen
+    assert fm.read_json(directory / "meter.json") == result
+    assert meter.verify(directory)["pass"]
+
+
+@pytest.mark.parametrize(
+    "d,n,k,n_pos,p,delta,halves,same_sign",
+    [
+        ([0] * 5, 0, 0, 0, 1, 0, [0, 0], False),
+        ([-1] * 5, 5, 5, 0, 1 / 32, -5, [-3, -2], True),
+        ([1] * 5, 5, 0, 5, 1, 5, [3, 2], True),
+        ([-2, 0, 1, -1, 0], 3, 2, 1, 1 / 2, -2, [-1, -1], True),
+        ([-1, 1, -1, 1], 4, 2, 2, 11 / 16, 0, [-2, 2], False),
+    ],
+)
+def test_sign_test_hand_calculation(d, n, k, n_pos, p, delta, halves, same_sign):
+    result = sign_test(stat_doc([0] * len(d)), stat_doc(d), "gain_bits")
+    assert (result["n"], result["k"], result["n_pos"]) == (n, k, n_pos)
+    assert result["p_neg"] == p
+    assert result["delta"] == delta and result["halves"] == halves
+    assert result["halves_same_sign"] is same_sign
+
+
+def test_sign_test_base_metric_order_and_validation():
+    a, b = stat_doc([0] * 5), stat_doc([-1] * 5)
+    for item in b["per_task"].values():
+        item["b"] = [-1, -1]
+    assert sign_test(a, b, "base_bits")["p_neg"] == 1 / 32
+    assert sign_test(a, b)["n"] == 0
+    b["task_ids"].reverse()
+    with pytest.raises(ValueError, match="ordered tasksets"):
+        sign_test(a, b)
+    b["task_ids"].reverse()
+    b["cfg"]["L"] = 40000
+    with pytest.raises(ValueError, match="cfg"):
+        sign_test(a, b)
+    with pytest.raises(ValueError, match="only"):
+        sign_test(a, a, "auc_L")
+
+
+def test_batch_subset_creates_only_requested_controls(setup, monkeypatch):
+    parent, ids, allowed, make_run = setup
+    taskset = allowed / "selected.json"
+    fm.write_json(taskset, {"task_ids": ids})
+
+    def synthetic_worker(job, taskset, cfg, log):
+        path = make_run(job["run_dir"], src=job["tree_json"])
+        return {**job, "returncode": 0, "verify": meter.verify(path)}
+
+    monkeypatch.setattr(meter_suite, "_worker", synthetic_worker)
+    result = meter_suite.batch(
+        parent,
+        taskset,
+        allowed / "subset.json",
+        base_dir=allowed,
+        labels=meter_suite.T4C_LABELS,
+    )
+    assert result["pass"]
+    assert [r["label"] for r in result["runs"]] == list(meter_suite.T4C_LABELS)
+    suite = next(allowed.glob("suite_*"))
+    assert {p.name for p in (suite / "genomes").iterdir()} == {
+        "no-learn-all",
+        "no-learn",
+        "null",
+    }
+
+
+@pytest.mark.parametrize("labels", [[], ["null", "null"], ["unknown"], [""]])
+def test_batch_rejects_invalid_labels_before_writing(setup, labels):
+    _, _, allowed, _ = setup
+    with pytest.raises(ValueError, match="labels"):
+        meter_suite.batch("missing", "missing", allowed / "batch.json", labels=labels)
+    assert not (allowed / "batch.json").exists()
+
+
+def test_t4c_accept_with_actual_fake_verifications(setup):
+    _, manifest, allowed = make_suite(setup, meter_suite.T4C_LABELS)
+    result = meter_suite.accept(
+        manifest, allowed / "accept.json", criterion="t4c", fake=True
+    )
+    assert result["pass"], result["errors"]
+    assert result["checks"]["control_clean"]
+    assert result["sign_tests"]["no-learn-all"]["p_neg"] == 1 / 2**16
+    assert all(r["rejected"] for r in result["checks"]["fake"]["checks"].values())
+
+
+@pytest.fixture
+def t4c_reports(setup, monkeypatch):
+    _, _, allowed, _ = setup
+    docs, directories = {}, {}
+    for label in meter_suite.T4C_LABELS:
+        doc = stat_doc([0 if label == "no-learn-all" else 1] * 16)
+        doc.update(
+            schema="think4-meter/1",
+            genome_sha="parent" if label.startswith("parent-") else label,
+            gates={"promotes": 0, "new_ops": 0},
+        )
+        if not label.startswith("parent-"):
+            doc["dumb"] = {"parent_sha": "parent", "recipe": label}
+        if label == "no-learn-all":
+            doc["gates"]["freeze_uses"] = True
+        docs[label], directories[label] = doc, allowed / label
+    manifest = allowed / "batch.json"
+    fm.write_json(
+        manifest,
+        {"runs": [{"label": k, "run_dir": str(p)} for k, p in directories.items()]},
+    )
+    monkeypatch.setattr(meter_suite.meter, "verify", lambda p: {"pass": True})
+    monkeypatch.setattr(meter_suite, "fake_checks", lambda *args: {"pass": True})
+
+    def accept():
+        for label, doc in docs.items():
+            doc["scores"] = meter.score(doc["per_task"])
+            fm.write_json(directories[label] / "meter.json", doc)
+        return meter_suite.accept(
+            manifest, allowed / "accept.json", fake=True, criterion="t4c"
+        )
+
+    return docs, accept
+
+
+def set_gains(doc, values):
+    for item, value in zip(doc["per_task"].values(), values, strict=True):
+        item["b"] = [0, value]
+
+
+def test_t4c_reports_old_control_without_using_its_score_as_gate(t4c_reports):
+    docs, accept = t4c_reports
+    set_gains(docs["no-learn"], [50] * 16)
+    result = accept()
+    assert result["pass"], result["errors"]
+    old = result["report_only"]["no-learn"]
+    assert old["sign_test"]["delta"] == 49 * 16
+    assert old["compare"]["gain_bits"]["significant"]
+    ordering = result["report_only"]["no-learn-all_vs_no-learn"]["sign_test"]
+    assert ordering["delta"] == -50 * 16
+
+
+@pytest.mark.parametrize("gains", [[100] + [1] * 15, [0.125] * 16])
+def test_t4c_learning_uses_sign_test_and_includes_minimum_effect(t4c_reports, gains):
+    docs, accept = t4c_reports
+    for label in ("parent-1", "parent-2", "null"):
+        set_gains(docs[label], gains)
+    result = accept()
+    assert result["pass"], result["errors"]
+    if gains[0] == 100:
+        assert not result["comparisons"]["no-learn-all"]["gain_bits"]["significant"]
+    else:
+        assert result["sign_tests"]["no-learn-all"]["delta"] == -2
+
+
+@pytest.mark.parametrize(
+    "case",
+    [
+        "control_clean",
+        "p_value",
+        "effect",
+        "halves",
+        "repeat",
+        "null_sign",
+        "null_z",
+        "identity",
+        "freeze_uses",
+    ],
+)
+def test_t4c_accept_rejects_failed_gates(t4c_reports, case):
+    docs, accept = t4c_reports
+    expected_gate = case
+    if case == "control_clean":
+        set_gains(docs["no-learn-all"], [1 / 16] * 16)
+    elif case in ("p_value", "effect", "halves"):
+        values = {
+            "p_value": [1] * 4 + [0] * 12,
+            "effect": [0.1] * 16,
+            "halves": [1, 0] * 8,
+        }[case]
+        for label in ("parent-1", "parent-2", "null"):
+            set_gains(docs[label], values)
+        expected_gate = "learning_drop"
+    elif case == "repeat":
+        docs["parent-2"]["per_task"]["t0"]["b"][0] = 0.5
+    elif case == "null_sign":
+        set_gains(docs["null"], [0.999] * 5 + [1] * 11)
+        expected_gate = "null"
+    elif case == "null_z":
+        set_gains(docs["null"], [11, 11, 0, 0] * 4)
+        expected_gate = "null"
+    elif case == "identity":
+        docs["no-learn-all"]["genome_sha"] = "parent"
+    else:
+        docs["no-learn-all"]["gates"]["freeze_uses"] = False
+        expected_gate = "recipes"
+    result = accept()
+    assert not result["pass"]
+    check = result["checks"][expected_gate]
+    if case == "identity":
+        assert not all(check.values())
+    elif expected_gate == "recipes":
+        assert check["no-learn-all"]["inert"]
+    else:
+        assert not check
+    if case == "control_clean":
+        assert any("對照不乾淨" in error for error in result["errors"])
+    if case == "null_sign":
+        assert not result["comparisons"]["null"]["gain_bits"]["significant"]
+    if case == "null_z":
+        assert result["sign_tests"]["null"]["p_neg"] > 0.05
+
+
+def test_t4c_null_zero_delta_exception(t4c_reports):
+    docs, accept = t4c_reports
+    set_gains(docs["null"], [0] * 10 + [11] + [1] * 5)
+    result = accept()
+    assert result["pass"], result["errors"]
+    assert result["sign_tests"]["null"]["delta"] == 0
+    assert result["sign_tests"]["null"]["p_neg"] <= 0.05
+
+
+def test_t4c_keeps_verify_and_fake_gates(t4c_reports, monkeypatch):
+    _, accept = t4c_reports
+    monkeypatch.setattr(meter_suite.meter, "verify", lambda p: {"pass": False})
+    assert not accept()["pass"]
+    monkeypatch.setattr(meter_suite.meter, "verify", lambda p: {"pass": True})
+    monkeypatch.setattr(meter_suite, "fake_checks", lambda *args: {"pass": False})
+    assert not accept()["pass"]
+
+
+@pytest.mark.parametrize("case", ["missing", "extra", "shared_directory"])
+def test_t4c_requires_five_independent_runs(t4c_reports, setup, case):
+    _, accept = t4c_reports
+    _, _, allowed, _ = setup
+    path = allowed / "batch.json"
+    manifest = fm.read_json(path)
+    if case == "missing":
+        manifest["runs"].pop()
+    elif case == "extra":
+        manifest["runs"].append({"label": "gate-dormant", "run_dir": str(allowed)})
+    else:
+        manifest["runs"][1]["run_dir"] = manifest["runs"][0]["run_dir"]
+    fm.write_json(path, manifest)
+    result = accept()
+    assert not result["pass"]
+    assert any("5 independent run directories" in error for error in result["errors"])
+
+
+def test_cli_passes_labels_and_criterion(setup, monkeypatch):
+    parent, _, allowed, _ = setup
+    captured = {}
+
+    def batch(*args, **kwargs):
+        captured.update(kwargs)
+        return {"pass": True}
+
+    def accept(*args, **kwargs):
+        captured.update(kwargs)
+        return {"pass": True}
+
+    monkeypatch.setattr(meter_suite, "batch", batch)
+    monkeypatch.setattr(meter_suite, "accept", accept)
+    assert (
+        main(
+            [
+                "meter-batch",
+                str(parent),
+                "--taskset",
+                "x",
+                "--out",
+                "x",
+                "--labels",
+                "parent-1,no-learn-all,null",
+            ]
+        )
+        == 0
+    )
+    assert captured["labels"] == ["parent-1", "no-learn-all", "null"]
+    assert main(["meter-accept", "x", "--out", "x", "--criterion", "t4c"]) == 0
+    assert captured["criterion"] == "t4c"
+    assert main(["meter-accept", "x", "--out", "x"]) == 0
+    assert captured["criterion"] == "t4b"
+    assert (
+        main(
+            [
+                "dumb",
+                str(parent),
+                "--recipe",
+                "no-learn-all",
+                "--out",
+                str(allowed / "cli/tree.json"),
+            ]
+        )
+        == 0
+    )

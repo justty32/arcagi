@@ -175,7 +175,7 @@ def _gates(directory: Path, meta: dict) -> dict:
     new = [o["id"] for o in ops if o["id"] not in base]
     ledger = read_jsonl(root / "ledger.jsonl")
     taskset = read_json(root / "truth/train/taskset.json")
-    return {
+    gates = {
         "check_root_errors": len(check_root(root)),
         "leak": "FAIL" if taskset["P"] or violations else "PASS",
         "leak_violations": violations,
@@ -184,6 +184,9 @@ def _gates(directory: Path, meta: dict) -> dict:
         "new_ops": len(new),
         "new_ops_ids": new,
     }
+    if read_json(root / "_metainfo.json").get("meter_freeze_uses") is True:
+        gates["freeze_uses"] = True
+    return gates
 
 
 def _report(directory: Path) -> dict:
@@ -205,11 +208,18 @@ def run(run_dir: str | Path) -> dict:
     meta = read_json(directory / PREPARED)
     if not meta or (directory / "meter.json").exists() or (root / "epochs").exists():
         raise ValueError("meter run must be freshly prepared and never run before")
+    freeze_uses = read_json(root / "_metainfo.json").get("meter_freeze_uses") is True
     started = time.perf_counter()
     quick._stop(root)
 
     def after_epoch(message: str) -> None:
         quick._stop(root)
+        if freeze_uses:
+            # run_epoch writes state.json (epoch.py:455) before run_tree logs.
+            path = root / "live/state.json"
+            state = read_json(path)
+            state["uses"] = {}
+            write_json(path, state)
         print(message, flush=True)
 
     epoch.run_tree(
@@ -249,6 +259,8 @@ def verify(run_dir: str | Path) -> dict:
         if not 1 <= cfg["threads"] <= 4 or cfg["holdout"] is not False:
             errors.append("threads/holdout mismatch")
         tree = expand(doc["tree"], doc["defs"])
+        if read_json(root / "_metainfo.json") != tree["_metainfo.json"]:
+            errors.append("root config differs from source")
         frozen = tree["frozen.json"]
         frozen["budgets"].update(L=cfg["L"], epochs=cfg["E"])
         if read_json(root / "frozen.json") != frozen:

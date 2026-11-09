@@ -22,6 +22,7 @@ def add_commands(commands: argparse._SubParsersAction) -> None:
         parser.add_argument("--base-dir", type=Path, default=meter.RUN_BASE)
         if name == "meter-batch":
             parser.add_argument("--jobs", type=int, choices=range(1, 5), default=4)
+            parser.add_argument("--labels", type=lambda value: value.split(","))
             parser.add_argument("--out", type=Path, required=True)
         else:
             parser.add_argument("--threads", type=int, choices=range(1, 5), default=1)
@@ -40,6 +41,7 @@ def add_commands(commands: argparse._SubParsersAction) -> None:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--fake", action="store_true")
     parser.add_argument("--fake-dir", type=Path)
+    parser.add_argument("--criterion", choices=("t4b", "t4c"), default="t4b")
 
 
 def dispatch(args: argparse.Namespace) -> int:
@@ -61,10 +63,15 @@ def dispatch(args: argparse.Namespace) -> int:
             L=args.L,
             epochs=args.epochs,
             strip=args.strip,
+            labels=args.labels,
         )
     elif args.command == "meter-accept":
         result = meter_suite.accept(
-            args.manifest, args.out, fake=args.fake, fake_dir=args.fake_dir
+            args.manifest,
+            args.out,
+            fake=args.fake,
+            fake_dir=args.fake_dir,
+            criterion=args.criterion,
         )
     else:
         if args.command == "meter-calibrate":

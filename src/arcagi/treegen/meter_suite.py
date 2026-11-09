@@ -5,6 +5,7 @@ import signal
 import subprocess
 import sys
 import time
+from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from pathlib import Path
@@ -14,7 +15,11 @@ from arcagi.hammer.formats import read_json, write_json
 from . import boundary, dumb, meter
 from .meter_fake import fake_checks
 from .meter_fake import identity as _identity
-from .meter_stats import compare, load
+from .meter_stats import compare, load, sign_test
+
+T4B_LABELS = ("parent-1", "parent-2", *(r for r in dumb.RECIPES if r != "no-learn-all"))
+T4C_LABELS = ("parent-1", "parent-2", "no-learn-all", "no-learn", "null")
+LABELS = ("parent-1", "parent-2", *dumb.RECIPES)
 
 
 def _worker(job: dict, taskset: Path, cfg: dict, log: Path) -> dict:
@@ -84,11 +89,15 @@ def batch(
     L: int = 50_000,  # noqa: N803 - Public meter budget name.
     epochs: int = 4,
     strip: str = "all",
+    labels: Sequence[str] | None = None,
 ) -> dict:
-    """Run parent twice and all five controls, each in its own one-thread process."""
+    """Run selected labels in one-thread processes; default to the t4b suite."""
     boundary.check_stop()
     if not 1 <= jobs <= 4:
         raise ValueError("meter-batch jobs must be between 1 and 4")
+    labels = list(T4B_LABELS if labels is None else labels)
+    if not labels or len(set(labels)) != len(labels) or not set(labels) <= set(LABELS):
+        raise ValueError("batch labels must be nonempty, unique and known")
     parent, taskset, out = Path(parent).resolve(), Path(taskset).resolve(), Path(out)
     if out.exists():
         raise ValueError(f"batch manifest already exists: {out}")
@@ -101,11 +110,14 @@ def batch(
         raise ValueError("invalid batch budget/strip")
     suite = meter.fresh_run("suite", read_json(parent)["genome_sha"], base_dir)
     suite.mkdir(parents=True, exist_ok=False)
-    sources = {"parent-1": parent, "parent-2": parent}
-    for recipe in dumb.RECIPES:
-        target = suite / "genomes" / recipe / "tree.json"
-        dumb.make(parent, recipe, target)
-        sources[recipe] = target
+    sources = {}
+    for label in labels:
+        if label.startswith("parent-"):
+            sources[label] = parent
+        else:
+            target = suite / "genomes" / label / "tree.json"
+            dumb.make(parent, label, target)
+            sources[label] = target
     plan = [
         {
             "label": label,
@@ -149,11 +161,15 @@ def accept(
     *,
     fake: bool = False,
     fake_dir: str | Path | None = None,
+    criterion: str = "t4b",
 ) -> dict:
     """Apply every acceptance gate; a missing/invalid run makes the report red."""
     boundary.check_stop()
+    if criterion not in ("t4b", "t4c"):
+        raise ValueError("criterion must be t4b or t4c")
     manifest, out = Path(manifest), Path(out)
     checks, comparisons, errors = {}, {}, []
+    sign_tests, report_only = {}, {}
     data = read_json(manifest)
     directories, runs = {}, {}
     try:
@@ -161,11 +177,13 @@ def accept(
         if len({r["label"] for r in rows}) != len(rows):
             raise ValueError("duplicate batch label")
         directories = {r["label"]: Path(r["run_dir"]).resolve() for r in rows}
-        required = {"parent-1", "parent-2", *dumb.RECIPES}
+        required = set(T4C_LABELS if criterion == "t4c" else T4B_LABELS)
         if set(directories) != required or len(set(directories.values())) != len(
             required
         ):
-            raise ValueError("need seven independent run directories with all labels")
+            raise ValueError(
+                f"need {len(required)} independent run directories with all labels"
+            )
         verification = {k: meter.verify(p) for k, p in directories.items()}
         checks["raw_verify"] = verification
         if not all(v["pass"] for v in verification.values()):
@@ -186,7 +204,8 @@ def accept(
             )
             and all(c["delta"] == 0 and not c["significant"] for c in pcomp.values())
         )
-        checks["identity"] = {r: _identity(parent, runs[r], r) for r in dumb.RECIPES}
+        recipes = [r for r in dumb.RECIPES if r in runs]
+        checks["identity"] = {r: _identity(parent, runs[r], r) for r in recipes}
         checks["null"] = all(not c["significant"] for c in comparisons["null"].values())
         checks["taskset_size"] = len(parent["task_ids"]) >= 16
         # An all-equal negative difference follows the specified sigma=0 rule.
@@ -194,13 +213,44 @@ def accept(
             comparisons[r]["gain_bits"]["significant"]
             and comparisons[r]["gain_bits"]["delta"] < 0
             for r in dumb.RECIPES[:3]
+            if r in runs
         )
+        if criterion == "t4c":
+            control = runs["no-learn-all"]
+            checks["control_clean"] = abs(control["scores"]["gain_bits"]) < 1
+            sign_tests = {
+                r: sign_test(parent, runs[r]) for r in ("no-learn-all", "null")
+            }
+            drop, null = sign_tests["no-learn-all"], sign_tests["null"]
+            checks["learning_drop"] = (
+                drop["p_neg"] <= 0.05
+                and drop["delta"] <= -2
+                and all(h < 0 for h in drop["halves"])
+            )
+            checks["null"] = checks["null"] and (
+                null["delta"] == 0 or null["p_neg"] > 0.05
+            )
+            report_only = {
+                "no-learn": {
+                    "sign_test": sign_test(parent, runs["no-learn"]),
+                    "compare": comparisons["no-learn"],
+                },
+                "no-learn-all_vs_no-learn": {
+                    "sign_test": sign_test(runs["no-learn"], control),
+                },
+            }
+            if not checks["control_clean"]:
+                errors.append("control_clean failed: 對照不乾淨")
         checks["recipes"] = {}
-        for recipe in dumb.RECIPES[:3]:
+        for recipe in recipes:
+            if recipe not in (*dumb.RECIPES[:3], "no-learn-all"):
+                continue
             g = runs[recipe]["gates"]
             effective = g["promotes"] == 0 and (
                 recipe == "judge-block" or g["new_ops"] == 0
             )
+            if recipe == "no-learn-all":
+                effective = effective and g.get("freeze_uses") is True
             checks["recipes"][recipe] = {
                 "inert": not effective,
                 "promotes": g["promotes"],
@@ -227,10 +277,13 @@ def accept(
         errors.append(str(exc))
     report = {
         "schema": "think4-accept/1",
+        "criterion": criterion,
         "pass": not errors,
         "status": "FAIL" if errors else "PASS",
         "errors": errors,
         "comparisons": comparisons,
+        "sign_tests": sign_tests,
+        "report_only": report_only,
         "checks": checks,
         "manifest": str(manifest),
     }

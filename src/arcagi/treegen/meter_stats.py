@@ -126,6 +126,27 @@ def compare(
     }
 
 
+def sign_test(
+    a: dict | str | Path, b: dict | str | Path, metric: str = "gain_bits"
+) -> dict:
+    """Return the exact one-sided negative sign test for paired B minus A."""
+    paired = compare(a, b, metric)
+    differences = paired["per_task_delta"].values()
+    k = sum(d < 0 for d in differences)
+    n_pos = sum(d > 0 for d in differences)
+    n = k + n_pos
+    return {
+        "metric": metric,
+        "n": n,
+        "k": k,
+        "n_pos": n_pos,
+        "p_neg": sum(math.comb(n, j) for j in range(k, n + 1)) / 2**n,
+        "delta": paired["delta"],
+        "halves": paired["halves"],
+        "halves_same_sign": paired["halves_same_sign"],
+    }
+
+
 def select_taskset(calib: dict | str | Path) -> dict:
     """Classify using train evidence only; keep all learned/sped tasks."""
     calib = load(calib)

@@ -16,6 +16,9 @@ These replacements guarantee no comb promotions. no-learn/gate-dormant
 also block comb additions in the normal isolated run (no external inbox).
 null changes the root node's unused name: export-level name alone is not
 hashed (treegen/refs.py:19-21). no-decomp keeps the first decomp op.
+no-learn-all additionally asks meter to clear uses after each epoch:
+epoch.py:317-321 accumulates uses outside pause controls, and epoch.py:250
+feeds those counts to order_from_uses for the next search's ordering.
 """
 
 import hashlib
@@ -26,7 +29,14 @@ from arcagi.hammer.formats import read_json, write_json
 from . import boundary
 from .refs import deduplicate, expand, genome_sha, sha12
 
-RECIPES = ("no-learn", "gate-dormant", "judge-block", "no-decomp", "null")
+RECIPES = (
+    "no-learn",
+    "gate-dormant",
+    "judge-block",
+    "no-decomp",
+    "null",
+    "no-learn-all",
+)
 
 
 def make(parent_tree_json: str | Path, recipe: str, out_tree_json: str | Path) -> dict:
@@ -43,7 +53,7 @@ def make(parent_tree_json: str | Path, recipe: str, out_tree_json: str | Path) -
     tree = expand(doc["tree"], doc["defs"])
     original_content = sha12(tree)
     ops = tree["ops.jsonl"]
-    if recipe in ("no-learn", "gate-dormant"):
+    if recipe in ("no-learn", "no-learn-all", "gate-dormant"):
         for name in ("grow", "foundry", "judge"):
             tree["nodes"][name]["_metainfo.json"]["status"] = "paused"
         for op in ops:
@@ -52,6 +62,8 @@ def make(parent_tree_json: str | Path, recipe: str, out_tree_json: str | Path) -
                     op["status"] = "dormant"
                 else:
                     op["payload"]["params"]["lib_cap"] = 0
+        if recipe == "no-learn-all":
+            tree["_metainfo.json"]["meter_freeze_uses"] = True
     elif recipe == "judge-block":
         tree["nodes"]["judge"]["_metainfo.json"]["status"] = "paused"
     elif recipe == "no-decomp":
