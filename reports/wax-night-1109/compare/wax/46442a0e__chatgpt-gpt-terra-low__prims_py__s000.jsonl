@@ -1,0 +1,13 @@
+{"task": "46442a0e", "pairs": 3, "steps": ["transpose", "stack_reflected_transpose", "transpose", "stack_rotated_mirror"], "by": "chatgpt-gpt-terra-low:prims_py", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "transpose", "grid": [[8, 6], [6, 8]]}
+{"pair": 0, "step": 2, "tag": "stack_reflected_transpose", "grid": [[8, 6], [6, 8], [6, 8], [8, 6]]}
+{"pair": 0, "step": 3, "tag": "transpose", "grid": [[8, 6, 6, 8], [6, 8, 8, 6]]}
+{"pair": 0, "step": 4, "tag": "stack_rotated_mirror", "grid": [[8, 6, 6, 8], [6, 8, 8, 6], [6, 8, 8, 6], [8, 6, 6, 8]]}
+{"pair": 1, "step": 1, "tag": "transpose", "grid": [[7, 7, 8], [7, 7, 8], [8, 8, 8]]}
+{"pair": 1, "step": 2, "tag": "stack_reflected_transpose", "grid": [[7, 7, 8], [7, 7, 8], [8, 8, 8], [8, 8, 8], [7, 7, 8], [7, 7, 8]]}
+{"pair": 1, "step": 3, "tag": "transpose", "grid": [[7, 7, 8, 8, 7, 7], [7, 7, 8, 8, 7, 7], [8, 8, 8, 8, 8, 8]]}
+{"pair": 1, "step": 4, "tag": "stack_rotated_mirror", "grid": [[7, 7, 8, 8, 7, 7], [7, 7, 8, 8, 7, 7], [8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8], [7, 7, 8, 8, 7, 7], [7, 7, 8, 8, 7, 7]]}
+{"pair": 2, "step": 1, "tag": "transpose", "grid": [[6, 6, 6], [9, 4, 4], [9, 4, 4]]}
+{"pair": 2, "step": 2, "tag": "stack_reflected_transpose", "grid": [[6, 6, 6], [9, 4, 4], [9, 4, 4], [6, 4, 4], [6, 4, 4], [6, 9, 9]]}
+{"pair": 2, "step": 3, "tag": "transpose", "grid": [[6, 9, 9, 6, 6, 6], [6, 4, 4, 4, 4, 9], [6, 4, 4, 4, 4, 9]]}
+{"pair": 2, "step": 4, "tag": "stack_rotated_mirror", "grid": [[6, 9, 9, 6, 6, 6], [6, 4, 4, 4, 4, 9], [6, 4, 4, 4, 4, 9], [9, 4, 4, 4, 4, 6], [9, 4, 4, 4, 4, 6], [6, 6, 6, 9, 9, 6]]}

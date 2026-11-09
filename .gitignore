@@ -17,3 +17,13 @@ native/synth.jsonl
 
 # native/hot build objects
 native/hot/obj-*/
+
+# native/gpu build objects and generated sources (regenerate via *_mk.py)
+native/gpu/seed/obj-*/
+native/gpu/synth/obj/
+native/gpu/seed/m0prof_enum.cpp
+native/gpu/seed/r1_enum.cpp
+# raw pytest tmp dirs and raw overnight model outputs
+reports/think4-1110/a/pytest-*/
+reports/wax-night-1109/overnight/*/calls.jsonl
+reports/wax-night-1109/overnight/*/wax/

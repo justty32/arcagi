@@ -1,0 +1,7 @@
+2026-11-09T22:52:30+08:00 start phase-A (800 tasks, 25650s left): --depth 5 --dedup 3 --budget 120
+2026-11-10T00:26:06+08:00 end phase-A rc=0
+2026-11-10T00:26:06+08:00 start phase-B (589 tasks, 20034s left): --depth 6 --dedup 4 --prefix-cap 3000000 --budget 600
+2026-11-10T06:00:00+08:00 end phase-B rc=124
+2026-11-10T06:00:00+08:00 skip phase-C (deadline)
+2026-11-10T06:00:00+08:00 summary (到截止時間)
+wrote /home/lorkhan/repo/arcagi/reports/native-cuda-1109/overnight-summary.md: 74 train-solved, 66 test-ok, 4 new

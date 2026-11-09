@@ -1,0 +1,7 @@
+{"task": "46442a0e", "pairs": 3, "steps": ["stack_input_with_reversed_transpose", "join_row_blocks"], "by": "chatgpt-gpt-terra-low:prims_shot", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "stack_input_with_reversed_transpose", "grid": [[8, 6], [6, 8], [6, 8], [8, 6]]}
+{"pair": 0, "step": 2, "tag": "join_row_blocks", "grid": [[8, 6, 6, 8], [6, 8, 8, 6], [6, 8, 8, 6], [8, 6, 6, 8]]}
+{"pair": 1, "step": 1, "tag": "stack_input_with_reversed_transpose", "grid": [[7, 7, 8], [7, 7, 8], [8, 8, 8], [8, 8, 8], [7, 7, 8], [7, 7, 8]]}
+{"pair": 1, "step": 2, "tag": "join_row_blocks", "grid": [[7, 7, 8, 8, 7, 7], [7, 7, 8, 8, 7, 7], [8, 8, 8, 8, 8, 8], [8, 8, 8, 8, 8, 8], [7, 7, 8, 8, 7, 7], [7, 7, 8, 8, 7, 7]]}
+{"pair": 2, "step": 1, "tag": "stack_input_with_reversed_transpose", "grid": [[6, 9, 9], [6, 4, 4], [6, 4, 4], [9, 4, 4], [9, 4, 4], [6, 6, 6]]}
+{"pair": 2, "step": 2, "tag": "join_row_blocks", "grid": [[6, 9, 9, 6, 6, 6], [6, 4, 4, 4, 4, 9], [6, 4, 4, 4, 4, 9], [9, 4, 4, 4, 4, 6], [9, 4, 4, 4, 4, 6], [6, 6, 6, 9, 9, 6]]}

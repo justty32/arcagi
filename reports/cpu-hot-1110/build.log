@@ -1,0 +1,51 @@
+make: Entering directory '/home/lorkhan/repo/arcagi/native'
+mkdir -p hot/obj-a
+mkdir -p hot/obj-ab
+mkdir -p hot/obj-ab
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -Isrc -DHOT_A -c hot/seed_enum.cpp -o hot/obj-a/seed_enum.o
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/background.cpp -o hot/obj-ab/background.o
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/batch.cpp -o hot/obj-ab/batch.o
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/candidates.cpp -o hot/obj-ab/candidates.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/grid.cpp -o hot/obj-ab/grid.o
+hot/seed_enum.cpp:20:6: warning: ‘bool seed::{anonymous}::leaf_is(const seed::PP&, int)’ defined but not used [-Wunused-function]
+   20 | bool leaf_is(const PP& p, int s) { return p->kind == PN::TUP && p->kids.size() == 1 && is_str(p->kids[0], s); }
+      |      ^~~~~~~
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/json.cpp -o hot/obj-ab/json.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/learners.cpp -o hot/obj-ab/learners.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/objects.cpp -o hot/obj-ab/objects.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/objects_candidates.cpp -o hot/obj-ab/objects_candidates.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/objects_learner.cpp -o hot/obj-ab/objects_learner.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/objects_props.cpp -o hot/obj-ab/objects_props.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/prims_base.cpp -o hot/obj-ab/prims_base.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/prims_cells.cpp -o hot/obj-ab/prims_cells.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/prims_ext.cpp -o hot/obj-ab/prims_ext.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/prims_more.cpp -o hot/obj-ab/prims_more.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/search.cpp -o hot/obj-ab/search.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/seed_decomp.cpp -o hot/obj-ab/seed_decomp.o
+mkdir -p hot/obj-ab
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread -c src/seed_main.cpp -o hot/obj-ab/seed_main.o
+src/seed_decomp.cpp: In function ‘seed::SolveOut seed::solve_task(const std::vector<Example>&, const std::vector<Example>&, const Lib&, const Settings&)’:
+src/seed_decomp.cpp:289:97: warning: missing initializer for member ‘seed::{anonymous}::Solver::near’ [-Wmissing-field-initializers]
+  289 |             Solver sv{T, lib, sub_library(lib), order, st.budget, st.lam_depth, task_consts(all)};
+      |                                                                                                 ^
+src/seed_decomp.cpp:289:97: warning: missing initializer for member ‘seed::{anonymous}::Solver::allowed’ [-Wmissing-field-initializers]
+src/seed_main.cpp:39:13: warning: ‘std::string seed::{anonymous}::fmt_num(double)’ defined but not used [-Wunused-function]
+   39 | std::string fmt_num(double d) { std::ostringstream o; o.precision(17); o << d; return o.str(); }
+      |             ^~~~~~~
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread hot/obj-a/background.o hot/obj-a/batch.o hot/obj-a/candidates.o hot/obj-a/grid.o hot/obj-a/json.o hot/obj-a/learners.o hot/obj-a/main.o hot/obj-a/objects.o hot/obj-a/objects_candidates.o hot/obj-a/objects_learner.o hot/obj-a/objects_props.o hot/obj-a/prims_base.o hot/obj-a/prims_cells.o hot/obj-a/prims_ext.o hot/obj-a/prims_more.o hot/obj-a/search.o hot/obj-a/seed_decomp.o hot/obj-a/seed_enum.o hot/obj-a/seed_main.o hot/obj-a/seed_value.o hot/obj-a/batch_main.o -o bin/arcbatch-hot-a
+g++ -std=c++20 -O3 -march=native -ffp-contract=off -Wall -Wextra -pthread hot/obj-ab/background.o hot/obj-ab/batch.o hot/obj-ab/candidates.o hot/obj-ab/grid.o hot/obj-ab/json.o hot/obj-ab/learners.o hot/obj-ab/main.o hot/obj-ab/objects.o hot/obj-ab/objects_candidates.o hot/obj-ab/objects_learner.o hot/obj-ab/objects_props.o hot/obj-ab/prims_base.o hot/obj-ab/prims_cells.o hot/obj-ab/prims_ext.o hot/obj-ab/prims_more.o hot/obj-ab/search.o hot/obj-ab/seed_decomp.o hot/obj-ab/seed_enum.o hot/obj-ab/seed_main.o hot/obj-ab/seed_value.o hot/obj-ab/batch_main.o -o bin/arcbatch-hot
+make: Leaving directory '/home/lorkhan/repo/arcagi/native'
