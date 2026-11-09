@@ -20,6 +20,8 @@ agent 不用重猜的事。always-on 鐵律在 AGENTS.md，這裡是**這位使�
 | 回覆風格 | 通用風格見 [reply-style.md](reply-style.md)；這位使用者的例外：（尚無）；使用者問「要不要」時附**可執行判準**（門檻數字）與後果，讓他能改數字 |
 | 時區 | Asia/Taipei |
 | 子 agent 分工 | 2026-11-08：普通工作 opus、簡單與雜活 sonnet；先讀 `wf/` 規矩（雜活除外）；可再派、模型隨意 → [team-model](../team-model.md) |
+| 子 agent 分工補充 | 2026-11-09：實作、寫檔等普通文字處理優先交 codex gpt sol（`-m gpt-6.1-sol`，必帶 `-s`；除 astra 外型號皆可）或 litellm sol；Claude 子 agent 留給設計、審查、驗收；設計用 fable、審稿 agy Argon。子孫 agent 要做權限管理（交接書帶安全邊界段、原樣下傳）與 context 管理（一線一里程碑、到點寫 progress 交棒）|
+| 長時間無人值守 | 2026-11-09：使用者會設 goal＋auto compact（30% 觸發）；主 agent 把續行點寫進 SESSION-LOG 與當夜看板，compact 後照看板檢查表恢復（看門狗、停止開關 `~/arcagi-STOP`、inbox 監看、排程）|
 
 ## 外出時
 
