@@ -26,6 +26,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 5. CronList 看 06:04 晨報排程在不在；不在就 CronCreate `4 6 10 11 *` one-shot（內容：核各線 overnight-summary、寫 晨報.md、寄 aos DONE）。
 6. 下表「現役線」逐條確認狀態；子 agent 完成通知來了就照 dispatch 收線（對證據）並更新本表。
 7. 每次 commit 後更新本表與 SESSION-LOG（**今晚只 commit、不 push**）。
+7b. `systemctl --user is-active arcagi-aos-daemon.scope`：掉了先 `systemctl --user stop arcagi-aos-daemon.scope` 再照 aos-daemon/食譜.md 起。
 8. **GPU 不准閒**（使用者：「不要讓gpu閒下來，一整個晚上我都要靠它取暖」）：`nvidia-smi --query-gpu=utilization.gpu,power.draw,temperature.gpu --format=csv`；功耗長時間 <100W 或 util 掉下來就加 GPU 負載（開新的 GPU 搜尋長跑或加大 batch），溫度 ≤85°C。
 9. aos 頂層熟使用者過去習慣：拿不準的流程、偏好、過去 thinking 就寄 REQUEST 問它（`wf/tools/inbox_send.sh --reply-to ... aos inbox ... REQUEST`），不自己猜。
 
@@ -61,7 +62,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | T2 思考設計輪 2 | opus 隊長 | 主題：樹⇄JSON 往返（整棵樹當個體）＋分層改進成本帳＋塊 B 雜訊尺與 Argon 守門；跑 01a→03＋施工第一塊 | 跑中（00:3x 派） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | opus | 照 progress 5 步寫 gpuprofile、跑 800 題、features.csv | 跑中 | reports/task-features-1109/ |
-| A1 自起 aos daemon | opus | 照 aos 回信起 `.aos-run/` 樹＋luna 只讀 agent，試用法 1 | 跑中 | .aos-run/、notes/rounds/gpu-night-1109/aos-daemon/ |
+| N5b seed 列舉 GPU 第一步 | opus | 照 seed-gpu-可行性「最小可驗一步」：大小 2–3 一階原語 GPU 生成＋求值＋指紋去重，跟 CPU Enumerator 同層比對＋吞吐比 | 跑中（23:5x 派） | reports/seed-gpu-1110/ |
 
 ## 待辦（有空位就派）
 
@@ -81,6 +82,8 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 已收線
 
+- A1 自起 aos 樹（23:5x）：`arcagi-aos-daemon.scope` 根 pid 177262（收：`kill -TERM 177262`）；t1＝luna 只讀（read/ls，拿掉範本的 4 個工具）問答 14 秒、2 呼叫、品質中等；寫入只落 `.aos-run/`；食譜 `aos-daemon/食譜.md`、kb `lead/aos_agent`；c209f0f。風險：scope 從子 agent 背景殼起，主 session 結束可能連帶倒——看門狗檢查表加一條。
+- GPU 補負載 2（23:47）：功耗掉到 ~89W，主 session 加開 `arcagi-main-gpufill2`（gpusearch-filler2 跑 training 主線未解 253 題深度 6，到 06:00）→ 95W。
 - N5 S1 forbid（00:0x）：加好、解集合完全一致（100 題三種預算），但只跳過 0.5～3% 候選、速度差在雜訊內——多數樣式產的值本來就被去重丟掉；真要省得靠大量挖掘樣式或 seed 列舉搬 GPU（可行性稿估 2～4×）。pytest 21 過（主 session 重跑核過）；d7c2ed6。
 - K1 分層知識庫（23:3x）：`kb/` 23 節點（resume／lead／worker／project），memory 工具實測可讀、find 可搜，節點 ≤1.3KB；7f2ce39。交接書「先讀規矩」可改成「先 read kb `worker`／`lead`」。wf_kb 改指 kb/ 要改 ~/.cache/aos-mcp-arcagi/tools.json（夜跑寫入範圍外）→ 待使用者。
 - T1 思考設計輪 1（00:2x）：04-總結簡報 寫好（7d16438）；計分卡 21 積木（幹活 4／休眠 5／休眠有動靜 5／未量 7）、曲線尺速度分數 43.5；待使用者看 Q1／Q5／Q4／A4；輪 2 主題＝樹⇄JSON 往返＋分層改進成本帳＋塊 B 雜訊尺與 Argon 兩警告守門。
