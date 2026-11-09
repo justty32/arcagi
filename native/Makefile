@@ -198,3 +198,21 @@ gpu/synth/obj/%.o: src/%.cpp $(HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 bin/gpusynth_verify: gpu/synth/verify.cpp $(SYNTH_V_OBJECTS) $(HEADERS) | bin
 	$(CXX) $(CXXFLAGS) gpu/synth/verify.cpp $(SYNTH_V_OBJECTS) -o $@
+
+# R1 probe (reports/r1-probe-1110/): bin/arcbatch-r1 = bin/arcbatch with cost-bucketed enumeration
+# (costs from $ARC_R1_COSTS). gpu/seed/r1_enum.cpp is generated from src/seed_enum.cpp by
+# gpu/seed/r1_mk.py (src/ untouched). CPU only. Separate target: `make r1`.
+.PHONY: r1
+r1: bin/arcbatch-r1
+
+R1_DIR := gpu/seed/obj-r1
+
+gpu/seed/r1_enum.cpp: src/seed_enum.cpp gpu/seed/r1_mk.py
+	python3 -I gpu/seed/r1_mk.py src/seed_enum.cpp $@
+
+$(R1_DIR)/%.o: gpu/seed/%.cpp $(HEADERS)
+	mkdir -p $(R1_DIR)
+	$(CXX) $(CXXFLAGS) -Isrc -c $< -o $@
+
+bin/arcbatch-r1: $(SEED_GPU_OBJECTS) $(E2E_DIR)/main.o $(R1_DIR)/r1_enum.o $(R1_DIR)/r1_main.o | bin
+	$(CXX) $(CXXFLAGS) $^ -o $@

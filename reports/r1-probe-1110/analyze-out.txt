@@ -1,0 +1,36 @@
+identity (no costs) vs arcbatch @1e6: 100 rows, 0 mismatches (all fields except seconds) []
+| budget | engine | solved (train_ok) | test_ok | nodes-to-first median | nodes-to-first sorted | wall s | sum task s |
+|---|---|---:|---:|---:|---|---:|---:|
+| 1000000 | base | 7 | 5 | 140126 | 10179, 10789, 54626, 140126, 140128, 241984, 367189 | 8.7 | 34.7 |
+| 1000000 | r1 | 7 | 6 | 47501 | 12668, 32412, 46681, 47501, 54626, 140128, 238938 | 17.0 | 66.4 |
+| 1000000 | lam2 | 7 | 5 | 54626 | 20361, 30632, 47501, 54626, 54626, 140126, 242723 | 12.1 | 47.9 |
+
+@1000000: solved only base [], only r1 []; test_ok only base [], only r1 ['2dee498d']
+@1000000: per-task r1/base nodes-to-first on 7 common: 1e0a9b12:241984->238938, 22eb0ac0:54626->54626, 239be575:367189->47501, 25d8a9c8:140128->140128, 25ff71a9:10179->46681, 2dee498d:140126->32412, 3c9b0459:10789->12668; median ratio 1.000
+   239be575 program differs: base ["transpose", ["reverse", ["if", ["eq", 8, ["last", ["last", ["sort", ["reverse", ["transpose", ["$in"]]]]]]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]]]] | r1 ["if", ["eq", ["head", ["head", ["$in"]]], ["head", ["last", ["$in"]]]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]]
+   2dee498d program differs: base ["map", ["lam", 1, ["reverse", ["if", ["eq", 9, ["len", ["reverse", ["$0"]]]], ["take", 3, ["reverse", ["$0"]]], ["take", 4, ["drop", 4, ["reverse", ["$0"]]]]]]], ["$in"]] | r1 ["map", ["lam", 1, ["take", ["len", ["$in"]], ["$0"]]], ["$in"]]
+
+
+@1000000: solved only base [], only lam2 []; test_ok only base [], only lam2 []
+@1000000: per-task lam2/base nodes-to-first on 7 common: 1e0a9b12:241984->242723, 22eb0ac0:54626->54626, 239be575:367189->47501, 25d8a9c8:140128->54626, 25ff71a9:10179->20361, 2dee498d:140126->140126, 3c9b0459:10789->30632; median ratio 1.000
+   239be575 program differs: base ["transpose", ["reverse", ["if", ["eq", 8, ["last", ["last", ["sort", ["reverse", ["transpose", ["$in"]]]]]]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]]]] | lam2 ["if", ["eq", ["head", ["head", ["$in"]]], ["head", ["last", ["$in"]]]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]]
+   25d8a9c8 program differs: base ["map", ["lam", 1, ["reverse", ["if", ["eq", ["reverse", ["$0"]], ["repeat", 3, ["head", ["reverse", ["$0"]]]]], ["repeat", 3, 5], ["repeat", 3, 0]]]], ["$in"]] | lam2 ["map", ["lam", 1, ["if", ["eq", ["$0"], ["repeat", 3, ["head", ["$0"]]]], ["repeat", 3, 5], ["repeat", 3, 0]]], ["$in"]]
+
+| 10000000 | base | 10 | 7 | 510626.0 | 10179, 10789, 124282, 196491, 475001, 546251, 546251, 950001, 950001, 4873501 | 125.0 | 492.1 |
+| 10000000 | r1 | 10 | 7 | 546251.0 | 12668, 32412, 46681, 475001, 546251, 546251, 855001, 950001, 950001, 2376438 | 230.0 | 902.0 |
+| 10000000 | lam2 | 9 | 6 | 546251 | 20361, 30632, 76092, 475001, 546251, 546251, 855001, 950001, 2380223 | 152.3 | 593.9 |
+
+@10000000: solved only base [], only r1 []; test_ok only base [], only r1 []
+@10000000: per-task r1/base nodes-to-first on 10 common: 1e0a9b12:196491->2376438, 1fad071e:950001->950001, 22eb0ac0:546251->546251, 239be575:475001->475001, 25d8a9c8:546251->546251, 25ff71a9:10179->46681, 27a28665:950001->950001, 2dee498d:124282->32412, 3c9b0459:10789->12668, 445eab21:4873501->855001; median ratio 1.000
+   1fad071e program differs: base ["map", ["lam", 1, ["if", ["eq", 0, ["last", ["$0"]]], ["reverse", ["map", ["lam", 1, ["min", ["$0"], 1]], ["range", 5]]], ["take", 5, ["cons", 1, ["cons", 1, ["$0"]]]]]], ["take", 1, ["$in"]]] | r1 ["map", ["lam", 1, ["if", ["eq", 0, ["head", ["$0"]]], ["map", ["lam", 1, ["count", ["$0"], ["range", 2]]], ["range", 5]], ["reverse", ["map", ["lam", 1, ["min", ["$0"], 1]], ["range", 5]]]]], ["take", 1, ["$in"]]]
+   239be575 program differs: base ["if", ["eq", 8, ["nth", ["concat", ["transpose", ["$in"]]], 5]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]] | r1 ["if", ["eq", ["head", ["head", ["$in"]]], ["head", ["last", ["$in"]]]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]]
+   27a28665 program differs: base ["map", ["lam", 1, ["if", ["eq", 0, ["head", ["$0"]]], ["repeat", 1, ["mul", 3, ["count", 0, ["$0"]]]], ["repeat", 1, ["count", ["last", ["$0"]], ["$0"]]]]], ["take", 1, ["$in"]]] | r1 ["map", ["lam", 1, ["if", ["eq", 0, ["head", ["$0"]]], ["repeat", 1, ["fold", ["lam", 2, 3], 6, ["range", ["last", ["$0"]]]]], ["repeat", 1, ["count", ["last", ["$0"]], ["$0"]]]]], ["take", 1, ["$in"]]]
+   445eab21 program differs: base ["reverse", ["if", ["eq", ["take", 2, ["reverse", ["$in"]]], ["reverse", ["sort", ["take", 2, ["reverse", ["$in"]]]]]], ["repeat", 2, ["repeat", 2, 4]], ["repeat", 2, ["drop", 8, ["sort", ["last", ["take", 2, ["reverse", ["$in"]]]]]]]]] | r1 ["map", ["lam", 1, ["if", ["eq", 4, ["last", ["sort", ["$0"]]]], ["repeat", 2, 4], ["repeat", 2, ["add", 1, ["last", ["sort", ["$0"]]]]]]], ["take", 2, ["$in"]]]
+
+
+@10000000: solved only base ['27a28665'], only lam2 []; test_ok only base ['27a28665'], only lam2 []
+@10000000: per-task lam2/base nodes-to-first on 9 common: 1e0a9b12:196491->2380223, 1fad071e:950001->950001, 22eb0ac0:546251->546251, 239be575:475001->475001, 25d8a9c8:546251->546251, 25ff71a9:10179->20361, 2dee498d:124282->76092, 3c9b0459:10789->30632, 445eab21:4873501->855001; median ratio 1.000
+   1fad071e program differs: base ["map", ["lam", 1, ["if", ["eq", 0, ["last", ["$0"]]], ["reverse", ["map", ["lam", 1, ["min", ["$0"], 1]], ["range", 5]]], ["take", 5, ["cons", 1, ["cons", 1, ["$0"]]]]]], ["take", 1, ["$in"]]] | lam2 ["map", ["lam", 1, ["if", ["eq", 0, ["last", ["$0"]]], ["reverse", ["map", ["lam", 1, ["min", ["$0"], 1]], ["range", 5]]], ["take", 5, ["append", ["repeat", 2, 1], ["$0"]]]]], ["take", 1, ["$in"]]]
+   239be575 program differs: base ["if", ["eq", 8, ["nth", ["concat", ["transpose", ["$in"]]], 5]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]] | lam2 ["if", ["eq", ["head", ["head", ["$in"]]], ["head", ["last", ["$in"]]]], ["repeat", 1, ["repeat", 1, 8]], ["repeat", 1, ["range", 1]]]
+   445eab21 program differs: base ["reverse", ["if", ["eq", ["take", 2, ["reverse", ["$in"]]], ["reverse", ["sort", ["take", 2, ["reverse", ["$in"]]]]]], ["repeat", 2, ["repeat", 2, 4]], ["repeat", 2, ["drop", 8, ["sort", ["last", ["take", 2, ["reverse", ["$in"]]]]]]]]] | lam2 ["map", ["lam", 1, ["if", ["eq", 4, ["last", ["sort", ["$0"]]]], ["repeat", 2, 4], ["repeat", 2, ["add", 1, ["last", ["sort", ["$0"]]]]]]], ["take", 2, ["$in"]]]
+
