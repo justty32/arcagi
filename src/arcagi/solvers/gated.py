@@ -12,6 +12,9 @@ Entry points:
 * external: ``python -m arcagi.solvers.gated {input} {output} {trace}``
   (same protocol as ``native/bin/solve``);
 * plugin: ``arcagi.solvers.gated:solve`` (Python search only, no native step).
+
+Set ``ARCAGI_GPU_FALLBACK`` to ``os.pathsep``-separated gpusearch JSONL paths
+to try cached GPU programs after the mainline abstains (disabled by default).
 """
 
 import json
@@ -23,6 +26,8 @@ import tempfile
 from collections import Counter
 from collections.abc import Callable, Iterable, Sequence
 from contextlib import contextmanager
+from dataclasses import replace
+from functools import lru_cache
 from pathlib import Path
 
 from arcagi.dsl import background as bgc
@@ -227,6 +232,62 @@ def gate(
     return guard.judge(cands, train, task.test, gates=set(gates)), cands
 
 
+@lru_cache(maxsize=8)
+def load_gpu_programs(paths: tuple[str | Path, ...]) -> dict[str, list[str]]:
+    """Merge gpusearch JSONL files in order, best first, deduplicating JSON text."""
+    programs: dict[str, list[str]] = {}
+    for path in paths:
+        with Path(path).open() as source:
+            for line in source:
+                rec = json.loads(line)
+                best = (rec.get("best") or {}).get("program")
+                candidates = ([best] if best is not None else []) + list(
+                    rec.get("samples", [])
+                )
+                if not candidates:
+                    continue
+                found = programs.setdefault(rec["task"], [])
+                for program in candidates:
+                    text = json.dumps(program)
+                    if text not in found:
+                        found.append(text)
+    return programs
+
+
+def gpu_fallback(
+    task: SolverTask,
+    verdict: guard.Verdict,
+    programs: Sequence[str],
+    gates: Iterable[str] = ("table", "unseen"),
+) -> guard.Verdict:
+    """Try train-verified GPU programs only when the mainline abstained."""
+    if not verdict.abstained:
+        return verdict
+    cands = evaluate(task, [(p, "gpu") for p in programs])
+    train = [(e.input, e.output) for e in task.train]
+    fallback = guard.judge(cands, train, task.test, gates=set(gates))
+    if fallback.abstained:
+        return verdict
+    return replace(fallback, reason="gpu-fallback: " + fallback.reason)
+
+
+def _gpu_from_env(
+    task: SolverTask, verdict: guard.Verdict
+) -> tuple[guard.Verdict, dict | None]:
+    paths = os.environ.get("ARCAGI_GPU_FALLBACK")
+    if not paths:
+        return verdict, None
+    programs = load_gpu_programs(tuple(p for p in paths.split(os.pathsep) if p)).get(
+        task.task_id, []
+    )
+    fallback = gpu_fallback(task, verdict, programs)
+    return fallback, {
+        "used": fallback is not verdict,
+        "n_programs": len(programs),
+        "reason": fallback.reason,
+    }
+
+
 def _annotate(trace: dict, verdict: guard.Verdict) -> dict:
     trace = dict(trace)
     meta = dict(trace.get("metadata", {}))
@@ -250,7 +311,10 @@ def solve(task: SolverTask) -> SolverResult:
 
     result = search.solve(task)
     verdict, _ = gate(task, result.trace)
+    verdict, gpu_info = _gpu_from_env(task, verdict)
     trace = _annotate(result.trace, verdict) if result.trace else None
+    if trace and gpu_info is not None:
+        trace["metadata"]["guard"]["gpu_fallback"] = gpu_info
     return SolverResult(verdict.predictions, trace)
 
 
@@ -266,13 +330,15 @@ def main(argv: Sequence[str] | None = None, runner: Callable | None = None) -> i
         (runner or _run_hybrid)(request_path, inner_out, inner_trace)
         trace = json.loads(inner_trace.read_text()) if inner_trace.is_file() else None
     verdict, _ = gate(task, trace)
+    verdict, gpu_info = _gpu_from_env(task, verdict)
     Path(output_path).write_text(
         json.dumps({request["task_id"]: verdict.predictions}) + "\n"
     )
     if trace_path and trace:
-        Path(trace_path).write_text(
-            json.dumps(validate_trace(_annotate(trace, verdict))) + "\n"
-        )
+        trace = _annotate(trace, verdict)
+        if gpu_info is not None:
+            trace["metadata"]["guard"]["gpu_fallback"] = gpu_info
+        Path(trace_path).write_text(json.dumps(validate_trace(trace)) + "\n")
     return 0
 
 
