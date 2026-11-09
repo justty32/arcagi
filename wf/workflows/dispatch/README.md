@@ -49,6 +49,8 @@
 
 | 線 | 模型 | 可寫範圍 | 唯讀／禁區 | 上線時間 |
 |----|------|---------|-----------|---------|
+| N1 蠟模夜跑（gpu-night-1109）| opus | `src/arcagi/llm/wax/`、`tests/llm/wax/`、`reports/wax-night-1109/`、`notes/rounds/gpu-night-1109/wax*.md` | `~/code/playground-arc1/ws/hammer/` 唯讀；LM Studio 不 load/unload；`aos/blocks/`、`data/` 禁寫 | 2026-11-09 22:40 |
+| N2 CUDA 暴力搜尋雛形（gpu-night-1109）| opus | `native/`（含 S1 `forbid`）、`tests/native/`、`reports/native-cuda-1109/`、`notes/rounds/gpu-night-1109/cuda*.md` | 求解入口契約與 `arcagi-trace/1` 不改；`aos/blocks/`、`data/` 禁寫 | 2026-11-09 22:40 |
 
 ### 保留給主 agent，任何線都不得寫
 

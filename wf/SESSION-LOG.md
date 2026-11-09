@@ -14,6 +14,8 @@
 - [inbox/dispatch] 主 agent 依 aos 轉達的 REQUEST（wf/inbox 頂層 1121/1122/1123/1124/1125/1127/1130）做準備＋照 aos 輪次試解；**交棒總表** → [notes/rounds/README.md](../notes/rounds/README.md)
 - [rounds] r09 停手、主 session 11-08 19:5x 關閉；v4 方向題五題全 A（19:44）→ 使用者說開工才動：先插 v4 M1～M7 收 r09，再開 r10；接手照 [交棒總表](../notes/rounds/README.md)「主 session 交接」
 
+- [rounds/gpu-night-1109] aos 22:28 REQUEST（使用者：顯卡跑整夜、兩條都試）：N1 蠟模（opus）、N2 CUDA（opus）22:40 上線，跑到 11-10 07:00；07:30 前主 agent 收線寄 DONE 給 aos → [notes/rounds/gpu-night-1109/](../notes/rounds/gpu-night-1109/)
+
 ## 各工作流 session-log
 
 | 工作流 | session-log | open 摘要 |
