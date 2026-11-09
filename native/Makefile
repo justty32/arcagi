@@ -90,3 +90,27 @@ forbid: bin/arcbatch-forbid
 
 bin/arcbatch-forbid: $(SOURCES) $(HEADERS) | bin
 	$(CXX) $(CXXFLAGS) $(SOURCES) -o $@
+
+# GPU seed layer (native/gpu/seed/, reports/seed-gpu-1110/): one seed Enumerator
+# layer on the GPU vs the CPU Enumerator. host.cpp includes src/seed_enum.cpp,
+# so that file is left out of the linked objects. Separate target: `make gpuseed`.
+.PHONY: gpuseed
+gpuseed: bin/gpuseed
+
+SEED_GPU_SOURCES := $(filter-out src/main.cpp src/seed_enum.cpp,$(SOURCES))
+SEED_GPU_OBJECTS := $(patsubst src/%.cpp,gpu/seed/obj/%.o,$(SEED_GPU_SOURCES))
+
+gpu/seed/obj/%.o: src/%.cpp $(HEADERS)
+	mkdir -p gpu/seed/obj
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+gpu/seed/obj/kernel.o: gpu/seed/kernel.cu gpu/seed/gpuseed.hpp
+	mkdir -p gpu/seed/obj
+	$(NVCC) $(NVFLAGS) -c $< -o $@
+
+gpu/seed/obj/host.o: gpu/seed/host.cpp gpu/seed/gpuseed.hpp $(HEADERS) src/seed_enum.cpp
+	mkdir -p gpu/seed/obj
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+bin/gpuseed: $(SEED_GPU_OBJECTS) gpu/seed/obj/host.o gpu/seed/obj/kernel.o | bin
+	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
