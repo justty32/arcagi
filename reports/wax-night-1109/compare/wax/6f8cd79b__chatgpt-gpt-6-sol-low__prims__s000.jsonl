@@ -1,0 +1,33 @@
+{"task": "6f8cd79b", "pairs": 4, "steps": ["fill_first_row", "reverse_rows", "fill_first_row", "transpose", "fill_first_row", "reverse_rows", "fill_first_row", "transpose"], "by": "chatgpt-gpt-6-sol-low:prims", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "fill_first_row", "grid": [[8, 8, 8], [0, 0, 0], [0, 0, 0]]}
+{"pair": 0, "step": 2, "tag": "reverse_rows", "grid": [[0, 0, 0], [0, 0, 0], [8, 8, 8]]}
+{"pair": 0, "step": 3, "tag": "fill_first_row", "grid": [[8, 8, 8], [0, 0, 0], [8, 8, 8]]}
+{"pair": 0, "step": 4, "tag": "transpose", "grid": [[8, 0, 8], [8, 0, 8], [8, 0, 8]]}
+{"pair": 0, "step": 5, "tag": "fill_first_row", "grid": [[8, 8, 8], [8, 0, 8], [8, 0, 8]]}
+{"pair": 0, "step": 6, "tag": "reverse_rows", "grid": [[8, 0, 8], [8, 0, 8], [8, 8, 8]]}
+{"pair": 0, "step": 7, "tag": "fill_first_row", "grid": [[8, 8, 8], [8, 0, 8], [8, 8, 8]]}
+{"pair": 0, "step": 8, "tag": "transpose", "grid": [[8, 8, 8], [8, 0, 8], [8, 8, 8]]}
+{"pair": 1, "step": 1, "tag": "fill_first_row", "grid": [[8, 8, 8], [0, 0, 0], [0, 0, 0], [0, 0, 0]]}
+{"pair": 1, "step": 2, "tag": "reverse_rows", "grid": [[0, 0, 0], [0, 0, 0], [0, 0, 0], [8, 8, 8]]}
+{"pair": 1, "step": 3, "tag": "fill_first_row", "grid": [[8, 8, 8], [0, 0, 0], [0, 0, 0], [8, 8, 8]]}
+{"pair": 1, "step": 4, "tag": "transpose", "grid": [[8, 0, 0, 8], [8, 0, 0, 8], [8, 0, 0, 8]]}
+{"pair": 1, "step": 5, "tag": "fill_first_row", "grid": [[8, 8, 8, 8], [8, 0, 0, 8], [8, 0, 0, 8]]}
+{"pair": 1, "step": 6, "tag": "reverse_rows", "grid": [[8, 0, 0, 8], [8, 0, 0, 8], [8, 8, 8, 8]]}
+{"pair": 1, "step": 7, "tag": "fill_first_row", "grid": [[8, 8, 8, 8], [8, 0, 0, 8], [8, 8, 8, 8]]}
+{"pair": 1, "step": 8, "tag": "transpose", "grid": [[8, 8, 8], [8, 0, 8], [8, 0, 8], [8, 8, 8]]}
+{"pair": 2, "step": 1, "tag": "fill_first_row", "grid": [[8, 8, 8, 8], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]}
+{"pair": 2, "step": 2, "tag": "reverse_rows", "grid": [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [8, 8, 8, 8]]}
+{"pair": 2, "step": 3, "tag": "fill_first_row", "grid": [[8, 8, 8, 8], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [8, 8, 8, 8]]}
+{"pair": 2, "step": 4, "tag": "transpose", "grid": [[8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8]]}
+{"pair": 2, "step": 5, "tag": "fill_first_row", "grid": [[8, 8, 8, 8, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8]]}
+{"pair": 2, "step": 6, "tag": "reverse_rows", "grid": [[8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 8, 8, 8, 8]]}
+{"pair": 2, "step": 7, "tag": "fill_first_row", "grid": [[8, 8, 8, 8, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 8, 8, 8, 8]]}
+{"pair": 2, "step": 8, "tag": "transpose", "grid": [[8, 8, 8, 8], [8, 0, 0, 8], [8, 0, 0, 8], [8, 0, 0, 8], [8, 8, 8, 8]]}
+{"pair": 3, "step": 1, "tag": "fill_first_row", "grid": [[8, 8, 8, 8, 8, 8], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0]]}
+{"pair": 3, "step": 2, "tag": "reverse_rows", "grid": [[0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [8, 8, 8, 8, 8, 8]]}
+{"pair": 3, "step": 3, "tag": "fill_first_row", "grid": [[8, 8, 8, 8, 8, 8], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0], [8, 8, 8, 8, 8, 8]]}
+{"pair": 3, "step": 4, "tag": "transpose", "grid": [[8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8]]}
+{"pair": 3, "step": 5, "tag": "fill_first_row", "grid": [[8, 8, 8, 8, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8]]}
+{"pair": 3, "step": 6, "tag": "reverse_rows", "grid": [[8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 8, 8, 8, 8]]}
+{"pair": 3, "step": 7, "tag": "fill_first_row", "grid": [[8, 8, 8, 8, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 0, 0, 0, 8], [8, 8, 8, 8, 8]]}
+{"pair": 3, "step": 8, "tag": "transpose", "grid": [[8, 8, 8, 8, 8, 8], [8, 0, 0, 0, 0, 8], [8, 0, 0, 0, 0, 8], [8, 0, 0, 0, 0, 8], [8, 8, 8, 8, 8, 8]]}

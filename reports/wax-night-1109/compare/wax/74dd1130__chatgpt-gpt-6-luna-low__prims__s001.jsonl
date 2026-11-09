@@ -1,0 +1,5 @@
+{"task": "74dd1130", "pairs": 4, "steps": ["map0"], "by": "chatgpt-gpt-6-luna-low:prims", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "map0", "grid": [[2, 1, 5], [2, 5, 2], [1, 1, 2]]}
+{"pair": 1, "step": 1, "tag": "map0", "grid": [[2, 6, 5], [2, 2, 5], [5, 2, 5]]}
+{"pair": 2, "step": 1, "tag": "map0", "grid": [[9, 5, 5], [9, 5, 8], [5, 8, 9]]}
+{"pair": 3, "step": 1, "tag": "map0", "grid": [[2, 2, 2], [6, 1, 6], [6, 1, 2]]}

@@ -1,0 +1,5 @@
+{"task": "0d3d703e", "pairs": 4, "steps": ["replace_colors"], "by": "chatgpt-gpt-6-sol-low:base", "req": "wax-night-1109", "verified": true}
+{"pair": 0, "step": 1, "tag": "replace_colors", "grid": [[4, 5, 6], [4, 5, 6], [4, 5, 6]]}
+{"pair": 1, "step": 1, "tag": "replace_colors", "grid": [[6, 4, 9], [6, 4, 9], [6, 4, 9]]}
+{"pair": 2, "step": 1, "tag": "replace_colors", "grid": [[1, 9, 2], [1, 9, 2], [1, 9, 2]]}
+{"pair": 3, "step": 1, "tag": "replace_colors", "grid": [[8, 3, 6], [8, 3, 6], [8, 3, 6]]}

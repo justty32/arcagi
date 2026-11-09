@@ -1,0 +1,63 @@
+[
+ {
+  "name": "g1_2ff25d9c21",
+  "body": [
+   "map",
+   [
+    "lam",
+    1,
+    [
+     "append",
+     [
+      "$0"
+     ],
+     [
+      "reverse",
+      [
+       "$0"
+      ]
+     ]
+    ]
+   ],
+   [
+    "$in"
+   ]
+  ],
+  "sig": "list[list[int]]",
+  "src_tasks": [],
+  "saving": 0.0,
+  "uses": 0
+ },
+ {
+  "name": "g1_0652240849",
+  "body": [
+   "transpose",
+   [
+    "$in"
+   ]
+  ],
+  "sig": "list[list[int]]",
+  "src_tasks": [],
+  "saving": 0.0,
+  "uses": 0
+ },
+ {
+  "name": "g1_cd450dff4b",
+  "body": [
+   "append",
+   [
+    "$h0"
+   ],
+   [
+    "reverse",
+    [
+     "$h0"
+    ]
+   ]
+  ],
+  "sig": "(list[a]) -> list[a]",
+  "src_tasks": [],
+  "saving": 0.0,
+  "uses": 0
+ }
+]
