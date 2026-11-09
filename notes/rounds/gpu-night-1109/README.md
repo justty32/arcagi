@@ -29,6 +29,8 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 8. **GPU 不准閒**（使用者：「不要讓gpu閒下來，一整個晚上我都要靠它取暖」）：`nvidia-smi --query-gpu=utilization.gpu,power.draw,temperature.gpu --format=csv`；功耗長時間 <100W 或 util 掉下來就加 GPU 負載（開新的 GPU 搜尋長跑或加大 batch），溫度 ≤85°C。
 9. aos 頂層熟使用者過去習慣：拿不準的流程、偏好、過去 thinking 就寄 REQUEST 問它（`wf/tools/inbox_send.sh --reply-to ... aos inbox ... REQUEST`），不自己猜。
 
+- **aos 自主**（使用者睡前）：「你可以自己起aos daemon，自己開aos agent，自己改進自己的工作流」→ 可自起 aos daemon（包 systemd-run arcagi-aos-*）、開 aos agent、改 wf/ 與 kb/ 工作流；安全邊界不變。
+
 ## 子 agent context 管理（使用者 22:5x「子agent的context也要做管理」）
 
 - 一條線＝一個里程碑；交接書寫死**交棒點**，到點就寫進度檔（`<產物夾>/progress.md`：做到哪、數字、下一步、關鍵路徑）並回報 `DONE`／`PARTIAL`，由主 agent 開新線接力，交接書只帶上一段產物路徑、不帶對話。
