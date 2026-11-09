@@ -61,7 +61,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N3 GPU 遺傳符號搜尋 | opus | 第 2 棒 N3b 23:3x PARTIAL（ce51644）：smoke 過、pop 524288 約 125W；長跑 `arcagi-n3-gp` 597 題到 06:00；比較 bench real 約 23:50、synth 約 00:30 結束，`arcagi-n3-fill` 自動填 report 表並留 bench/FILLED；**早期警訊**：GP 前 33 題標 solved 的 4 題 test 全錯（過擬合）。第 3 棒：00:37 排程派 opus 寫結論＋白話 | 長跑中 | reports/gpu-gp-1109/ |
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
-| T4 思考設計輪 4 | opus 隊長 | 主題：先修量尺再演化（快撥解析度、故意改笨的樹驗尺）、補演化缺口（交配擋同 sha、D27 活動量分功勞、D18 引導突變）、塊 5 Janet 表示＋嵌套／節點池 | 跑中（01:0x） | notes/rounds/gpu-night-1109/think-4/ |
+| T4 思考設計輪 4 | opus（第 2 棒 T4b） | 第 1 棒 PARTIAL（d2a933d、41ffdc6）：診斷 auc_L 恆 20＝量的是「已知」非「學習速度」（16 題中 5 題 epoch0 就被既有積木解、11 題 25k 內永遠解不出）→ 加預算沒用，要換量法；fable 提 learn_bits＋6 棵笨樹；Argon 6 條 P0（未減 epoch0、題集太易/太難、test 洩漏、16 題 z 達不到、笨樹判準可繞過、run 目錄碰撞）。T4b：重議代定＋03＋施工量尺 | 跑中（01:3x） | notes/rounds/gpu-night-1109/think-4/ |
 | N3e MDL λ 掃描 | （無 agent，長跑） | `arcagi-n3e-sweep` real-40／on40 × λ{0,.003,.006,.01} × seed 1–3，最晚 05:45 停，自動寫 `reports/gpu-gp-1109/ho/sweep-summary.md`（尾 SWEEPDONE）；收尾＝結論寫進 holdout.md（晨報前做）。9ed21de | 長跑中 | reports/gpu-gp-1109/ho/ |
 | N5d B1 bank 常駐 | opus | GPU seed bank 只傳增量、常駐顯存、子題共用記憶池、合批 launch；量 cpu/gpu/b1 端到端，E8 判讀 | 跑中（01:1x） | reports/seed-gpu-b1-1110/ |
 
