@@ -1,0 +1,47 @@
+{
+ "at": "2026-11-09T23:57:37.120748+08:00",
+ "checks": {
+  "P1_content": {
+   "genome_sha_equal": true,
+   "n_diff": 0,
+   "n_diff_dedup_off": 0,
+   "n_diff_nostate": 0,
+   "pass": true,
+   "state_equal": true
+  },
+  "P2_bytes": {
+   "check_root_errors_src": 0,
+   "check_root_errors_tree2": 0,
+   "files_compared": 29,
+   "files_differ": [],
+   "mode": "bytes",
+   "pass": true
+  },
+  "P3_seal_speed": {
+   "H24": {
+    "calc": "f03397ae6879",
+    "frozen": "f03397ae6879",
+    "tree2": "f03397ae6879"
+   },
+   "H8": {
+    "calc": "56bf95d88954",
+    "frozen": "56bf95d88954",
+    "tree2": "56bf95d88954"
+   },
+   "live_untouched": true,
+   "pass": true,
+   "wall_s": 0.036601592000806704
+  }
+ },
+ "out": "/home/lorkhan/code/playground-arc1/ws/evo/rt/hammer",
+ "pass": true,
+ "schema": "think2-rt-accept/1",
+ "src": "/home/lorkhan/code/playground-arc1/ws/hammer",
+ "stats": {
+  "bytes": 20089,
+  "defs": 0,
+  "files": 15,
+  "refs": 0,
+  "skipped": []
+ }
+}
