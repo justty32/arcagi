@@ -62,7 +62,6 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | T2 思考設計輪 2 | opus 隊長（第 2 棒 T2b） | 第 1 棒 PARTIAL（f160691、1737472）：01a～02b、代定 D1–D10 齊；fable 5 塊；D3 發現「驗證池不准造積木」程式裡已破（epoch gate_ids 取 L16∪P、P 結果餵 sleep_ops）→ 本輪只加外部守門印 FAIL；D6 本輪 GPU 不做整樹評估 kernel。T2b 接 D11～、03-設計、施工樹⇄JSON 往返、04 | 跑中（00:1x） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | opus | 照 progress 5 步寫 gpuprofile、跑 800 題、features.csv | 跑中 | reports/task-features-1109/ |
-| N5b seed 列舉 GPU 第一步 | opus | 照 seed-gpu-可行性「最小可驗一步」：大小 2–3 一階原語 GPU 生成＋求值＋指紋去重，跟 CPU Enumerator 同層比對＋吞吐比 | 跑中（23:5x 派） | reports/seed-gpu-1110/ |
 
 ## 待辦（有空位就派）
 
@@ -82,6 +81,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 已收線
 
+- N5b seed 列舉 GPU 第一步（00:3x）：20 個一階原語搬上 GPU，100 題第 2–6 層指紋集合與節點數 GPU==CPU 0 不一致；吞吐比 0.13×（L2）→2.6×（L3）→30×（L6）（只算生成＋求值＋雜湊段，上限值）；lambda 類仍在 CPU；pytest 22 過（主 session 核過）；3f73ec6。
 - A1 自起 aos 樹（23:5x）：`arcagi-aos-daemon.scope` 根 pid 177262（收：`kill -TERM 177262`）；t1＝luna 只讀（read/ls，拿掉範本的 4 個工具）問答 14 秒、2 呼叫、品質中等；寫入只落 `.aos-run/`；食譜 `aos-daemon/食譜.md`、kb `lead/aos_agent`；c209f0f。風險：scope 從子 agent 背景殼起，主 session 結束可能連帶倒——看門狗檢查表加一條。
 - GPU 補負載 2（23:47）：功耗掉到 ~89W，主 session 加開 `arcagi-main-gpufill2`（gpusearch-filler2 跑 training 主線未解 253 題深度 6，到 06:00）→ 95W。
 - N5 S1 forbid（00:0x）：加好、解集合完全一致（100 題三種預算），但只跳過 0.5～3% 候選、速度差在雜訊內——多數樣式產的值本來就被去重丟掉；真要省得靠大量挖掘樣式或 seed 列舉搬 GPU（可行性稿估 2～4×）。pytest 21 過（主 session 重跑核過）；d7c2ed6。
