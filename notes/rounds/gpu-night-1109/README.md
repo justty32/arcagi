@@ -61,7 +61,6 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N3 GPU 遺傳符號搜尋 | opus | 第 2 棒 N3b 23:3x PARTIAL（ce51644）：smoke 過、pop 524288 約 125W；長跑 `arcagi-n3-gp` 597 題到 06:00；比較 bench real 約 23:50、synth 約 00:30 結束，`arcagi-n3-fill` 自動填 report 表並留 bench/FILLED；**早期警訊**：GP 前 33 題標 solved 的 4 題 test 全錯（過擬合）。第 3 棒：00:37 排程派 opus 寫結論＋白話 | 長跑中 | reports/gpu-gp-1109/ |
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
-| N7 R1 排序器探針 | opus | gpusynth 料學 P(原語|型別,深度)，代價分桶列舉（不丟候選）探針 arcbatch-r1，量到解節點中位對基線（E7 門檻 ≤0.5×）；只量測不進主線（E10 的 03／施工仍待使用者） | 跑中（01:0x） | reports/r1-probe-1110/ |
 | T4 思考設計輪 4 | opus 隊長 | 主題：先修量尺再演化（快撥解析度、故意改笨的樹驗尺）、補演化缺口（交配擋同 sha、D27 活動量分功勞、D18 引導突變）、塊 5 Janet 表示＋嵌套／節點池 | 跑中（01:0x） | notes/rounds/gpu-night-1109/think-4/ |
 | N3e MDL λ 掃描 | （無 agent，長跑） | `arcagi-n3e-sweep` real-40／on40 × λ{0,.003,.006,.01} × seed 1–3，最晚 05:45 停，自動寫 `reports/gpu-gp-1109/ho/sweep-summary.md`（尾 SWEEPDONE）；收尾＝結論寫進 holdout.md（晨報前做）。9ed21de | 長跑中 | reports/gpu-gp-1109/ho/ |
 
@@ -83,6 +82,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 
 ## 已收線
 
+- N7 R1 排序器探針（01:2x）：gpusynth 料學先驗＋代價分桶列舉（不丟候選），解集合 0 不一致；**E7 不過**：1e6 合併中位 140k→47.5k 但同題比值中位 1.00（只是 7 題換位）、1e7 1.07×、wall +84～95%（lambda 代價偏低，求值步數 4–5×）。白話：先驗反映合成器怎麼抽樣，不是 ARC 要什麼。下一步：量到解求值步數／wall、代價計入求值開銷、用題目不變量給代價（Argon 提案 4）、合成料要能產 lambda、用 400 題判。ec983be。
 - T2 思考設計輪 2 收輪（01:0x）：04b 8484b44。管線成（樹⇄JSON、快撥＋雜訊尺＋守門、credit 帳、遺傳個體），但 C25 快撥 auc_L 全 20 → 未證演化有用。建議落地：1、6、7① 已；5 框架；2、3 半；4 雛形；7②、8 待下輪。待使用者看 5 條代定（D3/D17/D22 洩漏、D20、D25、D27、D6）。
 - N6b gpusynth v2（00:5x）：語意對 seed_value.cpp 核 4.5 萬列 0 不一致（and/or 沒被生成、未實測）；28 原語、輸出指紋去重；30 s 相異率 3.7%→31.2%、每秒相異 4.5k→10.2k（10× 目標未達，2.3×）；約 1 分鐘後新相異樣本枯竭 → 要加原語或 lambda 才能再提。5 分鐘料 521MB 在 scratchpad（tmpfs，不 commit）。27bec54。`native/synth.jsonl`（40MB，N6 遺留）已加 gitignore。
 - N3d GP holdout＋MDL（01:0x）：gpgp-ho 三旗標（預設不變）。MDL 把假 solved 砍半（on40：8→4、test 對 1 保留）；留一 holdout 反而更糟（失掉真解、留下的全錯）——ARC train 只 2–4 例、輸出常很小（1fad071e 留出例與另一例輸出相同），留一擋不住。下一步：MDL 設預設試 λ 0.006/0.01、輪轉 holdout 並跳過低資訊題、solved 須「簡化長度 ≤ 窮舉已證無解深度+1」、≥3 seed。9e8d90f、d5ef32d。
