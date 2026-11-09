@@ -81,3 +81,12 @@ bin/profile-obj/profile_main.o: gpu/profile/profile_main.cpp gpu/profile/profile
 
 bin/gpuprofile: $(LIB_OBJECTS) bin/profile-obj/profile_kernel.o bin/profile-obj/profile_main.o
 	$(CXX) $(CXXFLAGS) $^ -L/opt/cuda/lib64 -Wl,-rpath,/opt/cuda/lib64 -lcudart -o $@
+
+# Seed enumerator with S1 `forbid` (AST pattern pruning; reports/seed-forbid-1110/).
+# Same sources as bin/arcsearch, separate name so running binaries stay untouched.
+# Usage: bin/arcbatch-forbid --batch --mode seed ... (configs may carry "forbid").
+.PHONY: forbid
+forbid: bin/arcbatch-forbid
+
+bin/arcbatch-forbid: $(SOURCES) $(HEADERS) | bin
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $@

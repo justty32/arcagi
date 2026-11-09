@@ -485,6 +485,61 @@ double elem_score(V got, V want) {
 }  // namespace
 
 // ---- Enumerator (seed/enum.py) ------------------------------------------------------
+// ---- forbid (S1): root AST pattern pruning ----------------------------------------
+namespace {
+thread_local const std::vector<PP>* g_forbid = nullptr;
+thread_local long g_forbidden = 0;
+
+// '?'-prefixed STR in a pattern: 0 = not a wildcard, 1 = any subprogram, 2 = int const
+int wild_kind(const PN& p) {
+    if (p.kind != PN::STR) return 0;
+    const std::string& nm = sym_name(p.s);
+    if (nm.size() < 2 || nm[0] != '?') return 0;
+    return nm[1] == 'c' ? 2 : 1;
+}
+using Binds = std::vector<std::pair<int, const PN*>>;
+bool pn_eq(const PN* a, const PN* b) {
+    if (a == b) return true;
+    if (a->kind != b->kind) return false;
+    switch (a->kind) {
+        case PN::INT: return a->i == b->i;
+        case PN::STR: return a->s == b->s;
+        case PN::TUP:
+            if (a->kids.size() != b->kids.size()) return false;
+            for (size_t k = 0; k < a->kids.size(); ++k)
+                if (!pn_eq(a->kids[k].get(), b->kids[k].get())) return false;
+            return true;
+        default: return false;
+    }
+}
+bool pmatch(const PN& pat, const PN* prog, Binds& bs) {
+    if (int w = wild_kind(pat)) {
+        if (w == 2 && prog->kind != PN::INT) return false;
+        for (const auto& b : bs)
+            if (b.first == pat.s) return pn_eq(b.second, prog);
+        bs.push_back({pat.s, prog});
+        return true;
+    }
+    if (pat.kind != prog->kind) return false;
+    switch (pat.kind) {
+        case PN::INT: return pat.i == prog->i;
+        case PN::STR: return pat.s == prog->s;
+        case PN::TUP:
+            if (pat.kids.size() != prog->kids.size()) return false;
+            for (size_t k = 0; k < pat.kids.size(); ++k)
+                if (!pmatch(*pat.kids[k], prog->kids[k].get(), bs)) return false;
+            return true;
+        default: return false;
+    }
+}
+}  // namespace
+
+void set_forbid(const std::vector<PP>* patterns) {
+    g_forbid = (patterns && !patterns->empty()) ? patterns : nullptr;
+    g_forbidden = 0;
+}
+long forbid_count() { return g_forbidden; }
+
 struct Enumerator {
     struct Entry { PP prog; int typ; uint32_t voff; uint32_t seq; };
     struct Near { double sc; long nn; PP prog; };  // heap item (sc, -nodes, prog)
@@ -505,6 +560,7 @@ struct Enumerator {
     std::vector<Level> bank{Level{}};
     std::vector<Near> near;
     std::vector<Op> ops;
+    std::vector<std::vector<const PN*>> op_pats;  // forbid patterns per op (empty unless g_forbid)
     std::map<std::vector<int>, std::unique_ptr<BodyPool>> pools;
     long steps = 0;
     FILE* trace = nullptr;  // ARC_SEED_TRACE=path: every candidate (debugging, one thread)
@@ -513,6 +569,21 @@ struct Enumerator {
                const std::vector<std::pair<int, double>>& order, bool kn)
         : T(T_), lib(l), sp(p), n(p.xs.size()), budget(b), lam_depth(ld), keep_near(kn) {
         ops = build_ops(T, lib, order, false);
+        if (g_forbid) {  // patterns whose head and arity fit each op (forbidden_root)
+            const int blk = SY().blk;
+            op_pats.resize(ops.size());
+            for (size_t o = 0; o < ops.size(); ++o) {
+                const Op& op = ops[o];
+                const size_t k0 = op.block ? 2 : 1;
+                for (const PP& pp : *g_forbid) {
+                    const PN& p = *pp;
+                    if (p.kind != PN::TUP || p.kids.size() != k0 + size_t(op.arity())) continue;
+                    auto is = [](const PP& k, int s) { return k->kind == PN::STR && k->s == s; };
+                    if (op.block ? !(is(p.kids[0], blk) && is(p.kids[1], op.name)) : !is(p.kids[0], op.name)) continue;
+                    op_pats[o].push_back(pp.get());
+                }
+            }
+        }
         seen_tab.assign(1 << 12, -1);
         if (const char* p = std::getenv("ARC_SEED_TRACE")) trace = std::fopen(p, "a");
     }
@@ -673,6 +744,23 @@ struct Enumerator {
         }
     }
 
+    // Root of build_prog(op, chosen) matches a forbid pattern (without building it).
+    bool forbidden_root(const Op& op, const std::vector<Pick>& chosen) const {
+        const size_t k0 = op.block ? 2 : 1, ar = chosen.size();
+        Binds bs;
+        for (const PN* pp : op_pats[size_t(&op - ops.data())]) {
+            const PN& p = *pp;
+            bs.clear();
+            bool ok = true;
+            for (size_t k = 0; ok && k < ar; ++k) {
+                const PN* kid = chosen[k].lam ? chosen[k].lam->prog.get() : entries[chosen[k].entry].prog.get();
+                ok = pmatch(*p.kids[k0 + k], kid, bs);
+            }
+            if (ok) return true;
+        }
+        return false;
+    }
+
     PP build_prog(const Op& op, const std::vector<Pick>& chosen) {
         const Syms& S = SY();
         std::vector<PP> kids;
@@ -685,6 +773,10 @@ struct Enumerator {
     void emit(int size, const Op& op, const std::vector<int>& comp, const Subst& subst,
               const std::vector<Pick>& chosen, std::vector<V>& vals) {
         if (op.comm && comp[0] == comp[1] && entries[chosen[0].entry].seq > entries[chosen[1].entry].seq) return;
+        if (g_forbid && !op_pats[size_t(&op - ops.data())].empty() && forbidden_root(op, chosen)) {
+            ++g_forbidden;
+            return;
+        }
         int ret = resolve(T, op.ret, subst);
         bool ok;
         if (!op.block) ok = eval_prim(op, chosen, vals);

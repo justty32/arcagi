@@ -56,4 +56,12 @@ DirectOut run_enum(Types& T, const LibView& lib, const SubProblem& sp, long budg
                    bool use_cond, long cond_budget, bool keep_near, bool cond_absolute = false);
 
 std::vector<int64_t> task_consts(const std::vector<V>& values);
+
+// forbid (S1): AST patterns whose root match skips a candidate before it is
+// evaluated (not counted as a node, never enters the bank). Thread-local, set by
+// arcbatch --mode seed around each solve_task; null/empty = off (bit-identical to no forbid).
+// Pattern wildcards: "?x..." any subprogram, "?c..." any integer constant; a
+// name repeated in one pattern must bind identical subprograms.
+void set_forbid(const std::vector<PP>* patterns);
+long forbid_count();  // candidates skipped on this thread since set_forbid
 }  // namespace seed

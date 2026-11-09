@@ -75,7 +75,7 @@ Lib load_lib(const std::string& path) {
 }
 
 namespace {
-struct Config { std::string name; Settings st; Lib lib; };
+struct Config { std::string name; Settings st; Lib lib; std::vector<PP> forbid; };  // forbid: set_forbid
 
 Config parse_config(const Json& j) {
     Config c;
@@ -94,12 +94,13 @@ Config parse_config(const Json& j) {
     if (has(j, "exclude")) for (const auto& x : j["exclude"].items()) c.st.exclude.push_back(x.str());
     if (has(j, "order") && j["order"].object())
         for (const auto& kv : j["order"].fields()) c.st.order.push_back({kv.first, num(kv.second)});
+    if (has(j, "forbid")) for (const auto& x : j["forbid"].items()) c.forbid.push_back(from_json(x));
     for (const auto& e : c.st.exclude) prim_of_sym(sym(e));
     { Types T; for (const auto& b : c.lib.blocks) T.parse(b.sig); }  // intern type variable names
     return c;
 }
 
-Json result_json(const Config& c, const Task& t, const SolveOut& r) {
+Json result_json(const Config& c, const Task& t, const SolveOut& r, long forbidden) {
     Json::Array near;
     for (const auto& kv : r.near) near.push_back(Json(Json::Array{to_json(kv.first), Json(kv.second)}));
     Json::Object o{{"config", c.name}, {"task_id", t.id},
@@ -109,6 +110,7 @@ Json result_json(const Config& c, const Task& t, const SolveOut& r) {
                    {"nodes_to_first", r.nodes_to_first < 0 ? Json() : Json(double(r.nodes_to_first))},
                    {"seconds", r.seconds}, {"near", Json(near)},
                    {"eval_steps", Json(double(r.eval_steps))}};
+    if (!c.forbid.empty()) o["forbidden"] = Json(double(forbidden));
     if (!r.error.empty()) o["error"] = Json(r.error);
     return Json(o);
 }
@@ -174,23 +176,28 @@ int mode_seed(const std::map<std::string, std::vector<std::string>>& a, int thre
         auto t0 = std::chrono::steady_clock::now();
         std::vector<Json> rows(tasks.size());
         std::vector<SolveOut> res(tasks.size());
+        std::vector<long> fcount(tasks.size(), 0);
         parallel(tasks.size(), threads, [&](size_t i) {
+            set_forbid(&c.forbid);  // thread-local; empty = off
             res[i] = solve_task(tasks[i].train, tasks[i].test, c.lib, c.st);
-            rows[i] = result_json(c, tasks[i], res[i]);
+            fcount[i] = forbid_count();
+            set_forbid(nullptr);
+            rows[i] = result_json(c, tasks[i], res[i], fcount[i]);
         });
         double wall = std::chrono::duration<double>(std::chrono::steady_clock::now() - t0).count();
-        long nodes = 0, solved = 0, train_ok = 0, errors = 0;
+        long nodes = 0, solved = 0, train_ok = 0, errors = 0, forbidden = 0;
         double secs = 0;
         for (size_t i = 0; i < rows.size(); ++i) {
             out << rows[i].dump() << '\n';
             nodes += res[i].nodes; solved += res[i].test_ok; train_ok += res[i].train_ok;
-            secs += res[i].seconds; errors += !res[i].error.empty();
+            secs += res[i].seconds; errors += !res[i].error.empty(); forbidden += fcount[i];
         }
-        out << Json(Json::Object{{"config", c.name}, {"summary", true}, {"tasks", int(tasks.size())},
-                                 {"solved", int(solved)}, {"train_ok", int(train_ok)}, {"errors", int(errors)},
-                                 {"nodes", double(nodes)}, {"task_seconds", secs}, {"wall_seconds", wall},
-                                 {"threads", threads}}).dump()
-            << '\n';
+        Json::Object summ{{"config", c.name}, {"summary", true}, {"tasks", int(tasks.size())},
+                          {"solved", int(solved)}, {"train_ok", int(train_ok)}, {"errors", int(errors)},
+                          {"nodes", double(nodes)}, {"task_seconds", secs}, {"wall_seconds", wall},
+                          {"threads", threads}};
+        if (!c.forbid.empty()) summ["forbidden"] = Json(double(forbidden));
+        out << Json(summ).dump() << '\n';
         out.flush();
     }
     return 0;
