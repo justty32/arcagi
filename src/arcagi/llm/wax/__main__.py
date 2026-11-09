@@ -143,6 +143,10 @@ def cmd_summary(a) -> None:
 
 def cmd_overnight(a) -> None:
     tasks = rn.overnight_tasks()
+    if a.offset:
+        # Rotate so parallel runs start on different task segments.
+        k = a.offset % len(tasks)
+        tasks = tasks[k:] + tasks[:k]
     if a.limit:
         tasks = tasks[: a.limit]
     jobs = ((t, a.model, a.method, r) for r in itertools.count() for t in tasks)
@@ -211,6 +215,7 @@ def main(argv=None) -> None:
     o.add_argument("--workers", type=int, default=1)
     o.add_argument("--threads", type=int, default=6)
     o.add_argument("--limit", type=int, default=0)
+    o.add_argument("--offset", type=int, default=0)
     o.add_argument("--name", default="overnight")
     o.set_defaults(fn=cmd_overnight)
     a = p.parse_args(argv)
