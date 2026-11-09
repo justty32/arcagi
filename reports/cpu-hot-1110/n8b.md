@@ -156,3 +156,20 @@ Verdict vs arcbatch-hot (median): C 1e6 −5.2% / 1e7 −2.3% (slower: key looku
 D 1e6 −0.2% / 1e7 +1.0% (below the 2% bar, ranges overlap) → not adopted; arcbatch-hot stays the best binary (1.14x at 1e7 here).
 Reading: list-function time is mostly the per-element loop and lambda calls themselves, not list allocation or repeated whole calls;
 further CPU gains need fewer evals (search side) or a different eval layout (e.g. batched/vectorised lambda bodies), not caching.
+
+## 正式交錯 bench（主 session 03:1x 補，analyze.py 原樣）
+
+| budget | bin | wall 中位 (min..max) s | 對 arcbatch | 差異 |
+|---:|---|---:|---:|---:|
+| 1e6 | arcbatch | 13.170 (12.320..14.005) | 1.000× | ref |
+| 1e6 | hot | 12.008 (11.719..12.571) | 1.097× | 0 |
+| 1e6 | hot-c | 12.670 (12.567..12.972) | 1.039× | 0 |
+| 1e6 | hot-d | 12.037 (11.505..12.724) | 1.094× | 0 |
+| 1e7 | arcbatch | 144.410 (140.763..146.258) | 1.000× | ref |
+| 1e7 | hot | 127.004 (122.607..133.911) | 1.137× | 0 |
+| 1e7 | hot-c | 129.956 (126.018..134.402) | 1.111× | 0 |
+| 1e7 | hot-d | 125.701 (123.752..127.507) | 1.149× | 0 |
+
+負載 loadavg1 14.3–19.3。cmp.txt 18 筆全 0 差異。
+
+**判讀**：D 在 1e7 只比 hot 快 1.0%（<2% 門檻）→ 不收；C 比 hot 慢 → 不收。arcbatch-hot 維持 N8 版本。剖面顯示四個高階函式佔 58%，但結果快取（A、C）與緩衝重用（D）都撈不到；下一步若續做，要改的是一階評估本身（28%）或高階函式的迴圈結構，不是快取。
