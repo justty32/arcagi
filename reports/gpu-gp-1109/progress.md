@@ -25,3 +25,8 @@
 
 ## 安全邊界與規則
 照原交接書（寫入範圍、顯存 ≤4GB、`~/arcagi-STOP`、不改 N2 檔與 `arcagi-n2-overnight`）。新規：context 到 30% 就寫本檔換手。
+
+## 補記（23:10）codex 已結束
+- codex 回報：只新增 gp.hpp／gp_kernel.cu／gp_main.cpp（N2 檔與 Makefile 未改，`git status native/gpu` 已核）；`make -C native gpugp` 編譯成功、`native/bin/gpgp` 已產生。
+- **沙箱內 GPU 不可用**，所以 smoke 沒有實際結果 → 接手者第一步：在沙箱外跑 smoke（3c9b0459 要 `solved:true`）並審 diff（隊長尚未審）。
+- 三個 gp 原始檔已一併 commit（未審、未實跑），之後照審查結果修。
