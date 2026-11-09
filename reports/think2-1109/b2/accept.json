@@ -1,0 +1,23 @@
+{
+ "schema": "think2-b2-accept/1",
+ "src": "/home/lorkhan/code/playground-arc1/ws/evo/quick (b2runs.out ALLDONE 00:18; D20 rerun t2d 00:19)",
+ "B1": {"pass": true, "c25": {"runs": 3, "wall_s": [15.52, 15.18, 14.18], "check_root_errors": [0, 0, 0], "leak_config": "PASS", "leak_new": "PASS"},
+        "c50": {"runs": 3, "L": 50000, "epochs": 6, "wall_s": [33.11, 37.27, 38.15], "check_root_errors": [0, 0, 0], "leak_config": "PASS", "leak_new": "PASS"},
+        "note": "load 8-11 during runs (GPU night jobs)"},
+ "B2": {"pass": true, "c25": {"deterministic": true, "auc_L": 20, "cost": 7294813, "eff": 2.7417, "sigma_auc_L": 0.0, "degenerate": true},
+        "c50": {"deterministic": true, "auc_L": 31, "cost": 17295412, "eff": 1.7924, "sigma_auc_L": 0.0, "degenerate": true},
+        "fake": "t2c/fake noise-fake.json: flipped one task -> deterministic=false, per_task_mismatch=1, exit 1",
+        "note": "same-tree sigma is degenerate 0; block 4 must use paired compare sigma between different trees"},
+ "B3": {"pass": true, "live": {"status": "FAIL", "config": "FAIL", "violations": 16, "tainted_ops": 12}, "quick_copies": {"leak_config": "PASS", "leak_new": "PASS"},
+        "fake": "t2c/fake leak-fake.json: comb with P src_task -> leak_new=FAIL"},
+ "B4": {"pass": true, "repo": {"status": "PASS", "hits": 25, "unregistered": 0, "forbidden": 0}, "fake": "t2c/fake thr-fake.json -> FAIL"},
+ "B5": {"pass": true, "l2_orig_vs_tree2": {"delta_auc_L": 0, "n_tasks_differ": 0, "cost": [5917419, 5917419]}, "clean_vs_state": {"delta_auc_L": 0, "n_tasks_differ": 0}},
+ "B6": {"pass": false, "d20_usable": false,
+        "first_attempt": "all 3 variants exit 1: variants/vN/ lacked files/ blobs (mkvariants bug); fixed by copying genome/files, rerun as d20b-vN",
+        "v1_drop_dormant_comb": {"exit": 0, "delta_auc_L": 0, "n_tasks_differ": 0, "cost": 7294813},
+        "v2_born_by": {"exit": 1, "error": "treegen: 'NoneType' object is not subscriptable", "note": "born.epoch=99/by changed -> quick crashes; born/by are NOT behaviour-inert, cannot be excluded from the hash"},
+        "v3_mdl_bits_plus1": {"exit": 0, "delta_auc_L": 0, "n_tasks_differ": 0, "cost": 7294813},
+        "verdict": "D20 not adopted; use genome_sha only (v1, v3 inert on C25 but v2 fails)"},
+ "pass": false,
+ "summary": "B1-B5 PASS; B6 FAIL -> D20 rejected, genome_sha only"
+}

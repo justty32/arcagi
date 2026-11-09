@@ -196,6 +196,14 @@ def main(argv: list[str] | None = None) -> int:
     compare.add_argument("a", type=Path)
     compare.add_argument("b", type=Path)
     compare.add_argument("--out", type=Path, required=True)
+    ledger = commands.add_parser("ledger")
+    ledger.add_argument("tree_root", type=Path)
+    ledger.add_argument("--out", type=Path, required=True)
+    ledger.add_argument("--rates", type=Path, required=True)
+    ledger_check = commands.add_parser("ledger-check")
+    ledger_check.add_argument("directory", type=Path)
+    ledger_check.add_argument("--tree", type=Path, required=True)
+    ledger_check.add_argument("--accept", type=Path)
     leak = commands.add_parser("guard-leak")
     leak.add_argument("target", type=Path)
     leak.add_argument("--state", type=Path)
@@ -210,6 +218,8 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         boundary.check_stop()
+        if args.command in ("ledger", "ledger-check"):
+            return _block3(args)
         if args.command in ("quick", "noise", "compare", "guard-leak", "guard-thr"):
             return _block2(args)
         if args.command == "export":
@@ -282,6 +292,23 @@ def _block2(args: argparse.Namespace) -> int:
     boundary.check_stop()
     if getattr(args, "out", None):
         write_json(args.out, result)
+    print(json.dumps(result, ensure_ascii=False, indent=1))
+    return code
+
+
+def _block3(args: argparse.Namespace) -> int:
+    """Dispatch offline block-3 ledger commands."""
+    from . import ledger
+
+    if args.command == "ledger":
+        result = ledger.generate(args.tree_root, args.out, args.rates)
+        code = int(not result["source_unchanged"])
+    else:
+        result = ledger.check(args.directory, args.tree, args.accept)
+        code = int(not result["pass"])
+        for name, item in result["checks"].items():
+            if not item["pass"]:
+                print(f"{name} FAIL: {'; '.join(item['errors'])}", file=sys.stderr)
     print(json.dumps(result, ensure_ascii=False, indent=1))
     return code
 

@@ -2,7 +2,7 @@
 
 ← [代定清單](代定清單.md)｜[夜跑看板](../README.md)
 
-狀態：**塊 2 PARTIAL（t2c）**：03b 寫好、sol 施工完、隊長審過＋造假測試全過；§9 長跑在背景。塊 1 DONE。第二棒（t2b）做完 D11～D20、03 設計、塊 1 施工（accept 三條全過）、04 總結。
+狀態：**塊 3 DONE、塊 2 收（B1～B5 PASS、B6 FAIL→D20 不用）（t2d）**。塊 1、2 施工完。下一棒做塊 4。
 
 ## 已完成
 
@@ -44,17 +44,26 @@
 
 已出的 §9 數字：C25（L=25k、epochs 0..4）淨態 ×3：wall 15.5／15.2／14.2 s（load≈8～10），auc_L 20、cost 7294813、eff 2.7417 三次全同 → deterministic，`sigma_auc_L`=0（degenerate）；guards leak_config／leak_new 皆 PASS。C50、B5、B6 待收。
 
+## 第四棒（t2d）做完
+
+| 段 | 結果 |
+|---|---|
+| 塊 2 收 | [b2/accept.json](../../../../reports/think2-1109/b2/accept.json)：B1～B5 PASS（C25 wall≈15 s、C50 L=50k/6 ep≈33～38 s，check_root 0 錯；C25／C50 皆決定論 σ=0 degenerate；L2 Δ=0、cost 同）。B6：原 D20 三變體都因 variants 缺 `files/` 崩（mkvariants bug），補檔重跑 → v1、v3 Δ=0；**v2 改 born/by 快撥崩** → D20 不用，只用 `genome_sha`（已記代定清單） |
+| 03c | [03c-設計-塊3.md](03c-設計-塊3.md)：回應 Argon 7（legacy／aos 兩組 rates，legacy 要 Δ=0）、8（兩層守恆、單輪新解題由 solutions 比對、10% 底薪保覆蓋）；開放 cost key 規則（點分、≥0、祖孫不並存、前綴 keys、rollup） |
+| 施工 | codex sol：`treegen/{cost,credit,health,ledger}.py`、cli `ledger`／`ledger-check`、`tests/treegen/test_block3.py`（treegen 共 53 passed）、`reports/think2-1109/cost/rates_{legacy,aos}.json`、[b3/accept.json](../../../../reports/think2-1109/b3/accept.json) C1～C7 全 PASS、[b3/fake.json](../../../../reports/think2-1109/b3/fake.json) 8 種造假全 exit 1 |
+| 實數 | legacy price Σ=218157376＝meter cost（Δ=0）；Σ amount=0.18335 vs meter eff 0.1834；守恆最大殘差 2.7e-20；live op 覆蓋 84/84；只 epoch 5 有新解題（1 題歸 comb_g1_cd450dff4b、1 題無 blk）；health：solve ok=false（dormant-stale 5 → retire_suggest 5 列），其餘 ok |
+| 隊長審 | `ledger-check` 從活樹重算參考值再比對檔案（不信存檔 pass）；我另做「守恆但分錯」造假（epoch 2 第一層 gate+0.005、judge−0.005）→ C2 FAIL exit 1 |
+
+產物（不進 git）：`ws/evo/ledger/hammer/`；造假：scratchpad `t2d/fake/`、`t2d/myfake/`。
+
+已知限制：by_subtree 七節點等分（weight 全 1.0），第一層沒有區分力；gate／route 無 blk 歸屬，star 份額平分；花費只有 hammer 級；20/70/10 未證有效。
+
 ## 下一步
 
-1. 收 §9 長跑結果（下節單元）：讀 `ws/evo/quick/b2runs.out`、`noise-c25.json`、`noise-c50.json`、`cmp-l2.json`（B5 要 Δ=0）、`cmp-d20-v{1,2,3}.json`（B6）、`cmp-clean-vs-state.json`、各 `quick.json` 的 wall／guards，寫 `reports/think2-1109/b2/accept.json`（B1～B6）並 commit，代定清單 D20 依 B6 結果改「驗過可用／不用」。
-2. 若 C25/C50 全決定論，`sigma_auc_L` 對同樹會是 0（degenerate），塊 4 判顯著要用 `compare` 的成對 σ（不同樹）。
-3. 之後：塊 3 credit 帳的 03 細化（先回應 D15 的 Argon 7、8）。
+1. **塊 4 整棵樹當遺傳個體**：先寫 03d（回應 D15 的 Argon 9 快撥覆寫 budgets 廢 M1、10 單親退化；採 02b (B)3 health 引導突變：讀 `health.json`／`credit.jsonl` 挑下刀 op）。個體 hash 只用 `genome_sha`（D20 不用）；顯著性用 `compare` 成對 σ（同樹 σ=0 degenerate）。
+2. 突變要避開 born/by 欄位（v2 證實改 born 會讓快撥崩，先查 quick 哪裡讀 born.epoch）。
+3. 第一層分法改「節點當輪活躍度」而非 weight，否則 by_subtree 無區分力（塊 4 適應度前要定）。
 
 ## 在跑的背景單元
 
-- `arcagi-t2c-b2runs.service`（systemd 服務，非 scope）：腳本 scratchpad `t2c/b2runs.sh`，C25×3→noise→L2 兩跑→D20 三變體→C50×3→noise；輸出 `/home/lorkhan/code/playground-arc1/ws/evo/quick/`，跑完印 `ALLDONE`。C25 一跑約 15 s。
-
-## commit
-
-- f160691 think-2: add gather (sol) and brief
-- （本棒收尾 commit 見 git log）
+- 無（`arcagi-t2c-b2runs`、`arcagi-t2d-sol`、`arcagi-t2d-d20` 皆已結束）。

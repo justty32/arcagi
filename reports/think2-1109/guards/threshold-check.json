@@ -1,0 +1,186 @@
+{
+ "forbidden": [],
+ "hits": [
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "6613ebfbc939",
+   "line": 35,
+   "metric": "near_miss",
+   "text": "ms = [a for a in tr.get(\"attempts\", []) if a.get(\"kind\") == \"near_miss\"]"
+  },
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "211dd1714b24",
+   "line": 36,
+   "metric": "pixel_acc",
+   "text": "ms.sort(key=lambda a: -a.get(\"data\", {}).get(\"pixel_acc\", 0.0))"
+  },
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "0fc82acc3ea4",
+   "line": 40,
+   "metric": "pixel_acc",
+   "text": "\"pixel_acc\": a.get(\"data\", {}).get(\"pixel_acc\"),"
+  },
+  {
+   "file": "scripts/taxonomy_failsample.py",
+   "key": "42a6f2cfd359",
+   "line": 70,
+   "metric": "near_miss",
+   "text": "\"near_misses\": near.get(tid, []),"
+  },
+  {
+   "file": "scripts/taxonomy_rates.py",
+   "key": "4ae64e530b05",
+   "line": 60,
+   "metric": "pixel_acc",
+   "text": "a.get(\"data\", {}).get(\"pixel_acc\", 0.0)"
+  },
+  {
+   "file": "scripts/taxonomy_rates.py",
+   "key": "65246309a43b",
+   "line": 62,
+   "metric": "near_miss",
+   "text": "if a.get(\"kind\") == \"near_miss\""
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "4e893d61d964",
+   "line": 14,
+   "metric": "_gradients",
+   "text": "Near misses become ``_gradients.jsonl`` letters. Files: ``config.json``,"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "223c18c6211f",
+   "line": 36,
+   "metric": "near_miss",
+   "text": "\"near_misses_per_task\": 1,"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "61c3dd82ed60",
+   "line": 114,
+   "metric": "near_miss",
+   "text": "def _near_misses(trace: dict, limit: int) -> list[dict]:"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "a5d9f23f1fad",
+   "line": 115,
+   "metric": "near_miss",
+   "text": "near = [a for a in trace.get(\"attempts\", []) if a.get(\"kind\") == \"near_miss\"]"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "5e2cbce950cb",
+   "line": 116,
+   "metric": "pixel_acc",
+   "text": "return sorted(near, key=lambda a: -a.get(\"data\", {}).get(\"pixel_acc\", 0))[:limit]"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "0509138f70cc",
+   "line": 151,
+   "metric": "near_miss",
+   "text": "for attempt in _near_misses(trace, config[\"near_misses_per_task\"]):"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "d1fb1cd4c57f",
+   "line": 158,
+   "metric": "pixel_acc",
+   "text": "letter[\"score\"] = attempt.get(\"data\", {}).get(\"pixel_acc\")"
+  },
+  {
+   "file": "src/arcagi/blocks/pool/ledger.py",
+   "key": "c8ddcc6c7ae5",
+   "line": 207,
+   "metric": "_gradients",
+   "text": "path = block.path / \"_gradients.jsonl\" if block else None"
+  },
+  {
+   "file": "src/arcagi/hammer/body.py",
+   "key": "4fd254afc6b4",
+   "line": 82,
+   "metric": "near_score",
+   "text": "\"near_score\": near[0][1] if near else None,"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "a9bb438c1481",
+   "line": 139,
+   "metric": "near_best",
+   "text": "\"llm_calls\", \"false_pos\", \"env_hash\", \"near_best_L\", \"wall_s\"]"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "96c6504ec48c",
+   "line": 408,
+   "metric": "near_score",
+   "text": "near = [main[t].get(\"near_score\") or 0.0 for t in ids[\"L16\"]"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "c4e16cf7c977",
+   "line": 426,
+   "metric": "near_best",
+   "text": "\"near_best_L\": round(max(near), 6) if near else None,"
+  },
+  {
+   "file": "src/arcagi/hammer/epoch.py",
+   "key": "d35c73bd8a8f",
+   "line": 453,
+   "metric": "near_best",
+   "text": "\"near_best_L\")}})"
+  },
+  {
+   "file": "src/arcagi/hammer/stall.py",
+   "key": "4fce2dc91272",
+   "line": 21,
+   "metric": "near_best",
+   "text": "near_best_L                      best near score over unsolved L16"
+  },
+  {
+   "file": "src/arcagi/hammer/stall.py",
+   "key": "5d2abd43ab43",
+   "line": 80,
+   "metric": "near_best",
+   "text": "near = [_get(r, \"near_best_L\") for r in rows]"
+  },
+  {
+   "file": "src/arcagi/solvers/search.py",
+   "key": "40f1a97cbd38",
+   "line": 277,
+   "metric": "near_miss",
+   "text": "kind=\"near_miss\","
+  },
+  {
+   "file": "src/arcagi/solvers/search.py",
+   "key": "c11a11e97e51",
+   "line": 280,
+   "metric": "pixel_acc",
+   "text": "data={\"pixel_acc\": round(acc, 4)},"
+  },
+  {
+   "file": "src/arcagi/treegen/guards.py",
+   "key": "75bffc3e73ee",
+   "line": 17,
+   "metric": "cell_acc|match_after|match_ratio|near_best|near_miss|near_score|pixel_acc",
+   "text": "r\"pixel_acc|cell_acc|match_ratio|match_after|near_score|near_best|near_miss|\""
+  },
+  {
+   "file": "src/arcagi/treegen/guards.py",
+   "key": "c510963e5495",
+   "line": 18,
+   "metric": "_gradients",
+   "text": "r\"_gradients\""
+  }
+ ],
+ "invalid": [],
+ "registry": "/home/lorkhan/repo/arcagi/reports/think2-1109/guards/thresholds.json",
+ "rule": "no_approximate_thresholds",
+ "stale": [],
+ "status": "PASS",
+ "unregistered": []
+}

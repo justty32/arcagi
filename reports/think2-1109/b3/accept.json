@@ -1,0 +1,73 @@
+{
+ "checks": {
+  "C1": {
+   "errors": [],
+   "files": 97,
+   "files_differ": 0,
+   "hash": "sha256",
+   "pass": true
+  },
+  "C2": {
+   "errors": [],
+   "groups": 32,
+   "max_allocation_error": 0.0,
+   "max_residual": 2.710505431213761e-20,
+   "pass": true
+  },
+  "C3": {
+   "coverage": 1.0,
+   "covered": 84,
+   "errors": [],
+   "live_op_epochs": 84,
+   "missing": 0,
+   "pass": true
+  },
+  "C4": {
+   "amount_sum": 0.18335387385664192,
+   "delta_cost": 0.0,
+   "delta_eff": -4.612614335808285e-05,
+   "errors": [],
+   "legacy_price": 218157376.0,
+   "meter_cost": 218157376,
+   "meter_eff": 0.1834,
+   "pass": true
+  },
+  "C5": {
+   "errors": [],
+   "open_key_price": 13.0,
+   "pass": true,
+   "prefix_price": 5.0,
+   "priced_total": 218157376.0,
+   "rows": 9,
+   "unknown_rate_price": 0.0
+  },
+  "C6": {
+   "errors": [],
+   "n_ops": 21,
+   "nodes": 7,
+   "ops_by_node": {
+    "foundry": 0,
+    "gate": 1,
+    "grow": 0,
+    "judge": 0,
+    "route": 6,
+    "solve": 14,
+    "stall": 0
+   },
+   "pass": true
+  },
+  "C7": {
+   "errors": [],
+   "guard_missing": 0,
+   "guard_status": "PASS",
+   "pass": true,
+   "pytest_exit": 0,
+   "tests_passed": 53,
+   "wall_s": 1.2407348320011806
+  }
+ },
+ "ledger": "/home/lorkhan/code/playground-arc1/ws/evo/ledger/hammer",
+ "pass": true,
+ "schema": "t2-ledger-accept/1",
+ "tree_root": "/home/lorkhan/code/playground-arc1/ws/hammer"
+}

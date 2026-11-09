@@ -1,0 +1,133 @@
+{
+ "schema": "t2-ledger-fakes/1",
+ "contract": "wf-table/1",
+ "source": "/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/t2d/sol-b3-report.md",
+ "extracted": "2026-11-10",
+ "columns": [
+  "id",
+  "mutation",
+  "expected_check",
+  "exit_code",
+  "failed_checks",
+  "fail_messages",
+  "pass"
+ ],
+ "rows": [
+  {
+   "id": "c2-amount",
+   "mutation": "epoch=1 layer=1 root keep amount += 0.01",
+   "expected_check": "C2",
+   "exit_code": 1,
+   "failed_checks": [
+    "C2",
+    "C4"
+   ],
+   "fail_messages": [
+    "C2 FAIL: epoch=1 layer=1 from=root to=keep: allocation or epoch evidence differs; epoch=1 layer=1 from=root: residual=0.010000000000000037",
+    "C4 FAIL: root amount minus meter eff = 0.009953873856641926"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c3-drop-op",
+   "mutation": "remove all epoch=1 rows to ops/comb_g1_0652240849",
+   "expected_check": "C3",
+   "exit_code": 1,
+   "failed_checks": [
+    "C2",
+    "C3"
+   ],
+   "fail_messages": [
+    "C2 FAIL: epoch=1 layer=2 from=nodes/solve to=ops/comb_g1_0652240849: missing or unexpected credit row; epoch=1 layer=2 from=nodes/solve to=ops/comb_g1_0652240849: missing or unexpected credit row; epoch=1 layer=2 from=nodes/solve: residual=0.007545327879334551",
+    "C3 FAIL: epoch=1 node=nodes/solve: uncovered ops/comb_g1_0652240849"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c4-shadow",
+   "mutation": "delete epoch=0 cost.evals.shadow",
+   "expected_check": "C4",
+   "exit_code": 1,
+   "failed_checks": [
+    "C4"
+   ],
+   "fail_messages": [
+    "C4 FAIL: epoch=0: legacy cost fields differ from curve; legacy price minus meter cost = -2133051.0, expected exactly 0"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c4-root",
+   "mutation": "epoch=1 layer=1 root keep amount += 0.01",
+   "expected_check": "C4",
+   "exit_code": 1,
+   "failed_checks": [
+    "C2",
+    "C4"
+   ],
+   "fail_messages": [
+    "C2 FAIL: epoch=1 layer=1 from=root to=keep: allocation or epoch evidence differs; epoch=1 layer=1 from=root: residual=0.010000000000000037",
+    "C4 FAIL: root amount minus meter eff = 0.009953873856641926"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c5-string",
+   "mutation": "epoch=0 cost.update({'wall_s': 'abc'})",
+   "expected_check": "C5",
+   "exit_code": 1,
+   "failed_checks": [
+    "C4",
+    "C5"
+   ],
+   "fail_messages": [
+    "C4 FAIL: wall_s: expected a finite nonnegative int or float",
+    "C5 FAIL: row 0: wall_s: expected a finite nonnegative int or float"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c5-negative",
+   "mutation": "epoch=0 cost.update({'wall_s': -1})",
+   "expected_check": "C5",
+   "exit_code": 1,
+   "failed_checks": [
+    "C4",
+    "C5"
+   ],
+   "fail_messages": [
+    "C4 FAIL: wall_s: expected a finite nonnegative int or float",
+    "C5 FAIL: row 0: wall_s: expected a finite nonnegative int or float"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c5-ancestor",
+   "mutation": "epoch=0 cost.update({'evals': 1})",
+   "expected_check": "C5",
+   "exit_code": 1,
+   "failed_checks": [
+    "C4",
+    "C5"
+   ],
+   "fail_messages": [
+    "C4 FAIL: overlapping dimensions: evals and evals.body; overlapping dimensions: evals and evals.foundry; overlapping dimensions: evals and evals.meta; overlapping dimensions: evals and evals.shadow",
+    "C5 FAIL: row 0: overlapping dimensions: evals and evals.body; row 0: overlapping dimensions: evals and evals.foundry; row 0: overlapping dimensions: evals and evals.meta; row 0: overlapping dimensions: evals and evals.shadow"
+   ],
+   "pass": true
+  },
+  {
+   "id": "c6-node",
+   "mutation": "delete health.nodes.solve",
+   "expected_check": "C6",
+   "exit_code": 1,
+   "failed_checks": [
+    "C6"
+   ],
+   "fail_messages": [
+    "C6 FAIL: health nodes/verdicts/ok/counts differ from the reference scorecard"
+   ],
+   "pass": true
+  }
+ ]
+}
