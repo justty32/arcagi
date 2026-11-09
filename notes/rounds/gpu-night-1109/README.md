@@ -61,7 +61,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N3 GPU 遺傳符號搜尋 | opus | 第 2 棒 N3b 23:3x PARTIAL（ce51644）：smoke 過、pop 524288 約 125W；長跑 `arcagi-n3-gp` 597 題到 06:00；比較 bench real 約 23:50、synth 約 00:30 結束，`arcagi-n3-fill` 自動填 report 表並留 bench/FILLED；**早期警訊**：GP 前 33 題標 solved 的 4 題 test 全錯（過擬合）。第 3 棒：00:37 排程派 opus 寫結論＋白話 | 長跑中 | reports/gpu-gp-1109/ |
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | T2 思考設計輪 2 | opus（第 3 棒 T2c） | 塊 1 樹⇄JSON 往返完成（e910b2d：accept 三條 pass，29 檔位元組一致，往返 0.037 s；真樹 defs=0 因重複子樹 <64B）；D11–D20 記 Argon 採納；04 總結寫好。T2c 做塊 2 快撥樹＋雜訊尺＋兩守門 | 跑中（00:0x） | notes/rounds/gpu-night-1109/think-2/ |
-| N4b GPU 剖面 | opus | 照 progress 5 步寫 gpuprofile、跑 800 題、features.csv | 跑中 | reports/task-features-1109/ |
+| N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
 | N5c seed GPU 端到端 | opus | GPU 層接進真 seed 搜尋（arcbatch-gpuseed --gpu-seed），量整體搜樹速度＋解集合，修小層長尾 | 跑中（23:5x） | reports/seed-gpu-e2e-1110/ |
 
 ## 待辦（有空位就派）
