@@ -62,6 +62,7 @@ aos mcp 已接（local scope，`mcp__aos__wf_kb`、`mcp__aos__aos_kb`，只讀�
 | N4 題目特性採集（第 1 棒） | opus | 23:5x 停線 PARTIAL（3cdbb11 本機）：gpuprofile 規格 `gpuprofile-spec.md`、CPU 特徵工具 `native/tools/profile_features.py`（800 列 23 欄可跑）；GPU 剖面程式未寫；Makefile 片段待貼回；下一棒照 progress.md 5 步 | 停（待接手） | reports/task-features-1109/ |
 | T2 思考設計輪 2 | opus（第 7 棒 T2g 收輪） | 塊 1–4 完成：往返（e910b2d）、評判（B1–B5）、credit 帳（657a4be）、遺傳個體（bc17510：G1–G7 pass，1 代 8 個體全合法、快撥 71 s、3 次快取命中、活樹不變；95 測試過）。**發現**：C25 快撥 auc_L 全是 20 → 分不出突變好壞，只證管線通、未證演化有用；交配子代與親代同 sha 未擋。T2g 寫 04b 收輪 | 跑中（01:0x） | notes/rounds/gpu-night-1109/think-2/ |
 | N4b GPU 剖面 | （無 agent，等長跑） | gpuprofile 寫好（55e907f），抽查 3c9b0459 rot180／00d62c1b fill_enclosed top-1=1.0，perfect 數與 gpusearch 一致；800 題剖面 `arcagi-n4-prof-{training,evaluation}` 跑中約 01:35 完，`arcagi-n4-finalize` 自動產 features.csv＋FINALIZED；01:47 排程派 N4c 收尾（README、白話、commit） | 長跑中 | reports/task-features-1109/ |
+| N7 R1 排序器探針 | opus | gpusynth 料學 P(原語|型別,深度)，代價分桶列舉（不丟候選）探針 arcbatch-r1，量到解節點中位對基線（E7 門檻 ≤0.5×）；只量測不進主線（E10 的 03／施工仍待使用者） | 跑中（01:0x） | reports/r1-probe-1110/ |
 
 ## 待辦（有空位就派）
 
