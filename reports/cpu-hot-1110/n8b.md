@@ -115,3 +115,21 @@ analyze.py 保留舊 bins 的輸出與順序，並自動列出新增 binaries。
 native/hot/prof/{generate.py,prof.hpp,main.cpp,seed_enum.cpp,seed_value.cpp}（末兩者為生成檔）；
 tests/native/{test_arcbatch_hot.py,hot_c_check.cpp}；本報告、n8b-prof-1e6.txt、
 n8b_prof.sh、n8b_bench.sh、run_one.py 與 analyze.py。object／binary 為建置產物，未 commit。
+
+## 1e7 profile (lead, 11-10 ~02:40, arcbatch-hot-prof, 4 threads, nice 19; raw [n8b-prof-1e7.txt](n8b-prof-1e7.txt))
+
+| bucket | s | % | calls |
+|---|---:|---:|---:|
+| first_order_eval | 280.9 | 28.35 | 6.25e9 |
+| ho_lambda_body | 231.6 | 23.38 | 1.38e10 |
+| ho_result_build | 100.0 | 10.09 | 9.59e9 |
+| ho_loop_rest | 245.0 | 24.73 | 1.07e9 |
+| lambda_body_pool | 7.5 | 0.75 | 1.9e7 |
+| choose_unify | 30.2 | 3.05 | — |
+| offer | 45.4 | 4.58 | 8.4e8 |
+| dedup_seen_insert | 35.5 | 3.58 | 8.5e8 |
+| cond_witness / other | 14.8 | 1.50 | — |
+| total | 990.8 | 100 | |
+
+HO (map/filter/zipwith/fold) total 58.2% at 1e7 (52.7% at 1e6) — still the largest hotspot; first-order eval 28.3%.
+Interleaved bench (arcbatch / hot / hot-c / hot-d x3) still running; see n8b-progress.md.

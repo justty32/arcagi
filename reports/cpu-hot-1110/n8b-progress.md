@@ -8,7 +8,7 @@
 - 1e6 single runs (not official): hot 9.62 s, hot-c 10.00 s, hot-d 9.37 s; all 0/100 mismatches vs arcbatch. See n8b.md.
 - Lead: `uv run pytest -q tests/native` 37 passed (outside sandbox). Diff reviewed (Makefile append-only, native/src untouched).
 
-## Running (started 02:35, chain prof -> bench, ~35 min)
+## Running (started 02:35; 1e7 prof DONE -> n8b-prof-1e7.txt, bench still running)
 - 1e7 profile: unit `arcagi-n8b-prof-*`, out `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8b/prof-1e7-lead/` (profile.txt, DONE), log `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8b/prof-1e7.log` (ends `prof=<rc>`).
 - Then bench: unit `arcagi-n8b-bench-*`, out `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8b/bench-lead/` (wall.txt, cmp.txt, DONE), log `/tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8b/bench.log` (ends `bench=<rc>`).
 - Read: `cat /tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8b/prof-1e7-lead/profile.txt; python3 reports/cpu-hot-1110/analyze.py /tmp/claude-1000/-home-lorkhan-repo-arcagi/b2d327dc-6912-4964-832e-dd0c86af8593/scratchpad/n8b/bench-lead`
