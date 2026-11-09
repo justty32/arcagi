@@ -32,6 +32,7 @@
 
 - 分工補充（使用者 22:5x）：「可以的話，實作，寫檔案等各種普通的，不太需要高階智能的文字處理，都交給codex gpt sol，或是litellm的sol」→ 實作與普通文字處理優先派 codex `-m gpt-6.1-sol -s workspace-write`（必帶 -m／-s）或 litellm sol；Claude 子 agent 留給設計、審查、驗收。
 
+- LM Studio 又開了（使用者 23:1x）：「lm studio我還是開起來了，如果沒東西跑的話，可以拿他跑一些。」→ 可當閒置填充用；只用已載入的模型、不 load／unload。
 ## 現役線（頂層 ≤3）
 
 | 線 | 模型 | 內容 | 狀態 | 產物 |
