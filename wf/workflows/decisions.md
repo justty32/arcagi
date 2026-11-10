@@ -13,7 +13,7 @@
 
 ## 記錄
 
-已抽到 [decisions.json](decisions.json)（8 列，`wf-table/1`；2026-11-08 表超過 1 KB 依鐵律 3 抽出）。欄位：
+已抽到 [decisions.json](decisions.json)（13 列，`wf-table/1`；2026-11-08 表超過 1 KB 依鐵律 3 抽出；2026-11-10 加 5 列晨報裁決）。欄位：
 
 - `date`：決定日期。
 - `decision`：定了什麼。

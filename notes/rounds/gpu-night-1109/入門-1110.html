@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arcagi 從頭講起</title>
+<style>
+:root{
+  --bg:#f7f5f0; --paper:#ffffff; --ink:#1d1f24; --ink2:#4a4f59; --mute:#7a808b;
+  --line:#dcd8cf; --soft:#efece5; --accent:#0b6bcb; --accent-soft:#e3effb;
+  --ok:#1f8a4c; --ok-soft:#e2f4e9; --no:#b5462f; --no-soft:#f9e6e1; --warn:#9a6a00; --warn-soft:#fbf0d4;
+  --view:#6b4bb8; --view-soft:#efe9fb;
+  --gridline:#2b2b2b; --c0:#000000;
+  --s-train:#0b6bcb; --s-eval:#d0642a;
+  --radius:10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15171b; --paper:#1d2026; --ink:#e8e6e1; --ink2:#b9bcc4; --mute:#8b919c;
+    --line:#343943; --soft:#252931; --accent:#5aa7f0; --accent-soft:#1b2c40;
+    --ok:#4cc27d; --ok-soft:#173326; --no:#ec7d64; --no-soft:#3a201b; --warn:#e2b44a; --warn-soft:#352b14;
+    --view:#b49cf2; --view-soft:#2a2340;
+    --gridline:#555b66; --s-train:#5aa7f0; --s-eval:#f0925c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15171b; --paper:#1d2026; --ink:#e8e6e1; --ink2:#b9bcc4; --mute:#8b919c;
+  --line:#343943; --soft:#252931; --accent:#5aa7f0; --accent-soft:#1b2c40;
+  --ok:#4cc27d; --ok-soft:#173326; --no:#ec7d64; --no-soft:#3a201b; --warn:#e2b44a; --warn-soft:#352b14;
+  --view:#b49cf2; --view-soft:#2a2340;
+  --gridline:#555b66; --s-train:#5aa7f0; --s-eval:#f0925c;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;overflow-x:hidden}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 80px}
+header.top{padding:40px 0 8px}
+.kicker{font-size:13px;letter-spacing:.12em;color:var(--mute)}
+h1{font-size:34px;line-height:1.3;margin:6px 0 10px}
+h2{font-size:25px;line-height:1.35;margin:0 0 14px;display:flex;gap:12px;align-items:baseline}
+h2 .no{font:600 14px/1 ui-monospace,Consolas,monospace;color:var(--accent);border:1.5px solid var(--accent);border-radius:6px;padding:4px 7px;flex:none;position:relative;top:-3px}
+h3{font-size:19px;margin:22px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:18px;color:var(--ink2)}
+section{padding:44px 0 8px;border-top:1px solid var(--line);margin-top:28px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 8px;margin:16px 0}
+.fig{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin:18px 0}
+.fig figcaption,.cap{font-size:14px;color:var(--mute);margin-top:8px;line-height:1.6}
+svg{max-width:100%;height:auto;display:block}
+svg text{fill:var(--ink);font-family:inherit}
+details{border:1px solid var(--line);border-radius:8px;background:var(--soft);margin:12px 0;padding:0 14px}
+details>summary{cursor:pointer;padding:10px 0;font-size:15px;color:var(--ink2);list-style:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>summary:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+details .inner{padding:0 0 12px;font-size:15px;line-height:1.7}
+.src{font-size:13px;color:var(--mute)}
+code{font:14px ui-monospace,Consolas,monospace;background:var(--soft);padding:1px 5px;border-radius:4px}
+.tldr{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--radius);padding:16px 18px;margin:18px 0}
+.tldr ol{margin:0;padding-left:22px}
+.tldr li{margin:6px 0}
+.big{font:700 40px/1.1 ui-monospace,Consolas,monospace}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.stat .lbl{font-size:14px;color:var(--mute)}
+.stat .big{margin:4px 0}
+.stat .sub{font-size:13px;color:var(--ink2)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.tag.ok{background:var(--ok-soft);color:var(--ok)}
+.tag.no{background:var(--no-soft);color:var(--no)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.tag.view{background:var(--view-soft);color:var(--view)}
+.viewbox{border:1.5px dashed var(--view);background:var(--view-soft);border-radius:var(--radius);padding:16px 18px 6px;margin:18px 0}
+.viewbox .vh{font-weight:700;color:var(--view);margin-bottom:6px}
+.note{border-left:4px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:6px;margin:14px 0;font-size:15px}
+/* ARC grids */
+.arc{display:inline-grid;gap:1px;background:var(--gridline);border:2px solid var(--gridline);border-radius:3px}
+.arc i{display:block;width:var(--cs,18px);height:var(--cs,18px)}
+.pair{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pair .arrow{color:var(--mute);font-size:20px}
+.pairs{display:flex;flex-wrap:wrap;gap:16px 26px;align-items:center}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+button{font:inherit;font-size:15px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer}
+button[aria-pressed="true"],button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.testrow{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.qbox{display:inline-flex;align-items:center;justify-content:center;border:2px dashed var(--mute);border-radius:4px;color:var(--mute);font-size:24px}
+.lbl-s{font-size:13px;color:var(--mute);display:block;margin-bottom:4px}
+/* search demo */
+.tries{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:10px}
+.try{border:1px solid var(--line);border-radius:8px;padding:10px;background:var(--bg);opacity:.35;transition:opacity .25s}
+.try.shown{opacity:1}
+.try .nm{font:600 14px ui-monospace,Consolas,monospace}
+.try .res{font-size:14px;margin-top:6px}
+.try.good{border-color:var(--ok);box-shadow:0 0 0 1px var(--ok)}
+/* night cards */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.nc{border-radius:var(--radius);padding:12px 14px;border:1px solid var(--line);background:var(--paper)}
+.nc.ok{border-top:4px solid var(--ok)}
+.nc.no{border-top:4px solid var(--no)}
+.nc.mid{border-top:4px solid var(--warn)}
+.nc b{display:block;margin-bottom:4px}
+.nc p{font-size:15px;margin:0;color:var(--ink2);line-height:1.6}
+.dec{position:relative}
+.dec .q{font-weight:700;font-size:18px;margin-bottom:8px}
+.dec .rec{font-size:15px;color:var(--ink2)}
+.dec.re{border:2px solid var(--warn)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink2);margin-top:8px}
+.legend span::before{content:"";display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle;background:var(--c)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600}
+.tscroll{overflow-x:auto}
+.themebtn{position:fixed;right:12px;top:12px;z-index:5;font-size:13px;padding:5px 10px;opacity:.85}
+nav.toc{font-size:15px;columns:2;column-gap:28px;margin:10px 0 0}
+nav.toc a{color:var(--accent);text-decoration:none;display:block;padding:2px 0;break-inside:avoid}
+nav.toc a:hover{text-decoration:underline}
+dl.gl dt{font-weight:700;margin-top:10px}
+dl.gl dd{margin:2px 0 0 0;color:var(--ink2)}
+@media (max-width:560px){
+  body{font-size:16px}
+  h1{font-size:27px}
+  h2{font-size:21px}
+  .big{font-size:32px}
+  nav.toc{columns:1}
+  .arc i{width:calc(var(--cs,18px)*.8);height:calc(var(--cs,18px)*.8)}
+  .fig,.viewbox{overflow-x:auto}
+  .fig>svg,.viewbox>svg,#chart svg{min-width:700px}
+  .fig:has(>svg)::after,.fig:has(#chart)::after{content:"← 圖可左右滑動 →";display:block;font-size:12px;color:var(--mute);text-align:center;margin-top:4px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<button class="themebtn" id="themeBtn" type="button" aria-label="切換淺色或深色">深／淺</button>
+<div class="wrap">
+
+<header class="top">
+  <div class="kicker">寫給專案主人・2026-11-10・從零接回進度</div>
+  <h1>arcagi 從頭講起</h1>
+  <p class="lead">過去三天 agent 們做了很多事，文件裡滿是編號。這一頁把它們翻回白話：這專案在解什麼、我們的解題器怎麼想、分數怎麼走到今天、昨晚試了什麼、現在卡在哪，以及今天還有哪兩題要你再想一次。</p>
+  <div class="tldr">
+    <strong>一分鐘版</strong>
+    <ol>
+      <li>我們在解 ARC：每題給 2～5 組「圖變圖」的例子，要猜出規則畫出新圖。</li>
+      <li>解法是「積木＋搜尋」：準備一盒小變換（翻轉、換色、鋪磚…），讓電腦把它們排列組合，挑出能把所有例子都變對的那串。</li>
+      <li>現在主線解題器：練習集 <b>147/400</b>、考試集 <b>56/400</b>。九輪下來考試集從 21 漲到 56，之後就停在 56～57。</li>
+      <li>昨晚最大收穫是做出一把「量尺」，第一次能分辨樹有沒有在學。其餘加速、加時間、加深、演化，幾乎都沒換到更多題。</li>
+      <li>主 agent 的看法：瓶頸是「盒子裡缺積木」，而不是「找得不夠快」。這是看法，不是定論。</li>
+    </ol>
+  </div>
+  <nav class="toc" aria-label="目錄">
+    <a href="#s1">1　ARC 題目長什麼樣</a>
+    <a href="#s2">2　積木＋搜尋：我們怎麼解</a>
+    <a href="#s3">3　兩套東西：解題器與錘子</a>
+    <a href="#s4">4　分數一路怎麼走</a>
+    <a href="#s5">5　昨晚試了什麼</a>
+    <a href="#s6">6　瓶頸在哪（看法）</a>
+    <a href="#s7">7　蠟模漏斗</a>
+    <a href="#s8">8　今天要你決定的 5 題</a>
+    <a href="#s9">9　詞彙表</a>
+  </nav>
+</header>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <h2><span class="no">1</span>ARC 題目長什麼樣</h2>
+  <p>ARC 是一套智力測驗，題目全是彩色方格圖。每題先給幾組「左邊的圖變成右邊的圖」當例子（叫練習對，train），再給一張新圖（考題，test），你要畫出它該變成什麼。</p>
+  <p>人看幾眼就懂規則，電腦卻很難，因為每題的規則都不一樣，沒辦法靠背。下面三題是資料夾裡的真題，點一下「看答案」對對看你猜得對不對。</p>
+  <div class="fig" id="taskViewer">
+    <div class="tabs" role="group" aria-label="選題目">
+      <button type="button" data-task="3c9b0459" aria-pressed="true">題 A：轉半圈</button>
+      <button type="button" data-task="0d3d703e" aria-pressed="false">題 B：換顏色</button>
+      <button type="button" data-task="a416b8f3" aria-pressed="false">題 C：複製一份</button>
+    </div>
+    <div id="tvBody"></div>
+    <figcaption>真題，取自 <code>data/ARC-AGI/data/training/</code>（題號 3c9b0459、0d3d703e、a416b8f3），只列前 3 組練習對。這三題我們的主線都已經解出。</figcaption>
+  </div>
+  <details><summary>計分規則（為什麼「答錯」和「不答」一樣）</summary><div class="inner">
+    <p>每題每張考題只能交一個答案，一格不差才算對；一題有好幾張考題時要全部對才算這題對。答錯不扣分，所以「答錯」和「放棄不答」都是 0 分。</p>
+    <p>題庫分兩包，各 400 題：<b>training（練習集）</b>可以拿來調整方法；<b>evaluation（考試集）</b>規定不能看著調，是比較誠實的成績。</p>
+    <p class="src">出處：docs/solvers.md「每個 test 只有一個預測」；src/arcagi/eval 計分 <code>all(test["correct"] …)</code>；gate-r08 README 的「回改＝看 evaluation 調參」。</p>
+  </div></details>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <h2><span class="no">2</span>積木＋搜尋：我們怎麼解</h2>
+  <p>想像一盒樂高。每塊積木是一個很小的圖形動作，例如「左右翻」「轉半圈」「把紅色換成藍色」「整張複製到右邊」。解一題，就是找出一串積木，把每一組例子的左圖都變成右圖。</p>
+  <p>電腦不會「看懂」，它的做法是硬試：先試一塊的，再試兩塊串起來的，越試越長。每串都拿去練習對上跑一遍，全部對上的才留下，最後拿它去變考題。</p>
+
+  <div class="fig">
+    <svg viewBox="0 0 800 300" role="img" aria-label="積木加搜尋示意：積木盒、逐一嘗試、全對才留下、套到考題">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="var(--mute)"/></marker></defs>
+      <rect x="10" y="40" width="190" height="220" rx="10" fill="var(--soft)" stroke="var(--line)"/>
+      <text x="105" y="66" text-anchor="middle" font-weight="700" font-size="16">① 積木盒</text>
+      <g font-size="13" font-family="ui-monospace,Consolas,monospace">
+        <rect x="28" y="82" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="65" y="101" text-anchor="middle">左右翻</text>
+        <rect x="110" y="82" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="147" y="101" text-anchor="middle">上下翻</text>
+        <rect x="28" y="118" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="65" y="137" text-anchor="middle">轉半圈</text>
+        <rect x="110" y="118" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="147" y="137" text-anchor="middle">換顏色</text>
+        <rect x="28" y="154" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="65" y="173" text-anchor="middle">鋪磚</text>
+        <rect x="110" y="154" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="147" y="173" text-anchor="middle">放大</text>
+        <rect x="28" y="190" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="65" y="209" text-anchor="middle">裁邊</text>
+        <rect x="110" y="190" width="74" height="28" rx="5" fill="var(--paper)" stroke="var(--accent)"/><text x="147" y="209" text-anchor="middle">填空洞</text>
+        <text x="105" y="244" text-anchor="middle" fill="var(--mute)" font-family="inherit">…幾十塊</text>
+      </g>
+      <line x1="205" y1="150" x2="245" y2="150" stroke="var(--mute)" stroke-width="2" marker-end="url(#ar)"/>
+      <rect x="250" y="40" width="250" height="220" rx="10" fill="var(--soft)" stroke="var(--line)"/>
+      <text x="375" y="66" text-anchor="middle" font-weight="700" font-size="16">② 排列組合，一串串試</text>
+      <g font-size="13" font-family="ui-monospace,Consolas,monospace">
+        <text x="268" y="98">1 塊：左右翻</text><text x="478" y="98" text-anchor="end" fill="var(--no)">✗</text>
+        <text x="268" y="122">1 塊：上下翻</text><text x="478" y="122" text-anchor="end" fill="var(--no)">✗</text>
+        <text x="268" y="146">2 塊：上下翻→換顏色</text><text x="478" y="146" text-anchor="end" fill="var(--no)">✗</text>
+        <text x="268" y="170">2 塊：鋪磚→裁邊</text><text x="478" y="170" text-anchor="end" fill="var(--no)">✗</text>
+        <text x="268" y="194">3 塊：…</text><text x="478" y="194" text-anchor="end" fill="var(--mute)">…</text>
+        <text x="268" y="226" fill="var(--ok)" font-weight="700">n 塊：某一串</text><text x="478" y="226" text-anchor="end" fill="var(--ok)">✓</text>
+      </g>
+      <line x1="505" y1="150" x2="545" y2="150" stroke="var(--mute)" stroke-width="2" marker-end="url(#ar)"/>
+      <rect x="550" y="40" width="240" height="100" rx="10" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="670" y="68" text-anchor="middle" font-weight="700" font-size="16">③ 守門員檢查</text>
+      <text x="670" y="94" text-anchor="middle" font-size="13">練習對全對還不夠</text>
+      <text x="670" y="114" text-anchor="middle" font-size="13">看起來像背答案的就放棄</text>
+      <line x1="670" y1="142" x2="670" y2="172" stroke="var(--mute)" stroke-width="2" marker-end="url(#ar)"/>
+      <rect x="550" y="176" width="240" height="84" rx="10" fill="var(--accent-soft)" stroke="var(--accent)"/>
+      <text x="670" y="206" text-anchor="middle" font-weight="700" font-size="16">④ 套到考題上交卷</text>
+      <text x="670" y="232" text-anchor="middle" font-size="13">對不對要等改卷才知道</text>
+      <text x="400" y="290" text-anchor="middle" font-size="13" fill="var(--mute)">串越長，要試的組合爆炸性地變多：每多一塊，數量就乘上積木數</text>
+    </svg>
+    <figcaption>示意圖。積木名稱是白話翻譯；實際積木清單在 src/arcagi/dsl、src/arcagi/seed 與 native/。</figcaption>
+  </div>
+
+  <h3>親手試一次</h3>
+  <p>下面用題 A 的真資料，讓網頁自己把四塊積木一塊塊拿去套。每塊都在 3 組練習對上真的算一遍，結果不是寫死的。</p>
+  <div class="fig">
+    <button type="button" id="tryBtn">試下一塊積木</button> <button type="button" id="tryReset">重來</button>
+    <div class="tries" id="tries"></div>
+    <figcaption id="tryCap">按「試下一塊積木」開始。</figcaption>
+  </div>
+
+  <h3>為什麼會有「假解」</h3>
+  <p>只有 2～4 組例子時，常常有好幾串積木都能把例子變對，其中有些只是湊巧，換到考題就錯。這種「練習全對、考試答錯」的叫<b>假解</b>。守門員（第 ③ 步）就是為了擋它而加的，第七輪加上後，練習集的假解從 57 題降到 20 題。</p>
+  <details><summary>出處與細節</summary><div class="inner">
+    <p>守門入口是 <code>python -m arcagi.solvers.gated</code>，第七輪起是正式入口。它看「同一答案有幾支程式背書」「是不是逐格背表」「有沒有造出例子裡沒見過的顏色」等證據，可疑就放棄作答。考試集上「過 train 答錯」從 29 降到 10（第七輪）、再到 9（第八輪）。</p>
+    <p class="src">notes/rounds/總表/輪次-r07-r09.md 第七輪、第八輪；reports/gate-r07/分析方法與線上量測.md；reports/gate-r08/README.md。</p>
+  </div></details>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <h2><span class="no">3</span>兩套東西：解題器與錘子</h2>
+  <p>文件常把兩套東西混著講，這是你跟不上的主因之一。它們目標不同，量分的方式也不同。</p>
+  <div class="fig">
+    <svg viewBox="0 0 800 270" role="img" aria-label="兩套系統：主線解題器與錘子">
+      <rect x="10" y="10" width="380" height="250" rx="12" fill="var(--accent-soft)" stroke="var(--accent)"/>
+      <text x="200" y="42" text-anchor="middle" font-weight="700" font-size="18">主線解題器（守門入口）</text>
+      <text x="200" y="70" text-anchor="middle" font-size="14" fill="var(--ink2)">目的：在 800 題上盡量多答對</text>
+      <g font-size="14">
+        <rect x="40" y="88" width="320" height="34" rx="6" fill="var(--paper)" stroke="var(--line)"/><text x="200" y="110" text-anchor="middle">Python 積木搜尋＋C++ 快速搜尋</text>
+        <rect x="40" y="130" width="320" height="34" rx="6" fill="var(--paper)" stroke="var(--line)"/><text x="200" y="152" text-anchor="middle">「每個物件各自套規則」等專門積木</text>
+        <rect x="40" y="172" width="320" height="34" rx="6" fill="var(--paper)" stroke="var(--line)"/><text x="200" y="194" text-anchor="middle">守門員：可疑就不答</text>
+      </g>
+      <text x="200" y="240" text-anchor="middle" font-size="15" font-weight="700" fill="var(--accent)">成績＝147 / 56 這兩個數字</text>
+      <rect x="410" y="10" width="380" height="250" rx="12" fill="var(--view-soft)" stroke="var(--view)"/>
+      <text x="600" y="42" text-anchor="middle" font-weight="700" font-size="18">錘子（會自己學的樹）</text>
+      <text x="600" y="70" text-anchor="middle" font-size="14" fill="var(--ink2)">目的：從一盒很陽春的積木出發，自己變強</text>
+      <g font-size="14">
+        <rect x="440" y="88" width="320" height="34" rx="6" fill="var(--paper)" stroke="var(--line)"/><text x="600" y="110" text-anchor="middle">起點：空樹，只有 32 塊通用積木</text>
+        <rect x="440" y="130" width="320" height="34" rx="6" fill="var(--paper)" stroke="var(--line)"/><text x="600" y="152" text-anchor="middle">每一輪：解題 → 記住常用的 → 包新積木</text>
+        <rect x="440" y="172" width="320" height="34" rx="6" fill="var(--paper)" stroke="var(--line)"/><text x="600" y="194" text-anchor="middle">在一小組題（16～64 題）上反覆練</text>
+      </g>
+      <text x="600" y="240" text-anchor="middle" font-size="15" font-weight="700" fill="var(--view)">成績＝學習曲線、量尺上的 bits</text>
+    </svg>
+    <figcaption>左邊決定「考幾分」，右邊是你真正想要的東西：一棵能越長越強的樹。錘子的改進目前不會直接改變左邊的分數。</figcaption>
+  </div>
+  <p>你在 11-09 晚上講過判準：要的是「能更快搜尋、更快解出題目的樹」，不是解題數。所以從第七輪起，主指標從考試集題數改成錘子的學習曲線，考試集只偶爾量一次。昨晚的工作大多是在右邊。</p>
+  <details><summary>錘子怎麼「學」（兩條管道）</summary><div class="inner">
+    <p>錘子目前只有兩條學習管道。第一條是「記住哪些積木常用，下次先試」，像整理工具箱把常用的放上層。第二條是「把常一起出現的幾塊包成一塊新積木」，叫 comb。</p>
+    <p>昨晚診斷出：兩條管道在第一輪就學完了，之後每輪看到同一批答案，沒有新東西可學。另外評審（judge）只在「解出新題」時才承認新積木，可是新積木的好處其實是「讓已經會解的題變快」，所以那些積木永遠升不上去，11 條只有 1 條轉正。</p>
+    <p class="src">notes/rounds/gpu-night-1109/think-7/01-簡報.md §2；notes/rounds/總表/使用者方向.md 第 28 條（11-09 23:1x 原話）；kb/project/what.md；notes/rounds/r09/05-白話進度.md。</p>
+  </div></details>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <h2><span class="no">4</span>分數一路怎麼走</h2>
+  <div class="stats">
+    <div class="stat"><div class="lbl">練習集 training</div><div class="big" style="color:var(--s-train)">147<span style="font-size:18px">/400</span></div><div class="sub">第七輪版本量的</div></div>
+    <div class="stat"><div class="lbl">考試集 evaluation</div><div class="big" style="color:var(--s-eval)">56<span style="font-size:18px">/400</span></div><div class="sub">第八輪版本量的（比較誠實）</div></div>
+    <div class="stat"><div class="lbl">若打開 GPU 補位</div><div class="big">149 / 59</div><div class="sub">昨晚重放算出來的，開關預設關</div></div>
+  </div>
+  <div class="fig">
+    <div class="tabs" role="group" aria-label="顯示哪條線">
+      <button type="button" class="ser" data-s="both" aria-pressed="true">兩條都看</button>
+      <button type="button" class="ser" data-s="train" aria-pressed="false">只看練習集</button>
+      <button type="button" class="ser" data-s="eval" aria-pressed="false">只看考試集</button>
+    </div>
+    <div id="chart"></div>
+    <div class="legend"><span style="--c:var(--s-train)">練習集 training</span><span style="--c:var(--s-eval)">考試集 evaluation</span><span style="--c:var(--mute)">虛線＝補位開關若打開（未啟用）</span></div>
+    <figcaption>每輪收輪時量的正式成績。第八輪只重量了考試集；第九輪沒有重量（解題入口沒動）。起點「0」是原樣交回的對照組。</figcaption>
+  </div>
+  <p>前五輪靠一直加新種類的積木，穩定往上爬。第六輪一口氣從 38 跳到 56，主要來自 C++ 快速搜尋與「每個物件各自套規則」這類專門積木。第七輪起主軸改成「讓錘子學」，考試集就停在 56～57。</p>
+  <p>第八輪少的那 1 題是刻意的：守門員的門檻改成只看練習集來挑，因此丟了一題。照規矩不能看著考試集把它調回來。</p>
+  <details><summary>逐輪數字與出處</summary><div class="inner tscroll">
+    <table>
+      <thead><tr><th>輪</th><th>training</th><th>evaluation</th><th>這輪主要做了什麼</th></tr></thead>
+      <tbody>
+        <tr><td>起點</td><td>0</td><td>0</td><td>原樣交回，確認量具</td></tr>
+        <tr><td>1</td><td>57</td><td>21</td><td>第一版積木＋枚舉</td></tr>
+        <tr><td>2</td><td>79</td><td>28</td><td>接上 aos 的積木資料夾</td></tr>
+        <tr><td>3</td><td>86</td><td>32</td><td>公式型、抽取型積木產生器</td></tr>
+        <tr><td>4</td><td>92</td><td>37</td><td>每物件規則</td></tr>
+        <tr><td>5</td><td>96</td><td>38</td><td>子樹也當積木、改寫搜尋</td></tr>
+        <tr><td>6</td><td>138</td><td>56</td><td>入口改成 Python＋C++ 混合</td></tr>
+        <tr><td>7</td><td>147</td><td>57</td><td>加守門員；主指標改學習曲線</td></tr>
+        <tr><td>8</td><td>沒重量</td><td>56</td><td>練習池 32 題；門檻只看練習集，−1 題</td></tr>
+        <tr><td>9</td><td>沒重量</td><td>沒重量（仍 56）</td><td>造出錘子</td></tr>
+      </tbody>
+    </table>
+    <p class="src">git log「Close round 1～6: … scores X/400」；notes/rounds/總表/輪次-r01-r06.md、輪次-r07-r09.md；reports/gate-r07/分析方法與線上量測.md（147/400）；reports/gate-r08/README.md（56/400）；補位數字 notes/rounds/gpu-night-1109/晨報.md「N4g 06:00 重放」。147 與 56 是不同兩版程式量的，目前沒有同一版同時量兩包的數字。</p>
+  </div></details>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <h2><span class="no">5</span>昨晚（11-09 夜）試了什麼</h2>
+  <p>昨晚在 Linux 機上用 GPU 開了很多條線，從 22 點跑到隔天 6 點，只在本機存檔，沒有上傳。綠色是成了，紅色是沒成，黃色是成了但先不用。</p>
+  <div class="grid2">
+    <div class="nc ok"><b>量尺做出來了 <span class="tag ok">成</span></b><p>第一次能分辨「會學的樹」和「完全不學的樹」：18 題全部是會學的那棵贏，差距 168.7 bits，不是巧合。之後所有改進都能拿它來驗。</p></div>
+    <div class="nc ok"><b>找出學習卡在哪 <span class="tag ok">成</span></b><p>學習只發生在第一輪；評審只認「解新題」，不認「已會的題變快」。這直接變成今天第 1 題。</p></div>
+    <div class="nc ok"><b>CPU 搜尋快了約 1.2 倍 <span class="tag ok">成</span></b><p>1.18～1.21 倍，結果與舊版一模一樣。再往下挖不到 1%，這條線收工。</p></div>
+    <div class="nc mid"><b>GPU 補位 <span class="tag warn">成，先關著</span></b><p>主線放棄的題，改用 GPU 窮舉找到的解來補。考試集 56→59、練習集 147→149，各多 1 題假解。開關已做好，預設關。</p></div>
+    <div class="nc ok"><b>800 題「題目特性表」 <span class="tag ok">成</span></b><p>每題 62 個欄位（大小、顏色、物件數、GPU 搜到多深…），之後訓練排序器或挑題可以用。</p></div>
+    <div class="nc mid"><b>蠟模整夜鑄造 <span class="tag warn">跑通，收穫少</span></b><p>讓大模型寫逐步解法，再看我們的積木能不能一步步重現。296 題只有 28 題每步都重現得了。見第 7 節。</p></div>
+    <div class="nc no"><b>演化（GA） <span class="tag no">沒成</span></b><p>修了 3 個 bug 後，64 題上每題變化都是 0。突變改到的地方，錘子根本沒在讀。</p></div>
+    <div class="nc no"><b>遺傳程式（GP） <span class="tag no">沒成</span></b><p>練習集說解了 11 題，考試只對 2 題，而且這 2 題窮舉也解得出。多的全是背答案。加重「程式越短越好」也篩不掉。</p></div>
+    <div class="nc no"><b>給更多時間 <span class="tag no">沒成</span></b><p>每題時限 19 秒拉到 120 秒（約 6.6 倍算力），188 題裡只多對 2 題、多 3 題假解，174 題照樣逾時。</p></div>
+    <div class="nc no"><b>GPU 挖得更深 <span class="tag no">沒成</span></b><p>窮舉從 5 塊挖到 7 塊，共試了約 2 兆個組合，178 題只多 1 題。收穫都在 5 塊以內。</p></div>
+    <div class="nc no"><b>整條搬上 GPU <span class="tag no">沒成</span></b><p>端到端還是比 CPU 慢（184 秒、173 秒對 126 秒），凍結。</p></div>
+    <div class="nc no"><b>其他小試 <span class="tag no">沒成</span></b><p>排序器探針、剪枝（只跳過 0.5～3%）、跨題合批（上限 1.35 倍）都不值得做。</p></div>
+  </div>
+  <details><summary>出處與更多數字</summary><div class="inner">
+    <p>量尺：p=3.8e-6，168.7 bits＝「常用排序」70.1＋「新積木」98.6。GPU 窮舉整夜：phase-A 800 題 73 題有解、phase-B 再挖 178 題只多 1 題，共 2.01e12 個候選；74 題 Python 重驗全對、考題對 66 題，其中主線沒解的新題 4 題。補位只接窮舉來源才對；連 GP 一起接，考試集反而只到 58、假解 2 題，還把本來對的 be03b35f 蓋錯。</p>
+    <p class="src">notes/rounds/gpu-night-1109/晨報.md「結論」「overnight 長跑結果」「N4g 06:00 重放」「否定結果」；reports/nodecap-1110/README.md；reports/cpu-hot-1110/n8c.md；reports/gpu-gp-1109/overnight-summary.md、holdout.md；reports/native-cuda-1109/overnight-summary.md。內部代號：量尺 T4、診斷 T7、CPU N8、補位 N4、特性表 N4c、蠟模 N1、GA g1/g1′、GP N3、加時間 N9、挖深 N2、上 GPU N5c/d。</p>
+  </div></details>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <h2><span class="no">6</span>瓶頸在哪</h2>
+  <p>下面先擺事實（三組數字，都查過原檔），再擺主 agent 的解讀。</p>
+  <div class="fig">
+    <svg viewBox="0 0 800 300" role="img" aria-label="投入與收穫對照：加時間、挖深、加速">
+      <text x="10" y="24" font-size="14" fill="var(--mute)">投入多少</text>
+      <text x="470" y="24" font-size="14" fill="var(--mute)">多答對幾題</text>
+      <!-- row 1 -->
+      <text x="10" y="62" font-size="15" font-weight="700">時間給 6.6 倍</text>
+      <rect x="10" y="72" width="400" height="22" rx="4" fill="var(--accent)" opacity=".75"/>
+      <text x="400" y="88" font-size="13" text-anchor="end" fill="#fff">19 秒 → 120 秒</text>
+      <rect x="470" y="72" width="40" height="22" rx="4" fill="var(--ok)"/>
+      <text x="520" y="88" font-size="14">+2 題（188 題裡 174 題照樣逾時）</text>
+      <!-- row 2 -->
+      <text x="10" y="142" font-size="15" font-weight="700">GPU 從 5 塊挖到 7 塊</text>
+      <rect x="10" y="152" width="400" height="22" rx="4" fill="var(--accent)" opacity=".75"/>
+      <text x="400" y="168" font-size="13" text-anchor="end" fill="#fff">約 2 兆個組合</text>
+      <rect x="470" y="152" width="20" height="22" rx="4" fill="var(--ok)"/>
+      <text x="500" y="168" font-size="14">+1 題（再挖的 178 題中）</text>
+      <!-- row 3 -->
+      <text x="10" y="222" font-size="15" font-weight="700">CPU 搜尋加速</text>
+      <rect x="10" y="232" width="80" height="22" rx="4" fill="var(--accent)" opacity=".75"/>
+      <text x="100" y="248" font-size="13">1.18～1.21 倍</text>
+      <line x1="470" y1="232" x2="470" y2="254" stroke="var(--mute)" stroke-width="2"/>
+      <text x="480" y="248" font-size="14">0 題（同一批答案，只是更快）</text>
+      <text x="10" y="290" font-size="13" fill="var(--mute)">左邊的長條只是示意大小，不是同一把刻度；右邊的題數是實數。</text>
+    </svg>
+    <figcaption>出處：reports/nodecap-1110/README.md（N9b 表：120 秒那列）；reports/native-cuda-1109/overnight-summary.md；reports/cpu-hot-1110/n8c.md。</figcaption>
+  </div>
+
+  <div class="viewbox">
+    <div class="vh">主 agent（fable）的看法 <span class="tag view">看法，不是定論</span></div>
+    <p>這三組數字指向同一件事：用現有積木組得出來的解，差不多都找到了。再加時間、挖更深、跑更快，只是在同一塊地上多挖幾遍。真正的瓶頸是「積木盒裡缺積木」，有些題需要的動作，盒子裡根本沒有。</p>
+    <svg viewBox="0 0 800 260" role="img" aria-label="可達範圍示意：已找到的解幾乎填滿積木能組出的範圍，很多題在範圍外">
+      <rect x="0" y="0" width="800" height="260" rx="10" fill="var(--paper)" stroke="var(--line)"/>
+      <text x="20" y="28" font-size="14" fill="var(--mute)">全部 400 題需要的規則</text>
+      <ellipse cx="300" cy="140" rx="220" ry="95" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+      <text x="300" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="var(--accent)">現有積木組得出來的範圍</text>
+      <ellipse cx="290" cy="148" rx="185" ry="68" fill="var(--ok-soft)" stroke="var(--ok)" stroke-dasharray="5 4"/>
+      <text x="290" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ok)">已經找到的解</text>
+      <text x="290" y="168" text-anchor="middle" font-size="13" fill="var(--ink2)">加時間、挖深只在這圈邊緣多撿幾題</text>
+      <g fill="var(--no)"><circle cx="600" cy="70" r="6"/><circle cx="650" cy="110" r="6"/><circle cx="700" cy="70" r="6"/><circle cx="620" cy="170" r="6"/><circle cx="720" cy="150" r="6"/><circle cx="680" cy="210" r="6"/><circle cx="580" cy="220" r="6"/><circle cx="740" cy="220" r="6"/><circle cx="560" cy="120" r="6"/></g>
+      <text x="650" y="250" text-anchor="middle" font-size="13" fill="var(--no)">範圍外的題：要先有新積木</text>
+    </svg>
+    <p class="cap">示意圖，圈的大小不代表題數。</p>
+  </div>
+
+  <div class="note"><b>子 agent 查證時的補充：</b>「時間 6.6 倍只多 2 題」這組數字，原報告的解讀是「搜尋空間太大、或積木不夠」兩者都有可能。加時間是線性的，組合數卻是爆炸性成長，所以它排除的是「多給一點時間」，沒有完全排除「聰明地少試很多」（剪枝、排序那種上百倍的省法）。昨晚試過的剪枝與排序器都很小、也都沒成，所以主 agent 的讀法目前最說得通，但還算不上證明。</div>
+  <details><summary>三組數字分別量的是哪一盒積木</summary><div class="inner">
+    <p>這三組不是同一盒積木量的：加時間是在主線解題器上，GPU 挖深用的是 GPU 版自己的一小套變換，蠟模的重現則是用錘子的 32 塊通用積木加 3 塊學到的積木。方向一致，但「缺哪些積木」要分開講是缺在哪一盒。</p>
+    <p class="src">reports/nodecap-1110/README.md 判讀段；notes/rounds/gpu-night-1109/cuda-白話.md；reports/wax-night-1109/overnight-summary.md「擬合」那行。</p>
+  </div></details>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <h2><span class="no">7</span>蠟模漏斗：缺哪些積木的線索</h2>
+  <p>「蠟模」是讓大模型（雲端的 GPT）寫一段逐步解題的小程式，每一步把圖變一點點。接著把每一步單獨丟給錘子，看它能不能用自己的積木重現那一步。這就像請老師示範解法，再看學生每一步跟不跟得上。</p>
+  <p>跟不上的那些步，正好就是「盒子裡缺的積木」的清單。主 agent 認為這是昨晚最值得追的東西。</p>
+  <div class="fig">
+    <svg viewBox="0 0 800 300" role="img" aria-label="漏斗：296 題、175 題有驗過的解法、28 題每步都能重現">
+      <polygon points="40,30 760,30 640,110 160,110" fill="var(--accent-soft)" stroke="var(--accent)"/>
+      <text x="400" y="66" text-anchor="middle" font-size="22" font-weight="700">296 題</text>
+      <text x="400" y="92" text-anchor="middle" font-size="14" fill="var(--ink2)">拿去請大模型示範（練習集裡的小題）</text>
+      <polygon points="160,118 640,118 540,198 260,198" fill="var(--warn-soft)" stroke="var(--warn)"/>
+      <text x="400" y="154" text-anchor="middle" font-size="22" font-weight="700">175 題</text>
+      <text x="400" y="180" text-anchor="middle" font-size="14" fill="var(--ink2)">至少有一份示範在練習對上全對</text>
+      <polygon points="260,206 540,206 470,286 330,286" fill="var(--ok-soft)" stroke="var(--ok)"/>
+      <text x="400" y="242" text-anchor="middle" font-size="22" font-weight="700">28 題</text>
+      <text x="400" y="266" text-anchor="middle" font-size="13" fill="var(--ink2)">每一步都能用我們的積木重現</text>
+    </svg>
+    <figcaption>出處：reports/wax-night-1109/overnight-summary.md「題目層級」。2680 次呼叫、851 份示範在練習對上全對；這 851 份的 3021 個步驟裡，只有 41.1% 重現得了，也就是約六成重現不了。</figcaption>
+  </div>
+
+  <h3>兩件原本不知道的事</h3>
+  <div class="card">
+    <p><b>這 296 題是主線沒解的題嗎？</b><span class="tag warn">不是，混在一起</span></p>
+    <p>挑題的程式只看「題目夠小」，不管主線解了沒。照題目特性表推算，296 題裡大約有 106～133 題主線早就解了。最後那 28 題「每步都重現得了」的，有 <b>20 題主線本來就會</b>，主線沒解的只有 8 題。</p>
+    <p>所以這 28 題大多是簡單題，不是新收穫。真正有用的是另外那 147 題「示範對了、但有步驟重現不了」，那裡才是缺積木的地方。</p>
+  </div>
+  <div class="card">
+    <p><b>175 題的示範，拿去考題上對幾題？</b><span class="tag no">未知</span></p>
+    <p>不知道。鑄蠟模的程式只在練習對上驗，沒有拿去跑考題；整夜的原始紀錄留在 Linux 機上、沒進 git，這台電腦上查不到。</p>
+  </div>
+  <details><summary>怎麼推出 106～133 與 20／8</summary><div class="inner">
+    <p>挑題規則在 <code>src/arcagi/llm/wax/runner.py</code> 的 <code>overnight_tasks()</code>：16 題比較組，加上練習集中所有「練習對格子總數 ≤1200」的題，再扣掉錘子的保留盲測題（H8、H24）。這樣的小題共 323 題，其中主線已解 133 題（看 <code>reports/task-features-1109/features.csv</code> 的 <code>mainline_solved</code>）。扣掉的 27 題盲測題名單只在 Linux 機上，所以 296 題中主線已解的題數只能夾在 133−27＝106 到 133 之間。28 題的名單在 overnight-summary.md 裡，逐題對 features.csv 得 20 已解、8 未解（46442a0e、7fe24cdd、8d5021e8、beb8660c、caa06a1f、d10ecb37、e9afcf9a、eb281b96）。</p>
+    <p>「我們的積木」在這裡指錘子的 32 塊通用積木加 3 塊學到的積木，不是主線解題器那一大盒。wax-白話.md 也提到，空樹的小程式最多 4 個節點，連「把 8 換成 2」這種換色都寫不出來。</p>
+  </div></details>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+  <h2><span class="no">8</span>今天要你決定的 5 題</h2>
+  <p>今天早上你對晨報的 5 題回了「照推薦走」。之後主 agent 對第 1、3 題提出再議，所以這兩題<b>還沒定案</b>。另外三題照推薦。所有要動程式的部分，都要等回到有 GPU 的 Linux 機才施工。</p>
+
+  <div class="card dec re">
+    <div class="q">第 1 題　准不准改錘子的評審，讓「已會的題變快」也算學到？<span class="tag warn">再議中</span></div>
+    <p class="rec">原推薦：准。新規則預設關，舊行為一位元都不變；預期在量尺上多 8～25 bits。這是目前唯一被量尺證明有效的學習管道。</p>
+    <div class="viewbox" style="margin:10px 0">
+      <div class="vh">主 agent 的疑慮 <span class="tag view">看法</span></div>
+      <p>就算成功，題數大概也不會動。8～25 bits 攤到 64 題，大約每題快 1.1～1.3 倍，而昨晚時間給 6.6 倍才換 2 題。它有研究價值，能證明學習機制是通的，但不帶來分數。</p>
+    </div>
+    <details><summary>子 agent 查證時看到的兩點，供你判斷</summary><div class="inner">
+      <p>第一，錘子本來就不是交卷的那套（見第 3 節），改它的評審不會直接動到 147／56，這一點不需要靠估算。第二，你 11-09 晚上講過判準是「能更快搜尋、更快解出題目的樹，而非解題數」；照這個判準，「已會的題變快」正是你要的東西。要不要做，取決於你現在更在意哪一個。</p>
+      <p>關於「每題快 1.1～1.3 倍」：量尺的 bits 是把 4 輪加總的，如果平均攤到 64 題×4 輪，每題每輪只快約 1.02～1.07 倍；如果集中在少數題上，那幾題會快得多。主 agent 的估算是粗略量級。</p>
+      <p class="src">晨報「待你裁」1；think-7/代定清單.md U1、T7-F；think-7/01-簡報.md §1（gain_bits＝Σ題 Σ e=1..4）；notes/rounds/總表/使用者方向.md 第 28 條。</p>
+    </div></details>
+  </div>
+
+  <div class="card dec">
+    <div class="q">第 2 題　演化（GA）這條線停不停？<span class="tag ok">照推薦：停</span></div>
+    <p class="rec">停掉現在的演化回圈，框架留著。它突變的地方錘子根本不讀，在 64 題上反覆調參只會背題。等第 1 題改完、突變真的能影響錘子時再重看。</p>
+  </div>
+
+  <div class="card dec re">
+    <div class="q">第 3 題　GPU 補位要不要預設打開？<span class="tag warn">再議中</span></div>
+    <p class="rec">原推薦：先維持關，等一道「不冗餘門」把假解壓到 1 題以下再開；要開時只接窮舉的結果。</p>
+    <div class="viewbox" style="margin:10px 0">
+      <div class="vh">主 agent 的疑慮 <span class="tag view">看法</span></div>
+      <p>補位只在主線放棄的題上出手，昨晚 0 衝突。答錯和不答都是 0 分，所以純看分數，打開就是考試集 56→59，不會有損失。假解真正的風險，是被拿去當學習材料。這一點主 agent 還沒查程式碼確認。</p>
+    </div>
+    <details><summary>子 agent 粗查的結果</summary><div class="inner">
+      <p>在 <code>src/arcagi/hammer/</code> 裡沒找到讀取守門入口輸出或補位結果的程式（檔案裡的「gated」字樣是別的意思）。看起來補位的答案目前不會流進錘子的學習材料，但這只是用關鍵字搜過，沒有完整審查，仍算<b>未確認</b>。</p>
+      <p class="src">src/arcagi/solvers/gated.py（補位只在 guard.judge 放棄時觸發）；reports/gpu-fallback-1110/README.md；晨報「N4g 06:00 重放」。</p>
+    </div></details>
+  </div>
+
+  <div class="card dec">
+    <div class="q">第 4 題　把快 1.2 倍的 CPU 搜尋換成預設？<span class="tag ok">照推薦：換</span></div>
+    <p class="rec">換。結果和舊版一模一樣、測試都過，舊版留著隨時能退回。</p>
+  </div>
+
+  <div class="card dec">
+    <div class="q">第 5 題　排一段乾淨的 GPU 時間量排隊延遲？<span class="tag ok">照推薦：排，MPS 不開</span></div>
+    <p class="rec">停掉所有背景工作 10～15 分鐘，量清楚 GPU 慢是不是因為排隊。MPS（讓多個程式共用 GPU 的系統設定）先不開。</p>
+  </div>
+  <p class="src">出處：notes/rounds/gpu-night-1109/晨報.md「待你裁（5 題）」；wf/workflows/decisions.json 2026-11-10 五列。</p>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="s9">
+  <h2><span class="no">9</span>詞彙表</h2>
+  <p>你在其他文件會遇到這些詞。每個都回原檔查過意思；查不到的沒有列。</p>
+  <details><summary>展開詞彙表（14 個詞）</summary><div class="inner">
+  <dl class="gl">
+    <dt>aos</dt><dd>你的另一個專案與它的 agent。arcagi 的前提是「用 aos 體系（符號程式）解題」，大模型只負責找規則、寫程式，最後解題靠確定的程式。<span class="src">kb/README.md、kb/project/what.md</span></dd>
+    <dt>空樹／seed</dt><dd>錘子的起點：只有 32 塊通用積木、什麼都還沒學的樹。程式在 src/arcagi/seed/，第七輪打了標籤 r07-seed0。<span class="src">總表/輪次-r07-r09.md 第七輪</span></dd>
+    <dt>hammer（錘子）</dt><dd>會自己學的那棵樹，第九輪造好，活樹在 Linux 機的 ws/hammer。名字來自你的「先造一把 lv1 錘子，再用它打造 lv2 錘子」。<span class="src">總表/使用者方向.md 意見 5；r09/05-白話進度.md</span></dd>
+    <dt>gated（守門入口）</dt><dd>主線正式的解題入口 <code>arcagi.solvers.gated</code>，可疑的答案就放棄不答。147／56 都是它量的。<span class="src">gate-r07、gate-r08 README</span></dd>
+    <dt>假解</dt><dd>練習對全對、考題卻答錯的解，也就是湊巧或背答案。文件裡常寫成「過 train 答錯」。<span class="src">gpu-fallback-1110 README；gp-白話.md</span></dd>
+    <dt>補位</dt><dd>主線放棄的題，改用 GPU 窮舉找到的程式來答。開關叫 <code>ARCAGI_GPU_FALLBACK</code>，預設關。<span class="src">reports/gpu-fallback-1110/README.md</span></dd>
+    <dt>蠟模</dt><dd>大模型寫的逐步解題小程式。每一步再交給錘子的積木去重現，重現得了的步驟可以變成新積木的材料。<span class="src">gpu-night-1109/wax-白話.md</span></dd>
+    <dt>量尺</dt><dd>量「樹學得多快」的尺。把會學的樹和不學的對照組逐題比，用統計檢定判斷差距是不是真的。<span class="src">think-4/03-設計.md；think-7/01-簡報.md §1</span></dd>
+    <dt>bits</dt><dd>量尺的單位。每題看「找到第一個解之前試了幾個組合」，取對數；多 1 bit 大約等於少試一半。沒解出的題算 0，上限約 15 bits。<span class="src">think-7/01-簡報.md §1（B_REF＝40000）</span></dd>
+    <dt>epoch（輪）</dt><dd>錘子練一次的回合。每輪把練習題解一遍、記住常用積木、包新積木。<span class="src">think-7/01-簡報.md §2</span></dd>
+    <dt>comb</dt><dd>錘子從解法裡把常一起出現的幾塊積木包成的一塊新積木，要評審認可才會轉正。<span class="src">src/arcagi/hammer/grow.py、think-7/01-簡報.md</span></dd>
+    <dt>judge（評審）</dt><dd>錘子裡決定新積木能不能轉正的規則。目前只認「解出新題」，這就是第 1 題要改的地方。<span class="src">think-7/01-簡報.md §2(b)</span></dd>
+    <dt>GA（演化）</dt><dd>把錘子的設定當基因，隨機突變、留下表現好的，一代代改良。昨晚證實突變到的設定錘子沒在讀，所以零效果。<span class="src">晨報 結論 2；think-4</span></dd>
+    <dt>GP（遺傳程式）</dt><dd>在 GPU 上「先亂組一大堆程式，留下比較像的互相拼湊」的搜尋法，和一個個窮舉相對。昨晚結果是題數打平、更慢、多背答案。<span class="src">gpu-night-1109/gp-白話.md</span></dd>
+  </dl>
+  </div></details>
+  <p class="src" style="margin-top:24px">這一頁由子 agent 讀 repo 整理，只新增了這個檔案，沒有改動 repo。數字都附了出處；寫「未知」「未確認」的地方是真的查不到。</p>
+</section>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  // ---------- theme ----------
+  var root = document.documentElement;
+  var btn = document.getElementById("themeBtn");
+  try { var saved = localStorage.getItem("arcagi-intro-theme"); if (saved) root.setAttribute("data-theme", saved); } catch(e) {}
+  btn.addEventListener("click", function(){
+    var cur = root.getAttribute("data-theme");
+    var isDark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = isDark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("arcagi-intro-theme", next); } catch(e) {}
+  });
+
+  // ---------- ARC data (real tasks, first 3 train pairs + 1 test) ----------
+  var TASKS = {"3c9b0459":{"train":[[[[2,2,1],[2,1,2],[2,8,1]],[[1,8,2],[2,1,2],[1,2,2]]],[[[9,2,4],[2,4,4],[2,9,2]],[[2,9,2],[4,4,2],[4,2,9]]],[[[8,8,8],[5,5,8],[8,5,5]],[[5,5,8],[8,5,5],[8,8,8]]]],"test":[[[[6,4,4],[6,6,4],[4,6,7]],[[7,6,4],[4,6,6],[4,4,6]]]]},"0d3d703e":{"train":[[[[3,1,2],[3,1,2],[3,1,2]],[[4,5,6],[4,5,6],[4,5,6]]],[[[2,3,8],[2,3,8],[2,3,8]],[[6,4,9],[6,4,9],[6,4,9]]],[[[5,8,6],[5,8,6],[5,8,6]],[[1,9,2],[1,9,2],[1,9,2]]]],"test":[[[[8,1,3],[8,1,3],[8,1,3]],[[9,5,4],[9,5,4],[9,5,4]]]]},"a416b8f3":{"train":[[[[0,5,0],[5,5,2],[0,0,0]],[[0,5,0,0,5,0],[5,5,2,5,5,2],[0,0,0,0,0,0]]],[[[3,0,0],[2,3,0],[2,1,8],[0,1,0]],[[3,0,0,3,0,0],[2,3,0,2,3,0],[2,1,8,2,1,8],[0,1,0,0,1,0]]],[[[5,2,3,0],[2,5,3,0],[5,2,8,8],[0,0,6,0]],[[5,2,3,0,5,2,3,0],[2,5,3,0,2,5,3,0],[5,2,8,8,5,2,8,8],[0,0,6,0,0,0,6,0]]]],"test":[[[[4,0,0,0],[4,5,0,0],[0,5,6,0],[6,6,1,0],[0,0,0,1]],[[4,0,0,0,4,0,0,0],[4,5,0,0,4,5,0,0],[0,5,6,0,0,5,6,0],[6,6,1,0,6,6,1,0],[0,0,0,1,0,0,0,1]]]]}};
+  var HINT = {
+    "3c9b0459": "規則：整張圖轉半圈（180 度）。",
+    "0d3d703e": "規則：每種顏色固定換成另一種，例如綠→黃、藍→灰、紅→洋紅。",
+    "a416b8f3": "規則：把整張圖原樣複製一份，接在右邊。"
+  };
+  var PAL = ["#000000","#1e93ff","#f93c31","#4fcc30","#ffdc00","#999999","#e53aa3","#ff851b","#87d8f1","#921231"];
+
+  function gridEl(g, cs){
+    var d = document.createElement("div");
+    d.className = "arc";
+    d.style.gridTemplateColumns = "repeat(" + g[0].length + ", auto)";
+    if (cs) d.style.setProperty("--cs", cs + "px");
+    d.setAttribute("role","img");
+    d.setAttribute("aria-label", g.length + "×" + g[0].length + " 格子圖");
+    for (var r=0;r<g.length;r++) for (var c=0;c<g[0].length;c++){
+      var i = document.createElement("i"); i.style.background = PAL[g[r][c]]; d.appendChild(i);
+    }
+    return d;
+  }
+  function pairEl(a, b, cs){
+    var p = document.createElement("div"); p.className = "pair";
+    p.appendChild(gridEl(a, cs));
+    var s = document.createElement("span"); s.className = "arrow"; s.textContent = "→"; p.appendChild(s);
+    p.appendChild(b ? gridEl(b, cs) : qBox(a, cs));
+    return p;
+  }
+  function qBox(a, cs){
+    var q = document.createElement("div"); q.className = "qbox";
+    q.style.width = (a[0].length*(cs+1)+4) + "px"; q.style.height = (a.length*(cs+1)+4) + "px";
+    q.textContent = "?"; return q;
+  }
+
+  var tvBody = document.getElementById("tvBody");
+  function showTask(id){
+    var t = TASKS[id]; var cs = 20;
+    tvBody.innerHTML = "";
+    var lab = document.createElement("span"); lab.className = "lbl-s"; lab.textContent = "例子（練習對）"; tvBody.appendChild(lab);
+    var ps = document.createElement("div"); ps.className = "pairs";
+    t.train.forEach(function(pr){ ps.appendChild(pairEl(pr[0], pr[1], cs)); });
+    tvBody.appendChild(ps);
+    var tr = document.createElement("div"); tr.className = "testrow";
+    var lab2 = document.createElement("span"); lab2.className = "lbl-s"; lab2.textContent = "考題：該變成什麼？"; tr.appendChild(lab2);
+    var holder = document.createElement("div"); holder.className = "pairs";
+    var testPair = pairEl(t.test[0][0], null, cs); holder.appendChild(testPair);
+    var b = document.createElement("button"); b.type = "button"; b.textContent = "看答案";
+    var hint = document.createElement("p"); hint.style.margin = "10px 0 0"; hint.style.fontSize = "15px";
+    b.addEventListener("click", function(){
+      var shown = b.getAttribute("data-shown") === "1";
+      testPair.replaceChild(shown ? qBox(t.test[0][0], cs) : gridEl(t.test[0][1], cs), testPair.lastChild);
+      b.textContent = shown ? "看答案" : "藏起答案";
+      hint.textContent = shown ? "" : HINT[id];
+      b.setAttribute("data-shown", shown ? "0" : "1");
+    });
+    holder.appendChild(b);
+    tr.appendChild(holder); tr.appendChild(hint);
+    tvBody.appendChild(tr);
+  }
+  document.querySelectorAll("#taskViewer [data-task]").forEach(function(bt){
+    bt.addEventListener("click", function(){
+      document.querySelectorAll("#taskViewer [data-task]").forEach(function(x){ x.setAttribute("aria-pressed", x === bt ? "true" : "false"); });
+      showTask(bt.getAttribute("data-task"));
+    });
+  });
+  showTask("3c9b0459");
+
+  // ---------- search demo: really apply blocks to task A ----------
+  function flipLR(g){ return g.map(function(r){ return r.slice().reverse(); }); }
+  function flipUD(g){ return g.slice().reverse().map(function(r){ return r.slice(); }); }
+  function transpose(g){ return g[0].map(function(_, c){ return g.map(function(r){ return r[c]; }); }); }
+  function rot180(g){ return flipUD(flipLR(g)); }
+  function same(a, b){ return JSON.stringify(a) === JSON.stringify(b); }
+  var BLOCKS = [["左右翻", flipLR], ["上下翻", flipUD], ["沿對角線翻", transpose], ["轉半圈", rot180]];
+  var A = TASKS["3c9b0459"];
+  var triesEl = document.getElementById("tries"), cap = document.getElementById("tryCap");
+  var step = 0;
+  function buildTries(){
+    triesEl.innerHTML = ""; step = 0;
+    BLOCKS.forEach(function(bk){
+      var d = document.createElement("div"); d.className = "try";
+      var nm = document.createElement("div"); nm.className = "nm"; nm.textContent = bk[0]; d.appendChild(nm);
+      var out = bk[1](A.train[0][0]);
+      var g = gridEl(out, 14); g.style.marginTop = "6px"; d.appendChild(g);
+      var ok = 0; A.train.forEach(function(pr){ if (same(bk[1](pr[0]), pr[1])) ok++; });
+      var res = document.createElement("div"); res.className = "res";
+      res.textContent = "練習對對了 " + ok + "/" + A.train.length + (ok === A.train.length ? "　✓ 留下" : "　✗ 丟掉");
+      res.style.color = ok === A.train.length ? "var(--ok)" : "var(--no)";
+      d.appendChild(res); d.dataset.ok = ok === A.train.length ? "1" : "0";
+      triesEl.appendChild(d);
+    });
+    cap.textContent = "按「試下一塊積木」開始。每格顯示的是把第 1 組例子的左圖套上這塊積木後的樣子。";
+  }
+  document.getElementById("tryBtn").addEventListener("click", function(){
+    var items = triesEl.children; if (step >= items.length) return;
+    var it = items[step]; it.classList.add("shown");
+    if (it.dataset.ok === "1"){ it.classList.add("good"); cap.textContent = "找到了：「轉半圈」讓 3 組例子全對。電腦接著就把它套到考題上交卷。"; }
+    else cap.textContent = "「" + BLOCKS[step][0] + "」有例子沒對上，丟掉，換下一塊。";
+    step++;
+  });
+  document.getElementById("tryReset").addEventListener("click", buildTries);
+  buildTries();
+
+  // ---------- score chart ----------
+  var X = ["起點","1","2","3","4","5","6","7","8","9"];
+  var TR = [0,57,79,86,92,96,138,147,null,null];
+  var EV = [0,21,28,32,37,38,56,57,56,null];
+  var chartEl = document.getElementById("chart");
+  var mode = "both";
+  function draw(){
+    var W=780,H=330,L=48,R=80,T=20,B=44, iw=W-L-R, ih=H-T-B, maxY=160;
+    function x(i){ return L + iw*i/(X.length); }
+    function y(v){ return T + ih*(1 - v/maxY); }
+    var s = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="各輪分數走勢">';
+    [0,40,80,120,160].forEach(function(v){
+      s += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)"/>';
+      s += '<text x="'+(L-8)+'" y="'+(y(v)+4)+'" text-anchor="end" font-size="12" fill="var(--mute)">'+v+'</text>';
+    });
+    X.forEach(function(lb,i){ s += '<text x="'+x(i)+'" y="'+(H-B+24)+'" text-anchor="middle" font-size="13" fill="var(--mute)">'+(i===0?lb:"第"+lb+"輪")+'</text>'; });
+    var nx = X.length; // night slot
+    s += '<text x="'+x(nx)+'" y="'+(H-B+24)+'" text-anchor="middle" font-size="13" fill="var(--mute)">昨晚</text>';
+    s += '<line x1="'+((x(6)+x(7))/2)+'" x2="'+((x(6)+x(7))/2)+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--mute)" stroke-dasharray="3 4"/>';
+    s += '<text x="'+((x(6)+x(7))/2+6)+'" y="'+y(100)+'" font-size="12" fill="var(--mute)">此後主指標改成</text>';
+    s += '<text x="'+((x(6)+x(7))/2+6)+'" y="'+(y(100)+18)+'" font-size="12" fill="var(--mute)">「錘子學得多快」</text>';
+    function line(arr, col, extra, lastIdx){
+      var pts=[], d="";
+      arr.forEach(function(v,i){ if (v!==null) pts.push([x(i),y(v),v,i]); });
+      pts.forEach(function(p,k){ d += (k?"L":"M")+p[0]+","+p[1]; });
+      var o = '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="3" stroke-linejoin="round"/>';
+      pts.forEach(function(p){ o += '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4.5" fill="'+col+'"/>';
+        if (p[2] === 0) return;
+        o += '<text x="'+p[0]+'" y="'+(p[1]-10)+'" text-anchor="middle" font-size="12" fill="'+col+'">'+p[2]+'</text>'; });
+      var last = pts[pts.length-1];
+      o += '<path d="M'+last[0]+','+last[1]+' L'+x(nx)+','+y(extra)+'" stroke="'+col+'" stroke-width="2" stroke-dasharray="5 5" fill="none"/>';
+      o += '<circle cx="'+x(nx)+'" cy="'+y(extra)+'" r="5" fill="var(--paper)" stroke="'+col+'" stroke-width="2"/>';
+      o += '<text x="'+(x(nx)+9)+'" y="'+(y(extra)+4)+'" font-size="12" fill="'+col+'">'+extra+'?</text>';
+      return o;
+    }
+    if (mode!=="eval") s += line(TR, "var(--s-train)", 149);
+    if (mode!=="train") s += line(EV, "var(--s-eval)", 59);
+    s += '</svg>';
+    chartEl.innerHTML = s;
+  }
+  document.querySelectorAll(".ser").forEach(function(b){
+    b.addEventListener("click", function(){
+      mode = b.getAttribute("data-s");
+      document.querySelectorAll(".ser").forEach(function(o){ o.setAttribute("aria-pressed", o===b ? "true":"false"); });
+      draw();
+    });
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

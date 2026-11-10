@@ -10,6 +10,36 @@
  ],
  "rows": [
   {
+   "date": "2026-11-10",
+   "decision": "U1：准改 hammer 原始碼，讓 judge 跟量尺對齊（新欄位預設關、clone 門驗親代位元不變）。出處：[晨報](../../notes/rounds/gpu-night-1109/晨報.md)「待你裁」第 1 題（使用者 11-10 裁照推薦）；翻案見 [think-7/代定清單.md](../../notes/rounds/gpu-night-1109/think-7/代定清單.md) U1。施工待回 Linux 機（有 GPU）再派，11-10 公司 Windows 機不開工程線",
+   "rejected_alternatives": "不准改 hammer：judge 與量尺持續對不齊，放掉目前唯一被量尺證明有效的學習通道（預期 +8～+25 bits）",
+   "premise": "新欄位預設關、親代行為逐位元不變（clone 門驗）；變快也算升級、逐 comb 記功。門驗不過就退回重看"
+  },
+  {
+   "date": "2026-11-10",
+   "decision": "U2：停現行 GA 回圈，保留框架。出處：[晨報](../../notes/rounds/gpu-night-1109/晨報.md)「待你裁」第 2 題（使用者 11-10 裁照推薦）；翻案見 [think-7/代定清單.md](../../notes/rounds/gpu-night-1109/think-7/代定清單.md) U2",
+   "rejected_alternatives": "改 genome 繼續跑：genome 全在 hammer 不讀的欄位，多代調參在 64 題上必然過擬合",
+   "premise": "hammer 仍不讀 genome 欄位；U1 改完讓 judge 對齊量尺後，若 genome 能影響 hammer 再重看"
+  },
+  {
+   "date": "2026-11-10",
+   "decision": "`ARCAGI_GPU_FALLBACK` 維持預設關；等「不冗餘門」把假解壓到 ≤1 再開，開時來源只列窮舉輸出。出處：[晨報](../../notes/rounds/gpu-night-1109/晨報.md)「待你裁」第 3 題（使用者 11-10 裁照推薦）；翻案見 [think-6/代定清單.md](../../notes/rounds/gpu-night-1109/think-6/代定清單.md) 第 2 條",
+   "rejected_alternatives": "現在就預設開：06:00 重放只接窮舉是 evaluation +3 對／+1 假、training +2 對／+1 假，假解還沒壓到 ≤1",
+   "premise": "不冗餘門尚未完成；假解壓到 ≤1 後再裁一次"
+  },
+  {
+   "date": "2026-11-10",
+   "decision": "`arcbatch-hot-e` 換成預設 CPU 搜尋，舊 binary 保留可退回。出處：[晨報](../../notes/rounds/gpu-night-1109/晨報.md)「待你裁」第 4 題（使用者 11-10 裁照推薦）；證據 reports/cpu-hot-1110/n8c.md、n8d.md。施工待回 Linux 機再派",
+   "rejected_alternatives": "不換：放掉 1.18～1.21× 的加速（0 差異、43 tests 過）",
+   "premise": "舊 binary 還在、隨時能退回；後續出現與舊版的差異就退回"
+  },
+  {
+   "date": "2026-11-10",
+   "decision": "排一段乾淨 GPU 窗口（停掉所有夜跑 10～15 分鐘）量排隊延遲 λ；MPS 先不開。出處：[晨報](../../notes/rounds/gpu-night-1109/晨報.md)「待你裁」第 5 題（使用者 11-10 裁照推薦）；翻案見 [think-5/代定清單.md](../../notes/rounds/gpu-night-1109/think-5/代定清單.md)「要使用者裁」與 G14（MPS，T5）。量測待回 Linux 機（有 GPU）再派",
+   "rejected_alternatives": "現在就開 MPS：屬系統設定，且 GPU 慢可能只是夜跑排隊造成，要先量清楚；不排窗口：無從得知 λ",
+   "premise": "夜跑長跑已結束、只剩 aos daemon 與 watchdog，窗口好排；量完 λ 若確為時間切片排隊主因再重看 MPS"
+  },
+  {
    "date": "2026-11-08",
    "decision": "跑分紀錄走 `experiments/ledger.json`（`wf-table/1`）一列一跑；細節才開 repo 根 `reports/<slug>/README.md`（沿用主 agent 已用的 baseline-identity 形式）",
    "rejected_alternatives": "學 aos 用 md 表當實驗索引：跑分會累積成同質大表，撞鐵律 3 的 1 KB；每次一檔：一句話的結果也開檔，雜訊多",
